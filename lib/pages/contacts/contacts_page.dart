@@ -1,0 +1,248 @@
+import 'package:dim_example/im/model/contacts.dart';
+import 'package:flutter/material.dart';
+import 'package:dim_example/tools/wechat_flutter.dart';
+import 'package:dim_example/ui/item/contact_item.dart';
+
+const INDEX_BAR_WORDS = [
+  "↑",
+  "☆",
+  "A",
+  "B",
+  "C",
+  "D",
+  "E",
+  "F",
+  "G",
+  "H",
+  "I",
+  "J",
+  "K",
+  "L",
+  "M",
+  "N",
+  "O",
+  "P",
+  "Q",
+  "R",
+  "S",
+  "T",
+  "U",
+  "V",
+  "W",
+  "X",
+  "Y",
+  "Z",
+  "#",
+];
+
+class ContactsPage extends StatefulWidget {
+  _ContactsPageState createState() => _ContactsPageState();
+}
+
+class _ContactsPageState extends State<ContactsPage>
+    with AutomaticKeepAliveClientMixin {
+  Color indexBarBg = Colors.transparent;
+  String currentLetter = '';
+  ScrollController sC;
+  List<Contact> _contacts = [];
+  StreamSubscription<dynamic> _messageStreamSubscription;
+
+  List<ContactItem> _functionButtons = [
+    new ContactItem(avatar: 'assets/images/favorite.webp', title: '新的朋友'),
+    new ContactItem(avatar: 'assets/images/favorite.webp', title: '群聊'),
+    new ContactItem(avatar: 'assets/images/favorite.webp', title: '标签'),
+    new ContactItem(avatar: 'assets/images/favorite.webp', title: '公众号'),
+  ];
+  final Map _letterPosMap = {INDEX_BAR_WORDS[0]: 0.0};
+
+  Future getContacts() async {
+    final str = await ContactsPageData().listFriend();
+
+    List<Contact> listContact = str;
+    _contacts.clear();
+    _contacts..addAll(listContact);
+    _contacts
+        .sort((Contact a, Contact b) => a.nameIndex.compareTo(b.nameIndex));
+    sC = new ScrollController();
+
+    /// 计算用于 IndexBar 进行定位的关键通讯录列表项的位置
+    var _totalPos =
+        _functionButtons.length * ContactItemState.heightItem(false);
+    for (int i = 0; i < _contacts.length; i++) {
+      bool _hasGroupTitle = true;
+      if (i > 0 &&
+          _contacts[i].nameIndex.compareTo(_contacts[i - 1].nameIndex) == 0)
+        _hasGroupTitle = false;
+
+      if (_hasGroupTitle) _letterPosMap[_contacts[i].nameIndex] = _totalPos;
+
+      _totalPos += ContactItemState.heightItem(_hasGroupTitle);
+    }
+    if (mounted) setState(() {});
+  }
+
+  @override
+  bool get wantKeepAlive => true;
+
+  @override
+  void dispose() {
+    super.dispose();
+    sC.dispose();
+    canCelListener();
+  }
+
+  String _getLetter(BuildContext context, double tileHeight, Offset globalPos) {
+    RenderBox _box = context.findRenderObject();
+    var local = _box.globalToLocal(globalPos);
+    int index = (local.dy ~/ tileHeight).clamp(0, INDEX_BAR_WORDS.length - 1);
+    return INDEX_BAR_WORDS[index];
+  }
+
+  void _jumpToIndex(String letter) {
+    if (_letterPosMap.isNotEmpty) {
+      final _pos = _letterPosMap[letter];
+      if (_pos != null)
+        sC.animateTo(_pos,
+            curve: Curves.easeOut, duration: Duration(milliseconds: 200));
+    }
+  }
+
+  Widget _buildIndexBar(BuildContext context, BoxConstraints constraints) {
+    final List<Widget> _letters = INDEX_BAR_WORDS
+        .map((String word) =>
+            new Expanded(child: new Text(word, style: TextStyle(fontSize: 12))))
+        .toList();
+
+    final double _totalHeight = constraints.biggest.height;
+    final double _tileHeight = _totalHeight / _letters.length;
+
+    void jumpTo(details) {
+      indexBarBg = Colors.black26;
+      currentLetter = _getLetter(context, _tileHeight, details.globalPosition);
+      _jumpToIndex(currentLetter);
+      setState(() {});
+    }
+
+    void transparentMethod() {
+      indexBarBg = Colors.transparent;
+      currentLetter = null;
+      setState(() {});
+    }
+
+    return new GestureDetector(
+      onVerticalDragDown: (DragDownDetails details) => jumpTo(details),
+      onVerticalDragEnd: (DragEndDetails details) => transparentMethod(),
+      onVerticalDragUpdate: (DragUpdateDetails details) => jumpTo(details),
+      child: new Column(children: _letters),
+    );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getContacts();
+    initPlatformState();
+  }
+
+  void canCelListener() {
+    if (_messageStreamSubscription != null) _messageStreamSubscription.cancel();
+  }
+
+  Future<void> initPlatformState() async {
+    if (!mounted) return;
+    if (_messageStreamSubscription == null) {
+      _messageStreamSubscription =
+          im.onMessage.listen((dynamic onData) => getContacts());
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    super.build(context);
+
+    final List<Widget> body = [
+      new ListView.builder(
+        controller: sC,
+        itemBuilder: (BuildContext context, int index) {
+          if (index < _functionButtons.length) return _functionButtons[index];
+
+          int _contactIndex = index - _functionButtons.length;
+          bool _isGroupTitle = true;
+          Contact _contact = _contacts[_contactIndex];
+          if (_contactIndex >= 1 &&
+              _contact.nameIndex == _contacts[_contactIndex - 1].nameIndex) {
+            _isGroupTitle = false;
+          }
+          if (_contact.name != _contacts[_contacts.length - 1].name) {
+            return new ContactItem(
+              avatar: _contact.avatar,
+              title: _contact.name,
+              identifier: _contact.identifier,
+              groupTitle: _isGroupTitle ? _contact.nameIndex : null,
+              isLine: true,
+            );
+          } else {
+            return new Column(children: <Widget>[
+              new ContactItem(
+                avatar: _contact.avatar,
+                title: _contact.name,
+                identifier: _contact.identifier,
+                groupTitle: _isGroupTitle ? _contact.nameIndex : null,
+                isLine: false,
+              ),
+              new HorizontalLine(),
+              new Container(
+                padding: EdgeInsets.symmetric(vertical: 10.0),
+                child: new Text(
+                  '${_contacts.length}位联系人',
+                  style: TextStyle(color: mainTextColor, fontSize: 16),
+                ),
+              )
+            ]);
+          }
+        },
+        itemCount: _contacts.length + _functionButtons.length,
+      ),
+      new Positioned(
+        width: Constants.IndexBarWidth,
+        right: 0.0,
+        top: 120.0,
+        bottom: 120.0,
+        child: new Container(
+          color: indexBarBg,
+          child: new LayoutBuilder(builder: _buildIndexBar),
+        ),
+      ),
+    ];
+    if (currentLetter != null && currentLetter.isNotEmpty) {
+      var row = [
+        new Container(
+            width: Constants.IndexLetterBoxSize,
+            height: Constants.IndexLetterBoxSize,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color: AppColors.IndexLetterBoxBg,
+              borderRadius: BorderRadius.all(
+                  Radius.circular(Constants.IndexLetterBoxSize / 2)),
+            ),
+            child: new Text(currentLetter,
+                style: AppStyles.IndexLetterBoxTextStyle)),
+        new Icon(Icons.arrow_right),
+        new Space(width: mainSpace * 5),
+      ];
+      body.add(
+        new Container(
+          width: winWidth(context),
+          height: winHeight(context),
+          child:
+              new Row(mainAxisAlignment: MainAxisAlignment.end, children: row),
+        ),
+      );
+    }
+    if (!listNoEmpty(_contacts)) {
+      return new LoadingView();
+    }
+    return new Scaffold(body: new Stack(children: body));
+  }
+}
+

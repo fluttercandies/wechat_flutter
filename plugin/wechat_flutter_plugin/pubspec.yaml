@@ -1,0 +1,17 @@
+name: dim
+description: flutter_wechat_plugin
+version: 0.2.8
+author: brzhang <1595819400@qq.com>, FlutterBear <iflutterbear@gmail.com>
+homepage: https://github.com/FlutterBear/wechat_flutter
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+flutter:
+  plugin:
+    androidPackage: com.brzhang.flutter.dim
+    pluginClass: DimPlugin
+
+environment:
+  sdk: ">=2.1.0 <3.0.0"

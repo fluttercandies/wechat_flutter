@@ -1,0 +1,109 @@
+PODS:
+  - connectivity (0.0.1):
+    - Flutter
+    - Reachability
+  - dim (0.2.7):
+    - Flutter
+    - TXIMSDK_iOS
+    - YYModel
+  - Flutter (1.0.0)
+  - flutter_downloader (0.0.1):
+    - Flutter
+  - flutter_native_image (0.0.1):
+    - Flutter
+  - FMDB (2.7.5):
+    - FMDB/standard (= 2.7.5)
+  - FMDB/standard (2.7.5)
+  - image_picker (0.0.1):
+    - Flutter
+  - path_provider (0.0.1):
+    - Flutter
+  - Reachability (3.2)
+  - screen (0.0.1):
+    - Flutter
+  - shared_preferences (0.0.1):
+    - Flutter
+  - sqflite (0.0.1):
+    - Flutter
+    - FMDB (~> 2.7.2)
+  - TXIMSDK_iOS (4.6.1)
+  - url_launcher (0.0.1):
+    - Flutter
+  - video_player (0.0.1):
+    - Flutter
+  - webview_flutter (0.0.1):
+    - Flutter
+  - YYModel (1.0.4)
+
+DEPENDENCIES:
+  - connectivity (from `.symlinks/plugins/connectivity/ios`)
+  - dim (from `.symlinks/plugins/dim/ios`)
+  - Flutter (from `.symlinks/flutter/ios`)
+  - flutter_downloader (from `.symlinks/plugins/flutter_downloader/ios`)
+  - flutter_native_image (from `.symlinks/plugins/flutter_native_image/ios`)
+  - image_picker (from `.symlinks/plugins/image_picker/ios`)
+  - path_provider (from `.symlinks/plugins/path_provider/ios`)
+  - screen (from `.symlinks/plugins/screen/ios`)
+  - shared_preferences (from `.symlinks/plugins/shared_preferences/ios`)
+  - sqflite (from `.symlinks/plugins/sqflite/ios`)
+  - url_launcher (from `.symlinks/plugins/url_launcher/ios`)
+  - video_player (from `.symlinks/plugins/video_player/ios`)
+  - webview_flutter (from `.symlinks/plugins/webview_flutter/ios`)
+
+SPEC REPOS:
+  trunk:
+    - FMDB
+    - Reachability
+    - TXIMSDK_iOS
+    - YYModel
+
+EXTERNAL SOURCES:
+  connectivity:
+    :path: ".symlinks/plugins/connectivity/ios"
+  dim:
+    :path: ".symlinks/plugins/dim/ios"
+  Flutter:
+    :path: ".symlinks/flutter/ios"
+  flutter_downloader:
+    :path: ".symlinks/plugins/flutter_downloader/ios"
+  flutter_native_image:
+    :path: ".symlinks/plugins/flutter_native_image/ios"
+  image_picker:
+    :path: ".symlinks/plugins/image_picker/ios"
+  path_provider:
+    :path: ".symlinks/plugins/path_provider/ios"
+  screen:
+    :path: ".symlinks/plugins/screen/ios"
+  shared_preferences:
+    :path: ".symlinks/plugins/shared_preferences/ios"
+  sqflite:
+    :path: ".symlinks/plugins/sqflite/ios"
+  url_launcher:
+    :path: ".symlinks/plugins/url_launcher/ios"
+  video_player:
+    :path: ".symlinks/plugins/video_player/ios"
+  webview_flutter:
+    :path: ".symlinks/plugins/webview_flutter/ios"
+
+SPEC CHECKSUMS:
+  connectivity: 6e94255659cc86dcbef1d452ad3e0491bb1b3e75
+  dim: fa3014799fdbbbf47d5d507a85385c8e00f1c706
+  Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
+  flutter_downloader: 058b9c41564a90500f67f3e432e3524613a7fd83
+  flutter_native_image: 9c0b7451838484458e5b0fae007b86a4c2d4bdfe
+  FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
+  image_picker: 16e5fec1fbc87fd3b297c53e4048521eaf17cd06
+  path_provider: fb74bd0465e96b594bb3b5088ee4a4e7bb1f2a9d
+  Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
+  screen: abd91ca7bf3426e1cc3646d27e9b2358d6bf07b0
+  shared_preferences: 430726339841afefe5142b9c1f50cb6bd7793e01
+  sqflite: ff1d9da63c06588cc8d1faf7256d741f16989d5a
+  TXIMSDK_iOS: fe85c769896ebffcca191dfb24d93618dd736d62
+  url_launcher: a1c0cc845906122c4784c542523d8cacbded5626
+  video_player: 3964090a33353060ed7f58aa6427c7b4b208ec21
+  webview_flutter: 1aa7604e6cdb451a9b7ed2c37d5454c0b440246b
+  YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
+
+PODFILE CHECKSUM: fbaee5b23138ad4cd0cb935c94fcf473f272085c
+
+COCOAPODS: 1.8.4

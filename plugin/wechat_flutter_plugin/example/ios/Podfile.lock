@@ -1,0 +1,33 @@
+PODS:
+  - dim (0.2.7):
+    - Flutter
+    - TXIMSDK_iOS
+    - YYModel
+  - Flutter (1.0.0)
+  - TXIMSDK_iOS (4.5.111)
+  - YYModel (1.0.4)
+
+DEPENDENCIES:
+  - dim (from `.symlinks/plugins/dim/ios`)
+  - Flutter (from `.symlinks/flutter/ios`)
+
+SPEC REPOS:
+  trunk:
+    - TXIMSDK_iOS
+    - YYModel
+
+EXTERNAL SOURCES:
+  dim:
+    :path: ".symlinks/plugins/dim/ios"
+  Flutter:
+    :path: ".symlinks/flutter/ios"
+
+SPEC CHECKSUMS:
+  dim: fa3014799fdbbbf47d5d507a85385c8e00f1c706
+  Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
+  TXIMSDK_iOS: 5c952428d5a44f3c35f4fa5d37cf4aaec8f190e6
+  YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
+
+PODFILE CHECKSUM: fbaee5b23138ad4cd0cb935c94fcf473f272085c
+
+COCOAPODS: 1.8.4

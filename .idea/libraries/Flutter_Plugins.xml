@@ -1,0 +1,20 @@
+<component name="libraryTable">
+  <library name="Flutter Plugins" type="FlutterPluginsLibraryType">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/plugin/wechat_flutter_plugin" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/shared_preferences-0.5.4+5" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/image_picker-0.6.1+2" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/flutter_downloader-1.3.3" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/sqflite-1.1.7+2" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/flutter_native_image-0.0.4" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/url_launcher-5.2.5" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/video_player-0.7.2" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/screen-0.0.5" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/connectivity-0.4.5+3" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/path_provider-1.4.2" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/webview_flutter-0.3.14+1" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

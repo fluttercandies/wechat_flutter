@@ -1,0 +1,82 @@
+name: dim_example
+description: Demonstrates how to use the dim plugin.
+
+version: 1.0.0+1
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  cupertino_icons: ^0.1.2
+  dim:
+    path: plugin/wechat_flutter_plugin
+  shared_preferences: ^0.5.2+2
+  provider: ^3.0.0+1
+  flutter_native_image: any
+  cached_network_image: any
+  toast: any
+  webview_flutter: 0.3.14+1
+  image_picker: 0.6.1+2
+  extended_text_field: any
+  extended_text: any
+  url_launcher: any
+  connectivity: any
+#  flutter_sound: ^1.4.1
+  file: any
+  photo_view: ^0.4.2
+#  audioplayer: any
+  flutter_downloader: any
+  video_player: ^0.7.2
+  chewie: ^0.9.8
+  dio: ^2.2.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+
+  uses-material-design: true
+
+  assets:
+    - assets/images/bsc.webp
+    - assets/images/bar_close.png
+    - assets/images/tabbar_contacts_c.webp
+    - assets/images/tabbar_contacts_s.webp
+    - assets/images/tabbar_discover_c.webp
+    - assets/images/tabbar_discover_s.webp
+    - assets/images/tabbar_chat_c.webp
+    - assets/images/tabbar_chat_s.webp
+    - assets/images/tabbar_me_c.webp
+    - assets/images/tabbar_me_s.webp
+    - assets/images/def_avatar.png
+    - assets/images/search_black.webp
+    - assets/images/search_white.png
+    - assets/images/Contact_Female.webp
+    - assets/images/Contact_Male.webp
+    - assets/images/right_more.png
+    - assets/images/favorite.webp
+    - assets/images/contacts_add_newmessage.png
+    - assets/images/add_addressicon.png
+    - assets/images/ic_delete.webp
+    - assets/images/ic_right_arrow_black.webp
+    - assets/images/ic_right_arrow_grey.webp
+
+    - assets/images/login/select_avatar.webp
+    - assets/images/login/abo.png
+    - assets/images/login/abn.webp
+
+    - assets/images/mine/ic_small_code.png
+    - assets/images/mine/ic_wallet.webp
+    - assets/images/mine/ic_card_package.png
+
+    - assets/images/discover/ff_Icon_album.webp
+    - assets/images/discover/ff_Icon_shake.webp
+    - assets/images/discover/ff_Icon_bottle.webp
+    - assets/images/discover/ff_Icon_browse.webp
+    - assets/images/discover/ff_Icon_nearby.webp
+    - assets/images/discover/ff_Icon_qr_code.webp
+    - assets/images/discover/ff_Icon_search.webp
+    - assets/images/discover/game_center_h5.webp
+    - assets/images/discover/mini_program.webp
