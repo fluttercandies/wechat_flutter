@@ -11,7 +11,7 @@ Future<dynamic> addFriend(String userName, BuildContext context) async {
       showToast(context, '添加成功');
     }
 
-    popToRootPage();
+    popToHomePage();
 
   } on PlatformException {
     debugPrint('Dim添加好友  失败');

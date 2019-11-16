@@ -72,6 +72,10 @@ flutter:
     - assets/images/mine/ic_card_package.png
 
     - assets/images/contact/ic_contacts_details.png
+    - assets/images/contact/ic_no_public.webp
+    - assets/images/contact/ic_tag.webp
+    - assets/images/contact/ic_group.webp
+    - assets/images/contact/ic_new_friend.webp
 
     - assets/images/discover/ff_Icon_album.webp
     - assets/images/discover/ff_Icon_shake.webp

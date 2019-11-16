@@ -84,3 +84,9 @@ pushReplacement(Widget page) {
 popToRootPage() {
   navGK.currentState.popUntil(ModalRoute.withName('/'));
 }
+
+popToHomePage() {
+  navGK.currentState.pop();
+  navGK.currentState.maybePop();
+  navGK.currentState.maybePop();
+}

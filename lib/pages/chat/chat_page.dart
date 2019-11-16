@@ -35,7 +35,7 @@ class _ChatPageState extends State<ChatPage> {
     super.initState();
     getChatMsgData();
 
-//    _sC.addListener(() => FocusScope.of(context).requestFocus(new FocusNode()));
+    _sC.addListener(() => FocusScope.of(context).requestFocus(new FocusNode()));
 
     initPlatformState();
   }
@@ -110,30 +110,59 @@ class _ChatPageState extends State<ChatPage> {
     await sendTextMsg('${widget.id}', widget.type, text);
   }
 
+  Widget edit(context, size) {
+    // 计算当前的文本需要占用的行数
+    TextSpan _text =
+        TextSpan(text: _textController.text, style: AppStyles.ChatBoxTextStyle);
+
+    TextPainter _tp = TextPainter(
+        text: _text,
+        textDirection: TextDirection.ltr,
+        textAlign: TextAlign.left);
+    _tp.layout(maxWidth: size.maxWidth);
+
+    return ExtendedTextField(
+      textInputAction: TextInputAction.send,
+      specialTextSpanBuilder: TextSpanBuilder(showAtBackground: true),
+      textSelectionControls: _selectionControls,
+      onTap: () {
+        setState(() {});
+      },
+      onSubmitted: (data) {
+        if (data.isNotEmpty) {
+          FocusScope.of(context).requestFocus(new FocusNode());
+          _handleSubmittedData(data);
+        }
+      },
+      decoration: InputDecoration(
+          border: InputBorder.none, contentPadding: const EdgeInsets.all(5.0)),
+      controller: _textController,
+      cursorColor: const Color(AppColors.ChatBoxCursorColor),
+      style: AppStyles.ChatBoxTextStyle,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
 //    var keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
     var _voiceBtnColor = Colors.white;
     var body = [
       chatData != null
-          ? Flexible(
-              child: ListView.builder(
+          ? new Flexible(
+              child: new ListView.builder(
                 controller: _sC,
                 padding: EdgeInsets.all(8.0),
                 reverse: true,
                 itemBuilder: (context, int index) {
                   ChatData model = chatData[index];
-                  return SendMessageView(model);
-//                  return new Text(chatData is String
-//                      ? chatData.toString()
-//                      : model.msg['text'].toString());
+                  return new SendMessageView(model);
                 },
                 itemCount: chatData.length,
                 dragStartBehavior: DragStartBehavior.down,
               ),
             )
           : new Spacer(),
-      Container(
+      new Container(
         height: 50.0,
         padding: EdgeInsets.symmetric(horizontal: 8.0),
         decoration: BoxDecoration(
@@ -144,51 +173,16 @@ class _ChatPageState extends State<ChatPage> {
                 width: Constants.DividerWidth),
           ),
         ),
-        child: Row(
+        child: new Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Expanded(
-              child: Container(
+            new Expanded(
+              child: new Container(
                 margin: const EdgeInsets.only(left: 8.0, right: 8.0),
                 decoration: BoxDecoration(
                     color: _voiceBtnColor,
                     borderRadius: BorderRadius.circular(5.0)),
-                child: LayoutBuilder(
-                  builder: (context, size) {
-                    // 计算当前的文本需要占用的行数
-                    TextSpan _text = TextSpan(
-                        text: _textController.text,
-                        style: AppStyles.ChatBoxTextStyle);
-
-                    TextPainter _tp = TextPainter(
-                        text: _text,
-                        textDirection: TextDirection.ltr,
-                        textAlign: TextAlign.left);
-                    _tp.layout(maxWidth: size.maxWidth);
-
-                    return ExtendedTextField(
-                      textInputAction: TextInputAction.send,
-                      specialTextSpanBuilder:
-                          TextSpanBuilder(showAtBackground: true),
-                      textSelectionControls: _selectionControls,
-                      onTap: () {
-                        setState(() {});
-                      },
-                      onSubmitted: (data) {
-                        if (data.isNotEmpty) {
-                          FocusScope.of(context).requestFocus(new FocusNode());
-                          _handleSubmittedData(data);
-                        }
-                      },
-                      decoration: InputDecoration(
-                          border: InputBorder.none,
-                          contentPadding: const EdgeInsets.all(5.0)),
-                      controller: _textController,
-                      cursorColor: const Color(AppColors.ChatBoxCursorColor),
-                      style: AppStyles.ChatBoxTextStyle,
-                    );
-                  },
-                ),
+                child: new LayoutBuilder(builder: edit),
               ),
             ),
           ],

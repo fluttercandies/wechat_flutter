@@ -48,10 +48,11 @@ class _ContactsPageState extends State<ContactsPage>
   StreamSubscription<dynamic> _messageStreamSubscription;
 
   List<ContactItem> _functionButtons = [
-    new ContactItem(avatar: 'assets/images/favorite.webp', title: '新的朋友'),
-    new ContactItem(avatar: 'assets/images/favorite.webp', title: '群聊'),
-    new ContactItem(avatar: 'assets/images/favorite.webp', title: '标签'),
-    new ContactItem(avatar: 'assets/images/favorite.webp', title: '公众号'),
+    new ContactItem(
+        avatar: contactAssets + 'ic_new_friend.webp', title: '新的朋友'),
+    new ContactItem(avatar: contactAssets + 'ic_group.webp', title: '群聊'),
+    new ContactItem(avatar: contactAssets + 'ic_tag.webp', title: '标签'),
+    new ContactItem(avatar: contactAssets + 'ic_no_public.webp', title: '公众号'),
   ];
   final Map _letterPosMap = {INDEX_BAR_WORDS[0]: 0.0};
 
@@ -245,4 +246,3 @@ class _ContactsPageState extends State<ContactsPage>
     return new Scaffold(body: new Stack(children: body));
   }
 }
-
