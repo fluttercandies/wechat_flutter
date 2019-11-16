@@ -1,6 +1,4 @@
-import 'package:dim_example/http/api_req.dart';
-import 'package:dim_example/http/http.dart';
-import 'package:dio/dio.dart';
+import 'package:dim_example/http/req.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
@@ -16,35 +14,17 @@ class PersonalInfoPage extends StatefulWidget {
   _PersonalInfoPageState createState() => _PersonalInfoPageState();
 }
 
-class _PersonalInfoPageState extends State<PersonalInfoPage> with Request {
+class _PersonalInfoPageState extends State<PersonalInfoPage> {
   @override
   void initState() {
     super.initState();
 //    getHttp();
-    postSuggestionWithAvatar(
-      success: (bean) {},
-      failed: (bean) {},
-      error: (msg) {},
-    );
-  }
-
-  void getHttp() async {
-    try {
-      Response response = await Dio().get(API.cat);
-      print("response::" + response.toString());
-    } catch (e) {
-      print(e);
-    }
+    postSuggestionWithAvatar();
   }
 
   ///提交建议(新增头像上传)
-  void postSuggestionWithAvatar(
-      {FormData params,
-      Function success,
-      Function failed,
-      Function error,
-      CancelToken token}) {
-    ApiStrategy.getInstance().get(
+  void postSuggestionWithAvatar({FormData params, CancelToken token}) {
+    Req.getInstance().get(
       API.cat,
       (v) {
         print('okDATA:::$v');

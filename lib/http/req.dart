@@ -7,22 +7,27 @@ var _id = 0;
 typedef OnData(t);
 typedef OnError(String msg, int code);
 
-class ApiStrategy {
-  static ApiStrategy _instance;
+enum RequestType { GET, POST }
 
-  static const int connectTimeOut = 5 * 1000; ///连接超时时间为5秒
-  static const int receiveTimeOut = 7 * 1000; ///响应超时时间为7秒
+class Req {
+  static Req _instance;
+
+  ///连接超时时间为5秒
+  static const int connectTimeOut = 5 * 1000;
+
+  ///响应超时时间为7秒
+  static const int receiveTimeOut = 7 * 1000;
 
   Dio _client;
 
-  static ApiStrategy getInstance() {
+  static Req getInstance() {
     if (_instance == null) {
-      _instance = ApiStrategy._internal();
+      _instance = Req._internal();
     }
     return _instance;
   }
 
-  ApiStrategy._internal() {
+  Req._internal() {
     if (_client == null) {
       BaseOptions options = new BaseOptions();
       options.connectTimeout = connectTimeOut;
@@ -32,10 +37,8 @@ class ApiStrategy {
   }
 
   Dio get client => _client;
-  static const String GET = "get";
-  static const String POST = "post";
 
-  //get请求
+  ///get请求
   void get(
     String url,
     OnData callBack, {
@@ -46,7 +49,7 @@ class ApiStrategy {
     this._request(
       url,
       callBack,
-      method: GET,
+      method: RequestType.GET,
       params: params,
       errorCallBack: errorCallBack,
       token: token,
@@ -64,7 +67,7 @@ class ApiStrategy {
     this._request(
       url,
       callBack,
-      method: POST,
+      method: RequestType.POST,
       params: params,
       errorCallBack: errorCallBack,
       token: token,
@@ -83,7 +86,7 @@ class ApiStrategy {
     this._request(
       url,
       callBack,
-      method: POST,
+      method: RequestType.POST,
       formData: formData,
       errorCallBack: errorCallBack,
       progressCallBack: progressCallBack,
@@ -94,7 +97,7 @@ class ApiStrategy {
   void _request(
     String url,
     OnData callBack, {
-    String method,
+    RequestType method,
     Map<String, String> params,
     FormData formData,
     OnError errorCallBack,
@@ -105,19 +108,13 @@ class ApiStrategy {
     int statusCode;
     try {
       Response response;
-      if (method == GET) {
-        //组合GET请求的参数
+      if (method == RequestType.GET) {
+        ///组合GET请求的参数
         if (mapNoEmpty(params)) {
-          response = await _client.get(
-            url,
-            queryParameters: params,
-            cancelToken: token,
-          );
+          response = await _client.get(url,
+              queryParameters: params, cancelToken: token);
         } else {
-          response = await _client.get(
-            url,
-            cancelToken: token,
-          );
+          response = await _client.get(url, cancelToken: token);
         }
       } else {
         if (mapNoEmpty(params) || formData.isNotEmpty) {
@@ -128,10 +125,7 @@ class ApiStrategy {
             cancelToken: token,
           );
         } else {
-          response = await _client.post(
-            url,
-            cancelToken: token,
-          );
+          response = await _client.post(url, cancelToken: token);
         }
       }
 
