@@ -68,7 +68,7 @@ class _AddFriendsDetailsState extends State<AddFriendsDetails> {
       backgroundColor: appBarColor,
       appBar: new ComMomBar(
           title: '', backgroundColor: Colors.white, rightDMActions: rWidget),
-      body: body(),
+      body: new SingleChildScrollView(child: body()),
     );
   }
 }

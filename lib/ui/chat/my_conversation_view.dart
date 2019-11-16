@@ -16,47 +16,52 @@ class MyConversationView extends StatefulWidget {
 class _MyConversationViewState extends State<MyConversationView> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.only(left: 18.0),
-      color: Colors.white,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          widget.imageUrl,
-          Expanded(
-              child: Container(
+    var row = Row(
+      children: <Widget>[
+        Container(width: 10.0),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              widget.title,
+              SizedBox(height: 2.0),
+              widget.content,
+            ],
+          ),
+        ),
+        Container(width: 10.0),
+        Column(
+          children: [
+            widget.time,
+            new Icon(Icons.flag, color: Colors.transparent),
+          ],
+        ),
+      ],
+    );
+
+    var body = [
+      widget.imageUrl,
+      Expanded(
+        child: Container(
             padding:
                 const EdgeInsets.only(right: 18.0, top: 12.0, bottom: 12.0),
             decoration: BoxDecoration(
-                border: Border(
-              bottom: BorderSide(
-                  width: Constants.DividerWidth,
-                  color: Color(AppColors.DividerColor)),
-            )),
-            child: Row(
-              children: <Widget>[
-                Container(width: 10.0),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      widget.title,
-                      SizedBox(height: 2.0),
-                      widget.content,
-                    ],
-                  ),
-                ),
-                Container(width: 10.0),
-                Column(
-                  children: [
-                    widget.time,
-                    new Icon(Icons.flag, color: Colors.transparent),
-                  ],
-                ),
-              ],
+              border: Border(
+                bottom: BorderSide(
+                    width: Constants.DividerWidth,
+                    color: Color(AppColors.DividerColor)),
+              ),
             ),
-          )),
-        ],
+            child: row),
+      ),
+    ];
+
+    return Container(
+      padding: EdgeInsets.only(left: 18.0),
+      color: Colors.white,
+      child: new Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: body,
       ),
     );
   }

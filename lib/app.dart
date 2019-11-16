@@ -15,13 +15,12 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
   @override
   void initState() {
     super.initState();
-    if(Platform.isAndroid) {
+    if (Platform.isAndroid) {
       StorageManager().initAutoLogin();
-    }else{
+    } else {
       debugPrint('IOS自动登陆开发中');
     }
   }
@@ -34,8 +33,10 @@ class _MyAppState extends State<MyApp> {
       navigatorKey: navGK,
       title: model.appName,
       theme: ThemeData(
-          scaffoldBackgroundColor: bgColor,
-          hintColor: Colors.grey.withOpacity(0.3)),
+        scaffoldBackgroundColor: bgColor,
+        hintColor: Colors.grey.withOpacity(0.3),
+        splashColor: Colors.transparent,
+      ),
       debugShowCheckedModeBanner: false,
       localizationsDelegates: [
         S.delegate,

@@ -28,9 +28,11 @@ const itemOnColor = Color.fromRGBO(68, 68, 68, 1.0);
 
 const btTextColor = Color.fromRGBO(112, 113, 135, 1.0);
 
-const String defIcon = 'assets/images/def_avatar.png';
+const defIcon = 'assets/images/def_avatar.png';
 
-const String gitDefAvatar =
+const contactAssets = 'assets/images/contact/';
+
+const gitDefAvatar =
     'https://avatars0.githubusercontent.com/u/56596795?s=460&v=4';
 
 const defContentImg =

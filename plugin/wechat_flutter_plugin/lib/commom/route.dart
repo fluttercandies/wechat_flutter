@@ -22,6 +22,17 @@ Future<dynamic> routePush(Widget widget) {
   return navGK.currentState.push(route);
 }
 
+Future<dynamic> routePushReplace(Widget widget) {
+  final route = new CupertinoPageRoute(
+    builder: (BuildContext context) => widget,
+    settings: new RouteSettings(
+      name: widget.toStringShort(),
+      isInitialRoute: false,
+    ),
+  );
+  return navGK.currentState.pushReplacement(route);
+}
+
 Future<dynamic> routeMaterialPush(Widget widget) {
   final route = new MaterialPageRoute(
     builder: (BuildContext context) => widget,

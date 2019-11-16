@@ -30,14 +30,15 @@ class _VerificationPageState extends State<VerificationPage> {
         controller: infoC,
         focusNode: infoF,
       ),
-      new Space(),
-      new VerifyInput(
-        title: '为朋友设置备注',
-        defStr: widget.nickName ?? 'flutterj.com',
-        controller: remarksC,
-        focusNode: remarksF,
+      new Padding(
+        padding: EdgeInsets.symmetric(vertical: mainSpace),
+        child: new VerifyInput(
+          title: '为朋友设置备注',
+          defStr: widget.nickName ?? 'flutterj.com',
+          controller: remarksC,
+          focusNode: remarksF,
+        ),
       ),
-      new Space(),
       new VerifySwitch(title: '设置朋友圈和视频动态权限'),
     ];
 

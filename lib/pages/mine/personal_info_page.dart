@@ -24,7 +24,8 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
     print(name);
   }
 
-  _openGallery(BuildContext context) async {
+  /// 自定义头像暂用
+  openGallery(BuildContext context) async {
     File img = await ImagePicker.pickImage(source: ImageSource.gallery);
     final model = Provider.of<GlobalModel>(context);
 

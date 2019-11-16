@@ -1,3 +1,4 @@
+import 'package:dim_example/pages/contacts/contacts_details_page.dart';
 import 'package:flutter/material.dart';
 import 'package:dim_example/pages/chat/chat_page.dart';
 import 'package:dim_example/tools/wechat_flutter.dart';
@@ -58,18 +59,22 @@ class ContactItemState extends State<ContactItem> {
       img: widget.avatar,
       width: Constants.ContactAvatarSize,
       height: Constants.ContactAvatarSize,
+      fit: BoxFit.cover,
     );
+
     /// 头像圆角
     _avatarIcon = _avatarIcon;
 
     var content = [
       _avatarIcon,
+
       ///  头像离名字的距离
       new Space(width: 15.0),
       new Expanded(
         child: new Container(
           padding: const EdgeInsets.only(right: MARGIN_HORIZONTAL),
           height: heightItem(false),
+
           /// 名字的显示位置
           alignment: Alignment.centerLeft,
           decoration: BoxDecoration(
@@ -77,11 +82,13 @@ class ContactItemState extends State<ContactItem> {
                 ? null
                 : Border(
                     bottom: BorderSide(
+
                         /// 下划线粗细及颜色
                         width: Constants.DividerWidth,
                         color: Color(AppColors.DividerColor)),
                   ),
           ),
+
           /// 姓名
           child: new Text(widget.title,
               style: TextStyle(fontWeight: FontWeight.w400), maxLines: 1),
@@ -93,7 +100,8 @@ class ContactItemState extends State<ContactItem> {
     Widget button = new FlatButton(
       color: Colors.white,
       onPressed: () {
-        routePush(new ChatPage(id: widget.identifier, title: widget.title));
+        routePush(new ContactsDetailsPage(
+            id: widget.identifier, avatar: widget.avatar, title: widget.title));
       },
       child: new Row(children: content),
     );

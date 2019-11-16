@@ -54,7 +54,7 @@ class _VerifySwitchState extends State<VerifySwitch> {
   @override
   Widget build(BuildContext context) {
     return new Container(
-      height: 90.0,
+      height: 100.0,
       width: winWidth(context),
       color: Colors.white,
       padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),

@@ -71,6 +71,8 @@ flutter:
     - assets/images/mine/ic_wallet.webp
     - assets/images/mine/ic_card_package.png
 
+    - assets/images/contact/ic_contacts_details.png
+
     - assets/images/discover/ff_Icon_album.webp
     - assets/images/discover/ff_Icon_shake.webp
     - assets/images/discover/ff_Icon_bottle.webp
