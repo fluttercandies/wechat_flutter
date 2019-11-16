@@ -1,4 +1,5 @@
 import 'package:dim_example/http/api.dart';
+import 'package:dim_example/pages/mine/code_page.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
@@ -20,8 +21,12 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
     super.initState();
   }
 
-  action(name) {
-    print(name);
+  action(v) {
+    if (v == '二维码名片') {
+      routePush(new CodePage());
+    } else {
+      print(v);
+    }
   }
 
   /// 自定义头像暂用
@@ -112,6 +117,10 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
       isLine: item['label'] == '我的地址' || item['label'] == '更多' ? false : true,
       isRight: item['label'] == '微信号' ? false : true,
       margin: EdgeInsets.only(bottom: item['label'] == '更多' ? 10.0 : 0.0),
+      rightW: item['label'] == '二维码名片'
+          ? new Image.asset('assets/images/mine/ic_small_code.png',
+              color: mainTextColor.withOpacity(0.7))
+          : new Container(),
       onPressed: () => action(item['label']),
     );
   }

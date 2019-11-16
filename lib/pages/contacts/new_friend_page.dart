@@ -31,7 +31,7 @@ class _NewFriendPageState extends State<NewFriendPage> {
     return new ListTileView(
       border: item['title'] == '雷达加朋友'
           ? null
-          : Border(top: BorderSide(color: lineColor, width: 0.3)),
+          : Border(top: BorderSide(color: lineColor, width: 0.2)),
       title: item['title'],
       label: item['label'],
     );

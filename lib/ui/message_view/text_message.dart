@@ -15,7 +15,6 @@ class TextMessage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final globalModel = Provider.of<GlobalModel>(context);
-
     var body = [
       new Container(
         decoration: BoxDecoration(
@@ -26,12 +25,15 @@ class TextMessage extends StatelessWidget {
         ),
         margin: EdgeInsets.only(right: 10.0),
         child: new ImageView(
-            img: model.avatar, height: 50, width: 50, fit: BoxFit.fill),
+            img: model.id == globalModel.account ? globalModel.avatar : model.avatar,
+            height: 50,
+            width: 50,
+            fit: BoxFit.fill),
       ),
       new TextItemContainer(
         text: text ?? '文字为空',
         action: '',
-        isMyself: false,
+        isMyself: model.id == globalModel.account,
       ),
       new Spacer(),
     ];

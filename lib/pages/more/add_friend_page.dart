@@ -30,7 +30,7 @@ class _AddFriendPageState extends State<AddFriendPage> {
     return new ListTileView(
       border: item['title'] == '雷达加朋友'
           ? null
-          : Border(top: BorderSide(color: lineColor, width: 0.3)),
+          : Border(top: BorderSide(color: lineColor, width: 0.2)),
       title: item['title'],
       label: item['label'],
       icon: strNoEmpty(item['icon'])
@@ -94,7 +94,7 @@ class _AddFriendPageState extends State<AddFriendPage> {
             new Space(width: mainSpace * 1.5),
             new InkWell(
               child: new Image.asset('assets/images/mine/ic_small_code.png',
-                  color: mainTextColor),
+                  color: mainTextColor.withOpacity(0.7)),
               onTap: () => routePush(new CodePage()),
             )
           ],
