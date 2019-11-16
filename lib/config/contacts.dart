@@ -13,7 +13,6 @@ class AppColors {
   static const TitleColor = 0xff181818;
   static const ConversationItemBg = 0xffffffff;
   static const DesTextColor = 0xff999999;
-  static const DividerColor = 0xffd5d5d5;
   static const NotifyDotBg = 0xfff85351;
   static const NotifyDotText = 0xffffffff;
   static const ConversationMuteIcon = 0xffd8d8d8;
@@ -99,7 +98,7 @@ class Constants {
   static const ActionIconSizeLarge = 32.0;
   static const AvatarRadius = 4.0;
   static const ConversationAvatarSize = 48.0;
-  static const DividerWidth = 0.5;
+  static const DividerWidth = 0.2;
   static const ConversationMuteIconSize = 18.0;
   static const ContactAvatarSize = 42.0;
   static const TitleTextSize = 16.0;

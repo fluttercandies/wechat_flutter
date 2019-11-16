@@ -33,7 +33,7 @@ class _MinePageState extends State<MinePage> {
               item['label'] == '设置' ||
               item['label'] == '表情'
           ? null
-          : Border(bottom: BorderSide(color: lineColor, width: 0.3)),
+          : Border(bottom: BorderSide(color: lineColor, width: 0.2)),
       title: item['label'],
       titleStyle: TextStyle(fontSize: 15.0),
       isLabel: false,

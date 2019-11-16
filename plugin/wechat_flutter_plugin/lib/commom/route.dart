@@ -86,7 +86,7 @@ popToRootPage() {
 }
 
 popToHomePage() {
-  navGK.currentState.pop();
+  navGK.currentState.maybePop();
   navGK.currentState.maybePop();
   navGK.currentState.maybePop();
 }

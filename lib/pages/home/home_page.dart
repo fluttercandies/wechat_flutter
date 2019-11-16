@@ -119,7 +119,7 @@ class _HomePageState extends State<HomePage>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    if (!listNoEmpty(_chatData)) {}
+    if (!listNoEmpty(_chatData)) return new LoadingView();
 
     return new Container(
       color: Color(AppColors.BackgroundColor),

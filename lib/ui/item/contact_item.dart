@@ -86,7 +86,7 @@ class ContactItemState extends State<ContactItem> {
 
                         /// 下划线粗细及颜色
                         width: Constants.DividerWidth,
-                        color: Color(AppColors.DividerColor)),
+                        color: lineColor),
                   ),
           ),
 

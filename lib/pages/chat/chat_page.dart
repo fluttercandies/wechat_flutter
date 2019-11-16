@@ -168,9 +168,7 @@ class _ChatPageState extends State<ChatPage> {
         decoration: BoxDecoration(
           color: Color(AppColors.ChatBoxBg),
           border: Border(
-            top: BorderSide(
-                color: const Color(AppColors.DividerColor),
-                width: Constants.DividerWidth),
+            top: BorderSide(color: lineColor, width: Constants.DividerWidth),
           ),
         ),
         child: new Row(
