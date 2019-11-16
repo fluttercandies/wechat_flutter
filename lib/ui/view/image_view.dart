@@ -45,11 +45,14 @@ class ImageView extends StatelessWidget {
       );
     } else {
       image = new Container(
-        color: Colors.black26.withOpacity(0.1),
-        child: new CachedNetworkImage(
-          imageUrl: gitDefAvatar,
-          width: width,
-          height: height,
+        decoration: BoxDecoration(
+          color: Colors.black26.withOpacity(0.1),
+          border: Border.all(color: Colors.black.withOpacity(0.2),width: 0.3)
+        ),
+        child: new Image.asset(
+          defIcon,
+          width: width-1,
+          height: height-1,
           fit: width != null && height != null ? BoxFit.fill : fit,
         ),
       );

@@ -32,8 +32,9 @@ const defIcon = 'assets/images/def_avatar.png';
 
 const contactAssets = 'assets/images/contact/';
 
-const gitDefAvatar =
-    'https://avatars0.githubusercontent.com/u/56596795?s=460&v=4';
+const defAvatar = 'http://flutterj.com/f.jpeg';
+
+const myCode = 'http://flutterj.com/c.jpg';
 
 const defContentImg =
     'https://www.runoob.com/wp-content/uploads/2015/06/image_1c58e950q14da167k1nqpu2hn5e9.png';
