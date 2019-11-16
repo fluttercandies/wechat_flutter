@@ -1,3 +1,4 @@
+import 'package:dim_example/ui/dialog/code_dialog.dart';
 import 'package:flutter/material.dart';
 
 import 'package:dim_example/tools/wechat_flutter.dart';
@@ -15,31 +16,38 @@ class _CodePageState extends State<CodePage> {
         width: 60,
         child: new FlatButton(
           padding: EdgeInsets.all(0),
-          onPressed: () {},
+          onPressed: () => codeDialog(context),
           child: new Image.asset(contactAssets + 'ic_contacts_details.png'),
         ),
       )
     ];
 
     var body = [
-      new Card(
+      new Container(
         margin: EdgeInsets.only(
             left: 20.0, right: 20.0, top: winHeight(context) / 10),
-        color: Colors.white,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.all(
+            Radius.circular(4.0),
+          ),
+        ),
         child: new Padding(
           padding: EdgeInsets.all(20.0),
           child: new Column(
             children: <Widget>[
-              new CardPerson(
-                name: 'CrazyQ1',
-                area: '北京 海淀',
-                icon: 'assets/images/Contact_Male.webp',
+              new SizedBox(
+                width: winWidth(context) - 40.0,
+                child: new CardPerson(
+                  name: 'CrazyQ1',
+                  area: '北京 海淀',
+                  icon: 'assets/images/Contact_Male.webp',
+                ),
               ),
               new Space(width: mainSpace),
               new CachedNetworkImage(
                 imageUrl: myCode,
                 width: winWidth(context) - 40,
-                placeholder: (context, v) => new LoadingView(),
               ),
               new Space(height: mainSpace * 2),
               new Text(
@@ -54,9 +62,7 @@ class _CodePageState extends State<CodePage> {
     return new Scaffold(
       backgroundColor: chatBg,
       appBar: new ComMomBar(title: '二维码名片', rightDMActions: rWidget),
-      body: new SingleChildScrollView(
-        child: new Column(children: body),
-      ),
+      body: new Column(children: body),
     );
   }
 }

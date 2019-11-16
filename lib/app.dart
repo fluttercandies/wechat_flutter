@@ -36,6 +36,7 @@ class _MyAppState extends State<MyApp> {
         scaffoldBackgroundColor: bgColor,
         hintColor: Colors.grey.withOpacity(0.3),
         splashColor: Colors.transparent,
+        canvasColor: Colors.transparent,
       ),
       debugShowCheckedModeBanner: false,
       localizationsDelegates: [
