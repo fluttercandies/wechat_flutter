@@ -1,0 +1,165 @@
+import 'package:dio/dio.dart';
+export 'package:dio/dio.dart';
+import 'package:dim_example/tools/wechat_flutter.dart';
+
+var _id = 0;
+
+typedef OnData(t);
+typedef OnError(String msg, int code);
+
+class ApiStrategy {
+  static ApiStrategy _instance;
+
+  static const int connectTimeOut = 5 * 1000; ///连接超时时间为5秒
+  static const int receiveTimeOut = 7 * 1000; ///响应超时时间为7秒
+
+  Dio _client;
+
+  static ApiStrategy getInstance() {
+    if (_instance == null) {
+      _instance = ApiStrategy._internal();
+    }
+    return _instance;
+  }
+
+  ApiStrategy._internal() {
+    if (_client == null) {
+      BaseOptions options = new BaseOptions();
+      options.connectTimeout = connectTimeOut;
+      options.receiveTimeout = receiveTimeOut;
+      _client = new Dio(options);
+    }
+  }
+
+  Dio get client => _client;
+  static const String GET = "get";
+  static const String POST = "post";
+
+  //get请求
+  void get(
+    String url,
+    OnData callBack, {
+    Map<String, String> params,
+    OnError errorCallBack,
+    CancelToken token,
+  }) async {
+    this._request(
+      url,
+      callBack,
+      method: GET,
+      params: params,
+      errorCallBack: errorCallBack,
+      token: token,
+    );
+  }
+
+  //post请求
+  void post(
+    String url,
+    OnData callBack, {
+    Map<String, String> params,
+    OnError errorCallBack,
+    CancelToken token,
+  }) async {
+    this._request(
+      url,
+      callBack,
+      method: POST,
+      params: params,
+      errorCallBack: errorCallBack,
+      token: token,
+    );
+  }
+
+  //post请求
+  void postUpload(
+    String url,
+    OnData callBack,
+    ProgressCallback progressCallBack, {
+    FormData formData,
+    OnError errorCallBack,
+    CancelToken token,
+  }) async {
+    this._request(
+      url,
+      callBack,
+      method: POST,
+      formData: formData,
+      errorCallBack: errorCallBack,
+      progressCallBack: progressCallBack,
+      token: token,
+    );
+  }
+
+  void _request(
+    String url,
+    OnData callBack, {
+    String method,
+    Map<String, String> params,
+    FormData formData,
+    OnError errorCallBack,
+    ProgressCallback progressCallBack,
+    CancelToken token,
+  }) async {
+    final id = _id++;
+    int statusCode;
+    try {
+      Response response;
+      if (method == GET) {
+        //组合GET请求的参数
+        if (mapNoEmpty(params)) {
+          response = await _client.get(
+            url,
+            queryParameters: params,
+            cancelToken: token,
+          );
+        } else {
+          response = await _client.get(
+            url,
+            cancelToken: token,
+          );
+        }
+      } else {
+        if (mapNoEmpty(params) || formData.isNotEmpty) {
+          response = await _client.post(
+            url,
+            data: formData ?? new FormData.from(params),
+            onSendProgress: progressCallBack,
+            cancelToken: token,
+          );
+        } else {
+          response = await _client.post(
+            url,
+            cancelToken: token,
+          );
+        }
+      }
+
+      statusCode = response.statusCode;
+
+      if (response != null) {
+        callBack(response.data);
+        print('HTTP_REQUEST_URL::[$id]::$url');
+        print('HTTP_REQUEST_BODY::[$id]::${params ?? ' no'}');
+        print('HTTP_RESPONSE_BODY::[$id]::${response.data}');
+      }
+
+      ///处理错误部分
+      if (statusCode < 0) {
+        _handError(errorCallBack, statusCode);
+        return;
+      }
+    } catch (e) {
+      _handError(errorCallBack, e);
+    }
+  }
+
+  ///处理异常
+  static void _handError(OnError errorCallback, int statusCode) {
+    String errorMsg = 'Network request error';
+    if (errorCallback != null) {
+      errorCallback(errorMsg, statusCode);
+    }
+    print("HTTP_RESPONSE_ERROR::$errorMsg code:$statusCode");
+  }
+}
