@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:dim_example/pages/mine/code_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:dim_example/im/info_handle.dart';
@@ -91,7 +92,11 @@ class _AddFriendPageState extends State<AddFriendPage> {
               style: TextStyle(color: mainTextColor, fontSize: 14.0),
             ),
             new Space(width: mainSpace * 1.5),
-            new Icon(Icons.code, color: mainTextColor.withOpacity(0.7))
+            new InkWell(
+              child: new Image.asset('assets/images/mine/ic_small_code.png',
+                  color: mainTextColor),
+              onTap: () => routePush(new CodePage()),
+            )
           ],
         ),
       ),
