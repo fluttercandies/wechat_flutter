@@ -1,10 +1,12 @@
 import 'package:dim_example/pages/chat/chat_page.dart';
+import 'package:dim_example/provider/global_model.dart';
 import 'package:dim_example/ui/item/contact_card.dart';
 import 'package:dim_example/ui/orther/button_row.dart';
 import 'package:dim_example/ui/orther/label_row.dart';
 import 'package:flutter/material.dart';
 
 import 'package:dim_example/tools/wechat_flutter.dart';
+import 'package:provider/provider.dart';
 
 class ContactsDetailsPage extends StatefulWidget {
   final String avatar, title, id;
@@ -16,7 +18,7 @@ class ContactsDetailsPage extends StatefulWidget {
 }
 
 class _ContactsDetailsPageState extends State<ContactsDetailsPage> {
-  List<Widget> body() {
+  List<Widget> body(bool isSelf) {
     return [
       new ContactCard(
         img: widget.avatar,
@@ -26,10 +28,13 @@ class _ContactsDetailsPageState extends State<ContactsDetailsPage> {
         area: '北京 海淀区',
         isBorder: true,
       ),
-      new LabelRow(
-        label: '设置备注和标签',
-        margin: EdgeInsets.only(bottom: 10.0),
+      new Visibility(
+        visible: !isSelf,
+        child: new LabelRow(
+          label: '设置备注和标签',
+        ),
       ),
+      new Space(),
       new LabelRow(label: '朋友圈', isLine: true),
       new LabelRow(label: '更多信息'),
       new ButtonRow(
@@ -39,15 +44,21 @@ class _ContactsDetailsPageState extends State<ContactsDetailsPage> {
         onPressed: () => routePushReplace(
             new ChatPage(id: widget.id, title: widget.title, type: 1)),
       ),
-      new ButtonRow(
-        text: '音视频通话',
-        onPressed: () => showToast(context, '敬请期待'),
+      new Visibility(
+        visible: !isSelf,
+        child: new ButtonRow(
+          text: '音视频通话',
+          onPressed: () => showToast(context, '敬请期待'),
+        ),
       ),
     ];
   }
 
   @override
   Widget build(BuildContext context) {
+    final globalModel = Provider.of<GlobalModel>(context);
+    bool isSelf = globalModel.account == widget.id;
+
     var rWidget = [
       new SizedBox(
         width: 60,
@@ -62,9 +73,11 @@ class _ContactsDetailsPageState extends State<ContactsDetailsPage> {
     return new Scaffold(
       backgroundColor: chatBg,
       appBar: new ComMomBar(
-          title: '', backgroundColor: Colors.white, rightDMActions: rWidget),
+          title: '',
+          backgroundColor: Colors.white,
+          rightDMActions: isSelf ? [] : rWidget),
       body: new SingleChildScrollView(
-        child: new Column(children: body()),
+        child: new Column(children: body(isSelf)),
       ),
     );
   }

@@ -130,7 +130,6 @@ class _ChatPageState extends State<ChatPage> {
       },
       onSubmitted: (data) {
         if (data.isNotEmpty) {
-          FocusScope.of(context).requestFocus(new FocusNode());
           _handleSubmittedData(data);
         }
       },
@@ -174,6 +173,7 @@ class _ChatPageState extends State<ChatPage> {
         child: new Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
+            new Icon(Icons.view_agenda),
             new Expanded(
               child: new Container(
                 margin: const EdgeInsets.only(left: 8.0, right: 8.0),

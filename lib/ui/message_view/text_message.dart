@@ -1,4 +1,5 @@
 import 'package:dim_example/im/model/chat_data.dart';
+import 'package:dim_example/ui/message_view/msg_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:dim_example/ui/message_view/text_item_container.dart';
 import 'package:provider/provider.dart';
@@ -16,19 +17,9 @@ class TextMessage extends StatelessWidget {
   Widget build(BuildContext context) {
     final globalModel = Provider.of<GlobalModel>(context);
     var body = [
-      new Container(
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.all(
-            Radius.circular(5.0),
-          ),
-        ),
-        margin: EdgeInsets.only(right: 10.0),
-        child: new ImageView(
-            img: model.id == globalModel.account ? globalModel.avatar : model.avatar,
-            height: 50,
-            width: 50,
-            fit: BoxFit.fill),
+      new MsgAvatar(
+        model: model,
+        globalModel: globalModel,
       ),
       new TextItemContainer(
         text: text ?? '文字为空',
