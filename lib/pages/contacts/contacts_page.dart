@@ -88,7 +88,7 @@ class _ContactsPageState extends State<ContactsPage>
   @override
   void dispose() {
     super.dispose();
-    sC.dispose();
+    if (sC != null) sC.dispose();
     canCelListener();
   }
 
@@ -174,13 +174,15 @@ class _ContactsPageState extends State<ContactsPage>
               _contact.nameIndex == _contacts[_contactIndex - 1].nameIndex) {
             _isGroupTitle = false;
           }
+          bool _isBorder = _contactIndex < _contacts.length - 1 &&
+              _contact.nameIndex == _contacts[_contactIndex + 1].nameIndex;
           if (_contact.name != _contacts[_contacts.length - 1].name) {
             return new ContactItem(
               avatar: _contact.avatar,
               title: _contact.name,
               identifier: _contact.identifier,
               groupTitle: _isGroupTitle ? _contact.nameIndex : null,
-              isLine: true,
+              isLine: _isBorder,
             );
           } else {
             return new Column(children: <Widget>[

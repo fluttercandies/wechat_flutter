@@ -119,9 +119,7 @@ class _HomePageState extends State<HomePage>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    if (!listNoEmpty(_chatData)) {
-
-    }
+    if (!listNoEmpty(_chatData)) {}
 
     return new Container(
       color: Color(AppColors.BackgroundColor),
@@ -132,7 +130,7 @@ class _HomePageState extends State<HomePage>
           return InkWell(
             onTap: () {
               routePush(new ChatPage(
-                id: model.identifier,
+                  id: model.identifier,
                   title: model.name,
                   type: model.type == 'Group' ? 2 : 1));
             },
@@ -140,19 +138,19 @@ class _HomePageState extends State<HomePage>
               tapPos = details.globalPosition;
             },
             onLongPress: () {
-              if(Platform.isAndroid) {
-                _showMenu(context, tapPos,
-                    model.type == 'Group' ? 2 : 1, model.identifier);
-              }else{
+              if (Platform.isAndroid) {
+                _showMenu(context, tapPos, model.type == 'Group' ? 2 : 1,
+                    model.identifier);
+              } else {
                 debugPrint("IOS聊天长按选项功能开发中");
               }
             },
             child: new MyConversationView(
-              imageUrl:
-                  new ImageView(img: model.avatar, height: 50.0, width: 50.0),
+              imageUrl: model.avatar,
               title: new Text(model?.name ?? ''),
               content: new Text(model.content),
               time: timeView(model?.time ?? 0),
+              isBorder: model?.name != _chatData[_chatData.length - 1].name,
             ),
           );
         },

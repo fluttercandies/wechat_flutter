@@ -121,7 +121,13 @@ class ContactItemState extends State<ContactItem> {
           new Container(
             height: GROUP_TITLE_HEIGHT,
             padding: EdgeInsets.only(left: 16.0, right: 16.0),
-            color: const Color(AppColors.ContactGroupTitleBg),
+            decoration: BoxDecoration(
+              color: const Color(AppColors.ContactGroupTitleBg),
+              border: Border(
+                top: BorderSide(color: lineColor, width: 0.2),
+                bottom: BorderSide(color: lineColor, width: 0.2),
+              ),
+            ),
             alignment: Alignment.centerLeft,
             child: new Text(widget.groupTitle,
                 style: AppStyles.GroupTitleItemTextStyle),

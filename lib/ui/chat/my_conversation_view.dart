@@ -2,12 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:dim_example/tools/wechat_flutter.dart';
 
 class MyConversationView extends StatefulWidget {
-  final Widget imageUrl;
+  final String imageUrl;
   final Widget title;
   final Widget content;
   final Widget time;
+  final bool isBorder;
 
-  MyConversationView({this.imageUrl, this.title, this.content, this.time});
+  MyConversationView({
+    this.imageUrl,
+    this.title,
+    this.content,
+    this.time,
+    this.isBorder = true,
+  });
 
   @override
   _MyConversationViewState createState() => _MyConversationViewState();
@@ -40,19 +47,22 @@ class _MyConversationViewState extends State<MyConversationView> {
     );
 
     var body = [
-      widget.imageUrl,
+      new ImageView(
+          img: widget.imageUrl, height: 50.0, width: 50.0, fit: BoxFit.cover),
       Expanded(
         child: Container(
-            padding:
-                const EdgeInsets.only(right: 18.0, top: 12.0, bottom: 12.0),
-            decoration: BoxDecoration(
-              border: Border(
-                bottom: BorderSide(
-                    width: Constants.DividerWidth,
-                    color: Color(AppColors.DividerColor)),
-              ),
-            ),
-            child: row),
+          padding: const EdgeInsets.only(right: 18.0, top: 12.0, bottom: 12.0),
+          decoration: BoxDecoration(
+            border: widget.isBorder
+                ? Border(
+                    bottom: BorderSide(
+                        width: Constants.DividerWidth,
+                        color: Color(AppColors.DividerColor)),
+                  )
+                : null,
+          ),
+          child: row,
+        ),
       ),
     ];
 
