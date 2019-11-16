@@ -76,6 +76,12 @@ flutter:
     - assets/images/contact/ic_tag.webp
     - assets/images/contact/ic_group.webp
     - assets/images/contact/ic_new_friend.webp
+    - assets/images/contact/ic_video.png
+    - assets/images/contact/ic_voice.png
+    - assets/images/contact/ic_offical.webp
+    - assets/images/contact/ic_reda.webp
+    - assets/images/contact/ic_scanqr.webp
+    - assets/images/contact/ic_search_wework.webp
 
     - assets/images/discover/ff_Icon_album.webp
     - assets/images/discover/ff_Icon_shake.webp

@@ -14,20 +14,21 @@ class LabelRow extends StatelessWidget {
   final Widget rightW;
   final EdgeInsetsGeometry margin;
   final EdgeInsetsGeometry padding;
+  final Widget headW;
 
-  LabelRow(
-      {this.label,
-      this.onPressed,
-      this.value,
-      this.labelWidth,
-      this.isRight = true,
-        this.isLine = false,
-        this.rightW,
-        this.rValue,
-        this.margin,
-        this.padding = const EdgeInsets.only(
-            top: 15.0, bottom: 15.0, right: 5.0)
-      });
+  LabelRow({
+    this.label,
+    this.onPressed,
+    this.value,
+    this.labelWidth,
+    this.isRight = true,
+    this.isLine = false,
+    this.rightW,
+    this.rValue,
+    this.margin,
+    this.padding = const EdgeInsets.only(top: 15.0, bottom: 15.0, right: 5.0),
+    this.headW,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +46,7 @@ class LabelRow extends StatelessWidget {
                   : null),
           child: new Row(
             children: <Widget>[
+              if (headW != null) headW,
               new SizedBox(
                 width: labelWidth,
                 child: new Text(
@@ -54,21 +56,21 @@ class LabelRow extends StatelessWidget {
               ),
               value != null
                   ? new Text(value,
-                  style: TextStyle(
-                    color: mainTextColor.withOpacity(0.7),
-                  ))
+                      style: TextStyle(
+                        color: mainTextColor.withOpacity(0.7),
+                      ))
                   : new Container(),
               new Spacer(),
               rValue != null
                   ? new Text(rValue,
-                  style: TextStyle(
-                      color: mainTextColor.withOpacity(0.7),
-                      fontWeight: FontWeight.w400))
+                      style: TextStyle(
+                          color: mainTextColor.withOpacity(0.7),
+                          fontWeight: FontWeight.w400))
                   : new Container(),
               rightW != null ? rightW : new Container(),
               isRight
                   ? new Icon(CupertinoIcons.right_chevron,
-                  color: mainTextColor.withOpacity(0.5))
+                      color: mainTextColor.withOpacity(0.5))
                   : new Container(width: 10.0)
             ],
           ),

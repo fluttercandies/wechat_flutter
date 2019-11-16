@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:dim_example/pages/more/add_friend_page.dart';
+import 'package:dim_example/ui/orther/label_row.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:dim_example/im/info_handle.dart';
@@ -10,12 +12,12 @@ import 'package:dim_example/ui/view/list_tile_view.dart';
 import 'package:dim_example/ui/view/search_main_view.dart';
 import 'package:dim_example/ui/view/search_tile_view.dart';
 
-class AddFriendPage extends StatefulWidget {
+class NewFriendPage extends StatefulWidget {
   @override
-  _AddFriendPageState createState() => new _AddFriendPageState();
+  _NewFriendPageState createState() => new _NewFriendPageState();
 }
 
-class _AddFriendPageState extends State<AddFriendPage> {
+class _NewFriendPageState extends State<NewFriendPage> {
   bool isSearch = false;
   bool showBtn = false;
   bool isResult = false;
@@ -32,70 +34,28 @@ class _AddFriendPageState extends State<AddFriendPage> {
           : Border(top: BorderSide(color: lineColor, width: 0.3)),
       title: item['title'],
       label: item['label'],
-      icon: strNoEmpty(item['icon'])
-          ? item['icon']
-          : 'assets/images/favorite.webp',
-      fit: BoxFit.cover,
     );
   }
 
   Widget body() {
-    List data = [
-      {
-        'icon': contactAssets + 'ic_reda.webp',
-        'title': '雷达加朋友',
-        'label': '添加身边的朋友',
-      },
-      {
-        'icon': contactAssets + 'ic_group.webp',
-        'title': '面对面建群',
-        'label': '与身边的朋友进入同一个群聊'
-      },
-      {
-        'icon': contactAssets + 'ic_scanqr.webp',
-        'title': '扫一扫',
-        'label': '扫描二维码名片',
-      },
-      {
-        'icon': contactAssets + 'ic_new_friend.webp',
-        'title': '手机联系人',
-        'label': '添加或邀请通讯录中的朋友',
-      },
-      {
-        'icon': contactAssets + 'ic_offical.webp',
-        'title': '公众号',
-        'label': '获取更多资讯和服务',
-      },
-      {
-        'icon': contactAssets + 'ic_search_wework.webp',
-        'title': '企业微信联系人',
-        'label': '通过手机号搜索企业微信用户',
-      },
-    ];
     var content = [
       new SearchMainView(
         text: '微信号/手机号',
+        isBorder: true,
         onTap: () {
           isSearch = true;
           setState(() {});
           searchF.requestFocus();
         },
       ),
-      new Padding(
-        padding: EdgeInsets.only(top: 15.0, bottom: 30.0),
-        child: new Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            new Text(
-              '我的微信号：$currentUser',
-              style: TextStyle(color: mainTextColor, fontSize: 14.0),
-            ),
-            new Space(width: mainSpace * 1.5),
-            new Icon(Icons.code, color: mainTextColor.withOpacity(0.7))
-          ],
+      new LabelRow(
+        headW: new Padding(
+          padding: EdgeInsets.only(right: 15.0),
+          child: new Image.asset('assets/images/contact/ic_voice.png',
+              width: 25, fit: BoxFit.cover),
         ),
-      ),
-      new Column(children: data.map(buildItem).toList())
+        label: '添加手机联系人',
+      )
     ];
 
     return new Column(children: content);
@@ -157,18 +117,14 @@ class _AddFriendPageState extends State<AddFriendPage> {
     setState(() {});
   }
 
-  // 搜索好友
+  /// 搜索好友
   Future search(String userName) async {
     final data = await getUsersProfile([userName]);
     List<dynamic> dataMap = json.decode(data);
-    if (strNoEmpty(dataMap[0]['allowType'])) {
-      routePush(new AddFriendsDetails(
-        'search',
-        dataMap[0]['identifier'],
-        dataMap[0]['faceUrl'],
-        dataMap[0]['nickName'],
-        dataMap[0]['gender'],
-      ));
+    Map map = dataMap[0];
+    if (strNoEmpty(map['allowType'])) {
+      routePush(new AddFriendsDetails('search', map['identifier'],
+          map['faceUrl'], map['nickName'], map['gender']));
     } else {
       isResult = true;
       setState(() {});
@@ -229,13 +185,19 @@ class _AddFriendPageState extends State<AddFriendPage> {
           : body(),
     );
 
+    var rWidget = new FlatButton(
+      onPressed: () => routePush(new AddFriendPage()),
+      child: new Text('添加朋友'),
+    );
+
     return WillPopScope(
       child: new Scaffold(
         backgroundColor: appBarColor,
         appBar: new ComMomBar(
           leadingW: isSearch ? leading : null,
-          title: '添加朋友',
+          title: '新的朋友',
           titleW: isSearch ? new Row(children: searchView()) : null,
+          rightDMActions: !isSearch ? [rWidget] : [],
         ),
         body: bodyView,
       ),

@@ -1,4 +1,5 @@
 import 'package:dim_example/pages/contacts/contacts_details_page.dart';
+import 'package:dim_example/pages/contacts/new_friend_page.dart';
 import 'package:flutter/material.dart';
 import 'package:dim_example/pages/chat/chat_page.dart';
 import 'package:dim_example/tools/wechat_flutter.dart';
@@ -100,8 +101,14 @@ class ContactItemState extends State<ContactItem> {
     Widget button = new FlatButton(
       color: Colors.white,
       onPressed: () {
-        routePush(new ContactsDetailsPage(
-            id: widget.identifier, avatar: widget.avatar, title: widget.title));
+        if (widget.title == '新的朋友') {
+          routePush(new NewFriendPage());
+        } else {
+          routePush(new ContactsDetailsPage(
+              id: widget.identifier,
+              avatar: widget.avatar,
+              title: widget.title));
+        }
       },
       child: new Row(children: content),
     );

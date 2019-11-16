@@ -5,8 +5,13 @@ import 'package:dim_example/tools/wechat_flutter.dart';
 class SearchMainView extends StatelessWidget {
   final GestureTapCallback onTap;
   final String text;
+  final bool isBorder;
 
-  SearchMainView({this.onTap, this.text});
+  SearchMainView({
+    this.onTap,
+    this.text,
+    this.isBorder = false,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +30,14 @@ class SearchMainView extends StatelessWidget {
 
     return new InkWell(
       child: new Container(
-        color: Colors.white,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          border: isBorder
+              ? Border(
+                  bottom: BorderSide(color: lineColor, width: 0.2),
+                )
+              : null,
+        ),
         padding: EdgeInsets.symmetric(vertical: 15.0),
         child: row,
       ),

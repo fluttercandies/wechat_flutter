@@ -12,20 +12,22 @@ class ListTileView extends StatelessWidget {
   final bool isLabel;
   final EdgeInsetsGeometry padding;
   final String icon;
-
+  final BoxFit fit;
   final EdgeInsetsGeometry margin;
 
-  ListTileView(
-      {this.border,
-      this.onPressed,
-      this.title,
-      this.label,
-      this.padding = const EdgeInsets.symmetric(vertical: 15.0),
-      this.isLabel = true,
-      this.icon = 'assets/images/favorite.webp',
-      this.titleStyle =
-          const TextStyle(fontSize: 17, fontWeight: FontWeight.w500),
-      this.margin});
+  ListTileView({
+    this.border,
+    this.onPressed,
+    this.title,
+    this.label,
+    this.padding = const EdgeInsets.symmetric(vertical: 15.0),
+    this.isLabel = true,
+    this.icon = 'assets/images/favorite.webp',
+    this.titleStyle =
+        const TextStyle(fontSize: 17, fontWeight: FontWeight.w500),
+    this.margin,
+    this.fit,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +61,7 @@ class ListTileView extends StatelessWidget {
         new Container(
           width: 40.0,
           margin: EdgeInsets.symmetric(horizontal: 10.0),
-          child: new Image.asset(icon),
+          child: new ImageView(img: icon, width: 45, fit: fit),
         ),
         new Container(
           width: winWidth(context) - 60,
