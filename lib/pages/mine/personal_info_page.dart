@@ -1,4 +1,4 @@
-import 'package:dim_example/http/req.dart';
+import 'package:dim_example/http/api.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
@@ -18,20 +18,6 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
   @override
   void initState() {
     super.initState();
-//    getHttp();
-    postSuggestionWithAvatar();
-  }
-
-  ///提交建议(新增头像上传)
-  void postSuggestionWithAvatar({FormData params, CancelToken token}) {
-    Req.getInstance().get(
-      API.cat,
-      (v) {
-        print('okDATA:::$v');
-      },
-//      params: {"test": "1"},
-      errorCallBack: (e, c) {},
-    );
   }
 
   action(name) {
@@ -101,7 +87,7 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
                 : new Image.asset(defIcon, fit: BoxFit.fill),
           ),
         ),
-        onPressed: () => _openGallery(context),
+        onPressed: () => postSuggestionWithAvatar(context),
       ),
       new LabelRow(
         label: '昵称',

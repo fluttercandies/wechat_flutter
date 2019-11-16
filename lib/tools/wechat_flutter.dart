@@ -20,7 +20,7 @@ export 'package:dim_example/ui/web/web_view.dart';
 export 'package:dim_example/ui/view/loading_view.dart';
 export 'package:dim_example/ui/view/image_view.dart';
 export 'package:dim_example/config/api.dart';
-
+export 'package:dim_example/http/req.dart';
 import 'package:dim/dim.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 

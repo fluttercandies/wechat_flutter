@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-export 'package:dio/dio.dart';
 import 'package:dim_example/tools/wechat_flutter.dart';
 
 var _id = 0;
@@ -132,7 +131,8 @@ class Req {
       statusCode = response.statusCode;
 
       if (response != null) {
-        callBack(response.data);
+        Map data = response.data[0];
+        callBack(data);
         print('HTTP_REQUEST_URL::[$id]::$url');
         print('HTTP_REQUEST_BODY::[$id]::${params ?? ' no'}');
         print('HTTP_RESPONSE_BODY::[$id]::${response.data}');
@@ -144,7 +144,7 @@ class Req {
         return;
       }
     } catch (e) {
-      _handError(errorCallBack, e);
+      _handError(errorCallBack, statusCode);
     }
   }
 
