@@ -185,6 +185,10 @@ class _ChatPageState extends State<ChatPage> {
                 child: new LayoutBuilder(builder: edit),
               ),
             ),
+            new InkWell(
+              child: new Image.asset('assets/images/chat/ic_Emotion.webp'),
+              onTap: () {},
+            )
           ],
         ),
       ),
@@ -193,7 +197,7 @@ class _ChatPageState extends State<ChatPage> {
     var rWidget = [
       new InkWell(
         child: new Image.asset('assets/images/right_more.png'),
-        onTap: () => routePush(new ChatInfoPage()),
+        onTap: () => routePush(new ChatInfoPage(widget.id)),
       )
     ];
 

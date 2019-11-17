@@ -22,7 +22,7 @@ class IChatPersonEntity {
   String nickname;
   int language;
   IChatPersonCustominfo customInfo;
-  int allowType;
+  dynamic allowType;
 
   IChatPersonEntity(
       {this.birthday,

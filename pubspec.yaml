@@ -67,6 +67,10 @@ flutter:
     - assets/images/login/abo.png
     - assets/images/login/abn.webp
 
+    - assets/images/chat/ic_Emotion.webp
+    - assets/images/chat/ic_Keyboard.webp
+    - assets/images/chat/ic_details_add.png
+
     - assets/images/mine/ic_small_code.png
     - assets/images/mine/ic_wallet.webp
     - assets/images/mine/ic_card_package.png
