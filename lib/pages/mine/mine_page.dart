@@ -43,6 +43,8 @@ class _MinePageState extends State<MinePage> {
           vertical:
               item['label'] == '支付' || item['label'] == '设置' ? 10.0 : 0.0),
       onPressed: () => action(item['label']),
+      width: 25.0,
+      fit: BoxFit.cover,
     );
   }
 
@@ -56,12 +58,12 @@ class _MinePageState extends State<MinePage> {
 
   Widget body(GlobalModel model) {
     List data = [
-      {'label': '支付', 'icon': 'assets/images/mine/ic_card_package.png'},
-      {'label': '收藏', 'icon': 'assets/images/mine/ic_card_package.png'},
+      {'label': '支付', 'icon': 'assets/images/mine/ic_pay.png'},
+      {'label': '收藏', 'icon': 'assets/images/favorite.webp'},
       {'label': '相册', 'icon': 'assets/images/mine/ic_card_package.png'},
       {'label': '卡片', 'icon': 'assets/images/mine/ic_card_package.png'},
-      {'label': '表情', 'icon': 'assets/images/mine/ic_card_package.png'},
-      {'label': '设置', 'icon': 'assets/images/mine/ic_card_package.png'},
+      {'label': '表情', 'icon': 'assets/images/mine/ic_emoji.png'},
+      {'label': '设置', 'icon': 'assets/images/mine/ic_setting.png'},
     ];
 
     var row = [

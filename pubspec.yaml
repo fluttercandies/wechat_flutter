@@ -66,8 +66,9 @@ flutter:
     - assets/images/ic_no_data.webp
 
     - assets/images/login/select_avatar.webp
-    - assets/images/login/abo.png
-    - assets/images/login/abn.webp
+    - assets/images/login/ic_select_have.webp
+    - assets/images/login/ic_select_have_grey.webp
+    - assets/images/login/ic_select_no.png
 
     - assets/images/chat/ic_Emotion.webp
     - assets/images/chat/ic_Keyboard.webp
@@ -77,6 +78,9 @@ flutter:
     - assets/images/mine/ic_small_code.png
     - assets/images/mine/ic_wallet.webp
     - assets/images/mine/ic_card_package.png
+    - assets/images/mine/ic_emoji.png
+    - assets/images/mine/ic_pay.png
+    - assets/images/mine/ic_setting.png
 
     - assets/images/contact/ic_contacts_details.png
     - assets/images/contact/ic_no_public.webp

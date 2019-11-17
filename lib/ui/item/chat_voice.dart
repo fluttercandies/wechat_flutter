@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:dim_example/tools/wechat_flutter.dart';
 
 class ChatVoice extends StatefulWidget {
+  final OnData data;
+
+  ChatVoice({this.data});
+
   @override
   _ChatVoiceState createState() => _ChatVoiceState();
 }

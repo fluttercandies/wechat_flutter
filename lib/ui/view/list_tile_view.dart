@@ -7,13 +7,14 @@ class ListTileView extends StatelessWidget {
   final BoxBorder border;
   final VoidCallback onPressed;
   final String title;
-  final TextStyle titleStyle;
   final String label;
+  final String icon;
+  final double width;
+  final TextStyle titleStyle;
   final bool isLabel;
   final EdgeInsetsGeometry padding;
-  final String icon;
-  final BoxFit fit;
   final EdgeInsetsGeometry margin;
+  final BoxFit fit;
 
   ListTileView({
     this.border,
@@ -27,6 +28,7 @@ class ListTileView extends StatelessWidget {
         const TextStyle(fontSize: 17, fontWeight: FontWeight.w500),
     this.margin,
     this.fit,
+    this.width = 45.0,
   });
 
   @override
@@ -59,9 +61,10 @@ class ListTileView extends StatelessWidget {
     var row = new Row(
       children: <Widget>[
         new Container(
-          width: 40.0,
+          width: width - 5,
           margin: EdgeInsets.symmetric(horizontal: 10.0),
-          child: new ImageView(img: icon, width: 45, fit: fit),
+          child:
+              new ImageView(img: icon, width: width, fit: fit),
         ),
         new Container(
           width: winWidth(context) - 60,
