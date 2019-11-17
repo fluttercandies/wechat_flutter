@@ -30,7 +30,8 @@ class WebViewPageState extends State<WebViewPage> {
           _toasterJavascriptChannel(context),
         ].toSet(),
         navigationDelegate: (NavigationRequest request) {
-          if (request.url.startsWith('https://github.com/flutterbear')) {
+          if (request.url
+              .startsWith('https://github.com/fluttercandies/wechat_flutter')) {
             print('blocking navigation to $request}');
             return NavigationDecision.prevent;
           }

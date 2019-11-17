@@ -15,7 +15,7 @@ class _SearchPageState extends State<SearchPage> {
   Widget wordView(item) {
     return new InkWell(
       child: new Container(
-        width: winWidth(context)/3,
+        width: winWidth(context) / 3,
         alignment: Alignment.center,
         margin: EdgeInsets.symmetric(vertical: 15.0),
         child: new Text(

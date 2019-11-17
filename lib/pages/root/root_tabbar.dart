@@ -55,6 +55,8 @@ class RootTabBarState extends State<RootTabBar> {
         return;
       }
       routePush(new GroupLaunchPage());
+    } else if (v == '帮助与反馈') {
+      routePush(new WebViewPage(helpUrl, '帮助与反馈'));
     } else {
       routePush(new LanguagePage());
     }
