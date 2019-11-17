@@ -1,39 +1,10 @@
+import 'package:dim_example/config/dictionary.dart';
 import 'package:dim_example/im/model/contacts.dart';
+import 'package:dim_example/ui/item/contact_view.dart';
 import 'package:flutter/material.dart';
 import 'package:dim_example/tools/wechat_flutter.dart';
 import 'package:dim_example/ui/item/contact_item.dart';
 
-const INDEX_BAR_WORDS = [
-  "↑",
-  "☆",
-  "A",
-  "B",
-  "C",
-  "D",
-  "E",
-  "F",
-  "G",
-  "H",
-  "I",
-  "J",
-  "K",
-  "L",
-  "M",
-  "N",
-  "O",
-  "P",
-  "Q",
-  "R",
-  "S",
-  "T",
-  "U",
-  "V",
-  "W",
-  "X",
-  "Y",
-  "Z",
-  "#",
-];
 
 class ContactsPage extends StatefulWidget {
   _ContactsPageState createState() => _ContactsPageState();
@@ -162,50 +133,8 @@ class _ContactsPageState extends State<ContactsPage>
     super.build(context);
 
     final List<Widget> body = [
-      new ListView.builder(
-        controller: sC,
-        itemBuilder: (BuildContext context, int index) {
-          if (index < _functionButtons.length) return _functionButtons[index];
-
-          int _contactIndex = index - _functionButtons.length;
-          bool _isGroupTitle = true;
-          Contact _contact = _contacts[_contactIndex];
-          if (_contactIndex >= 1 &&
-              _contact.nameIndex == _contacts[_contactIndex - 1].nameIndex) {
-            _isGroupTitle = false;
-          }
-          bool _isBorder = _contactIndex < _contacts.length - 1 &&
-              _contact.nameIndex == _contacts[_contactIndex + 1].nameIndex;
-          if (_contact.name != _contacts[_contacts.length - 1].name) {
-            return new ContactItem(
-              avatar: _contact.avatar,
-              title: _contact.name,
-              identifier: _contact.identifier,
-              groupTitle: _isGroupTitle ? _contact.nameIndex : null,
-              isLine: _isBorder,
-            );
-          } else {
-            return new Column(children: <Widget>[
-              new ContactItem(
-                avatar: _contact.avatar,
-                title: _contact.name,
-                identifier: _contact.identifier,
-                groupTitle: _isGroupTitle ? _contact.nameIndex : null,
-                isLine: false,
-              ),
-              new HorizontalLine(),
-              new Container(
-                padding: EdgeInsets.symmetric(vertical: 10.0),
-                child: new Text(
-                  '${_contacts.length}位联系人',
-                  style: TextStyle(color: mainTextColor, fontSize: 16),
-                ),
-              )
-            ]);
-          }
-        },
-        itemCount: _contacts.length + _functionButtons.length,
-      ),
+      new ContactView(
+          sC: sC, functionButtons: _functionButtons, contacts: _contacts),
       new Positioned(
         width: Constants.IndexBarWidth,
         right: 0.0,

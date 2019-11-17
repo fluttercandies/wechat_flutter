@@ -1,55 +1,181 @@
+import 'package:dim_example/config/dictionary.dart';
+import 'package:dim_example/im/model/contacts.dart';
+import 'package:dim_example/ui/item/contact_item.dart';
+import 'package:dim_example/ui/item/contact_view.dart';
+import 'package:dim_example/ui/item/launch_group.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-
 import 'package:dim_example/tools/wechat_flutter.dart';
+import 'dart:convert';
+import 'package:dim_example/im/info_handle.dart';
+import 'package:dim_example/pages/more/add_friend_details.dart';
 
 class LaunchGroupPage extends StatefulWidget {
   @override
-  _LaunchGroupPageState createState() => _LaunchGroupPageState();
+  _LaunchGroupPageState createState() => new _LaunchGroupPageState();
 }
 
 class _LaunchGroupPageState extends State<LaunchGroupPage> {
-  List<Widget> body() {
-    return [
-      new Space(height: 50.0),
-      new Container(
-        width: winWidth(context),
-        height: winHeight(context),
-        color: CupertinoColors.activeBlue.withOpacity(0.5),
-      ),
-      new Container(
-        width: winWidth(context),
-        height: winHeight(context),
-        color: CupertinoColors.destructiveRed.withOpacity(0.5),
-      ),
-    ];
+  bool isSearch = false;
+  bool showBtn = false;
+  bool isResult = false;
+
+  List defItems = ['选择一个群', '面对面建群'];
+  List<Contact> _contacts = [];
+
+  FocusNode searchF = new FocusNode();
+  TextEditingController searchC = new TextEditingController();
+  ScrollController sC;
+
+  final Map _letterPosMap = {INDEX_BAR_WORDS[0]: 0.0};
+
+  List<Widget> searchBody() {
+    if (isResult) {
+      return [
+        new Space(height: mainSpace),
+      ];
+    } else {
+      return [
+        new Space(height: mainSpace),
+      ];
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getContacts();
+  }
+
+  unFocusMethod() {
+    searchF.unfocus();
+    isSearch = false;
+    if (isResult) isResult = !isResult;
+    setState(() {});
+  }
+
+  Future getContacts() async {
+    final str = await ContactsPageData().listFriend();
+
+    List<Contact> listContact = str;
+    _contacts.clear();
+    _contacts..addAll(listContact);
+    _contacts
+        .sort((Contact a, Contact b) => a.nameIndex.compareTo(b.nameIndex));
+    sC = new ScrollController();
+
+    /// 计算用于 IndexBar 进行定位的关键通讯录列表项的位置
+    var _totalPos = ContactItemState.heightItem(false);
+    for (int i = 0; i < _contacts.length; i++) {
+      bool _hasGroupTitle = true;
+      if (i > 0 &&
+          _contacts[i].nameIndex.compareTo(_contacts[i - 1].nameIndex) == 0)
+        _hasGroupTitle = false;
+
+      if (_hasGroupTitle) _letterPosMap[_contacts[i].nameIndex] = _totalPos;
+
+      _totalPos += ContactItemState.heightItem(_hasGroupTitle);
+    }
+    if (mounted) setState(() {});
+  }
+
+  // 搜索好友
+  Future search(String userName) async {
+    final data = await getUsersProfile([userName]);
+    List<dynamic> dataMap = json.decode(data);
+    if (strNoEmpty(dataMap[0]['allowType'])) {
+      routePush(
+        new AddFriendsDetails(
+          'search',
+          dataMap[0]['identifier'],
+          dataMap[0]['faceUrl'],
+          dataMap[0]['nickName'],
+          dataMap[0]['gender'],
+        ),
+      );
+    } else {
+      isResult = true;
+      setState(() {});
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+    List<Widget> body() {
+      return [
+        new Space(height: 50.0),
+        new Container(
+          child: new Column(
+            children:
+                defItems.map((item) => new LaunchGroupItem(item)).toList(),
+          ),
+        ),
+        new Expanded(child: new ContactView(sC: sC, contacts: _contacts))
+      ];
+    }
+
     var rWidget = new FlatButton(
       onPressed: () {},
       child: new Text('确定'),
     );
-    return Scaffold(
-      appBar: new ComMomBar(
-        title: '发起群聊',
-        rightDMActions: <Widget>[rWidget],
+
+    return WillPopScope(
+      child: new Scaffold(
+        backgroundColor: appBarColor,
+        appBar: new ComMomBar(title: '发起群聊', rightDMActions: <Widget>[rWidget]),
+        body: new Stack(
+          children: <Widget>[
+            new MainInputBody(
+              child: isSearch
+                  ? new GestureDetector(
+                      child: new Column(children: searchBody()),
+                      onTap: () => unFocusMethod(),
+                    )
+                  : new Column(children: body()),
+              onTap: () => unFocusMethod(),
+            ),
+            new Container(
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.8),
+                border: Border(
+                  bottom: BorderSide(
+                      color: isSearch ? Colors.green : lineColor, width: 0.3),
+                ),
+              ),
+              width: winWidth(context),
+              alignment: Alignment.center,
+              height: 50.0,
+              padding: EdgeInsets.symmetric(horizontal: 10.0),
+              child: new LaunchSearch(
+                searchC: searchC,
+                searchF: searchF,
+                onChanged: (txt) {
+                  if (strNoEmpty(searchC.text))
+                    showBtn = true;
+                  else
+                    showBtn = false;
+                  if (isResult) isResult = false;
+
+                  setState(() {});
+                },
+                onTap: () {
+                  setState(() => isSearch = true);
+                },
+                onSubmitted: (txt) => search(txt),
+                delOnTap: () => setState(() {}),
+              ),
+            )
+          ],
+        ),
       ),
-      body: new Stack(
-        children: <Widget>[
-          new SingleChildScrollView(
-            child: new Column(children: body()),
-          ),
-          new Container(
-            color: Colors.white.withOpacity(0.5),
-            width: winWidth(context),
-            alignment: Alignment.center,
-            height: 50.0,
-            child: new Text('搜索'),
-          )
-        ],
-      ),
+      onWillPop: () {
+        if (isSearch) {
+          unFocusMethod();
+        } else {
+          Navigator.pop(context);
+        }
+        return;
+      },
     );
   }
 }
