@@ -130,7 +130,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 width: 25.0,
                 height: 25.0,
                 fit: BoxFit.cover,
-                color: isSelect ? Colors.green : null),
+                color: isSelect ? mainTextColor : null),
             onTap: () {
               setState(() => isSelect = !isSelect);
             },

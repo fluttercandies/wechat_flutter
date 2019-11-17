@@ -110,7 +110,16 @@ class _LaunchGroupPageState extends State<LaunchGroupPage> {
                 defItems.map((item) => new LaunchGroupItem(item)).toList(),
           ),
         ),
-        new Expanded(child: new ContactView(sC: sC, contacts: _contacts))
+        new Expanded(
+          child: new ContactView(
+            sC: sC,
+            contacts: _contacts,
+            type: ClickType.select,
+            callback: (v) {
+              print('当前数据${v.toString()}');
+            },
+          ),
+        )
       ];
     }
 

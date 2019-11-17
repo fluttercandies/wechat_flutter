@@ -1,23 +1,28 @@
 import 'package:dim_example/im/model/contacts.dart';
 import 'package:flutter/material.dart';
-
 import 'package:dim_example/tools/wechat_flutter.dart';
-
 import 'contact_item.dart';
+
+enum ClickType { select, open }
 
 class ContactView extends StatelessWidget {
   final ScrollController sC;
   final List<ContactItem> functionButtons;
   final List<Contact> contacts;
+  final ClickType type;
+  final Callback callback;
 
   ContactView({
     this.sC,
     this.functionButtons = const [],
     this.contacts = const [],
+    this.type,
+    this.callback,
   });
 
   @override
   Widget build(BuildContext context) {
+    List<String> data = [];
     return ListView.builder(
       controller: sC,
       itemBuilder: (BuildContext context, int index) {
@@ -39,6 +44,15 @@ class ContactView extends StatelessWidget {
             identifier: _contact.identifier,
             groupTitle: _isGroupTitle ? _contact.nameIndex : null,
             isLine: _isBorder,
+            type: type,
+            cancel: (v) {
+              data.remove(v);
+              callback(data);
+            },
+            add: (v) {
+              data.add(v);
+              callback(data);
+            },
           );
         } else {
           return new Column(children: <Widget>[
@@ -48,6 +62,15 @@ class ContactView extends StatelessWidget {
               identifier: _contact.identifier,
               groupTitle: _isGroupTitle ? _contact.nameIndex : null,
               isLine: false,
+              type: type,
+              cancel: (v) {
+                data.remove(v);
+                callback(data);
+              },
+              add: (v) {
+                data.add(v);
+                callback(data);
+              },
             ),
             new HorizontalLine(),
             new Container(

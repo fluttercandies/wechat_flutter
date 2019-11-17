@@ -6,19 +6,31 @@ import 'package:dim_example/pages/contacts/public_page.dart';
 import 'package:flutter/material.dart';
 import 'package:dim_example/tools/wechat_flutter.dart';
 
+import 'contact_view.dart';
+
+typedef OnAdd = void Function(String v);
+typedef OnCancel = void Function(String v);
+
 class ContactItem extends StatefulWidget {
   final String avatar;
   final String title;
   final String identifier;
   final String groupTitle;
   final bool isLine;
+  final ClickType type;
+  final OnAdd add;
+  final OnCancel cancel;
 
-  ContactItem(
-      {@required this.avatar,
-      @required this.title,
-      this.identifier,
-      this.isLine = true,
-      this.groupTitle});
+  ContactItem({
+    @required this.avatar,
+    @required this.title,
+    this.identifier,
+    this.isLine = true,
+    this.groupTitle,
+    this.type = ClickType.open,
+    this.add,
+    this.cancel,
+  });
 
   ContactItemState createState() => ContactItemState();
 }
@@ -40,6 +52,8 @@ class ContactItemState extends State<ContactItem> {
 
     return _buttonHeight;
   }
+
+  bool isSelect = false;
 
   Map<String, dynamic> mapData;
 
@@ -97,12 +111,34 @@ class ContactItemState extends State<ContactItem> {
               style: TextStyle(fontWeight: FontWeight.w400), maxLines: 1),
         ),
       ),
+      widget.type == ClickType.select
+          ? new InkWell(
+              child: new Image.asset(
+                'assets/images/login/${isSelect ? 'abo.png' : 'abn.webp'}',
+                width: 25.0,
+                height: 25.0,
+                fit: BoxFit.cover,
+                color: isSelect ? mainTextColor : null,
+              ),
+              onTap: () {
+                setState(() => isSelect = !isSelect);
+                if (isSelect) widget.add(widget.identifier);
+                if (!isSelect) widget.cancel(widget.identifier);
+              },
+            )
+          : new Container()
     ];
 
     /// 列表项主体部分
     Widget button = new FlatButton(
       color: Colors.white,
       onPressed: () {
+        if (widget.type == ClickType.select) {
+          setState(() => isSelect = !isSelect);
+          if (isSelect) widget.add(widget.identifier);
+          if (!isSelect) widget.cancel(widget.identifier);
+          return;
+        }
         if (widget.title == '新的朋友') {
           routePush(new NewFriendPage());
         } else if (widget.title == '群聊') {
