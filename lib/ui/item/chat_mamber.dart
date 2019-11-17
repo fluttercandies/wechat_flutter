@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:dim_example/tools/wechat_flutter.dart';
 
 class ChatMamBer extends StatefulWidget {
-  final PersonInfoEntity model;
+  final dynamic model;
 
   ChatMamBer({this.model});
 
@@ -16,6 +16,11 @@ class ChatMamBer extends StatefulWidget {
 class _ChatMamBerState extends State<ChatMamBer> {
   @override
   Widget build(BuildContext context) {
+    String face =
+        Platform.isIOS ? widget.model?.faceURL : widget.model?.faceUrl;
+    String name =
+        Platform.isIOS ? widget.model?.nickname : widget.model?.nickName;
+
     List<Widget> wrap = [];
 
     wrap.add(
@@ -29,18 +34,14 @@ class _ChatMamBerState extends State<ChatMamBer> {
               child: new Column(
                 children: <Widget>[
                   new ImageView(
-                    img: strNoEmpty(widget.model?.faceUrl)
-                        ? widget.model?.faceUrl
-                        : defAvatar,
+                    img: strNoEmpty(face) ? face : defAvatar,
                     width: 55.0,
                     height: 55.0,
                     fit: BoxFit.cover,
                   ),
                   new Space(height: mainSpace / 2),
                   new Text(
-                    strNoEmpty(widget.model?.nickName)
-                        ? widget.model.nickName
-                        : '无名氏',
+                    strNoEmpty(name) ? name : '无名氏',
                     style: TextStyle(color: mainTextColor),
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -48,10 +49,7 @@ class _ChatMamBerState extends State<ChatMamBer> {
               ),
             ),
             onTap: () => routePush(new ContactsDetailsPage(
-              id: widget.model.identifier,
-              title: widget.model.nickName,
-              avatar: widget.model.faceUrl,
-            )),
+                id: widget.model.identifier, title: name, avatar: face)),
           );
         }).toList(),
       ),

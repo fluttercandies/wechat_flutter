@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:dim_example/im/entity/i_person_info_entity.dart';
 import 'package:dim_example/im/entity/person_info_entity.dart';
 import 'package:dim_example/im/info_handle.dart';
 import 'package:dim_example/ui/item/chat_mamber.dart';
@@ -19,7 +20,7 @@ class ChatInfoPage extends StatefulWidget {
 }
 
 class _ChatInfoPageState extends State<ChatInfoPage> {
-  PersonInfoEntity model;
+  var model;
 
   bool isRemind = false;
   bool isTop = false;
@@ -71,7 +72,11 @@ class _ChatInfoPageState extends State<ChatInfoPage> {
     final info = await getUsersProfile([widget.id]);
     List infoList = json.decode(info);
     setState(() {
-      model = PersonInfoEntity.fromJson(infoList[0]);
+      if(Platform.isIOS) {
+        model = IPersonInfoEntity.fromJson(infoList[0]);
+      }else {
+        model = PersonInfoEntity.fromJson(infoList[0]);
+      }
     });
   }
 
