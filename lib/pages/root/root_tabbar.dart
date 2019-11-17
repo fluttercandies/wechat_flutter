@@ -1,6 +1,7 @@
 import 'dart:io';
 
-import 'package:dim_example/pages/contacts/launch_group_page.dart';
+import 'package:dim_example/pages/contacts/group_launch_page.dart';
+import 'package:dim_example/pages/home/search_page.dart';
 import 'package:dim_example/pages/settings/language_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -53,7 +54,7 @@ class RootTabBarState extends State<RootTabBar> {
         showToast(context, 'IOS暂不支持发起群聊');
         return;
       }
-      routePush(new LaunchGroupPage());
+      routePush(new GroupLaunchPage());
     } else {
       routePush(new LanguagePage());
     }
@@ -93,7 +94,7 @@ class RootTabBarState extends State<RootTabBar> {
             width: 60.0,
             child: new Image.asset('assets/images/search_black.webp'),
           ),
-          onTap: () => showToast(context, 'search'),
+          onTap: () => routeFadePush(new SearchPage()),
         ),
         new WPopupMenu(
           menuWidth: winWidth(context) / 2.5,

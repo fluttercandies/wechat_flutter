@@ -10,12 +10,12 @@ import 'dart:convert';
 import 'package:dim_example/im/info_handle.dart';
 import 'package:dim_example/pages/more/add_friend_details.dart';
 
-class LaunchGroupPage extends StatefulWidget {
+class GroupLaunchPage extends StatefulWidget {
   @override
-  _LaunchGroupPageState createState() => new _LaunchGroupPageState();
+  _GroupLaunchPageState createState() => new _GroupLaunchPageState();
 }
 
-class _LaunchGroupPageState extends State<LaunchGroupPage> {
+class _GroupLaunchPageState extends State<GroupLaunchPage> {
   bool isSearch = false;
   bool showBtn = false;
   bool isResult = false;

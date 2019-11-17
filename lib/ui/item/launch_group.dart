@@ -1,3 +1,4 @@
+import 'package:dim_example/pages/contacts/group_select_page.dart';
 import 'package:flutter/material.dart';
 
 import 'package:dim_example/tools/wechat_flutter.dart';
@@ -19,7 +20,13 @@ class LaunchGroupItem extends StatelessWidget {
       child: new FlatButton(
         color: Colors.white,
         padding: EdgeInsets.symmetric(vertical: 15.0),
-        onPressed: () {},
+        onPressed: () {
+          if (item == '选择一个群') {
+            routePush(new GroupSelectPage());
+          } else {
+            showToast(context, '敬请期待');
+          }
+        },
         child: new Container(
           width: winWidth(context),
           padding: EdgeInsets.only(left: 20.0),
