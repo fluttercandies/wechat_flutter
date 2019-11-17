@@ -22,13 +22,9 @@ dependencies:
   extended_text: any
   url_launcher: any
   connectivity: any
-#  flutter_sound: ^1.4.1
   file: any
   photo_view: ^0.4.2
-#  audioplayer: any
   flutter_downloader: any
-  video_player: ^0.7.2
-  chewie: ^0.9.8
   dio: ^2.2.2
 
 dev_dependencies:
