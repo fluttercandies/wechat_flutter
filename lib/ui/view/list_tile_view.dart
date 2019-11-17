@@ -10,6 +10,7 @@ class ListTileView extends StatelessWidget {
   final String label;
   final String icon;
   final double width;
+  final double horizontal;
   final TextStyle titleStyle;
   final bool isLabel;
   final EdgeInsetsGeometry padding;
@@ -29,6 +30,7 @@ class ListTileView extends StatelessWidget {
     this.margin,
     this.fit,
     this.width = 45.0,
+    this.horizontal = 10.0,
   });
 
   @override
@@ -62,7 +64,7 @@ class ListTileView extends StatelessWidget {
       children: <Widget>[
         new Container(
           width: width - 5,
-          margin: EdgeInsets.symmetric(horizontal: 10.0),
+          margin: EdgeInsets.symmetric(horizontal: horizontal),
           child:
               new ImageView(img: icon, width: width, fit: fit),
         ),

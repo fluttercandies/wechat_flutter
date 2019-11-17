@@ -45,6 +45,7 @@ class _MinePageState extends State<MinePage> {
       onPressed: () => action(item['label']),
       width: 25.0,
       fit: BoxFit.cover,
+      horizontal: 15.0,
     );
   }
 
