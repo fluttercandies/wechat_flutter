@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:dim_example/im/entity/chat_list_entity.dart';
+import 'package:dim_example/im/entity/i_person_info_entity.dart';
 import 'package:dim_example/im/entity/message_entity.dart';
 import 'package:dim_example/im/entity/person_info_entity.dart';
 import 'package:flutter/material.dart';
@@ -52,19 +53,31 @@ class ChatListData {
 
         final profile = await getUsersProfile([model.peer]);
         List<dynamic> profileData = json.decode(profile);
-
         for (int i = 0; i < profileData.length; i++) {
-          PersonInfoEntity info = PersonInfoEntity.fromJson(profileData[i]);
-          if (strNoEmpty(info?.faceUrl) && info?.faceUrl != '[]') {
-            avatar = info?.faceUrl ?? defIcon;
-          } else {
-            avatar = defIcon;
+          if (Platform.isIOS) {
+            IPersonInfoEntity info = IPersonInfoEntity.fromJson(profileData[i]);
+
+            if (strNoEmpty(info?.faceURL) && info?.faceURL != '[]') {
+              avatar = info?.faceURL ?? defIcon;
+            } else {
+              avatar = defIcon;
+            }
+            name = strNoEmpty(info?.nickname)
+                ? info?.nickname
+                : identifier ?? '未知';
+          }else {
+            PersonInfoEntity info = PersonInfoEntity.fromJson(profileData[i]);
+            if (strNoEmpty(info?.faceUrl) && info?.faceUrl != '[]') {
+              avatar = info?.faceUrl ?? defIcon;
+            } else {
+              avatar = defIcon;
+            }
+            name =
+            strNoEmpty(info?.nickName) ? info?.nickName : identifier ?? '未知';
           }
-          name =
-              strNoEmpty(info?.nickName) ? info?.nickName : identifier ?? '未知';
         }
 
-        final message = await getDimMessages(model.peer,num: 1);
+        final message = await getDimMessages(model.peer, num: 1);
         List<dynamic> messageData = json.decode(message);
         MessageEntity messageModel = MessageEntity.fromJson(messageData[0]);
         content = messageModel.message.text;

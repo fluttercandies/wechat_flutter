@@ -1,3 +1,4 @@
+import 'package:dim_example/pages/settings/language_page.dart';
 import 'package:flutter/material.dart';
 
 import 'package:dim_example/tools/wechat_flutter.dart';
@@ -33,6 +34,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
       padding: EdgeInsets.symmetric(vertical: 16.0),
       icon: item['icon'],
       margin: EdgeInsets.only(bottom: isShow() ? 10.0 : 0.0),
+      onPressed: () => routePush(new LanguagePage()),
     );
   }
 

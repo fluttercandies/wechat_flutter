@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:dim_example/im/entity/i_chat_person_entity.dart';
+import 'package:dim_example/im/entity/i_person_info_entity.dart';
 import 'package:dim_example/im/entity/person_info_entity.dart';
 import 'package:dim_example/im/info_handle.dart';
 import 'package:dim_example/tools/wechat_flutter.dart';
@@ -51,7 +52,7 @@ class ChatDataRep {
       for (int i = 0; i < chatMsgDataList.length; i++) {
         final info = await getUsersProfile([chatMsgDataList[i]['sender']]);
         List infoList = json.decode(info);
-        IChatPersonEntity model = IChatPersonEntity.fromJson(infoList[0]);
+        IPersonInfoEntity model = IPersonInfoEntity.fromJson(infoList[0]);
         chatData.insert(
           0,
           new ChatData(

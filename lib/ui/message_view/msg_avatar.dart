@@ -21,12 +21,13 @@ class MsgAvatar extends StatelessWidget {
         ),
         margin: EdgeInsets.only(right: 10.0),
         child: new ImageView(
-            img: model.id == globalModel.account
-                ? globalModel.avatar
-                : model.avatar,
-            height: 50,
-            width: 50,
-            fit: BoxFit.fill),
+          img: model.id == globalModel.account
+              ? globalModel.avatar??defIcon
+              : model.avatar,
+          height: 50,
+          width: 50,
+          fit: BoxFit.fill,
+        ),
       ),
       onTap: () {
         routePush(new ContactsDetailsPage(

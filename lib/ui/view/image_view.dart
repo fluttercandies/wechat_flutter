@@ -4,7 +4,6 @@ import 'package:dim_example/tools/wechat_flutter.dart';
 
 class ImageView extends StatelessWidget {
   final String img;
-
   final double width;
   final double height;
   final BoxFit fit;
