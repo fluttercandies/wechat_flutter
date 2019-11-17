@@ -64,7 +64,7 @@ class WPopupMenu extends StatefulWidget {
 class _WPopupMenuState extends State<WPopupMenu> {
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return new InkWell(
       child: Container(
         key: widget.key,
         padding: widget.padding,
@@ -77,11 +77,6 @@ class _WPopupMenuState extends State<WPopupMenu> {
       ),
       onTap: () {
         if (widget.pressType == PressType.singleClick) {
-          onTap();
-        }
-      },
-      onLongPress: () {
-        if (widget.pressType == PressType.longPress) {
           onTap();
         }
       },

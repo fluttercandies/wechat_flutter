@@ -147,6 +147,7 @@ class _NewFriendPageState extends State<NewFriendPage> {
       return [
         new Expanded(
           child: new TextField(
+            style: TextStyle(textBaseline: TextBaseline.alphabetic),
             focusNode: searchF,
             controller: searchC,
             decoration:

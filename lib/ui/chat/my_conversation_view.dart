@@ -46,31 +46,28 @@ class _MyConversationViewState extends State<MyConversationView> {
       ],
     );
 
-    var body = [
-      new ImageView(
-          img: widget.imageUrl, height: 50.0, width: 50.0, fit: BoxFit.cover),
-      new Expanded(
-        child: new Container(
-          padding: const EdgeInsets.only(right: 18.0, top: 12.0, bottom: 12.0),
-          decoration: BoxDecoration(
-            border: widget.isBorder
-                ? Border(
-                    bottom: BorderSide(
-                        width: Constants.DividerWidth, color: lineColor),
-                  )
-                : null,
-          ),
-          child: row,
-        ),
-      ),
-    ];
-
     return new Container(
       padding: EdgeInsets.only(left: 18.0),
       color: Colors.white,
       child: new Row(
         crossAxisAlignment: CrossAxisAlignment.center,
-        children: body,
+        children: [
+          new ImageView(
+              img: widget.imageUrl, height: 50.0, width: 50.0, fit: BoxFit.cover),
+          new Expanded(
+            child: new Container(
+              padding: EdgeInsets.only(right: 18.0, top: 12.0, bottom: 12.0),
+              decoration: BoxDecoration(
+                border: widget.isBorder
+                    ? Border(
+                  top: BorderSide(color: lineColor, width: 0.2),
+                )
+                    : null,
+              ),
+              child: row,
+            ),
+          ),
+        ],
       ),
     );
   }

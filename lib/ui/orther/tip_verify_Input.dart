@@ -39,7 +39,9 @@ class _VerifyInputState extends State<TipVerifyInput> {
           },
           onTap: () => setState(() {}),
           style: TextStyle(
-              color: widget.focusNode.hasFocus ? Colors.black : Colors.grey),
+            color: widget.focusNode.hasFocus ? Colors.black : Colors.grey,
+            textBaseline: TextBaseline.alphabetic,
+          ),
         ),
       ),
       widget.controller.text != ''

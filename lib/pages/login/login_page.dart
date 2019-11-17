@@ -114,6 +114,7 @@ class _LoginPageState extends State<LoginPage> {
                   child: new TextField(
                 controller: _tC,
                 maxLines: 1,
+                style: TextStyle(textBaseline: TextBaseline.alphabetic),
                 keyboardType: TextInputType.phone,
                 inputFormatters: [
                   WhitelistingTextInputFormatter(new RegExp('[0-9]'))

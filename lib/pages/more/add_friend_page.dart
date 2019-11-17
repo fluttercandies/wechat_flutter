@@ -198,6 +198,7 @@ class _AddFriendPageState extends State<AddFriendPage> {
           child: new TextField(
             focusNode: searchF,
             controller: searchC,
+            style: TextStyle(textBaseline: TextBaseline.alphabetic),
             decoration:
                 InputDecoration(hintText: '微信号/手机号', border: InputBorder.none),
             onChanged: (txt) {

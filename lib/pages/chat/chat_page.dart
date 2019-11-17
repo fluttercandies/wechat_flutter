@@ -8,6 +8,8 @@ import 'package:dim_example/ui/edit/selection_controls.dart';
 import 'package:dim_example/ui/edit/text_span_builder.dart';
 import 'package:dim_example/ui/massage/wait1.dart';
 
+import 'chat_info_page.dart';
+
 class ChatPage extends StatefulWidget {
   final String title;
   final int type;
@@ -188,8 +190,15 @@ class _ChatPageState extends State<ChatPage> {
       ),
     ];
 
+    var rWidget = [
+      new InkWell(
+        child: new Image.asset('assets/images/right_more.png'),
+        onTap: () => routePush(new ChatInfoPage()),
+      )
+    ];
+
     return Scaffold(
-      appBar: new ComMomBar(title: widget.title),
+      appBar: new ComMomBar(title: widget.title, rightDMActions: rWidget),
       body: new MainInputBody(
         decoration: BoxDecoration(color: chatBg),
         child: new Column(children: body),

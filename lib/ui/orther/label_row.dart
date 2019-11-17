@@ -41,9 +41,10 @@ class LabelRow extends StatelessWidget {
           padding: padding,
           margin: EdgeInsets.only(left: 20.0),
           decoration: BoxDecoration(
-              border: isLine
-                  ? Border(bottom: BorderSide(color: lineColor, width: 0.2))
-                  : null),
+            border: isLine
+                ? Border(bottom: BorderSide(color: lineColor, width: 0.2))
+                : null,
+          ),
           child: new Row(
             children: <Widget>[
               if (headW != null) headW,

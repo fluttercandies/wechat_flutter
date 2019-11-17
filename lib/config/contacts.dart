@@ -82,6 +82,7 @@ class AppStyles {
       fontWeight: FontWeight.bold);
 
   static const ChatBoxTextStyle = TextStyle(
+      textBaseline: TextBaseline.alphabetic,
       fontSize: Constants.ContentTextSize,
       color: const Color(AppColors.TitleColor));
 }

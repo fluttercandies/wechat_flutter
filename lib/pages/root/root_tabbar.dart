@@ -66,7 +66,7 @@ class RootTabBarState extends State<RootTabBar> {
       title: widget.pages[currentIndex].title,
       showShadow: false,
       rightDMActions: <Widget>[
-        new GestureDetector(
+        new InkWell(
           child: new Container(
             width: 60.0,
             child: new Image.asset('assets/images/search_black.webp'),
@@ -75,6 +75,7 @@ class RootTabBarState extends State<RootTabBar> {
         ),
         new WPopupMenu(
           menuWidth: winWidth(context) / 2.5,
+          alignment: Alignment.center,
           onValueChanged: (String value) {
             if (!strNoEmpty(value)) return;
             switch (value) {
@@ -85,7 +86,7 @@ class RootTabBarState extends State<RootTabBar> {
           },
           actions: actions,
           child: new Container(
-            margin: EdgeInsets.only(right: 15.0),
+            margin: EdgeInsets.symmetric(horizontal: 15.0),
             child: new Image.asset('assets/images/add_addressicon.png',
                 color: Colors.black, width: 22.0, fit: BoxFit.fitWidth),
           ),

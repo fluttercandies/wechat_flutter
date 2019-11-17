@@ -150,7 +150,7 @@ class _HomePageState extends State<HomePage>
               title: new Text(model?.name ?? ''),
               content: new Text(model.content),
               time: timeView(model?.time ?? 0),
-              isBorder: model?.name != _chatData[_chatData.length - 1].name,
+              isBorder: model?.name != _chatData[0].name,
             ),
           );
         },

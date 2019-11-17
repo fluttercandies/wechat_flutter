@@ -32,6 +32,7 @@ class EditView extends StatelessWidget {
         ),
         new Expanded(
           child: new TextField(
+            style: TextStyle(textBaseline: TextBaseline.alphabetic),
             controller: controller,
             focusNode: focusNode,
             decoration:

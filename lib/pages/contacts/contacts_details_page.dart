@@ -1,4 +1,6 @@
 import 'package:dim_example/pages/chat/chat_page.dart';
+import 'package:dim_example/pages/chat/more_info_page.dart';
+import 'package:dim_example/pages/chat/set_remark_page.dart';
 import 'package:dim_example/provider/global_model.dart';
 import 'package:dim_example/ui/item/contact_card.dart';
 import 'package:dim_example/ui/orther/button_row.dart';
@@ -32,11 +34,15 @@ class _ContactsDetailsPageState extends State<ContactsDetailsPage> {
         visible: !isSelf,
         child: new LabelRow(
           label: '设置备注和标签',
+          onPressed: () => routePush(new SetRemarkPage()),
         ),
       ),
       new Space(),
       new LabelRow(label: '朋友圈', isLine: true),
-      new LabelRow(label: '更多信息'),
+      new LabelRow(
+        label: '更多信息',
+        onPressed: () => routePush(new MoreInfoPage()),
+      ),
       new ButtonRow(
         margin: EdgeInsets.only(top: 10.0),
         text: '发消息',
