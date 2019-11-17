@@ -113,7 +113,10 @@ class _HomePageState extends State<HomePage>
 
     String timeStr = '$hour:$minute';
 
-    return Text(timeStr);
+    return Text(
+      timeStr,
+      style: TextStyle(color: mainTextColor, fontSize: 14.0),
+    );
   }
 
   @override
@@ -147,8 +150,8 @@ class _HomePageState extends State<HomePage>
             },
             child: new MyConversationView(
               imageUrl: model.avatar,
-              title: new Text(model?.name ?? ''),
-              content: new Text(model.content),
+              title: model?.name ?? '',
+              content: model?.content ?? '',
               time: timeView(model?.time ?? 0),
               isBorder: model?.name != _chatData[0].name,
             ),
