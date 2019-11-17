@@ -1,4 +1,6 @@
 import 'package:dim_example/im/model/chat_data.dart';
+import 'package:dim_example/ui/item/chat_more_icon.dart';
+import 'package:dim_example/ui/item/chat_voice.dart';
 import 'package:extended_text_field/extended_text_field.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -23,14 +25,13 @@ class ChatPage extends StatefulWidget {
 
 class _ChatPageState extends State<ChatPage> {
   List<ChatData> chatData = [];
+  StreamSubscription<dynamic> _messageStreamSubscription;
 
-  ///------------------
+  bool _isVoice = false;
 
   TextEditingController _textController = TextEditingController();
   ScrollController _sC = ScrollController();
   SelectionControls _selectionControls = SelectionControls();
-
-  StreamSubscription<dynamic> _messageStreamSubscription;
 
   @override
   void initState() {
@@ -38,7 +39,6 @@ class _ChatPageState extends State<ChatPage> {
     getChatMsgData();
 
     _sC.addListener(() => FocusScope.of(context).requestFocus(new FocusNode()));
-
     initPlatformState();
   }
 
@@ -48,13 +48,6 @@ class _ChatPageState extends State<ChatPage> {
     chatData.clear();
     chatData..addAll(listChat.reversed);
     if (mounted) setState(() {});
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    canCelListener();
-    _sC.dispose();
   }
 
   void insertText(String text) {
@@ -98,11 +91,8 @@ class _ChatPageState extends State<ChatPage> {
     if (!mounted) return;
 
     if (_messageStreamSubscription == null) {
-      _messageStreamSubscription = im.onMessage.listen((dynamic onData) {
-        getChatMsgData();
-        debugPrint(
-            "我监听到数据了$onData,需要在这里判断是你是消息列表还是需要刷新会话的请求。会话的请求是一个空的列表[],消息列表是有内容的");
-      });
+      _messageStreamSubscription =
+          im.onMessage.listen((dynamic onData) => getChatMsgData());
     }
   }
 
@@ -124,16 +114,14 @@ class _ChatPageState extends State<ChatPage> {
     _tp.layout(maxWidth: size.maxWidth);
 
     return ExtendedTextField(
-      textInputAction: TextInputAction.send,
+      textInputAction: TextInputAction.none,
       specialTextSpanBuilder: TextSpanBuilder(showAtBackground: true),
       textSelectionControls: _selectionControls,
       onTap: () {
         setState(() {});
       },
-      onSubmitted: (data) {
-        if (data.isNotEmpty) {
-          _handleSubmittedData(data);
-        }
+      onChanged: (v) {
+        setState(() {});
       },
       decoration: InputDecoration(
           border: InputBorder.none, contentPadding: const EdgeInsets.all(5.0)),
@@ -146,7 +134,6 @@ class _ChatPageState extends State<ChatPage> {
   @override
   Widget build(BuildContext context) {
 //    var keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
-    var _voiceBtnColor = Colors.white;
     var body = [
       chatData != null
           ? new Flexible(
@@ -175,20 +162,34 @@ class _ChatPageState extends State<ChatPage> {
         child: new Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            new Icon(Icons.view_agenda),
+            new InkWell(
+              child: new Image.asset('assets/images/chat/ic_voice.webp',
+                  width: 25, color: mainTextColor),
+              onTap: () {
+                setState(() => _isVoice = !_isVoice);
+              },
+            ),
             new Expanded(
               child: new Container(
-                margin: const EdgeInsets.only(left: 8.0, right: 8.0),
+                margin: const EdgeInsets.only(
+                    top: 7.0, bottom: 7.0, left: 8.0, right: 8.0),
                 decoration: BoxDecoration(
-                    color: _voiceBtnColor,
+                    color: Colors.white,
                     borderRadius: BorderRadius.circular(5.0)),
-                child: new LayoutBuilder(builder: edit),
+                child: _isVoice
+                    ? new ChatVoice()
+                    : new LayoutBuilder(builder: edit),
               ),
             ),
             new InkWell(
-              child: new Image.asset('assets/images/chat/ic_Emotion.webp'),
+              child: new Image.asset('assets/images/chat/ic_Emotion.webp',
+                  width: 25, fit: BoxFit.cover),
               onTap: () {},
-            )
+            ),
+            new ChatMoreIcon(
+              value: _textController.text,
+              onTap: () => _handleSubmittedData(_textController.text),
+            ),
           ],
         ),
       ),
@@ -208,5 +209,12 @@ class _ChatPageState extends State<ChatPage> {
         child: new Column(children: body),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    canCelListener();
+    _sC.dispose();
   }
 }

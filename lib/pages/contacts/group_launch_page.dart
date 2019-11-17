@@ -124,15 +124,19 @@ class _GroupLaunchPageState extends State<GroupLaunchPage> {
       ];
     }
 
-    var rWidget = new FlatButton(
-      onPressed: () {
+    var rWidget = new ComMomButton(
+      text: '确定',
+      style: TextStyle(color: Colors.white),
+      width: 45.0,
+      margin: EdgeInsets.all(10.0),
+      radius: 4.0,
+      onTap: () {
         if (Platform.isIOS) {
           showToast(context, 'IOS暂不支持发起群聊');
           return;
         }
         showToast(context, '当前ID：${selectData.toString()}');
       },
-      child: new Text('确定'),
     );
 
     return WillPopScope(

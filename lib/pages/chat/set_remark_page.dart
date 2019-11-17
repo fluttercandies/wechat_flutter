@@ -30,15 +30,18 @@ class _SetRemarkPageState extends State<SetRemarkPage> {
 
   @override
   Widget build(BuildContext context) {
-    var rWidget = new FlatButton(
-      padding: EdgeInsets.all(0),
-      onPressed: () {
+    var rWidget = new ComMomButton(
+      text: '完成',
+      style: TextStyle(color: Colors.white),
+      width: 45.0,
+      margin: EdgeInsets.all(10.0),
+      radius: 4.0,
+      onTap: () {
         if (!strNoEmpty(_tc.text)) {
           showToast(context, '输入的内容不能为空');
           return;
         }
       },
-      child: new Text('完成'),
     );
 
     return new Scaffold(

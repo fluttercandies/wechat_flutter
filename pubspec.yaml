@@ -72,6 +72,7 @@ flutter:
     - assets/images/chat/ic_Emotion.webp
     - assets/images/chat/ic_Keyboard.webp
     - assets/images/chat/ic_details_add.png
+    - assets/images/chat/ic_voice.webp
 
     - assets/images/mine/ic_small_code.png
     - assets/images/mine/ic_wallet.webp
