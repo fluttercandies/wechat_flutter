@@ -22,6 +22,7 @@ class _GroupLaunchPageState extends State<GroupLaunchPage> {
 
   List defItems = ['选择一个群', '面对面建群'];
   List<Contact> _contacts = [];
+  List<String> selectData = [];
 
   FocusNode searchF = new FocusNode();
   TextEditingController searchC = new TextEditingController();
@@ -116,7 +117,7 @@ class _GroupLaunchPageState extends State<GroupLaunchPage> {
             contacts: _contacts,
             type: ClickType.select,
             callback: (v) {
-              print('当前数据${v.toString()}');
+              selectData = v;
             },
           ),
         )
@@ -124,7 +125,9 @@ class _GroupLaunchPageState extends State<GroupLaunchPage> {
     }
 
     var rWidget = new FlatButton(
-      onPressed: () {},
+      onPressed: () {
+        showToast(context, '当前ID：${selectData.toString()}');
+      },
       child: new Text('确定'),
     );
 
