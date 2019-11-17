@@ -15,6 +15,7 @@ class LabelRow extends StatelessWidget {
   final EdgeInsetsGeometry margin;
   final EdgeInsetsGeometry padding;
   final Widget headW;
+  final double lineWidth;
 
   LabelRow({
     this.label,
@@ -28,6 +29,7 @@ class LabelRow extends StatelessWidget {
     this.margin,
     this.padding = const EdgeInsets.only(top: 15.0, bottom: 15.0, right: 5.0),
     this.headW,
+    this.lineWidth = mainLineWidth,
   });
 
   @override
@@ -42,7 +44,7 @@ class LabelRow extends StatelessWidget {
           margin: EdgeInsets.only(left: 20.0),
           decoration: BoxDecoration(
             border: isLine
-                ? Border(bottom: BorderSide(color: lineColor, width: 0.2))
+                ? Border(bottom: BorderSide(color: lineColor, width: lineWidth))
                 : null,
           ),
           child: new Row(

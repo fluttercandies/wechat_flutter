@@ -14,6 +14,8 @@ const defStyle = TextStyle(color: Colors.white);
 
 const mainSpace = 10.0;
 
+const mainLineWidth = 0.3;
+
 const lineColor = Colors.grey;
 
 const tipColor = Color.fromRGBO(89, 96, 115, 1.0);

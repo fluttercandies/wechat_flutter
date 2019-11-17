@@ -28,7 +28,7 @@ class _ContactsDetailsPageState extends State<ContactsDetailsPage> {
         id: widget.id,
         title: widget.title,
         nickName: widget.title,
-        area: '北京 海淀区',
+        area: '北京 海淀',
         isBorder: true,
       ),
       new Visibility(
@@ -39,7 +39,8 @@ class _ContactsDetailsPageState extends State<ContactsDetailsPage> {
         ),
       ),
       new Space(),
-      new LabelRow(label: '朋友圈', isLine: true),
+      new LabelRow(label: '朋友圈', isLine: true,
+        lineWidth: 0.3,),
       new LabelRow(
         label: '更多信息',
         onPressed: () => routePush(new MoreInfoPage()),

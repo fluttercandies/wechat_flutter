@@ -8,6 +8,7 @@ class ButtonRow extends StatelessWidget {
   final TextStyle style;
   final VoidCallback onPressed;
   final bool isBorder;
+  final double lineWidth;
 
   ButtonRow({
     this.margin,
@@ -16,6 +17,7 @@ class ButtonRow extends StatelessWidget {
         color: btTextColor, fontWeight: FontWeight.w600, fontSize: 16),
     this.onPressed,
     this.isBorder = false,
+    this.lineWidth = mainLineWidth,
   });
 
   @override
@@ -25,7 +27,7 @@ class ButtonRow extends StatelessWidget {
       decoration: BoxDecoration(
         border: isBorder
             ? Border(
-                bottom: BorderSide(color: lineColor, width: 0.2),
+                bottom: BorderSide(color: lineColor, width: lineWidth),
               )
             : null,
       ),

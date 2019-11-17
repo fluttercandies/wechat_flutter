@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 class ContactCard extends StatelessWidget {
   final String img, title, nickName, id, area;
   final bool isBorder;
+  final double lineWidth;
 
   ContactCard({
     @required this.img,
@@ -13,6 +14,7 @@ class ContactCard extends StatelessWidget {
     this.nickName,
     this.area,
     this.isBorder = false,
+    this.lineWidth = mainLineWidth,
   }) : assert(id != null);
 
   @override
@@ -23,7 +25,7 @@ class ContactCard extends StatelessWidget {
         color: Colors.white,
         border: isBorder
             ? Border(
-                bottom: BorderSide(color: lineColor, width: 0.2),
+                bottom: BorderSide(color: lineColor, width: lineWidth),
               )
             : null,
       ),
