@@ -62,6 +62,7 @@ flutter:
     - assets/images/ic_delete.webp
     - assets/images/ic_right_arrow_black.webp
     - assets/images/ic_right_arrow_grey.webp
+    - assets/images/ic_add_friend.webp
 
     - assets/images/login/select_avatar.webp
     - assets/images/login/abo.png

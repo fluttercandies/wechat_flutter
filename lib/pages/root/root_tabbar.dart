@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:dim_example/pages/contacts/launch_group_page.dart';
+import 'package:dim_example/pages/settings/language_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:dim_example/pages/more/add_friend_page.dart';
@@ -43,9 +45,29 @@ class RootTabBarState extends State<RootTabBar> {
     }
   }
 
+  actionsHandle(v) {
+    if (v == '添加朋友') {
+      routePush(new AddFriendPage());
+    } else if (v == '发起群聊') {
+      if (Platform.isIOS) {
+        showToast(context, 'IOS暂不支持发起群聊');
+        return;
+      }
+      routePush(new LaunchGroupPage());
+    } else {
+      routePush(new LanguagePage());
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    final List<String> actions = ['发起群聊', '添加朋友', '扫一扫', '收付款', '帮助与反馈'];
+    final List actions = [
+      {"title": '发起群聊', 'icon': 'assets/images/contacts_add_newmessage.png'},
+      {"title": '添加朋友', 'icon': 'assets/images/ic_add_friend.webp'},
+      {"title": '扫一扫', 'icon': ''},
+      {"title": '收付款', 'icon': ''},
+      {"title": '帮助与反馈', 'icon': ''},
+    ];
 
     final BottomNavigationBar bottomNavigationBar = new BottomNavigationBar(
       items: pages,
@@ -78,11 +100,7 @@ class RootTabBarState extends State<RootTabBar> {
           alignment: Alignment.center,
           onValueChanged: (String value) {
             if (!strNoEmpty(value)) return;
-            switch (value) {
-              case '添加朋友':
-                routePush(new AddFriendPage());
-                break;
-            }
+            actionsHandle(value);
           },
           actions: actions,
           child: new Container(

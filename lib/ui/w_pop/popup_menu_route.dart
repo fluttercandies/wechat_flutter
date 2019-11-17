@@ -9,7 +9,7 @@ class PopupMenuRoute extends PopupRoute {
   final BuildContext btnContext;
   double _height;
   double _width;
-  final List<String> actions;
+  final List actions;
   final int _pageMaxChildCount;
   final Color backgroundColor;
   final double menuWidth;

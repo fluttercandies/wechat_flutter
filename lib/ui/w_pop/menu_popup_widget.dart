@@ -8,7 +8,7 @@ class MenuPopWidget extends StatefulWidget {
   final BuildContext btnContext;
   final double _height;
   final double _width;
-  final List<String> actions;
+  final List actions;
   final int _pageMaxChildCount;
   final Color backgroundColor;
   final double menuWidth;
@@ -139,8 +139,8 @@ class _MenuPopWidgetState extends State<MenuPopWidget> {
     var row = [
       new Padding(
         padding: EdgeInsets.symmetric(horizontal: 10.0),
-        child: item == '发起群聊'
-            ? new Image.asset('assets/images/contacts_add_newmessage.png')
+        child: strNoEmpty(item['icon'])
+            ? new Image.asset(item['icon'])
             : new Icon(Icons.phone, color: Colors.white),
       ),
       new Expanded(
@@ -148,13 +148,13 @@ class _MenuPopWidgetState extends State<MenuPopWidget> {
           height: 50,
           alignment: Alignment.centerLeft,
           decoration: BoxDecoration(
-              border: item == widget.actions[0]
+              border: item['title'] == widget.actions[0]['title']
                   ? null
                   : Border(
                       top: BorderSide(
                           color: Colors.white.withOpacity(0.3), width: 0.2))),
           child: new Text(
-            item,
+            item['title'],
             style: TextStyle(color: Colors.white),
           ),
         ),
@@ -165,7 +165,7 @@ class _MenuPopWidgetState extends State<MenuPopWidget> {
       onPressed: () {
         isShow = false;
         setState(() {});
-        Navigator.of(context).pop(item);
+        Navigator.of(context).pop(item['title']);
       },
       child: new Container(
         decoration: BoxDecoration(

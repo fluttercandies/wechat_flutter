@@ -49,7 +49,7 @@ class WPopupMenu extends StatefulWidget {
   final EdgeInsets margin;
   final Matrix4 transform;
   final ValueChanged<String> onValueChanged;
-  final List<String> actions;
+  final List actions;
   final Widget child;
   final PressType pressType; // 点击方式 长按 还是单击
   final int pageMaxChildCount;
