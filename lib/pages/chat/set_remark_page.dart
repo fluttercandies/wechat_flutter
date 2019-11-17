@@ -32,17 +32,22 @@ class _SetRemarkPageState extends State<SetRemarkPage> {
   Widget build(BuildContext context) {
     var rWidget = new FlatButton(
       padding: EdgeInsets.all(0),
-      onPressed: () {},
+      onPressed: () {
+        if (!strNoEmpty(_tc.text)) {
+          showToast(context, '输入的内容不能为空');
+          return;
+        }
+      },
       child: new Text('完成'),
     );
 
     return new Scaffold(
-      backgroundColor: chatBg,
+      backgroundColor: appBarColor,
       appBar: new ComMomBar(
         title: '设置备注和标签',
         rightDMActions: <Widget>[rWidget],
       ),
-      body: new MainInputBody(child: body()),
+      body: new MainInputBody(child: body(), color: appBarColor),
     );
   }
 }

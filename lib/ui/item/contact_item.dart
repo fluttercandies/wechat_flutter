@@ -1,7 +1,9 @@
+import 'package:dim_example/pages/contacts/all_label_page.dart';
 import 'package:dim_example/pages/contacts/contacts_details_page.dart';
+import 'package:dim_example/pages/contacts/group_list_page.dart';
 import 'package:dim_example/pages/contacts/new_friend_page.dart';
+import 'package:dim_example/pages/contacts/public_page.dart';
 import 'package:flutter/material.dart';
-import 'package:dim_example/pages/chat/chat_page.dart';
 import 'package:dim_example/tools/wechat_flutter.dart';
 
 class ContactItem extends StatefulWidget {
@@ -103,6 +105,12 @@ class ContactItemState extends State<ContactItem> {
       onPressed: () {
         if (widget.title == '新的朋友') {
           routePush(new NewFriendPage());
+        } else if (widget.title == '群聊') {
+          routePush(new GroupListPage());
+        } else if (widget.title == '标签') {
+          routePush(new AllLabelPage());
+        } else if (widget.title == '公众号') {
+          routePush(new PublicPage());
         } else {
           routePush(new ContactsDetailsPage(
               id: widget.identifier,

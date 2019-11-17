@@ -1,4 +1,5 @@
 import 'package:dim_example/im/entity/person_info_entity.dart';
+import 'package:dim_example/pages/contacts/contacts_details_page.dart';
 import 'package:flutter/material.dart';
 
 import 'package:dim_example/tools/wechat_flutter.dart';
@@ -22,22 +23,35 @@ class _ChatMamBerState extends State<ChatMamBer> {
         spacing: (winWidth(context) - 315) / 5,
         runSpacing: 10.0,
         children: [0].map((item) {
-          return new Container(
-            child: new Column(
-              children: <Widget>[
-                new ImageView(
-                  img: strNoEmpty(widget.model?.faceUrl)
-                      ? widget.model?.faceUrl
-                      : defAvatar,
-                  width: 55.0,
-                  height: 55.0,
-                  fit: BoxFit.cover,
-                ),
-                new Text(strNoEmpty(widget.model?.nickName)
-                    ? widget.model.nickName
-                    : '无名氏'),
-              ],
+          return new InkWell(
+            child: new Container(
+              width: 55.0,
+              child: new Column(
+                children: <Widget>[
+                  new ImageView(
+                    img: strNoEmpty(widget.model?.faceUrl)
+                        ? widget.model?.faceUrl
+                        : defAvatar,
+                    width: 55.0,
+                    height: 55.0,
+                    fit: BoxFit.cover,
+                  ),
+                  new Space(height: mainSpace / 2),
+                  new Text(
+                    strNoEmpty(widget.model?.nickName)
+                        ? widget.model.nickName
+                        : '无名氏',
+                    style: TextStyle(color: mainTextColor),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ],
+              ),
             ),
+            onTap: () => routePush(new ContactsDetailsPage(
+              id: widget.model.identifier,
+              title: widget.model.nickName,
+              avatar: widget.model.faceUrl,
+            )),
           );
         }).toList(),
       ),
