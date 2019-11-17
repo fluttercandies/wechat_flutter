@@ -16,7 +16,10 @@ codeDialog(BuildContext context) {
       child: new FlatButton(
         color: Colors.white,
         padding: EdgeInsets.symmetric(vertical: 15.0),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.of(context).pop();
+          showToast(context, '$item正在开发中');
+        },
         child: new Text(item),
       ),
     );

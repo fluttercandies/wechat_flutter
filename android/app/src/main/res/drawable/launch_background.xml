@@ -6,6 +6,7 @@
     <item>
         <bitmap
             android:gravity="fill"
+            android:filter="true"
             android:src="@mipmap/launch_image" />
     </item>
 </layer-list>

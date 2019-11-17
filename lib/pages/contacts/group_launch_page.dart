@@ -126,6 +126,10 @@ class _GroupLaunchPageState extends State<GroupLaunchPage> {
 
     var rWidget = new FlatButton(
       onPressed: () {
+        if (Platform.isIOS) {
+          showToast(context, 'IOS暂不支持发起群聊');
+          return;
+        }
         showToast(context, '当前ID：${selectData.toString()}');
       },
       child: new Text('确定'),

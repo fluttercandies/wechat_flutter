@@ -50,10 +50,6 @@ class RootTabBarState extends State<RootTabBar> {
     if (v == '添加朋友') {
       routePush(new AddFriendPage());
     } else if (v == '发起群聊') {
-      if (Platform.isIOS) {
-        showToast(context, 'IOS暂不支持发起群聊');
-        return;
-      }
       routePush(new GroupLaunchPage());
     } else if (v == '帮助与反馈') {
       routePush(new WebViewPage(helpUrl, '帮助与反馈'));
