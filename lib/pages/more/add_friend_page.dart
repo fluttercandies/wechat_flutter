@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:dim_example/pages/mine/code_page.dart';
+import 'package:dim_example/provider/global_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:dim_example/im/info_handle.dart';
@@ -10,6 +11,7 @@ import 'package:dim_example/tools/wechat_flutter.dart';
 import 'package:dim_example/ui/view/list_tile_view.dart';
 import 'package:dim_example/ui/view/search_main_view.dart';
 import 'package:dim_example/ui/view/search_tile_view.dart';
+import 'package:provider/provider.dart';
 
 class AddFriendPage extends StatefulWidget {
   @override
@@ -41,6 +43,8 @@ class _AddFriendPageState extends State<AddFriendPage> {
   }
 
   Widget body() {
+    final model = Provider.of<GlobalModel>(context);
+
     List data = [
       {
         'icon': contactAssets + 'ic_reda.webp',
@@ -88,7 +92,7 @@ class _AddFriendPageState extends State<AddFriendPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             new Text(
-              '我的微信号：$currentUser',
+              '我的微信号：${currentUser??'[${model.account}]'}',
               style: TextStyle(color: mainTextColor, fontSize: 14.0),
             ),
             new Space(width: mainSpace * 1.5),

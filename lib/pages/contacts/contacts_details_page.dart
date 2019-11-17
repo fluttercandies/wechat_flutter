@@ -2,6 +2,7 @@ import 'package:dim_example/pages/chat/chat_page.dart';
 import 'package:dim_example/pages/chat/more_info_page.dart';
 import 'package:dim_example/pages/chat/set_remark_page.dart';
 import 'package:dim_example/provider/global_model.dart';
+import 'package:dim_example/ui/dialog/friend_item_dialog.dart';
 import 'package:dim_example/ui/item/contact_card.dart';
 import 'package:dim_example/ui/orther/button_row.dart';
 import 'package:dim_example/ui/orther/label_row.dart';
@@ -70,7 +71,7 @@ class _ContactsDetailsPageState extends State<ContactsDetailsPage> {
         width: 60,
         child: new FlatButton(
           padding: EdgeInsets.all(0),
-          onPressed: () {},
+          onPressed: () => friendItemDialog(context),
           child: new Image.asset(contactAssets + 'ic_contacts_details.png'),
         ),
       )
