@@ -19,7 +19,7 @@ void confirmAlert<T>(
     barrierDismissible: false,
     builder: (BuildContext context) {
       if (!strNoEmpty(okBtn)) okBtn = '确定';
-      if (!strNoEmpty(cancelBtn)) cancelBtn = '取消';
+      if (!strNoEmpty(cancelBtn)) cancelBtn = '取消1';
       if (!strNoEmpty(warmStr)) warmStr = '温馨提示：';
       return CupertinoAlertDialog(
         title: isWarm

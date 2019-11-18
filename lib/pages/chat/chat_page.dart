@@ -114,7 +114,7 @@ class _ChatPageState extends State<ChatPage> {
     _tp.layout(maxWidth: size.maxWidth);
 
     return ExtendedTextField(
-      textInputAction: TextInputAction.none,
+//      textInputAction: TextInputAction.none,
       specialTextSpanBuilder: TextSpanBuilder(showAtBackground: true),
       textSelectionControls: _selectionControls,
       onTap: () {
@@ -172,7 +172,11 @@ class _ChatPageState extends State<ChatPage> {
             new Expanded(
               child: new Container(
                 margin: const EdgeInsets.only(
-                    top: 7.0, bottom: 7.0, left: 8.0, right: 8.0),
+                  top: 7.0,
+                  bottom: 7.0,
+                  left: 8.0,
+                  right: 8.0,
+                ),
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(5.0)),

@@ -19,8 +19,6 @@ PODS:
   - path_provider (0.0.1):
     - Flutter
   - Reachability (3.2)
-  - screen (0.0.1):
-    - Flutter
   - shared_preferences (0.0.1):
     - Flutter
   - sqflite (0.0.1):
@@ -28,8 +26,6 @@ PODS:
     - FMDB (~> 2.7.2)
   - TXIMSDK_iOS (4.6.1)
   - url_launcher (0.0.1):
-    - Flutter
-  - video_player (0.0.1):
     - Flutter
   - webview_flutter (0.0.1):
     - Flutter
@@ -43,11 +39,9 @@ DEPENDENCIES:
   - flutter_native_image (from `.symlinks/plugins/flutter_native_image/ios`)
   - image_picker (from `.symlinks/plugins/image_picker/ios`)
   - path_provider (from `.symlinks/plugins/path_provider/ios`)
-  - screen (from `.symlinks/plugins/screen/ios`)
   - shared_preferences (from `.symlinks/plugins/shared_preferences/ios`)
   - sqflite (from `.symlinks/plugins/sqflite/ios`)
   - url_launcher (from `.symlinks/plugins/url_launcher/ios`)
-  - video_player (from `.symlinks/plugins/video_player/ios`)
   - webview_flutter (from `.symlinks/plugins/webview_flutter/ios`)
 
 SPEC REPOS:
@@ -72,16 +66,12 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/image_picker/ios"
   path_provider:
     :path: ".symlinks/plugins/path_provider/ios"
-  screen:
-    :path: ".symlinks/plugins/screen/ios"
   shared_preferences:
     :path: ".symlinks/plugins/shared_preferences/ios"
   sqflite:
     :path: ".symlinks/plugins/sqflite/ios"
   url_launcher:
     :path: ".symlinks/plugins/url_launcher/ios"
-  video_player:
-    :path: ".symlinks/plugins/video_player/ios"
   webview_flutter:
     :path: ".symlinks/plugins/webview_flutter/ios"
 
@@ -95,12 +85,10 @@ SPEC CHECKSUMS:
   image_picker: 16e5fec1fbc87fd3b297c53e4048521eaf17cd06
   path_provider: fb74bd0465e96b594bb3b5088ee4a4e7bb1f2a9d
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
-  screen: abd91ca7bf3426e1cc3646d27e9b2358d6bf07b0
   shared_preferences: 430726339841afefe5142b9c1f50cb6bd7793e01
   sqflite: ff1d9da63c06588cc8d1faf7256d741f16989d5a
   TXIMSDK_iOS: fe85c769896ebffcca191dfb24d93618dd736d62
   url_launcher: a1c0cc845906122c4784c542523d8cacbded5626
-  video_player: 3964090a33353060ed7f58aa6427c7b4b208ec21
   webview_flutter: 1aa7604e6cdb451a9b7ed2c37d5454c0b440246b
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
 
