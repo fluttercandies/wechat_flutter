@@ -2,11 +2,23 @@ import 'package:flutter/material.dart';
 
 import 'package:dim_example/tools/wechat_flutter.dart';
 
+import 'confirm_alert.dart';
+
 friendItemDialog(BuildContext context) {
   action(v) {
     Navigator.of(context).pop();
     if (v == '删除') {
-      showToast(context, '功能还没放');
+      confirmAlert(
+        context,
+        (bool) {
+          if (bool) showToast(context, '删除功能还没引入');
+        },
+        tips: '你确定要删除此联系人吗',
+        okBtn: '删除',
+        warmStr: '删除联系人',
+        isWarm: true,
+        style: TextStyle(fontWeight: FontWeight.w500),
+      );
     } else {
       showToast(context, '删除功能是好的');
     }
@@ -33,6 +45,7 @@ friendItemDialog(BuildContext context) {
 
   showModalBottomSheet(
     context: context,
+    isScrollControlled: true,
     builder: (context) {
       List data = [
         '设置备注和标签',
