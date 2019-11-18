@@ -32,4 +32,4 @@ IOS的直接拉下项目直接跑即可
 
 # 贡献者
 
-<img src="https://avatars2.githubusercontent.com/u/41765610?s=460&v=4" style="zoom:30%;" />
+<img src="https://github.com/fluttercandies/wechat_flutter/blob/master/assets/git/circle-cropped.png" style="zoom:30%;" />
