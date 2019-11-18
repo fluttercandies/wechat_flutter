@@ -39,8 +39,11 @@ class _ContactsDetailsPageState extends State<ContactsDetailsPage> {
         ),
       ),
       new Space(),
-      new LabelRow(label: '朋友圈', isLine: true,
-        lineWidth: 0.3,),
+      new LabelRow(
+        label: '朋友圈',
+        isLine: true,
+        lineWidth: 0.3,
+      ),
       new LabelRow(
         label: '更多信息',
         onPressed: () => routePush(new MoreInfoPage()),
@@ -72,7 +75,10 @@ class _ContactsDetailsPageState extends State<ContactsDetailsPage> {
         width: 60,
         child: new FlatButton(
           padding: EdgeInsets.all(0),
-          onPressed: () => friendItemDialog(context),
+          onPressed: () =>
+              friendItemDialog(context, userId: widget.id, suCc: (v) {
+            if (v) Navigator.of(context).maybePop();
+          }),
           child: new Image.asset(contactAssets + 'ic_contacts_details.png'),
         ),
       )
