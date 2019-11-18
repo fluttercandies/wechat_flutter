@@ -30,7 +30,6 @@ class UserDataPageGet {
     '158',
     '159',
     '160',
-    '188',
     '155',
     '123',
     '150',
@@ -42,6 +41,7 @@ class UserDataPageGet {
     '132',
     '133',
     '134',
+    '139',
   ];
 
   listUserData() async {

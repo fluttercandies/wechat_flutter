@@ -1,6 +1,7 @@
 import 'package:dim_example/im/friend_handle.dart';
 import 'package:dim_example/im/model/user_data.dart';
 import 'package:dim_example/im/send_handle.dart';
+import 'package:dim_example/ui/dialog/confirm_alert.dart';
 import 'package:dim_example/ui/new_friend_card.dart';
 import 'package:flutter/material.dart';
 
@@ -47,7 +48,27 @@ class _UserPageState extends State<UserPage> {
   Widget build(BuildContext context) {
     return new Scaffold(
       backgroundColor: appBarColor,
-      appBar: new ComMomBar(title: '推荐好友 【空白说明网络不好】'),
+      appBar: new ComMomBar(
+        title: '推荐好友 【空白说明网络不好】',
+        rightDMActions: <Widget>[
+          new ComMomButton(
+            text: '查看提示',
+            onTap: () {
+              confirmAlert(
+                context,
+                (bool) {
+                  if (bool) showToast(context, '感谢支持');
+                },
+                tips:
+                    '如果显示添加成功了好友列表还是没这个好友，说明对方的好友数量上限了，你可以选择下一个或者自己注册一个新的来测试。',
+                okBtn: '确定',
+                isWarm: true,
+                style: TextStyle(fontWeight: FontWeight.w500),
+              );
+            },
+          )
+        ],
+      ),
       body: new ListView.builder(
         itemBuilder: (context, index) {
           UserData model = _userData[index];
