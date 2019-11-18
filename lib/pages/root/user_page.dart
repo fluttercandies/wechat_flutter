@@ -47,7 +47,7 @@ class _UserPageState extends State<UserPage> {
   Widget build(BuildContext context) {
     return new Scaffold(
       backgroundColor: appBarColor,
-      appBar: new ComMomBar(title: '添加好友进行聊天'),
+      appBar: new ComMomBar(title: '推荐好友 【空白说明网络不好】'),
       body: new ListView.builder(
         itemBuilder: (context, index) {
           UserData model = _userData[index];
