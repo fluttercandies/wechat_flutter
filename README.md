@@ -4,7 +4,7 @@ wechat_flutter是flutter版微信，目前已实现即时通讯基本功能，�
 ![start.gif](https://github.com/fluttercandies/wechat_flutter/blob/master/assets/git/start.gif)
 
 # 效果图
-|![1.gif](https://github.com/fluttercandies/wechat_flutter/blob/master/assets/git/1.gif)| ![2.gif](https://user-gold-cdn.xitu.io/2019/9/18/16d43ceba80a0d00?w=250&h=540&f=gif&s=4839426) | ![tab概览_1080-50-128.gif](https://user-gold-cdn.xitu.io/2019/9/18/16d43ceba8a2a682?w=250&h=540&f=gif&s=2990202)|
+|![1.gif](https://github.com/fluttercandies/wechat_flutter/blob/master/assets/git/1.gif)| ![2.gif](https://github.com/fluttercandies/wechat_flutter/blob/master/assets/git/2.gif) | ![3.gif](https://user-gold-cdn.xitu.io/2019/9/18/16d43ceba8a2a682?w=250&h=540&f=gif&s=2990202)|
 | --- | --- | --- |
 
 
