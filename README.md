@@ -19,11 +19,11 @@ IOS的直接拉下项目直接跑即可,
 
  > [https://github.com/fluttercandies/wechat_flutter](https://github.com/fluttercandies/wechat_flutter)
 
-# 长时间加载中
+# 使用教程
 
-*  如果出现长时间加载中直接去添加好友或者给好友发个信息即可。
-*  如还是未解决可尝试重新登陆。
-*  推荐添加账号：188，156，157，158，159，10001，10002 【都可】
+*  使用命令（拉取项目）：$ git clone https://github.com/fluttercandies/wechat_flutter.git
+*  然后命令（获取依赖）：$ flutter packages get。
+*  最后命令（运行）：$ flutter run
 
 # Future
 
