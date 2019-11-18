@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:dim_example/pages/mine/code_page.dart';
+import 'package:dim_example/pages/root/user_page.dart';
 import 'package:dim_example/provider/global_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -39,6 +40,7 @@ class _AddFriendPageState extends State<AddFriendPage> {
           ? item['icon']
           : 'assets/images/favorite.webp',
       fit: BoxFit.cover,
+      onPressed: () => routePush(new UserPage()),
     );
   }
 
@@ -92,7 +94,7 @@ class _AddFriendPageState extends State<AddFriendPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             new Text(
-              '我的微信号：${currentUser??'[${model.account}]'}',
+              '我的微信号：${currentUser ?? '[${model.account}]'}',
               style: TextStyle(color: mainTextColor, fontSize: 14.0),
             ),
             new Space(width: mainSpace * 1.5),

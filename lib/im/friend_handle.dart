@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:dim_example/tools/wechat_flutter.dart';
 
-Future<dynamic> addFriend(String userName, BuildContext context) async {
+typedef OnSuCc = void Function(bool v);
+
+Future<dynamic> addFriend(String userName, BuildContext context,
+    {OnSuCc cc}) async {
   try {
     var result = await im.addFriend(userName);
     debugPrint('Dim添加好友result >>> $result');
@@ -10,9 +13,11 @@ Future<dynamic> addFriend(String userName, BuildContext context) async {
     } else {
       showToast(context, '添加成功');
     }
-
-    popToHomePage();
-
+    if (cc == null) {
+      popToHomePage();
+    } else {
+      cc(true);
+    }
   } on PlatformException {
     debugPrint('Dim添加好友  失败');
   }
