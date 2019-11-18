@@ -118,7 +118,6 @@ class ContactItemState extends State<ContactItem> {
                 width: 25.0,
                 height: 25.0,
                 fit: BoxFit.cover,
-                color: isSelect ? mainTextColor : null,
               ),
               onTap: () {
                 setState(() => isSelect = !isSelect);

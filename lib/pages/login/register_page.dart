@@ -126,11 +126,11 @@ class _RegisterPageState extends State<RegisterPage> {
         children: <Widget>[
           new InkWell(
             child: new Image.asset(
-                'assets/images/login/${isSelect ? 'ic_select_have.webp' : 'ic_select_no.png'}',
-                width: 25.0,
-                height: 25.0,
-                fit: BoxFit.cover,
-                color: isSelect ? mainTextColor : null),
+              'assets/images/login/${isSelect ? 'ic_select_have.webp' : 'ic_select_no.png'}',
+              width: 25.0,
+              height: 25.0,
+              fit: BoxFit.cover,
+            ),
             onTap: () {
               setState(() => isSelect = !isSelect);
             },
