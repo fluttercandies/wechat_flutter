@@ -28,6 +28,8 @@ Future<dynamic> delFriend(String userName, BuildContext context,
     var result = await im.delFriend(userName);
     if (result.toString().contains('ucc')) {
       showToast(context, '删除成功');
+    } else {
+      showToast(context, result);
     }
 
     if (suCc == null) {
