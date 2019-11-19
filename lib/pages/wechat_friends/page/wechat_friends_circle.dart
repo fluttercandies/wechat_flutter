@@ -9,9 +9,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../ui/item_dynamic.dart';
 
-import 'package:multi_image_picker/multi_image_picker.dart';
+//import 'package:multi_image_picker/multi_image_picker.dart';
 
-import 'publish_dynamic.dart';
+//import 'publish_dynamic.dart';
 
 class WeChatFriendsCircle extends StatefulWidget {
   WeChatFriendsCircle({Key key}) : super(key: key);
@@ -30,7 +30,7 @@ class _WeChatFriendsCircleState extends State<WeChatFriendsCircle> {
   Color c = Colors.grey;
   String title = '';
 
-  List<Asset> images = List<Asset>();
+//  List<Asset> images = List<Asset>();
 
   int maxImages = 9;
 
@@ -175,61 +175,61 @@ class _WeChatFriendsCircleState extends State<WeChatFriendsCircle> {
   }
 
   Future<void> loadAssets() async {
-    List<Asset> resultList = List<Asset>();
-
-    try {
-      resultList = await MultiImagePicker.pickImages(
-        maxImages: maxImages,
-        enableCamera: false,
-        selectedAssets: images,
-        materialOptions: MaterialOptions(
-          actionBarColor: "#ff00a5",
-          actionBarTitle: "Flutter App",
-          actionBarTitleColor: "#ffffffff",
-          allViewTitle: "All Photos",
-          useDetailsView: true,
-          lightStatusBar: false,
-          selectCircleStrokeColor: "#ff11ab",
-          statusBarColor: '#ff00a5',
-          startInAllView: true,
-          selectionLimitReachedText: "You can't select any more.",
-        ),
-        cupertinoOptions: CupertinoOptions(
-          selectionFillColor: "#ff11ab",
-          selectionTextColor: "#ff00a5",
-          selectionCharacter: "✓",
-        ),
-      );
-
-      for (var r in resultList) {
-        var t = await r.filePath;
-        print(t);
-      }
-    } on PlatformException catch (e) {
-      debugPrint(e.message.toString());
-    } on NoImagesSelectedException catch (e) {
-      debugPrint(e.message.toString());
-    } on PermissionDeniedException catch (e) {
-      debugPrint(e.message.toString());
-    } on PermissionPermanentlyDeniedExeption catch (e) {
-      debugPrint(e.message.toString());
-    } on Exception catch (e) {
-      debugPrint(e.toString());
-    }
-
-    // If the widget was removed from the tree while the asynchronous platform
-    // message was in flight, we want to discard the reply rather than calling
-    // setState to update our non-existent appearance.
-    if (!mounted) return;
-
-    setState(() {
-      images = resultList;
-
-      debugPrint(images.toString());
-
-      if (images.isNotEmpty) {
-        routePush(PublishDynamicPage(images: images, maxImages: maxImages));
-      }
-    });
+//    List<Asset> resultList = List<Asset>();
+//
+//    try {
+//      resultList = await MultiImagePicker.pickImages(
+//        maxImages: maxImages,
+//        enableCamera: false,
+//        selectedAssets: images,
+//        materialOptions: MaterialOptions(
+//          actionBarColor: "#ff00a5",
+//          actionBarTitle: "Flutter App",
+//          actionBarTitleColor: "#ffffffff",
+//          allViewTitle: "All Photos",
+//          useDetailsView: true,
+//          lightStatusBar: false,
+//          selectCircleStrokeColor: "#ff11ab",
+//          statusBarColor: '#ff00a5',
+//          startInAllView: true,
+//          selectionLimitReachedText: "You can't select any more.",
+//        ),
+//        cupertinoOptions: CupertinoOptions(
+//          selectionFillColor: "#ff11ab",
+//          selectionTextColor: "#ff00a5",
+//          selectionCharacter: "✓",
+//        ),
+//      );
+//
+//      for (var r in resultList) {
+//        var t = await r.filePath;
+//        print(t);
+//      }
+//    } on PlatformException catch (e) {
+//      debugPrint(e.message.toString());
+//    } on NoImagesSelectedException catch (e) {
+//      debugPrint(e.message.toString());
+//    } on PermissionDeniedException catch (e) {
+//      debugPrint(e.message.toString());
+//    } on PermissionPermanentlyDeniedExeption catch (e) {
+//      debugPrint(e.message.toString());
+//    } on Exception catch (e) {
+//      debugPrint(e.toString());
+//    }
+//
+//    // If the widget was removed from the tree while the asynchronous platform
+//    // message was in flight, we want to discard the reply rather than calling
+//    // setState to update our non-existent appearance.
+//    if (!mounted) return;
+//
+//    setState(() {
+//      images = resultList;
+//
+//      debugPrint(images.toString());
+//
+//      if (images.isNotEmpty) {
+//        routePush(PublishDynamicPage(images: images, maxImages: maxImages));
+//      }
+//    });
   }
 }

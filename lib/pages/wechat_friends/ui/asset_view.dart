@@ -1,10 +1,11 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:multi_image_picker/multi_image_picker.dart';
+//import 'package:multi_image_picker/multi_image_picker.dart';
 
 class AssetView extends StatefulWidget {
-  final Asset asset;
+//  final Asset asset;
+  final dynamic asset;
   final VoidCallback onTap;
 
   AssetView({Key key, this.asset, this.onTap}) : super(key: key);
@@ -34,9 +35,10 @@ class _AssetState extends State<AssetView> {
     }
 
     return GestureDetector(
-      child: null != widget.asset
-          ? AssetThumb(asset: widget.asset, width: 300, height: 300)
-          : Image.asset('images/add_image.png', fit: BoxFit.cover),
+      child: Image.asset('images/add_image.png', fit: BoxFit.cover),
+//      child: null != widget.asset
+//          ? AssetThumb(asset: widget.asset, width: 300, height: 300)
+//          : Image.asset('images/add_image.png', fit: BoxFit.cover),
       onTap: widget.onTap,
     );
   }

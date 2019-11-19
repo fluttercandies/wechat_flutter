@@ -26,7 +26,6 @@ dependencies:
   photo_view: ^0.4.2
   flutter_downloader: any
   dio: ^2.2.2
-  multi_image_picker: any
 
 dev_dependencies:
   flutter_test:
