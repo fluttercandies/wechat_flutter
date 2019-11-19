@@ -5,11 +5,11 @@
       <module fileurl="file://$PROJECT_DIR$/android.iml" filepath="$PROJECT_DIR$/android.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/connectivity-0.4.5+3/android/connectivity.iml" filepath="$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/connectivity-0.4.5+3/android/connectivity.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../../dim/android/dim.iml" filepath="$PROJECT_DIR$/../../dim/android/dim.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../plugin/wechat_flutter_plugin/android/dim.iml" filepath="$PROJECT_DIR$/../plugin/wechat_flutter_plugin/android/dim.iml" />
       <module fileurl="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/flutter_downloader-1.3.3/android/flutter_downloader.iml" filepath="$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/flutter_downloader-1.3.3/android/flutter_downloader.iml" />
       <module fileurl="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/flutter_native_image-0.0.4/android/flutter_native_image.iml" filepath="$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/flutter_native_image-0.0.4/android/flutter_native_image.iml" />
       <module fileurl="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/image_picker-0.6.1+2/android/image_picker.iml" filepath="$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/image_picker-0.6.1+2/android/image_picker.iml" />
-      <module fileurl="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/path_provider-1.4.0/android/path_provider.iml" filepath="$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/path_provider-1.4.0/android/path_provider.iml" />
+      <module fileurl="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/path_provider-1.4.2/android/path_provider.iml" filepath="$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/path_provider-1.4.2/android/path_provider.iml" />
       <module fileurl="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/screen-0.0.5/android/screen.iml" filepath="$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/screen-0.0.5/android/screen.iml" />
       <module fileurl="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/shared_preferences-0.5.4+5/android/shared_preferences.iml" filepath="$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/shared_preferences-0.5.4+5/android/shared_preferences.iml" />
       <module fileurl="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/sqflite-1.1.7+2/android/sqflite.iml" filepath="$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/sqflite-1.1.7+2/android/sqflite.iml" />

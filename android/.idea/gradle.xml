@@ -11,16 +11,16 @@
             <option value="$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/flutter_downloader-1.3.3/android" />
             <option value="$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/flutter_native_image-0.0.4/android" />
             <option value="$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/image_picker-0.6.1+2/android" />
-            <option value="$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/path_provider-1.4.0/android" />
+            <option value="$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/path_provider-1.4.2/android" />
             <option value="$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/screen-0.0.5/android" />
             <option value="$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/shared_preferences-0.5.4+5/android" />
             <option value="$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/sqflite-1.1.7+2/android" />
             <option value="$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/url_launcher-5.2.5/android" />
             <option value="$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/video_player-0.7.2/android" />
             <option value="$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/webview_flutter-0.3.14+1/android" />
-            <option value="$PROJECT_DIR$/../../dim/android" />
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/../plugin/wechat_flutter_plugin/android" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
