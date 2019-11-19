@@ -28,6 +28,7 @@ IOS的直接拉下项目直接跑即可,
 # Future
 
 *  后期会把项目里所遇到的问题及解决的思路写成博客给大家学习。
+*  Flutter教程网：www.flutterj.com
 
 # Flutter教程网微信群
 
