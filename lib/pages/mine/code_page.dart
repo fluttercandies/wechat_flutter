@@ -62,7 +62,7 @@ class _CodePageState extends State<CodePage> {
     return new Scaffold(
       backgroundColor: chatBg,
       appBar: new ComMomBar(title: '二维码名片', rightDMActions: rWidget),
-      body: new Column(children: body),
+      body: new SingleChildScrollView(child: new Column(children: body)),
     );
   }
 }

@@ -1,7 +1,8 @@
 import 'package:dim_example/pages/wechat_friends/from.dart';
-import 'package:dim_example/pages/wechat_friends/ui/load_view.dart';
 import 'package:flutter/material.dart';
 import 'package:dim_example/tools/wechat_flutter.dart';
+
+import 'load_view.dart';
 
 class ItemDynamic extends StatelessWidget {
   final FriendsDynamic dynamic;
@@ -21,6 +22,9 @@ class ItemDynamic extends StatelessWidget {
 
     String desc = this.dynamic.desc;
 
+    String def =
+        'https://c-ssl.duitang.com/uploads/item/201803/04/20180304085215_WGFx8.thumb.700_0.jpeg';
+
     return Container(
       padding: EdgeInsets.all(10.0),
       child: Column(children: <Widget>[
@@ -28,10 +32,12 @@ class ItemDynamic extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            ImageLoadView('${this.dynamic.userAvatar}',
-                height: 50,
-                width: 50,
-                borderRadius: BorderRadius.circular(5.0)),
+            ImageLoadView(
+              '${this.dynamic?.userAvatar ?? def}',
+              height: 50,
+              width: 50,
+              borderRadius: BorderRadius.circular(5.0),
+            ),
             Expanded(
               child: Container(
                   padding: EdgeInsets.only(left: 10.0, top: 8),
@@ -67,7 +73,7 @@ class ItemDynamic extends StatelessWidget {
                                             childAspectRatio: 1),
                                     itemBuilder: (context, index) =>
                                         ImageLoadView(
-                                          '${this.dynamic.images.isNotEmpty ? this.dynamic.images[index].image : ''}',
+                                          '${this.dynamic.images.isNotEmpty ? this.dynamic.images[index].image : def}',
                                           fit: BoxFit.cover,
                                           width: imageWidth,
                                           height: imageWidth,
@@ -76,7 +82,8 @@ class ItemDynamic extends StatelessWidget {
                                     ? Padding(
                                         padding: EdgeInsets.only(top: 8.0),
                                         child: ImageLoadView(
-                                          this.dynamic?.images?.first?.image,
+                                          this.dynamic?.images?.first?.image ??
+                                              def,
                                           width: imageWidth,
                                           height: imageWidth,
                                           fit: BoxFit.cover,
@@ -92,7 +99,7 @@ class ItemDynamic extends StatelessWidget {
                                   alignment: Alignment.center,
                                   children: <Widget>[
                                     ImageLoadView(
-                                      '${this.dynamic.video?.image}',
+                                      '${this.dynamic.video?.image ?? def}',
                                       height: 200,
                                     ),
                                     IconButton(

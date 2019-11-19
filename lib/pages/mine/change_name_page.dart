@@ -51,7 +51,7 @@ class _ChangeNamePageState extends State<ChangeNamePage> {
       color: appBarColor,
     );
 
-    return new Column(children: [widget]);
+    return new SingleChildScrollView(child: new Column(children: [widget]));
   }
 
   @override
