@@ -15,16 +15,18 @@ class _SetRemarkPageState extends State<SetRemarkPage> {
   String initContent;
 
   Widget body() {
-    return new Column(
-      children: [
-        new TipVerifyInput(
-          title: '备注',
-          defStr: initContent,
-          controller: _tc,
-          focusNode: _f,
-          color: appBarColor,
-        )
-      ],
+    return new SingleChildScrollView(
+      child: new Column(
+        children: [
+          new TipVerifyInput(
+            title: '备注',
+            defStr: initContent,
+            controller: _tc,
+            focusNode: _f,
+            color: appBarColor,
+          )
+        ],
+      ),
     );
   }
 
