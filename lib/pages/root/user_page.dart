@@ -49,10 +49,12 @@ class _UserPageState extends State<UserPage> {
     return new Scaffold(
       backgroundColor: appBarColor,
       appBar: new ComMomBar(
-        title: '推荐好友 【空白说明网络不好】',
+        title: '推荐好友',
         rightDMActions: <Widget>[
           new ComMomButton(
             text: '查看提示',
+            style: TextStyle(color: Colors.white),
+            margin: EdgeInsets.all(10.0),
             onTap: () {
               confirmAlert(
                 context,
