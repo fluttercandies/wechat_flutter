@@ -15,9 +15,7 @@ void main() async {
   await StorageManager.init();
 
   /// APP入口并配置Provider
-  runApp(
-    ProviderConfig.getInstance().getGlobal(MyApp()),
-  );
+  runApp(ProviderConfig.getInstance().getGlobal(MyApp()));
 
   /// 自定义报错页面
   ErrorWidget.builder = (FlutterErrorDetails flutterErrorDetails) {
