@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:dim/commom/win_media.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -174,13 +175,20 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     final model = Provider.of<LoginModel>(context);
+    double height = (winHeight(context) - navigationBarHeight(context));
 
     return new Scaffold(
       appBar:
           new ComMomBar(title: '', leadingImg: 'assets/images/bar_close.png'),
       body: new MainInputBody(
         color: appBarColor,
-        child: body(model),
+        child: new SingleChildScrollView(
+          child: new SizedBox(
+            height: height - winTop(context),
+            width: winWidth(context),
+            child: body(model),
+          ),
+        ),
       ),
     );
   }
