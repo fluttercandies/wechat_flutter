@@ -1,3 +1,4 @@
+import 'package:dim_example/pages/wechat_friends/page/wechat_friends_circle.dart';
 import 'package:flutter/material.dart';
 import 'package:dim_example/pages/more/verification_page.dart';
 import 'package:dim_example/tools/wechat_flutter.dart';
@@ -43,7 +44,10 @@ class _AddFriendsDetailsState extends State<AddFriendsDetails> {
         isLine: true,
         value: '这是我的签名',
       ),
-      new LabelRow(label: '朋友圈'),
+      new LabelRow(
+        label: '朋友圈',
+        onPressed: () => routePush(new WeChatFriendsCircle()),
+      ),
       new ButtonRow(
         margin: EdgeInsets.only(top: 10.0),
         text: '添加到通讯录',

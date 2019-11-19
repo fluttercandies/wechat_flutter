@@ -1,6 +1,7 @@
 import 'package:dim_example/pages/chat/chat_page.dart';
 import 'package:dim_example/pages/chat/more_info_page.dart';
 import 'package:dim_example/pages/chat/set_remark_page.dart';
+import 'package:dim_example/pages/wechat_friends/page/wechat_friends_circle.dart';
 import 'package:dim_example/provider/global_model.dart';
 import 'package:dim_example/ui/dialog/friend_item_dialog.dart';
 import 'package:dim_example/ui/item/contact_card.dart';
@@ -43,6 +44,7 @@ class _ContactsDetailsPageState extends State<ContactsDetailsPage> {
         label: '朋友圈',
         isLine: true,
         lineWidth: 0.3,
+        onPressed: () => routePush(new WeChatFriendsCircle()),
       ),
       new LabelRow(
         label: '更多信息',

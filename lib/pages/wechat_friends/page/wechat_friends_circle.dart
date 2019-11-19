@@ -127,7 +127,7 @@ class _WeChatFriendsCircleState extends State<WeChatFriendsCircle> {
               title: title,
               rightDMActions: <Widget>[
                 IconButton(
-                  icon: Icon(Icons.add_a_photo),
+                  icon: Icon(Icons.add_a_photo,color: mainTextColor),
                   onPressed: () => _showDialog(context),
                 )
               ],
