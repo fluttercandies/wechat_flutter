@@ -26,7 +26,7 @@ IOS的直接拉下项目直接跑即可,
 *  最后命令（运行）：$ flutter run
 
 # 我的Flutter环境
-```dart
+```
 q1deMacBook-Pro:~ q1$ flutter doctor -v
 [✓] Flutter (Channel stable, v1.9.1+hotfix.6, on Mac OS X 10.14.5 18F2059,
     locale zh-Hans-CN)
