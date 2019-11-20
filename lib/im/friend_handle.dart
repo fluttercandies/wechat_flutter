@@ -11,15 +11,17 @@ Future<dynamic> addFriend(String userName, BuildContext context,
       showToast(context, '朋友已存在');
     } else if (result.toString().contains('30014')) {
       showToast(context, '对方好友人数上限');
+      return;
     } else if (result.toString().contains('30003')) {
       showToast(context, '添加的这个账号不存在');
+      return;
     } else {
       showToast(context, '添加成功');
-      if (suCc == null) {
-        popToHomePage();
-      } else {
-        suCc(true);
-      }
+    }
+    if (suCc == null) {
+      popToHomePage();
+    } else {
+      suCc(true);
     }
   } on PlatformException {
     debugPrint('Dim添加好友  失败');
