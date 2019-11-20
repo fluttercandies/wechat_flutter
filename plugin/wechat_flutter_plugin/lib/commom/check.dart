@@ -119,3 +119,10 @@ String stringDisposeWithDouble(v, [fix = 2]) {
 
   return vStr;
 }
+
+///去除小数点
+String removeDot(v) {
+  String vStr = v.toString().replaceAll('.', '');
+
+  return vStr;
+}

@@ -1,3 +1,4 @@
+import 'package:dim_example/http/api.dart';
 import 'package:flutter/material.dart';
 import 'package:dim_example/pages/contacts/contacts_page.dart';
 import 'package:dim_example/pages/discover/discover_page.dart';
@@ -16,6 +17,7 @@ class _RootPageState extends State<RootPage> {
   void initState() {
     super.initState();
     ifBrokenNetwork();
+    updateApi(context);
   }
 
   ifBrokenNetwork() async {

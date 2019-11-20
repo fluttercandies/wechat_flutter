@@ -7,4 +7,5 @@ class API {
   static const avatarUrl = h + w + 'lorempixel.com/200/200/';
   static const cat = s + 'api.thecatapi.com/v1/images/search';
   static const upImg = h + "111.230.251.115/oldchen/fUser/oneDaySuggestion";
+  static const update = h + w + 'flutterj.com/api/update.json';
 }
