@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:dim_example/im/entity/i_person_info_entity.dart';
+import 'package:dim_example/im/entity/person_info_entity.dart';
 import 'package:dim_example/pages/mine/code_page.dart';
 import 'package:dim_example/pages/root/user_page.dart';
 import 'package:dim_example/provider/global_model.dart';
@@ -157,7 +159,11 @@ class _AddFriendPageState extends State<AddFriendPage> {
   }
 
   getUser() async {
-    currentUser = await im.getCurrentLoginUser();
+    if (Platform.isAndroid) {
+      currentUser = await im.getCurrentLoginUser();
+    } else {
+      currentUser = null;
+    }
     setState(() {});
   }
 
@@ -172,18 +178,25 @@ class _AddFriendPageState extends State<AddFriendPage> {
   Future search(String userName) async {
     final data = await getUsersProfile([userName]);
     List<dynamic> dataMap = json.decode(data);
-    if (strNoEmpty(dataMap[0]['allowType'])) {
-      routePush(new AddFriendsDetails(
-        'search',
-        dataMap[0]['identifier'],
-        dataMap[0]['faceUrl'],
-        dataMap[0]['nickName'],
-        dataMap[0]['gender'],
-      ));
-    } else {
-      isResult = true;
-      setState(() {});
-    }
+    setState(() {
+      if (Platform.isIOS) {
+        IPersonInfoEntity model = IPersonInfoEntity.fromJson(dataMap[0]);
+        if (strNoEmpty(model.allowType.toString())) {
+          routePush(new AddFriendsDetails('search', model.identifier,
+              model.faceURL, model.nickname, model.gender));
+        } else {
+          isResult = true;
+        }
+      } else {
+        PersonInfoEntity model = PersonInfoEntity.fromJson(dataMap[0]);
+        if (strNoEmpty(model.allowType)) {
+          routePush(new AddFriendsDetails('search', model.identifier,
+              model.faceUrl, model.nickName, model.gender));
+        } else {
+          isResult = true;
+        }
+      }
+    });
   }
 
   @override

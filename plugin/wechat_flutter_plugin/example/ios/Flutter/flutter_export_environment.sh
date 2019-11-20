@@ -1,7 +1,7 @@
 #!/bin/sh
 # This is a generated file; do not edit or check into version control.
 export "FLUTTER_ROOT=/Users/q1/flutter"
-export "FLUTTER_APPLICATION_PATH=/Users/q1/Documents/gitPro/wechat_flutter/plugin/wechat_flutter_plugin/example"
+export "FLUTTER_APPLICATION_PATH=/Users/q1/Documents/gitPro/ahyangnb/wechat_flutter/plugin/wechat_flutter_plugin/example"
 export "FLUTTER_TARGET=lib/main.dart"
 export "FLUTTER_BUILD_DIR=build"
 export "SYMROOT=${SOURCE_ROOT}/../build/ios"

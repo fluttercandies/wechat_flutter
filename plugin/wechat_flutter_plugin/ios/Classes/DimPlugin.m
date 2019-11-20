@@ -211,8 +211,10 @@
         
     }else if([@"addFriend" isEqualToString:call.method]){
         
+        NSString *identifier = call.arguments[@"identifier"];
+        
         TIMFriendRequest *req = [[TIMFriendRequest alloc] init];
-        req.identifier = (NSString *)call.arguments[@"identifier"];
+        req.identifier = identifier;
         req.addWording =@"请添加我";
         req.addSource = @"AddSource_Type_iOS";
         [[TIMFriendshipManager sharedInstance] addFriend:req succ:^(TIMFriendResult *addResult) {
