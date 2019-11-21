@@ -7,6 +7,8 @@ homepage: https://github.com/fluttercandies/wechat_flutter
 dependencies:
   flutter:
     sdk: flutter
+  flutter_native_image: any
+  flutter_image_compress: any
 
 flutter:
   plugin:

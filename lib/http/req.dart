@@ -119,7 +119,7 @@ class Req {
         if (mapNoEmpty(params) || formData.isNotEmpty) {
           response = await _client.post(
             url,
-            data: formData ?? new FormData.from(params),
+            data: formData ?? params,
             onSendProgress: progressCallBack,
             cancelToken: token,
           );

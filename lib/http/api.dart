@@ -61,3 +61,20 @@ void updateApi(BuildContext context) async {
     },
   );
 }
+
+/// 上传头像 [uploadImg]
+uploadImgApi(BuildContext context, base64Img, Callback callback) async {
+  Req.getInstance().post(
+    API.uploadImg,
+    (v) {
+      print('code::${v['code']}');
+      print('URL::${v['result']['URL']}');
+      if (v['code'] == 200) {
+        callback(v['result']['URL']);
+      } else {
+        callback(null);
+      }
+    },
+    params: {"image_base_64": base64Img},
+  );
+}

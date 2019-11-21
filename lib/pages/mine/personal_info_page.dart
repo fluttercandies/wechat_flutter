@@ -1,5 +1,9 @@
+import 'dart:convert';
+
+import 'package:dim/commom/util.dart';
 import 'package:dim_example/http/api.dart';
 import 'package:dim_example/pages/mine/code_page.dart';
+import 'package:dim_example/tools/wechat_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
@@ -7,7 +11,6 @@ import 'package:dim_example/im/info_handle.dart';
 import 'package:dim_example/pages/mine/change_name_page.dart';
 import 'package:dim_example/provider/global_model.dart';
 
-import 'package:dim_example/tools/wechat_flutter.dart';
 import 'package:dim_example/ui/orther/label_row.dart';
 
 class PersonalInfoPage extends StatefulWidget {
@@ -29,30 +32,33 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
     }
   }
 
-  /// 自定义头像暂用
-  openGallery(BuildContext context) async {
-    File img = await ImagePicker.pickImage(source: ImageSource.gallery);
+  _openGallery({type = ImageSource.gallery}) async {
     final model = Provider.of<GlobalModel>(context);
+    File imageFile = await ImagePicker.pickImage(source: type);
+    List<int> imageBytes = await compressFile(imageFile);
+    if (imageFile != null) {
+      String base64Img = 'data:image/jpeg;base64,${base64Encode(imageBytes)}';
+      uploadImgApi(context, base64Img, (v) {
+        if (v == null) {
+          showToast(context, '上传头像失败,请换张图像再试');
+          return;
+        }
 
-    if (img != null) {
-      setUsersProfileMethod(
-        context,
-        avatarStr:
-            'https://c-ssl.duitang.com/uploads/item/201803/09/20180309220127_cRhdH.thumb.700_0.jpeg',
-        nickNameStr: model.nickName,
-        callback: (data) {
-          if (data.toString().contains('ucc')) {
-            showToast(context, '设置头像成功');
-            model.avatar =
-                'https://c-ssl.duitang.com/uploads/item/201803/09/20180309220127_cRhdH.thumb.700_0.jpeg';
-            model.refresh();
-          } else {
-            showToast(context, '设置头像失败');
-          }
-        },
-      );
-    } else {
-      return;
+        setUsersProfileMethod(
+          context,
+          avatarStr: v,
+          nickNameStr: model.nickName,
+          callback: (data) {
+            if (data.toString().contains('ucc')) {
+              showToast(context, '设置头像成功');
+              model.avatar = v;
+              model.refresh();
+            } else {
+              showToast(context, '设置头像失败');
+            }
+          },
+        );
+      });
     }
   }
 
@@ -93,7 +99,7 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
                 : new Image.asset(defIcon, fit: BoxFit.fill),
           ),
         ),
-        onPressed: () => postSuggestionWithAvatar(context),
+        onPressed: () => _openGallery(),
       ),
       new LabelRow(
         label: '昵称',

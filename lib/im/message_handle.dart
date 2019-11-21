@@ -1,3 +1,4 @@
+import 'package:dim/commom/util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
@@ -18,7 +19,7 @@ Future<void> sendImageMsg(String userName, int type,
     {Callback callback, String isCamera}) async {
   File image = await ImagePicker.pickImage(
       source: isCamera == 'c' ? ImageSource.camera : ImageSource.gallery);
-  File compressImg = await compressFile(image);
+  File compressImg = await singleCompressFile(image);
 
   if (compressImg != null) {
     debugPrint('你当前选择的图片是 ======> ${compressImg.path}');
