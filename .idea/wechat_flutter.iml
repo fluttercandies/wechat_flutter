@@ -18,6 +18,10 @@
       <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/dim/example/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/dim/example/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/dim/example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/dim/example/ios/.symlinks/plugins/dim/example/build/ios/Debug-iphonesimulator/Runner.app/Frameworks/App.framework/flutter_assets/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/dim/example/ios/.symlinks/plugins/dim/example/build/ios/iphonesimulator/Runner.app/Frameworks/App.framework/flutter_assets/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/dim/example/ios/.symlinks/plugins/dim/example/ios/Flutter/App.framework/flutter_assets/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/dim/example/ios/Flutter/App.framework/flutter_assets/packages" />
       <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/flutter_downloader/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/flutter_downloader/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/flutter_downloader/build" />
@@ -84,6 +88,7 @@
       <excludeFolder url="file://$MODULE_DIR$/plugin/wechat_flutter_plugin/example/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/plugin/wechat_flutter_plugin/example/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/plugin/wechat_flutter_plugin/example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/plugin/wechat_flutter_plugin/example/ios/Flutter/App.framework/flutter_assets/packages" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
