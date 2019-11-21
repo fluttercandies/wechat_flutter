@@ -9,8 +9,6 @@ PODS:
   - Flutter (1.0.0)
   - flutter_downloader (0.0.1):
     - Flutter
-  - flutter_native_image (0.0.1):
-    - Flutter
   - FMDB (2.7.5):
     - FMDB/standard (= 2.7.5)
   - FMDB/standard (2.7.5)
@@ -40,7 +38,6 @@ DEPENDENCIES:
   - dim (from `.symlinks/plugins/dim/ios`)
   - Flutter (from `.symlinks/flutter/ios`)
   - flutter_downloader (from `.symlinks/plugins/flutter_downloader/ios`)
-  - flutter_native_image (from `.symlinks/plugins/flutter_native_image/ios`)
   - image_picker (from `.symlinks/plugins/image_picker/ios`)
   - open_file (from `.symlinks/plugins/open_file/ios`)
   - package_info (from `.symlinks/plugins/package_info/ios`)
@@ -66,8 +63,6 @@ EXTERNAL SOURCES:
     :path: ".symlinks/flutter/ios"
   flutter_downloader:
     :path: ".symlinks/plugins/flutter_downloader/ios"
-  flutter_native_image:
-    :path: ".symlinks/plugins/flutter_native_image/ios"
   image_picker:
     :path: ".symlinks/plugins/image_picker/ios"
   open_file:
@@ -90,7 +85,6 @@ SPEC CHECKSUMS:
   dim: fa3014799fdbbbf47d5d507a85385c8e00f1c706
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
   flutter_downloader: 058b9c41564a90500f67f3e432e3524613a7fd83
-  flutter_native_image: 9c0b7451838484458e5b0fae007b86a4c2d4bdfe
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   image_picker: 16e5fec1fbc87fd3b297c53e4048521eaf17cd06
   open_file: 02eb5cb6b21264bd3a696876f5afbfb7ca4f4b7d
