@@ -96,7 +96,7 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
             borderRadius: BorderRadius.all(Radius.circular(5.0)),
             child: strNoEmpty(model.avatar)
                 ? dynamicAvatar(model.avatar)
-                : new Image.asset(defIcon, fit: BoxFit.fill),
+                : new Image.asset(defIcon, fit: BoxFit.cover),
           ),
         ),
         onPressed: () => _openGallery(),

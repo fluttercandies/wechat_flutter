@@ -26,7 +26,7 @@ class MsgAvatar extends StatelessWidget {
               : model.avatar,
           height: 50,
           width: 50,
-          fit: BoxFit.fill,
+          fit: BoxFit.cover,
         ),
       ),
       onTap: () {

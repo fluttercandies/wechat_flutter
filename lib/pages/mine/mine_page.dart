@@ -75,7 +75,7 @@ class _MinePageState extends State<MinePage> {
           borderRadius: BorderRadius.all(Radius.circular(5.0)),
           child: strNoEmpty(model.avatar)
               ? dynamicAvatar(model.avatar)
-              : new Image.asset(defIcon, fit: BoxFit.fill),
+              : new Image.asset(defIcon, fit: BoxFit.cover),
         ),
       ),
       new Container(

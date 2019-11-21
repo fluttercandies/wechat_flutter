@@ -1,6 +1,7 @@
 import 'package:dim_example/tools/wechat_flutter.dart';
 import 'package:dim_example/ui/view/image_view.dart';
 import 'package:flutter/material.dart';
+import 'package:photo_view/photo_view.dart';
 
 class ContactCard extends StatelessWidget {
   final String img, title, nickName, id, area;
@@ -34,7 +35,16 @@ class ContactCard extends StatelessWidget {
       child: new Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          new ImageView(img: img, width: 55, height: 55, fit: BoxFit.cover),
+          new GestureDetector(
+            child: new ImageView(
+                img: img, width: 55, height: 55, fit: BoxFit.cover),
+            onTap: () => routePush(
+              new PhotoView(
+                imageProvider: NetworkImage(img),
+                onTapUp: (c, f, s) => Navigator.of(context).pop(),
+              ),
+            ),
+          ),
           new Space(width: mainSpace * 2),
           new Column(
             crossAxisAlignment: CrossAxisAlignment.start,
