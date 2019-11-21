@@ -1,6 +1,9 @@
 import 'package:dim_example/pages/wechat_friends/from.dart';
+import 'package:dim_example/tools/wechat_flutter.dart' as prefix1;
+import 'package:dim_example/ui/w_pop/friend_pop.dart';
 import 'package:flutter/material.dart';
 import 'package:dim_example/tools/wechat_flutter.dart';
+import 'package:flutter/material.dart' as prefix0;
 
 import 'load_view.dart';
 
@@ -136,9 +139,7 @@ class ItemDynamic extends StatelessWidget {
                                             style: TextStyle(
                                                 color: Colors.blueAccent))))
                               ]),
-                          IconButton(
-                              icon: Icon(Icons.more_horiz, color: Colors.black),
-                              onPressed: () {})
+                          TestPush(),
                         ], mainAxisAlignment: MainAxisAlignment.spaceBetween),
 
                         /// 评论部分
@@ -152,5 +153,64 @@ class ItemDynamic extends StatelessWidget {
             margin: EdgeInsets.only(top: 10))
       ]),
     );
+  }
+
+
+}
+
+class TestPush extends StatefulWidget {
+  @override
+  _TestPushState createState() => _TestPushState();
+}
+
+class _TestPushState extends State<TestPush> {
+
+  Widget _buildExit() {
+    TextStyle labelStyle = TextStyle(color: Colors.white);
+    return Container(
+      width: 200,
+      height: 36,
+      decoration: BoxDecoration(
+        color: itemBgColor,
+        borderRadius: BorderRadius.all(
+          Radius.circular(4.0),
+        ),
+      ),
+      child: new Row(
+        children: <Widget>[
+          new Expanded(
+            child: new FlatButton(
+              onPressed: () {},
+              child: new Text('赞', style: labelStyle),
+            ),
+          ),
+          new Expanded(
+            child: new FlatButton(
+              onPressed: () {},
+              child: new Text('评论', style: labelStyle),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+        icon: Icon(Icons.more_horiz, color: Colors.black),
+        onPressed: () {
+          Navigator.push(
+            context,
+            PopRoute(
+              child: Popup(
+                btnContext: context,
+                child: _buildExit(),
+                onClick: () {
+                  print("exit");
+                },
+              ),
+            ),
+          );
+        });
   }
 }
