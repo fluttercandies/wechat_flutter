@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:dim_example/tools/wechat_flutter.dart';
 
 class LoadingView extends StatelessWidget {
+  final bool isStr;
+
+  LoadingView({this.isStr = true});
+
   @override
   Widget build(BuildContext context) {
     var body = new Center(
@@ -17,13 +21,17 @@ class LoadingView extends StatelessWidget {
                   '加载中',
                   style: TextStyle(color: mainTextColor),
                 ),
-                new Text(
-                  '第一次进点我',
-                  style: TextStyle(color: mainTextColor, fontSize: 9),
-                ),
+                isStr
+                    ? new Text(
+                        '第一次进点我',
+                        style: TextStyle(color: mainTextColor, fontSize: 9),
+                      )
+                    : new Container(),
               ],
             ),
-            onTap: () => routePush(new UserPage()),
+            onTap: () {
+              if (isStr) routePush(new UserPage());
+            },
           ),
           new Space(),
           new SizedBox(

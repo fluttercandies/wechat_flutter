@@ -44,6 +44,24 @@ class _UserPageState extends State<UserPage> {
     );
   }
 
+  Widget body() {
+    if (_userData == null || _userData?.length == 0)
+      return new LoadingView(isStr: false);
+
+    return new ListView.builder(
+      itemBuilder: (context, index) {
+        UserData model = _userData[index];
+        return new NewFriendCard(
+          img: model.avatar,
+          name: model.name,
+          isAdd: model.isAdd,
+          onTap: () => action(model),
+        );
+      },
+      itemCount: _userData?.length ?? 0,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -71,18 +89,7 @@ class _UserPageState extends State<UserPage> {
           )
         ],
       ),
-      body: new ListView.builder(
-        itemBuilder: (context, index) {
-          UserData model = _userData[index];
-          return new NewFriendCard(
-            img: model.avatar,
-            name: model.name,
-            isAdd: model.isAdd,
-            onTap: () => action(model),
-          );
-        },
-        itemCount: _userData?.length ?? 0,
-      ),
+      body: body(),
     );
   }
 }
