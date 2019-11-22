@@ -172,13 +172,11 @@ class _ChatPageState extends State<ChatPage> {
       new Container(
         height: _isMore && !_focusNode.hasFocus ? keyboardHeight : 0.0,
         width: winWidth(context),
-        color: lineColor.withOpacity(0.5),
+        color: appBarColor,
         child: new IndicatorPageView(
           pageC: pageC,
           pages: <Widget>[
             new Text('0'),
-            new Text('1'),
-            new Text('1'),
             new Text('1'),
           ],
         ),
