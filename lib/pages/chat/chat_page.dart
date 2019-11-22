@@ -32,6 +32,8 @@ class _ChatPageState extends State<ChatPage> {
   bool _isMore = false;
 
   TextEditingController _textController = TextEditingController();
+  FocusNode _focusNode = new FocusNode();
+
   ScrollController _sC = ScrollController();
   SelectionControls _selectionControls = SelectionControls();
   PageController pageC = new PageController();
@@ -129,6 +131,7 @@ class _ChatPageState extends State<ChatPage> {
       decoration: InputDecoration(
           border: InputBorder.none, contentPadding: const EdgeInsets.all(5.0)),
       controller: _textController,
+      focusNode: _focusNode,
       cursorColor: const Color(AppColors.ChatBoxCursorColor),
       style: AppStyles.ChatBoxTextStyle,
     );
@@ -200,14 +203,20 @@ class _ChatPageState extends State<ChatPage> {
               value: _textController.text,
               onTap: () => _handleSubmittedData(_textController.text),
               moreTap: () {
-                setState(() => _isMore = !_isMore);
+                if (_focusNode.hasFocus) {
+                  _focusNode.unfocus();
+                  _isMore = true;
+                } else {
+                  _isMore = !_isMore;
+                }
+                setState(() {});
               },
             ),
           ],
         ),
       ),
       new Container(
-        height: _isMore ? 260 : 0.0,
+        height: _isMore && !_focusNode.hasFocus ? 260 : 0.0,
         width: winWidth(context),
         color: lineColor.withOpacity(0.5),
         child: new IndicatorPageView(
