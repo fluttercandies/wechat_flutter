@@ -1,6 +1,7 @@
 import 'package:dim_example/im/model/chat_data.dart';
 import 'package:dim_example/ui/item/chat_more_icon.dart';
 import 'package:dim_example/ui/item/chat_voice.dart';
+import 'package:dim_example/ui/view/indicator_page_view.dart';
 import 'package:extended_text_field/extended_text_field.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -28,10 +29,12 @@ class _ChatPageState extends State<ChatPage> {
   StreamSubscription<dynamic> _messageStreamSubscription;
 
   bool _isVoice = false;
+  bool _isMore = false;
 
   TextEditingController _textController = TextEditingController();
   ScrollController _sC = ScrollController();
   SelectionControls _selectionControls = SelectionControls();
+  PageController pageC = new PageController();
 
   @override
   void initState() {
@@ -137,16 +140,19 @@ class _ChatPageState extends State<ChatPage> {
     var body = [
       chatData != null
           ? new Flexible(
-              child: new ListView.builder(
-                controller: _sC,
-                padding: EdgeInsets.all(8.0),
-                reverse: true,
-                itemBuilder: (context, int index) {
-                  ChatData model = chatData[index];
-                  return new SendMessageView(model);
-                },
-                itemCount: chatData.length,
-                dragStartBehavior: DragStartBehavior.down,
+              child: new ScrollConfiguration(
+                behavior: MyBehavior(),
+                child: new ListView.builder(
+                  controller: _sC,
+                  padding: EdgeInsets.all(8.0),
+                  reverse: true,
+                  itemBuilder: (context, int index) {
+                    ChatData model = chatData[index];
+                    return new SendMessageView(model);
+                  },
+                  itemCount: chatData.length,
+                  dragStartBehavior: DragStartBehavior.down,
+                ),
               ),
             )
           : new Spacer(),
@@ -187,13 +193,30 @@ class _ChatPageState extends State<ChatPage> {
             ),
             new InkWell(
               child: new Image.asset('assets/images/chat/ic_Emotion.webp',
-                  width: 25, fit: BoxFit.cover),
+                  width: 30, fit: BoxFit.cover),
               onTap: () {},
             ),
             new ChatMoreIcon(
               value: _textController.text,
               onTap: () => _handleSubmittedData(_textController.text),
+              moreTap: () {
+                setState(() => _isMore = !_isMore);
+              },
             ),
+          ],
+        ),
+      ),
+      new Container(
+        height: _isMore ? 260 : 0.0,
+        width: winWidth(context),
+        color: lineColor.withOpacity(0.5),
+        child: new IndicatorPageView(
+          pageC: pageC,
+          pages: <Widget>[
+            new Text('0'),
+            new Text('1'),
+            new Text('1'),
+            new Text('1'),
           ],
         ),
       ),

@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:dim_example/pages/contacts/group_launch_page.dart';
 import 'package:dim_example/pages/home/search_page.dart';
 import 'package:dim_example/pages/settings/language_page.dart';
+import 'package:dim_example/ui/view/indicator_page_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:dim_example/pages/more/add_friend_page.dart';
@@ -126,17 +127,20 @@ class RootTabBarState extends State<RootTabBar> {
       ),
       appBar:
           widget.pages[currentIndex].title != S.of(context).me ? appBar : null,
-      body: new PageView.builder(
-        itemBuilder: (BuildContext context, int index) =>
-            widget.pages[index].page,
-        controller: pageController,
-        itemCount: pages.length,
-        physics: Platform.isAndroid
-            ? new ClampingScrollPhysics()
-            : new NeverScrollableScrollPhysics(),
-        onPageChanged: (int index) {
-          setState(() => currentIndex = index);
-        },
+      body: new ScrollConfiguration(
+        behavior: MyBehavior(),
+        child: new PageView.builder(
+          itemBuilder: (BuildContext context, int index) =>
+              widget.pages[index].page,
+          controller: pageController,
+          itemCount: pages.length,
+          physics: Platform.isAndroid
+              ? new ClampingScrollPhysics()
+              : new NeverScrollableScrollPhysics(),
+          onPageChanged: (int index) {
+            setState(() => currentIndex = index);
+          },
+        ),
       ),
     );
   }

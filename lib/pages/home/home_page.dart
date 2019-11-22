@@ -3,6 +3,7 @@ import 'package:dim_example/im/conversation_handle.dart';
 import 'package:dim_example/im/model/chat_list.dart';
 import 'package:dim_example/pages/chat/chat_page.dart';
 import 'package:dim_example/tools/wechat_flutter.dart';
+import 'package:dim_example/ui/view/indicator_page_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:dim_example/ui/edit/text_span_builder.dart';
@@ -126,38 +127,41 @@ class _HomePageState extends State<HomePage>
 
     return new Container(
       color: Color(AppColors.BackgroundColor),
-      child: new ListView.builder(
-        itemBuilder: (BuildContext context, int index) {
-          ChatList model = _chatData[index];
+      child: new ScrollConfiguration(
+        behavior: MyBehavior(),
+        child: new ListView.builder(
+          itemBuilder: (BuildContext context, int index) {
+            ChatList model = _chatData[index];
 
-          return InkWell(
-            onTap: () {
-              routePush(new ChatPage(
-                  id: model.identifier,
-                  title: model.name,
-                  type: model.type == 'Group' ? 2 : 1));
-            },
-            onTapDown: (TapDownDetails details) {
-              tapPos = details.globalPosition;
-            },
-            onLongPress: () {
-              if (Platform.isAndroid) {
-                _showMenu(context, tapPos, model.type == 'Group' ? 2 : 1,
-                    model.identifier);
-              } else {
-                debugPrint("IOS聊天长按选项功能开发中");
-              }
-            },
-            child: new MyConversationView(
-              imageUrl: model.avatar,
-              title: model?.name ?? '',
-              content: model?.content ?? '',
-              time: timeView(model?.time ?? 0),
-              isBorder: model?.name != _chatData[0].name,
-            ),
-          );
-        },
-        itemCount: _chatData?.length ?? 1,
+            return InkWell(
+              onTap: () {
+                routePush(new ChatPage(
+                    id: model.identifier,
+                    title: model.name,
+                    type: model.type == 'Group' ? 2 : 1));
+              },
+              onTapDown: (TapDownDetails details) {
+                tapPos = details.globalPosition;
+              },
+              onLongPress: () {
+                if (Platform.isAndroid) {
+                  _showMenu(context, tapPos, model.type == 'Group' ? 2 : 1,
+                      model.identifier);
+                } else {
+                  debugPrint("IOS聊天长按选项功能开发中");
+                }
+              },
+              child: new MyConversationView(
+                imageUrl: model.avatar,
+                title: model?.name ?? '',
+                content: model?.content ?? '',
+                time: timeView(model?.time ?? 0),
+                isBorder: model?.name != _chatData[0].name,
+              ),
+            );
+          },
+          itemCount: _chatData?.length ?? 1,
+        ),
       ),
     );
   }

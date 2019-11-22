@@ -6,11 +6,13 @@ class ChatMoreIcon extends StatelessWidget {
   final bool isMore;
   final String value;
   final VoidCallback onTap;
+  final GestureTapCallback moreTap;
 
   ChatMoreIcon({
     this.isMore = false,
     this.value,
     this.onTap,
+    this.moreTap,
   });
 
   @override
@@ -24,6 +26,21 @@ class ChatMoreIcon extends StatelessWidget {
             radius: 4.0,
             onTap: onTap ?? () {},
           )
-        : new Container();
+        : new InkWell(
+            child: new Container(
+              width: 23,
+              margin: EdgeInsets.symmetric(horizontal: 5.0),
+              child: new Image.asset(
+                'assets/images/chat/ic_chat_more.webp',
+                color: mainTextColor,
+                fit: BoxFit.cover,
+              ),
+            ),
+            onTap: () {
+              if (moreTap != null) {
+                moreTap();
+              }
+            },
+          );
   }
 }

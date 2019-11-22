@@ -71,6 +71,18 @@ flutter:
     - assets/images/chat/ic_Keyboard.webp
     - assets/images/chat/ic_details_add.png
     - assets/images/chat/ic_voice.webp
+    - assets/images/chat/ic_chat_more.webp
+    - assets/images/chat/ic_chat_voice.webp
+    - assets/images/chat/ic_details_camera.webp
+    - assets/images/chat/ic_details_card.webp
+    - assets/images/chat/ic_details_favorite.webp
+    - assets/images/chat/ic_details_file.webp
+    - assets/images/chat/ic_details_localtion.webp
+    - assets/images/chat/ic_details_media.webp
+    - assets/images/chat/ic_details_photo.webp
+    - assets/images/chat/ic_details_red.webp
+    - assets/images/chat/ic_details_transfer.webp
+    - assets/images/chat/ic_details_video.webp
 
     - assets/images/mine/ic_small_code.png
     - assets/images/mine/ic_wallet.webp
