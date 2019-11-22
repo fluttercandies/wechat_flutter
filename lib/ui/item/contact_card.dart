@@ -38,12 +38,18 @@ class ContactCard extends StatelessWidget {
           new GestureDetector(
             child: new ImageView(
                 img: img, width: 55, height: 55, fit: BoxFit.cover),
-            onTap: () => routePush(
-              new PhotoView(
-                imageProvider: NetworkImage(img),
-                onTapUp: (c, f, s) => Navigator.of(context).pop(),
-              ),
-            ),
+            onTap: () {
+              if (isNetWorkImg(img)) {
+                routePush(
+                  new PhotoView(
+                    imageProvider: NetworkImage(img),
+                    onTapUp: (c, f, s) => Navigator.of(context).pop(),
+                  ),
+                );
+              } else {
+                showToast(context, '无头像');
+              }
+            },
           ),
           new Space(width: mainSpace * 2),
           new Column(
