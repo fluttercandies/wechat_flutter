@@ -1,8 +1,6 @@
 import 'package:dim_example/ui/card/more_item_card.dart';
 import 'package:flutter/material.dart';
 
-import 'package:dim_example/tools/wechat_flutter.dart';
-
 class ChatMorePage extends StatefulWidget {
   final int index;
 

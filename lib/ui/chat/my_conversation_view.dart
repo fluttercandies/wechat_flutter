@@ -32,6 +32,8 @@ class _MyConversationViewState extends State<MyConversationView> {
             children: <Widget>[
               new Text(
                 widget.title ?? '',
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
                 style: TextStyle(fontSize: 17.0, fontWeight: FontWeight.normal),
               ),
               new SizedBox(height: 2.0),
