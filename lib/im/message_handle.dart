@@ -22,9 +22,8 @@ Future<void> sendImageMsg(String userName, int type,
   File compressImg = await singleCompressFile(image);
 
   try {
-    var result =
-        await im.sendImageMessages(userName, compressImg.path, type: type);
-    callback(result);
+    await im.sendImageMessages(userName, compressImg.path, type: type);
+    callback(compressImg.path);
   } on PlatformException {
     debugPrint("发送图片消息失败");
   }

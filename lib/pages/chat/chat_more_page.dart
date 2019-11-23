@@ -1,4 +1,5 @@
 import 'package:dim_example/im/message_handle.dart';
+import 'package:dim_example/tools/wechat_flutter.dart';
 import 'package:dim_example/ui/card/more_item_card.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -36,7 +37,7 @@ class _ChatMorePageState extends State<ChatMorePage> {
       sendImageMsg(widget.id, widget.type, source: ImageSource.gallery,
           callback: (v) {
         if (v == null) return;
-        print('sendResult::$v');
+        Notice.send(WeChatActions.imgMsg(), v ?? '');
       });
     } else {
       print('onClick$name');

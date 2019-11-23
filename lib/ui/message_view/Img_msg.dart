@@ -16,9 +16,12 @@ class ImgMsg extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (!listNoEmpty(msg['imageList'])) return Text('发送中');
     var msgInfo = msg['imageList'][1];
     var _height = msgInfo['height'].toDouble();
     var resultH = _height > 200.0 ? 200.0 : _height;
+    var url = msgInfo['url'];
+    var isFile = File(url).existsSync();
     final globalModel = Provider.of<GlobalModel>(context);
     var body = [
       new MsgAvatar(model: model, globalModel: globalModel),
@@ -33,13 +36,15 @@ class ImgMsg extends StatelessWidget {
             ),
             child: new ClipRRect(
               borderRadius: BorderRadius.all(Radius.circular(10.0)),
-              child: new CachedNetworkImage(
-                  imageUrl: msgInfo['url'], height: resultH, fit: BoxFit.cover),
+              child: isFile
+                  ? new Image.file(File(url))
+                  : new CachedNetworkImage(
+                      imageUrl: url, height: resultH, fit: BoxFit.cover),
             ),
           ),
           onTap: () => routePush(
             new PhotoView(
-              imageProvider: NetworkImage(msgInfo['url']),
+              imageProvider: isFile ? FileImage(File(url)) : NetworkImage(url),
               onTapUp: (c, f, s) => Navigator.of(context).pop(),
               maxScale: 3.0,
               minScale: 1.0,

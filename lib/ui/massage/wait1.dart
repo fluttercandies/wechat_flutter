@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:dim_example/im/entity/img_entity.dart';
 import 'package:dim_example/im/model/chat_data.dart';
+import 'package:dim_example/tools/wechat_flutter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:dim_example/provider/global_model.dart';
@@ -26,7 +26,7 @@ class SendMessageView extends StatefulWidget {
 class _SendMessageViewState extends State<SendMessageView> {
   @override
   Widget build(BuildContext context) {
-    var msg = widget.model.msg;
+    Map msg = widget.model.msg;
     String msgType = msg['type'];
 
     bool isI = Platform.isIOS;
