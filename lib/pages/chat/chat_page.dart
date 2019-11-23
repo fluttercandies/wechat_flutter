@@ -1,4 +1,5 @@
 import 'package:dim_example/im/model/chat_data.dart';
+import 'package:dim_example/pages/chat/chat_more_page.dart';
 import 'package:dim_example/ui/chat/chat_details_body.dart';
 import 'package:dim_example/ui/chat/chat_details_row.dart';
 import 'package:dim_example/ui/item/chat_more_icon.dart';
@@ -176,7 +177,7 @@ class _ChatPageState extends State<ChatPage> {
         child: new IndicatorPageView(
           pageC: pageC,
           pages: <Widget>[
-            new Text('0'),
+            new ChatMorePage(),
             new Text('1'),
           ],
         ),

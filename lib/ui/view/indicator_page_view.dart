@@ -33,27 +33,30 @@ class IndicatorPageViewState extends State<IndicatorPageView> {
 
   @override
   Widget build(BuildContext context) {
-    return new Stack(
-      alignment: Alignment.bottomCenter,
-      children: <Widget>[
-        new ScrollConfiguration(
-          behavior: MyBehavior(),
-          child: new PageView(
-            controller: widget.pageC,
-            onPageChanged: (v) {
-              setState(() => currentMoreIndex = v);
-            },
-            children: widget.pages,
+    return new GestureDetector(
+      child: new Stack(
+        alignment: Alignment.bottomCenter,
+        children: <Widget>[
+          new ScrollConfiguration(
+            behavior: MyBehavior(),
+            child: new PageView(
+              controller: widget.pageC,
+              onPageChanged: (v) {
+                setState(() => currentMoreIndex = v);
+              },
+              children: widget.pages,
+            ),
           ),
-        ),
-        new Container(
-          padding: EdgeInsets.only(bottom: 10.0),
-          child: new Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: List.generate(widget.pages.length, itemView),
-          ),
-        )
-      ],
+          new Container(
+            padding: EdgeInsets.only(bottom: 10.0),
+            child: new Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: List.generate(widget.pages.length, itemView),
+            ),
+          )
+        ],
+      ),
+      onTap: () {},
     );
   }
 }
