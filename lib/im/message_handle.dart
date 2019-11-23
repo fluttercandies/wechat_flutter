@@ -16,26 +16,22 @@ Future<dynamic> getDimMessages(String id,
 }
 
 Future<void> sendImageMsg(String userName, int type,
-    {Callback callback, String isCamera}) async {
-  File image = await ImagePicker.pickImage(
-      source: isCamera == 'c' ? ImageSource.camera : ImageSource.gallery);
+    {Callback callback, ImageSource source}) async {
+  File image = await ImagePicker.pickImage(source: source);
+  if (image == null) return;
   File compressImg = await singleCompressFile(image);
 
-  if (compressImg != null) {
-    debugPrint('你当前选择的图片是 ======> ${compressImg.path}');
-    callback(compressImg);
-    try {
-      var result =
-      await im.sendImageMessages(userName, compressImg.path, type: type);
-      callback(result);
-    } on PlatformException {
-      debugPrint("发送图片消息失败");
-    }
+  try {
+    var result =
+        await im.sendImageMessages(userName, compressImg.path, type: type);
+    callback(result);
+  } on PlatformException {
+    debugPrint("发送图片消息失败");
   }
 }
 
-Future<dynamic> sendSoundMessages(String id, String soundPath,
-    int duration, int type, Callback callback) async {
+Future<dynamic> sendSoundMessages(String id, String soundPath, int duration,
+    int type, Callback callback) async {
   try {
     var result = await im.sendSoundMessages(id, soundPath, type, duration);
     callback(result);

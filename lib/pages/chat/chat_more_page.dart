@@ -1,10 +1,14 @@
+import 'package:dim_example/im/message_handle.dart';
 import 'package:dim_example/ui/card/more_item_card.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class ChatMorePage extends StatefulWidget {
   final int index;
+  final String id;
+  final int type;
 
-  ChatMorePage({this.index = 0});
+  ChatMorePage({this.index = 0, this.id, this.type});
 
   @override
   _ChatMorePageState createState() => _ChatMorePageState();
@@ -27,23 +31,19 @@ class _ChatMorePageState extends State<ChatMorePage> {
     {"name": "文件", "icon": "assets/images/chat/ic_details_file.webp"},
   ];
 
-  @override
-  Widget build(BuildContext context) {
-    if (widget.index == 0) {
-      return new ItemBuild(data);
+  action(String name) {
+    if (name == '相册') {
+      sendImageMsg(widget.id, widget.type, source: ImageSource.gallery,
+          callback: (v) {
+        if (v == null) return;
+        print('sendResult::$v');
+      });
     } else {
-      return new ItemBuild(dataS);
+      print('onClick$name');
     }
   }
-}
 
-class ItemBuild extends StatelessWidget {
-  final List data;
-
-  ItemBuild(this.data);
-
-  @override
-  Widget build(BuildContext context) {
+  itemBuild(data) {
     return new Container(
       margin: EdgeInsets.all(20.0),
       padding: EdgeInsets.only(bottom: 20.0),
@@ -56,12 +56,28 @@ class ItemBuild extends StatelessWidget {
           return new MoreItemCard(
             name: name,
             icon: icon,
-            onPressed: () {
-              print('onclick $name');
-            },
+            onPressed: () => action(name),
           );
         }),
       ),
     );
   }
+
+  @override
+  Widget build(BuildContext context) {
+    if (widget.index == 0) {
+      return itemBuild(data);
+    } else {
+      return itemBuild(dataS);
+    }
+  }
+}
+
+class ItemBuild extends StatelessWidget {
+  final List data;
+
+  ItemBuild(this.data);
+
+  @override
+  Widget build(BuildContext context) {}
 }

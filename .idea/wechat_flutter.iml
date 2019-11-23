@@ -42,14 +42,6 @@
       <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/dim/example/ios/.symlinks/plugins/dim/example/ios/.symlinks/plugins/dim/example/ios/.symlinks/plugins/dim/example/ios/.symlinks/plugins/dim/example/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/dim/example/ios/.symlinks/plugins/dim/example/ios/.symlinks/plugins/dim/example/ios/.symlinks/plugins/dim/example/ios/.symlinks/plugins/dim/example/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/dim/example/ios/.symlinks/plugins/dim/example/ios/.symlinks/plugins/dim/example/ios/.symlinks/plugins/dim/example/ios/.symlinks/plugins/dim/example/build" />
-      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/dim/example/ios/.symlinks/plugins/dim/example/ios/.symlinks/plugins/dim/example/ios/.symlinks/plugins/dim/example/ios/.symlinks/plugins/dim/example/build/ios/Debug-iphonesimulator/Runner.app/Frameworks/App.framework/flutter_assets/packages" />
-      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/dim/example/ios/.symlinks/plugins/dim/example/ios/.symlinks/plugins/dim/example/ios/.symlinks/plugins/dim/example/ios/.symlinks/plugins/dim/example/build/ios/iphonesimulator/Runner.app/Frameworks/App.framework/flutter_assets/packages" />
-      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/dim/example/ios/.symlinks/plugins/dim/example/ios/.symlinks/plugins/dim/example/ios/.symlinks/plugins/dim/example/ios/.symlinks/plugins/dim/example/ios/.symlinks/plugins/dim/example/build/ios/Debug-iphonesimulator/Runner.app/Frameworks/App.framework/flutter_assets/packages" />
-      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/dim/example/ios/.symlinks/plugins/dim/example/ios/.symlinks/plugins/dim/example/ios/.symlinks/plugins/dim/example/ios/.symlinks/plugins/dim/example/ios/.symlinks/plugins/dim/example/build/ios/iphonesimulator/Runner.app/Frameworks/App.framework/flutter_assets/packages" />
-      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/dim/example/ios/.symlinks/plugins/dim/example/ios/.symlinks/plugins/dim/example/ios/.symlinks/plugins/dim/example/ios/.symlinks/plugins/dim/example/ios/.symlinks/plugins/dim/example/ios/Flutter/App.framework/flutter_assets/packages" />
-      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/dim/example/ios/.symlinks/plugins/dim/example/ios/.symlinks/plugins/dim/example/ios/.symlinks/plugins/dim/example/ios/.symlinks/plugins/dim/example/ios/Flutter/App.framework/flutter_assets/packages" />
-      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/dim/example/ios/.symlinks/plugins/dim/example/ios/.symlinks/plugins/dim/example/ios/.symlinks/plugins/dim/example/ios/Flutter/App.framework/flutter_assets/packages" />
-      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/dim/example/ios/.symlinks/plugins/dim/example/ios/.symlinks/plugins/dim/example/ios/Flutter/App.framework/flutter_assets/packages" />
       <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/dim/example/ios/.symlinks/plugins/dim/example/ios/Flutter/App.framework/flutter_assets/packages" />
       <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/dim/example/ios/Flutter/App.framework/flutter_assets/packages" />
       <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/flutter_downloader/.dart_tool" />
@@ -58,6 +50,12 @@
       <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/flutter_downloader/example/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/flutter_downloader/example/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/flutter_downloader/example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/flutter_image_compress/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/flutter_image_compress/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/flutter_image_compress/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/flutter_image_compress/example/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/flutter_image_compress/example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/flutter_image_compress/example/build" />
       <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/flutter_native_image/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/flutter_native_image/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/flutter_native_image/build" />

@@ -44,6 +44,8 @@ class ContactCard extends StatelessWidget {
                   new PhotoView(
                     imageProvider: NetworkImage(img),
                     onTapUp: (c, f, s) => Navigator.of(context).pop(),
+                    maxScale: 3.0,
+                    minScale: 1.0,
                   ),
                 );
               } else {

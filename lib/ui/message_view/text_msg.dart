@@ -7,11 +7,11 @@ import 'package:provider/provider.dart';
 import '../../provider/global_model.dart';
 import '../view/image_view.dart';
 
-class TextMessage extends StatelessWidget {
+class TextMsg extends StatelessWidget {
   final String text;
   final ChatData model;
 
-  TextMessage(this.text, this.model);
+  TextMsg(this.text, this.model);
 
   @override
   Widget build(BuildContext context) {

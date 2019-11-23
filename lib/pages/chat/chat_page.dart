@@ -177,8 +177,8 @@ class _ChatPageState extends State<ChatPage> {
         child: new IndicatorPageView(
           pageC: pageC,
           pages: <Widget>[
-            new ChatMorePage(index: 0),
-            new ChatMorePage(index: 1),
+            new ChatMorePage(index: 0, id: widget.id, type: widget.type),
+            new ChatMorePage(index: 1, id: widget.id, type: widget.type),
           ],
         ),
       ),

@@ -1,18 +1,18 @@
 import 'dart:io';
 
+import 'package:dim_example/im/entity/img_entity.dart';
 import 'package:dim_example/im/model/chat_data.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:dim_example/provider/global_model.dart';
 
-import 'package:dim_example/ui/message_view/Image_message.dart';
+import 'package:dim_example/ui/message_view/Img_msg.dart';
 import 'package:dim_example/ui/message_view/join_message.dart';
 import 'package:dim_example/ui/message_view/quit_message.dart';
 import 'package:dim_example/ui/message_view/sound_message.dart';
 import 'package:dim_example/ui/message_view/tem_message.dart';
-import 'package:dim_example/ui/message_view/text_message.dart';
+import 'package:dim_example/ui/message_view/text_msg.dart';
 import 'package:dim_example/ui/message_view/video_message.dart';
-
 
 class SendMessageView extends StatefulWidget {
   final ChatData model;
@@ -26,11 +26,15 @@ class SendMessageView extends StatefulWidget {
 class _SendMessageViewState extends State<SendMessageView> {
   @override
   Widget build(BuildContext context) {
-    String msgType = widget.model.msg['type'];
+    var msg = widget.model.msg;
+    String msgType = msg['type'];
+
     bool isI = Platform.isIOS;
-    bool iosText = isI && widget.model.msg.toString().contains('text:');
+    bool iosText = isI && msg.toString().contains('text:');
     if (msgType == "Text" || iosText) {
-      return new TextMessage(widget.model.msg['text'], widget.model);
+      return new TextMsg(msg['text'], widget.model);
+    } else if (msgType == "Image") {
+      return new ImgMsg(msg, widget.model);
     } else {
       return new Text('未知消息');
     }
