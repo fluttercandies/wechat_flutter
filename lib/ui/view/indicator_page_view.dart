@@ -13,7 +13,7 @@ class IndicatorPageView extends StatefulWidget {
 
 class IndicatorPageViewState extends State<IndicatorPageView> {
   int currentMoreIndex = 0;
-  double size = 7.0;
+  double size = 5.0;
 
   Widget itemView(index) {
     return new Container(
@@ -23,7 +23,7 @@ class IndicatorPageViewState extends State<IndicatorPageView> {
       decoration: BoxDecoration(
         color: currentMoreIndex == index
             ? Colors.black
-            : lineColor.withOpacity(0.2),
+            : Colors.grey.withOpacity(0.3),
         borderRadius: BorderRadius.all(
           Radius.circular(size / 2),
         ),

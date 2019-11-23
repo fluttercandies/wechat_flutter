@@ -29,11 +29,11 @@ class _ChatMorePageState extends State<ChatMorePage> {
     if (widget.index == 0) {
       return new Container(
         alignment: Alignment.center,
-        margin: EdgeInsets.symmetric(horizontal: 10),
+        margin: EdgeInsets.symmetric(horizontal: 20),
         padding: EdgeInsets.only(bottom: 20.0),
         child: new Wrap(
           runSpacing: 10.0,
-          spacing: (winWidth(context) - 440) / 10,
+          spacing: 10,
           children: List.generate(data.length, (index) {
             String name = data[index]['name'];
             String icon = data[index]['icon'];
