@@ -24,31 +24,46 @@ class _ChatMorePageState extends State<ChatMorePage> {
     {"name": "我的收藏", "icon": "assets/images/chat/ic_details_favorite.webp"},
   ];
 
+  List dataS = [
+    {"name": "名片", "icon": "assets/images/chat/ic_details_card.webp"},
+    {"name": "文件", "icon": "assets/images/chat/ic_details_file.webp"},
+  ];
+
   @override
   Widget build(BuildContext context) {
     if (widget.index == 0) {
-      return new Container(
-        alignment: Alignment.center,
-        margin: EdgeInsets.symmetric(horizontal: 20),
-        padding: EdgeInsets.only(bottom: 20.0),
-        child: new Wrap(
-          runSpacing: 10.0,
-          spacing: 10,
-          children: List.generate(data.length, (index) {
-            String name = data[index]['name'];
-            String icon = data[index]['icon'];
-            return new MoreItemCard(
-              name: name,
-              icon: icon,
-              onPressed: () {
-                print('onclick $name');
-              },
-            );
-          }),
-        ),
-      );
+      return new ItemBuild(data);
     } else {
-      return Container();
+      return new ItemBuild(dataS);
     }
+  }
+}
+
+class ItemBuild extends StatelessWidget {
+  final List data;
+
+  ItemBuild(this.data);
+
+  @override
+  Widget build(BuildContext context) {
+    return new Container(
+      margin: EdgeInsets.all(20.0),
+      padding: EdgeInsets.only(bottom: 20.0),
+      child: new Wrap(
+        runSpacing: 10.0,
+        spacing: 10,
+        children: List.generate(data.length, (index) {
+          String name = data[index]['name'];
+          String icon = data[index]['icon'];
+          return new MoreItemCard(
+            name: name,
+            icon: icon,
+            onPressed: () {
+              print('onclick $name');
+            },
+          );
+        }),
+      ),
+    );
   }
 }
