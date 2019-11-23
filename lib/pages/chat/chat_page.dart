@@ -31,7 +31,7 @@ class _ChatPageState extends State<ChatPage> {
   StreamSubscription<dynamic> _msgStreamSubs;
   bool _isVoice = false;
   bool _isMore = false;
-  double keyboardHeight = 260.0;
+  double keyboardHeight = 270.0;
 
   TextEditingController _textController = TextEditingController();
   FocusNode _focusNode = new FocusNode();
@@ -164,7 +164,7 @@ class _ChatPageState extends State<ChatPage> {
 
   @override
   Widget build(BuildContext context) {
-    if (keyboardHeight == 260.0 &&
+    if (keyboardHeight == 270.0 &&
         MediaQuery.of(context).viewInsets.bottom != 0) {
       keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
     }
@@ -188,10 +188,14 @@ class _ChatPageState extends State<ChatPage> {
         color: Color(AppColors.ChatBoxBg),
         child: new IndicatorPageView(
           pageC: pageC,
-          pages: <Widget>[
-            new ChatMorePage(index: 0, id: widget.id, type: widget.type),
-            new ChatMorePage(index: 1, id: widget.id, type: widget.type),
-          ],
+          pages: List.generate(2, (index) {
+            return new ChatMorePage(
+              index: index,
+              id: widget.id,
+              type: widget.type,
+              keyboardHeight: keyboardHeight,
+            );
+          }),
         ),
       ),
     ];

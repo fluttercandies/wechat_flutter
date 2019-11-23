@@ -8,8 +8,9 @@ class ChatMorePage extends StatefulWidget {
   final int index;
   final String id;
   final int type;
+  final double keyboardHeight;
 
-  ChatMorePage({this.index = 0, this.id, this.type});
+  ChatMorePage({this.index = 0, this.id, this.type, this.keyboardHeight});
 
   @override
   _ChatMorePageState createState() => _ChatMorePageState();
@@ -57,6 +58,7 @@ class _ChatMorePageState extends State<ChatMorePage> {
           return new MoreItemCard(
             name: name,
             icon: icon,
+            keyboardHeight: widget.keyboardHeight,
             onPressed: () => action(name),
           );
         }),
@@ -72,13 +74,4 @@ class _ChatMorePageState extends State<ChatMorePage> {
       return itemBuild(dataS);
     }
   }
-}
-
-class ItemBuild extends StatelessWidget {
-  final List data;
-
-  ItemBuild(this.data);
-
-  @override
-  Widget build(BuildContext context) {}
 }

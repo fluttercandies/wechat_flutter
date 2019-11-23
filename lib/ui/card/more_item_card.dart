@@ -6,13 +6,18 @@ import 'package:dim_example/tools/wechat_flutter.dart';
 class MoreItemCard extends StatelessWidget {
   final String name, icon;
   final VoidCallback onPressed;
+  final double keyboardHeight;
 
-  MoreItemCard({this.name, this.icon, this.onPressed});
+  MoreItemCard({this.name, this.icon, this.onPressed, this.keyboardHeight});
 
   @override
   Widget build(BuildContext context) {
+    double _margin =
+        keyboardHeight != null && keyboardHeight != 0.0 ? keyboardHeight : 0.0;
+    double _top = _margin != 0.0 ? _margin / 10 : 20.0;
+
     return new Container(
-      padding: EdgeInsets.only(top: 10.0, bottom: 5.0),
+      padding: EdgeInsets.only(top: _top, bottom: 5.0),
       width: (winWidth(context) - 70) / 4,
       child: new Column(
         children: <Widget>[
