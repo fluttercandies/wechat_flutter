@@ -1,10 +1,11 @@
+import 'package:dim_example/ui/message_view/content_msg.dart';
 import 'package:flutter/material.dart';
 import 'package:dim_example/tools/wechat_flutter.dart';
 
 class MyConversationView extends StatefulWidget {
   final String imageUrl;
   final String title;
-  final String content;
+  final Map content;
   final Widget time;
   final bool isBorder;
 
@@ -35,24 +36,16 @@ class _MyConversationViewState extends State<MyConversationView> {
                 style: TextStyle(fontSize: 17.0, fontWeight: FontWeight.normal),
               ),
               new SizedBox(height: 2.0),
-              new Text(
-                widget.content ?? '',
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(color: mainTextColor, fontSize: 14.0),
-              ),
+              new ContentMsg(widget.content),
             ],
           ),
         ),
         new Space(width: mainSpace),
-        new Container(
-          width: 35.0,
-          child: new Column(
-            children: [
-              widget.time,
-              new Icon(Icons.flag, color: Colors.transparent),
-            ],
-          ),
+        new Column(
+          children: [
+            widget.time,
+            new Icon(Icons.flag, color: Colors.transparent),
+          ],
         )
       ],
     );

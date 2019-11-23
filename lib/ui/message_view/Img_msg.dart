@@ -16,7 +16,7 @@ class ImgMsg extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var msgInfo = msg['imageList'][0];
+    var msgInfo = msg['imageList'][1];
     var _height = msgInfo['height'].toDouble();
     var resultH = _height > 200.0 ? 200.0 : _height;
     final globalModel = Provider.of<GlobalModel>(context);

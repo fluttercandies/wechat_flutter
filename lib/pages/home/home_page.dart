@@ -159,7 +159,7 @@ class _HomePageState extends State<HomePage>
               child: new MyConversationView(
                 imageUrl: model.avatar,
                 title: model?.name ?? '',
-                content: model?.content ?? '',
+                content: model?.content,
                 time: timeView(model?.time ?? 0),
                 isBorder: model?.name != _chatData[0].name,
               ),
