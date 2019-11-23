@@ -31,9 +31,10 @@ class _SendMessageViewState extends State<SendMessageView> {
 
     bool isI = Platform.isIOS;
     bool iosText = isI && msg.toString().contains('text:');
+    bool iosImg = isI && msg.toString().contains('imageList:');
     if (msgType == "Text" || iosText) {
       return new TextMsg(msg['text'], widget.model);
-    } else if (msgType == "Image") {
+    } else if (msgType == "Image" || iosImg) {
       return new ImgMsg(msg, widget.model);
     } else {
       return new Text('未知消息');

@@ -30,7 +30,6 @@ class ChatDataRep {
     if (Platform.isAndroid) {
       final chatMsgData = await getDimMessages(id, type: type);
       List chatMsgDataList = json.decode(chatMsgData);
-print('当前消息队列：：：：${chatMsgData.toString()}');
       for (int i = 0; i < chatMsgDataList.length; i++) {
         PersonInfoEntity model =
             PersonInfoEntity.fromJson(chatMsgDataList[i]['senderProfile']);
