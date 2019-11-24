@@ -27,6 +27,7 @@ dependencies:
   dio: ^2.2.2
   open_file: ^2.0.3
   package_info: ^0.4.0+2
+  flutter_sound: any
 
 dev_dependencies:
   flutter_test:
@@ -83,6 +84,13 @@ flutter:
     - assets/images/chat/ic_details_red.webp
     - assets/images/chat/ic_details_transfer.webp
     - assets/images/chat/ic_details_video.webp
+    - assets/images/chat/voice_volume_1.webp
+    - assets/images/chat/voice_volume_2.webp
+    - assets/images/chat/voice_volume_3.webp
+    - assets/images/chat/voice_volume_4.webp
+    - assets/images/chat/voice_volume_5.webp
+    - assets/images/chat/voice_volume_6.webp
+    - assets/images/chat/voice_volume_7.webp
 
     - assets/images/mine/ic_small_code.png
     - assets/images/mine/ic_wallet.webp

@@ -8,7 +8,6 @@ import 'package:extended_text_field/extended_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:dim_example/im/send_handle.dart';
 import 'package:dim_example/tools/wechat_flutter.dart';
-import 'package:dim_example/ui/edit/selection_controls.dart';
 import 'package:dim_example/ui/edit/text_span_builder.dart';
 
 import 'chat_info_page.dart';
@@ -36,7 +35,6 @@ class _ChatPageState extends State<ChatPage> {
   TextEditingController _textController = TextEditingController();
   FocusNode _focusNode = new FocusNode();
   ScrollController _sC = ScrollController();
-  SelectionControls _selectionControls = SelectionControls();
   PageController pageC = new PageController();
 
   @override
@@ -46,18 +44,7 @@ class _ChatPageState extends State<ChatPage> {
 
     _sC.addListener(() => FocusScope.of(context).requestFocus(new FocusNode()));
     initPlatformState();
-    Notice.addListener(WeChatActions.imgMsg(), (v) {
-      getChatMsgData();
-//      chatData.insert(
-//          0,
-//          new ChatData(msg: {
-//            "type": "Image",
-//            "imageList": [
-//              {},
-//              {"url": v, "height": 200},
-//            ]
-//          }));
-    });
+    Notice.addListener(WeChatActions.imgMsg(), (v) => getChatMsgData());
   }
 
   Future getChatMsgData() async {
@@ -149,7 +136,6 @@ class _ChatPageState extends State<ChatPage> {
 
     return ExtendedTextField(
       specialTextSpanBuilder: TextSpanBuilder(showAtBackground: true),
-      textSelectionControls: _selectionControls,
       onTap: () => setState(() {}),
       onChanged: (v) => setState(() {}),
       decoration: InputDecoration(
@@ -181,6 +167,8 @@ class _ChatPageState extends State<ChatPage> {
           onTap: () => _handleSubmittedData(_textController.text),
           moreTap: () => onTapHandle(ButtonType.more),
         ),
+        id: widget.id,
+        type: widget.type,
       ),
       new Container(
         height: _isMore && !_focusNode.hasFocus ? keyboardHeight : 0.0,

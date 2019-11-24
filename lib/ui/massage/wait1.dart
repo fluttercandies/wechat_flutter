@@ -39,36 +39,5 @@ class _SendMessageViewState extends State<SendMessageView> {
     } else {
       return new Text('未知消息');
     }
-//    final globalModel = Provider.of<GlobalModel>(context);
-
-//    Widget messageWidget(message, int type) {
-//     if (message['type'] == 'Sound') {
-//        return SoundMessage(message['duration'], type, widget.data);
-//      } else if (message['type'] == 'Image') {
-//        return ImageMessage(message['imageList'], type, widget.data);
-//      } else if (message.toString().contains('snapshotPath') &&
-//          message.toString().contains('videoPath')) {
-//        return VideoMessage(message, type, widget.data);
-//      } else if (message['tipsType'] == 'Join') {
-//        return JoinMessage(message);
-//      } else if (message['tipsType'] == 'Quit') {
-//        return QuitMessage(message);
-////      } else if (message['groupInfoList'][0]['type'] == 'ModifyIntroduction') {
-////        return ModifyNotificationMessage(message);
-////      } else if (message['groupInfoList'][0]['type'] == 'ModifyName') {
-////        return ModifyGroupInfoMessage(message);
-//      } else {
-//        return new Text('未知消息');
-//      }
-//    }
-
-//    if (widget.data.runtimeType != String) {
-//      dynamic message = widget.data['message'];
-//      return globalModel.account == widget.data['senderProfile']['identifier']
-//          ? messageWidget(message, 2)
-//          : messageWidget(message, 1);
-//    } else {
-//      return new TemMessage(widget.data);
-//    }
   }
 }

@@ -1,15 +1,50 @@
 import 'package:dim_example/config/contacts.dart';
+import 'package:dim_example/im/message_handle.dart';
 import 'package:dim_example/tools/wechat_flutter.dart';
 import 'package:dim_example/ui/item/chat_voice.dart';
 import 'package:flutter/material.dart';
 
-class ChatDetailsRow extends StatelessWidget {
+class ChatDetailsRow extends StatefulWidget {
   final GestureTapCallback voiceOnTap;
   final bool isVoice;
   final LayoutWidgetBuilder edit;
   final Widget more;
+  final String id;
+  final int type;
 
-  ChatDetailsRow({this.voiceOnTap, this.isVoice, this.edit, this.more});
+  ChatDetailsRow({
+    this.voiceOnTap,
+    this.isVoice,
+    this.edit,
+    this.more,
+    this.id,
+    this.type,
+  });
+
+  ChatDetailsRowState createState() => ChatDetailsRowState();
+}
+
+class ChatDetailsRowState extends State<ChatDetailsRow> {
+  String path;
+
+  @override
+  void initState() {
+    super.initState();
+
+    Notice.addListener(WeChatActions.voiceImg(), (v) {
+      if (!v) return;
+      if (!strNoEmpty(path)) return;
+      sendSoundMessages(
+        widget.id,
+        path,
+        2,
+        widget.type,
+        (value) {
+          debugPrint('语音发送成功:$path'); //.m4a
+        },
+      );
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,8 +66,8 @@ class ChatDetailsRow extends StatelessWidget {
               child: new Image.asset('assets/images/chat/ic_voice.webp',
                   width: 25, color: mainTextColor),
               onTap: () {
-                if (voiceOnTap != null) {
-                  voiceOnTap();
+                if (widget.voiceOnTap != null) {
+                  widget.voiceOnTap();
                 }
               },
             ),
@@ -43,9 +78,13 @@ class ChatDetailsRow extends StatelessWidget {
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(5.0)),
-                child: isVoice
-                    ? new ChatVoice()
-                    : new LayoutBuilder(builder: edit),
+                child: widget.isVoice
+                    ? new ChatVoice(
+                        voiceFile: (path) {
+                          setState(() => this.path = path);
+                        },
+                      )
+                    : new LayoutBuilder(builder: widget.edit),
               ),
             ),
             new InkWell(
@@ -53,7 +92,7 @@ class ChatDetailsRow extends StatelessWidget {
                   width: 30, fit: BoxFit.cover),
               onTap: () {},
             ),
-            more,
+            widget.more,
           ],
         ),
       ),

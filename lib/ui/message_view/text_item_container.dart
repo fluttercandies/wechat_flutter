@@ -33,14 +33,12 @@ class _TextItemContainerState extends State<TextItemContainer> {
       },
       pressType: PressType.longPress,
       actions: ['复制', '转发', '收藏', '撤回', '删除'],
-      child: Container(
-        width: widget.text.length > 25 ? (winWidth(context) - 66) - 100 : null,
+      child: new Container(
+        width: widget.text.length > 24 ? (winWidth(context) - 66) - 100 : null,
         padding: EdgeInsets.all(5.0),
         decoration: BoxDecoration(
           color: widget.isMyself ? Color(0xff98E165) : Colors.white,
-          borderRadius: BorderRadius.all(
-            Radius.circular(5.0),
-          ),
+          borderRadius: BorderRadius.all(Radius.circular(5.0)),
         ),
         margin: EdgeInsets.only(right: 7.0),
         child: ExtendedText(
