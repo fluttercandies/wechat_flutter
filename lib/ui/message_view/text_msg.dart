@@ -17,10 +17,7 @@ class TextMsg extends StatelessWidget {
   Widget build(BuildContext context) {
     final globalModel = Provider.of<GlobalModel>(context);
     var body = [
-      new MsgAvatar(
-        model: model,
-        globalModel: globalModel,
-      ),
+      new MsgAvatar(model: model, globalModel: globalModel),
       new TextItemContainer(
         text: text ?? '文字为空',
         action: '',

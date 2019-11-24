@@ -91,6 +91,14 @@ flutter:
     - assets/images/chat/voice_volume_5.webp
     - assets/images/chat/voice_volume_6.webp
     - assets/images/chat/voice_volume_7.webp
+    - assets/images/chat/sound_left_0.webp
+    - assets/images/chat/sound_left_1.webp
+    - assets/images/chat/sound_left_2.webp
+    - assets/images/chat/sound_left_3.webp
+    - assets/images/chat/sound_right_0.png
+    - assets/images/chat/sound_right_1.webp
+    - assets/images/chat/sound_right_2.webp
+    - assets/images/chat/sound_right_3.png
 
     - assets/images/mine/ic_small_code.png
     - assets/images/mine/ic_wallet.webp
