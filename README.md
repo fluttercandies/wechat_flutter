@@ -22,8 +22,13 @@ IOS的直接拉下项目直接跑即可,
 # 使用教程
 
 *  使用命令（拉取项目）：$ git clone https://github.com/fluttercandies/wechat_flutter.git
-*  然后命令（获取依赖）：$ flutter packages get
+*  然后命令（获取依赖）：$ flutter packages get  (IOS执行IOS部分再执行下一步)
 *  最后命令（运行）：$ flutter run
+
+IOS
+*  进入项目IOS目录：$ cd ios/
+*  更新Pod（非必须）：$ pod update
+*  安装Pod：$ pod install
 
 # 我的Flutter环境
 ```
