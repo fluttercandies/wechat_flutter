@@ -44,7 +44,7 @@ class _ChatPageState extends State<ChatPage> {
 
     _sC.addListener(() => FocusScope.of(context).requestFocus(new FocusNode()));
     initPlatformState();
-    Notice.addListener(WeChatActions.imgMsg(), (v) => getChatMsgData());
+    Notice.addListener(WeChatActions.msg(), (v) => getChatMsgData());
   }
 
   Future getChatMsgData() async {

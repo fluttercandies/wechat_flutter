@@ -39,7 +39,7 @@ class ChatDetailsRowState extends State<ChatDetailsRow> {
         path,
         2,
         widget.type,
-        (value) => debugPrint('语音发送成功:$path'),
+        (value) => Notice.send(WeChatActions.msg(), v ?? ''),
       );
     });
   }

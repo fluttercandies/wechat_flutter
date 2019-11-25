@@ -25,12 +25,6 @@ class SendMessageView extends StatefulWidget {
 
 class _SendMessageViewState extends State<SendMessageView> {
   @override
-  void initState() {
-    super.initState();
-    print('消息大全：：：${widget.model.msg.toString()}');
-  }
-
-  @override
   Widget build(BuildContext context) {
     Map msg = widget.model.msg;
     String msgType = msg['type'];

@@ -38,7 +38,7 @@ class _ChatMorePageState extends State<ChatMorePage> {
       sendImageMsg(widget.id, widget.type, source: ImageSource.gallery,
           callback: (v) {
         if (v == null) return;
-        Notice.send(WeChatActions.imgMsg(), v ?? '');
+        Notice.send(WeChatActions.msg(), v ?? '');
       });
     } else {
       print('onClick$name');
