@@ -1,4 +1,3 @@
-import 'package:dim_example/tools/date.dart';
 import 'package:flutter/material.dart';
 
 showVoiceDialog(BuildContext context, {int index}) {

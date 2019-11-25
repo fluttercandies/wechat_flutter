@@ -1,6 +1,4 @@
 import 'dart:io';
-
-import 'package:dim_example/tools/flutter/download.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:dim_example/config/provider_config.dart';
@@ -17,9 +15,6 @@ void main() async {
 
   /// APP入口并配置Provider
   runApp(ProviderConfig.getInstance().getGlobal(MyApp()));
-
-  /// 初始化下载工具
-  DownloadUtil.init();
 
   /// 自定义报错页面
   ErrorWidget.builder = (FlutterErrorDetails flutterErrorDetails) {

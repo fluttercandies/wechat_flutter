@@ -1,7 +1,6 @@
 import 'package:dim_example/im/entity/sound_msg_entity.dart';
 import 'package:dim_example/im/model/chat_data.dart';
 import 'package:dim_example/provider/global_model.dart';
-import 'package:dim_example/tools/flutter/download.dart';
 import 'package:dim_example/tools/wechat_flutter.dart';
 import 'package:dim_example/ui/message_view/msg_avatar.dart';
 import 'package:flutter/material.dart';
@@ -103,28 +102,6 @@ class _SoundMsgState extends State<SoundMsg> with TickerProviderStateMixin {
     }
   }
 
-  void playVoice(String url, String uuid) async {
-    File file = new File((await DownloadUtil.savePath) + "/" + uuid);
-
-    debugPrint('语音文件路劲：${file.path}');
-    if (!await file.exists()) {
-      debugPrint('语音文件不存在');
-      DownloadUtil.checkPermission(context).then((v) async {
-        if (!v) {
-          showToast(context, '无权限');
-          return;
-        }
-        String path = (await DownloadUtil.savePath) + "/" + uuid;
-
-        debugPrint('path::$path');
-        showToast(context, '语音功能待完善');
-      });
-    } else {
-      showToast(context, '语音文件存在');
-      start(file.path);
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     final globalModel = Provider.of<GlobalModel>(context);
@@ -182,7 +159,7 @@ class _SoundMsgState extends State<SoundMsg> with TickerProviderStateMixin {
               : Colors.white,
           onPressed: () {
             if (strNoEmpty(urls)) {
-              playVoice(urls, model.uuid);
+              showToast(context, '语音功能待完善');
             } else {
               showToast(context, '未知错误');
             }
