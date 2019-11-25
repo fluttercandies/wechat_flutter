@@ -28,15 +28,18 @@ class _SendMessageViewState extends State<SendMessageView> {
   Widget build(BuildContext context) {
     Map msg = widget.model.msg;
     String msgType = msg['type'];
+    String msgStr = msg.toString();
 
     bool isI = Platform.isIOS;
-    bool iosText = isI && msg.toString().contains('text:');
-    bool iosImg = isI && msg.toString().contains('imageList:');
+    bool iosText = isI && msgStr.contains('text:');
+    bool iosImg = isI && msgStr.contains('imageList:');
+    var iosS = msgStr.contains('downloadFlag:') && msgStr.contains('second:');
+    bool iosSound = isI && iosS;
     if (msgType == "Text" || iosText) {
       return new TextMsg(msg['text'], widget.model);
     } else if (msgType == "Image" || iosImg) {
       return new ImgMsg(msg, widget.model);
-    } else if (msgType == 'Sound') {
+    } else if (msgType == 'Sound' || iosSound) {
       return new SoundMsg(widget.model);
     } else {
       return new Text('未知消息');

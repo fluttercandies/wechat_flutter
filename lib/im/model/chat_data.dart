@@ -27,8 +27,8 @@ class ChatData {
 class ChatDataRep {
   repData(String id, int type) async {
     List<ChatData> chatData = new List<ChatData>();
+    final chatMsgData = await getDimMessages(id, type: type);
     if (Platform.isAndroid) {
-      final chatMsgData = await getDimMessages(id, type: type);
       List chatMsgDataList = json.decode(chatMsgData);
       for (int i = 0; i < chatMsgDataList.length; i++) {
         PersonInfoEntity model =
@@ -46,7 +46,6 @@ class ChatDataRep {
         );
       }
     } else {
-      final chatMsgData = await getDimMessages(id, type: type);
       List chatMsgDataList = json.decode(chatMsgData);
       for (int i = 0; i < chatMsgDataList.length; i++) {
         final info = await getUsersProfile([chatMsgDataList[i]['sender']]);

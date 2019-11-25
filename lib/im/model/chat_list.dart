@@ -36,7 +36,6 @@ class ChatListData {
     String avatar;
     String name;
     int time;
-    Map content;
     String identifier;
     dynamic type;
     String msgType;

@@ -1,3 +1,4 @@
+import 'package:dim_example/im/entity/i_sound_msg_entity.dart';
 import 'package:dim_example/im/entity/sound_msg_entity.dart';
 import 'package:dim_example/im/model/chat_data.dart';
 import 'package:dim_example/provider/global_model.dart';
@@ -127,9 +128,11 @@ class _SoundMsgState extends State<SoundMsg> with TickerProviderStateMixin {
     }
 
     SoundMsgEntity model = SoundMsgEntity.fromJson(widget.model.msg);
-    if (!listNoEmpty(model.urls)) return Container();
+    ISoundMsgEntity iModel = ISoundMsgEntity.fromJson(widget.model.msg);
+    bool isIos = Platform.isIOS;
+    if (!listNoEmpty(isIos ? iModel.soundUrls : model.urls)) return Container();
 
-    var urls = model.urls[0];
+    var urls = isIos ? iModel.soundUrls[0] : model.urls[0];
     var body = [
       new MsgAvatar(model: widget.model, globalModel: globalModel),
       new Container(

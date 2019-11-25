@@ -19,14 +19,19 @@ class _ContentMsgState extends State<ContentMsg> {
     if (widget.msg == null) return new Text('消息为空');
     Map msg = widget.msg['message'];
     String msgType = msg['type'];
+    String msgStr = msg.toString();
 
     bool isI = Platform.isIOS;
-    bool iosText = isI && msg.toString().contains('text:');
-    bool iosImg = isI && msg.toString().contains('imageList:');
+    bool iosText = isI && msgStr.contains('text:');
+    bool iosImg = isI && msgStr.contains('imageList:');
+    var iosS = msgStr.contains('downloadFlag:') && msgStr.contains('second:');
+    bool iosSound = isI && iosS;
     if (msgType == "Text" || iosText) {
       str = msg['text'];
     } else if (msgType == "Image" || iosImg) {
       str = '[图片]';
+    } else if (msgType == 'Sound' || iosSound) {
+      str = '[语音消息]';
     } else {
       str = '[未知消息]';
     }
