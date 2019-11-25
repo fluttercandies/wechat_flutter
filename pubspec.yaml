@@ -28,6 +28,7 @@ dependencies:
   package_info: ^0.4.0+2
   flutter_sound: any
   permission_handler: ^3.1.0
+  audioplayers: ^0.13.3
 
 
 dev_dependencies:

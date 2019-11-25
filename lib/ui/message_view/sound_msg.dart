@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:dim_example/im/entity/i_sound_msg_entity.dart';
 import 'package:dim_example/im/entity/sound_msg_entity.dart';
 import 'package:dim_example/im/model/chat_data.dart';
@@ -26,6 +27,7 @@ class _SoundMsgState extends State<SoundMsg> with TickerProviderStateMixin {
   AnimationController controller;
   Animation animation;
   FlutterSound flutterSound;
+  AudioPlayer audioPlayer = AudioPlayer();
 
   StreamSubscription _positionSubscription;
   StreamSubscription _audioPlayerStateSubscription;
@@ -103,6 +105,15 @@ class _SoundMsgState extends State<SoundMsg> with TickerProviderStateMixin {
     }
   }
 
+  playNew(url) async {
+    int result = await audioPlayer.play(url);
+    if (result == 1) {
+      showToast(context, '播放中');
+    } else {
+      showToast(context, '播放出问题了');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final globalModel = Provider.of<GlobalModel>(context);
@@ -162,7 +173,7 @@ class _SoundMsgState extends State<SoundMsg> with TickerProviderStateMixin {
               : Colors.white,
           onPressed: () {
             if (strNoEmpty(urls)) {
-              showToast(context, '语音功能待完善');
+              playNew(urls);
             } else {
               showToast(context, '未知错误');
             }
