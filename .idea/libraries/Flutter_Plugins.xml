@@ -3,7 +3,6 @@
     <CLASSES>
       <root url="file://$PROJECT_DIR$/plugin/wechat_flutter_plugin" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/shared_preferences-0.5.4+5" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/image_picker-0.6.1+2" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/url_launcher-5.2.5" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/connectivity-0.4.5+3" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/webview_flutter-0.3.14+1" />
@@ -16,6 +15,7 @@
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/permission_handler-3.3.0" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/sqflite-1.1.7+3" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/audioplayers-0.13.3" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/multi_image_picker-4.5.9" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

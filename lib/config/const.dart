@@ -10,6 +10,8 @@ const bgColor = Color.fromRGBO(255, 255, 255, 1);
 
 const chatBg = Color(0xffefefef);
 
+const darkAppBar = Color(0xff343434);
+
 const defStyle = TextStyle(color: Colors.white);
 
 const mainSpace = 10.0;

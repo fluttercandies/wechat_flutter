@@ -184,13 +184,6 @@
             </list>
           </value>
         </entry>
-        <entry key="image_picker">
-          <value>
-            <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/image_picker-0.6.1+2/lib" />
-            </list>
-          </value>
-        </entry>
         <entry key="intl">
           <value>
             <list>
@@ -209,6 +202,13 @@
           <value>
             <list>
               <option value="$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/meta-1.1.7/lib" />
+            </list>
+          </value>
+        </entry>
+        <entry key="multi_image_picker">
+          <value>
+            <list>
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/multi_image_picker-4.5.9/lib" />
             </list>
           </value>
         </entry>
@@ -427,10 +427,10 @@
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/flutter_sound-1.5.2/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/http-0.12.0+2/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/http_parser-3.1.3/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/image_picker-0.6.1+2/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/intl-0.15.8/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/matcher-0.12.5/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/meta-1.1.7/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/multi_image_picker-4.5.9/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/open_file-2.1.1/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/package_info-0.4.0+10/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/path-1.6.4/lib" />

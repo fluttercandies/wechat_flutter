@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:multi_image_picker/multi_image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:dim_example/provider/login_model.dart';
 
@@ -20,19 +20,43 @@ class _RegisterPageState extends State<RegisterPage> {
 
   FocusNode nickF = new FocusNode();
   TextEditingController nickC = new TextEditingController();
+  FocusNode phoneF = new FocusNode();
+  TextEditingController phoneC = new TextEditingController();
   FocusNode pWF = new FocusNode();
   TextEditingController pWC = new TextEditingController();
 
   String localAvatarImgPath = '';
 
   _openGallery() async {
-    File img = await ImagePicker.pickImage(source: ImageSource.gallery);
+    List<Asset> resultList = List<Asset>();
+    List<Asset> images = List<Asset>();
+    try {
+      resultList = await MultiImagePicker.pickImages(
+        maxImages: 1,
+        enableCamera: true,
+        selectedAssets: images,
+        cupertinoOptions: CupertinoOptions(takePhotoIcon: "chat"),
+        materialOptions: MaterialOptions(
+          actionBarColor: "#343434",
+          actionBarTitle: "图片和视频",
+          allViewTitle: "所有",
+          useDetailsView: false,
+          selectCircleStrokeColor: "#000000",
+          selectionLimitReachedText: "已到达最大选择数量",
+        ),
+      );
 
-    if (img != null) {
-      localAvatarImgPath = img.path;
-      setState(() {});
-    } else {
-      return;
+      for (var r in resultList) {
+        File img = File(await r.filePath);
+        if (img != null) {
+          localAvatarImgPath = img.path;
+          setState(() {});
+        } else {
+          return;
+        }
+      }
+    } on Exception catch (e) {
+      showToast(context, e.toString());
     }
   }
 
@@ -66,9 +90,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     child: new Image.file(File(localAvatarImgPath),
                         width: 60.0, height: 60.0, fit: BoxFit.cover),
                   ),
-            onTap: () {
-              _openGallery();
-            },
+            onTap: () => _openGallery(),
           ),
         ],
       ),
@@ -85,11 +107,14 @@ class _RegisterPageState extends State<RegisterPage> {
                         TextStyle(fontSize: 16.0, fontWeight: FontWeight.w400)),
               ),
               new Expanded(
-                child: new Text(model.area,
-                    style: TextStyle(
-                        color: Colors.green,
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.w400)),
+                child: new Text(
+                  model.area,
+                  style: TextStyle(
+                    color: Colors.green,
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
               )
             ],
           ),
@@ -105,6 +130,8 @@ class _RegisterPageState extends State<RegisterPage> {
       new EditView(
         label: S.of(context).phoneNumber,
         hint: S.of(context).phoneNumberHint,
+        controller: phoneC,
+        focusNode: phoneF,
         onTap: () => setState(() {}),
       ),
       new EditView(
@@ -135,9 +162,12 @@ class _RegisterPageState extends State<RegisterPage> {
               setState(() => isSelect = !isSelect);
             },
           ),
-          new Text(
-            S.of(context).readAgree,
-            style: TextStyle(color: Colors.grey),
+          new Padding(
+            padding: EdgeInsets.only(left: mainSpace / 2),
+            child: new Text(
+              S.of(context).readAgree,
+              style: TextStyle(color: Colors.grey),
+            ),
           ),
           new InkWell(
             child: new Text(
@@ -154,10 +184,18 @@ class _RegisterPageState extends State<RegisterPage> {
         style: TextStyle(
             color:
                 pWC.text == '' ? Colors.grey.withOpacity(0.8) : Colors.white),
-        margin: EdgeInsets.only(top: 10.0),
+        margin: EdgeInsets.only(top: 20.0),
         color: pWC.text == ''
             ? Color.fromRGBO(226, 226, 226, 1.0)
             : Color.fromRGBO(8, 191, 98, 1.0),
+        onTap: () {
+          if (!strNoEmpty(pWC.text)) return;
+          if (!isMobilePhoneNumber(phoneC.text)) {
+            showToast(context, '请输入正确的手机号');
+            return;
+          }
+          showToast(context, '注册成功');
+        },
       ),
     ];
 
@@ -166,11 +204,6 @@ class _RegisterPageState extends State<RegisterPage> {
       child: new Column(
           crossAxisAlignment: CrossAxisAlignment.start, children: column),
     );
-  }
-
-  @override
-  void initState() {
-    super.initState();
   }
 
   @override
