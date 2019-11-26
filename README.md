@@ -116,4 +116,4 @@ q1deMacBook-Pro:~ q1$ flutter doctor -v
 
 # 贡献者
 
-<img src="https://github.com/fluttercandies/wechat_flutter/blob/master/assets/git/circle-cropped.png" height="150" width="150" style="zoom:30%;" />
+<img src="http://www.flutterj.com/circle-cropped.png" height="150" width="150" style="zoom:30%;" />
