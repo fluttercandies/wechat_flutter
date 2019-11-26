@@ -16,6 +16,7 @@ dependencies:
   cached_network_image: any
   toast: any
   webview_flutter: 0.3.14+1
+  image_picker: 0.6.1+2
   extended_text_field: any
   extended_text: any
   url_launcher: any
@@ -28,7 +29,6 @@ dependencies:
   flutter_sound: any
   permission_handler: ^3.1.0
   audioplayers: ^0.13.3
-  multi_image_picker: ^4.5.9
 
 
 dev_dependencies:

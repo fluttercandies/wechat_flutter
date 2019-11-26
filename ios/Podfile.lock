@@ -1,4 +1,6 @@
 PODS:
+  - audioplayers (0.0.1):
+    - Flutter
   - connectivity (0.0.1):
     - Flutter
     - Reachability
@@ -44,6 +46,7 @@ PODS:
   - YYModel (1.0.4)
 
 DEPENDENCIES:
+  - audioplayers (from `.symlinks/plugins/audioplayers/ios`)
   - connectivity (from `.symlinks/plugins/connectivity/ios`)
   - dim (from `.symlinks/plugins/dim/ios`)
   - Flutter (from `.symlinks/flutter/ios`)
@@ -69,6 +72,8 @@ SPEC REPOS:
     - YYModel
 
 EXTERNAL SOURCES:
+  audioplayers:
+    :path: ".symlinks/plugins/audioplayers/ios"
   connectivity:
     :path: ".symlinks/plugins/connectivity/ios"
   dim:
@@ -101,6 +106,7 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/webview_flutter/ios"
 
 SPEC CHECKSUMS:
+  audioplayers: 84f968cea3f2deab00ec4f8ff53358b3c0b3992c
   connectivity: 6e94255659cc86dcbef1d452ad3e0491bb1b3e75
   dim: fa3014799fdbbbf47d5d507a85385c8e00f1c706
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec

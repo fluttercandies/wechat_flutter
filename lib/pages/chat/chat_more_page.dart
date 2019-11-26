@@ -2,6 +2,7 @@ import 'package:dim_example/im/message_handle.dart';
 import 'package:dim_example/tools/wechat_flutter.dart';
 import 'package:dim_example/ui/card/more_item_card.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class ChatMorePage extends StatefulWidget {
   final int index;
@@ -34,11 +35,11 @@ class _ChatMorePageState extends State<ChatMorePage> {
 
   action(String name) {
     if (name == '相册') {
-      sendImageMsg(widget.id, widget.type, context, callback: (v) {
+      sendImageMsg(widget.id, widget.type, source: ImageSource.gallery,
+          callback: (v) {
         if (v == null) return;
         Notice.send(WeChatActions.msg(), v ?? '');
       });
-    } else if (name == '拍摄') {
     } else {
       print('onClick$name');
     }

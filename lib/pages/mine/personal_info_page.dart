@@ -5,7 +5,7 @@ import 'package:dim_example/http/api.dart';
 import 'package:dim_example/pages/mine/code_page.dart';
 import 'package:dim_example/tools/wechat_flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:multi_image_picker/multi_image_picker.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:dim_example/im/info_handle.dart';
 import 'package:dim_example/pages/mine/change_name_page.dart';
@@ -32,58 +32,33 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
     }
   }
 
-  _openGallery() async {
+  _openGallery({type = ImageSource.gallery}) async {
     final model = Provider.of<GlobalModel>(context);
-
-    List<Asset> resultList = List<Asset>();
-    List<Asset> images = List<Asset>();
-    try {
-      resultList = await MultiImagePicker.pickImages(
-        maxImages: 1,
-        enableCamera: true,
-        selectedAssets: images,
-        cupertinoOptions: CupertinoOptions(takePhotoIcon: "chat"),
-        materialOptions: MaterialOptions(
-          actionBarColor: "#343434",
-          actionBarTitle: "图片和视频",
-          allViewTitle: "所有",
-          useDetailsView: false,
-          selectCircleStrokeColor: "#000000",
-          selectionLimitReachedText: "已到达最大选择数量",
-        ),
-      );
-
-      for (var r in resultList) {
-        File imageFile = File(await r.filePath);
-        List<int> imageBytes = await compressFile(imageFile);
-        if (imageFile != null) {
-          String base64Img =
-              'data:image/jpeg;base64,${base64Encode(imageBytes)}';
-          uploadImgApi(context, base64Img, (v) {
-            if (v == null) {
-              showToast(context, '上传头像失败,请换张图像再试');
-              return;
-            }
-
-            setUsersProfileMethod(
-              context,
-              avatarStr: v,
-              nickNameStr: model.nickName,
-              callback: (data) {
-                if (data.toString().contains('ucc')) {
-                  showToast(context, '设置头像成功');
-                  model.avatar = v;
-                  model.refresh();
-                } else {
-                  showToast(context, '设置头像失败');
-                }
-              },
-            );
-          });
+    File imageFile = await ImagePicker.pickImage(source: type);
+    List<int> imageBytes = await compressFile(imageFile);
+    if (imageFile != null) {
+      String base64Img = 'data:image/jpeg;base64,${base64Encode(imageBytes)}';
+      uploadImgApi(context, base64Img, (v) {
+        if (v == null) {
+          showToast(context, '上传头像失败,请换张图像再试');
+          return;
         }
-      }
-    } on Exception catch (e) {
-      showToast(context, e.toString());
+
+        setUsersProfileMethod(
+          context,
+          avatarStr: v,
+          nickNameStr: model.nickName,
+          callback: (data) {
+            if (data.toString().contains('ucc')) {
+              showToast(context, '设置头像成功');
+              model.avatar = v;
+              model.refresh();
+            } else {
+              showToast(context, '设置头像失败');
+            }
+          },
+        );
+      });
     }
   }
 

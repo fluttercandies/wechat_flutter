@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:multi_image_picker/multi_image_picker.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:dim_example/provider/login_model.dart';
 
@@ -28,35 +28,13 @@ class _RegisterPageState extends State<RegisterPage> {
   String localAvatarImgPath = '';
 
   _openGallery() async {
-    List<Asset> resultList = List<Asset>();
-    List<Asset> images = List<Asset>();
-    try {
-      resultList = await MultiImagePicker.pickImages(
-        maxImages: 1,
-        enableCamera: true,
-        selectedAssets: images,
-        cupertinoOptions: CupertinoOptions(takePhotoIcon: "chat"),
-        materialOptions: MaterialOptions(
-          actionBarColor: "#343434",
-          actionBarTitle: "图片和视频",
-          allViewTitle: "所有",
-          useDetailsView: false,
-          selectCircleStrokeColor: "#000000",
-          selectionLimitReachedText: "已到达最大选择数量",
-        ),
-      );
+    File img = await ImagePicker.pickImage(source: ImageSource.gallery);
 
-      for (var r in resultList) {
-        File img = File(await r.filePath);
-        if (img != null) {
-          localAvatarImgPath = img.path;
-          setState(() {});
-        } else {
-          return;
-        }
-      }
-    } on Exception catch (e) {
-      showToast(context, e.toString());
+    if (img != null) {
+      localAvatarImgPath = img.path;
+      setState(() {});
+    } else {
+      return;
     }
   }
 

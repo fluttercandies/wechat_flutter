@@ -54,7 +54,7 @@
         <entry key="connectivity">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/connectivity-0.4.5+3/lib" />
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/connectivity-0.4.5+6/lib" />
             </list>
           </value>
         </entry>
@@ -184,6 +184,13 @@
             </list>
           </value>
         </entry>
+        <entry key="image_picker">
+          <value>
+            <list>
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/image_picker-0.6.1+2/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="intl">
           <value>
             <list>
@@ -205,13 +212,6 @@
             </list>
           </value>
         </entry>
-        <entry key="multi_image_picker">
-          <value>
-            <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/multi_image_picker-4.5.9/lib" />
-            </list>
-          </value>
-        </entry>
         <entry key="open_file">
           <value>
             <list>
@@ -222,7 +222,7 @@
         <entry key="package_info">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/package_info-0.4.0+10/lib" />
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/package_info-0.4.0+11/lib" />
             </list>
           </value>
         </entry>
@@ -236,7 +236,7 @@
         <entry key="path_provider">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/path_provider-1.4.4/lib" />
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/path_provider-1.4.5/lib" />
             </list>
           </value>
         </entry>
@@ -285,7 +285,7 @@
         <entry key="shared_preferences">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/shared_preferences-0.5.4+5/lib" />
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/shared_preferences-0.5.4+6/lib" />
             </list>
           </value>
         </entry>
@@ -369,7 +369,7 @@
         <entry key="url_launcher">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/url_launcher-5.2.5/lib" />
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/url_launcher-5.2.7/lib" />
             </list>
           </value>
         </entry>
@@ -411,7 +411,7 @@
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/cached_network_image-1.1.3/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/charcode-1.1.2/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/collection-1.14.11/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/connectivity-0.4.5+3/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/connectivity-0.4.5+6/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/convert-2.1.1/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/cookie_jar-1.0.1/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/crypto-2.1.3/lib" />
@@ -427,21 +427,21 @@
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/flutter_sound-1.5.2/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/http-0.12.0+2/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/http_parser-3.1.3/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/image_picker-0.6.1+2/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/intl-0.15.8/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/matcher-0.12.5/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/meta-1.1.7/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/multi_image_picker-4.5.9/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/open_file-2.1.1/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/package_info-0.4.0+10/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/package_info-0.4.0+11/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/path-1.6.4/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/path_provider-1.4.4/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/path_provider-1.4.5/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/pedantic-1.8.0+1/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/permission_handler-3.3.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/photo_view-0.4.2/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/platform-2.2.1/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/provider-3.1.0+1/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/quiver-2.0.5/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/shared_preferences-0.5.4+5/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/shared_preferences-0.5.4+6/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/source_span-1.5.5/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/sqflite-1.1.7+3/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/stack_trace-1.9.3/lib" />
@@ -452,7 +452,7 @@
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/test_api-0.2.5/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/toast-0.1.5/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/typed_data-1.1.6/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/url_launcher-5.2.5/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/url_launcher-5.2.7/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/url_launcher_platform_interface-1.0.1/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/uuid-2.0.4/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/vector_math-2.0.8/lib" />
