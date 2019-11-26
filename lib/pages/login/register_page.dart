@@ -215,7 +215,7 @@ class _RegisterPageState extends State<RegisterPage> {
           new ComMomBar(title: "", leadingImg: 'assets/images/bar_close.png'),
       body: new MainInputBody(
         color: appBarColor,
-        child: body(model),
+        child: new SingleChildScrollView(child: body(model)),
         onTap: () => setState(() => {}),
       ),
     );
