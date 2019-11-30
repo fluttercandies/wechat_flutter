@@ -38,7 +38,7 @@ class _UserPageState extends State<UserPage> {
         if (v) {
           showToast(context, '添加成功');
           sendTextMsg(model.identifier, 1, '你好${model.name}，我添加你为好友啦');
-          Navigator.of(context).pop();
+          Navigator.of(context).maybePop();
         }
       },
     );
