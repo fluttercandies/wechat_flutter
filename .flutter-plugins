@@ -1,4 +1,5 @@
 audioplayers=/Users/q1/.pub-cache/hosted/pub.flutter-io.cn/audioplayers-0.13.3/
+camera=/Users/q1/.pub-cache/hosted/pub.flutter-io.cn/camera-0.5.7/
 connectivity=/Users/q1/.pub-cache/hosted/pub.flutter-io.cn/connectivity-0.4.5+6/
 dim=/Users/q1/Documents/gitPro/ahyangnb/wechat_flutter/plugin/wechat_flutter_plugin/
 flutter_image_compress=/Users/q1/.pub-cache/hosted/pub.flutter-io.cn/flutter_image_compress-0.6.3/
@@ -12,4 +13,5 @@ permission_handler=/Users/q1/.pub-cache/hosted/pub.flutter-io.cn/permission_hand
 shared_preferences=/Users/q1/.pub-cache/hosted/pub.flutter-io.cn/shared_preferences-0.5.4+6/
 sqflite=/Users/q1/.pub-cache/hosted/pub.flutter-io.cn/sqflite-1.1.7+3/
 url_launcher=/Users/q1/.pub-cache/hosted/pub.flutter-io.cn/url_launcher-5.2.7/
+video_player=/Users/q1/.pub-cache/hosted/pub.flutter-io.cn/video_player-0.10.3+3/
 webview_flutter=/Users/q1/.pub-cache/hosted/pub.flutter-io.cn/webview_flutter-0.3.14+1/

@@ -1,4 +1,7 @@
+import 'package:camera/camera.dart';
 import 'package:dim_example/im/message_handle.dart';
+import 'package:dim_example/pages/chat/shoot_page.dart';
+import 'package:dim_example/tools/utils/handle_util.dart';
 import 'package:dim_example/tools/wechat_flutter.dart';
 import 'package:dim_example/ui/card/more_item_card.dart';
 import 'package:flutter/material.dart';
@@ -33,13 +36,26 @@ class _ChatMorePageState extends State<ChatMorePage> {
     {"name": "文件", "icon": "assets/images/chat/ic_details_file.webp"},
   ];
 
-  action(String name) {
+  action(String name)async {
     if (name == '相册') {
       sendImageMsg(widget.id, widget.type, source: ImageSource.gallery,
           callback: (v) {
         if (v == null) return;
         Notice.send(WeChatActions.msg(), v ?? '');
       });
+    } else if (name == '拍摄') {
+
+      try {
+        List<CameraDescription> cameras;
+
+        WidgetsFlutterBinding.ensureInitialized();
+        cameras = await availableCameras();
+
+        routePush(new ShootPage(cameras));
+      } on CameraException catch (e) {
+        logError(e.code, e.description);
+      }
+
     } else {
       print('onClick$name');
     }

@@ -29,6 +29,8 @@ dependencies:
   flutter_sound: any
   permission_handler: ^3.1.0
   audioplayers: ^0.13.3
+  camera: any
+  video_player: ^0.10.0
 
 
 dev_dependencies:
@@ -101,6 +103,8 @@ flutter:
     - assets/images/chat/sound_right_1.webp
     - assets/images/chat/sound_right_2.webp
     - assets/images/chat/sound_right_3.png
+    - assets/images/chat/icon_sight_close.png
+    - assets/images/chat/flip_camera_icon_nor.webp
 
     - assets/images/mine/ic_small_code.png
     - assets/images/mine/ic_wallet.webp
