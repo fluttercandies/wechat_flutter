@@ -18,6 +18,9 @@ class ShootPage extends StatefulWidget {
 }
 
 class _ShootPageState extends State<ShootPage> with WidgetsBindingObserver {
+  Timer _timer;
+  int _timing = 0;
+
   CameraController controller;
   String imagePath;
   String videoPath;
@@ -52,6 +55,27 @@ class _ShootPageState extends State<ShootPage> with WidgetsBindingObserver {
         onNewCameraSelected(controller.description);
       }
     }
+  }
+
+  void startTimer() {
+    const oneSec = const Duration(seconds: 1);
+
+    var callback = (timer) => {
+          setState(() {
+            if (_timing >= 17) {
+              isOnPress = false;
+              onStopButtonPressed();
+              if (_timer != null) {
+                _timer.cancel();
+              }
+            } else {
+              _timing = _timing + 1;
+              print('当前：$_timing');
+            }
+          })
+        };
+
+    _timer = Timer.periodic(oneSec, callback);
   }
 
   @override
@@ -98,16 +122,18 @@ class _ShootPageState extends State<ShootPage> with WidgetsBindingObserver {
               new Container(width: 40),
               new Column(
                 children: <Widget>[
-                  new Visibility(
-                    visible: !isOnPress,
-                    child: new Padding(
-                      padding: EdgeInsets.only(bottom: 45.0),
-                      child: new Text(
-                        '轻触拍照，长按摄像',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                  ),
+                  !isOnPress
+                      ? new Padding(
+                          padding: EdgeInsets.only(bottom: 45.0),
+                          child: new Text(
+                            '轻触拍照，长按摄像',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        )
+                      : new Text(
+                          '计时: ${_timing ?? 0}',
+                          style: TextStyle(color: Colors.white),
+                        ),
                   new Listener(
                     child: new Container(
                       height: isOnPress ? 100 : 80.0,
@@ -129,16 +155,33 @@ class _ShootPageState extends State<ShootPage> with WidgetsBindingObserver {
                       ),
                     ),
                     onPointerDown: (v) {
-                      if (isOnPress) return;
-                      isOnPress = true;
-                      onVideoRecordButtonPressed();
-                      setState(() {});
+                      setState(() {
+                        //开始计时
+                        _timing = 0;
+                        startTimer();
+
+                        if (isOnPress) return;
+                        isOnPress = true;
+                        onVideoRecordButtonPressed();
+                      });
                     },
                     onPointerUp: (v) {
-                      if (!isOnPress) return;
-                      isOnPress = false;
-                      onStopButtonPressed();
-                      setState(() {});
+                      setState(() {
+                        if (!isOnPress) return;
+                        isOnPress = false;
+                        if (_timing < 2) {
+                          showToast(context, '录制时间过短');
+                          stopVideoRecording();
+                          if (_timer != null) {
+                            _timer.cancel();
+                          }
+                          return;
+                        }
+                        onStopButtonPressed();
+                        if (_timer != null) {
+                          _timer.cancel();
+                        }
+                      });
                     },
                   ),
 //              onTap: () {
@@ -202,7 +245,7 @@ class _ShootPageState extends State<ShootPage> with WidgetsBindingObserver {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           videoController == null && imagePath == null
-              ? Container()
+              ? new Container()
               : SizedBox(
                   child: (videoController == null)
                       ? Image.file(File(imagePath))
@@ -221,20 +264,22 @@ class _ShootPageState extends State<ShootPage> with WidgetsBindingObserver {
                   width: 64.0,
                   height: 64.0,
                 ),
-          new Container(
-            margin: EdgeInsets.only(top: 10.0),
-            width: 60.0,
-            height: 25.0,
-            child: new FlatButton(
-              onPressed: () {},
-              color: Colors.white,
-              padding: EdgeInsets.all(0),
-              child: new Text(
-                '发送',
-                style: TextStyle(fontSize: 11.0),
-              ),
-            ),
-          )
+          videoController == null && imagePath == null
+              ? new Container()
+              : new Container(
+                  margin: EdgeInsets.only(top: 10.0),
+                  width: 60.0,
+                  height: 25.0,
+                  child: new FlatButton(
+                    onPressed: () {},
+                    color: Colors.white,
+                    padding: EdgeInsets.all(0),
+                    child: new Text(
+                      '发送',
+                      style: TextStyle(fontSize: 11.0),
+                    ),
+                  ),
+                )
         ],
       ),
     );
@@ -329,7 +374,7 @@ class _ShootPageState extends State<ShootPage> with WidgetsBindingObserver {
           videoController?.dispose();
           videoController = null;
         });
-        if (filePath != null) showToast(context, 'Picture saved to $filePath');
+        if (filePath != null) showToast(context, '图片保存到$filePath');
       }
     });
   }
@@ -337,34 +382,34 @@ class _ShootPageState extends State<ShootPage> with WidgetsBindingObserver {
   void onVideoRecordButtonPressed() {
     startVideoRecording().then((String filePath) {
       if (mounted) setState(() {});
-      if (filePath != null) showToast(context, 'Saving video to $filePath');
+      if (filePath != null) showToast(context, '开始录制');
     });
   }
 
   void onStopButtonPressed() {
     stopVideoRecording().then((_) {
       if (mounted) setState(() {});
-      showToast(context, 'Video recorded to: $videoPath');
+      showToast(context, '视频记录到$videoPath');
     });
   }
 
   void onPauseButtonPressed() {
     pauseVideoRecording().then((_) {
       if (mounted) setState(() {});
-      showToast(context, 'Video recording paused');
+      showToast(context, '录制视频暂停');
     });
   }
 
   void onResumeButtonPressed() {
     resumeVideoRecording().then((_) {
       if (mounted) setState(() {});
-      showToast(context, 'Video recording resumed');
+      showToast(context, '录制视频恢复');
     });
   }
 
   Future<String> startVideoRecording() async {
     if (!controller.value.isInitialized) {
-      showToast(context, 'Error: select a camera first.');
+      showToast(context, '异常: 首先选择一个相机');
       return null;
     }
 
@@ -454,7 +499,7 @@ class _ShootPageState extends State<ShootPage> with WidgetsBindingObserver {
 
   Future<String> takePicture() async {
     if (!controller.value.isInitialized) {
-      showToast(context, 'Error: select a camera first.');
+      showToast(context, '异常: 首先选择一个相机');
       return null;
     }
     final Directory extDir = await getApplicationDocumentsDirectory();
@@ -483,7 +528,10 @@ class _ShootPageState extends State<ShootPage> with WidgetsBindingObserver {
 
   @override
   void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
     super.dispose();
+    WidgetsBinding.instance.removeObserver(this);
+    if (_timer != null) {
+      _timer.cancel();
+    }
   }
 }
