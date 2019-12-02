@@ -102,6 +102,7 @@ q1deMacBook-Pro:~ q1$ flutter doctor -v
 
 *  后期会把项目里所遇到的问题及解决的思路写成博客给大家学习。
 *  Flutter教程网：www.flutterj.com
+*  仿微信录制音频开源库：https://github.com/yxwandroid/flutter_plugin_record
 
 # 招聘 【前端开发工程师 - flutter方向 】
 薪资：面议
