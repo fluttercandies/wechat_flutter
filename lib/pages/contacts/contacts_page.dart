@@ -134,7 +134,7 @@ class _ContactsPageState extends State<ContactsPage>
   Widget build(BuildContext context) {
     super.build(context);
 
-    final List<Widget> body = [
+    List<Widget> body = [
       new ContactView(
           sC: sC, functionButtons: _functionButtons, contacts: _contacts),
       new Positioned(
@@ -148,6 +148,9 @@ class _ContactsPageState extends State<ContactsPage>
         ),
       ),
     ];
+
+    if (isNull) body.add(new HomeNullView(str: '无联系人'));
+
     if (currentLetter != null && currentLetter.isNotEmpty) {
       var row = [
         new Container(
@@ -173,7 +176,6 @@ class _ContactsPageState extends State<ContactsPage>
         ),
       );
     }
-    if (isNull) return new HomeNullView(str: '无联系人');
     return new Scaffold(body: new Stack(children: body));
   }
 }
