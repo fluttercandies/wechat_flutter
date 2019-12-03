@@ -31,6 +31,12 @@ class ChatList {
 }
 
 class ChatListData {
+  Future<bool> isNull() async {
+    final str = await getConversationsListData();
+    List<dynamic> data = json.decode(str);
+    return !listNoEmpty(data);
+  }
+
   chatListData() async {
     List<ChatList> chatList = new List<ChatList>();
     String avatar;

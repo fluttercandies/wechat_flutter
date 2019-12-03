@@ -21,6 +21,7 @@ export 'package:dim_example/ui/view/image_view.dart';
 export 'package:dim_example/config/api.dart';
 export 'package:dim_example/http/req.dart';
 export 'package:dim_example/tools/data/data.dart';
+export 'package:dim_example/ui/view/null_view.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:dim/dim.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';

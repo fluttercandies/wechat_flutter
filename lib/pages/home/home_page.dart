@@ -1,10 +1,8 @@
-import 'package:dim/commom/route.dart';
 import 'package:dim_example/im/conversation_handle.dart';
 import 'package:dim_example/im/model/chat_list.dart';
 import 'package:dim_example/pages/chat/chat_page.dart';
 import 'package:dim_example/tools/wechat_flutter.dart';
 import 'package:dim_example/ui/view/indicator_page_view.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:dim_example/ui/edit/text_span_builder.dart';
 import 'package:dim_example/ui/chat/my_conversation_view.dart';
@@ -20,11 +18,20 @@ class _HomePageState extends State<HomePage>
   List<ChatList> _chatData = [];
 
   var tapPos;
+  var isNull = false;
   TextSpanBuilder _builder = TextSpanBuilder();
   StreamSubscription<dynamic> _messageStreamSubscription;
 
+  @override
+  void initState() {
+    super.initState();
+    initPlatformState();
+    getChatData();
+  }
+
   Future getChatData() async {
     final str = await ChatListData().chatListData();
+    isNull = await ChatListData().isNull();
 
     List<ChatList> listChat = str;
     _chatData.clear();
@@ -86,19 +93,6 @@ class _HomePageState extends State<HomePage>
   @override
   bool get wantKeepAlive => true;
 
-  @override
-  void initState() {
-    super.initState();
-    initPlatformState();
-    getChatData();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    canCelListener();
-  }
-
   Widget timeView(int time) {
     DateTime dateTime = DateTime.fromMillisecondsSinceEpoch(time * 1000);
 
@@ -128,8 +122,7 @@ class _HomePageState extends State<HomePage>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    if (!listNoEmpty(_chatData)) return new LoadingView();
-
+    if (isNull) return new HomeNullView();
     return new Container(
       color: Color(AppColors.BackgroundColor),
       child: new ScrollConfiguration(
@@ -169,5 +162,11 @@ class _HomePageState extends State<HomePage>
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    canCelListener();
   }
 }
