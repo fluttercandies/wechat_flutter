@@ -23,6 +23,13 @@ class Contact {
 }
 
 class ContactsPageData {
+  Future<bool> contactIsNull() async {
+    final user = await SharedUtil.instance.getString(Keys.account);
+    final result = await getContactsFriends(user);
+    List<dynamic> data = json.decode(result);
+    return !listNoEmpty(data);
+  }
+
   listFriend() async {
     List<Contact> contacts = new List<Contact>();
     String avatar;

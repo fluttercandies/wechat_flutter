@@ -5,15 +5,16 @@ import 'package:flutter/material.dart';
 import 'package:dim_example/tools/wechat_flutter.dart';
 import 'package:dim_example/ui/item/contact_item.dart';
 
-
 class ContactsPage extends StatefulWidget {
   _ContactsPageState createState() => _ContactsPageState();
 }
 
 class _ContactsPageState extends State<ContactsPage>
     with AutomaticKeepAliveClientMixin {
-  Color indexBarBg = Colors.transparent;
-  String currentLetter = '';
+  var indexBarBg = Colors.transparent;
+  var currentLetter = '';
+  var isNull = false;
+
   ScrollController sC;
   List<Contact> _contacts = [];
   StreamSubscription<dynamic> _messageStreamSubscription;
@@ -29,6 +30,7 @@ class _ContactsPageState extends State<ContactsPage>
 
   Future getContacts() async {
     final str = await ContactsPageData().listFriend();
+    isNull = await ContactsPageData().contactIsNull();
 
     List<Contact> listContact = str;
     _contacts.clear();
@@ -171,9 +173,7 @@ class _ContactsPageState extends State<ContactsPage>
         ),
       );
     }
-    if (!listNoEmpty(_contacts)) {
-      return new LoadingView();
-    }
+    if (isNull) return new HomeNullView(str: '无联系人');
     return new Scaffold(body: new Stack(children: body));
   }
 }
