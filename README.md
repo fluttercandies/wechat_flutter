@@ -136,7 +136,7 @@ q1deMacBook-Pro:~ q1$ flutter doctor -v
 # Flutter教程网微信群
 
 <img src="http://www.flutterj.com/content/uploadfile/201903/64821551854137.png" height="300" width="300" style="zoom:30%;" />
-
+关注公众号“Flutter前线”，各种Flutter项目实战经验技巧，干活知识，Flutter面试题答案，等你来领取。
 
 # 贡献者
 
