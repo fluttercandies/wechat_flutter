@@ -17,8 +17,8 @@ dependencies:
   toast: any
   webview_flutter: 0.3.14+1
   image_picker: 0.6.1+2
-  extended_text_field: any
-  extended_text: any
+  extended_text_field: 0.4.4
+  extended_text: ^0.6.6
   url_launcher: any
   connectivity: any
   file: any
