@@ -1,3 +1,6 @@
+# log
+2019.12.30 取消extended_text_field，兼容所有版本Flutter
+
 # wechat_flutter
 
 wechat_flutter是flutter版微信，目前已实现即时通讯基本功能，支持安卓和IOS，具体下载体验。
