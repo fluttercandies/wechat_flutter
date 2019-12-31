@@ -20,9 +20,9 @@ class TextSpanBuilder extends SpecialTextSpanBuilder {
       {TextStyle textStyle, SpecialTextGestureTapCallback onTap, int index}) {
     if (flag == null || flag == "") return null;
 
-    if (isStart(flag, EmojiText.flag)) {
-      return EmojiText(textStyle, start: index - (EmojiText.flag.length - 1));
-    }
+//    if (isStart(flag, EmojiText.flag)) {
+//      return EmojiText(textStyle, start: index - (EmojiText.flag.length - 1));
+//    }
     return null;
   }
 }

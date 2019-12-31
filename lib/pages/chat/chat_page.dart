@@ -4,7 +4,8 @@ import 'package:dim_example/ui/chat/chat_details_body.dart';
 import 'package:dim_example/ui/chat/chat_details_row.dart';
 import 'package:dim_example/ui/item/chat_more_icon.dart';
 import 'package:dim_example/ui/view/indicator_page_view.dart';
-import 'package:extended_text_field/extended_text_field.dart';
+
+//import 'package:extended_text_field/extended_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:dim_example/im/send_handle.dart';
 import 'package:dim_example/tools/wechat_flutter.dart';
@@ -134,16 +135,27 @@ class _ChatPageState extends State<ChatPage> {
         textAlign: TextAlign.left);
     _tp.layout(maxWidth: size.maxWidth);
 
-    return ExtendedTextField(
-      specialTextSpanBuilder: TextSpanBuilder(showAtBackground: true),
-      onTap: () => setState(() {}),
-      onChanged: (v) => setState(() {}),
-      decoration: InputDecoration(
-          border: InputBorder.none, contentPadding: const EdgeInsets.all(5.0)),
+//    return ExtendedTextField(
+//      specialTextSpanBuilder: TextSpanBuilder(showAtBackground: true),
+//      onTap: () => setState(() {}),
+//      onChanged: (v) => setState(() {}),
+//      decoration: InputDecoration(
+//          border: InputBorder.none, contentPadding: const EdgeInsets.all(5.0)),
+//      controller: _textController,
+//      focusNode: _focusNode,
+//      maxLines: 99,
+//      cursorColor: const Color(AppColors.ChatBoxCursorColor),
+//      style: AppStyles.ChatBoxTextStyle,
+//    );
+    return TextField(
       controller: _textController,
       focusNode: _focusNode,
       maxLines: 99,
       cursorColor: const Color(AppColors.ChatBoxCursorColor),
+      decoration: InputDecoration(
+          border: InputBorder.none, contentPadding: const EdgeInsets.all(5.0)),
+      onTap: () => setState(() {}),
+      onChanged: (v) => setState(() {}),
       style: AppStyles.ChatBoxTextStyle,
     );
   }
