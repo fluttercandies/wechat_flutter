@@ -13,7 +13,8 @@ dependencies:
     path: plugin/wechat_flutter_plugin
   shared_preferences: ^0.5.2+2
   provider: ^3.0.0+1
-  cached_network_image: any
+#  cached_network_image: 1.1.1 # 1.9.0左右flutter版本的用这个
+  cached_network_image: 2.0.0 # 2.0.0左右flutter版本直接用这个
   toast: any
   webview_flutter: 0.3.14+1
   image_picker: 0.6.1+2
