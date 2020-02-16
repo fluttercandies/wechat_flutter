@@ -15,22 +15,21 @@ dependencies:
   provider: 3.0.0+1
 #  cached_network_image: 1.1.1 # 1.9版本flutter
   cached_network_image: 2.0.0 # 2.0(最新)版本flutter
-  toast: any
+  toast: 0.1.5
   webview_flutter: 0.3.14+1
   image_picker: 0.6.1+2
 #  extended_text_field: 0.4.7
   extended_text: 0.6.6
-  url_launcher: any
-  connectivity: any
-  file: any
+  url_launcher: 5.2.7
+  connectivity: 0.4.6
   photo_view: 0.4.2
   dio: 2.2.2
   open_file: 2.0.3
   package_info: 0.4.0+2
-  flutter_sound: any
+  flutter_sound: 1.7.0
   permission_handler: 3.1.0
   audioplayers: 0.13.3
-  camera: any
+  camera: 0.5.7+1
   video_player: 0.10.0
 
 
