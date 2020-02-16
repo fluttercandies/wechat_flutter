@@ -20,11 +20,17 @@ wechat_flutter是flutter版微信，目前已实现即时通讯基本功能，�
 IOS的直接拉下项目直接跑即可,
 
 # 运行安卓androidx.core:core问题
-错误信息：
+##### 错误信息：
 ```
-Android dependency 'androidx.core:core' has different version for the compile (1.0.0) and runtime (1.0.2) classpath. You should manually set the same version via DependencyResolution
+Android dependency 'androidx.core:core' has different version for 
+the compile (1.0.0) and runtime (1.0.2) classpath. You should 
+manually set the same version via DependencyResolution
 ```
-解决方案
+##### 解决方案
+项目最下方的`External Libraries` => `Flutter Plugins` => `image_picker-0.6.1+2`
+=> `android` => `build.gradle` 然后最下方有`androidx.core:core:版本`。
+
+直接改为`androidx.core:core:1.0.0`，
 
 ![](assets/git/core.png)
 ```
