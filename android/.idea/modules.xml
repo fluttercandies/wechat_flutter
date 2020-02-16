@@ -3,6 +3,23 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/android.iml" filepath="$PROJECT_DIR$/android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/audioplayers-0.13.3/android/audioplayers.iml" filepath="$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/audioplayers-0.13.3/android/audioplayers.iml" />
+      <module fileurl="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/camera-0.5.7+1/android/camera.iml" filepath="$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/camera-0.5.7+1/android/camera.iml" />
+      <module fileurl="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/connectivity-0.4.6/android/connectivity.iml" filepath="$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/connectivity-0.4.6/android/connectivity.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../plugin/wechat_flutter_plugin/android/dim.iml" filepath="$PROJECT_DIR$/../plugin/wechat_flutter_plugin/android/dim.iml" />
+      <module fileurl="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/flutter_image_compress-0.6.3/android/flutter_image_compress.iml" filepath="$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/flutter_image_compress-0.6.3/android/flutter_image_compress.iml" />
+      <module fileurl="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/flutter_sound-1.7.0/android/flutter_sound.iml" filepath="$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/flutter_sound-1.7.0/android/flutter_sound.iml" />
+      <module fileurl="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/image_picker-0.6.1+2/android/image_picker.iml" filepath="$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/image_picker-0.6.1+2/android/image_picker.iml" />
+      <module fileurl="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/open_file-2.0.3/android/open_file.iml" filepath="$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/open_file-2.0.3/android/open_file.iml" />
+      <module fileurl="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/package_info-0.4.0+2/android/package_info.iml" filepath="$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/package_info-0.4.0+2/android/package_info.iml" />
+      <module fileurl="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/path_provider-1.5.0/android/path_provider.iml" filepath="$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/path_provider-1.5.0/android/path_provider.iml" />
+      <module fileurl="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/permission_handler-3.1.0/android/permission_handler.iml" filepath="$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/permission_handler-3.1.0/android/permission_handler.iml" />
+      <module fileurl="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/shared_preferences-0.5.2+2/android/shared_preferences.iml" filepath="$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/shared_preferences-0.5.2+2/android/shared_preferences.iml" />
+      <module fileurl="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/sqflite-1.1.8/android/sqflite.iml" filepath="$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/sqflite-1.1.8/android/sqflite.iml" />
+      <module fileurl="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/url_launcher-5.2.7/android/url_launcher.iml" filepath="$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/url_launcher-5.2.7/android/url_launcher.iml" />
+      <module fileurl="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/video_player-0.10.0/android/video_player.iml" filepath="$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/video_player-0.10.0/android/video_player.iml" />
+      <module fileurl="file://$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/webview_flutter-0.3.14+1/android/webview_flutter.iml" filepath="$USER_HOME$/.pub-cache/hosted/pub.flutter-io.cn/webview_flutter-0.3.14+1/android/webview_flutter.iml" />
     </modules>
   </component>
 </project>

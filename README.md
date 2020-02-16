@@ -1,5 +1,7 @@
 # log
-2019.12.30 取消extended_text_field，兼容所有版本Flutter
+* 2020.02.16 适配flutter v1.12.13和Androidx，修复Android运行问题
+
+* 2019.12.30 取消extended_text_field
 
 # wechat_flutter
 
@@ -16,6 +18,34 @@ wechat_flutter是flutter版微信，目前已实现即时通讯基本功能，�
 <img src="http://www.flutterj.com/download.png" style="zoom:50%;" />
 
 IOS的直接拉下项目直接跑即可,
+
+# 运行安卓androidx.core:core问题
+错误信息：
+```
+Android dependency 'androidx.core:core' has different version for the compile (1.0.0) and runtime (1.0.2) classpath. You should manually set the same version via DependencyResolution
+```
+解决方案
+
+![](assets/git/core.png)
+```
+android {
+    compileSdkVersion 28
+
+    defaultConfig {
+        minSdkVersion 16
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    lintOptions {
+        disable 'InvalidPackage'
+    }
+    dependencies {
+        implementation 'androidx.core:core:1.0.0'
+        implementation 'androidx.annotation:annotation:1.0.0'
+    }
+}
+```
+然后permission_handler也一样改下。
+
 
 # 特性
 
@@ -59,15 +89,14 @@ IOS
 # 我的Flutter环境
 ```
 q1deMacBook-Pro:~ q1$ flutter doctor -v
-[✓] Flutter (Channel stable, v1.9.1+hotfix.6, on Mac OS X 10.14.5 18F2059,
-    locale zh-Hans-CN)
-    • Flutter version 1.9.1+hotfix.6 at /Users/q1/flutter
-    • Framework revision 68587a0916 (10 weeks ago), 2019-09-13 19:46:58 -0700
-    • Engine revision b863200c37
-    • Dart version 2.5.0
+[✓] Flutter (Channel unknown, v1.12.13, on Mac OS X 10.14.5 18F2059, locale
+    zh-Hans-CN)
+    • Flutter version 1.12.13 at /Users/q1/flutter
+    • Framework revision cf37c2cd07 (3 months ago), 2019-11-25 12:04:30 -0800
+    • Engine revision b6b54fd606
+    • Dart version 2.7.0
 
- 
-[!] Android toolchain - develop for Android devices (Android SDK version 29.0.2)
+[✓] Android toolchain - develop for Android devices (Android SDK version 29.0.2)
     • Android SDK at /Users/q1/Library/Android/sdk
     • Android NDK location not configured (optional; useful for native profiling
       support)
@@ -76,30 +105,31 @@ q1deMacBook-Pro:~ q1$ flutter doctor -v
     • Java binary at: /Applications/Android
       Studio.app/Contents/jre/jdk/Contents/Home/bin/java
     • Java version OpenJDK Runtime Environment (build
-      1.8.0_152-release-1024-b01)
-    ! Some Android licenses not accepted.  To resolve this, run: flutter doctor
-      --android-licenses
+      1.8.0_202-release-1483-b49-5587405)
+    • All Android licenses accepted.
 
-[✓] Xcode - develop for iOS and macOS (Xcode 11.2)
+[✓] Xcode - develop for iOS and macOS (Xcode 11.3)
     • Xcode at /Applications/Xcode.app/Contents/Developer
-    • Xcode 11.2, Build version 11B52
+    • Xcode 11.3, Build version 11C29
     • CocoaPods version 1.8.4
 
-[✓] Android Studio (version 3.1)
+[✓] Android Studio (version 3.5)
     • Android Studio at /Applications/Android Studio.app/Contents
-    • Flutter plugin version 29.0.1
-    • Dart plugin version 173.4700
+    • Flutter plugin version 42.1.1
+    • Dart plugin version 191.8593
     • Java version OpenJDK Runtime Environment (build
-      1.8.0_152-release-1024-b01)
+      1.8.0_202-release-1483-b49-5587405)
 
 [✓] Connected device (2 available)
     • Android SDK built for x86 • emulator-5554                        •
       android-x86 • Android 10 (API 29) (emulator)
-    • iPhone 11 Pro Max         • 1873AA1D-FC80-4074-9A7B-3C78C4D332F1 • ios
-      • com.apple.CoreSimulator.SimRuntime.iOS-13-2 (simulator)
+    • iPhone 11 Pro Max         • 083FB0DB-0531-41FA-8C94-EADF5F884353 • ios
+      • com.apple.CoreSimulator.SimRuntime.iOS-13-3 (simulator)
 
-! Doctor found issues in 1 category.
+• No issues found!
 ```
+
+# androidx 问题
 
 # Future
 
