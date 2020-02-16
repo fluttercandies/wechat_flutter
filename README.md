@@ -31,7 +31,6 @@ manually set the same version via DependencyResolution
 => `android` => `build.gradle` 然后最下方有`androidx.core:core:版本`。
 
 直接改为`androidx.core:core:1.0.0`，
-
 ![](assets/git/core.png)
 ```
 android {
