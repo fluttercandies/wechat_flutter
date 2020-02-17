@@ -140,6 +140,7 @@ q1deMacBook-Pro:~ q1$ flutter doctor -v
 
 有以上地区招flutter的大厂可以内推我，我农村来的，贼能吃苦。
 
+微信号：zonggeyl_com (q1)
 
 # Future
 
