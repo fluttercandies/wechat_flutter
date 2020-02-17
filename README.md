@@ -134,7 +134,12 @@ q1deMacBook-Pro:~ q1$ flutter doctor -v
 • No issues found!
 ```
 
-# androidx 问题
+# flutter内推
+
+地区：广东省，湖南省，上海，杭州；
+
+有以上地区招flutter的大厂可以内推我，我农村来的，贼能吃苦。
+
 
 # Future
 

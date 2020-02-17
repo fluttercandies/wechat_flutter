@@ -1,6 +1,8 @@
 PODS:
   - audioplayers (0.0.1):
     - Flutter
+  - camera (0.0.1):
+    - Flutter
   - connectivity (0.0.1):
     - Flutter
     - Reachability
@@ -12,8 +14,6 @@ PODS:
   - flutter_image_compress (0.0.1):
     - Flutter
     - Mantle
-  - flutter_native_image (0.0.1):
-    - Flutter
   - flutter_sound (0.0.1):
     - Flutter
   - FMDB (2.7.5):
@@ -30,7 +30,7 @@ PODS:
     - Flutter
   - path_provider (0.0.1):
     - Flutter
-  - permission_handler (3.3.0):
+  - permission_handler (3.1.0):
     - Flutter
   - Reachability (3.2)
   - shared_preferences (0.0.1):
@@ -41,17 +41,19 @@ PODS:
   - TXIMSDK_iOS (4.6.1)
   - url_launcher (0.0.1):
     - Flutter
+  - video_player (0.0.1):
+    - Flutter
   - webview_flutter (0.0.1):
     - Flutter
   - YYModel (1.0.4)
 
 DEPENDENCIES:
   - audioplayers (from `.symlinks/plugins/audioplayers/ios`)
+  - camera (from `.symlinks/plugins/camera/ios`)
   - connectivity (from `.symlinks/plugins/connectivity/ios`)
   - dim (from `.symlinks/plugins/dim/ios`)
   - Flutter (from `.symlinks/flutter/ios`)
   - flutter_image_compress (from `.symlinks/plugins/flutter_image_compress/ios`)
-  - flutter_native_image (from `.symlinks/plugins/flutter_native_image/ios`)
   - flutter_sound (from `.symlinks/plugins/flutter_sound/ios`)
   - image_picker (from `.symlinks/plugins/image_picker/ios`)
   - open_file (from `.symlinks/plugins/open_file/ios`)
@@ -61,6 +63,7 @@ DEPENDENCIES:
   - shared_preferences (from `.symlinks/plugins/shared_preferences/ios`)
   - sqflite (from `.symlinks/plugins/sqflite/ios`)
   - url_launcher (from `.symlinks/plugins/url_launcher/ios`)
+  - video_player (from `.symlinks/plugins/video_player/ios`)
   - webview_flutter (from `.symlinks/plugins/webview_flutter/ios`)
 
 SPEC REPOS:
@@ -74,6 +77,8 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   audioplayers:
     :path: ".symlinks/plugins/audioplayers/ios"
+  camera:
+    :path: ".symlinks/plugins/camera/ios"
   connectivity:
     :path: ".symlinks/plugins/connectivity/ios"
   dim:
@@ -82,8 +87,6 @@ EXTERNAL SOURCES:
     :path: ".symlinks/flutter/ios"
   flutter_image_compress:
     :path: ".symlinks/plugins/flutter_image_compress/ios"
-  flutter_native_image:
-    :path: ".symlinks/plugins/flutter_native_image/ios"
   flutter_sound:
     :path: ".symlinks/plugins/flutter_sound/ios"
   image_picker:
@@ -102,29 +105,32 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/sqflite/ios"
   url_launcher:
     :path: ".symlinks/plugins/url_launcher/ios"
+  video_player:
+    :path: ".symlinks/plugins/video_player/ios"
   webview_flutter:
     :path: ".symlinks/plugins/webview_flutter/ios"
 
 SPEC CHECKSUMS:
   audioplayers: 84f968cea3f2deab00ec4f8ff53358b3c0b3992c
+  camera: 38cc83ae9a5667bb5a71c7d9edaf60a91920fd4e
   connectivity: 6e94255659cc86dcbef1d452ad3e0491bb1b3e75
   dim: fa3014799fdbbbf47d5d507a85385c8e00f1c706
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
   flutter_image_compress: f69d0e0e078ce52b4810695593bc861ee319ae7d
-  flutter_native_image: 9c0b7451838484458e5b0fae007b86a4c2d4bdfe
   flutter_sound: 0e8163ceac1e00eb6d894e2ae4641ba726a2c479
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   image_picker: 16e5fec1fbc87fd3b297c53e4048521eaf17cd06
   Mantle: 2fa750afa478cd625a94230fbf1c13462f29395b
   open_file: 02eb5cb6b21264bd3a696876f5afbfb7ca4f4b7d
-  package_info: 48b108e75b8802c2d5e126f208ef540561c98aef
+  package_info: 78cabb3c322943c55d39676f4a5bfc748c01d055
   path_provider: fb74bd0465e96b594bb3b5088ee4a4e7bb1f2a9d
-  permission_handler: 67637977b227d62d46bfbf524f335f8568de5a73
+  permission_handler: fa6b0d784b1a43cb96b468a5b8365cb130b1956a
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
-  shared_preferences: 430726339841afefe5142b9c1f50cb6bd7793e01
+  shared_preferences: 1feebfa37bb57264736e16865e7ffae7fc99b523
   sqflite: 4001a31ff81d210346b500c55b17f4d6c7589dd0
   TXIMSDK_iOS: fe85c769896ebffcca191dfb24d93618dd736d62
   url_launcher: a1c0cc845906122c4784c542523d8cacbded5626
+  video_player: 3964090a33353060ed7f58aa6427c7b4b208ec21
   webview_flutter: 1aa7604e6cdb451a9b7ed2c37d5454c0b440246b
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
 
