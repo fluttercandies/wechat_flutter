@@ -134,13 +134,10 @@ q1deMacBook-Pro:~ q1$ flutter doctor -v
 • No issues found!
 ```
 
-# flutter内推
-
-地区：广东省，湖南省，上海，杭州；
-
-有以上地区招flutter的大厂可以内推我，我农村来的，贼能吃苦。
-
-微信号：zonggeyl_com (q1)
+# 关于项目太久没更
+最近工作太繁忙，基本没啥时间更新，然后之前是做其他开源项目，导致这个项目太久没实质性进展，
+不好意思哈各位，从现在开始进入维护状态。
+![](assets/git/cui.png)
 
 # Future
 
