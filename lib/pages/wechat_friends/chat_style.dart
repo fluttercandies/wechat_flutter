@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 var backgroundImage =
-    'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1444433231,507640515&fm=11&gp=0.jpg';
+    'https://hbimg.huabanimg.com/907605885b6dac544640128d8f5c6b089de96519117bb5-VdbptL';
 
 class Line extends StatelessWidget {
   final Color color;

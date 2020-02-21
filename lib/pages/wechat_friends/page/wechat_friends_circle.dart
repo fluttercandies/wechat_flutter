@@ -91,24 +91,25 @@ class _WeChatFriendsCircleState extends State<WeChatFriendsCircle> {
                           width: winWidth(context)),
                       margin: EdgeInsets.only(bottom: 30.0)),
                   Container(
-                      child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.min,
-                          children: <Widget>[
-                            Padding(
-                              padding: EdgeInsets.only(top: 10, right: 10),
-                              child: Text('张三',
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 17)),
-                            ),
-                            ImageLoadView(
-                              'http://cdn.duitang.com/uploads/item/201409/18/20140918141220_N4Tic.thumb.700_0.jpeg',
-                              height: 70,
-                              width: 70,
-                              borderRadius: BorderRadius.circular(5.0),
-                            )
-                          ]),
-                      margin: EdgeInsets.only(right: 10))
+                    child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          Padding(
+                            padding: EdgeInsets.only(top: 10, right: 10),
+                            child: Text('张三',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 17)),
+                          ),
+                          ImageLoadView(
+                            'http://cdn.duitang.com/uploads/item/201409/18/20140918141220_N4Tic.thumb.700_0.jpeg',
+                            height: 70,
+                            width: 70,
+                            borderRadius: BorderRadius.circular(5.0),
+                          )
+                        ]),
+                    margin: EdgeInsets.only(right: 10),
+                  )
                 ],
               ),
               SizedBox(height: 10),
@@ -122,12 +123,12 @@ class _WeChatFriendsCircleState extends State<WeChatFriendsCircle> {
             ]),
           ),
           Container(
-            height: navigationBarHeight(context)+10,
+            height: navigationBarHeight(context) + 10,
             child: new ComMomBar(
               title: title,
               rightDMActions: <Widget>[
                 IconButton(
-                  icon: Icon(Icons.add_a_photo,color: mainTextColor),
+                  icon: Icon(Icons.add_a_photo, color: mainTextColor),
                   onPressed: () => _showDialog(context),
                 )
               ],
