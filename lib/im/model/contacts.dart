@@ -42,6 +42,7 @@ class ContactsPageData {
     final result = await getContactsFriends(user);
 
     getMethod(result) async {
+      if (!listNoEmpty(result)) return contacts;
       List<dynamic> dataMap = json.decode(result);
       int dLength = dataMap.length;
       for (int i = 0; i < dLength; i++) {

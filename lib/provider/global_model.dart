@@ -53,6 +53,7 @@ class GlobalModel extends ChangeNotifier {
 
   void initInfo() async {
     final data = await getUsersProfile([account]);
+    if (data == null) return;
     List<dynamic> result = json.decode(data);
     if (Platform.isAndroid) {
       nickName = result[0]['nickName'];
