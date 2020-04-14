@@ -146,7 +146,7 @@ q1deMacBook-Pro:~ q1$ flutter doctor -v
 
 # Flutter微信群
 
-<img src="http://flutterj.com/left_group.png" height="200" width="200" style="zoom:30%;" />
+<img src="http://www.flutterj.com/left_group.png" height="200" width="210" style="zoom:30%;" />
 
 Flutter教程网：www.flutterj.com
 
