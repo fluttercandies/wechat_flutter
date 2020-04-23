@@ -1,4 +1,4 @@
-# log
+# log 
 * 2020.02.16 适配flutter v1.12.13和Androidx，修复Android运行问题
 
 * 2019.12.30 取消extended_text_field
