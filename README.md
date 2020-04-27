@@ -91,6 +91,9 @@ IOS
 *  更新Pod（非必须）：$ pod update
 *  安装Pod：$ pod install
 
+如果出现`(Connection refused - connect(2) for "raw.githubusercontent.com" port 443)`，则表示还没设置国内源，
+或者尝试下翻墙。
+
 # 我的Flutter环境
 ```
 q1deMacBook-Pro:~ q1$ flutter doctor -v
