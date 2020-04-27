@@ -14,6 +14,7 @@ PODS:
   - flutter_image_compress (0.0.1):
     - Flutter
     - Mantle
+    - SDWebImageWebPCoder
   - flutter_sound (0.0.1):
     - Flutter
   - FMDB (2.7.5):
@@ -21,6 +22,15 @@ PODS:
   - FMDB/standard (2.7.5)
   - image_picker (0.0.1):
     - Flutter
+  - libwebp (1.1.0):
+    - libwebp/demux (= 1.1.0)
+    - libwebp/mux (= 1.1.0)
+    - libwebp/webp (= 1.1.0)
+  - libwebp/demux (1.1.0):
+    - libwebp/webp
+  - libwebp/mux (1.1.0):
+    - libwebp/demux
+  - libwebp/webp (1.1.0)
   - Mantle (2.1.0):
     - Mantle/extobjc (= 2.1.0)
   - Mantle/extobjc (2.1.0)
@@ -30,9 +40,15 @@ PODS:
     - Flutter
   - path_provider (0.0.1):
     - Flutter
+  - path_provider_macos (0.0.1):
+    - Flutter
   - permission_handler (3.1.0):
     - Flutter
   - Reachability (3.2)
+  - SDWebImage/Core (5.7.3)
+  - SDWebImageWebPCoder (0.6.1):
+    - libwebp (~> 1.0)
+    - SDWebImage/Core (~> 5.7)
   - shared_preferences (0.0.1):
     - Flutter
   - sqflite (0.0.1):
@@ -59,6 +75,7 @@ DEPENDENCIES:
   - open_file (from `.symlinks/plugins/open_file/ios`)
   - package_info (from `.symlinks/plugins/package_info/ios`)
   - path_provider (from `.symlinks/plugins/path_provider/ios`)
+  - path_provider_macos (from `.symlinks/plugins/path_provider_macos/ios`)
   - permission_handler (from `.symlinks/plugins/permission_handler/ios`)
   - shared_preferences (from `.symlinks/plugins/shared_preferences/ios`)
   - sqflite (from `.symlinks/plugins/sqflite/ios`)
@@ -69,8 +86,11 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - FMDB
+    - libwebp
     - Mantle
     - Reachability
+    - SDWebImage
+    - SDWebImageWebPCoder
     - TXIMSDK_iOS
     - YYModel
 
@@ -97,6 +117,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/package_info/ios"
   path_provider:
     :path: ".symlinks/plugins/path_provider/ios"
+  path_provider_macos:
+    :path: ".symlinks/plugins/path_provider_macos/ios"
   permission_handler:
     :path: ".symlinks/plugins/permission_handler/ios"
   shared_preferences:
@@ -116,16 +138,20 @@ SPEC CHECKSUMS:
   connectivity: 6e94255659cc86dcbef1d452ad3e0491bb1b3e75
   dim: fa3014799fdbbbf47d5d507a85385c8e00f1c706
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
-  flutter_image_compress: f69d0e0e078ce52b4810695593bc861ee319ae7d
+  flutter_image_compress: 082f8daaf6c1b0c9fe798251c750ef0ecd98d7ae
   flutter_sound: 0e8163ceac1e00eb6d894e2ae4641ba726a2c479
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   image_picker: 16e5fec1fbc87fd3b297c53e4048521eaf17cd06
+  libwebp: 946cb3063cea9236285f7e9a8505d806d30e07f3
   Mantle: 2fa750afa478cd625a94230fbf1c13462f29395b
   open_file: 02eb5cb6b21264bd3a696876f5afbfb7ca4f4b7d
   package_info: 78cabb3c322943c55d39676f4a5bfc748c01d055
   path_provider: fb74bd0465e96b594bb3b5088ee4a4e7bb1f2a9d
+  path_provider_macos: f760a3c5b04357c380e2fddb6f9db6f3015897e0
   permission_handler: fa6b0d784b1a43cb96b468a5b8365cb130b1956a
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
+  SDWebImage: 97351f6582ceca541ea294ba66a1fcb342a331c2
+  SDWebImageWebPCoder: d0dac55073088d24b2ac1b191a71a8f8d0adac21
   shared_preferences: 1feebfa37bb57264736e16865e7ffae7fc99b523
   sqflite: 4001a31ff81d210346b500c55b17f4d6c7589dd0
   TXIMSDK_iOS: fe85c769896ebffcca191dfb24d93618dd736d62
