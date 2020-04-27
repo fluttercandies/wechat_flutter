@@ -39,11 +39,11 @@ class ContactsPageData {
 
     final contactsData = await SharedUtil.instance.getString(Keys.contacts);
     final user = await SharedUtil.instance.getString(Keys.account);
-    final result = await getContactsFriends(user);
+    var result = await getContactsFriends(user);
 
     getMethod(result) async {
       if (!listNoEmpty(result)) return contacts;
-      List<dynamic> dataMap = json.decode(result);
+      List<dynamic> dataMap = json.decode(jsonEncode(result));
       int dLength = dataMap.length;
       for (int i = 0; i < dLength; i++) {
         if (Platform.isIOS) {
@@ -85,15 +85,19 @@ class ContactsPageData {
       return contacts;
     }
 
+    if (result is String) {
+      result = json.decode(result);
+    }
+
     if (strNoEmpty(contactsData) || contactsData != '[]') {
       if (result != contactsData) {
-        await SharedUtil.instance.saveString(Keys.contacts, result);
+        await SharedUtil.instance.saveString(Keys.contacts, result.toString());
         return await getMethod(result);
       } else {
         return await getMethod(contactsData);
       }
     } else {
-      await SharedUtil.instance.saveString(Keys.contacts, result);
+      await SharedUtil.instance.saveString(Keys.contacts, result.toString());
       return await getMethod(result);
     }
   }
