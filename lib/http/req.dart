@@ -116,7 +116,7 @@ class Req {
           response = await _client.get(url, cancelToken: token);
         }
       } else {
-        if (mapNoEmpty(params) || formData.isNotEmpty) {
+        if (mapNoEmpty(params) || formData != null) {
           response = await _client.post(
             url,
             data: formData ?? params,

@@ -82,7 +82,7 @@ class FileUtil {
           if (onComplete != null) onComplete(path + name);
         }
       },
-      options: Options(connectTimeout: 15 * 1000, receiveTimeout: 360 * 1000),
+      options: Options(sendTimeout: 15 * 1000, receiveTimeout: 360 * 1000),
     );
   }
 }
