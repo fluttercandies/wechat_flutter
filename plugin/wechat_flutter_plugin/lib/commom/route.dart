@@ -16,7 +16,6 @@ Future<dynamic> routePush(Widget widget) {
     builder: (BuildContext context) => widget,
     settings: new RouteSettings(
       name: widget.toStringShort(),
-      isInitialRoute: false,
     ),
   );
   return navGK.currentState.push(route);
@@ -27,7 +26,6 @@ Future<dynamic> routePushReplace(Widget widget) {
     builder: (BuildContext context) => widget,
     settings: new RouteSettings(
       name: widget.toStringShort(),
-      isInitialRoute: false,
     ),
   );
   return navGK.currentState.pushReplacement(route);
@@ -38,7 +36,6 @@ Future<dynamic> routeMaterialPush(Widget widget) {
     builder: (BuildContext context) => widget,
     settings: new RouteSettings(
       name: widget.toStringShort(),
-      isInitialRoute: false,
     ),
   );
   return navGK.currentState.push(route);
@@ -59,7 +56,6 @@ Future<dynamic> routePushAndRemove(Widget widget) {
     builder: (BuildContext context) => widget,
     settings: new RouteSettings(
       name: widget.toStringShort(),
-      isInitialRoute: false,
     ),
   );
   return navGK.currentState.pushAndRemoveUntil(route, (route) => route == null);
