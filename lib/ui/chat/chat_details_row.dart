@@ -1,7 +1,7 @@
-import 'package:dim_example/config/contacts.dart';
-import 'package:dim_example/im/message_handle.dart';
-import 'package:dim_example/tools/wechat_flutter.dart';
-import 'package:dim_example/ui/item/chat_voice.dart';
+import 'package:wechat_flutter/config/contacts.dart';
+import 'package:wechat_flutter/im/message_handle.dart';
+import 'package:wechat_flutter/tools/wechat_flutter.dart';
+import 'package:wechat_flutter/ui/item/chat_voice.dart';
 import 'package:flutter/material.dart';
 
 class ChatDetailsRow extends StatefulWidget {

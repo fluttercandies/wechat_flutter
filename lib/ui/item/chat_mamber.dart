@@ -1,8 +1,8 @@
-import 'package:dim_example/im/entity/person_info_entity.dart';
-import 'package:dim_example/pages/contacts/contacts_details_page.dart';
+import 'package:wechat_flutter/im/entity/person_info_entity.dart';
+import 'package:wechat_flutter/pages/contacts/contacts_details_page.dart';
 import 'package:flutter/material.dart';
 
-import 'package:dim_example/tools/wechat_flutter.dart';
+import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
 class ChatMamBer extends StatefulWidget {
   final dynamic model;

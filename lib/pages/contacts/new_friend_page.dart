@@ -1,16 +1,16 @@
 import 'dart:convert';
 
-import 'package:dim_example/pages/more/add_friend_page.dart';
-import 'package:dim_example/ui/orther/label_row.dart';
+import 'package:wechat_flutter/pages/more/add_friend_page.dart';
+import 'package:wechat_flutter/ui/orther/label_row.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:dim_example/im/info_handle.dart';
-import 'package:dim_example/pages/more/add_friend_details.dart';
+import 'package:wechat_flutter/im/info_handle.dart';
+import 'package:wechat_flutter/pages/more/add_friend_details.dart';
 
-import 'package:dim_example/tools/wechat_flutter.dart';
-import 'package:dim_example/ui/view/list_tile_view.dart';
-import 'package:dim_example/ui/view/search_main_view.dart';
-import 'package:dim_example/ui/view/search_tile_view.dart';
+import 'package:wechat_flutter/tools/wechat_flutter.dart';
+import 'package:wechat_flutter/ui/view/list_tile_view.dart';
+import 'package:wechat_flutter/ui/view/search_main_view.dart';
+import 'package:wechat_flutter/ui/view/search_tile_view.dart';
 
 class NewFriendPage extends StatefulWidget {
   @override

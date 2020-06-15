@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:dim_example/config/const.dart';
-import 'package:dim_example/tools/wechat_flutter.dart';
-import 'package:dim_example/ui/w_pop/popup_menu_route_layout.dart';
+import 'package:wechat_flutter/config/const.dart';
+import 'package:wechat_flutter/tools/wechat_flutter.dart';
+import 'package:wechat_flutter/ui/w_pop/popup_menu_route_layout.dart';
 import 'triangle_painter.dart';
 
 class MenuPopWidget extends StatefulWidget {

@@ -1,10 +1,10 @@
 //import 'package:cached_network_image/cached_network_image.dart';
 //import 'package:flutter/material.dart';
-//import 'package:dim_example/pages/chat/video_play_page.dart';
-//import 'package:dim_example/tools/wechat_flutter.dart';
-//import 'package:dim_example/ui/massage/img_item_container.dart';
-//import 'package:dim_example/ui/massage/vertical_container.dart';
-//import 'package:dim_example/ui/message_view/wai2.dart';
+//import 'package:wechat_flutter/pages/chat/video_play_page.dart';
+//import 'package:wechat_flutter/tools/wechat_flutter.dart';
+//import 'package:wechat_flutter/ui/massage/img_item_container.dart';
+//import 'package:wechat_flutter/ui/massage/vertical_container.dart';
+//import 'package:wechat_flutter/ui/message_view/wai2.dart';
 //
 //class VideoMessage extends StatefulWidget {
 //  final dynamic video;

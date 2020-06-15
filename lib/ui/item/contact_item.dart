@@ -1,10 +1,10 @@
-import 'package:dim_example/pages/contacts/all_label_page.dart';
-import 'package:dim_example/pages/contacts/contacts_details_page.dart';
-import 'package:dim_example/pages/contacts/group_list_page.dart';
-import 'package:dim_example/pages/contacts/new_friend_page.dart';
-import 'package:dim_example/pages/contacts/public_page.dart';
+import 'package:wechat_flutter/pages/contacts/all_label_page.dart';
+import 'package:wechat_flutter/pages/contacts/contacts_details_page.dart';
+import 'package:wechat_flutter/pages/contacts/group_list_page.dart';
+import 'package:wechat_flutter/pages/contacts/new_friend_page.dart';
+import 'package:wechat_flutter/pages/contacts/public_page.dart';
 import 'package:flutter/material.dart';
-import 'package:dim_example/tools/wechat_flutter.dart';
+import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
 import 'contact_view.dart';
 

@@ -1,8 +1,8 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:dim_example/config/provider_config.dart';
-import 'package:dim_example/app.dart';
+import 'package:wechat_flutter/config/provider_config.dart';
+import 'package:wechat_flutter/app.dart';
 
 import 'config/storage_manager.dart';
 

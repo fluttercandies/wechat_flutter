@@ -1,4 +1,4 @@
-package com.brzhang.flutter.wechat_flutter;
+package com.example.wechat_flutter;
 
 import io.flutter.embedding.android.FlutterActivity;
 

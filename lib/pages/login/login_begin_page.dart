@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:dim_example/config/provider_config.dart';
-import 'package:dim_example/im/login_handle.dart';
-import 'package:dim_example/pages/login/register_page.dart';
-import 'package:dim_example/pages/settings/language_page.dart';
-import 'package:dim_example/provider/global_model.dart';
+import 'package:wechat_flutter/config/provider_config.dart';
+import 'package:wechat_flutter/im/login_handle.dart';
+import 'package:wechat_flutter/pages/login/register_page.dart';
+import 'package:wechat_flutter/pages/settings/language_page.dart';
+import 'package:wechat_flutter/provider/global_model.dart';
 
-import 'package:dim_example/tools/wechat_flutter.dart';
+import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
 import 'login_page.dart';
 

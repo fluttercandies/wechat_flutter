@@ -1,15 +1,15 @@
 import 'dart:io';
 
-import 'package:dim_example/pages/contacts/group_launch_page.dart';
-import 'package:dim_example/pages/home/search_page.dart';
-import 'package:dim_example/pages/settings/language_page.dart';
-import 'package:dim_example/ui/view/indicator_page_view.dart';
+import 'package:wechat_flutter/pages/contacts/group_launch_page.dart';
+import 'package:wechat_flutter/pages/home/search_page.dart';
+import 'package:wechat_flutter/pages/settings/language_page.dart';
+import 'package:wechat_flutter/ui/view/indicator_page_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:dim_example/pages/more/add_friend_page.dart';
+import 'package:wechat_flutter/pages/more/add_friend_page.dart';
 
-import 'package:dim_example/tools/wechat_flutter.dart';
-import 'package:dim_example/ui/w_pop/w_popup_menu.dart';
+import 'package:wechat_flutter/tools/wechat_flutter.dart';
+import 'package:wechat_flutter/ui/w_pop/w_popup_menu.dart';
 
 typedef CheckLogin(index);
 

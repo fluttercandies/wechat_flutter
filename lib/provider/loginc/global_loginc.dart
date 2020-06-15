@@ -1,5 +1,5 @@
-import 'package:dim_example/provider/global_model.dart';
-import 'package:dim_example/tools/shared_util.dart';
+import 'package:wechat_flutter/provider/global_model.dart';
+import 'package:wechat_flutter/tools/shared_util.dart';
 
 class GlobalLogic {
   final GlobalModel _model;

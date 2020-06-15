@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:dim_example/provider/global_model.dart';
-import 'package:dim_example/provider/login_model.dart';
+import 'package:wechat_flutter/provider/global_model.dart';
+import 'package:wechat_flutter/provider/login_model.dart';
 
 /// ProviderConfig  provider配置
 class ProviderConfig {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:dim_example/tools/wechat_flutter.dart';
+import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
 typedef OnSuCc = void Function(bool v);
 

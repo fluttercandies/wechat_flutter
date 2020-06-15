@@ -1,10 +1,10 @@
-import 'package:dim_example/pages/wechat_friends/page/wechat_friends_circle.dart';
+import 'package:wechat_flutter/pages/wechat_friends/page/wechat_friends_circle.dart';
 import 'package:flutter/material.dart';
-import 'package:dim_example/pages/more/verification_page.dart';
-import 'package:dim_example/tools/wechat_flutter.dart';
-import 'package:dim_example/ui/orther/button_row.dart';
-import 'package:dim_example/ui/orther/label_row.dart';
-import 'package:dim_example/ui/orther/person_card.dart';
+import 'package:wechat_flutter/pages/more/verification_page.dart';
+import 'package:wechat_flutter/tools/wechat_flutter.dart';
+import 'package:wechat_flutter/ui/orther/button_row.dart';
+import 'package:wechat_flutter/ui/orther/label_row.dart';
+import 'package:wechat_flutter/ui/orther/person_card.dart';
 
 class AddFriendsDetails extends StatefulWidget {
   final String type;

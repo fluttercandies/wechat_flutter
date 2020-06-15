@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:io';
-import 'package:dim_example/tools/date.dart';
-import 'package:dim_example/tools/wechat_flutter.dart';
-import 'package:dim_example/ui/dialog/voice_dialog.dart';
+import 'package:wechat_flutter/tools/date.dart';
+import 'package:wechat_flutter/tools/wechat_flutter.dart';
+import 'package:wechat_flutter/ui/dialog/voice_dialog.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sound/flutter_sound.dart';

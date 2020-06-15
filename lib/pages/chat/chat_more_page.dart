@@ -1,9 +1,9 @@
 import 'package:camera/camera.dart';
-import 'package:dim_example/im/message_handle.dart';
-import 'package:dim_example/pages/chat/shoot_page.dart';
-import 'package:dim_example/tools/utils/handle_util.dart';
-import 'package:dim_example/tools/wechat_flutter.dart';
-import 'package:dim_example/ui/card/more_item_card.dart';
+import 'package:wechat_flutter/im/message_handle.dart';
+import 'package:wechat_flutter/pages/chat/shoot_page.dart';
+import 'package:wechat_flutter/tools/utils/handle_util.dart';
+import 'package:wechat_flutter/tools/wechat_flutter.dart';
+import 'package:wechat_flutter/ui/card/more_item_card.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 

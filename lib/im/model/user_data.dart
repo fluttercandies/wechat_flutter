@@ -1,12 +1,12 @@
-import 'package:dim_example/im/entity/i_contact_info_entity.dart';
-import 'package:dim_example/im/entity/i_person_info_entity.dart';
-import 'package:dim_example/im/entity/person_info_entity.dart';
+import 'package:wechat_flutter/im/entity/i_contact_info_entity.dart';
+import 'package:wechat_flutter/im/entity/i_person_info_entity.dart';
+import 'package:wechat_flutter/im/entity/person_info_entity.dart';
 import 'package:flutter/material.dart';
-import 'package:dim_example/im/friend_handle.dart';
-import 'package:dim_example/im/info_handle.dart';
+import 'package:wechat_flutter/im/friend_handle.dart';
+import 'package:wechat_flutter/im/info_handle.dart';
 import 'dart:convert';
 
-import 'package:dim_example/tools/wechat_flutter.dart';
+import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'package:dim/pinyin/pinyin_helper.dart';
 
 class UserData {

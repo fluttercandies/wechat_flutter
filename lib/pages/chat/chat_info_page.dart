@@ -1,14 +1,14 @@
 import 'dart:convert';
 
-import 'package:dim_example/im/entity/i_person_info_entity.dart';
-import 'package:dim_example/im/entity/person_info_entity.dart';
-import 'package:dim_example/im/info_handle.dart';
-import 'package:dim_example/ui/item/chat_mamber.dart';
-import 'package:dim_example/ui/orther/label_row.dart';
+import 'package:wechat_flutter/im/entity/i_person_info_entity.dart';
+import 'package:wechat_flutter/im/entity/person_info_entity.dart';
+import 'package:wechat_flutter/im/info_handle.dart';
+import 'package:wechat_flutter/ui/item/chat_mamber.dart';
+import 'package:wechat_flutter/ui/orther/label_row.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
-import 'package:dim_example/tools/wechat_flutter.dart';
+import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
 class ChatInfoPage extends StatefulWidget {
   final String id;

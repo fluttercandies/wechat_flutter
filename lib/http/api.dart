@@ -1,8 +1,8 @@
-import 'package:dim_example/im/info_handle.dart';
-import 'package:dim_example/im/other/update_entity.dart';
-import 'package:dim_example/provider/global_model.dart';
-import 'package:dim_example/tools/wechat_flutter.dart';
-import 'package:dim_example/ui/dialog/update_dialog.dart';
+import 'package:wechat_flutter/im/info_handle.dart';
+import 'package:wechat_flutter/im/other/update_entity.dart';
+import 'package:wechat_flutter/provider/global_model.dart';
+import 'package:wechat_flutter/tools/wechat_flutter.dart';
+import 'package:wechat_flutter/ui/dialog/update_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:package_info/package_info.dart';
 import 'package:provider/provider.dart';

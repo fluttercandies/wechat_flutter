@@ -1,7 +1,7 @@
-import 'package:dim_example/pages/contacts/group_select_page.dart';
+import 'package:wechat_flutter/pages/contacts/group_select_page.dart';
 import 'package:flutter/material.dart';
 
-import 'package:dim_example/tools/wechat_flutter.dart';
+import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
 class LaunchGroupItem extends StatelessWidget {
   final item;

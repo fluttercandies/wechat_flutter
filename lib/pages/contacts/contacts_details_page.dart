@@ -1,15 +1,15 @@
-import 'package:dim_example/pages/chat/chat_page.dart';
-import 'package:dim_example/pages/chat/more_info_page.dart';
-import 'package:dim_example/pages/chat/set_remark_page.dart';
-import 'package:dim_example/pages/wechat_friends/page/wechat_friends_circle.dart';
-import 'package:dim_example/provider/global_model.dart';
-import 'package:dim_example/ui/dialog/friend_item_dialog.dart';
-import 'package:dim_example/ui/item/contact_card.dart';
-import 'package:dim_example/ui/orther/button_row.dart';
-import 'package:dim_example/ui/orther/label_row.dart';
+import 'package:wechat_flutter/pages/chat/chat_page.dart';
+import 'package:wechat_flutter/pages/chat/more_info_page.dart';
+import 'package:wechat_flutter/pages/chat/set_remark_page.dart';
+import 'package:wechat_flutter/pages/wechat_friends/page/wechat_friends_circle.dart';
+import 'package:wechat_flutter/provider/global_model.dart';
+import 'package:wechat_flutter/ui/dialog/friend_item_dialog.dart';
+import 'package:wechat_flutter/ui/item/contact_card.dart';
+import 'package:wechat_flutter/ui/orther/button_row.dart';
+import 'package:wechat_flutter/ui/orther/label_row.dart';
 import 'package:flutter/material.dart';
 
-import 'package:dim_example/tools/wechat_flutter.dart';
+import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'package:provider/provider.dart';
 
 class ContactsDetailsPage extends StatefulWidget {

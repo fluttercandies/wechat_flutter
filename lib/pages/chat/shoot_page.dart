@@ -1,9 +1,9 @@
 import 'package:camera/camera.dart';
-import 'package:dim_example/tools/utils/handle_util.dart';
+import 'package:wechat_flutter/tools/utils/handle_util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'package:dim_example/tools/wechat_flutter.dart';
+import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'package:video_player/video_player.dart';
 
 import 'package:path_provider/path_provider.dart';

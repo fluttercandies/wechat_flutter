@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:dim_example/provider/loginc/login_loginc.dart';
+import 'package:wechat_flutter/provider/loginc/login_loginc.dart';
 
 class LoginModel extends ChangeNotifier {
   BuildContext context;

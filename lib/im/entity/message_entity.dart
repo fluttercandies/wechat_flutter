@@ -9,7 +9,7 @@
 * @param status 发送状态
 *
 * */
-import 'package:dim_example/im/entity/person_info_entity.dart';
+import 'package:wechat_flutter/im/entity/person_info_entity.dart';
 
 import 'chat_list_entity.dart';
 

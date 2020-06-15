@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:dim_example/ui/w_pop/popup_menu_route.dart';
+import 'package:wechat_flutter/ui/w_pop/popup_menu_route.dart';
 
 class WPopupMenu extends StatefulWidget {
   WPopupMenu({

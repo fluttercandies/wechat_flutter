@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:dim_example/provider/global_model.dart';
-import 'package:dim_example/tools/shared_util.dart';
+import 'package:wechat_flutter/provider/global_model.dart';
+import 'package:wechat_flutter/tools/shared_util.dart';
 
-import 'package:dim_example/tools/wechat_flutter.dart';
+import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
 class LanguagePage extends StatefulWidget {
   @override

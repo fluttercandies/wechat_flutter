@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:dim_example/ui/w_pop/menu_popup_widget.dart';
+import 'package:wechat_flutter/ui/w_pop/menu_popup_widget.dart';
 
 /// 1.长按  2.单击
 enum PressType { longPress, singleClick }

@@ -3,7 +3,7 @@
     {
       "size" : "20x20",
       "idiom" : "iphone",
-      "filename" : "ic_launcher的副本-15.png",
+      "filename" : "ic_launcher.png",
       "scale" : "2x"
     },
     {
@@ -15,7 +15,7 @@
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "ic_launcher的副本-16.png",
+      "filename" : "ic_launcher的副本-8.png",
       "scale" : "1x"
     },
     {
@@ -39,13 +39,13 @@
     {
       "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "ic_launcher的副本-10.png",
+      "filename" : "ic_launcher的副本-9.png",
       "scale" : "3x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "ic_launcher的副本-9.png",
+      "filename" : "ic_launcher的副本-10.png",
       "scale" : "2x"
     },
     {
@@ -63,13 +63,13 @@
     {
       "size" : "20x20",
       "idiom" : "ipad",
-      "filename" : "ic_launcher的副本-7.png",
+      "filename" : "ic_launcher的副本-15.png",
       "scale" : "2x"
     },
     {
       "size" : "29x29",
       "idiom" : "ipad",
-      "filename" : "ic_launcher的副本-8.png",
+      "filename" : "ic_launcher的副本-16.png",
       "scale" : "1x"
     },
     {
@@ -81,13 +81,13 @@
     {
       "size" : "40x40",
       "idiom" : "ipad",
-      "filename" : "ic_launcher.png",
+      "filename" : "ic_launcher的副本-19.png",
       "scale" : "1x"
     },
     {
       "size" : "40x40",
       "idiom" : "ipad",
-      "filename" : "ic_launcher的副本.png",
+      "filename" : "ic_launcher的副本-18.png",
       "scale" : "2x"
     },
     {
@@ -105,7 +105,7 @@
     {
       "size" : "83.5x83.5",
       "idiom" : "ipad",
-      "filename" : "ic_launcher的副本-3.png",
+      "filename" : "Icon-App-83.5x83.5@2x.png",
       "scale" : "2x"
     },
     {

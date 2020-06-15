@@ -1,4 +1,4 @@
-import 'package:dim_example/tools/data/notice.dart';
+import 'package:wechat_flutter/tools/data/notice.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:shared_preferences/shared_preferences.dart';

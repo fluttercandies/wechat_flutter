@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:dim_example/im/info_handle.dart';
-import 'package:dim_example/provider/global_model.dart';
+import 'package:wechat_flutter/im/info_handle.dart';
+import 'package:wechat_flutter/provider/global_model.dart';
 
-import 'package:dim_example/tools/wechat_flutter.dart';
-import 'package:dim_example/ui/orther/tip_verify_Input.dart';
+import 'package:wechat_flutter/tools/wechat_flutter.dart';
+import 'package:wechat_flutter/ui/orther/tip_verify_Input.dart';
 
 class ChangeNamePage extends StatefulWidget {
   final String name;

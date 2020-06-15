@@ -5,10 +5,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:dim_example/im/login_handle.dart';
-import 'package:dim_example/pages/login/select_location_page.dart';
-import 'package:dim_example/provider/login_model.dart';
-import 'package:dim_example/tools/wechat_flutter.dart';
+import 'package:wechat_flutter/im/login_handle.dart';
+import 'package:wechat_flutter/pages/login/select_location_page.dart';
+import 'package:wechat_flutter/provider/login_model.dart';
+import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
 class LoginPage extends StatefulWidget {
   @override

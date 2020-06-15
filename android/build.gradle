@@ -1,8 +1,7 @@
 buildscript {
     repositories {
-        maven { url 'https://maven.aliyun.com/repository/google' }
-        maven { url 'https://maven.aliyun.com/repository/jcenter' }
-        maven { url 'http://maven.aliyun.com/nexus/content/groups/public' }
+        google()
+        jcenter()
     }
 
     dependencies {
@@ -12,9 +11,8 @@ buildscript {
 
 allprojects {
     repositories {
-        maven { url 'https://maven.aliyun.com/repository/google' }
-        maven { url 'https://maven.aliyun.com/repository/jcenter' }
-        maven { url 'http://maven.aliyun.com/nexus/content/groups/public' }
+        google()
+        jcenter()
     }
 }
 
@@ -24,29 +22,6 @@ subprojects {
 }
 subprojects {
     project.evaluationDependsOn(':app')
-}
-
-subprojects {
-    project.configurations.all {
-        resolutionStrategy.eachDependency { details ->
-            if (details.requested.group == 'androidx.lifecycle' &&
-                    !details.requested.name.contains('androidx')) {
-                details.useVersion "2.0.0"
-            }
-            if (details.requested.group == 'androidx.slidingpanelayout' &&
-                    !details.requested.name.contains('androidx')) {
-                details.useVersion "1.0.0"
-            }
-            if (details.requested.group == 'androidx.legacy' &&
-                    !details.requested.name.contains('androidx')) {
-                details.useVersion "1.0.0"
-            }
-            if (details.requested.group == 'androidx.fragment' &&
-                    !details.requested.name.contains('androidx')) {
-                details.useVersion "1.0.0"
-            }
-        }
-    }
 }
 
 task clean(type: Delete) {

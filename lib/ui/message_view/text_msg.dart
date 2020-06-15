@@ -1,7 +1,7 @@
-import 'package:dim_example/im/model/chat_data.dart';
-import 'package:dim_example/ui/message_view/msg_avatar.dart';
+import 'package:wechat_flutter/im/model/chat_data.dart';
+import 'package:wechat_flutter/ui/message_view/msg_avatar.dart';
 import 'package:flutter/material.dart';
-import 'package:dim_example/ui/message_view/text_item_container.dart';
+import 'package:wechat_flutter/ui/message_view/text_item_container.dart';
 import 'package:provider/provider.dart';
 
 import '../../provider/global_model.dart';

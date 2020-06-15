@@ -1,9 +1,9 @@
 import 'package:extended_text/extended_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:dim_example/tools/wechat_flutter.dart';
-import 'package:dim_example/ui/edit/text_span_builder.dart';
-import 'package:dim_example/ui/w_pop/magic_pop.dart';
+import 'package:wechat_flutter/tools/wechat_flutter.dart';
+import 'package:wechat_flutter/ui/edit/text_span_builder.dart';
+import 'package:wechat_flutter/ui/w_pop/magic_pop.dart';
 
 class TextItemContainer extends StatefulWidget {
   final String text;

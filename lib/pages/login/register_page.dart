@@ -3,10 +3,10 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
-import 'package:dim_example/provider/login_model.dart';
+import 'package:wechat_flutter/provider/login_model.dart';
 
-import 'package:dim_example/tools/wechat_flutter.dart';
-import 'package:dim_example/ui/view/edit_view.dart';
+import 'package:wechat_flutter/tools/wechat_flutter.dart';
+import 'package:wechat_flutter/ui/view/edit_view.dart';
 
 import 'select_location_page.dart';
 

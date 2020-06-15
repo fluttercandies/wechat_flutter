@@ -1,5 +1,5 @@
-import 'package:dim_example/tools/wechat_flutter.dart';
-import 'package:dim_example/ui/view/image_view.dart';
+import 'package:wechat_flutter/tools/wechat_flutter.dart';
+import 'package:wechat_flutter/ui/view/image_view.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 

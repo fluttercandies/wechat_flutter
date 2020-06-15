@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:dim_example/config/const.dart';
+import 'package:wechat_flutter/config/const.dart';
 
 class ComMomBar extends StatelessWidget implements PreferredSizeWidget {
   const ComMomBar(

@@ -1,11 +1,11 @@
-import 'package:dim_example/im/friend_handle.dart';
-import 'package:dim_example/im/model/user_data.dart';
-import 'package:dim_example/im/send_handle.dart';
-import 'package:dim_example/ui/dialog/confirm_alert.dart';
-import 'package:dim_example/ui/new_friend_card.dart';
+import 'package:wechat_flutter/im/friend_handle.dart';
+import 'package:wechat_flutter/im/model/user_data.dart';
+import 'package:wechat_flutter/im/send_handle.dart';
+import 'package:wechat_flutter/ui/dialog/confirm_alert.dart';
+import 'package:wechat_flutter/ui/new_friend_card.dart';
 import 'package:flutter/material.dart';
 
-import 'package:dim_example/tools/wechat_flutter.dart';
+import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
 class UserPage extends StatefulWidget {
   @override

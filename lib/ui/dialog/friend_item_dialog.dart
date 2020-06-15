@@ -1,7 +1,7 @@
-import 'package:dim_example/im/friend_handle.dart';
+import 'package:wechat_flutter/im/friend_handle.dart';
 import 'package:flutter/material.dart';
 
-import 'package:dim_example/tools/wechat_flutter.dart';
+import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
 import 'confirm_alert.dart';
 

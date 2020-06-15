@@ -1,9 +1,9 @@
-import 'package:dim_example/im/model/chat_data.dart';
-import 'package:dim_example/pages/contacts/contacts_details_page.dart';
-import 'package:dim_example/provider/global_model.dart';
+import 'package:wechat_flutter/im/model/chat_data.dart';
+import 'package:wechat_flutter/pages/contacts/contacts_details_page.dart';
+import 'package:wechat_flutter/provider/global_model.dart';
 import 'package:flutter/material.dart';
 
-import 'package:dim_example/tools/wechat_flutter.dart';
+import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
 class MsgAvatar extends StatelessWidget {
   final GlobalModel globalModel;

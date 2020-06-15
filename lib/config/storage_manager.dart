@@ -1,4 +1,5 @@
-import 'package:dim_example/tools/wechat_flutter.dart';
+import 'package:flutter/material.dart';
+import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class StorageManager {
@@ -13,6 +14,12 @@ class StorageManager {
     // async 异步操作
     // sync 同步操作
     sp = await SharedPreferences.getInstance();
+
+    if (Platform.isAndroid) {
+      StorageManager().initAutoLogin();
+    } else {
+      debugPrint('IOS自动登陆开发中');
+    }
   }
 
 

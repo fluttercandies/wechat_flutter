@@ -1,10 +1,10 @@
 import 'package:audioplayers/audioplayers.dart';
-import 'package:dim_example/im/entity/i_sound_msg_entity.dart';
-import 'package:dim_example/im/entity/sound_msg_entity.dart';
-import 'package:dim_example/im/model/chat_data.dart';
-import 'package:dim_example/provider/global_model.dart';
-import 'package:dim_example/tools/wechat_flutter.dart';
-import 'package:dim_example/ui/message_view/msg_avatar.dart';
+import 'package:wechat_flutter/im/entity/i_sound_msg_entity.dart';
+import 'package:wechat_flutter/im/entity/sound_msg_entity.dart';
+import 'package:wechat_flutter/im/model/chat_data.dart';
+import 'package:wechat_flutter/provider/global_model.dart';
+import 'package:wechat_flutter/tools/wechat_flutter.dart';
+import 'package:wechat_flutter/ui/message_view/msg_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sound/flutter_sound.dart';
 import 'package:intl/date_symbol_data_local.dart';

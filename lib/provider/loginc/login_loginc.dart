@@ -1,5 +1,5 @@
-import 'package:dim_example/provider/login_model.dart';
-import 'package:dim_example/tools/shared_util.dart';
+import 'package:wechat_flutter/provider/login_model.dart';
+import 'package:wechat_flutter/tools/shared_util.dart';
 
 class LoginLogic {
   final LoginModel _model;

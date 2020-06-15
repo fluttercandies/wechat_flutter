@@ -1,7 +1,7 @@
-import 'package:dim_example/im/model/contacts.dart';
-import 'package:dim_example/ui/view/indicator_page_view.dart';
+import 'package:wechat_flutter/im/model/contacts.dart';
+import 'package:wechat_flutter/ui/view/indicator_page_view.dart';
 import 'package:flutter/material.dart';
-import 'package:dim_example/tools/wechat_flutter.dart';
+import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'contact_item.dart';
 
 enum ClickType { select, open }

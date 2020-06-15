@@ -1,7 +1,7 @@
-import 'package:dim_example/ui/dialog/code_dialog.dart';
+import 'package:wechat_flutter/ui/dialog/code_dialog.dart';
 import 'package:flutter/material.dart';
 
-import 'package:dim_example/tools/wechat_flutter.dart';
+import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
 class CodePage extends StatefulWidget {
   @override

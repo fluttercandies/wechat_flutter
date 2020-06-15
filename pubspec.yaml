@@ -1,7 +1,12 @@
-name: dim_example
-description: this is wechat_flutter demo
+name: wechat_flutter
+description: A new Flutter project.
 
-version: 0.0.6+1
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -13,17 +18,17 @@ dependencies:
     path: plugin/wechat_flutter_plugin
   shared_preferences: 0.5.2+2
   provider: 3.0.0+1
-#  cached_network_image: 1.1.1 # 1.9版本flutter
+  #  cached_network_image: 1.1.1 # 1.9版本flutter
   cached_network_image: 2.0.0 # 2.0(最新)版本flutter
   toast: 0.1.5
   webview_flutter: 0.3.14+1
   image_picker: 0.6.1+2
-#  extended_text_field: 0.4.7
+  #  extended_text_field: 0.4.7
   extended_text: 0.6.6
   url_launcher: 5.2.7
   connectivity: 0.4.6
   photo_view: 0.4.2
-#  dio: 2.2.2  #低于Flutter-1.17使用此版本
+  #  dio: 2.2.2  #低于Flutter-1.17使用此版本
   dio: 3.0.9
   open_file: 2.0.3
   package_info: 0.4.0+2
@@ -32,7 +37,6 @@ dependencies:
   audioplayers: 0.13.3
   camera: 0.5.7+1
   video_player: 0.10.0
-
 
 dev_dependencies:
   flutter_test:

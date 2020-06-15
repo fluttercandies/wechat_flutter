@@ -1,6 +1,6 @@
-import 'package:dim_example/ui/message_view/content_msg.dart';
+import 'package:wechat_flutter/ui/message_view/content_msg.dart';
 import 'package:flutter/material.dart';
-import 'package:dim_example/tools/wechat_flutter.dart';
+import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
 class MyConversationView extends StatefulWidget {
   final String imageUrl;

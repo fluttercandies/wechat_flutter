@@ -6,7 +6,7 @@ import '../chat_style.dart';
 import '../ui/asset_view.dart';
 //import 'package:multi_image_picker/multi_image_picker.dart';
 
-import 'package:dim_example/tools/wechat_flutter.dart';
+import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
 class PublishDynamicPage extends StatefulWidget {
 //  final List<Asset> images;

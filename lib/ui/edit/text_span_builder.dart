@@ -1,6 +1,6 @@
 import 'package:extended_text_library/extended_text_library.dart';
 import 'package:flutter/material.dart';
-import 'package:dim_example/ui/edit/emoji_text.dart';
+import 'package:wechat_flutter/ui/edit/emoji_text.dart';
 
 class TextSpanBuilder extends SpecialTextSpanBuilder {
   final bool showAtBackground;

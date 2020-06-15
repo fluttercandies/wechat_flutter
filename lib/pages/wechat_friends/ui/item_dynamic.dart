@@ -1,8 +1,8 @@
-import 'package:dim_example/pages/wechat_friends/from.dart';
-import 'package:dim_example/tools/wechat_flutter.dart' as prefix1;
-import 'package:dim_example/ui/w_pop/friend_pop.dart';
+import 'package:wechat_flutter/pages/wechat_friends/from.dart';
+import 'package:wechat_flutter/tools/wechat_flutter.dart' as prefix1;
+import 'package:wechat_flutter/ui/w_pop/friend_pop.dart';
 import 'package:flutter/material.dart';
-import 'package:dim_example/tools/wechat_flutter.dart';
+import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'package:flutter/material.dart' as prefix0;
 
 import 'load_view.dart';

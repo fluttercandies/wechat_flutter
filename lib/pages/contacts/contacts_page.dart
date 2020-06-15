@@ -1,9 +1,9 @@
-import 'package:dim_example/config/dictionary.dart';
-import 'package:dim_example/im/model/contacts.dart';
-import 'package:dim_example/ui/item/contact_view.dart';
+import 'package:wechat_flutter/config/dictionary.dart';
+import 'package:wechat_flutter/im/model/contacts.dart';
+import 'package:wechat_flutter/ui/item/contact_view.dart';
 import 'package:flutter/material.dart';
-import 'package:dim_example/tools/wechat_flutter.dart';
-import 'package:dim_example/ui/item/contact_item.dart';
+import 'package:wechat_flutter/tools/wechat_flutter.dart';
+import 'package:wechat_flutter/ui/item/contact_item.dart';
 
 class ContactsPage extends StatefulWidget {
   _ContactsPageState createState() => _ContactsPageState();

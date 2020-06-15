@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:dim_example/tools/wechat_flutter.dart';
+import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
 var _id = 0;
 

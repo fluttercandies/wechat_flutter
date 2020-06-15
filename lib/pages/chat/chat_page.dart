@@ -1,15 +1,15 @@
-import 'package:dim_example/im/model/chat_data.dart';
-import 'package:dim_example/pages/chat/chat_more_page.dart';
-import 'package:dim_example/ui/chat/chat_details_body.dart';
-import 'package:dim_example/ui/chat/chat_details_row.dart';
-import 'package:dim_example/ui/item/chat_more_icon.dart';
-import 'package:dim_example/ui/view/indicator_page_view.dart';
+import 'package:wechat_flutter/im/model/chat_data.dart';
+import 'package:wechat_flutter/pages/chat/chat_more_page.dart';
+import 'package:wechat_flutter/ui/chat/chat_details_body.dart';
+import 'package:wechat_flutter/ui/chat/chat_details_row.dart';
+import 'package:wechat_flutter/ui/item/chat_more_icon.dart';
+import 'package:wechat_flutter/ui/view/indicator_page_view.dart';
 
 //import 'package:extended_text_field/extended_text_field.dart';
 import 'package:flutter/material.dart';
-import 'package:dim_example/im/send_handle.dart';
-import 'package:dim_example/tools/wechat_flutter.dart';
-import 'package:dim_example/ui/edit/text_span_builder.dart';
+import 'package:wechat_flutter/im/send_handle.dart';
+import 'package:wechat_flutter/tools/wechat_flutter.dart';
+import 'package:wechat_flutter/ui/edit/text_span_builder.dart';
 
 import 'chat_info_page.dart';
 

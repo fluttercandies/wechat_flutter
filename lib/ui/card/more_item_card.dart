@@ -1,7 +1,7 @@
-import 'package:dim_example/tools/wechat_flutter.dart' as prefix0;
+import 'package:wechat_flutter/tools/wechat_flutter.dart' as prefix0;
 import 'package:flutter/material.dart';
 
-import 'package:dim_example/tools/wechat_flutter.dart';
+import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
 class MoreItemCard extends StatelessWidget {
   final String name, icon;

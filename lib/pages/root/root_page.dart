@@ -1,11 +1,11 @@
-import 'package:dim_example/http/api.dart';
+import 'package:wechat_flutter/http/api.dart';
 import 'package:flutter/material.dart';
-import 'package:dim_example/pages/contacts/contacts_page.dart';
-import 'package:dim_example/pages/discover/discover_page.dart';
-import 'package:dim_example/pages/home/home_page.dart';
-import 'package:dim_example/pages/mine/mine_page.dart';
-import 'package:dim_example/pages/root/root_tabbar.dart';
-import 'package:dim_example/tools/wechat_flutter.dart';
+import 'package:wechat_flutter/pages/contacts/contacts_page.dart';
+import 'package:wechat_flutter/pages/discover/discover_page.dart';
+import 'package:wechat_flutter/pages/home/home_page.dart';
+import 'package:wechat_flutter/pages/mine/mine_page.dart';
+import 'package:wechat_flutter/pages/root/root_tabbar.dart';
+import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
 class RootPage extends StatefulWidget {
   @override

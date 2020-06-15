@@ -1,6 +1,6 @@
-import 'package:dim_example/tools/data/store.dart';
-export 'package:dim_example/tools/data/store.dart';
-export 'package:dim_example/tools/data/notice.dart';
+import 'package:wechat_flutter/tools/data/store.dart';
+export 'package:wechat_flutter/tools/data/store.dart';
+export 'package:wechat_flutter/tools/data/notice.dart';
 
 class WeChatActions {
   static String msg() => 'msg';

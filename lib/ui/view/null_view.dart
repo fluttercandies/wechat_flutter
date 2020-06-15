@@ -1,7 +1,7 @@
-import 'package:dim_example/pages/root/user_page.dart';
+import 'package:wechat_flutter/pages/root/user_page.dart';
 import 'package:flutter/material.dart';
 
-import 'package:dim_example/tools/wechat_flutter.dart';
+import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
 class HomeNullView extends StatelessWidget {
   final String str;

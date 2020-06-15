@@ -1,6 +1,6 @@
-import 'package:dim_example/config/keys.dart';
-export 'package:dim_example/config/keys.dart';
-import 'package:dim_example/config/storage_manager.dart';
+import 'package:wechat_flutter/config/keys.dart';
+export 'package:wechat_flutter/config/keys.dart';
+import 'package:wechat_flutter/config/storage_manager.dart';
 
 class SharedUtil {
   factory SharedUtil() => _getInstance();

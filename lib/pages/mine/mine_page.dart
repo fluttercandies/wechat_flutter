@@ -2,13 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
-import 'package:dim_example/im/all_im.dart';
-import 'package:dim_example/pages/mine/personal_info_page.dart';
-import 'package:dim_example/pages/settings/language_page.dart';
-import 'package:dim_example/provider/global_model.dart';
+import 'package:wechat_flutter/im/all_im.dart';
+import 'package:wechat_flutter/pages/mine/personal_info_page.dart';
+import 'package:wechat_flutter/pages/settings/language_page.dart';
+import 'package:wechat_flutter/provider/global_model.dart';
 
-import 'package:dim_example/tools/wechat_flutter.dart';
-import 'package:dim_example/ui/view/list_tile_view.dart';
+import 'package:wechat_flutter/tools/wechat_flutter.dart';
+import 'package:wechat_flutter/ui/view/list_tile_view.dart';
 
 class MinePage extends StatefulWidget {
   @override

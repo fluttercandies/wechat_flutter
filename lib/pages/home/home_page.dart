@@ -1,12 +1,12 @@
-import 'package:dim_example/im/conversation_handle.dart';
-import 'package:dim_example/im/model/chat_list.dart';
-import 'package:dim_example/pages/chat/chat_page.dart';
-import 'package:dim_example/tools/wechat_flutter.dart';
-import 'package:dim_example/ui/view/indicator_page_view.dart';
+import 'package:wechat_flutter/im/conversation_handle.dart';
+import 'package:wechat_flutter/im/model/chat_list.dart';
+import 'package:wechat_flutter/pages/chat/chat_page.dart';
+import 'package:wechat_flutter/tools/wechat_flutter.dart';
+import 'package:wechat_flutter/ui/view/indicator_page_view.dart';
 import 'package:flutter/material.dart';
-import 'package:dim_example/ui/edit/text_span_builder.dart';
-import 'package:dim_example/ui/chat/my_conversation_view.dart';
-import 'package:dim_example/ui/view/pop_view.dart';
+import 'package:wechat_flutter/ui/edit/text_span_builder.dart';
+import 'package:wechat_flutter/ui/chat/my_conversation_view.dart';
+import 'package:wechat_flutter/ui/view/pop_view.dart';
 
 class HomePage extends StatefulWidget {
   @override

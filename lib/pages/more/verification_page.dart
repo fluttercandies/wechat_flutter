@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:dim_example/im/friend_handle.dart';
+import 'package:wechat_flutter/im/friend_handle.dart';
 
-import 'package:dim_example/tools/wechat_flutter.dart';
-import 'package:dim_example/ui/orther/verify_input.dart';
-import 'package:dim_example/ui/orther/verify_switch.dart';
+import 'package:wechat_flutter/tools/wechat_flutter.dart';
+import 'package:wechat_flutter/ui/orther/verify_input.dart';
+import 'package:wechat_flutter/ui/orther/verify_switch.dart';
 
 class VerificationPage extends StatefulWidget {
   final String nickName;
