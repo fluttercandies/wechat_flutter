@@ -23,8 +23,7 @@ dependencies:
   toast: 0.1.5
   webview_flutter: 0.3.14+1
   image_picker: 0.6.1+2
-  #  extended_text_field: 0.4.7
-  extended_text: 0.6.6
+  extended_text: 1.0.1
   url_launcher: 5.2.7
   connectivity: 0.4.6
   photo_view: 0.4.2
@@ -37,6 +36,7 @@ dependencies:
   audioplayers: 0.13.3
   camera: 0.5.7+1
   video_player: 0.10.0
+  extended_text_field: 1.0.1
 
 dev_dependencies:
   flutter_test:
@@ -140,5 +140,6 @@ flutter:
     - assets/images/discover/ff_Icon_search.webp
     - assets/images/discover/game_center_h5.webp
     - assets/images/discover/mini_program.webp
+    - assets/images/emoji/
 
     - assets/data/friends.json
