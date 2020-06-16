@@ -97,23 +97,19 @@ IOS
 # 我的Flutter环境
 ```
 q1deMacBook-Pro:~ q1$ flutter doctor -v
-[✓] Flutter (Channel unknown, v1.12.13, on Mac OS X 10.14.5 18F2059, locale
-    zh-Hans-CN)
-    • Flutter version 1.12.13 at /Users/q1/flutter
-    • Framework revision cf37c2cd07 (3 months ago), 2019-11-25 12:04:30 -0800
-    • Engine revision b6b54fd606
-    • Dart version 2.7.0
+[✓] Flutter (Channel stable, v1.17.3, on Mac OS X 10.14.5 18F2059, locale zh-Hans-CN)
+    • Flutter version 1.17.3 at /Users/q1/flutter
+    • Framework revision b041144f83 (12 days ago), 2020-06-04 09:26:11 -0700
+    • Engine revision ee76268252
+    • Dart version 2.8.4
 
+ 
 [✓] Android toolchain - develop for Android devices (Android SDK version 29.0.2)
     • Android SDK at /Users/q1/Library/Android/sdk
-    • Android NDK location not configured (optional; useful for native profiling
-      support)
     • Platform android-29, build-tools 29.0.2
     • ANDROID_HOME = /Users/q1/Library/Android/sdk
-    • Java binary at: /Applications/Android
-      Studio.app/Contents/jre/jdk/Contents/Home/bin/java
-    • Java version OpenJDK Runtime Environment (build
-      1.8.0_202-release-1483-b49-5587405)
+    • Java binary at: /Applications/Android Studio.app/Contents/jre/jdk/Contents/Home/bin/java
+    • Java version OpenJDK Runtime Environment (build 1.8.0_202-release-1483-b49-5587405)
     • All Android licenses accepted.
 
 [✓] Xcode - develop for iOS and macOS (Xcode 11.3)
@@ -125,14 +121,14 @@ q1deMacBook-Pro:~ q1$ flutter doctor -v
     • Android Studio at /Applications/Android Studio.app/Contents
     • Flutter plugin version 42.1.1
     • Dart plugin version 191.8593
-    • Java version OpenJDK Runtime Environment (build
-      1.8.0_202-release-1483-b49-5587405)
+    • Java version OpenJDK Runtime Environment (build 1.8.0_202-release-1483-b49-5587405)
 
-[✓] Connected device (2 available)
-    • Android SDK built for x86 • emulator-5554                        •
-      android-x86 • Android 10 (API 29) (emulator)
-    • iPhone 11 Pro Max         • 083FB0DB-0531-41FA-8C94-EADF5F884353 • ios
-      • com.apple.CoreSimulator.SimRuntime.iOS-13-3 (simulator)
+[✓] VS Code (version 1.45.1)
+    • VS Code at /Applications/Visual Studio Code.app/Contents
+    • Flutter extension version 3.11.0
+
+[✓] Connected device (1 available)
+    • Android SDK built for x86 • emulator-5554 • android-x86 • Android 10 (API 29) (emulator)
 
 • No issues found!
 ```
