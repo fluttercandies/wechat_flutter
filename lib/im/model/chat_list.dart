@@ -85,6 +85,7 @@ class ChatListData {
 
         final message = await getDimMessages(model.peer, num: 1);
         List<dynamic> messageData = json.decode(message);
+        if (!listNoEmpty(messageData)) return;
         MessageEntity messageModel = MessageEntity.fromJson(messageData[0]);
 
         time = messageModel.time;

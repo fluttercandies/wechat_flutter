@@ -1,4 +1,5 @@
 import 'package:wechat_flutter/config/dictionary.dart';
+import 'package:wechat_flutter/im/friend_handle.dart';
 import 'package:wechat_flutter/im/model/contacts.dart';
 import 'package:wechat_flutter/ui/item/contact_item.dart';
 import 'package:wechat_flutter/ui/item/contact_view.dart';
@@ -135,6 +136,15 @@ class _GroupLaunchPageState extends State<GroupLaunchPage> {
           showToast(context, 'IOS暂不支持发起群聊');
           return;
         }
+        createGroupChat(selectData, name: selectData.join(),
+            callback: (callBack) {
+          if (callBack.toString().contains('succ')) {
+            showToast(context, '创建群组成功');
+            if (Navigator.of(context).canPop()) {
+              Navigator.of(context).pop();
+            }
+          }
+        });
         showToast(context, '当前ID：${selectData.toString()}');
       },
     );

@@ -58,3 +58,13 @@ Future<dynamic> getContactsFriends(String userName) async {
     debugPrint('获取好友列表  失败');
   }
 }
+
+Future<dynamic> createGroupChat(List<String> personList,
+    {String name, Callback callback}) async {
+  try {
+    var result = await im.createGroupChat(name: name, personList: personList);
+    callback(result);
+  } on PlatformException {
+    print('创建群组  失败');
+  }
+}

@@ -34,8 +34,9 @@ class _HomePageState extends State<HomePage>
     isNull = await ChatListData().isNull();
 
     List<ChatList> listChat = str;
+    if (!listNoEmpty(listChat)) return;
     _chatData.clear();
-    _chatData..addAll(listChat.reversed);
+    _chatData..addAll(listChat?.reversed);
     if (mounted) setState(() {});
   }
 

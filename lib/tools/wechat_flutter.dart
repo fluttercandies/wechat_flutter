@@ -22,6 +22,8 @@ export 'package:wechat_flutter/config/api.dart';
 export 'package:wechat_flutter/http/req.dart';
 export 'package:wechat_flutter/tools/data/data.dart';
 export 'package:wechat_flutter/ui/view/null_view.dart';
+import 'dart:ui';
+
 import 'package:connectivity/connectivity.dart';
 import 'package:dim/dim.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
@@ -33,3 +35,8 @@ var subscription = Connectivity();
 typedef Callback(data);
 
 DefaultCacheManager cacheManager = new DefaultCacheManager();
+
+const String defGroupAvatar =
+    'http://www.flutterj.com/content/uploadfile/zidingyi/g.png';
+
+const Color mainBGColor = Color.fromRGBO(240, 240, 245, 1.0);
