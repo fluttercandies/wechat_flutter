@@ -36,7 +36,7 @@ class _MyConversationViewState extends State<MyConversationView> {
                 style: TextStyle(fontSize: 17.0, fontWeight: FontWeight.normal),
               ),
               new SizedBox(height: 2.0),
-              new ContentMsg(widget.content),
+              new ContentMsg(widget?.content),
             ],
           ),
         ),

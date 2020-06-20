@@ -14,9 +14,11 @@ class ContentMsg extends StatefulWidget {
 class _ContentMsgState extends State<ContentMsg> {
   String str;
 
+  TextStyle _style = TextStyle(color: mainTextColor, fontSize: 14.0);
+
   @override
   Widget build(BuildContext context) {
-    if (widget.msg == null) return new Text('消息为空');
+    if (widget.msg == null) return new Text('消息为空', style: _style);
     Map msg = widget.msg['message'];
     String msgType = msg['type'];
     String msgStr = msg.toString();
@@ -40,7 +42,7 @@ class _ContentMsgState extends State<ContentMsg> {
       str,
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
-      style: TextStyle(color: mainTextColor, fontSize: 14.0),
+      style: _style,
     );
   }
 }

@@ -85,11 +85,12 @@ class ChatListData {
 
         final message = await getDimMessages(model.peer, num: 1);
         List<dynamic> messageData = json.decode(message);
-        if (!listNoEmpty(messageData)) return;
-        MessageEntity messageModel = MessageEntity.fromJson(messageData[0]);
 
-        time = messageModel.time;
-        msgType = messageModel.message.type;
+        if (listNoEmpty(messageData)) {
+          MessageEntity messageModel = MessageEntity.fromJson(messageData[0]);
+          time = messageModel?.time ?? 0;
+          msgType = messageModel?.message?.type ?? '1';
+        }
 
         chatList.insert(
           0,
@@ -98,9 +99,9 @@ class ChatListData {
             identifier: identifier,
             avatar: avatar,
             name: name,
-            time: time,
-            content: messageData[0],
-            msgType: msgType,
+            time: time ?? 0,
+            content: listNoEmpty(messageData) ? messageData[0] : null,
+            msgType: msgType ?? '1',
           ),
         );
       }

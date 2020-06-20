@@ -32,7 +32,6 @@ class _HomePageState extends State<HomePage>
   Future getChatData() async {
     final str = await ChatListData().chatListData();
     isNull = await ChatListData().isNull();
-
     List<ChatList> listChat = str;
     if (!listNoEmpty(listChat)) return;
     _chatData.clear();
