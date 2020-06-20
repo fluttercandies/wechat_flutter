@@ -34,7 +34,8 @@ dependencies:
   flutter_sound: 1.7.0
   permission_handler: 3.1.0
   audioplayers: 0.13.3
-  camera: 0.5.7+1
+  camera: # 0.5.7+1
+    path: plugin/camera
   video_player: 0.10.0
   extended_text_field: 1.0.1
 
