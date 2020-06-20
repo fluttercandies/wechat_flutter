@@ -28,10 +28,10 @@ class _MsgAvatarState extends State<MsgAvatar> with TickerProviderStateMixin {
   @override
   initState() {
     super.initState();
-    start();
+    start(true);
   }
 
-  start() {
+  start(bool isInit) {
     controller = AnimationController(
         duration: const Duration(milliseconds: 500), vsync: this);
     animation = TweenSequence<double>([
@@ -41,7 +41,7 @@ class _MsgAvatarState extends State<MsgAvatar> with TickerProviderStateMixin {
       TweenSequenceItem<double>(tween: Tween(begin: 0, end: -10), weight: 1),
       TweenSequenceItem<double>(tween: Tween(begin: -10, end: 0), weight: 1),
     ]).animate(controller);
-    controller.forward();
+    if (!isInit) controller.forward();
   }
 
   Widget build(BuildContext context) {
@@ -65,7 +65,7 @@ class _MsgAvatarState extends State<MsgAvatar> with TickerProviderStateMixin {
         ),
       ),
       onDoubleTap: () {
-        setState(() => start());
+        setState(() => start(false));
       },
       onTap: () {
         routePush(new ContactsDetailsPage(

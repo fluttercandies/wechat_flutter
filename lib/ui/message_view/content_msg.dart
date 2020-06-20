@@ -18,7 +18,7 @@ class _ContentMsgState extends State<ContentMsg> {
 
   @override
   Widget build(BuildContext context) {
-    if (widget.msg == null) return new Text('消息为空', style: _style);
+    if (widget.msg == null) return new Text('未知消息', style: _style);
     Map msg = widget.msg['message'];
     String msgType = msg['type'];
     String msgStr = msg.toString();
