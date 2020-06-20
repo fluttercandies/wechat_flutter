@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:wechat_flutter/im/fun_dim_group_model.dart';
+import 'package:wechat_flutter/pages/chat/chat_page.dart';
 
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
@@ -31,7 +32,13 @@ class _GroupListPageState extends State<GroupListPage> {
       String gFaceURL, String title) {
     return Material(
         child: FlatButton(
-            onPressed: () {},
+            onPressed: () {
+              routePush(ChatPage(
+                title: title,
+                type: 2,
+//                returnType: 1,
+              ));
+            },
             child: Column(
               children: <Widget>[
                 Row(

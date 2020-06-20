@@ -55,7 +55,8 @@ class _ChatPageState extends State<ChatPage> {
   }
 
   Future getChatMsgData() async {
-    final str = await ChatDataRep().repData(widget.id, widget.type);
+    final str =
+        await ChatDataRep().repData(widget?.id ?? widget.title, widget.type);
     List<ChatData> listChat = str;
     chatData.clear();
     chatData..addAll(listChat.reversed);
@@ -109,7 +110,7 @@ class _ChatPageState extends State<ChatPage> {
   _handleSubmittedData(String text) async {
     _textController.clear();
     chatData.insert(0, new ChatData(msg: {"text": text}));
-    await sendTextMsg('${widget.id}', widget.type, text);
+    await sendTextMsg('${widget?.id ?? widget.title}', widget.type, text);
   }
 
   onTapHandle(ButtonType type) {
