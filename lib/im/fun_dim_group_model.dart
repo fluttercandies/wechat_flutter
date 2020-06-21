@@ -61,7 +61,7 @@ class DimGroup {
           resultMembers = await dim.getUsersProfile(ls);
         }
       }
-      callback(null);
+      callback(result);
 //      callback("[{'member':" +
 //          result.toString().replaceAll('[', '').replaceAll(']', '') +
 //          "," +

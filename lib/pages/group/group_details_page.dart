@@ -29,7 +29,7 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
   String time;
   String cardName;
 
-  List memberList;
+  List memberList = new List();
   List dataGroup;
   List groupUserInfo = [];
 
@@ -60,7 +60,7 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
       String notice = strNoEmpty(dataGroup[0]['groupNotification'].toString())
           ? dataGroup[0]['groupNotification'].toString()
           : '暂无公告';
-        groupNotification = notice;
+      groupNotification = notice;
       time = dataGroup[0]['groupIntroduction'].toString();
       setState(() {});
     });
@@ -68,7 +68,8 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
 
   // 获取群成员列表
   _getGroupMembers() async {
-    await DimGroup.getGroupMembersListModelLIST(widget.peer, callback: (result) {
+    await DimGroup.getGroupMembersListModelLIST(widget.peer,
+        callback: (result) {
       print('获取群成员 getGroupMembersListModel >>>> $result');
       memberList = json.decode(result.toString().replaceAll("'", '"'));
       setState(() {});
@@ -83,7 +84,7 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
   Widget memberItem(item) {
     List<dynamic> userInfo;
     String uId;
-    String uFace;
+    String uFace = '';
     String nickName;
 //    if (listNoEmpty(groupUserInfo))
 //      print('groupUserInfo ' + groupUserInfo[1][0].toString());
@@ -92,6 +93,7 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
           userInfo = json.decode(cb.toString());
           uId = userInfo[0]['identifier'];
           uFace = userInfo[0]['faceUrl'];
+          print('faceUrlfaceUrl::' + cb.toString());
           nickName = userInfo[0]['nickName'];
         }),
         builder: (context, snap) {
@@ -104,13 +106,14 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
                 children: <Widget>[
                   ClipRRect(
                     borderRadius: BorderRadius.all(Radius.circular(5)),
-                    child: CachedNetworkImage(
-                      imageUrl:
-                          uFace == null || uFace == '' ? defAvatar : uFace,
-                      height: 48.0,
-                      width: 48.0,
-                      cacheManager: cacheManager,
-                    ),
+                    child: !strNoEmpty(uFace)
+                        ? new Image.asset(defIcon, height: 48.0, width: 48.0)
+                        : CachedNetworkImage(
+                            imageUrl: uFace,
+                            height: 48.0,
+                            width: 48.0,
+                            cacheManager: cacheManager,
+                          ),
                   ),
                   SizedBox(height: 2),
                   Container(
@@ -237,21 +240,18 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
   }
 
   Widget body() {
-//    if (memberList == [] || memberList == null) {
-//      return new Container();
-//    }
     return SingleChildScrollView(
       child: Column(
         children: <Widget>[
-//          new Container(
-//            color: Colors.white,
-//            padding: EdgeInsets.only(top: 10.0),
-//            width: winWidth(context),
-//            child: Wrap(
-//              runSpacing: 20.0,
-//              children: memberList.map(memberItem).toList(),
-//            ),
-//          ),
+          new Container(
+            color: Colors.white,
+            padding: EdgeInsets.only(top: 10.0),
+            width: winWidth(context),
+            child: Wrap(
+              runSpacing: 20.0,
+              children: memberList.map(memberItem).toList(),
+            ),
+          ),
           new InkWell(
             child: new Container(
               alignment: Alignment.center,
@@ -367,7 +367,7 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
       backgroundColor: Color(0xffEDEDED),
       appBar: new ComMomBar(
 //        context,
-        title:'聊天信息 (${dataGroup[0]['memberNum']})',
+        title: '聊天信息 (${dataGroup[0]['memberNum']})',
 //        callBackType: 1,
 //        callback: (data) => widget.callBack(groupName),
       ),
