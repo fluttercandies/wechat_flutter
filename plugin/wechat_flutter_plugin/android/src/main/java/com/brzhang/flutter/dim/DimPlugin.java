@@ -1173,6 +1173,65 @@ public class DimPlugin implements MethodCallHandler, EventChannel.StreamHandler 
             } catch (NullPointerException e) {
                 System.out.println("字符为空!" + e);
             }
+        } else if (call.method.equals("getGroupMembersList")) {
+            String groupId = call.argument("groupId");
+
+//            final List<String> userS = new ArrayList<>();
+            final List<String> mData = new ArrayList<>();
+
+            //创建回调
+            TIMValueCallBack<List<TIMGroupMemberInfo>> cb = new TIMValueCallBack<List<TIMGroupMemberInfo>>() {
+                @Override
+                public void onError(int code, String desc) {
+                    Log.e(TAG, "getGroupMembersList onErr. code: " + code + " errmsg: " + desc);
+                    result.error(desc, "getGroupMembersList on Err code: " + code, null);
+                }
+
+                @Override
+                public void onSuccess(List<TIMGroupMemberInfo> infoList) {//参数返回群组成员信息
+
+                    for (TIMGroupMemberInfo infoIM : infoList) {
+//                        userS.add(infoIM.getUser());
+                        mData.add("{'user':'" + infoIM.getUser() + "'");
+                        mData.add("'joinTime':'" + infoIM.getJoinTime() + "'," +
+                                "'nameCard':'" + infoIM.getNameCard() + "'," +
+                                "'msgFlag':'" + infoIM.getMsgFlag() + "'," +
+                                "'msgSeq':'" + infoIM.getMsgSeq() + "'," +
+                                "'silenceSeconds':'" + infoIM.getSilenceSeconds() + "'," +
+                                "'tinyId':'" + infoIM.getTinyId() + "'," +
+                                "'role':'" + infoIM.getRole() + "'}");
+                    }
+                    result.success(mData.toString());
+                }
+            };
+
+//            TIMFriendshipManager.getInstance().getUsersProfile(userS, true, new TIMValueCallBack<List<TIMUserProfile>>() {
+//                @Override
+//                public void onError(int code, String desc) {
+//                    //错误码 code 和错误描述 desc，可用于定位请求失败原因
+//                    //错误码 code 列表请参见错误码表
+//                    Log.e(TAG, "getUsersProfile failed: " + code + " desc");
+//                }
+//
+//                @Override
+//                public void onSuccess(List<TIMUserProfile> timUserProfiles) {
+//                    if (timUserProfiles != null && timUserProfiles.size() > 0) {
+//                        TIMUserProfile info = timUserProfiles.get(0);
+//                        mData.add("'nickName':'" + info.getNickName() + "'");
+//                        mData.add("'allowType':'" + info.getAllowType() + "'");
+//                        mData.add("'faceUrl':'" + info.getFaceUrl() + "'");
+//                        mData.add("'identifier':'" + info.getIdentifier() + "'");
+//                    } else {
+//                        mData.add("'info':" + "[]");
+//                    }
+//
+//                }
+//            });
+
+//获取群组成员信息
+            TIMGroupManager.getInstance().getGroupMembers(
+                    groupId, cb);     //回调
+
         } else {
             result.notImplemented();
         }
