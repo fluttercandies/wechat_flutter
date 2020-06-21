@@ -52,6 +52,10 @@ class _ChatPageState extends State<ChatPage> {
     _sC.addListener(() => FocusScope.of(context).requestFocus(new FocusNode()));
     initPlatformState();
     Notice.addListener(WeChatActions.msg(), (v) => getChatMsgData());
+
+    _focusNode.addListener(() {
+      if (_focusNode.hasFocus) _hideEmoji();
+    });
   }
 
   Future getChatMsgData() async {
@@ -128,6 +132,7 @@ class _ChatPageState extends State<ChatPage> {
           _isMore = !_isMore;
         }
       }
+      _hideEmoji();
     });
   }
 
@@ -144,7 +149,10 @@ class _ChatPageState extends State<ChatPage> {
 
     return ExtendedTextField(
       specialTextSpanBuilder: TextSpanBuilder(showAtBackground: true),
-      onTap: () => setState(() {}),
+      onTap: () => setState(() {
+        print('=========================');
+        if (_focusNode.hasFocus) _hideEmoji();
+      }),
       onChanged: (v) => setState(() {}),
       decoration: InputDecoration(
           border: InputBorder.none, contentPadding: const EdgeInsets.all(5.0)),
@@ -186,6 +194,8 @@ class _ChatPageState extends State<ChatPage> {
           if (_emojiState) {
 //                  _focusNode.unfocus();
             _showEmoji();
+            FocusScope.of(context).requestFocus(new FocusNode());
+            _isMore = false;
 //                  _hideSendMore();
 //                  _voiceIconState = true;
           } else {
@@ -236,7 +246,12 @@ class _ChatPageState extends State<ChatPage> {
     return Scaffold(
       appBar: new ComMomBar(title: widget.title, rightDMActions: rWidget),
       body: new MainInputBody(
-        onTap: () => setState(() => _isMore = false),
+        onTap: () => setState(
+          () {
+            _isMore = false;
+            _emojiHeight = 0;
+          },
+        ),
         decoration: BoxDecoration(color: chatBg),
         child: new Column(children: body),
       ),

@@ -8,7 +8,7 @@ class ChatDetailsBody extends StatelessWidget {
   final ScrollController sC;
   final List<ChatData> chatData;
 
-  ChatDetailsBody({this.sC,this.chatData});
+  ChatDetailsBody({this.sC, this.chatData});
 
   @override
   Widget build(BuildContext context) {
