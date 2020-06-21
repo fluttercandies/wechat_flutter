@@ -157,17 +157,6 @@ class _ChatPageState extends State<ChatPage> {
       cursorColor: const Color(AppColors.ChatBoxCursorColor),
       style: AppStyles.ChatBoxTextStyle,
     );
-//    return TextField(
-//      controller: _textController,
-//      focusNode: _focusNode,
-//      maxLines: 99,
-//      cursorColor: const Color(AppColors.ChatBoxCursorColor),
-//      decoration: InputDecoration(
-//          border: InputBorder.none, contentPadding: const EdgeInsets.all(5.0)),
-//      onTap: () => setState(() {}),
-//      onChanged: (v) => setState(() {}),
-//      style: AppStyles.ChatBoxTextStyle,
-//    );
   }
 
   @override
