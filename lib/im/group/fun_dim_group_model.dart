@@ -46,9 +46,9 @@ class DimGroup {
 //    }
 //  }
 //
-  static Future<dynamic> getGroupMembersListModelLIST(String groupId,
-      {Callback callback}) async {
-    try {
+//  static Future<dynamic> getGroupMembersListModelLIST(String groupId,
+//      {Callback callback}) async {
+//    try {
 //      var result = await dim.getGroupMembersList(groupId);
 //      var resultMembers;
 //      print('获取群成员 getGroupMembersListModel >>>> $result');
@@ -61,17 +61,17 @@ class DimGroup {
 //          resultMembers = await dim.getUsersProfile(ls);
 //        }
 //      }
-      callback(null);
-//      callback("[{'member':" +
-//          result.toString().replaceAll('[', '').replaceAll(']', '') +
-//          "," +
-//          "'info':" +
-//          resultMembers +
-//          "}]");
-    } on PlatformException {
-      print('获取群成员  失败');
-    }
-  }
+//      callback(result);
+////      callback("[{'member':" +
+////          result.toString().replaceAll('[', '').replaceAll(']', '') +
+////          "," +
+////          "'info':" +
+////          resultMembers +
+////          "}]");
+//    } on PlatformException {
+//      print('获取群成员  失败');
+//    }
+//  }
 
   static Future<dynamic> getGroupListModel(Callback callback) async {
     try {

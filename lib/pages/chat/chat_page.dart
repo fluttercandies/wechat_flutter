@@ -1,5 +1,6 @@
 import 'package:wechat_flutter/im/model/chat_data.dart';
 import 'package:wechat_flutter/pages/chat/chat_more_page.dart';
+import 'package:wechat_flutter/pages/group/group_details_page.dart';
 import 'package:wechat_flutter/ui/chat/chat_details_body.dart';
 import 'package:wechat_flutter/ui/chat/chat_details_row.dart';
 import 'package:wechat_flutter/ui/item/chat_more_icon.dart';
@@ -239,7 +240,12 @@ class _ChatPageState extends State<ChatPage> {
     var rWidget = [
       new InkWell(
         child: new Image.asset('assets/images/right_more.png'),
-        onTap: () => routePush(new ChatInfoPage(widget.id)),
+        onTap: () => routePush(widget.type == 2
+            ? new GroupDetailsPage(
+                widget.title,
+                callBack: (v) {},
+              )
+            : new ChatInfoPage(widget.id)),
       )
     ];
 
