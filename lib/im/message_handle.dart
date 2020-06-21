@@ -1,7 +1,7 @@
-import 'package:dim/commom/util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:wechat_flutter/tools/commom.dart';
 
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 

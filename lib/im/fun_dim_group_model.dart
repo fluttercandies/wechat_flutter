@@ -36,31 +36,31 @@ class DimGroup {
 //    }
 //  }
 //
-//  static Future<dynamic> getGroupMembersListModel(String groupId,
-//      {Callback callback}) async {
-//    try {
-//      var result = await dim.getGroupMembersList(groupId);
-//      callback(result);
-//    } on PlatformException {
-//      print('获取群成员  失败');
-//    }
-//  }
-//
+  static Future<dynamic> getGroupMembersListModel(String groupId,
+      {Callback callback}) async {
+    try {
+      var result = await dim.getGroupMembersList(groupId);
+      callback(result);
+    } on PlatformException {
+      print('获取群成员  失败');
+    }
+  }
+
   static Future<dynamic> getGroupMembersListModelLIST(String groupId,
       {Callback callback}) async {
     try {
-//      var result = await dim.getGroupMembersList(groupId);
-//      var resultMembers;
-//      print('获取群成员 getGroupMembersListModel >>>> $result');
-//      List memberList = json.decode(result.toString().replaceAll("'", '"'));
-//      if (listNoEmpty(memberList)) {
-//        for (int i = 0; i < memberList.length; i++) {
-//          List<String> ls = new List();
-//
-//          ls.add(memberList[i]['user']);
-//          resultMembers = await dim.getUsersProfile(ls);
-//        }
-//      }
+      var result = await dim.getGroupMembersList(groupId);
+      var resultMembers;
+      print('获取群成员 getGroupMembersListModel >>>> $result');
+      List memberList = json.decode(result.toString().replaceAll("'", '"'));
+      if (listNoEmpty(memberList)) {
+        for (int i = 0; i < memberList.length; i++) {
+          List<String> ls = new List();
+
+          ls.add(memberList[i]['user']);
+          resultMembers = await dim.getUsersProfile(ls);
+        }
+      }
       callback(null);
 //      callback("[{'member':" +
 //          result.toString().replaceAll('[', '').replaceAll(']', '') +

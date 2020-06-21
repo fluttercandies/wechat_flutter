@@ -405,6 +405,13 @@ class Dim {
         .invokeMethod('getRemark', <String, dynamic>{'identifier': identifier});
   }
 
+  ///获取群成员列表
+  ///getGroupMembersList
+  Future<dynamic> getGroupMembersList(String groupId) async {
+    return await _methodChannel.invokeMethod(
+        'getGroupMembersList', <String, dynamic>{'groupId': groupId});
+  }
+
   dynamic _parseBatteryState(event) {
     return event;
   }

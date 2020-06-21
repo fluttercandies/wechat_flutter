@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:dim/commom/util.dart';
 import 'package:wechat_flutter/http/api.dart';
 import 'package:wechat_flutter/pages/mine/code_page.dart';
+import 'package:wechat_flutter/tools/commom.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';

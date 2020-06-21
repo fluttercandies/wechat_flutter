@@ -55,17 +55,12 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
   // 获取群组信息
   _getGroupInfo() {
     DimGroup.getGroupInfoListModel([widget.peer], callback: (result) {
-      print('群组数据群组数据 ' + result.toString());
       dataGroup = json.decode(result.toString().replaceAll("'", '"'));
       groupName = dataGroup[0]['groupName'].toString();
       String notice = strNoEmpty(dataGroup[0]['groupNotification'].toString())
           ? dataGroup[0]['groupNotification'].toString()
           : '暂无公告';
-//      if (notice.contains(new RegExp(r'[^\x00-\xff]'))) {
         groupNotification = notice;
-//      } else {
-//        groupNotification = Confidential.decodeBase64(notice);
-//      }
       time = dataGroup[0]['groupIntroduction'].toString();
       setState(() {});
     });
@@ -370,7 +365,7 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
 
     return Scaffold(
       backgroundColor: Color(0xffEDEDED),
-      appBar: ComMomBar(
+      appBar: new ComMomBar(
 //        context,
         title:'聊天信息 (${dataGroup[0]['memberNum']})',
 //        callBackType: 1,

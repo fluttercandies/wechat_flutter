@@ -38,6 +38,7 @@ dependencies:
     path: plugin/camera
   video_player: 0.10.0
   extended_text_field: 1.0.1
+  flutter_image_compress: 0.6.8
 
 dev_dependencies:
   flutter_test:
