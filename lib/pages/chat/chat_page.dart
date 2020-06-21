@@ -34,16 +34,11 @@ class _ChatPageState extends State<ChatPage> {
   bool _isMore = false;
   double keyboardHeight = 270.0;
   bool _emojiState = false;
-  double _emojiHeight = 0.0;
 
   TextEditingController _textController = TextEditingController();
   FocusNode _focusNode = new FocusNode();
   ScrollController _sC = ScrollController();
   PageController pageC = new PageController();
-
-  _showEmoji() => _emojiHeight = 235.0;
-
-  _hideEmoji() => _emojiHeight = 0.0;
 
   @override
   void initState() {
@@ -55,7 +50,7 @@ class _ChatPageState extends State<ChatPage> {
     Notice.addListener(WeChatActions.msg(), (v) => getChatMsgData());
 
     _focusNode.addListener(() {
-      if (_focusNode.hasFocus) _hideEmoji();
+      if (_focusNode.hasFocus) _emojiState = false;
     });
   }
 
@@ -133,7 +128,7 @@ class _ChatPageState extends State<ChatPage> {
           _isMore = !_isMore;
         }
       }
-      _hideEmoji();
+      _emojiState = false;
     });
   }
 
@@ -151,8 +146,7 @@ class _ChatPageState extends State<ChatPage> {
     return ExtendedTextField(
       specialTextSpanBuilder: TextSpanBuilder(showAtBackground: true),
       onTap: () => setState(() {
-        print('=========================');
-        if (_focusNode.hasFocus) _hideEmoji();
+        if (_focusNode.hasFocus) _emojiState = false;
       }),
       onChanged: (v) => setState(() {}),
       decoration: InputDecoration(
@@ -190,18 +184,14 @@ class _ChatPageState extends State<ChatPage> {
         voiceOnTap: () => onTapHandle(ButtonType.voice),
 //        insertMsg: (String msg) => insertText(msg),
         onEmojio: () {
-          _emojiState = !_emojiState;
-//                _sendMoreState = false;
+          if (_isMore) {
+            _emojiState = true;
+          } else {
+            _emojiState = !_emojiState;
+          }
           if (_emojiState) {
-//                  _focusNode.unfocus();
-            _showEmoji();
             FocusScope.of(context).requestFocus(new FocusNode());
             _isMore = false;
-//                  _hideSendMore();
-//                  _voiceIconState = true;
-          } else {
-            _hideEmoji();
-//                  _hideSendMore();
           }
           setState(() {});
         },
@@ -216,7 +206,7 @@ class _ChatPageState extends State<ChatPage> {
         type: widget.type,
       ),
       new Visibility(
-        visible: _emojiHeight > 1,
+        visible: _emojiState,
         child: emojiWidget(),
       ),
       new Container(
@@ -255,7 +245,7 @@ class _ChatPageState extends State<ChatPage> {
         onTap: () => setState(
           () {
             _isMore = false;
-            _emojiHeight = 0;
+            _emojiState = false;
           },
         ),
         decoration: BoxDecoration(color: chatBg),
@@ -267,7 +257,7 @@ class _ChatPageState extends State<ChatPage> {
   Widget emojiWidget() {
     return new GestureDetector(
       child: new SizedBox(
-        height: _emojiHeight ?? 236.0,
+        height: _emojiState ? keyboardHeight : 0,
         child: GridView.builder(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 7, crossAxisSpacing: 10.0, mainAxisSpacing: 10.0),
