@@ -1,6 +1,8 @@
+import 'package:extended_text/extended_text.dart';
 import 'package:flutter/material.dart';
 
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
+import 'package:wechat_flutter/ui/edit/text_span_builder.dart';
 
 class ContentMsg extends StatefulWidget {
   final Map msg;
@@ -38,8 +40,9 @@ class _ContentMsgState extends State<ContentMsg> {
       str = '[未知消息]';
     }
 
-    return new Text(
+    return new ExtendedText(
       str,
+      specialTextSpanBuilder: TextSpanBuilder(showAtBackground: true),
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
       style: _style,
