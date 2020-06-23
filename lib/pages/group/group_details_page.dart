@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:wechat_flutter/im/friend/fun_dim_friend.dart';
 import 'package:wechat_flutter/im/fun_dim_group_model.dart';
 import 'package:wechat_flutter/im/group/fun_dim_info.dart';
+import 'package:wechat_flutter/pages/group/group_member_details.dart';
 import 'package:wechat_flutter/tools/commom.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'package:wechat_flutter/ui/dialog/confirm_alert.dart';
@@ -21,8 +22,7 @@ class GroupDetailsPage extends StatefulWidget {
 
 class _GroupDetailsPageState extends State<GroupDetailsPage> {
   bool _top = false;
-  bool _DND = false;
-  String _myGroupNickName = '我的默认群昵称';
+  bool _dnd = false;
   String dimUser;
   String groupName;
   String groupNotification;
@@ -99,8 +99,7 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
         builder: (context, snap) {
           return FlatButton(
               onPressed: () {
-//                routePush(
-//                    GroupMemberDetails(dimUser == uId ? true : false, uId));
+                routePush(GroupMemberDetails(dimUser == uId, uId));
               },
               child: Column(
                 children: <Widget>[
@@ -150,66 +149,12 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
     return FlatButton(
       padding: EdgeInsets.only(top: 15.0, bottom: 15.0, left: 20, right: 10.0),
       color: Colors.white,
-      onPressed: () {
-//        switch (title) {
-//          case '群聊名称':
-//            routePush(UpdateGroupName(widget.peer, groupName)).then((data) {
-//              groupName = data ?? groupName;
-//            });
-//            break;
-//          case '群二维码':
-//            break;
-//          case '群公告':
-//            routePush(
-//              GroupBillBoardPage(
-//                dataGroup[0]['groupOwner'],
-//                groupNotification,
-//                groupId: widget.peer,
-//                time: time,
-//                callback: (timeData) => time = timeData,
-//              ),
-//            ).then((data) {
-//              groupNotification = data ?? groupNotification;
-//            });
-//            break;
-//          case '查找聊天记录':
-//            routePush(new SearchPage());
-//            break;
-//          case '消息免打扰':
-//            _DND = !_DND;
-//            _DND == true ? _setDND(1) : _setDND(2);
-//            break;
-//          case '聊天置顶':
-//            _top = !_top;
-//            setState(() {});
-//            _top == true ? _setTop(1) : _setTop(2);
-//            break;
-//          case '我的群昵称':
-//            routePush(MyGroupNickName(detail)).then((myGroupNickName) {
-//              _myGroupNickName = myGroupNickName ?? _myGroupNickName;
-//            });
-//            break;
-//          case '设置当前聊天背景':
-//            routePush(new ChatBackgroundPage());
-//            break;
-//          case '我在本群的昵称':
-//            groupCardNameModify(context, widget.peer, text: cardName,
-//                callback: (isC) {
-//              if (isC) getCardName();
-//            });
-//            break;
-//          case '投诉':
-//            routePush(new ComplaintPage());
-//            break;
-//        }
-      },
-      child: Row(
+      onPressed: () => handle(title),
+      child: new Row(
         children: <Widget>[
-          new Container(
-            width: width != 0 ? width : null,
+          new Expanded(
             child: Text(title),
           ),
-          Expanded(child: Container()),
           new SizedBox(
             width: widthT(),
             child: Text(
@@ -234,14 +179,17 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
         callback: (_) {});
   }
 
-  // 设置聊天置顶
-  _setTop(int type) {
-    print('设置聊天置顶 >>> $type');
-  }
+  @override
+  Widget build(BuildContext context) {
+    SizeConfig().init(context);
+    if (!listNoEmpty(dataGroup)) {
+      return new Container(color: Colors.white);
+    }
 
-  Widget body() {
-    return SingleChildScrollView(
-      child: Column(
+    return Scaffold(
+      backgroundColor: Color(0xffEDEDED),
+      appBar: new ComMomBar(title: '聊天信息 (${dataGroup[0]['memberNum']})'),
+      body: ListView(
         children: <Widget>[
           new Container(
             color: Colors.white,
@@ -282,9 +230,9 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
           new Space(height: 10.0),
           functionBtn('消息免打扰',
               right: Switch(
-                value: _DND,
+                value: _dnd,
                 onChanged: (bool value) {
-                  _DND = value;
+                  _dnd = value;
                   setState(() {});
                   value == true ? _setDND(1) : _setDND(2);
                 },
@@ -356,22 +304,59 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
     );
   }
 
-  @override
-  Widget build(BuildContext context) {
-    SizeConfig().init(context);
-    if (!listNoEmpty(dataGroup)) {
-      return new Container(color: Colors.white);
-    }
-
-    return Scaffold(
-      backgroundColor: Color(0xffEDEDED),
-      appBar: new ComMomBar(
-//        context,
-        title: '聊天信息 (${dataGroup[0]['memberNum']})',
-//        callBackType: 1,
-//        callback: (data) => widget.callBack(groupName),
-      ),
-      body: body(),
-    );
+  handle(String title) {
+//    switch (title) {
+//      case '群聊名称':
+//        routePush(UpdateGroupName(widget.peer, groupName)).then((data) {
+//          groupName = data ?? groupName;
+//        });
+//        break;
+//      case '群二维码':
+//        break;
+//      case '群公告':
+//        routePush(
+//          GroupBillBoardPage(
+//            dataGroup[0]['groupOwner'],
+//            groupNotification,
+//            groupId: widget.peer,
+//            time: time,
+//            callback: (timeData) => time = timeData,
+//          ),
+//        ).then((data) {
+//          groupNotification = data ?? groupNotification;
+//        });
+//        break;
+//      case '查找聊天记录':
+//        routePush(new SearchPage());
+//        break;
+//      case '消息免打扰':
+//        _dnd = !_dnd;
+//        _dnd == true ? _setDND(1) : _setDND(2);
+//        break;
+//      case '聊天置顶':
+//        _top = !_top;
+//        setState(() {});
+//        _top == true ? _setTop(1) : _setTop(2);
+//        break;
+//      case '我的群昵称':
+//        routePush(MyGroupNickName(detail)).then((myGroupNickName) {
+//          _myGroupNickName = myGroupNickName ?? _myGroupNickName;
+//        });
+//        break;
+//      case '设置当前聊天背景':
+//        routePush(new ChatBackgroundPage());
+//        break;
+//      case '我在本群的昵称':
+//        groupCardNameModify(context, widget.peer, text: cardName,
+//            callback: (isC) {
+//          if (isC) getCardName();
+//        });
+//        break;
+//      case '投诉':
+//        routePush(new ComplaintPage());
+//        break;
+//    }
   }
+
+  _setTop(int i) {}
 }
