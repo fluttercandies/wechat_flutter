@@ -171,7 +171,6 @@ class _ChatPageState extends State<ChatPage> {
           : new Spacer(),
       new ChatDetailsRow(
         voiceOnTap: () => onTapHandle(ButtonType.voice),
-//        insertMsg: (String msg) => insertText(msg),
         onEmojio: () {
           if (_isMore) {
             _emojiState = true;

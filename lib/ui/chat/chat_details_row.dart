@@ -4,13 +4,10 @@ import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'package:wechat_flutter/ui/item/chat_voice.dart';
 import 'package:flutter/material.dart';
 
-//typedef InsertMsg = Function(String msg);
-
 class ChatDetailsRow extends StatefulWidget {
   final GestureTapCallback voiceOnTap;
   final bool isVoice;
   final LayoutWidgetBuilder edit;
-//  final InsertMsg insertMsg;
   final VoidCallback onEmojio;
   final Widget more;
   final String id;
