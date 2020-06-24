@@ -7,6 +7,7 @@ import 'package:wechat_flutter/im/fun_dim_group_model.dart';
 import 'package:wechat_flutter/im/group/fun_dim_info.dart';
 import 'package:wechat_flutter/pages/group/group_billboard_page.dart';
 import 'package:wechat_flutter/pages/group/group_member_details.dart';
+import 'package:wechat_flutter/pages/group/group_remarks_page.dart';
 import 'package:wechat_flutter/pages/mine/code_page.dart';
 import 'package:wechat_flutter/tools/commom.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
@@ -370,6 +371,9 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
 
   handle(String title) {
     switch (title) {
+      case '备注':
+        routePush(new GroupRemarksPage());
+        break;
       case '群聊名称':
 //        routePush(UpdateGroupName(widget.peer, groupName)).then((data) {
 //          groupName = data ?? groupName;
