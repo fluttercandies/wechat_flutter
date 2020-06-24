@@ -8,6 +8,8 @@ import 'package:wechat_flutter/provider/global_model.dart';
 
 import 'package:wechat_flutter/ui/message_view/Img_msg.dart';
 import 'package:wechat_flutter/ui/message_view/join_message.dart';
+import 'package:wechat_flutter/ui/message_view/modify_groupInfo_message.dart';
+import 'package:wechat_flutter/ui/message_view/modify_notification_message.dart';
 import 'package:wechat_flutter/ui/message_view/quit_message.dart';
 import 'package:wechat_flutter/ui/message_view/sound_msg.dart';
 import 'package:wechat_flutter/ui/message_view/tem_message.dart';
@@ -41,6 +43,17 @@ class _SendMessageViewState extends State<SendMessageView> {
       return new ImgMsg(msg, widget.model);
     } else if (msgType == 'Sound' || iosSound) {
       return new SoundMsg(widget.model);
+//    } else if (msg.toString().contains('snapshotPath') &&
+//        msg.toString().contains('videoPath')) {
+//      return VideoMessage(msg, msgType, widget.data);
+    } else if (msg['tipsType'] == 'Join') {
+      return JoinMessage(msg);
+    } else if (msg['tipsType'] == 'Quit') {
+      return QuitMessage(msg);
+    } else if (msg['groupInfoList'][0]['type'] == 'ModifyIntroduction') {
+      return ModifyNotificationMessage(msg);
+    } else if (msg['groupInfoList'][0]['type'] == 'ModifyName') {
+      return ModifyGroupInfoMessage(msg);
     } else {
       return new Text('未知消息');
     }
