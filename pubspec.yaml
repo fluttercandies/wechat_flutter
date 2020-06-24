@@ -143,5 +143,6 @@ flutter:
     - assets/images/discover/game_center_h5.webp
     - assets/images/discover/mini_program.webp
     - assets/images/emoji/
+    - assets/images/group/
 
     - assets/data/friends.json

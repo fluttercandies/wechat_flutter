@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
-codeDialog(BuildContext context) {
+codeDialog(BuildContext context, List items) {
   Widget item(item) {
     return new Container(
       width: winWidth(context),
@@ -28,8 +28,6 @@ codeDialog(BuildContext context) {
   showModalBottomSheet(
     context: context,
     builder: (context) {
-      List data = ['换个样式', '保存到手机', '扫描二维码', '重置二维码'];
-
       return new Center(
         child: new Material(
           type: MaterialType.transparency,
@@ -49,7 +47,7 @@ codeDialog(BuildContext context) {
                   color: Colors.white,
                   child: new Column(
                     children: <Widget>[
-                      new Column(children: data.map(item).toList()),
+                      new Column(children: items.map(item).toList()),
                       new HorizontalLine(color: appBarColor, height: 10.0),
                       new FlatButton(
                         padding: EdgeInsets.symmetric(vertical: 15.0),
