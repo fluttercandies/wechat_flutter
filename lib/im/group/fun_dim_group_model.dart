@@ -125,18 +125,6 @@ class DimGroup {
     }
   }
 
-  static Future<dynamic> modifyGroupNotificationModel(
-      String groupId, String notification, String time,
-      {Callback callback}) async {
-    try {
-      var result =
-          await dim.modifyGroupNotification(groupId, notification, time);
-      callback(result);
-    } on PlatformException {
-      print('修改群公告  失败');
-    }
-  }
-
   static Future<dynamic> setReceiveMessageOptionModel(
       String groupId, String identifier, int type,
       {Callback callback}) async {

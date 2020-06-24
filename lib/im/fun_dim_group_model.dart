@@ -123,7 +123,7 @@ class DimGroup {
     try {
       var result =
           await dim.modifyGroupNotification(groupId, notification, time);
-      callback(result);
+      if (callback != null) callback(result);
     } on PlatformException {
       print('修改群公告  失败');
     }
