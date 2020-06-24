@@ -22,6 +22,8 @@ class GroupDetailsPage extends StatefulWidget {
 
 class _GroupDetailsPageState extends State<GroupDetailsPage> {
   bool _top = false;
+  bool _showName = false;
+  bool _contact = false;
   bool _dnd = false;
   String dimUser;
   String groupName;
@@ -31,7 +33,6 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
 
   List memberList = new List();
   List dataGroup;
-  List groupUserInfo = [];
 
   @override
   void initState() {
@@ -70,15 +71,9 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
   _getGroupMembers() async {
     await DimGroup.getGroupMembersListModelLIST(widget.peer,
         callback: (result) {
-      print('获取群成员 getGroupMembersListModel >>>> $result');
       memberList = json.decode(result.toString().replaceAll("'", '"'));
       setState(() {});
     });
-    if (listNoEmpty(memberList))
-      for (int i = 0; i < memberList.length; i++)
-        await DimFriend.getUsersProfile(memberList[i]['user'], (cb) {
-          groupUserInfo.add(json.decode(cb.toString()));
-        });
   }
 
   Widget memberItem(item) {
@@ -86,55 +81,50 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
     String uId;
     String uFace = '';
     String nickName;
-//    if (listNoEmpty(groupUserInfo))
-//      print('groupUserInfo ' + groupUserInfo[1][0].toString());
     return new FutureBuilder(
-        future: DimFriend.getUsersProfile(item['user'], (cb) {
-          userInfo = json.decode(cb.toString());
-          uId = userInfo[0]['identifier'];
-          uFace = userInfo[0]['faceUrl'];
-          print('faceUrlfaceUrl::' + cb.toString());
-          nickName = userInfo[0]['nickName'];
-        }),
-        builder: (context, snap) {
-          return FlatButton(
-              onPressed: () {
-                routePush(GroupMemberDetails(dimUser == uId, uId));
-              },
-              child: Column(
-                children: <Widget>[
-                  ClipRRect(
-                    borderRadius: BorderRadius.all(Radius.circular(5)),
-                    child: !strNoEmpty(uFace)
-                        ? new Image.asset(defIcon, height: 48.0, width: 48.0)
-                        : CachedNetworkImage(
-                            imageUrl: uFace,
-                            height: 48.0,
-                            width: 48.0,
-                            cacheManager: cacheManager,
-                          ),
-                  ),
-                  SizedBox(height: 2),
-                  Container(
-                    alignment: Alignment.center,
-                    height: 20.0,
-                    width: 50,
-                    child: Text(
-                      nickName == null || nickName == ''
-                          ? '默认名称'
-                          : nickName.length > 4
-                              ? '${nickName.substring(0, 3)}...'
-                              : nickName,
-                      style: TextStyle(fontSize: 12.0),
-                    ),
-                  ),
-                ],
-              ));
-        });
+      future: DimFriend.getUsersProfile(item['user'], (cb) {
+        userInfo = json.decode(cb.toString());
+        uId = userInfo[0]['identifier'];
+        uFace = userInfo[0]['faceUrl'];
+        print('faceUrlfaceUrl::' + cb.toString());
+        nickName = userInfo[0]['nickName'];
+      }),
+      builder: (context, snap) {
+        return FlatButton(
+          onPressed: () {
+            routePush(GroupMemberDetails(dimUser == uId, uId));
+          },
+          child: Column(
+            children: <Widget>[
+              ClipRRect(
+                borderRadius: BorderRadius.all(Radius.circular(5)),
+                child: !strNoEmpty(uFace)
+                    ? new Image.asset(defIcon, height: 48.0, width: 48.0)
+                    : CachedNetworkImage(
+                        imageUrl: uFace,
+                        height: 48.0,
+                        width: 48.0,
+                        cacheManager: cacheManager,
+                      ),
+              ),
+              SizedBox(height: 2),
+              Container(
+                alignment: Alignment.center,
+                height: 20.0,
+                width: 50,
+                child: Text(
+                  '${!strNoEmpty(nickName) ? uId : nickName.length > 4 ? '${nickName.substring(0, 3)}...' : nickName}',
+                  style: TextStyle(fontSize: 12.0),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 
-  Widget functionBtn(String title,
-      {String detail, Widget right, double width}) {
+  Widget functionBtn(String title, {String detail, Widget right}) {
     if (detail == null && detail == '') {
       return new Container();
     }
@@ -146,29 +136,51 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
       }
     }
 
+    bool isSwitch = title == '消息免打扰' ||
+        title == '聊天置顶' ||
+        title == '保存到通讯录' ||
+        title == '显示群成员昵称';
+    bool noBorder = title == '备注' ||
+        title == '查找聊天记录' ||
+        title == '保存到通讯录' ||
+        title == '显示群成员昵称' ||
+        title == '投诉' ||
+        title == '清空聊天记录';
+
     return FlatButton(
-      padding: EdgeInsets.only(top: 15.0, bottom: 15.0, left: 20, right: 10.0),
+      padding: EdgeInsets.only(left: 10, right: 10.0),
       color: Colors.white,
       onPressed: () => handle(title),
-      child: new Row(
-        children: <Widget>[
-          new Expanded(
-            child: Text(title),
-          ),
-          new SizedBox(
-            width: widthT(),
-            child: Text(
-              detail ?? '',
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(color: Colors.grey),
+      child: new Container(
+        padding: EdgeInsets.only(
+          top: isSwitch ? 10 : 15.0,
+          bottom: isSwitch ? 10 : 15.0,
+        ),
+        decoration: BoxDecoration(
+          border: noBorder
+              ? null
+              : Border(bottom: BorderSide(color: Colors.grey, width: 0.2)),
+        ),
+        child: new Row(
+          children: <Widget>[
+            new Expanded(
+              child: Text(title),
             ),
-          ),
-          right != null ? right : new Container(),
-          new Space(width: 5.0),
-          title == '消息免打扰' || title == '聊天置顶'
-              ? Container()
-              : Icon(Icons.chevron_right, color: Colors.grey),
-        ],
+            new SizedBox(
+              width: widthT(),
+              child: Text(
+                detail ?? '',
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(color: Colors.grey),
+              ),
+            ),
+            right != null ? right : new Container(),
+            new Space(width: 5.0),
+            isSwitch
+                ? Container()
+                : Icon(Icons.chevron_right, color: Colors.grey),
+          ],
+        ),
       ),
     );
   }
@@ -189,7 +201,7 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
     return Scaffold(
       backgroundColor: Color(0xffEDEDED),
       appBar: new ComMomBar(title: '聊天信息 (${dataGroup[0]['memberNum']})'),
-      body: ListView(
+      body: new ListView(
         children: <Widget>[
           new Container(
             color: Colors.white,
@@ -215,39 +227,60 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
             },
           ),
           SizedBox(height: 10.0),
-          functionBtn('群聊名称',
-              detail: groupName.toString().length > 7
-                  ? '${groupName.toString().substring(0, 6)}...'
-                  : groupName.toString(),
-              width: SizeConfig.blockSizeHorizontal * 16),
-          functionBtn('群公告',
-              detail: groupNotification.toString().length < 10
-                  ? groupNotification
-                  : '${groupNotification.toString().substring(0, 9)}...',
-              width: SizeConfig.blockSizeHorizontal * 16),
+          functionBtn(
+            '群聊名称',
+            detail: groupName.toString().length > 7
+                ? '${groupName.toString().substring(0, 6)}...'
+                : groupName.toString(),
+          ),
+          functionBtn(
+            '群公告',
+            detail: groupNotification.toString().length < 10
+                ? groupNotification
+                : '${groupNotification.toString().substring(0, 9)}...',
+          ),
+          functionBtn('备注'),
           new Space(height: 10.0),
           functionBtn('查找聊天记录'),
           new Space(height: 10.0),
           functionBtn('消息免打扰',
-              right: Switch(
+              right: CupertinoSwitch(
                 value: _dnd,
                 onChanged: (bool value) {
                   _dnd = value;
                   setState(() {});
-                  value == true ? _setDND(1) : _setDND(2);
+                  value ? _setDND(1) : _setDND(2);
                 },
               )),
           functionBtn('聊天置顶',
-              right: Switch(
+              right: CupertinoSwitch(
                 value: _top,
                 onChanged: (bool value) {
                   _top = value;
                   setState(() {});
-                  value == true ? _setTop(1) : _setTop(2);
+                  value ? _setTop(1) : _setTop(2);
+                },
+              )),
+          functionBtn('保存到通讯录',
+              right: CupertinoSwitch(
+                value: _contact,
+                onChanged: (bool value) {
+                  _contact = value;
+                  setState(() {});
+                  value ? _setTop(1) : _setTop(2);
                 },
               )),
           new Space(height: 10.0),
           functionBtn('我在本群的昵称', detail: cardName),
+          functionBtn('显示群成员昵称',
+              right: CupertinoSwitch(
+                value: _showName,
+                onChanged: (bool value) {
+                  _showName = value;
+                  setState(() {});
+                  value ? _setTop(1) : _setTop(2);
+                },
+              )),
           new Space(),
           functionBtn('设置当前聊天背景'),
           functionBtn('投诉'),
@@ -293,7 +326,7 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
                 '删除并退出',
                 style: TextStyle(
                     color: Colors.red,
-                    fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.w500,
                     fontSize: 18.0),
               ),
             ),
@@ -331,12 +364,12 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
 //        break;
 //      case '消息免打扰':
 //        _dnd = !_dnd;
-//        _dnd == true ? _setDND(1) : _setDND(2);
+//        _dnd ? _setDND(1) : _setDND(2);
 //        break;
 //      case '聊天置顶':
 //        _top = !_top;
 //        setState(() {});
-//        _top == true ? _setTop(1) : _setTop(2);
+//        _top ? _setTop(1) : _setTop(2);
 //        break;
 //      case '我的群昵称':
 //        routePush(MyGroupNickName(detail)).then((myGroupNickName) {

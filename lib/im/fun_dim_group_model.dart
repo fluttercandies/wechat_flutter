@@ -50,7 +50,6 @@ class DimGroup {
       {Callback callback}) async {
     try {
       var result = await dim.getGroupMembersList(groupId);
-      var resultMembers;
       print('获取群成员 getGroupMembersListModel >>>> $result');
       List memberList = json.decode(result.toString().replaceAll("'", '"'));
       if (listNoEmpty(memberList)) {
@@ -58,16 +57,9 @@ class DimGroup {
           List<String> ls = new List();
 
           ls.add(memberList[i]['user']);
-          resultMembers = await dim.getUsersProfile(ls);
         }
       }
       callback(result);
-//      callback("[{'member':" +
-//          result.toString().replaceAll('[', '').replaceAll(']', '') +
-//          "," +
-//          "'info':" +
-//          resultMembers +
-//          "}]");
     } on PlatformException {
       print('获取群成员  失败');
     }
