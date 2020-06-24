@@ -36,6 +36,17 @@ class _ContentMsgState extends State<ContentMsg> {
       str = '[图片]';
     } else if (msgType == 'Sound' || iosSound) {
       str = '[语音消息]';
+    } else if (msg.toString().contains('snapshotPath') &&
+        msg.toString().contains('videoPath')) {
+      str = '[视频]';
+    } else if (msg['tipsType'] == 'Join') {
+      str = '[系统消息] 新人入群';
+    } else if (msg['tipsType'] == 'Quit') {
+      str = '[系统消息] 有人退出群聊';
+    } else if (msg['groupInfoList'][0]['type'] == 'ModifyIntroduction') {
+      str = '[系统消息] 群公告';
+    } else if (msg['groupInfoList'][0]['type'] == 'ModifyName') {
+      str = '[系统消息] 群名修改';
     } else {
       str = '[未知消息]';
     }
