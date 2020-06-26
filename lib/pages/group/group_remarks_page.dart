@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
 class GroupRemarksPage extends StatefulWidget {
+  final bool isGroupName;
+
+  GroupRemarksPage([this.isGroupName = false]);
+
   @override
   _GroupRemarksPageState createState() => _GroupRemarksPageState();
 }
@@ -20,7 +24,7 @@ class _GroupRemarksPageState extends State<GroupRemarksPage> {
             children: <Widget>[
               new Space(height: 30),
               new Text(
-                '备注',
+                '${widget.isGroupName ? '修改群聊名称' : '备注'}',
                 style: TextStyle(
                     color: Colors.black,
                     fontSize: 20,
@@ -28,7 +32,8 @@ class _GroupRemarksPageState extends State<GroupRemarksPage> {
               ),
               new Padding(
                 padding: EdgeInsets.symmetric(vertical: 15),
-                child: new Text('群聊的备注仅自己可见'),
+                child: new Text(
+                    '${widget.isGroupName ? '修改群聊名称后，将在群内通知其他成员' : '群聊的备注仅自己可见'}'),
               ),
               new Container(
                 padding: EdgeInsets.symmetric(vertical: 10),
@@ -48,7 +53,7 @@ class _GroupRemarksPageState extends State<GroupRemarksPage> {
                     new Expanded(
                       child: new TextField(
                         decoration: InputDecoration(
-                          hintText: '备注',
+                          hintText: '${widget.isGroupName ? '群聊名称' : '备注'}',
                           border: InputBorder.none,
                         ),
                       ),
@@ -57,24 +62,27 @@ class _GroupRemarksPageState extends State<GroupRemarksPage> {
                 ),
               ),
               new Space(),
-              new Row(
-                children: <Widget>[
-                  new Text(
-                    '群聊名称：wechat_flutter 106号群',
-                    style: TextStyle(color: Colors.grey, fontSize: 14),
-                  ),
-                  new Space(),
-                  new InkWell(
-                    child: new Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 2),
-                      child: new Text(
-                        '填入',
-                        style: TextStyle(color: mainTextColor, fontSize: 14),
-                      ),
+              new Visibility(
+                visible: !widget.isGroupName,
+                child: new Row(
+                  children: <Widget>[
+                    new Text(
+                      '群聊名称：wechat_flutter 106号群',
+                      style: TextStyle(color: Colors.grey, fontSize: 14),
                     ),
-                    onTap: () => showToast(context, '敬请期待'),
-                  )
-                ],
+                    new Space(),
+                    new InkWell(
+                      child: new Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 2),
+                        child: new Text(
+                          '填入',
+                          style: TextStyle(color: mainTextColor, fontSize: 14),
+                        ),
+                      ),
+                      onTap: () => showToast(context, '敬请期待'),
+                    )
+                  ],
+                ),
               ),
               new Spacer(),
               new ComMomButton(

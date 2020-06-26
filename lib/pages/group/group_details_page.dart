@@ -375,6 +375,7 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
         routePush(new GroupRemarksPage());
         break;
       case '群聊名称':
+        routePush(new GroupRemarksPage(true));
 //        routePush(UpdateGroupName(widget.peer, groupName)).then((data) {
 //          groupName = data ?? groupName;
 //        });
