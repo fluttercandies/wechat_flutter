@@ -369,7 +369,7 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
         });
         break;
       case '投诉':
-//        routePush(new ComplaintPage());
+        routePush(new WebViewPage(helpUrl, '投诉'));
         break;
     }
   }

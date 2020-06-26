@@ -21,7 +21,7 @@ dependencies:
   #  cached_network_image: 1.1.1 # 1.9版本flutter
   cached_network_image: 2.0.0 # 2.0(最新)版本flutter
   toast: 0.1.5
-  webview_flutter: 0.3.14+1
+  webview_flutter: 0.3.22+1
   image_picker: 0.6.1+2
   extended_text: 1.0.1
   url_launcher: 5.2.7
