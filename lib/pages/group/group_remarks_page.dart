@@ -1,17 +1,46 @@
 import 'package:flutter/material.dart';
+import 'package:wechat_flutter/im/fun_dim_group_model.dart';
 
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
 class GroupRemarksPage extends StatefulWidget {
   final bool isGroupName;
+  final String groupName;
+  final String groupId;
 
-  GroupRemarksPage([this.isGroupName = false]);
+  GroupRemarksPage({
+    this.isGroupName = false,
+    this.groupName = '',
+    this.groupId,
+  });
 
   @override
   _GroupRemarksPageState createState() => _GroupRemarksPageState();
 }
 
 class _GroupRemarksPageState extends State<GroupRemarksPage> {
+  TextEditingController _textController = TextEditingController();
+
+  handle() {
+    if (!strNoEmpty(_textController.text)) {
+      showToast(context, '请输入内容');
+      return;
+    }
+    if (widget.isGroupName) {
+      DimGroup.modifyGroupNameModel(widget.groupId, _textController.text,
+          callback: (_) {});
+      Navigator.pop(context, _textController.text);
+    } else {
+      showToast(context, '敬请期待');
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _textController.text = widget.groupName;
+  }
+
   @override
   Widget build(BuildContext context) {
     return new MainInputBody(
@@ -52,6 +81,7 @@ class _GroupRemarksPageState extends State<GroupRemarksPage> {
                     new Space(),
                     new Expanded(
                       child: new TextField(
+                        controller: _textController,
                         decoration: InputDecoration(
                           hintText: '${widget.isGroupName ? '群聊名称' : '备注'}',
                           border: InputBorder.none,
@@ -87,7 +117,7 @@ class _GroupRemarksPageState extends State<GroupRemarksPage> {
               new Spacer(),
               new ComMomButton(
                 text: '完成',
-                onTap: () => showToast(context, '敬请期待'),
+                onTap: () => handle(),
                 width: winWidth(context) / 2,
               ),
               new Space(height: winKeyHeight(context) > 1 ? 15 : 50),

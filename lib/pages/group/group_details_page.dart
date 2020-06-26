@@ -204,7 +204,10 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
             new Space(width: 10.0),
             isSwitch
                 ? Container()
-                : Image.asset('assets/images/group/ic_right.png',width: 15,),
+                : Image.asset(
+                    'assets/images/group/ic_right.png',
+                    width: 15,
+                  ),
           ],
         ),
       ),
@@ -375,10 +378,12 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
         routePush(new GroupRemarksPage());
         break;
       case '群聊名称':
-        routePush(new GroupRemarksPage(true));
-//        routePush(UpdateGroupName(widget.peer, groupName)).then((data) {
-//          groupName = data ?? groupName;
-//        });
+        routePush(
+          new GroupRemarksPage(
+              isGroupName: true, groupName: groupName, groupId: widget.peer),
+        ).then((data) {
+          groupName = data ?? groupName;
+        });
         break;
       case '群二维码':
         routePush(new CodePage(true));
