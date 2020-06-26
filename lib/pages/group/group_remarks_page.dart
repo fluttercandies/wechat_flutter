@@ -3,14 +3,16 @@ import 'package:wechat_flutter/im/fun_dim_group_model.dart';
 
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
+enum GroupInfoType { remark, name, cardName }
+
 class GroupRemarksPage extends StatefulWidget {
-  final bool isGroupName;
-  final String groupName;
+  final GroupInfoType groupInfoType;
+  final String text;
   final String groupId;
 
   GroupRemarksPage({
-    this.isGroupName = false,
-    this.groupName = '',
+    this.groupInfoType = GroupInfoType.remark,
+    this.text = '',
     this.groupId,
   });
 
@@ -26,7 +28,7 @@ class _GroupRemarksPageState extends State<GroupRemarksPage> {
       showToast(context, '请输入内容');
       return;
     }
-    if (widget.isGroupName) {
+    if (widget.groupInfoType == GroupInfoType.name) {
       DimGroup.modifyGroupNameModel(widget.groupId, _textController.text,
           callback: (_) {});
       Navigator.pop(context, _textController.text);
@@ -38,7 +40,27 @@ class _GroupRemarksPageState extends State<GroupRemarksPage> {
   @override
   void initState() {
     super.initState();
-    _textController.text = widget.groupName;
+    _textController.text = widget.text;
+  }
+
+  String get label {
+    if (widget.groupInfoType == GroupInfoType.name) {
+      return '修改群聊名称';
+    } else if (widget.groupInfoType == GroupInfoType.cardName) {
+      return '我在本群的昵称';
+    } else {
+      return '备注';
+    }
+  }
+
+  String get des {
+    if (widget.groupInfoType == GroupInfoType.name) {
+      return '修改群聊名称后，将在群内通知其他成员';
+    } else if (widget.groupInfoType == GroupInfoType.cardName) {
+      return '昵称修改后，只会在此群内显示，群内成员都可以看见。';
+    } else {
+      return '群聊的备注仅自己可见';
+    }
   }
 
   @override
@@ -53,7 +75,7 @@ class _GroupRemarksPageState extends State<GroupRemarksPage> {
             children: <Widget>[
               new Space(height: 30),
               new Text(
-                '${widget.isGroupName ? '修改群聊名称' : '备注'}',
+                '$label',
                 style: TextStyle(
                     color: Colors.black,
                     fontSize: 20,
@@ -61,8 +83,7 @@ class _GroupRemarksPageState extends State<GroupRemarksPage> {
               ),
               new Padding(
                 padding: EdgeInsets.symmetric(vertical: 15),
-                child: new Text(
-                    '${widget.isGroupName ? '修改群聊名称后，将在群内通知其他成员' : '群聊的备注仅自己可见'}'),
+                child: new Text('$des', textAlign: TextAlign.center),
               ),
               new Container(
                 padding: EdgeInsets.symmetric(vertical: 10),
@@ -83,7 +104,8 @@ class _GroupRemarksPageState extends State<GroupRemarksPage> {
                       child: new TextField(
                         controller: _textController,
                         decoration: InputDecoration(
-                          hintText: '${widget.isGroupName ? '群聊名称' : '备注'}',
+                          hintText:
+                              '${widget.groupInfoType == GroupInfoType.name ? '群聊名称' : '备注'}',
                           border: InputBorder.none,
                         ),
                       ),
@@ -93,7 +115,7 @@ class _GroupRemarksPageState extends State<GroupRemarksPage> {
               ),
               new Space(),
               new Visibility(
-                visible: !widget.isGroupName,
+                visible: widget.groupInfoType == GroupInfoType.remark,
                 child: new Row(
                   children: <Widget>[
                     new Text(

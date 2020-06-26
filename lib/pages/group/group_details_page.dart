@@ -34,7 +34,7 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
   String groupName;
   String groupNotification;
   String time;
-  String cardName;
+  String cardName = '默认';
 
   List memberList = [
     {'user': '+'},
@@ -306,7 +306,7 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
                   },
                 )),
             new Space(height: 10.0),
-            functionBtn('我在本群的昵称', detail: cardName),
+            functionBtn('我在群里的昵称', detail: cardName),
             functionBtn('显示群成员昵称',
                 right: CupertinoSwitch(
                   value: _showName,
@@ -381,7 +381,10 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
       case '群聊名称':
         routePush(
           new GroupRemarksPage(
-              isGroupName: true, groupName: groupName, groupId: widget.peer),
+            groupInfoType: GroupInfoType.name,
+            text: groupName,
+            groupId: widget.peer,
+          ),
         ).then((data) {
           groupName = data ?? groupName;
         });
@@ -414,19 +417,24 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
         setState(() {});
         _top ? _setTop(1) : _setTop(2);
         break;
-      case '我的群昵称':
-//        routePush(MyGroupNickName(detail)).then((myGroupNickName) {
-//          _myGroupNickName = myGroupNickName ?? _myGroupNickName;
-//        });
-        break;
       case '设置当前聊天背景':
 //        routePush(new ChatBackgroundPage());
         break;
-      case '我在本群的昵称':
+      case '我在群里的昵称':
 //        groupCardNameModify(context, widget.peer, text: cardName,
 //            callback: (isC) {
 //          if (isC) getCardName();
 //        });
+
+        routePush(
+          new GroupRemarksPage(
+            groupInfoType: GroupInfoType.cardName,
+            text: cardName,
+            groupId: widget.peer,
+          ),
+        ).then((data) {
+          cardName = data ?? cardName;
+        });
         break;
       case '投诉':
 //        routePush(new ComplaintPage());
