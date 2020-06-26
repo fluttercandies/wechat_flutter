@@ -174,7 +174,7 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
         title == '清空聊天记录';
 
     return FlatButton(
-      padding: EdgeInsets.only(left: 10, right: 10.0),
+      padding: EdgeInsets.only(left: 15, right: 15.0),
       color: Colors.white,
       onPressed: () => handle(title),
       child: new Container(
