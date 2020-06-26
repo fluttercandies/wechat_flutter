@@ -266,41 +266,39 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
                 if (widget.peer == '') return;
                 confirmAlert(context, (isOK) {
                   if (isOK) {
-//                  DimGroup.quitGroupModel(widget.peer, callback: (str) {
-//                    if (str.toString().contains('失败')) {
-//                      print('失败了，开始执行解散');
-//                      DimGroup.deleteGroupModel(widget.peer, callback: (data) {
-//                        if (str.toString().contains('成功')) {
-//                          Navigator.of(context).pop();
-//                          Navigator.of(context).pop();
-//                          if (Navigator.canPop(context)) {
-//                            Navigator.of(context).pop();
-//                          }
-//                          print('解散群聊成功');
-//                          showToast(context, '解散群聊成功');
-//                        }
-//                      });
-//                    } else if (str.toString().contains('succ')) {
-//                      Navigator.of(context).pop();
-//                      Navigator.of(context).pop();
-//                      if (Navigator.canPop(context)) {
-//                        Navigator.of(context).pop();
-//                      }
-//                      print('退出成功');
-//                      showToast(context, '退出成功');
-//                    }
-//                  });
+                  DimGroup.quitGroupModel(widget.peer, callback: (str) {
+                    if (str.toString().contains('失败')) {
+                      print('失败了，开始执行解散');
+                      DimGroup.deleteGroupModel(widget.peer, callback: (data) {
+                        if (str.toString().contains('成功')) {
+                          Navigator.of(context).pop();
+                          Navigator.of(context).pop();
+                          if (Navigator.canPop(context)) {
+                            Navigator.of(context).pop();
+                          }
+                          print('解散群聊成功');
+                          showToast(context, '解散群聊成功');
+                        }
+                      });
+                    } else if (str.toString().contains('succ')) {
+                      Navigator.of(context).pop();
+                      Navigator.of(context).pop();
+                      if (Navigator.canPop(context)) {
+                        Navigator.of(context).pop();
+                      }
+                      print('退出成功');
+                      showToast(context, '退出成功');
+                    }
+                  });
                   }
                 }, tips: '确定要退出本群吗？');
               },
-              child: Center(
-                child: Text(
-                  '删除并退出',
-                  style: TextStyle(
-                      color: Colors.red,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 18.0),
-                ),
+              child: Text(
+                '删除并退出',
+                style: TextStyle(
+                    color: Colors.red,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 18.0),
               ),
             ),
             SizedBox(height: 30.0),

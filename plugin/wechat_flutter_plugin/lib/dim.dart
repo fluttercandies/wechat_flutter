@@ -412,6 +412,27 @@ class Dim {
         'getGroupMembersList', <String, dynamic>{'groupId': groupId});
   }
 
+  ///邀请群成员进群
+  ///inviteGroupMember
+  Future<dynamic> inviteGroupMember(List list, String groupId) async {
+    return await _methodChannel.invokeMethod('inviteGroupMember',
+        <String, dynamic>{'list': list, 'groupId': groupId});
+  }
+
+  ///退出群聊
+  ///quitGroup
+  Future<dynamic> quitGroup(String groupId) async {
+    return await _methodChannel
+        .invokeMethod('quitGroup', <String, dynamic>{'groupId': groupId});
+  }
+
+  ///删除群成员
+  ///deleteGroupMember
+  Future<dynamic> deleteGroupMember(String groupId, List deleteList) async {
+    return await _methodChannel.invokeMethod('deleteGroupMember',
+        <String, dynamic>{'groupId': groupId, 'deleteList': deleteList});
+  }
+
   dynamic _parseBatteryState(event) {
     return event;
   }

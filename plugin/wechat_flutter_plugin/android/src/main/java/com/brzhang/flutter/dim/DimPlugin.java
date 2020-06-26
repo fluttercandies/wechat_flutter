@@ -40,6 +40,7 @@ import com.tencent.imsdk.TIMVideo;
 import com.tencent.imsdk.TIMVideoElem;
 import com.tencent.imsdk.ext.group.TIMGroupBaseInfo;
 import com.tencent.imsdk.ext.group.TIMGroupDetailInfoResult;
+import com.tencent.imsdk.ext.group.TIMGroupMemberResult;
 import com.tencent.imsdk.ext.group.TIMGroupSelfInfo;
 import com.tencent.imsdk.ext.message.TIMConversationExt;
 import com.tencent.imsdk.ext.message.TIMManagerExt;
@@ -1232,6 +1233,87 @@ public class DimPlugin implements MethodCallHandler, EventChannel.StreamHandler 
             TIMGroupManager.getInstance().getGroupMembers(
                     groupId, cb);     //回调
 
+        } else if (call.method.equals("inviteGroupMember")) {
+            //创建待加入群组的用户列表
+            ArrayList list = call.argument("list");
+            String groupId = call.argument("groupId");
+
+            TIMGroupManager.getInstance().inviteGroupMember(groupId, list, new TIMValueCallBack<List<TIMGroupMemberResult>>() {
+                @Override
+                public void onError(int code, String desc) {
+                    Log.e(TAG, "addGroupMembers failed, code: " + code + "|desc: " + desc);
+                    result.error(desc, "code:" + code, null);
+                }
+
+                @Override
+                public void onSuccess(List<TIMGroupMemberResult> timGroupMemberResults) {
+                    Log.e(TAG, "邀请执行完毕");
+                    final List<String> adds = new ArrayList<>();
+
+                    if (timGroupMemberResults.size() > 0) {
+                        for (int i = 0; i < timGroupMemberResults.size(); i++) {
+                            TIMGroupMemberResult res = timGroupMemberResults.get(i);
+                            if (res.getResult() == 3) {
+//                                result.success("邀请成功，等待对方接受");
+                                return;
+                            }
+                            if (res.getResult() > 0) {
+                                adds.add(res.getUser());
+                            }
+                        }
+                        Log.e(TAG, "邀请成功，等待对方接受");
+                        result.success("邀请成功");
+                    }
+                    if (adds.size() > 0) {
+                        Log.e(TAG, "adds.size() > 0");
+                    }
+                }
+            });
+        } else if (call.method.equals("quitGroup")) {
+
+            String groupId = call.argument("groupId");
+
+            TIMGroupManager.getInstance().quitGroup(groupId, new TIMCallBack() {
+                @Override
+                public void onError(int code, String desc) {
+                    Log.e(TAG, "quitGroup failed, code: " + code + "|desc: " + desc);
+                    result.error(desc, "quitGroup failed, code: " + code, null);
+                }
+
+                @Override
+                public void onSuccess() {
+                    Log.e(TAG, "quit group succ");
+                    result.success("quit group succ");
+                }
+            });
+        } else if (call.method.equals("deleteGroupMember")) {
+            String groupId = call.argument("groupId");
+            ArrayList deleteList = call.argument("deleteList");
+
+            TIMGroupManager.DeleteMemberParam param = new TIMGroupManager.DeleteMemberParam(groupId, deleteList);
+            param.setReason("some reason");
+
+            TIMGroupManager.getInstance().deleteGroupMember(param, new TIMValueCallBack<List<TIMGroupMemberResult>>() {
+                @Override
+                public void onError(int code, String desc) {
+                    Log.e(TAG, "deleteGroupMember onErr. code: " + code + " errmsg: " + desc);
+                    result.error(desc, "deleteGroup on Err code: " + code, null);
+                }
+
+                @Override
+                public void onSuccess(List<TIMGroupMemberResult> results) { //群组成员操作结果
+                    List<String> mData = new ArrayList<>();
+
+                    for (TIMGroupMemberResult r : results) {
+                        Log.d(TAG, "result: " + r.getResult()  //操作结果:  0：删除失败；1：删除成功；2：不是群组成员
+                                + " user: " + r.getUser());    //用户帐号
+                        mData.add("result:" + r.getResult()
+                                + "user:" + r.getUser());
+                    }
+                    result.success(mData.toString());
+
+                }
+            });
         } else {
             result.notImplemented();
         }

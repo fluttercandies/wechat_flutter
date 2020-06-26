@@ -5,37 +5,37 @@ import 'package:wechat_flutter/tools/wechat_flutter.dart';
 Dim dim = new Dim();
 
 class DimGroup {
-//  static Future<dynamic> inviteGroupMember(List list, String groupId,
-//      {Callback callback}) async {
-//    try {
-//      var result = await dim.inviteGroupMember(list, groupId);
-//      callback(result);
-//    } on PlatformException {
-//      print('邀请好友进群  失败');
-//    }
-//  }
-//
-//  static Future<dynamic> quitGroupModel(String groupId,
-//      {Callback callback}) async {
-//    try {
-//      var result = await dim.quitGroup(groupId);
-//      callback(result);
-//    } on PlatformException {
-//      print('退出群聊  失败');
-//      callback('退出群聊  失败');
-//    }
-//  }
-//
-//  static Future<dynamic> deleteGroupMemberModel(String groupId, List deleteList,
-//      {Callback callback}) async {
-//    try {
-//      var result = await dim.deleteGroupMember(groupId, deleteList);
-//      callback(result);
-//    } on PlatformException {
-//      print('删除群成员  失败');
-//    }
-//  }
-//
+  static Future<dynamic> inviteGroupMember(List list, String groupId,
+      {Callback callback}) async {
+    try {
+      var result = await dim.inviteGroupMember(list, groupId);
+      callback(result);
+    } on PlatformException {
+      print('邀请好友进群  失败');
+    }
+  }
+
+  static Future<dynamic> quitGroupModel(String groupId,
+      {Callback callback}) async {
+    try {
+      var result = await dim.quitGroup(groupId);
+      callback(result);
+    } on PlatformException {
+      print('退出群聊  失败');
+      callback('退出群聊  失败');
+    }
+  }
+
+  static Future<dynamic> deleteGroupMemberModel(String groupId, List deleteList,
+      {Callback callback}) async {
+    try {
+      var result = await dim.deleteGroupMember(groupId, deleteList);
+      callback(result);
+    } on PlatformException {
+      print('删除群成员  失败');
+    }
+  }
+
   static Future<dynamic> getGroupMembersListModel(String groupId,
       {Callback callback}) async {
     try {
