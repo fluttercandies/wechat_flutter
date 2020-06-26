@@ -10,6 +10,7 @@ import 'package:wechat_flutter/pages/group/group_member_details.dart';
 import 'package:wechat_flutter/pages/group/group_remarks_page.dart';
 import 'package:wechat_flutter/pages/home/search_page.dart';
 import 'package:wechat_flutter/pages/mine/code_page.dart';
+import 'package:wechat_flutter/pages/settings/chat_background_page.dart';
 import 'package:wechat_flutter/tools/commom.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'package:wechat_flutter/ui/dialog/confirm_alert.dart';
@@ -148,70 +149,6 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
           ),
         );
       },
-    );
-  }
-
-  Widget functionBtn(String title, {String detail, Widget right}) {
-    if (detail == null && detail == '') {
-      return new Container();
-    }
-    double widthT() {
-      if (detail != null) {
-        return detail.length > 35 ? SizeConfig.blockSizeHorizontal * 60 : null;
-      } else {
-        return null;
-      }
-    }
-
-    bool isSwitch = title == '消息免打扰' ||
-        title == '聊天置顶' ||
-        title == '保存到通讯录' ||
-        title == '显示群成员昵称';
-    bool noBorder = title == '备注' ||
-        title == '查找聊天记录' ||
-        title == '保存到通讯录' ||
-        title == '显示群成员昵称' ||
-        title == '投诉' ||
-        title == '清空聊天记录';
-
-    return FlatButton(
-      padding: EdgeInsets.only(left: 15, right: 15.0),
-      color: Colors.white,
-      onPressed: () => handle(title),
-      child: new Container(
-        padding: EdgeInsets.only(
-          top: isSwitch ? 10 : 15.0,
-          bottom: isSwitch ? 10 : 15.0,
-        ),
-        decoration: BoxDecoration(
-          border: noBorder
-              ? null
-              : Border(bottom: BorderSide(color: Colors.grey, width: 0.2)),
-        ),
-        child: new Row(
-          children: <Widget>[
-            new Expanded(
-              child: Text(title),
-            ),
-            new SizedBox(
-              width: widthT(),
-              child: Text(
-                detail ?? '',
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(color: Colors.grey),
-              ),
-            ),
-            right != null ? right : new Container(),
-            new Space(width: 10.0),
-            isSwitch
-                ? Container()
-                : Image.asset(
-                    'assets/images/group/ic_right.png',
-                    width: 15,
-                  ),
-          ],
-        ),
-      ),
     );
   }
 
@@ -418,14 +355,9 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
         _top ? _setTop(1) : _setTop(2);
         break;
       case '设置当前聊天背景':
-//        routePush(new ChatBackgroundPage());
+        routePush(new ChatBackgroundPage());
         break;
       case '我在群里的昵称':
-//        groupCardNameModify(context, widget.peer, text: cardName,
-//            callback: (isC) {
-//          if (isC) getCardName();
-//        });
-
         routePush(
           new GroupRemarksPage(
             groupInfoType: GroupInfoType.cardName,
@@ -443,4 +375,96 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
   }
 
   _setTop(int i) {}
+
+  functionBtn(
+    title, {
+    final String detail,
+    final Widget right,
+  }) {
+    return GroupItem(
+      detail: detail,
+      title: title,
+      right: right,
+      onPressed: () => handle(title),
+    );
+  }
+}
+
+class GroupItem extends StatelessWidget {
+  final String detail;
+  final String title;
+  final VoidCallback onPressed;
+  final Widget right;
+
+  GroupItem({
+    this.detail,
+    this.title,
+    this.onPressed,
+    this.right,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    if (detail == null && detail == '') {
+      return new Container();
+    }
+    double widthT() {
+      if (detail != null) {
+        return detail.length > 35 ? SizeConfig.blockSizeHorizontal * 60 : null;
+      } else {
+        return null;
+      }
+    }
+
+    bool isSwitch = title == '消息免打扰' ||
+        title == '聊天置顶' ||
+        title == '保存到通讯录' ||
+        title == '显示群成员昵称';
+    bool noBorder = title == '备注' ||
+        title == '查找聊天记录' ||
+        title == '保存到通讯录' ||
+        title == '显示群成员昵称' ||
+        title == '投诉' ||
+        title == '清空聊天记录';
+
+    return FlatButton(
+      padding: EdgeInsets.only(left: 15, right: 15.0),
+      color: Colors.white,
+      onPressed: () => onPressed(),
+      child: new Container(
+        padding: EdgeInsets.only(
+          top: isSwitch ? 10 : 15.0,
+          bottom: isSwitch ? 10 : 15.0,
+        ),
+        decoration: BoxDecoration(
+          border: noBorder
+              ? null
+              : Border(bottom: BorderSide(color: Colors.grey, width: 0.2)),
+        ),
+        child: new Row(
+          children: <Widget>[
+            new Expanded(
+              child: Text(title),
+            ),
+            new SizedBox(
+              width: widthT(),
+              child: Text(
+                detail ?? '',
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(color: Colors.grey),
+              ),
+            ),
+            right != null ? right : new Container(),
+            new Space(width: 10.0),
+            isSwitch
+                ? Container()
+                : Image.asset(
+                    'assets/images/group/ic_right.png',
+                    width: 15,
+                  ),
+          ],
+        ),
+      ),
+    );
+  }
 }
