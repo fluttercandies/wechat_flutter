@@ -326,6 +326,7 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
           ),
         ).then((data) {
           groupName = data ?? groupName;
+          Notice.send(WeChatActions.groupName(), groupName);
         });
         break;
       case '群二维码':

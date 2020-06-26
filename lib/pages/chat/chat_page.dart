@@ -34,6 +34,7 @@ class _ChatPageState extends State<ChatPage> {
   bool _isMore = false;
   double keyboardHeight = 270.0;
   bool _emojiState = false;
+  String newGroupName;
 
   TextEditingController _textController = TextEditingController();
   FocusNode _focusNode = new FocusNode();
@@ -48,7 +49,11 @@ class _ChatPageState extends State<ChatPage> {
     _sC.addListener(() => FocusScope.of(context).requestFocus(new FocusNode()));
     initPlatformState();
     Notice.addListener(WeChatActions.msg(), (v) => getChatMsgData());
-
+    if (widget.type == 2) {
+      Notice.addListener(WeChatActions.groupName(), (v) {
+        setState(() => newGroupName = v);
+      });
+    }
     _focusNode.addListener(() {
       if (_focusNode.hasFocus) _emojiState = false;
     });
@@ -220,7 +225,7 @@ class _ChatPageState extends State<ChatPage> {
         child: new Image.asset('assets/images/right_more.png'),
         onTap: () => routePush(widget.type == 2
             ? new GroupDetailsPage(
-                widget.title,
+                widget?.id ?? widget.title,
                 callBack: (v) {},
               )
             : new ChatInfoPage(widget.id)),
@@ -228,7 +233,8 @@ class _ChatPageState extends State<ChatPage> {
     ];
 
     return Scaffold(
-      appBar: new ComMomBar(title: widget.title, rightDMActions: rWidget),
+      appBar: new ComMomBar(
+          title: newGroupName ?? widget.title, rightDMActions: rWidget),
       body: new MainInputBody(
         onTap: () => setState(
           () {
@@ -271,6 +277,8 @@ class _ChatPageState extends State<ChatPage> {
   void dispose() {
     super.dispose();
     canCelListener();
+    Notice.removeListenerByEvent(WeChatActions.msg());
+    Notice.removeListenerByEvent(WeChatActions.groupName());
     _sC.dispose();
   }
 }

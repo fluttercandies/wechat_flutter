@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:wechat_flutter/im/fun_dim_group_model.dart';
 import 'package:wechat_flutter/pages/chat/chat_page.dart';
+import 'package:wechat_flutter/pages/contacts/group_launch_page.dart';
 
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
@@ -18,65 +19,67 @@ class _GroupListPageState extends State<GroupListPage> {
   void initState() {
     super.initState();
     _getGroupListModel();
+    Notice.addListener(WeChatActions.groupName(), (v) {
+      _getGroupListModel();
+    });
   }
 
   // 获取群聊列表
   Future _getGroupListModel() async {
     await DimGroup.getGroupListModel((result) {
-      _groupList = json.decode(result.toString().replaceAll("'", '"'));
-      setState(() {});
+      setState(() =>
+          _groupList = json.decode(result.toString().replaceAll("'", '"')));
     });
   }
 
   Widget groupItem(BuildContext context, String gName, String gId,
       String gFaceURL, String title) {
-    return Material(
-        child: FlatButton(
-            onPressed: () {
-              routePush(ChatPage(
-                title: title,
-                type: 2,
+    return FlatButton(
+      onPressed: () {
+        routePush(ChatPage(
+          title: gName,
+          type: 2,
+          id: gId,
 //                returnType: 1,
-              ));
-            },
-            child: Column(
-              children: <Widget>[
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Container(
-                        margin: EdgeInsets.fromLTRB(0.0, 10.0, 10.0, 10.0),
-                        width: 50.0,
-                        height: 50.0,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.all(Radius.circular(5)),
-                          child: CachedNetworkImage(
-                            imageUrl: gFaceURL,
-                            cacheManager: cacheManager,
-                          ),
-                        )),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          gName,
-                        ),
-                        // 群聊Id
+        ));
+      },
+      child: Column(
+        children: <Widget>[
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Container(
+                  margin: EdgeInsets.fromLTRB(0.0, 10.0, 10.0, 10.0),
+                  width: 50.0,
+                  height: 50.0,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.all(Radius.circular(5)),
+                    child: CachedNetworkImage(
+                      imageUrl: gFaceURL,
+                      cacheManager: cacheManager,
+                    ),
+                  )),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(gName),
+                  // 群聊Id
 //                        Text(
 //                          gId,
 //                          style: TextStyle(color: Colors.grey),
 //                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                Container(
-                  height: 1.0,
-                  width: winWidth(context),
-                  color: mainBGColor,
-                )
-              ],
-            )));
+                ],
+              ),
+            ],
+          ),
+          Container(
+            height: 1.0,
+            width: winWidth(context),
+            color: mainBGColor,
+          )
+        ],
+      ),
+    );
   }
 
   @override
@@ -95,7 +98,7 @@ class _GroupListPageState extends State<GroupListPage> {
           child: new Image.asset('assets/images/contact/ic_contact_add.webp',
               color: Colors.black, width: 22.0, fit: BoxFit.fitWidth),
         ),
-        onTap: () => {},
+        onTap: () => routePush(new GroupLaunchPage()),
       ),
     ];
 
@@ -105,22 +108,20 @@ class _GroupListPageState extends State<GroupListPage> {
           ? ListView.builder(
               itemCount: _groupList.length,
               itemBuilder: (context, index) {
-                return Container(
-                  child: Column(
-                    children: <Widget>[
-                      _groupList.length > 0
-                          ? groupItem(
-                              context,
-                              _groupList[index]['groupName'] ?? '',
-                              _groupList[index]['groupId'] ?? '',
-                              !strNoEmpty(_groupList[index]['getFaceUrl'])
-                                  ? defGroupAvatar
-                                  : _groupList[index]['getFaceUrl'],
-                              _groupList[index]['groupId'] ?? '',
-                            )
-                          : SizedBox(height: 1),
-                    ],
-                  ),
+                return Column(
+                  children: <Widget>[
+                    _groupList.length > 0
+                        ? groupItem(
+                            context,
+                            _groupList[index]['groupName'] ?? '',
+                            _groupList[index]['groupId'] ?? '',
+                            !strNoEmpty(_groupList[index]['getFaceUrl'])
+                                ? defGroupAvatar
+                                : _groupList[index]['getFaceUrl'],
+                            _groupList[index]['groupId'] ?? '',
+                          )
+                        : SizedBox(height: 1),
+                  ],
                 );
               },
             )
@@ -131,5 +132,11 @@ class _GroupListPageState extends State<GroupListPage> {
               ),
             ),
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    Notice.removeListenerByEvent(WeChatActions.groupName());
   }
 }

@@ -5,6 +5,8 @@ export 'package:wechat_flutter/tools/data/notice.dart';
 class WeChatActions {
   static String msg() => 'msg';
 
+  static String groupName() => 'groupName';
+
   static String voiceImg() => 'voiceImg';
 }
 
