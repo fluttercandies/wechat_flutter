@@ -131,7 +131,9 @@ class _GroupRemarksPageState extends State<GroupRemarksPage> {
                           style: TextStyle(color: mainTextColor, fontSize: 14),
                         ),
                       ),
-                      onTap: () => showToast(context, '敬请期待'),
+                      onTap: () {
+                        _textController.text = 'wechat_flutter 106号群';
+                      },
                     )
                   ],
                 ),

@@ -39,6 +39,10 @@ dependencies:
   video_player: 0.10.0
   extended_text_field: 1.0.1
   flutter_image_compress: 0.6.8
+  #拼音
+  lpinyin: ^1.0.7
+  #特殊列表滑动
+  azlistview: ^0.1.0
 
 dev_dependencies:
   flutter_test:
@@ -145,4 +149,5 @@ flutter:
     - assets/images/emoji/
     - assets/images/group/
 
+    - assets/data/contacts.json
     - assets/data/friends.json

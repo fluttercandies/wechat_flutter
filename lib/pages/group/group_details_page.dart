@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:wechat_flutter/im/friend/fun_dim_friend.dart';
 import 'package:wechat_flutter/im/fun_dim_group_model.dart';
 import 'package:wechat_flutter/im/group/fun_dim_info.dart';
+import 'package:wechat_flutter/pages/group/select_members_page.dart';
 import 'package:wechat_flutter/pages/group/group_billboard_page.dart';
 import 'package:wechat_flutter/pages/group/group_member_details.dart';
 import 'package:wechat_flutter/pages/group/group_members_page.dart';
@@ -93,13 +94,16 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
     String uFace = '';
     String nickName;
     if (item['user'] == "+" || item['user'] == '-') {
-      return new SizedBox(
-        width: (winWidth(context) - 60) / 5,
-        child: Image.asset(
-          'assets/images/group/${item['user']}.png',
-          height: 48.0,
-          width: 48.0,
+      return new InkWell(
+        child: new SizedBox(
+          width: (winWidth(context) - 60) / 5,
+          child: Image.asset(
+            'assets/images/group/${item['user']}.png',
+            height: 48.0,
+            width: 48.0,
+          ),
         ),
+        onTap: () => routePush(new SelectMembersPage()),
       );
     }
     return new FutureBuilder(

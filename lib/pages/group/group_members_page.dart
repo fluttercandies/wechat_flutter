@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:wechat_flutter/im/friend/fun_dim_friend.dart';
 import 'package:wechat_flutter/im/fun_dim_group_model.dart';
+import 'package:wechat_flutter/pages/group/select_members_page.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
 class GroupMembersPage extends StatefulWidget {
@@ -28,8 +29,8 @@ class _GroupMembersPageState extends State<GroupMembersPage> {
   }
 
   handle(String uId) {
-    showToast(context, '敬请期待');
-//    if (!strNoEmpty(uId)) {
+    if (!strNoEmpty(uId)) {
+      routePush(new SelectMembersPage());
 //      routePush(CreateGroupChat(
 //        'invite',
 //        groupId: widget.groupId,
@@ -45,7 +46,9 @@ class _GroupMembersPageState extends State<GroupMembersPage> {
 //        title: uId,
 //        type: 1,
 //      ));
-//    }
+    } else {
+      showToast(context, '敬请期待');
+    }
   }
 
   Widget memberItem(item) {
@@ -81,6 +84,7 @@ class _GroupMembersPageState extends State<GroupMembersPage> {
           child: FlatButton(
             onPressed: () => handle(uId),
             padding: EdgeInsets.all(0),
+            highlightColor: Colors.transparent,
             child: Column(
               children: <Widget>[
                 ClipRRect(
