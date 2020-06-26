@@ -1,6 +1,7 @@
 import 'package:wechat_flutter/im/entity/person_info_entity.dart';
 import 'package:wechat_flutter/pages/contacts/contacts_details_page.dart';
 import 'package:flutter/material.dart';
+import 'package:wechat_flutter/pages/contacts/group_launch_page.dart';
 
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
@@ -63,7 +64,7 @@ class _ChatMamBerState extends State<ChatMamBer> {
           child: new Image.asset('assets/images/chat/ic_details_add.png',
               width: 55.0, height: 55.0, fit: BoxFit.cover),
         ),
-        onTap: () {},
+        onTap: () => routePush(new GroupLaunchPage()),
       ),
     );
 

@@ -22,7 +22,6 @@ class _ChatBackgroundPageState extends State<ChatBackgroundPage> {
       backgroundColor: appBarColor,
       body: new Column(
         children: <Widget>[
-          new Space(height: 15),
           new GroupItem(
             title: '选择背景图',
             onPressed: () => routePush(new SelectBgPage()),
