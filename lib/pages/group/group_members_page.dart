@@ -15,7 +15,6 @@ class GroupMembersPage extends StatefulWidget {
 }
 
 class _GroupMembersPageState extends State<GroupMembersPage> {
-  int num = 0;
   Future _futureBuilderFuture;
   List memberList = [
     {'user': '+'},
@@ -88,18 +87,18 @@ class _GroupMembersPageState extends State<GroupMembersPage> {
                   borderRadius: BorderRadius.all(Radius.circular(5)),
                   child: !strNoEmpty(uFace)
                       ? new Image.asset(
-                    defIcon,
-                    height: 48.0,
-                    width: 48.0,
-                    fit: BoxFit.cover,
-                  )
+                          defIcon,
+                          height: 48.0,
+                          width: 48.0,
+                          fit: BoxFit.cover,
+                        )
                       : CachedNetworkImage(
-                    imageUrl: uFace,
-                    height: 48.0,
-                    width: 48.0,
-                    cacheManager: cacheManager,
-                    fit: BoxFit.cover,
-                  ),
+                          imageUrl: uFace,
+                          height: 48.0,
+                          width: 48.0,
+                          cacheManager: cacheManager,
+                          fit: BoxFit.cover,
+                        ),
                 ),
                 SizedBox(height: 2),
                 Container(
@@ -110,8 +109,8 @@ class _GroupMembersPageState extends State<GroupMembersPage> {
                     nickName == null || nickName == ''
                         ? '默认昵称'
                         : nickName.length > 5
-                        ? '${nickName.substring(0, 3)}...'
-                        : nickName,
+                            ? '${nickName.substring(0, 3)}...'
+                            : nickName,
                     style: TextStyle(fontSize: 12.0),
                   ),
                 ),
@@ -126,12 +125,11 @@ class _GroupMembersPageState extends State<GroupMembersPage> {
   Future _gerData() async {
     return DimGroup.getGroupMembersListModel(widget.groupId,
         callback: (result) {
-          setState(() {
-            memberList.insertAll(
-                0, json.decode(result.toString().replaceAll("'", '"')));
-            num = memberList.length;
-          });
-        });
+      setState(() {
+        memberList.insertAll(
+            0, json.decode(result.toString().replaceAll("'", '"')));
+      });
+    });
   }
 
   Widget titleWidget() {
@@ -139,7 +137,7 @@ class _GroupMembersPageState extends State<GroupMembersPage> {
       future: _futureBuilderFuture,
       builder: (context, snap) {
         return new Text(
-          '聊天成员(${num ?? 0})',
+          '聊天成员(${memberList?.length != null ? memberList.length - 1 : 0})',
           style: new TextStyle(
               color: Colors.black, fontSize: 17.0, fontWeight: FontWeight.w600),
         );
