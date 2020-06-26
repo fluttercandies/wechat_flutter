@@ -7,6 +7,7 @@ import 'package:wechat_flutter/im/fun_dim_group_model.dart';
 import 'package:wechat_flutter/im/group/fun_dim_info.dart';
 import 'package:wechat_flutter/pages/group/group_billboard_page.dart';
 import 'package:wechat_flutter/pages/group/group_member_details.dart';
+import 'package:wechat_flutter/pages/group/group_members_page.dart';
 import 'package:wechat_flutter/pages/group/group_remarks_page.dart';
 import 'package:wechat_flutter/pages/home/search_page.dart';
 import 'package:wechat_flutter/pages/mine/code_page.dart';
@@ -189,9 +190,7 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
                 '查看全部群成员',
                 style: TextStyle(fontSize: 14.0, color: Colors.black54),
               ),
-              onPressed: () {
-//              routePush(GroupMembersPage(widget.peer));
-              },
+              onPressed: () => routePush(new GroupMembersPage(widget.peer)),
             ),
             SizedBox(height: 10.0),
             functionBtn(
