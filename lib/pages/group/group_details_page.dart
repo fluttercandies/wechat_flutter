@@ -371,11 +371,14 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
         routePush(new WebViewPage(helpUrl, '投诉'));
         break;
       case '清空聊天记录':
-        confirmAlert(context, (isOK) {
-          if (isOK) {
-            showToast(context, '敬请期待');
-          }
-        }, tips: '确定删除群的聊天记录吗？');
+        confirmAlert(
+          context,
+          (isOK) {
+            if (isOK) showToast(context, '敬请期待');
+          },
+          tips: '确定删除群的聊天记录吗？',
+          okBtn: '清空',
+        );
         break;
     }
   }
