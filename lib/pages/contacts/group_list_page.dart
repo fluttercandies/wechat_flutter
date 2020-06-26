@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:wechat_flutter/im/fun_dim_group_model.dart';
 import 'package:wechat_flutter/pages/chat/chat_page.dart';
 import 'package:wechat_flutter/pages/contacts/group_launch_page.dart';
+import 'package:wechat_flutter/pages/home/search_page.dart';
 
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
@@ -90,7 +91,7 @@ class _GroupListPageState extends State<GroupListPage> {
           width: 60.0,
           child: new Image.asset('assets/images/search_black.webp'),
         ),
-        onTap: () => showToast(context, 'search'),
+        onTap: () => routePush(new SearchPage()),
       ),
       new InkWell(
         child: new Container(

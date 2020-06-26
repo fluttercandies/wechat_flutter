@@ -34,7 +34,7 @@ class _ChatMamBerState extends State<ChatMamBer> {
               child: new Column(
                 children: <Widget>[
                   new ImageView(
-                    img: strNoEmpty(face) ? face : defAvatar,
+                    img: strNoEmpty(face) ? face : defIcon,
                     width: 55.0,
                     height: 55.0,
                     fit: BoxFit.cover,
