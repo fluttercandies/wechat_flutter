@@ -8,6 +8,7 @@ import 'package:wechat_flutter/im/group/fun_dim_info.dart';
 import 'package:wechat_flutter/pages/group/group_billboard_page.dart';
 import 'package:wechat_flutter/pages/group/group_member_details.dart';
 import 'package:wechat_flutter/pages/group/group_remarks_page.dart';
+import 'package:wechat_flutter/pages/home/search_page.dart';
 import 'package:wechat_flutter/pages/mine/code_page.dart';
 import 'package:wechat_flutter/tools/commom.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
@@ -402,7 +403,7 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
         });
         break;
       case '查找聊天记录':
-//        routePush(new SearchPage());
+        routePush(new SearchPage());
         break;
       case '消息免打扰':
         _dnd = !_dnd;
