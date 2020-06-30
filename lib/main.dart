@@ -3,12 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:wechat_flutter/config/provider_config.dart';
 import 'package:wechat_flutter/app.dart';
+import 'package:wechat_flutter/tools/data/data.dart';
 
 import 'config/storage_manager.dart';
 
 void main() async {
   /// 确保初始化
   WidgetsFlutterBinding.ensureInitialized();
+
+  /// 数据初始化
+  await Data.initData();
 
   /// 配置初始化
   await StorageManager.init();

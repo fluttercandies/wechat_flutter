@@ -47,9 +47,8 @@ class ChatListData {
     String msgType;
 
     String str = await getConversationsListData();
-    String nullMap = '{"mConversation":{},"peer":"","type":"System"},';
-    str = str.toString().replaceAll(nullMap, '');
-
+    String nullMap = '{"mConversation":{},"peer":"","type":"System"}';
+    str = str.replaceAll(',' + nullMap, '').replaceAll(nullMap + ',', '');
     if (strNoEmpty(str) && str != '[]') {
       List<dynamic> data = json.decode(str);
       for (int i = 0; i < data.length; i++) {

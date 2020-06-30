@@ -50,7 +50,6 @@ class DimGroup {
       {Callback callback}) async {
     try {
       var result = await dim.getGroupMembersList(groupId);
-      print('获取群成员 getGroupMembersListModel >>>> $result');
       List memberList = json.decode(result.toString().replaceAll("'", '"'));
       if (listNoEmpty(memberList)) {
         for (int i = 0; i < memberList.length; i++) {

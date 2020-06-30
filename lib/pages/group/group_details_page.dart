@@ -33,11 +33,11 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
   bool _showName = false;
   bool _contact = false;
   bool _dnd = false;
-  String dimUser;
   String groupName;
   String groupNotification;
   String time;
   String cardName = '默认';
+  bool isGroupOwner = false;
 
   List memberList = [
     {'user': '+'},
@@ -50,10 +50,6 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
     super.initState();
     _getGroupMembers();
     _getGroupInfo();
-    getStoreValue('dimUser').then((data) {
-      dimUser = data;
-    });
-
     getCardName();
   }
 
@@ -66,8 +62,10 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
 
   // 获取群组信息
   _getGroupInfo() {
-    DimGroup.getGroupInfoListModel([widget.peer], callback: (result) {
+    DimGroup.getGroupInfoListModel([widget.peer], callback: (result) async {
       dataGroup = json.decode(result.toString().replaceAll("'", '"'));
+      final user = await SharedUtil.instance.getString(Keys.account);
+      isGroupOwner = dataGroup[0]['groupOwner'] == user;
       groupName = dataGroup[0]['groupName'].toString();
       String notice = strNoEmpty(dataGroup[0]['groupNotification'].toString())
           ? dataGroup[0]['groupNotification'].toString()
@@ -117,7 +115,8 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
         return new SizedBox(
           width: (winWidth(context) - 60) / 5,
           child: FlatButton(
-            onPressed: () => routePush(GroupMemberDetails(dimUser == uId, uId)),
+            onPressed: () =>
+                routePush(GroupMemberDetails(Data.user() == uId, uId)),
             padding: EdgeInsets.all(0),
             highlightColor: Colors.transparent,
             child: Column(
@@ -159,7 +158,7 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
 
   // 设置消息免打扰
   _setDND(int type) {
-    DimGroup.setReceiveMessageOptionModel(widget.peer, dimUser, type,
+    DimGroup.setReceiveMessageOptionModel(widget.peer, Data.user(), type,
         callback: (_) {});
   }
 
@@ -214,6 +213,10 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
             functionBtn(
               '群公告',
               detail: groupNotification.toString(),
+            ),
+            new Visibility(
+              visible: isGroupOwner,
+              child: functionBtn('群管理'),
             ),
             functionBtn('备注'),
             new Space(height: 10.0),
