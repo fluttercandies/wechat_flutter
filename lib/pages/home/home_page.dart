@@ -18,7 +18,6 @@ class _HomePageState extends State<HomePage>
   List<ChatList> _chatData = [];
 
   var tapPos;
-  var isNull = false;
   TextSpanBuilder _builder = TextSpanBuilder();
   StreamSubscription<dynamic> _messageStreamSubscription;
 
@@ -31,7 +30,6 @@ class _HomePageState extends State<HomePage>
 
   Future getChatData() async {
     final str = await ChatListData().chatListData();
-    isNull = await ChatListData().isNull();
     List<ChatList> listChat = str;
     if (!listNoEmpty(listChat)) return;
     _chatData.clear();
@@ -122,7 +120,7 @@ class _HomePageState extends State<HomePage>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    if (isNull) return new HomeNullView();
+    if (!listNoEmpty(_chatData)) return new HomeNullView();
     return new Container(
       color: Color(AppColors.BackgroundColor),
       child: new ScrollConfiguration(
