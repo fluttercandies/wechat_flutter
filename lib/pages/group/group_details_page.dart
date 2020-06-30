@@ -210,9 +210,7 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
             ),
             functionBtn(
               '群公告',
-              detail: groupNotification.toString().length < 10
-                  ? groupNotification
-                  : '${groupNotification.toString().substring(0, 9)}...',
+              detail: groupNotification.toString(),
             ),
             functionBtn('备注'),
             new Space(height: 10.0),
@@ -454,27 +452,45 @@ class GroupItem extends StatelessWidget {
               ? null
               : Border(bottom: BorderSide(color: Colors.grey, width: 0.2)),
         ),
-        child: new Row(
+        child: new Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            new Expanded(
-              child: Text(title),
-            ),
-            new SizedBox(
-              width: widthT(),
-              child: Text(
-                detail ?? '',
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(color: Colors.grey),
-              ),
-            ),
-            right != null ? right : new Container(),
-            new Space(width: 10.0),
-            isSwitch
-                ? Container()
-                : Image.asset(
-                    'assets/images/group/ic_right.png',
-                    width: 15,
+            new Row(
+              children: <Widget>[
+                new Expanded(
+                  child: Text(title),
+                ),
+                new Visibility(
+                  visible: title != '群公告',
+                  child: new SizedBox(
+                    width: widthT(),
+                    child: Text(
+                      detail ?? '',
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(color: Colors.grey),
+                    ),
                   ),
+                ),
+                right != null ? right : new Container(),
+                new Space(width: 10.0),
+                isSwitch
+                    ? Container()
+                    : Image.asset(
+                        'assets/images/group/ic_right.png',
+                        width: 15,
+                      ),
+              ],
+            ),
+            new Visibility(
+              visible: title == '群公告',
+              child: new Padding(
+                padding: EdgeInsets.symmetric(vertical: 3),
+                child: Text(
+                  detail ?? '',
+                  style: TextStyle(color: Colors.grey),
+                ),
+              ),
+            )
           ],
         ),
       ),
