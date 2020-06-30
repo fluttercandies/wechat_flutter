@@ -187,14 +187,17 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
                 children: memberList.map(memberItem).toList(),
               ),
             ),
-            new FlatButton(
-              padding: EdgeInsets.only(top: 15.0, bottom: 20.0),
-              color: Colors.white,
-              child: new Text(
-                '查看全部群成员',
-                style: TextStyle(fontSize: 14.0, color: Colors.black54),
+            new Visibility(
+              visible: memberList.length > 20,
+              child: new FlatButton(
+                padding: EdgeInsets.only(top: 15.0, bottom: 20.0),
+                color: Colors.white,
+                child: new Text(
+                  '查看全部群成员',
+                  style: TextStyle(fontSize: 14.0, color: Colors.black54),
+                ),
+                onPressed: () => routePush(new GroupMembersPage(widget.peer)),
               ),
-              onPressed: () => routePush(new GroupMembersPage(widget.peer)),
             ),
             SizedBox(height: 10.0),
             functionBtn(
