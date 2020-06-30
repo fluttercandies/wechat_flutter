@@ -46,46 +46,53 @@ class ChatListData {
     dynamic type;
     String msgType;
 
-    final str = await getConversationsListData();
+    String str = await getConversationsListData();
+    String nullMap = '{"mConversation":{},"peer":"","type":"System"},';
+    str = str.toString().replaceAll(nullMap, '');
 
     if (strNoEmpty(str) && str != '[]') {
       List<dynamic> data = json.decode(str);
-
       for (int i = 0; i < data.length; i++) {
         ChatListEntity model = ChatListEntity.fromJson(data[i]);
         type = model?.type ?? 'C2C';
         identifier = model?.peer ?? '';
+        try {
+          final profile = await getUsersProfile([model.peer]);
+          List<dynamic> profileData = json.decode(profile);
+          for (int i = 0; i < profileData.length; i++) {
+            if (Platform.isIOS) {
+              IPersonInfoEntity info =
+                  IPersonInfoEntity.fromJson(profileData[i]);
 
-        final profile = await getUsersProfile([model.peer]);
-        List<dynamic> profileData = json.decode(profile);
-        for (int i = 0; i < profileData.length; i++) {
-          if (Platform.isIOS) {
-            IPersonInfoEntity info = IPersonInfoEntity.fromJson(profileData[i]);
-
-            if (strNoEmpty(info?.faceURL) && info?.faceURL != '[]') {
-              avatar = info?.faceURL ?? defIcon;
+              if (strNoEmpty(info?.faceURL) && info?.faceURL != '[]') {
+                avatar = info?.faceURL ?? defIcon;
+              } else {
+                avatar = defIcon;
+              }
+              name = strNoEmpty(info?.nickname)
+                  ? info?.nickname
+                  : identifier ?? '未知';
             } else {
-              avatar = defIcon;
+              PersonInfoEntity info = PersonInfoEntity.fromJson(profileData[i]);
+              if (strNoEmpty(info?.faceUrl) && info?.faceUrl != '[]') {
+                avatar = info?.faceUrl ?? defIcon;
+              } else {
+                avatar = defIcon;
+              }
+              name = strNoEmpty(info?.nickName)
+                  ? info?.nickName
+                  : identifier ?? '未知';
             }
-            name = strNoEmpty(info?.nickname)
-                ? info?.nickname
-                : identifier ?? '未知';
-          } else {
-            PersonInfoEntity info = PersonInfoEntity.fromJson(profileData[i]);
-            if (strNoEmpty(info?.faceUrl) && info?.faceUrl != '[]') {
-              avatar = info?.faceUrl ?? defIcon;
-            } else {
-              avatar = defIcon;
-            }
-            name = strNoEmpty(info?.nickName)
-                ? info?.nickName
-                : identifier ?? '未知';
           }
+        } catch (e) {}
+
+        final message = await getDimMessages(identifier,
+            num: 1, type: type == 'C2C' ? 1 : 2);
+        List<dynamic> messageData = new List();
+
+        if (strNoEmpty(message)) {
+          messageData = json.decode(message);
         }
-
-        final message = await getDimMessages(model.peer, num: 1);
-        List<dynamic> messageData = json.decode(message);
-
         if (listNoEmpty(messageData)) {
           MessageEntity messageModel = MessageEntity.fromJson(messageData[0]);
           time = messageModel?.time ?? 0;
@@ -97,8 +104,8 @@ class ChatListData {
           new ChatList(
             type: type,
             identifier: identifier,
-            avatar: avatar,
-            name: name,
+            avatar: avatar ?? defIcon,
+            name: name ?? '未知',
             time: time ?? 0,
             content: listNoEmpty(messageData) ? messageData[0] : null,
             msgType: msgType ?? '1',
