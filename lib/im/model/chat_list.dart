@@ -98,13 +98,13 @@ class ChatListData {
           time = messageModel?.time ?? 0;
           msgType = messageModel?.message?.type ?? '1';
         }
-
+        if (type == 'Group') avatar = defGroupAvatar;
         chatList.insert(
           0,
           new ChatList(
             type: type,
             identifier: identifier,
-            avatar: avatar ?? defIcon,
+            avatar: avatar,
             name: name ?? '未知',
             time: time ?? 0,
             content: listNoEmpty(messageData) ? messageData[0] : null,
