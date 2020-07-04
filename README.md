@@ -53,33 +53,6 @@ wechat_flutter是flutter版微信，目前已实现即时通讯基本功能，�
 
 IOS的直接拉下项目直接跑即可,
 
-# 第三方框架
-|  库   | 功能  |
-|  ----  | ----  |
-| dim  | 即时通讯 |
-| shared_preferences  | 持久化存储 |
-| provider  | 状态管理 |
-| cached_network_image  | 图片缓存 |
-| toast  | 消息提示 |
-| webview_flutter  | web页面显示 |
-| image_picker  | 图片和视频选择 |
-| extended_text  | 扩展文本 |
-| url_launcher  | 打开浏览器浏览 |
-| connectivity  | 检查网络连接 |
-| photo_view  | 图片放大显示 |
-| dio  | 网络框架 |
-| open_file  | 打开文件 |
-| package_info  | 包信息 |
-| flutter_sound  | 音频录制处理 |
-| permission_handler  | 权限管理 |
-| audioplayers  | 音频播放处理 |
-| camera  | 相机 |
-| video_player  | 视频播放 |
-| extended_text_field  | 扩展文本输入 |
-| flutter_image_compress  | 图片压缩 |
-| lpinyin  | 获取中文的拼音 |
-| azlistview  | 特殊列表滑动 |
-
 # 特性
 
 * [x] 文字消息
@@ -111,6 +84,32 @@ IOS的直接拉下项目直接跑即可,
 * [ ] 扫一扫
 * [ ] 设置备注
 
+# 第三方框架
+|  库   | 功能  |
+|  ----  | ----  |
+| dim  | 即时通讯 |
+| shared_preferences  | 持久化存储 |
+| provider  | 状态管理 |
+| cached_network_image  | 图片缓存 |
+| toast  | 消息提示 |
+| webview_flutter  | web页面显示 |
+| image_picker  | 图片和视频选择 |
+| extended_text  | 扩展文本 |
+| url_launcher  | 打开浏览器浏览 |
+| connectivity  | 检查网络连接 |
+| photo_view  | 图片放大显示 |
+| dio  | 网络框架 |
+| open_file  | 打开文件 |
+| package_info  | 包信息 |
+| flutter_sound  | 音频录制处理 |
+| permission_handler  | 权限管理 |
+| audioplayers  | 音频播放处理 |
+| camera  | 相机 |
+| video_player  | 视频播放 |
+| extended_text_field  | 扩展文本输入 |
+| flutter_image_compress  | 图片压缩 |
+| lpinyin  | 获取中文的拼音 |
+| azlistview  | 特殊列表滑动 |
 
 # 使用教程
 
