@@ -225,3 +225,13 @@ Flutter交流QQ群：[874592746](https://jq.qq.com/?_wv=1027&k=5coTYqE)
 # 贡献者
 
 <img src="http://www.flutterj.com/circle-cropped.png" height="150" width="150" style="zoom:30%;" />
+
+### LICENSE
+```
+fluttercandies/wechat_flutter is licensed under the
+Apache License 2.0
+
+A permissive license whose main conditions require preservation of copyright and license notices. 
+Contributors provide an express grant of patent rights. 
+Licensed works, modifications, and larger works may be distributed under different terms and without source code.
+```
