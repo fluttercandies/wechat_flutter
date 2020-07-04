@@ -1,6 +1,6 @@
-[![GitHub stars](https://img.shields.io/github/stars/fluttercandies/wechat_flutter.svg)](https://github.com/fluttercandies/wechat_flutter/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/fluttercandies/wechat_flutter.svg)](https://github.com/fluttercandies/wechat_flutter/network)
-[![GitHub issues](https://img.shields.io/github/issues/fluttercandies/wechat_flutter.svg)](https://github.com/fluttercandies/wechat_flutter/issues) 
+[![GitHub stars](https://img.shields.io/github/stars/fluttercandies/wechat_flutter)](https://github.com/fluttercandies/wechat_flutter/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/fluttercandies/wechat_flutter)](https://github.com/fluttercandies/wechat_flutter/network)
+[![GitHub issues](https://img.shields.io/github/issues/fluttercandies/wechat_flutter)](https://github.com/fluttercandies/wechat_flutter/issues) 
 
 # log
 * 2020.06.30 会话列表无会话消息判断显示、修复会话报错、群公告完整显示、群成员大于20才显示查看全部群成员、群主则显示群管理item
