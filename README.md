@@ -2,8 +2,6 @@
 [![GitHub forks](https://img.shields.io/github/forks/fluttercandies/wechat_flutter)](https://github.com/fluttercandies/wechat_flutter/network)
 [![GitHub issues](https://img.shields.io/github/issues/fluttercandies/wechat_flutter)](https://github.com/fluttercandies/wechat_flutter/issues) 
 
-> Flutter SDK (Channel stable, v1.17.3, on Mac OS X 10.14.5 18F2059, locale zh-Hans-CN， Dart SDK : 2.8.4)
-
 > 如果产生其他依赖无法编译的问题，可以尝试将`pubspec.yaml`中的`dependencies`中的所有依赖的"^"去掉，重新编译尝试。
 
 # log
@@ -81,39 +79,6 @@ IOS的直接拉下项目直接跑即可,
 | flutter_image_compress  | 图片压缩 |
 | lpinyin  | 获取中文的拼音 |
 | azlistview  | 特殊列表滑动 |
-
-# 运行安卓androidx.core:core问题
-##### 错误信息：
-```
-Android dependency 'androidx.core:core' has different version for 
-the compile (1.0.0) and runtime (1.0.2) classpath. You should 
-manually set the same version via DependencyResolution
-```
-##### 解决方案
-项目最下方的`External Libraries` => `Flutter Plugins` => `image_picker-0.6.1+2`
-=> `android` => `build.gradle` 然后最下方有`androidx.core:core:版本`。
-
-直接改为`androidx.core:core:1.0.0`，
-![](assets/git/core.png)
-```
-android {
-    compileSdkVersion 28
-
-    defaultConfig {
-        minSdkVersion 16
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-    }
-    lintOptions {
-        disable 'InvalidPackage'
-    }
-    dependencies {
-        implementation 'androidx.core:core:1.0.0'
-        implementation 'androidx.annotation:annotation:1.0.0'
-    }
-}
-```
-然后permission_handler也一样改下。
-
 
 # 特性
 
@@ -199,6 +164,38 @@ q1deMacBook-Pro:~ q1$ flutter doctor -v
 
 • No issues found!
 ```
+
+# 运行安卓androidx.core:core问题
+##### 错误信息：
+```
+Android dependency 'androidx.core:core' has different version for 
+the compile (1.0.0) and runtime (1.0.2) classpath. You should 
+manually set the same version via DependencyResolution
+```
+##### 解决方案
+项目最下方的`External Libraries` => `Flutter Plugins` => `image_picker-0.6.1+2`
+=> `android` => `build.gradle` 然后最下方有`androidx.core:core:版本`。
+
+直接改为`androidx.core:core:1.0.0`，
+![](assets/git/core.png)
+```
+android {
+    compileSdkVersion 28
+
+    defaultConfig {
+        minSdkVersion 16
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    lintOptions {
+        disable 'InvalidPackage'
+    }
+    dependencies {
+        implementation 'androidx.core:core:1.0.0'
+        implementation 'androidx.annotation:annotation:1.0.0'
+    }
+}
+```
+然后permission_handler也一样改下。
 
 # 关于项目太久没更
 最近工作太繁忙，基本没啥时间更新，然后之前是做其他开源项目，导致这个项目太久没实质性进展，
