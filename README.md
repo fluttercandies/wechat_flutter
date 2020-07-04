@@ -2,6 +2,10 @@
 [![GitHub forks](https://img.shields.io/github/forks/fluttercandies/wechat_flutter)](https://github.com/fluttercandies/wechat_flutter/network)
 [![GitHub issues](https://img.shields.io/github/issues/fluttercandies/wechat_flutter)](https://github.com/fluttercandies/wechat_flutter/issues) 
 
+> Flutter SDK (Channel stable, v1.17.3, on Mac OS X 10.14.5 18F2059, locale zh-Hans-CN， Dart SDK : 2.8.4)
+
+> 如果产生其他依赖无法编译的问题，可以尝试将`pubspec.yaml`中的`dependencies`中的所有依赖的"^"去掉，重新编译尝试。
+
 # log
 * 2020.06.30 会话列表无会话消息判断显示、修复会话报错、群公告完整显示、群成员大于20才显示查看全部群成员、群主则显示群管理item
 
