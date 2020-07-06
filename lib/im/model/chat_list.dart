@@ -89,7 +89,7 @@ class ChatListData {
             num: 1, type: type == 'C2C' ? 1 : 2);
         List<dynamic> messageData = new List();
 
-        if (strNoEmpty(message)) {
+        if (strNoEmpty(message) && !message.toString().contains('failed')) {
           messageData = json.decode(message);
         }
         if (listNoEmpty(messageData)) {
