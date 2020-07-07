@@ -1,4 +1,5 @@
 import 'package:camera/camera.dart';
+import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 import 'package:wechat_flutter/im/message_handle.dart';
 import 'package:wechat_flutter/pages/chat/shoot_page.dart';
 import 'package:wechat_flutter/tools/utils/handle_util.dart';
@@ -6,6 +7,7 @@ import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'package:wechat_flutter/ui/card/more_item_card.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:photo_manager/photo_manager.dart';
 
 class ChatMorePage extends StatefulWidget {
   final int index;
@@ -36,15 +38,32 @@ class _ChatMorePageState extends State<ChatMorePage> {
     {"name": "文件", "icon": "assets/images/chat/ic_details_file.webp"},
   ];
 
-  action(String name)async {
+  List<AssetEntity> assets = <AssetEntity>[];
+
+  action(String name) async {
     if (name == '相册') {
-      sendImageMsg(widget.id, widget.type, source: ImageSource.gallery,
-          callback: (v) {
-        if (v == null) return;
-        Notice.send(WeChatActions.msg(), v ?? '');
+      AssetPicker.pickAssets(
+        context,
+        maxAssets: 9,
+        pageSize: 320,
+        pathThumbSize: 80,
+        gridCount: 4,
+        selectedAssets: assets,
+        themeColor: Colors.green,
+        textDelegate: DefaultTextDelegate(),
+        routeCurve: Curves.easeIn,
+        routeDuration: const Duration(milliseconds: 500),
+      ).then((List<AssetEntity> result) {
+        result.forEach((AssetEntity element) async {
+          sendImageMsg(widget.id, widget.type, file: await element.file,
+              callback: (v) {
+            if (v == null) return;
+            Notice.send(WeChatActions.msg(), v ?? '');
+          });
+          element.file;
+        });
       });
     } else if (name == '拍摄') {
-
       try {
         List<CameraDescription> cameras;
 
@@ -55,9 +74,8 @@ class _ChatMorePageState extends State<ChatMorePage> {
       } on CameraException catch (e) {
         logError(e.code, e.description);
       }
-
     } else {
-      showToast(context,'敬请期待$name');
+      showToast(context, '敬请期待$name');
     }
   }
 

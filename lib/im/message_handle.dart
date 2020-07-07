@@ -16,8 +16,13 @@ Future<dynamic> getDimMessages(String id,
 }
 
 Future<void> sendImageMsg(String userName, int type,
-    {Callback callback, ImageSource source}) async {
-  File image = await ImagePicker.pickImage(source: source);
+    {Callback callback, ImageSource source, File file}) async {
+  File image;
+  if (file.existsSync()) {
+    image = file;
+  } else {
+    image = await ImagePicker.pickImage(source: source);
+  }
   if (image == null) return;
   File compressImg = await singleCompressFile(image);
 

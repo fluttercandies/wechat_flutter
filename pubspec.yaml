@@ -44,7 +44,7 @@ dependencies:
   #特殊列表滑动
   azlistview: ^0.1.0
   #微信图库
-  wechat_assets_picker: 2.1.0
+  wechat_assets_picker: 2.2.0
 
 dev_dependencies:
   flutter_test:
