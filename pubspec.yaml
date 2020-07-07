@@ -17,7 +17,7 @@ dependencies:
   dim:
     path: plugin/wechat_flutter_plugin
   shared_preferences: 0.5.2+2
-  provider: 3.0.0+1
+  provider: 4.1.2
   #  cached_network_image: 1.1.1 # 1.9版本flutter
   cached_network_image: 2.0.0 # 2.0(最新)版本flutter
   toast: 0.1.5
@@ -36,13 +36,15 @@ dependencies:
   audioplayers: 0.13.3
   camera: # 0.5.7+1
     path: plugin/camera
-  video_player: 0.10.0
+  video_player: 0.10.11+2
   extended_text_field: 1.0.1
   flutter_image_compress: 0.6.8
   #拼音
   lpinyin: ^1.0.7
   #特殊列表滑动
   azlistview: ^0.1.0
+  #微信图库
+  wechat_assets_picker: 2.1.0
 
 dev_dependencies:
   flutter_test:

@@ -17,7 +17,7 @@ class ProviderConfig {
   ///全局
   ChangeNotifierProvider<GlobalModel> getGlobal(Widget child) {
     return ChangeNotifierProvider<GlobalModel>(
-      builder: (context) => GlobalModel(),
+      create: (context) => GlobalModel(),
       child: child,
     );
   }
@@ -25,7 +25,7 @@ class ProviderConfig {
   ///登陆页面
   ChangeNotifierProvider<LoginModel> getLoginPage(Widget child) {
     return ChangeNotifierProvider<LoginModel>(
-      builder: (context) => LoginModel(),
+      create: (context) => LoginModel(),
       child: child,
     );
   }
