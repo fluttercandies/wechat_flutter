@@ -112,6 +112,7 @@ IOS的直接拉下项目直接跑即可,
 | flutter_image_compress  | 图片压缩 |
 | lpinyin  | 获取中文的拼音 |
 | azlistview  | 特殊列表滑动 |
+| wechat_assets_picker  | 微信图库 |
 
 # 使用教程
 
@@ -207,7 +208,7 @@ android {
 
 *  后期会把项目里所遇到的问题及解决的思路写成博客给大家学习。
 *  仿微信录制音频开源库：https://github.com/yxwandroid/flutter_plugin_record
-*  微信图片选择器：https://github.com/fluttercandies/flutter_wechat_assets_picker
+*  微信图库：https://github.com/fluttercandies/flutter_wechat_assets_picker
 
 # Flutter微信群
 
