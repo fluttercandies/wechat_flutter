@@ -11,33 +11,54 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  #本地化
   flutter_localizations:
     sdk: flutter
+  #IOS风格材料图标
   cupertino_icons: ^0.1.2
+  #即时通讯【腾讯云】
   dim:
     path: plugin/wechat_flutter_plugin
+  #持久化存储
   shared_preferences: 0.5.2+2
+  #状态管理
   provider: 4.1.2
   #  cached_network_image: 1.1.1 # 1.9版本flutter
   cached_network_image: 2.0.0 # 2.0(最新)版本flutter
+  #toast提示框
   toast: 0.1.5
+  #web显示
   webview_flutter: 0.3.22+1
+  #选取图库
   image_picker: 0.6.1+2
+  #文本扩展显示
   extended_text: 1.0.1
+  #打开系统浏览器
   url_launcher: 5.2.7
+  #网络连接
   connectivity: 0.4.6
+  #图片显示
   photo_view: 0.4.2
   #  dio: 2.2.2  #低于Flutter-1.17使用此版本
   dio: 3.0.9
+  #打开文件
   open_file: 2.0.3
+  #获取包信息
   package_info: 0.4.0+2
+  #音频处理
   flutter_sound: 1.7.0
+  #权限处理
   permission_handler: 3.1.0
+  #音频处理
   audioplayers: 0.13.3
+  #调用相机
   camera: # 0.5.7+1
     path: plugin/camera
+  #视频播放
   video_player: 0.10.11+2
+  #文字表情混入
   extended_text_field: 1.0.1
+  #图片压缩
   flutter_image_compress: 0.6.8
   #拼音
   lpinyin: ^1.0.7
