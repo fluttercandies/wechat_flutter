@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
+import 'package:wechat_flutter/pages/login/login_begin_page.dart';
 import 'package:wechat_flutter/provider/login_model.dart';
 
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
@@ -173,6 +174,7 @@ class _RegisterPageState extends State<RegisterPage> {
             return;
           }
           showToast(context, '注册成功');
+          popToRootPage();
         },
       ),
     ];

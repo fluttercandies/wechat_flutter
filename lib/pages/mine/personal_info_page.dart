@@ -33,7 +33,7 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
   }
 
   _openGallery({type = ImageSource.gallery}) async {
-    final model = Provider.of<GlobalModel>(context);
+    final model = Provider.of<GlobalModel>(context, listen: false);
     File imageFile = await ImagePicker.pickImage(source: type);
     List<int> imageBytes = await compressFile(imageFile);
     if (imageFile != null) {

@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:dim/route/fade_route.dart';
@@ -61,7 +60,7 @@ Future<dynamic> routePushAndRemove(Widget widget) {
   return navGK.currentState.pushAndRemoveUntil(route, (route) => route == null);
 }
 
-popToPage(Widget page) {
+pushAndRemoveUntilPage(Widget page) {
   navGK.currentState.pushAndRemoveUntil(new MaterialPageRoute<dynamic>(
     builder: (BuildContext context) {
       return page;
@@ -79,6 +78,14 @@ pushReplacement(Widget page) {
 
 popToRootPage() {
   navGK.currentState.popUntil(ModalRoute.withName('/'));
+}
+
+popToPage(Widget page) {
+  try {
+    navGK.currentState.popUntil(ModalRoute.withName(page.toStringShort()));
+  } catch (e) {
+    print('pop路由出现错误:::${e.toString()}');
+  }
 }
 
 popToHomePage() {

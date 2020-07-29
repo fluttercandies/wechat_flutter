@@ -75,6 +75,9 @@ uploadImgApi(BuildContext context, base64Img, Callback callback) async {
         callback(null);
       }
     },
+    errorCallBack: (String msg, int code) {
+      showToast(context, msg);
+    },
     params: {"image_base_64": base64Img},
   );
 }

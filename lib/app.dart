@@ -32,7 +32,11 @@ class MyApp extends StatelessWidget {
       ],
       supportedLocales: S.delegate.supportedLocales,
       locale: model.currentLocale,
-      home: model.goToLogin ? new LoginBeginPage() : new RootPage(),
+      routes: {
+        '/': (context) {
+          return model.goToLogin ? new LoginBeginPage() : new RootPage();
+        }
+      },
     );
   }
 }
