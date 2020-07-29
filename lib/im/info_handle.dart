@@ -11,7 +11,7 @@ Future<dynamic> getRemarkMethod(String id, {Callback callback}) async {
     return result;
   } on PlatformException {
     print('获取备注失败');
-  } on MissingPluginException{
+  } on MissingPluginException {
     print('插件内这个功能IOS版还在开发中');
   }
 }
@@ -22,7 +22,7 @@ Future<dynamic> setUsersProfileMethod(
   String nickNameStr = '',
   String avatarStr = '',
 }) async {
-  final model = Provider.of<GlobalModel>(context);
+  final model = Provider.of<GlobalModel>(context, listen: false);
 
   try {
     var result = await im.setUsersProfile(0, nickNameStr, avatarStr);
@@ -37,8 +37,7 @@ Future<dynamic> setUsersProfileMethod(
   }
 }
 
-Future<dynamic> getUsersProfile(List<String> users,
-    {Callback callback}) async {
+Future<dynamic> getUsersProfile(List<String> users, {Callback callback}) async {
   try {
     var result = await im.getUsersProfile(users);
     return result;
