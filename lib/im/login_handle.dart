@@ -17,7 +17,7 @@ Future<void> init(BuildContext context) async {
 }
 
 Future<void> login(String userName, BuildContext context) async {
-  final model = Provider.of<GlobalModel>(context);
+  final model = Provider.of<GlobalModel>(context, listen: false);
 
   try {
     var result = await im.imLogin(userName, null);
@@ -37,7 +37,7 @@ Future<void> login(String userName, BuildContext context) async {
 }
 
 Future<void> loginOut(BuildContext context) async {
-  final model = Provider.of<GlobalModel>(context);
+  final model = Provider.of<GlobalModel>(context, listen: false);
 
   try {
     var result = await im.imLogout();
