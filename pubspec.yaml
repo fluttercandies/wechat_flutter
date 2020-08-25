@@ -33,10 +33,10 @@ dependencies:
   image_picker: 0.6.1+2
   #文本扩展显示
 #  extended_text: 1.0.1  #1.17版本Flutter用这个
-  extended_text: 1.0.1
+  extended_text: 4.0.0
   #文字表情混入
-#  extended_text_field: 1.0.1 #1.17版本Flutter用这个
-  extended_text_field: 1.0.1
+#  extended_text_field: 1.0.1  #1.17版本Flutter用这个
+  extended_text_field: 4.0.0
   #打开系统浏览器
   url_launcher: 5.2.7
   #网络连接
