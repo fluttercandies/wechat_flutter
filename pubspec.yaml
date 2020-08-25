@@ -32,7 +32,11 @@ dependencies:
   #选取图库
   image_picker: 0.6.1+2
   #文本扩展显示
+#  extended_text: 1.0.1  #1.17版本Flutter用这个
   extended_text: 1.0.1
+  #文字表情混入
+#  extended_text_field: 1.0.1 #1.17版本Flutter用这个
+  extended_text_field: 1.0.1
   #打开系统浏览器
   url_launcher: 5.2.7
   #网络连接
@@ -56,8 +60,6 @@ dependencies:
     path: plugin/camera
   #视频播放
   video_player: 0.10.11+2
-  #文字表情混入
-  extended_text_field: 1.0.1
   #图片压缩
   flutter_image_compress: 0.6.8
   #拼音
