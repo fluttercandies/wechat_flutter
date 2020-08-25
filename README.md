@@ -142,19 +142,23 @@ IOS
 # 我的Flutter环境
 ```
 q1deMacBook-Pro:~ q1$ flutter doctor -v
-[✓] Flutter (Channel stable, v1.17.3, on Mac OS X 10.14.5 18F2059, locale zh-Hans-CN)
-    • Flutter version 1.17.3 at /Users/q1/flutter
-    • Framework revision b041144f83 (12 days ago), 2020-06-04 09:26:11 -0700
-    • Engine revision ee76268252
-    • Dart version 2.8.4
+[✓] Flutter (Channel stable, 1.20.2, on Mac OS X 10.14.5 18F2059, locale
+    zh-Hans-CN)
+    • Flutter version 1.20.2 at /Users/q1/flutter
+    • Framework revision bbfbf1770c (12 days ago), 2020-08-13 08:33:09 -0700
+    • Engine revision 9d5b21729f
+    • Dart version 2.9.1
+    • Pub download mirror https://pub.flutter-io.cn
+    • Flutter download mirror https://storage.flutter-io.cn
 
- 
-[✓] Android toolchain - develop for Android devices (Android SDK version 29.0.2)
+[✓] Android toolchain - develop for Android devices (Android SDK version 29.0.3)
     • Android SDK at /Users/q1/Library/Android/sdk
-    • Platform android-29, build-tools 29.0.2
+    • Platform android-29, build-tools 29.0.3
     • ANDROID_HOME = /Users/q1/Library/Android/sdk
-    • Java binary at: /Applications/Android Studio.app/Contents/jre/jdk/Contents/Home/bin/java
-    • Java version OpenJDK Runtime Environment (build 1.8.0_202-release-1483-b49-5587405)
+    • Java binary at: /Applications/Android
+      Studio.app/Contents/jre/jdk/Contents/Home/bin/java
+    • Java version OpenJDK Runtime Environment (build
+      1.8.0_242-release-1644-b3-6222593)
     • All Android licenses accepted.
 
 [✓] Xcode - develop for iOS and macOS (Xcode 11.3)
@@ -162,18 +166,21 @@ q1deMacBook-Pro:~ q1$ flutter doctor -v
     • Xcode 11.3, Build version 11C29
     • CocoaPods version 1.8.4
 
-[✓] Android Studio (version 3.5)
+[✓] Android Studio (version 4.0)
     • Android Studio at /Applications/Android Studio.app/Contents
-    • Flutter plugin version 42.1.1
-    • Dart plugin version 191.8593
-    • Java version OpenJDK Runtime Environment (build 1.8.0_202-release-1483-b49-5587405)
+    • Flutter plugin version 48.1.2
+    • Dart plugin version 193.7361
+    • Java version OpenJDK Runtime Environment (build
+      1.8.0_242-release-1644-b3-6222593)
 
-[✓] VS Code (version 1.45.1)
+[✓] VS Code (version 1.47.3)
     • VS Code at /Applications/Visual Studio Code.app/Contents
-    • Flutter extension version 3.11.0
+    • Flutter extension version 3.12.2
+
 
 [✓] Connected device (1 available)
-    • Android SDK built for x86 • emulator-5554 • android-x86 • Android 10 (API 29) (emulator)
+    • sdk gphone x86 arm (mobile) • emulator-5554 • android-x86 • Android 11
+      (API 30) (emulator)
 
 • No issues found!
 ```
