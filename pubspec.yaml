@@ -22,7 +22,7 @@ dependencies:
   #持久化存储
   shared_preferences: 0.5.2+2
   #状态管理
-  provider: 4.1.2
+  provider: 4.3.1
   #  cached_network_image: 1.1.1 # 1.9版本flutter
   cached_network_image: 2.0.0 # 2.0(最新)版本flutter
   #toast提示框
@@ -67,7 +67,7 @@ dependencies:
   #特殊列表滑动
   azlistview: ^0.1.0
   #微信图库
-  wechat_assets_picker: 2.2.0
+  wechat_assets_picker: 4.2.1
 
 dev_dependencies:
   flutter_test:
