@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:wechat_flutter/im/all_im.dart';
 import 'package:wechat_flutter/pages/mine/personal_info_page.dart';
 import 'package:wechat_flutter/pages/settings/language_page.dart';
+import 'package:wechat_flutter/pages/wallet/pay_home_page.dart';
 import 'package:wechat_flutter/provider/global_model.dart';
 
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
@@ -20,6 +21,9 @@ class _MinePageState extends State<MinePage> {
     switch (name) {
       case '设置':
         loginOut(context);
+        break;
+      case '支付':
+        routePush(new PayHomePage());
         break;
       default:
         routePush(new LanguagePage());
