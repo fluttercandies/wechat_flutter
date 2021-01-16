@@ -8,6 +8,8 @@
 
 # log
 
+* 2021.01.16 适配Flutter (Channel stable, 1.22.5)
+
 * 2020.08.25 适配Flutter (Channel stable, 1.20.2)
 
 * 2020.07.29 上传头像捕获错误【15:45】
