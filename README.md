@@ -8,6 +8,8 @@
 
 # log
 
+* 2021.01.16 新增支付页面，等待图标补全 【14:49】
+
 * 2021.01.16 适配Flutter (Channel stable, 1.22.5)
 
 * 2020.08.25 适配Flutter (Channel stable, 1.20.2)
