@@ -144,47 +144,61 @@ IOS
 # 我的Flutter环境
 ```
 q1deMacBook-Pro:~ q1$ flutter doctor -v
-[✓] Flutter (Channel stable, 1.20.2, on Mac OS X 10.14.5 18F2059, locale
+[✓] Flutter (Channel stable, 1.22.5, on macOS 11.0.1 20B50 darwin-x64, locale
     zh-Hans-CN)
-    • Flutter version 1.20.2 at /Users/q1/flutter
-    • Framework revision bbfbf1770c (12 days ago), 2020-08-13 08:33:09 -0700
-    • Engine revision 9d5b21729f
-    • Dart version 2.9.1
+    • Flutter version 1.22.5 at /Users/q1/flutter
+    • Framework revision 7891006299 (5 weeks ago), 2020-12-10 11:54:40 -0800
+    • Engine revision ae90085a84
+    • Dart version 2.10.4
     • Pub download mirror https://pub.flutter-io.cn
     • Flutter download mirror https://storage.flutter-io.cn
 
-[✓] Android toolchain - develop for Android devices (Android SDK version 29.0.3)
+
+[✓] Android toolchain - develop for Android devices (Android SDK version 30.0.1)
     • Android SDK at /Users/q1/Library/Android/sdk
-    • Platform android-29, build-tools 29.0.3
+    • Platform android-30, build-tools 30.0.1
     • ANDROID_HOME = /Users/q1/Library/Android/sdk
     • Java binary at: /Applications/Android
       Studio.app/Contents/jre/jdk/Contents/Home/bin/java
     • Java version OpenJDK Runtime Environment (build
-      1.8.0_242-release-1644-b3-6222593)
+      1.8.0_242-release-1644-b3-6915495)
     • All Android licenses accepted.
 
-[✓] Xcode - develop for iOS and macOS (Xcode 11.3)
+[✓] Xcode - develop for iOS and macOS (Xcode 12.2)
     • Xcode at /Applications/Xcode.app/Contents/Developer
-    • Xcode 11.3, Build version 11C29
-    • CocoaPods version 1.8.4
+    • Xcode 12.2, Build version 12B45b
+    • CocoaPods version 1.10.0
 
-[✓] Android Studio (version 4.0)
+[!] Android Studio (version 4.1)
     • Android Studio at /Applications/Android Studio.app/Contents
-    • Flutter plugin version 48.1.2
-    • Dart plugin version 193.7361
+    ✗ Flutter plugin not installed; this adds Flutter specific functionality.
+    ✗ Dart plugin not installed; this adds Dart specific functionality.
     • Java version OpenJDK Runtime Environment (build
-      1.8.0_242-release-1644-b3-6222593)
+      1.8.0_242-release-1644-b3-6915495)
 
-[✓] VS Code (version 1.47.3)
+[!] IntelliJ IDEA Community Edition (version 2020.2.3)
+    • IntelliJ at /Applications/Applications/IntelliJ IDEA CE.app
+    ✗ Flutter plugin not installed; this adds Flutter specific functionality.
+    ✗ Dart plugin not installed; this adds Dart specific functionality.
+    • For information about installing plugins, see
+      https://flutter.dev/intellij-setup/#installing-the-plugins
+
+[!] IntelliJ IDEA Community Edition (version 2020.2.3)
+    • IntelliJ at /Applications/IntelliJ IDEA CE.app
+    ✗ Flutter plugin not installed; this adds Flutter specific functionality.
+    ✗ Dart plugin not installed; this adds Dart specific functionality.
+    • For information about installing plugins, see
+      https://flutter.dev/intellij-setup/#installing-the-plugins
+
+[✓] VS Code (version 1.52.0)
     • VS Code at /Applications/Visual Studio Code.app/Contents
-    • Flutter extension version 3.12.2
-
+    • Flutter extension version 3.17.0
 
 [✓] Connected device (1 available)
     • sdk gphone x86 arm (mobile) • emulator-5554 • android-x86 • Android 11
       (API 30) (emulator)
 
-• No issues found!
+! Doctor found issues in 3 categories.
 ```
 
 # 运行安卓androidx.core:core问题
