@@ -85,7 +85,7 @@ const double _kMaxRegularTextScaleFactor = 1.4;
 // Accessibility mode on iOS is determined by the text scale factor that the
 // user has selected.
 bool _isInAccessibilityMode(BuildContext context) {
-  final MediaQueryData data = MediaQuery.of(context, nullOk: true);
+  final MediaQueryData data = MediaQuery.of(context);
   return data != null && data.textScaleFactor > _kMaxRegularTextScaleFactor;
 }
 
