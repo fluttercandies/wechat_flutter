@@ -22,9 +22,11 @@ dependencies:
   #持久化存储
   shared_preferences: 0.5.2+2
   #状态管理
-  provider: 4.3.1
+  #  provider: 4.3.1 #1.22.5版本Flutter用这个
+  provider: ^5.0.0 #Flutter2用这个
   #  cached_network_image: 1.1.1 # 1.9版本flutter
-  cached_network_image: 2.0.0 # 2.0(最新)版本flutter
+  #  cached_network_image: 2.0.0 #1.22.5版本Flutter用这个
+  cached_network_image: ^3.0.0 #Flutter2用这个
   #toast提示框
   toast: 0.1.5
   #web显示
@@ -32,14 +34,17 @@ dependencies:
   #选取图库
   image_picker: 0.6.1+2
   #文本扩展显示
-#  extended_text: 1.0.1  #1.17版本Flutter用这个
-#  extended_text: 4.0.0 #1.20版本Flutter用这个
-  extended_text: 4.0.1 #1.22.5版本Flutter用这个
+  #  extended_text: 1.0.1  #1.17版本Flutter用这个
+  #  extended_text: 4.0.0 #1.20版本Flutter用这个
+  #  extended_text: 4.0.1 #1.22.5版本Flutter用这个
+  extended_text: ^6.0.5 #Flutter2用这个,,其他可注释
   #文字表情混入
-#  extended_text_field: 1.0.1  #1.17版本Flutter用这个
-#  extended_text_field: 4.0.0  #1.20版本Flutter用这个
-  extended_text_field: 5.0.1 #1.22.5版本Flutter用这个
-  extended_text_library: 4.0.2 #1.22.5版本Flutter用这个,,其他可注释
+  #  extended_text_field: 1.0.1  #1.17版本Flutter用这个
+  #  extended_text_field: 4.0.0  #1.20版本Flutter用这个
+  #  extended_text_field: 5.0.1 #1.22.5版本Flutter用这个
+  extended_text_field: ^7.0.1 #Flutter2用这个,,其他可注释
+  #  extended_text_library: 4.0.2 #1.22.5版本Flutter用这个,,其他可注释
+  extended_text_library: ^6.0.0 #Flutter2用这个,,其他可注释
   #打开系统浏览器
   url_launcher: 5.2.7
   #网络连接
@@ -47,7 +52,8 @@ dependencies:
   #图片显示
   photo_view: 0.4.2
   #  dio: 2.2.2  #低于Flutter-1.17使用此版本
-  dio: 3.0.9
+  #  dio: 3.0.9  #1.22.5版本Flutter用这个
+  dio: ^4.0.0 #Flutter2用这个
   #打开文件
   open_file: 2.0.3
   #获取包信息
@@ -57,12 +63,14 @@ dependencies:
   #权限处理
   permission_handler: 3.1.0
   #音频处理
-  audioplayers: 0.13.3
+  #  audioplayers: 0.13.3 #1.22.5版本Flutter用这个
+  audioplayers: ^0.18.3 #Flutter2用这个
   #调用相机
   camera: # 0.5.7+1
     path: plugin/camera
   #视频播放
-  video_player: 0.10.11+2
+  #  video_player: 0.10.11+2 #1.22.5版本Flutter用这个
+  video_player: ^2.1.1 #Flutter2用这个
   #图片压缩
   flutter_image_compress: 0.6.8
   #拼音
@@ -70,7 +78,8 @@ dependencies:
   #特殊列表滑动
   azlistview: ^0.1.0
   #微信图库
-  wechat_assets_picker: 4.2.1
+  #  wechat_assets_picker: ^4.2.1 #1.22.5版本Flutter用这个
+  wechat_assets_picker: ^5.4.0 #Flutter2用这个
 
 dev_dependencies:
   flutter_test:

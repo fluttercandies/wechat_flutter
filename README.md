@@ -8,7 +8,9 @@
 
 # log
 
-* 2021.05.10 修复im插件例子不能获取依赖、修复`lib/ui/flutter/my_cupertino_dialog.dart`
+* 2021.05.10 适配 Flutter2 稳定分支 【11:45】
+
+* 2021.05.10 修复im插件例子不能获取依赖、修复`lib/ui/flutter/my_cupertino_dialog.dart`【】
 
 * 2021.01.16 新增支付页面，等待图标补全 【14:49】
 
