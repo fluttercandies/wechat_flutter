@@ -151,62 +151,49 @@ IOS
 
 # 我的Flutter环境
 ```
-q1deMacBook-Pro:~ q1$ flutter doctor -v
-[✓] Flutter (Channel stable, 1.22.5, on macOS 11.0.1 20B50 darwin-x64, locale
-    zh-Hans-CN)
-    • Flutter version 1.22.5 at /Users/q1/flutter
-    • Framework revision 7891006299 (5 weeks ago), 2020-12-10 11:54:40 -0800
-    • Engine revision ae90085a84
-    • Dart version 2.10.4
+q1deMacBook-Pro:wechat_flutter q1$ flutter doctor -v
+[✓] Flutter (Channel stable, 2.0.1, on macOS 11.2.3 20D91 darwin-x64, locale zh-Hans-CN)
+    • Flutter version 2.0.1 at /Users/q1/flutter
+    • Framework revision c5a4b4029c (9 weeks ago), 2021-03-04 09:47:48 -0800
+    • Engine revision 40441def69
+    • Dart version 2.12.0
     • Pub download mirror https://pub.flutter-io.cn
     • Flutter download mirror https://storage.flutter-io.cn
 
-
 [✓] Android toolchain - develop for Android devices (Android SDK version 30.0.1)
-    • Android SDK at /Users/q1/Library/Android/sdk
-    • Platform android-30, build-tools 30.0.1
-    • ANDROID_HOME = /Users/q1/Library/Android/sdk
-    • Java binary at: /Applications/Android
-      Studio.app/Contents/jre/jdk/Contents/Home/bin/java
-    • Java version OpenJDK Runtime Environment (build
-      1.8.0_242-release-1644-b3-6915495)
+    • Android SDK at /Users/q1/android-sdk-macosx
+    • Platform android-S, build-tools 30.0.1
+    • Java binary at: /Applications/Android Studio.app/Contents/jre/jdk/Contents/Home/bin/java
+    • Java version OpenJDK Runtime Environment (build 1.8.0_242-release-1644-b3-6915495)
     • All Android licenses accepted.
 
-[✓] Xcode - develop for iOS and macOS (Xcode 12.2)
+[✓] Xcode - develop for iOS and macOS
     • Xcode at /Applications/Xcode.app/Contents/Developer
-    • Xcode 12.2, Build version 12B45b
-    • CocoaPods version 1.10.0
+    • Xcode 12.4, Build version 12D4e
+    • CocoaPods version 1.10.1
 
-[!] Android Studio (version 4.1)
+[✓] Chrome - develop for the web
+    • Chrome at /Applications/Google Chrome.app/Contents/MacOS/Google Chrome
+
+[✓] Android Studio (version 4.1)
     • Android Studio at /Applications/Android Studio.app/Contents
-    ✗ Flutter plugin not installed; this adds Flutter specific functionality.
-    ✗ Dart plugin not installed; this adds Dart specific functionality.
-    • Java version OpenJDK Runtime Environment (build
-      1.8.0_242-release-1644-b3-6915495)
+    • Flutter plugin can be installed from:
+      🔨 https://plugins.jetbrains.com/plugin/9212-flutter
+    • Dart plugin can be installed from:
+      🔨 https://plugins.jetbrains.com/plugin/6351-dart
+    • Java version OpenJDK Runtime Environment (build 1.8.0_242-release-1644-b3-6915495)
 
-[!] IntelliJ IDEA Community Edition (version 2020.2.3)
-    • IntelliJ at /Applications/Applications/IntelliJ IDEA CE.app
-    ✗ Flutter plugin not installed; this adds Flutter specific functionality.
-    ✗ Dart plugin not installed; this adds Dart specific functionality.
-    • For information about installing plugins, see
-      https://flutter.dev/intellij-setup/#installing-the-plugins
-
-[!] IntelliJ IDEA Community Edition (version 2020.2.3)
-    • IntelliJ at /Applications/IntelliJ IDEA CE.app
-    ✗ Flutter plugin not installed; this adds Flutter specific functionality.
-    ✗ Dart plugin not installed; this adds Dart specific functionality.
-    • For information about installing plugins, see
-      https://flutter.dev/intellij-setup/#installing-the-plugins
-
-[✓] VS Code (version 1.52.0)
+[✓] VS Code (version 1.55.2)
     • VS Code at /Applications/Visual Studio Code.app/Contents
-    • Flutter extension version 3.17.0
+    • Flutter extension can be installed from:
+      🔨 https://marketplace.visualstudio.com/items?itemName=Dart-Code.flutter
 
-[✓] Connected device (1 available)
-    • sdk gphone x86 arm (mobile) • emulator-5554 • android-x86 • Android 11
-      (API 30) (emulator)
+[✓] Connected device (3 available)
+    • SEA AL10 (mobile) • 6HJ4C20219007098 • android-arm64  • Android 10 (API 29)
+    • macOS (desktop)   • macos            • darwin-x64     • macOS 11.2.3 20D91 darwin-x64
+    • Chrome (web)      • chrome           • web-javascript • Google Chrome 90.0.4430.93
 
-! Doctor found issues in 3 categories.
+• No issues found!
 ```
 
 # 运行安卓androidx.core:core问题
