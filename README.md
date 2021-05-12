@@ -8,6 +8,8 @@
 
 # log
 
+* 2021.05.12 适配iOS，解决运行问题
+
 * 2021.05.10 适配 Flutter2 稳定分支 【11:45】
 
 * 2021.05.10 修复im插件例子不能获取依赖、修复`lib/ui/flutter/my_cupertino_dialog.dart`【】
