@@ -20,10 +20,12 @@ dependencies:
   dim:
     path: plugin/wechat_flutter_plugin
   #持久化存储
-  shared_preferences: 0.5.2+2
+#  shared_preferences: 0.5.2+2 #[Flutter2及之前]用这个
+  shared_preferences: ^2.0.8
   #状态管理
   #  provider: 4.3.1 #1.22.5版本Flutter用这个
-  provider: ^5.0.0 #Flutter2用这个
+  provider: ^6.0.1 #Flutter2.5用这个
+  #  provider: ^5.0.0 #Flutter2用这个
   #  cached_network_image: 1.1.1 # 1.9版本flutter
   #  cached_network_image: 2.0.0 #1.22.5版本Flutter用这个
   cached_network_image: ^3.0.0 #Flutter2用这个
@@ -37,14 +39,17 @@ dependencies:
   #  extended_text: 1.0.1  #1.17版本Flutter用这个
   #  extended_text: 4.0.0 #1.20版本Flutter用这个
   #  extended_text: 4.0.1 #1.22.5版本Flutter用这个
-  extended_text: ^6.0.5 #Flutter2用这个,,其他可注释
+  #  extended_text: ^6.0.5 #Flutter2用这个,,其他可注释
+  extended_text: ^7.0.0 #flutter2.5用这个,,其他可注释
   #文字表情混入
   #  extended_text_field: 1.0.1  #1.17版本Flutter用这个
   #  extended_text_field: 4.0.0  #1.20版本Flutter用这个
   #  extended_text_field: 5.0.1 #1.22.5版本Flutter用这个
-  extended_text_field: ^7.0.1 #Flutter2用这个,,其他可注释
+  #  extended_text_field: ^7.0.1 #Flutter2用这个,,其他可注释
+  extended_text_field: ^8.0.0 #Flutter2.5用这个,,其他可注释
   #  extended_text_library: 4.0.2 #1.22.5版本Flutter用这个,,其他可注释
-  extended_text_library: ^6.0.0 #Flutter2用这个,,其他可注释
+  #  extended_text_library: ^6.0.0 #Flutter2用这个,,其他可注释
+  extended_text_library: ^7.0.0 #Flutter2.5用这个,,其他可注释
   #打开系统浏览器
   url_launcher: 5.2.7
   #网络连接
@@ -79,7 +84,8 @@ dependencies:
   azlistview: ^0.1.0
   #微信图库
   #  wechat_assets_picker: ^4.2.1 #1.22.5版本Flutter用这个
-  wechat_assets_picker: ^5.4.0 #Flutter2用这个
+  #  wechat_assets_picker: ^5.4.0 #Flutter2用这个
+  wechat_assets_picker: ^6.2.3 #flutter2.5用这个
 
 dev_dependencies:
   flutter_test:

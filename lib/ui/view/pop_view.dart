@@ -37,7 +37,8 @@ class PopupMenuItemState<T, W extends MyPopupMenuItem<T>> extends State<W> {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    TextStyle style = theme.textTheme.subhead;
+    /// 适配flutter2.5.2
+    TextStyle style = theme.textTheme.subtitle1;
     if (!widget.enabled) style = style.copyWith(color: theme.disabledColor);
 
     Widget item = AnimatedDefaultTextStyle(

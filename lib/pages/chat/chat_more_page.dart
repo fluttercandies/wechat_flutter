@@ -50,7 +50,7 @@ class _ChatMorePageState extends State<ChatMorePage> {
         gridCount: 4,
         selectedAssets: assets,
         themeColor: Colors.green,
-        textDelegate: DefaultAssetsPickerTextDelegate(),
+        // textDelegate: DefaultAssetsPickerTextDelegate(),
         routeCurve: Curves.easeIn,
         routeDuration: const Duration(milliseconds: 500),
       ).then((List<AssetEntity> result) {
