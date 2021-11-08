@@ -1,6 +1,7 @@
 import 'package:camera/camera.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 import 'package:wechat_flutter/im/message_handle.dart';
+import 'package:wechat_flutter/im/send_handle.dart';
 import 'package:wechat_flutter/pages/chat/shoot_page.dart';
 import 'package:wechat_flutter/tools/utils/handle_util.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
@@ -74,6 +75,9 @@ class _ChatMorePageState extends State<ChatMorePage> {
       } on CameraException catch (e) {
         logError(e.code, e.description);
       }
+    } else if (name == '红包') {
+      showToast(context, '测试发送红包消息');
+      await sendTextMsg('${widget?.id}', widget.type, "测试发送红包消息");
     } else {
       showToast(context, '敬请期待$name');
     }

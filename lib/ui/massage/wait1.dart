@@ -11,6 +11,7 @@ import 'package:wechat_flutter/ui/message_view/join_message.dart';
 import 'package:wechat_flutter/ui/message_view/modify_groupInfo_message.dart';
 import 'package:wechat_flutter/ui/message_view/modify_notification_message.dart';
 import 'package:wechat_flutter/ui/message_view/quit_message.dart';
+import 'package:wechat_flutter/ui/message_view/red_package.dart';
 import 'package:wechat_flutter/ui/message_view/sound_msg.dart';
 import 'package:wechat_flutter/ui/message_view/tem_message.dart';
 import 'package:wechat_flutter/ui/message_view/text_msg.dart';
@@ -37,7 +38,10 @@ class _SendMessageViewState extends State<SendMessageView> {
     bool iosImg = isI && msgStr.contains('imageList:');
     var iosS = msgStr.contains('downloadFlag:') && msgStr.contains('second:');
     bool iosSound = isI && iosS;
-    if (msgType == "Text" || iosText) {
+    if ((msgType == "Text" || iosText) &&
+        widget.model.msg.toString().contains("测试发送红包消息")) {
+      return new RedPackage(widget.model);
+    } else if (msgType == "Text" || iosText) {
       return new TextMsg(msg['text'], widget.model);
     } else if (msgType == "Image" || iosImg) {
       return new ImgMsg(msg, widget.model);
