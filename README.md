@@ -155,26 +155,27 @@ IOS
 
 # 我的Flutter环境
 ```
-q1deMacBook-Pro:wechat_flutter q1$ flutter doctor -v
-[✓] Flutter (Channel stable, 2.0.1, on macOS 11.2.3 20D91 darwin-x64, locale zh-Hans-CN)
-    • Flutter version 2.0.1 at /Users/q1/flutter
-    • Framework revision c5a4b4029c (9 weeks ago), 2021-03-04 09:47:48 -0800
-    • Engine revision 40441def69
-    • Dart version 2.12.0
+ q1@q1deMacBook-Pro  ~/Documents/git/wechat_flutter   master  flutter doctor -v
+[✓] Flutter (Channel stable, 2.5.2, on macOS 11.2.3 20D91 darwin-x64, locale zh-Hans-CN)
+    • Flutter version 2.5.2 at /Users/q1/flutterNewVersion/flutter
+    • Upstream repository https://github.com/flutter/flutter.git
+    • Framework revision 3595343e20 (6 weeks ago), 2021-09-30 12:58:18 -0700
+    • Engine revision 6ac856380f
+    • Dart version 2.14.3
     • Pub download mirror https://pub.flutter-io.cn
     • Flutter download mirror https://storage.flutter-io.cn
 
-[✓] Android toolchain - develop for Android devices (Android SDK version 30.0.1)
+[✓] Android toolchain - develop for Android devices (Android SDK version 31.0.0-rc1)
     • Android SDK at /Users/q1/android-sdk-macosx
-    • Platform android-S, build-tools 30.0.1
+    • Platform android-31, build-tools 31.0.0-rc1
     • Java binary at: /Applications/Android Studio.app/Contents/jre/jdk/Contents/Home/bin/java
     • Java version OpenJDK Runtime Environment (build 1.8.0_242-release-1644-b3-6915495)
     • All Android licenses accepted.
 
 [✓] Xcode - develop for iOS and macOS
     • Xcode at /Applications/Xcode.app/Contents/Developer
-    • Xcode 12.4, Build version 12D4e
-    • CocoaPods version 1.10.1
+    • Xcode 12.5.1, Build version 12E507
+    • CocoaPods version 1.11.0.beta.2
 
 [✓] Chrome - develop for the web
     • Chrome at /Applications/Google Chrome.app/Contents/MacOS/Google Chrome
@@ -187,15 +188,11 @@ q1deMacBook-Pro:wechat_flutter q1$ flutter doctor -v
       🔨 https://plugins.jetbrains.com/plugin/6351-dart
     • Java version OpenJDK Runtime Environment (build 1.8.0_242-release-1644-b3-6915495)
 
-[✓] VS Code (version 1.55.2)
-    • VS Code at /Applications/Visual Studio Code.app/Contents
-    • Flutter extension can be installed from:
-      🔨 https://marketplace.visualstudio.com/items?itemName=Dart-Code.flutter
-
-[✓] Connected device (3 available)
-    • SEA AL10 (mobile) • 6HJ4C20219007098 • android-arm64  • Android 10 (API 29)
-    • macOS (desktop)   • macos            • darwin-x64     • macOS 11.2.3 20D91 darwin-x64
-    • Chrome (web)      • chrome           • web-javascript • Google Chrome 90.0.4430.93
+[✓] Connected device (4 available)
+    • SEA AL10 (mobile) • 6HJ4C20219007098          • android-arm64  • Android 10 (API 29)
+    • iPhone (mobile)   • 00008020-0016343E2692002E • ios            • iOS 14.7.1 18G82
+    • macOS (desktop)   • macos                     • darwin-x64     • macOS 11.2.3 20D91 darwin-x64
+    • Chrome (web)      • chrome                    • web-javascript • Google Chrome 95.0.4638.69
 
 • No issues found!
 ```
