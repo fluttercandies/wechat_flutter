@@ -72,7 +72,7 @@ class _MenuPopWidgetState extends State<MenuPopWidget> {
           // 这里计算偏移量
           delegate: new PopupMenuRouteLayout(
               position,
-              widget.menuHeight + _triangleHeight,
+              null,
               Directionality.of(widget.btnContext),
               widget._width,
               widget.menuWidth,

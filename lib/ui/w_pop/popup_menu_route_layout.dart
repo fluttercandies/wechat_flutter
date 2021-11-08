@@ -45,7 +45,7 @@ class PopupMenuRouteLayout extends SingleChildLayoutDelegate {
     if (selectedItemOffset == null) {
       y = position.top;
     } else {
-      y = position.bottom +
+      y = position.top +
           (size.height - position.top - position.bottom) / 2.0 -
           selectedItemOffset;
     }
