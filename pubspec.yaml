@@ -192,6 +192,7 @@ flutter:
     - assets/images/emoji/
     - assets/images/group/
     - assets/images/wechat/
+    - assets/images/wechat/in/
 
     - assets/data/contacts.json
     - assets/data/friends.json
