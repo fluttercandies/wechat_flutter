@@ -58,8 +58,8 @@ class _MsgAvatarState extends State<MsgAvatar> with TickerProviderStateMixin {
             img: widget.model.id == widget.globalModel.account
                 ? widget.globalModel.avatar ?? defIcon
                 : widget.model.avatar,
-            height: 50,
-            width: 50,
+            height: 35,
+            width: 35,
             fit: BoxFit.cover,
           ),
         ),

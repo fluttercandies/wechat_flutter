@@ -191,6 +191,7 @@ flutter:
     - assets/images/discover/mini_program.webp
     - assets/images/emoji/
     - assets/images/group/
+    - assets/images/wechat/
 
     - assets/data/contacts.json
     - assets/data/friends.json
