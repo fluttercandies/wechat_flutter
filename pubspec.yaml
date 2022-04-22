@@ -69,7 +69,7 @@ dependencies:
   permission_handler: 3.1.0
   #音频处理
   #  audioplayers: 0.13.3 #1.22.5版本Flutter用这个
-  audioplayers: ^0.18.3 #Flutter2用这个
+  audioplayers: ^0.19.0 #Flutter2用这个
   #调用相机
   camera: # 0.5.7+1
     path: plugin/camera
