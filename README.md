@@ -79,6 +79,12 @@ wechat_flutter是flutter版微信，目前已实现即时通讯基本功能，�
 
 <img src="assets/git/qr_code.png" style="zoom:50%;" />
 
+防止上方二维码不显示：
+
+<img src="https://oss.shenmeniuma.com/images/app/qr_code.png" style="zoom:50%;" />
+
+
+
 IOS的直接拉下项目直接跑即可,
 
 # 特性
