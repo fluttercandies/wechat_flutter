@@ -72,9 +72,10 @@ wechat_flutter是flutter版微信，目前已实现即时通讯基本功能，�
 | --- | --- | --- |
 | ![4.gif](https://github.com/fluttercandies/wechat_flutter/blob/master/assets/git/4.gif) | ![5.gif](https://github.com/fluttercandies/wechat_flutter/blob/master/assets/git/5.gif) | ![6.gif](https://github.com/fluttercandies/wechat_flutter/blob/master/assets/git/6.gif) |
 | ![7.gif](https://github.com/fluttercandies/wechat_flutter/blob/master/assets/git/7.gif) | ![8.gif](https://github.com/fluttercandies/wechat_flutter/blob/master/assets/git/8.gif) | ![9.gif](https://github.com/fluttercandies/wechat_flutter/blob/master/assets/git/9.gif) |
-下载体验(Android)：[点击下载](http://www.flutterj.com/app-release.apk)
+下载体验(Android)：[https://wwc.lanzoul.com/iXHDE04v0y4j](https://wwc.lanzoul.com/iXHDE04v0y4j)
 
-<img src="http://www.flutterj.com/download.png" style="zoom:50%;" />
+
+<img src="assets/git/qr_code.png" style="zoom:50%;" />
 
 IOS的直接拉下项目直接跑即可,
 
