@@ -5,11 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:wechat_flutter/im/friend/fun_dim_friend.dart';
 import 'package:wechat_flutter/im/fun_dim_group_model.dart';
 import 'package:wechat_flutter/im/group/fun_dim_info.dart';
-import 'package:wechat_flutter/pages/group/select_members_page.dart';
 import 'package:wechat_flutter/pages/group/group_billboard_page.dart';
 import 'package:wechat_flutter/pages/group/group_member_details.dart';
 import 'package:wechat_flutter/pages/group/group_members_page.dart';
 import 'package:wechat_flutter/pages/group/group_remarks_page.dart';
+import 'package:wechat_flutter/pages/group/select_members_page.dart';
 import 'package:wechat_flutter/pages/home/search_page.dart';
 import 'package:wechat_flutter/pages/mine/code_page.dart';
 import 'package:wechat_flutter/pages/settings/chat_background_page.dart';
@@ -29,16 +29,27 @@ class GroupDetailsPage extends StatefulWidget {
 }
 
 class _GroupDetailsPageState extends State<GroupDetailsPage> {
+  /// 是否聊天置顶
   bool _top = false;
+
+  /// 是否显示群成员昵称
   bool _showName = false;
+
+  /// 是否保存到通讯录
   bool _contact = false;
+
+  /// 是否免打扰
   bool _dnd = false;
+
   String groupName;
   String groupNotification;
   String time;
   String cardName = '默认';
+
+  /// 是否群的创建者
   bool isGroupOwner = false;
 
+  /// 成员列表数据
   List memberList = [
     {'user': '+'},
 //    {'user': '-'}
@@ -86,11 +97,14 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
     });
   }
 
+  /// 成员item的UI序列渲染
   Widget memberItem(item) {
     List<dynamic> userInfo;
     String uId;
     String uFace = '';
     String nickName;
+
+    /// "+" 和 "-"
     if (item['user'] == "+" || item['user'] == '-') {
       return new InkWell(
         child: new SizedBox(
@@ -101,6 +115,8 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
             width: 48.0,
           ),
         ),
+
+        /// "+" 和 "-" 点击之后
         onTap: () => routePush(new SelectMembersPage()),
       );
     }
@@ -316,6 +332,9 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
     );
   }
 
+  /*
+  * 点击之后的事件处理，[title]是标题，点击之后的具体事件就是通过标题来判断
+  * */
   handle(String title) {
     switch (title) {
       case '备注':
@@ -393,6 +412,9 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
 
   _setTop(int i) {}
 
+  /*
+  * item封装调用
+  * */
   functionBtn(
     title, {
     final String detail,
