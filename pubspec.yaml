@@ -34,7 +34,8 @@ dependencies:
   #web显示
   webview_flutter: 0.3.22+1
   #选取图库
-  image_picker: 0.6.1+2
+#  image_picker: 0.6.1+2 #flutter2或者之前的使用这个
+  image_picker: ^0.8.5+3 #Flutter2.10用这个,,其他可注释
   #文本扩展显示
   #  extended_text: 1.0.1  #1.17版本Flutter用这个
   #  extended_text: 4.0.0 #1.20版本Flutter用这个
@@ -63,14 +64,17 @@ dependencies:
   #  dio: 3.0.9  #1.22.5版本Flutter用这个
   dio: ^4.0.0 #Flutter2用这个
   #打开文件
-  open_file: 2.0.3
+#  open_file: 2.0.3  #flutter2或者之前的使用这个
+  open_file: ^3.2.1 #flutter 2.10使用这个
   #获取包信息
 #  package_info: 0.4.0+2 #flutter2或者之前的使用这个
   package_info_plus: ^1.4.0 #flutter 2.10使用这个
   #音频处理
-  flutter_sound: 1.7.0
+#  flutter_sound: 1.7.0 # flutter 2.10之前的用这个
+  flutter_sound: ^9.1.2 # flutter 2.10用这个
   #权限处理
-  permission_handler: 3.1.0
+#  permission_handler: 3.1.0  # flutter 2.10之前的用这个
+  permission_handler: ^9.2.0 # flutter 2.10用这个
   #音频处理
   #  audioplayers: 0.13.3 #1.22.5版本Flutter用这个
   audioplayers: ^0.19.0 #Flutter2用这个
@@ -82,7 +86,7 @@ dependencies:
   video_player: ^2.1.1 #Flutter2用这个
   #图片压缩
 #  flutter_image_compress: 0.6.8 # flutter 2.10之前的用这个
-  flutter_image_compress: ^1.1.0 # flutter 2.10用这个
+#  flutter_image_compress: ^1.1.0 # flutter 2.10用这个
   #拼音
   lpinyin: ^1.0.7
   #特殊列表滑动

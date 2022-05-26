@@ -17,14 +17,14 @@ Future<dynamic> getDimMessages(String id,
 
 Future<void> sendImageMsg(String userName, int type,
     {Callback callback, ImageSource source, File file}) async {
-  File image;
+  XFile image;
   if (file.existsSync()) {
-    image = file;
+    image = XFile(file.path);
   } else {
-    image = await ImagePicker.pickImage(source: source);
+    image = await ImagePicker().pickImage(source: source);
   }
   if (image == null) return;
-  File compressImg = await singleCompressFile(image);
+  File compressImg = await singleCompressFile(File(image.path));
 
   try {
     await im.sendImageMessages(userName, compressImg.path, type: type);

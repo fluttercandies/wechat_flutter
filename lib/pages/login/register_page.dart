@@ -29,7 +29,7 @@ class _RegisterPageState extends State<RegisterPage> {
   String localAvatarImgPath = '';
 
   _openGallery() async {
-    File img = await ImagePicker.pickImage(source: ImageSource.gallery);
+    XFile img = await ImagePicker().pickImage(source: ImageSource.gallery);
 
     if (img != null) {
       localAvatarImgPath = img.path;

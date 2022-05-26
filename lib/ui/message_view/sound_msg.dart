@@ -40,9 +40,9 @@ class _SoundMsgState extends State<SoundMsg> with TickerProviderStateMixin {
   void initState() {
     super.initState();
     flutterSound = new FlutterSound();
-    flutterSound.setSubscriptionDuration(0.01);
-    flutterSound.setDbPeakLevelUpdate(0.8);
-    flutterSound.setDbLevelEnabled(true);
+    // flutterSound.setSubscriptionDuration(0.01);
+    // flutterSound.setDbPeakLevelUpdate(0.8);
+    // flutterSound.setDbLevelEnabled(true);
     initializeDateFormatting();
     initAudioPlayer();
   }
@@ -81,28 +81,29 @@ class _SoundMsgState extends State<SoundMsg> with TickerProviderStateMixin {
   }
 
   void start(String path) async {
-    try {
-      controller.forward();
-      await flutterSound.startPlayer(path);
-      await flutterSound.setVolume(1.0);
-      debugPrint('startPlayer: $path');
-
-      _playerSubscription = flutterSound.onPlayerStateChanged.listen((e) {
-        if (e != null) {
-          sliderCurrentPosition = e.currentPosition;
-          maxDuration = e.duration;
-
-          DateTime date = new DateTime.fromMillisecondsSinceEpoch(
-              e.currentPosition.toInt(),
-              isUtc: true);
-          String txt = DateFormat('mm:ss:SS', 'en_GB').format(date);
-
-          print(txt.substring(0, 8).toString());
-        }
-      });
-    } catch (err) {
-      print('error: $err');
-    }
+    showToast(context, "正在兼容最新flutter");
+    // try {
+    //   controller.forward();
+    //   await flutterSound.startPlayer(path);
+    //   await flutterSound.setVolume(1.0);
+    //   debugPrint('startPlayer: $path');
+    //
+    //   _playerSubscription = flutterSound.onPlayerStateChanged.listen((e) {
+    //     if (e != null) {
+    //       sliderCurrentPosition = e.currentPosition;
+    //       maxDuration = e.duration;
+    //
+    //       DateTime date = new DateTime.fromMillisecondsSinceEpoch(
+    //           e.currentPosition.toInt(),
+    //           isUtc: true);
+    //       String txt = DateFormat('mm:ss:SS', 'en_GB').format(date);
+    //
+    //       print(txt.substring(0, 8).toString());
+    //     }
+    //   });
+    // } catch (err) {
+    //   print('error: $err');
+    // }
   }
 
   playNew(url) async {

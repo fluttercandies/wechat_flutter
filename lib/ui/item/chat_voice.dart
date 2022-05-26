@@ -40,43 +40,44 @@ class _ChatVoiceWidgetState extends State<ChatVoice> {
   void initState() {
     super.initState();
     flutterSound = new FlutterSound();
-    flutterSound.setSubscriptionDuration(0.01);
-    flutterSound.setDbPeakLevelUpdate(0.8);
-    flutterSound.setDbLevelEnabled(true);
+    // flutterSound.setSubscriptionDuration(0.01);
+    // flutterSound.setDbPeakLevelUpdate(0.8);
+    // flutterSound.setDbLevelEnabled(true);
     initializeDateFormatting();
   }
 
   void start() async {
     print('开始拉。当前路径');
-    try {
-      String path = await flutterSound
-          .startRecorder(Platform.isIOS ? 'ios.m4a' : 'android.mp4');
-      widget.voiceFile(path);
-      _recorderSubscription =
-          flutterSound.onRecorderStateChanged.listen((e) {});
-    } catch (err) {
-      RecorderRunningException e = err;
-      showToast(context, 'startRecorder error: ${e.message}');
-    }
+    showToast(context, "正在兼容最新flutter");
+    // try {
+    //   String path = await flutterSound
+    //       .startRecorder(Platform.isIOS ? 'ios.m4a' : 'android.mp4');
+    //   widget.voiceFile(path);
+    //   _recorderSubscription =
+    //       flutterSound.onRecorderStateChanged.listen((e) {});
+    // } catch (err) {
+    //   RecorderRunningException e = err;
+    //   showToast(context, 'startRecorder error: ${e.message}');
+    // }
   }
 
   void stop() async {
-    try {
-      String result = await flutterSound.stopRecorder();
-      print('stopRecorder: $result');
-
-      if (_recorderSubscription != null) {
-        _recorderSubscription.cancel();
-        _recorderSubscription = null;
-      }
-      if (_dbPeakSubscription != null) {
-        _dbPeakSubscription.cancel();
-        _dbPeakSubscription = null;
-      }
-    } catch (err) {
-      RecorderStoppedException e = err;
-      showToast(context, 'stopRecorder error: ${e.message}');
-    }
+    // try {
+    //   String result = await flutterSound.stopRecorder();
+    //   print('stopRecorder: $result');
+    //
+    //   if (_recorderSubscription != null) {
+    //     _recorderSubscription.cancel();
+    //     _recorderSubscription = null;
+    //   }
+    //   if (_dbPeakSubscription != null) {
+    //     _dbPeakSubscription.cancel();
+    //     _dbPeakSubscription = null;
+    //   }
+    // } catch (err) {
+    //   RecorderStoppedException e = err;
+    //   showToast(context, 'stopRecorder error: ${e.message}');
+    // }
   }
 
   showVoiceView() {
