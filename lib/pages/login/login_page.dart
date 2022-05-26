@@ -113,7 +113,7 @@ class _LoginPageState extends State<LoginPage> {
                 style: TextStyle(textBaseline: TextBaseline.alphabetic),
                 keyboardType: TextInputType.phone,
                 inputFormatters: [
-                  WhitelistingTextInputFormatter(new RegExp('[0-9]'))
+                  FilteringTextInputFormatter(new RegExp(r'[0-9]'), allow: true)
                 ],
                 decoration: InputDecoration(
                     hintText: S.of(context).phoneNumberHint,

@@ -143,7 +143,7 @@ SPEC CHECKSUMS:
   flutter_sound: 0e8163ceac1e00eb6d894e2ae4641ba726a2c479
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   image_picker: 16e5fec1fbc87fd3b297c53e4048521eaf17cd06
-  libwebp: b5c43b583f1a8eae7aadd580c4600d05557f1fca
+  libwebp: 6bac0a99ba5a6bb7449a951ff22c484201985f68
   Mantle: 4c0ed6ce47c96eccc4dc3bb071deb3def0e2c3be
   open_file: 02eb5cb6b21264bd3a696876f5afbfb7ca4f4b7d
   package_info: 78cabb3c322943c55d39676f4a5bfc748c01d055
@@ -163,4 +163,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: aafe91acc616949ddb318b77800a7f51bffa2a4c
 
-COCOAPODS: 1.11.0.beta.2
+COCOAPODS: 1.11.3

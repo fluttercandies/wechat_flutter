@@ -20,7 +20,7 @@ dependencies:
   dim:
     path: plugin/wechat_flutter_plugin
   #持久化存储
-#  shared_preferences: 0.5.2+2 #[Flutter2及之前]用这个
+  #  shared_preferences: 0.5.2+2 #[Flutter2及之前]用这个
   shared_preferences: ^2.0.8
   #状态管理
   #  provider: 4.3.1 #1.22.5版本Flutter用这个
@@ -40,16 +40,19 @@ dependencies:
   #  extended_text: 4.0.0 #1.20版本Flutter用这个
   #  extended_text: 4.0.1 #1.22.5版本Flutter用这个
   #  extended_text: ^6.0.5 #Flutter2用这个,,其他可注释
-  extended_text: ^7.0.0 #flutter2.5用这个,,其他可注释
+  #  extended_text: ^7.0.0 #flutter2.5用这个,,其他可注释
+  extended_text: ^9.0.0 #flutter2.10.4用这个,,其他可注释
   #文字表情混入
   #  extended_text_field: 1.0.1  #1.17版本Flutter用这个
   #  extended_text_field: 4.0.0  #1.20版本Flutter用这个
   #  extended_text_field: 5.0.1 #1.22.5版本Flutter用这个
   #  extended_text_field: ^7.0.1 #Flutter2用这个,,其他可注释
-  extended_text_field: ^8.0.0 #Flutter2.5用这个,,其他可注释
+  #  extended_text_field: ^8.0.0 #Flutter2.5用这个,,其他可注释
+  extended_text_field: ^10.0.0 #Flutter2.10用这个,,其他可注释
   #  extended_text_library: 4.0.2 #1.22.5版本Flutter用这个,,其他可注释
   #  extended_text_library: ^6.0.0 #Flutter2用这个,,其他可注释
-  extended_text_library: ^7.0.0 #Flutter2.5用这个,,其他可注释
+  #  extended_text_library: ^7.0.0 #Flutter2.5用这个,,其他可注释
+  extended_text_library: ^9.0.0 #Flutter2.10用这个,,其他可注释
   #打开系统浏览器
   url_launcher: 5.2.7
   #网络连接
@@ -62,7 +65,8 @@ dependencies:
   #打开文件
   open_file: 2.0.3
   #获取包信息
-  package_info: 0.4.0+2
+#  package_info: 0.4.0+2 #flutter2或者之前的使用这个
+  package_info_plus: ^1.4.0 #flutter 2.10使用这个
   #音频处理
   flutter_sound: 1.7.0
   #权限处理

@@ -27,7 +27,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
-        android:name="io.flutter.app.FlutterApplication"
+        android:name="io.flutter.app.FutterApplication"
         android:icon="@mipmap/ic_launcher"
         android:usesCleartextTraffic="true">
         <activity
