@@ -1,6 +1,6 @@
 [![GitHub stars](https://img.shields.io/github/stars/fluttercandies/wechat_flutter)](https://github.com/fluttercandies/wechat_flutter/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/fluttercandies/wechat_flutter)](https://github.com/fluttercandies/wechat_flutter/network)
-[![GitHub issues](https://img.shields.io/github/issues/fluttercandies/wechat_flutter)](https://github.com/fluttercandies/wechat_flutter/issues) 
+[![GitHub issues](https://img.shields.io/github/issues/fluttercandies/wechat_flutter)](https://github.com/fluttercandies/wechat_flutter/issues)
 
 > 如果产生其他依赖无法编译的问题，可以尝试将`pubspec.yaml`中的`dependencies`中的所有依赖的"^"去掉或者插件版本号改为any，重新编译尝试。
 > 还是出错的话在项目主目录执行`flutter clean`再重新运行。
@@ -8,8 +8,12 @@
 
 # log
 
+* 2022.05.26 开始兼容flutter2.10.4
+
+* 2022.05.26 列出错误列表及修复方式
+
 * 2022.05.15 修复补Android安装包链接和二维码
-  
+
 * 2021.11.08 适配flutter 2.5
 
 * 2021.05.12 适配iOS，解决运行问题
@@ -70,11 +74,14 @@ wechat_flutter是flutter版微信，目前已实现即时通讯基本功能，�
 ![start.gif](https://github.com/fluttercandies/wechat_flutter/blob/master/assets/git/start.gif)
 
 # 效果图
+
 |![1.gif](https://github.com/fluttercandies/wechat_flutter/blob/master/assets/git/1.jpg)| ![2.gif](https://github.com/fluttercandies/wechat_flutter/blob/master/assets/git/2.gif) | ![3.gif](https://github.com/fluttercandies/wechat_flutter/blob/master/assets/git/3.gif)|
 | --- | --- | --- |
 | ![4.gif](https://github.com/fluttercandies/wechat_flutter/blob/master/assets/git/4.gif) | ![5.gif](https://github.com/fluttercandies/wechat_flutter/blob/master/assets/git/5.gif) | ![6.gif](https://github.com/fluttercandies/wechat_flutter/blob/master/assets/git/6.gif) |
 | ![7.gif](https://github.com/fluttercandies/wechat_flutter/blob/master/assets/git/7.gif) | ![8.gif](https://github.com/fluttercandies/wechat_flutter/blob/master/assets/git/8.gif) | ![9.gif](https://github.com/fluttercandies/wechat_flutter/blob/master/assets/git/9.gif) |
-下载体验(Android)【测试账号166，直接登录】：[https://wwc.lanzoul.com/iQlkj04vnhsj](https://wwc.lanzoul.com/iQlkj04vnhsj)
+
+下载体验(Android)
+【测试账号166，直接登录】：[https://wwc.lanzoul.com/iQlkj04vnhsj](https://wwc.lanzoul.com/iQlkj04vnhsj)
 
 
 <img src="assets/git/qr_code.png" style="zoom:50%;" />
@@ -121,6 +128,7 @@ IOS的直接拉下项目直接跑即可,
 * [ ] 设置备注
 
 # 第三方框架
+
 |  库   | 功能  |
 |  ----  | ----  |
 | dim  | 即时通讯 |
@@ -150,19 +158,21 @@ IOS的直接拉下项目直接跑即可,
 
 # 使用教程
 
-*  使用命令（拉取项目）：$ git clone https://github.com/fluttercandies/wechat_flutter.git
-*  然后命令（获取依赖）：$ flutter packages get  (IOS执行IOS部分再执行下一步)
-*  最后命令（运行）：$ flutter run
+* 使用命令（拉取项目）：$ git clone https://github.com/fluttercandies/wechat_flutter.git
+* 然后命令（获取依赖）：$ flutter packages get  (IOS执行IOS部分再执行下一步)
+* 最后命令（运行）：$ flutter run
 
 IOS
-*  进入项目IOS目录：$ cd ios/
-*  更新Pod（非必须）：$ pod update
-*  安装Pod：$ pod install
+
+* 进入项目IOS目录：$ cd ios/
+* 更新Pod（非必须）：$ pod update
+* 安装Pod：$ pod install
 
 如果出现`(Connection refused - connect(2) for "raw.githubusercontent.com" port 443)`，则表示还没设置国内源，
 或者尝试下翻墙。
 
 # 我的Flutter环境
+
 ```
  q1@q1deMacBook-Pro  ~/Documents/git/wechat_flutter   master  flutter doctor -v
 [✓] Flutter (Channel stable, 2.5.2, on macOS 11.2.3 20D91 darwin-x64, locale zh-Hans-CN)
@@ -207,18 +217,23 @@ IOS
 ```
 
 # 运行安卓androidx.core:core问题
+
 ##### 错误信息：
+
 ```
 Android dependency 'androidx.core:core' has different version for 
 the compile (1.0.0) and runtime (1.0.2) classpath. You should 
 manually set the same version via DependencyResolution
 ```
+
 ##### 解决方案
+
 项目最下方的`External Libraries` => `Flutter Plugins` => `image_picker-0.6.1+2`
 => `android` => `build.gradle` 然后最下方有`androidx.core:core:版本`。
 
 直接改为`androidx.core:core:1.0.0`，
 ![](assets/git/core.png)
+
 ```
 android {
     compileSdkVersion 28
@@ -236,18 +251,19 @@ android {
     }
 }
 ```
+
 然后permission_handler也一样改下。
 
 # 关于项目太久没更
-最近工作太繁忙，基本没啥时间更新，然后之前是做其他开源项目，导致这个项目太久没实质性进展，
-不好意思哈各位，从现在开始进入维护状态。
+
+最近工作太繁忙，基本没啥时间更新，然后之前是做其他开源项目，导致这个项目太久没实质性进展， 不好意思哈各位，从现在开始进入维护状态。
 ![](assets/git/cui.png)
 
 # Future
 
-*  后期会把项目里所遇到的问题及解决的思路写成博客给大家学习。
-*  仿微信录制音频开源库：https://github.com/yxwandroid/flutter_plugin_record
-*  微信图库：https://github.com/fluttercandies/flutter_wechat_assets_picker
+* 后期会把项目里所遇到的问题及解决的思路写成博客给大家学习。
+* 仿微信录制音频开源库：https://github.com/yxwandroid/flutter_plugin_record
+* 微信图库：https://github.com/fluttercandies/flutter_wechat_assets_picker
 
 # Flutter微信群
 
@@ -260,11 +276,13 @@ Flutter教程网：www.flutterj.com
 Flutter交流QQ群：[874592746](https://jq.qq.com/?_wv=1027&k=5coTYqE)
 
 # 公众号
+
 <img src="http://www.flutterj.com/public.jpg" height="200" width="200" style="zoom:30%;" />
 
 关注公众号“`Flutter前线`”，各种Flutter项目实战经验技巧，干活知识，Flutter面试题答案，等你来领取。
 
 ### LICENSE
+
 ```
 fluttercandies/wechat_flutter is licensed under the
 Apache License 2.0

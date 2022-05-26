@@ -81,7 +81,8 @@ dependencies:
   #  video_player: 0.10.11+2 #1.22.5版本Flutter用这个
   video_player: ^2.1.1 #Flutter2用这个
   #图片压缩
-  flutter_image_compress: 0.6.8
+#  flutter_image_compress: 0.6.8 # flutter 2.10之前的用这个
+  flutter_image_compress: ^1.1.0 # flutter 2.10用这个
   #拼音
   lpinyin: ^1.0.7
   #特殊列表滑动
@@ -90,6 +91,10 @@ dependencies:
   #  wechat_assets_picker: ^4.2.1 #1.22.5版本Flutter用这个
   #  wechat_assets_picker: ^5.4.0 #Flutter2用这个
   wechat_assets_picker: ^6.2.3 #flutter2.5用这个
+  #扩展图片
+  extended_image: 6.0.2+1 # flutter 2.10 用这个
+  #平台
+  platform: ^3.1.0 # flutter 2.10 用这个
 
 dev_dependencies:
   flutter_test:

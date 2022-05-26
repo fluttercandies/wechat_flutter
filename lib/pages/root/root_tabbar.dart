@@ -79,9 +79,10 @@ class RootTabBarState extends State<RootTabBar> {
         setState(() => currentIndex = index);
         pageController.jumpToPage(currentIndex);
       },
-      unselectedFontSize: 18.0,
-      selectedFontSize: 18.0,
+      unselectedFontSize: 12.0,
+      selectedFontSize: 12.0,
       elevation: 0,
+      // title: new Text(model.title, style: new TextStyle(fontSize: 12.0)),
     );
 
     var appBar = new ComMomBar(
