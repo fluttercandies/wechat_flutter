@@ -4,7 +4,6 @@ export 'package:flutter/services.dart';
 export 'dart:io';
 export 'package:dim/dim.dart';
 export 'package:cached_network_image/cached_network_image.dart';
-export 'package:connectivity/connectivity.dart';
 export 'package:wechat_flutter/ui/bar/commom_bar.dart';
 export 'package:wechat_flutter/config/const.dart';
 export 'package:wechat_flutter/ui/button/commom_button.dart';
@@ -24,7 +23,7 @@ export 'package:wechat_flutter/tools/data/data.dart';
 export 'package:wechat_flutter/ui/view/null_view.dart';
 import 'dart:ui';
 
-import 'package:connectivity/connectivity.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dim/dim.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 

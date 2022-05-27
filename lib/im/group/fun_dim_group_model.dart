@@ -1,4 +1,3 @@
-import 'dart:convert';
 
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 

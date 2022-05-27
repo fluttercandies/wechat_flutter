@@ -1,13 +1,8 @@
-import 'dart:convert';
-
-import 'package:wechat_flutter/http/api.dart';
 import 'package:wechat_flutter/pages/mine/code_page.dart';
-import 'package:wechat_flutter/tools/commom.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
-import 'package:wechat_flutter/im/info_handle.dart';
 import 'package:wechat_flutter/pages/mine/change_name_page.dart';
 import 'package:wechat_flutter/provider/global_model.dart';
 

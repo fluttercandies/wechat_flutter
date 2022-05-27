@@ -1,4 +1,3 @@
-import 'package:wechat_flutter/im/entity/person_info_entity.dart';
 import 'package:wechat_flutter/pages/contacts/contacts_details_page.dart';
 import 'package:flutter/material.dart';
 import 'package:wechat_flutter/pages/contacts/group_launch_page.dart';

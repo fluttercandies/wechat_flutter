@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:wechat_flutter/im/entity/i_chat_person_entity.dart';
 import 'package:wechat_flutter/im/entity/i_person_info_entity.dart';
 import 'package:wechat_flutter/im/entity/person_info_entity.dart';
 import 'package:wechat_flutter/im/info_handle.dart';

@@ -4,7 +4,6 @@ import 'package:wechat_flutter/im/model/chat_data.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:wechat_flutter/provider/global_model.dart';
 
 import 'package:wechat_flutter/ui/message_view/Img_msg.dart';
 import 'package:wechat_flutter/ui/message_view/join_message.dart';
@@ -13,9 +12,7 @@ import 'package:wechat_flutter/ui/message_view/modify_notification_message.dart'
 import 'package:wechat_flutter/ui/message_view/quit_message.dart';
 import 'package:wechat_flutter/ui/message_view/red_package.dart';
 import 'package:wechat_flutter/ui/message_view/sound_msg.dart';
-import 'package:wechat_flutter/ui/message_view/tem_message.dart';
 import 'package:wechat_flutter/ui/message_view/text_msg.dart';
-import 'package:wechat_flutter/ui/message_view/video_message.dart';
 
 class SendMessageView extends StatefulWidget {
   final ChatData model;

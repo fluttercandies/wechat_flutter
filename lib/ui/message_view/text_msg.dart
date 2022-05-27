@@ -5,7 +5,6 @@ import 'package:wechat_flutter/ui/message_view/text_item_container.dart';
 import 'package:provider/provider.dart';
 
 import '../../provider/global_model.dart';
-import '../view/image_view.dart';
 
 class TextMsg extends StatelessWidget {
   final String text;

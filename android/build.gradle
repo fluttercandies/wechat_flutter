@@ -2,19 +2,29 @@ buildscript {
     ext.kotlin_version = '1.6.10' // Change here
 
     repositories {
+        // 原生
         google()
         jcenter()
+
+        //  阿里镜像
+//        maven { url 'https://maven.aliyun.com/repository/central' }
+//        maven { url 'https://maven.aliyun.com/repository/public' }
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.0.1'
+        classpath 'com.android.tools.build:gradle:4.2.0'
     }
 }
 
 allprojects {
     repositories {
+        // 原生
         google()
         jcenter()
+
+        //  阿里镜像
+//        maven { url 'https://maven.aliyun.com/repository/central' }
+//        maven { url 'https://maven.aliyun.com/repository/public' }
     }
 }
 

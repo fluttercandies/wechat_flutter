@@ -1,4 +1,3 @@
-import 'package:dim/commom/check.dart';
 import 'package:dim/commom/ui.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

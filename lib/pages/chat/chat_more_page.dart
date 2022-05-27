@@ -7,7 +7,6 @@ import 'package:wechat_flutter/tools/utils/handle_util.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'package:wechat_flutter/ui/card/more_item_card.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:photo_manager/photo_manager.dart';
 
 class ChatMorePage extends StatefulWidget {
@@ -45,15 +44,13 @@ class _ChatMorePageState extends State<ChatMorePage> {
     if (name == '相册') {
       AssetPicker.pickAssets(
         context,
-        maxAssets: 9,
-        pageSize: 320,
-        pathThumbSize: 80,
-        gridCount: 4,
-        selectedAssets: assets,
-        themeColor: Colors.green,
-        // textDelegate: DefaultAssetsPickerTextDelegate(),
-        routeCurve: Curves.easeIn,
-        routeDuration: const Duration(milliseconds: 500),
+        pickerConfig: AssetPickerConfig(
+          maxAssets: 9,
+          pageSize: 320,
+          gridCount: 4,
+          selectedAssets: assets,
+          themeColor: Colors.green,
+        ),
       ).then((List<AssetEntity> result) {
         result.forEach((AssetEntity element) async {
           sendImageMsg(widget.id, widget.type, file: await element.file,

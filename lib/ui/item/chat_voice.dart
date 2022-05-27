@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 import 'package:wechat_flutter/tools/date.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'package:wechat_flutter/ui/dialog/voice_dialog.dart';
