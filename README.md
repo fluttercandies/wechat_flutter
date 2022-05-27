@@ -6,6 +6,9 @@
 > 还是出错的话在项目主目录执行`flutter clean`再重新运行。
 > 如果出现插件版本不适配记得看`pubspec.yaml`文件介绍的插件flutter版本是否与自己本地Flutter适配。
 
+# 公告
+目前正在以flutter2.10.4重构，具体进度查看`refactor`分支，将放弃`dim`插件，接入`tencent_im_sdk_plugin`，解决所有插件兼容问题，合并master后还可能会兼容空安全与代码整体规范。
+
 # log
 
 * 2022.05.26 开始兼容flutter2.10.4
