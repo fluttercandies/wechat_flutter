@@ -4,7 +4,6 @@ import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'package:wechat_flutter/ui/dialog/voice_dialog.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_sound/flutter_sound.dart';
 
 typedef VoiceFile = void Function(String path);
 
@@ -27,18 +26,18 @@ class _ChatVoiceWidgetState extends State<ChatVoice> {
   String toastShow = "手指上滑,取消发送";
   String voiceIco = "images/voice_volume_1.png";
 
-  StreamSubscription _recorderSubscription;
-  StreamSubscription _dbPeakSubscription;
+  // StreamSubscription _recorderSubscription;
+  // StreamSubscription _dbPeakSubscription;
 
   ///默认隐藏状态
   bool voiceState = true;
   OverlayEntry overlayEntry;
-  FlutterSound flutterSound;
+  // FlutterSound flutterSound;
 
   @override
   void initState() {
     super.initState();
-    flutterSound = new FlutterSound();
+    // flutterSound = new FlutterSound();
     // flutterSound.setSubscriptionDuration(0.01);
     // flutterSound.setDbPeakLevelUpdate(0.8);
     // flutterSound.setDbLevelEnabled(true);

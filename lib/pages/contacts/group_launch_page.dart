@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:wechat_flutter/config/dictionary.dart';
 import 'package:wechat_flutter/im/friend_handle.dart';
 import 'package:wechat_flutter/im/model/contacts.dart';
@@ -86,7 +87,7 @@ class _GroupLaunchPageState extends State<GroupLaunchPage> {
     final data = await getUsersProfile([userName]);
     List<dynamic> dataMap = json.decode(data);
     if (strNoEmpty(dataMap[0]['allowType'])) {
-      routePush(
+      Get.to(
         new AddFriendsDetails(
           'search',
           dataMap[0]['identifier'],

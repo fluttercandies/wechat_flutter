@@ -2,6 +2,7 @@ import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'package:wechat_flutter/ui/view/image_view.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
+import 'package:get/get.dart';
 
 class ContactCard extends StatelessWidget {
   final String img, title, nickName, id, area;
@@ -40,7 +41,7 @@ class ContactCard extends StatelessWidget {
                 img: img, width: 55, height: 55, fit: BoxFit.cover),
             onTap: () {
               if (isNetWorkImg(img)) {
-                routePush(
+                Get.to(
                   new PhotoView(
                     imageProvider: NetworkImage(img),
                     onTapUp: (c, f, s) => Navigator.of(context).pop(),

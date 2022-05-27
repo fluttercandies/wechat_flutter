@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:wechat_flutter/pages/root/user_page.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +17,7 @@ class HomeNullView extends StatelessWidget {
           str ?? '',
           style: TextStyle(color: mainTextColor),
         ),
-        onTap: () => routePush(new UserPage()),
+        onTap: () => Get.to(new UserPage()),
       ),
     );
   }

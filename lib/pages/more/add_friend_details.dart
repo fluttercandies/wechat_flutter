@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:wechat_flutter/pages/wechat_friends/page/wechat_friends_circle.dart';
 import 'package:flutter/material.dart';
 import 'package:wechat_flutter/pages/more/verification_page.dart';
@@ -46,12 +47,12 @@ class _AddFriendsDetailsState extends State<AddFriendsDetails> {
       ),
       new LabelRow(
         label: '朋友圈',
-        onPressed: () => routePush(new WeChatFriendsCircle()),
+        onPressed: () => Get.to(new WeChatFriendsCircle()),
       ),
       new ButtonRow(
         margin: EdgeInsets.only(top: 10.0),
         text: '添加到通讯录',
-        onPressed: () => routePush(
+        onPressed: () => Get.to(
             new VerificationPage(nickName: widget.nickName, id: widget.imUser)),
       ),
     ];

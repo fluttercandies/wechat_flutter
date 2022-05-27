@@ -1,17 +1,13 @@
-import 'package:camera/camera.dart';
-import 'package:wechat_flutter/tools/utils/handle_util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'package:video_player/video_player.dart';
 
-import 'package:path_provider/path_provider.dart';
-
 class ShootPage extends StatefulWidget {
-  final List<CameraDescription> cameras;
+  // final List<CameraDescription> cameras;
 
-  ShootPage(this.cameras);
+  // ShootPage(this.cameras);
 
   @override
   _ShootPageState createState() => _ShootPageState();
@@ -21,7 +17,7 @@ class _ShootPageState extends State<ShootPage> with WidgetsBindingObserver {
   Timer _timer;
   int _timing = 0;
 
-  CameraController controller;
+  // CameraController controller;
   String imagePath;
   String videoPath;
   VideoPlayerController videoController;
@@ -30,31 +26,31 @@ class _ShootPageState extends State<ShootPage> with WidgetsBindingObserver {
   bool isReverse = false;
   bool isOnPress = false;
 
-  CameraDescription cameraDescription;
+  // CameraDescription cameraDescription;
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
 
-    if (widget.cameras.isNotEmpty) {
-      cameraDescription = widget.cameras[!isReverse ? 0 : 1];
-      onNewCameraSelected(cameraDescription);
-    }
+    // if (widget.cameras.isNotEmpty) {
+    //   cameraDescription = widget.cameras[!isReverse ? 0 : 1];
+    //   onNewCameraSelected(cameraDescription);
+    // }
   }
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (controller == null || !controller.value.isInitialized) {
-      return;
-    }
-    if (state == AppLifecycleState.inactive) {
-      controller?.dispose();
-    } else if (state == AppLifecycleState.resumed) {
-      if (controller != null) {
-        onNewCameraSelected(controller.description);
-      }
-    }
+    // if (controller == null || !controller.value.isInitialized) {
+    //   return;
+    // }
+    // if (state == AppLifecycleState.inactive) {
+    //   controller?.dispose();
+    // } else if (state == AppLifecycleState.resumed) {
+    //   if (controller != null) {
+    //     onNewCameraSelected(controller.description);
+    //   }
+    // }
   }
 
   void startTimer() {
@@ -202,40 +198,40 @@ class _ShootPageState extends State<ShootPage> with WidgetsBindingObserver {
   }
 
   Widget checkWidget() {
-    if (widget.cameras.isEmpty) return const Text('No camera found');
-
-    cameraDescription = widget.cameras[isReverse ? 0 : 1];
-    return new InkWell(
-      child: new Container(
-        alignment: Alignment.topRight,
-        width: 60.0,
-        padding: EdgeInsets.symmetric(horizontal: 20.0),
-        child: new Image.asset('assets/images/chat/flip_camera_icon_nor.webp',
-            fit: BoxFit.cover),
-      ),
-      onTap: () {
-        isReverse = !isReverse;
-        onNewCameraSelected(cameraDescription);
-      },
-    );
+    // if (widget.cameras.isEmpty) return const Text('No camera found');
+    //
+    // cameraDescription = widget.cameras[isReverse ? 0 : 1];
+    // return new InkWell(
+    //   child: new Container(
+    //     alignment: Alignment.topRight,
+    //     width: 60.0,
+    //     padding: EdgeInsets.symmetric(horizontal: 20.0),
+    //     child: new Image.asset('assets/images/chat/flip_camera_icon_nor.webp',
+    //         fit: BoxFit.cover),
+    //   ),
+    //   onTap: () {
+    //     isReverse = !isReverse;
+    //     onNewCameraSelected(cameraDescription);
+    //   },
+    // );
   }
 
   Widget _cameraPreviewWidget() {
-    if (controller == null || !controller.value.isInitialized) {
-      return const Text(
-        '使用相机',
-        style: TextStyle(
-          color: Colors.white,
-          fontSize: 24.0,
-          fontWeight: FontWeight.w900,
-        ),
-      );
-    } else {
-      return new AspectRatio(
-        aspectRatio: controller.value.aspectRatio,
-        child: new CameraPreview(controller),
-      );
-    }
+    // if (controller == null || !controller.value.isInitialized) {
+    //   return const Text(
+    //     '使用相机',
+    //     style: TextStyle(
+    //       color: Colors.white,
+    //       fontSize: 24.0,
+    //       fontWeight: FontWeight.w900,
+    //     ),
+    //   );
+    // } else {
+    //   return new AspectRatio(
+    //     aspectRatio: controller.value.aspectRatio,
+    //     // child: new CameraPreview(controller),
+    //   );
+    // }
   }
 
   Widget _thumbnailWidget() {
@@ -286,85 +282,85 @@ class _ShootPageState extends State<ShootPage> with WidgetsBindingObserver {
   }
 
   /// Display the control bar with buttons to take pictures and record videos.
-  Widget _captureControlRowWidget() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      mainAxisSize: MainAxisSize.max,
-      children: <Widget>[
-        IconButton(
-          icon: const Icon(Icons.camera_alt),
-          color: Colors.blue,
-          onPressed: controller != null &&
-                  controller.value.isInitialized &&
-                  !controller.value.isRecordingVideo
-              ? onTakePictureButtonPressed
-              : null,
-        ),
-        IconButton(
-          icon: const Icon(Icons.videocam),
-          color: Colors.blue,
-          onPressed: controller != null &&
-                  controller.value.isInitialized &&
-                  !controller.value.isRecordingVideo
-              ? onVideoRecordButtonPressed
-              : null,
-        ),
-        IconButton(
-          icon: controller != null && controller.value.isRecordingPaused
-              ? Icon(Icons.play_arrow)
-              : Icon(Icons.pause),
-          color: Colors.blue,
-          onPressed: controller != null &&
-                  controller.value.isInitialized &&
-                  controller.value.isRecordingVideo
-              ? (controller != null && controller.value.isRecordingPaused
-                  ? onResumeButtonPressed
-                  : onPauseButtonPressed)
-              : null,
-        ),
-        IconButton(
-          icon: const Icon(Icons.stop),
-          color: Colors.red,
-          onPressed: controller != null &&
-                  controller.value.isInitialized &&
-                  controller.value.isRecordingVideo
-              ? onStopButtonPressed
-              : null,
-        )
-      ],
-    );
-  }
+  // Widget _captureControlRowWidget() {
+  //   return Row(
+  //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  //     mainAxisSize: MainAxisSize.max,
+  //     children: <Widget>[
+  //       IconButton(
+  //         icon: const Icon(Icons.camera_alt),
+  //         color: Colors.blue,
+  //         onPressed: controller != null &&
+  //                 controller.value.isInitialized &&
+  //                 !controller.value.isRecordingVideo
+  //             ? onTakePictureButtonPressed
+  //             : null,
+  //       ),
+  //       IconButton(
+  //         icon: const Icon(Icons.videocam),
+  //         color: Colors.blue,
+  //         onPressed: controller != null &&
+  //                 controller.value.isInitialized &&
+  //                 !controller.value.isRecordingVideo
+  //             ? onVideoRecordButtonPressed
+  //             : null,
+  //       ),
+  //       IconButton(
+  //         icon: controller != null && controller.value.isRecordingPaused
+  //             ? Icon(Icons.play_arrow)
+  //             : Icon(Icons.pause),
+  //         color: Colors.blue,
+  //         onPressed: controller != null &&
+  //                 controller.value.isInitialized &&
+  //                 controller.value.isRecordingVideo
+  //             ? (controller != null && controller.value.isRecordingPaused
+  //                 ? onResumeButtonPressed
+  //                 : onPauseButtonPressed)
+  //             : null,
+  //       ),
+  //       IconButton(
+  //         icon: const Icon(Icons.stop),
+  //         color: Colors.red,
+  //         onPressed: controller != null &&
+  //                 controller.value.isInitialized &&
+  //                 controller.value.isRecordingVideo
+  //             ? onStopButtonPressed
+  //             : null,
+  //       )
+  //     ],
+  //   );
+  // }
 
   String timestamp() => DateTime.now().millisecondsSinceEpoch.toString();
 
-  void onNewCameraSelected(CameraDescription cameraDescription) async {
-    if (controller != null) {
-      await controller.dispose();
-    }
-    controller = CameraController(
-      cameraDescription,
-      ResolutionPreset.max,
-      enableAudio: true,
-    );
-
-    // If the controller is updated then update the UI.
-    controller.addListener(() {
-      if (mounted) setState(() {});
-      if (controller.value.hasError) {
-        showToast(context, 'Camera error ${controller.value.errorDescription}');
-      }
-    });
-
-    try {
-      await controller.initialize();
-    } on CameraException catch (e) {
-      _showCameraException(e);
-    }
-
-    if (mounted) {
-      setState(() {});
-    }
-  }
+  // void onNewCameraSelected(CameraDescription cameraDescription) async {
+  //   if (controller != null) {
+  //     await controller.dispose();
+  //   }
+  //   controller = CameraController(
+  //     cameraDescription,
+  //     ResolutionPreset.max,
+  //     enableAudio: true,
+  //   );
+  //
+  //   // If the controller is updated then update the UI.
+  //   controller.addListener(() {
+  //     if (mounted) setState(() {});
+  //     if (controller.value.hasError) {
+  //       showToast(context, 'Camera error ${controller.value.errorDescription}');
+  //     }
+  //   });
+  //
+  //   try {
+  //     await controller.initialize();
+  //   } on CameraException catch (e) {
+  //     _showCameraException(e);
+  //   }
+  //
+  //   if (mounted) {
+  //     setState(() {});
+  //   }
+  // }
 
   void onTakePictureButtonPressed() {
     takePicture().then((String filePath) {
@@ -380,10 +376,10 @@ class _ShootPageState extends State<ShootPage> with WidgetsBindingObserver {
   }
 
   void onVideoRecordButtonPressed() {
-    startVideoRecording().then((String filePath) {
-      if (mounted) setState(() {});
-      if (filePath != null) showToast(context, '开始录制');
-    });
+    // startVideoRecording().then((String filePath) {
+    //   if (mounted) setState(() {});
+    //   if (filePath != null) showToast(context, '开始录制');
+    // });
   }
 
   void onStopButtonPressed() {
@@ -407,71 +403,71 @@ class _ShootPageState extends State<ShootPage> with WidgetsBindingObserver {
     });
   }
 
-  Future<String> startVideoRecording() async {
-    if (!controller.value.isInitialized) {
-      showToast(context, '异常: 首先选择一个相机');
-      return null;
-    }
-
-    final Directory extDir = await getApplicationDocumentsDirectory();
-    final String dirPath = '${extDir.path}/Movies/flutter_test';
-    await Directory(dirPath).create(recursive: true);
-    final String filePath = '$dirPath/${timestamp()}.mp4';
-
-    if (controller.value.isRecordingVideo) {
-      // A recording is already started, do nothing.
-      return null;
-    }
-
-    try {
-      videoPath = filePath;
-      await controller.startVideoRecording(filePath);
-    } on CameraException catch (e) {
-      _showCameraException(e);
-      return null;
-    }
-    return filePath;
-  }
+  // Future<String> startVideoRecording() async {
+  //   if (!controller.value.isInitialized) {
+  //     showToast(context, '异常: 首先选择一个相机');
+  //     return null;
+  //   }
+  //
+  //   final Directory extDir = await getApplicationDocumentsDirectory();
+  //   final String dirPath = '${extDir.path}/Movies/flutter_test';
+  //   await Directory(dirPath).create(recursive: true);
+  //   final String filePath = '$dirPath/${timestamp()}.mp4';
+  //
+  //   if (controller.value.isRecordingVideo) {
+  //     // A recording is already started, do nothing.
+  //     return null;
+  //   }
+  //
+  //   try {
+  //     videoPath = filePath;
+  //     await controller.startVideoRecording(filePath);
+  //   } on CameraException catch (e) {
+  //     _showCameraException(e);
+  //     return null;
+  //   }
+  //   return filePath;
+  // }
 
   Future<void> stopVideoRecording() async {
-    if (!controller.value.isRecordingVideo) {
-      return null;
-    }
-
-    try {
-      await controller.stopVideoRecording();
-    } on CameraException catch (e) {
-      _showCameraException(e);
-      return null;
-    }
-
-    await _startVideoPlayer();
+    // if (!controller.value.isRecordingVideo) {
+    //   return null;
+    // }
+    //
+    // try {
+    //   await controller.stopVideoRecording();
+    // } on CameraException catch (e) {
+    //   _showCameraException(e);
+    //   return null;
+    // }
+    //
+    // await _startVideoPlayer();
   }
 
   Future<void> pauseVideoRecording() async {
-    if (!controller.value.isRecordingVideo) {
-      return null;
-    }
-
-    try {
-      await controller.pauseVideoRecording();
-    } on CameraException catch (e) {
-      _showCameraException(e);
-      rethrow;
-    }
+    // if (!controller.value.isRecordingVideo) {
+    //   return null;
+    // }
+    //
+    // try {
+    //   await controller.pauseVideoRecording();
+    // } on CameraException catch (e) {
+    //   _showCameraException(e);
+    //   rethrow;
+    // }
   }
 
   Future<void> resumeVideoRecording() async {
-    if (!controller.value.isRecordingVideo) {
-      return null;
-    }
-
-    try {
-      await controller.resumeVideoRecording();
-    } on CameraException catch (e) {
-      _showCameraException(e);
-      rethrow;
-    }
+    // if (!controller.value.isRecordingVideo) {
+    //   return null;
+    // }
+    //
+    // try {
+    //   await controller.resumeVideoRecording();
+    // } on CameraException catch (e) {
+    //   _showCameraException(e);
+    //   rethrow;
+    // }
   }
 
   Future<void> _startVideoPlayer() async {
@@ -498,33 +494,33 @@ class _ShootPageState extends State<ShootPage> with WidgetsBindingObserver {
   }
 
   Future<String> takePicture() async {
-    if (!controller.value.isInitialized) {
-      showToast(context, '异常: 首先选择一个相机');
-      return null;
-    }
-    final Directory extDir = await getApplicationDocumentsDirectory();
-    final String dirPath = '${extDir.path}/Pictures/flutter_test';
-    await Directory(dirPath).create(recursive: true);
-    final String filePath = '$dirPath/${timestamp()}.jpg';
+    // if (!controller.value.isInitialized) {
+    //   showToast(context, '异常: 首先选择一个相机');
+    //   return null;
+    // }
+    // final Directory extDir = await getApplicationDocumentsDirectory();
+    // final String dirPath = '${extDir.path}/Pictures/flutter_test';
+    // await Directory(dirPath).create(recursive: true);
+    // final String filePath = '$dirPath/${timestamp()}.jpg';
+    //
+    // if (controller.value.isTakingPicture) {
+    //   // A capture is already pending, do nothing.
+    //   return null;
+    // }
 
-    if (controller.value.isTakingPicture) {
-      // A capture is already pending, do nothing.
-      return null;
-    }
-
-    try {
-      await controller.takePicture(filePath);
-    } on CameraException catch (e) {
-      _showCameraException(e);
-      return null;
-    }
-    return filePath;
+    // try {
+    //   await controller.takePicture(filePath);
+    // } on CameraException catch (e) {
+    //   _showCameraException(e);
+    //   return null;
+    // }
+    // return filePath;
   }
 
-  void _showCameraException(CameraException e) {
-    logError(e.code, e.description);
-    showToast(context, 'Error: ${e.code}\n${e.description}');
-  }
+  // void _showCameraException(CameraException e) {
+  //   logError(e.code, e.description);
+  //   showToast(context, 'Error: ${e.code}\n${e.description}');
+  // }
 
   @override
   void dispose() {

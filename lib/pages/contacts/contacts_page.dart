@@ -125,8 +125,8 @@ class _ContactsPageState extends State<ContactsPage>
   Future<void> initPlatformState() async {
     if (!mounted) return;
     if (_messageStreamSubscription == null) {
-      _messageStreamSubscription =
-          im.onMessage.listen((dynamic onData) => getContacts());
+      // _messageStreamSubscription =
+      //     im.onMessage.listen((dynamic onData) => getContacts());
     }
   }
 

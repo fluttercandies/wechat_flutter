@@ -60,7 +60,7 @@
 //                  ],
 //                ),
 //                onTap: () {
-//                  routePush(
+//                  Get.to(
 //                    VideoPlayPage(widget.video['video']['urls'][0]),
 //                  );
 //                },
@@ -95,7 +95,7 @@
 //                  ],
 //                ),
 //                onTap: () {
-//                  routePush(
+//                  Get.to(
 //                    VideoPlayPage(widget.video['video']['urls'][0]),
 //                  );
 //                },

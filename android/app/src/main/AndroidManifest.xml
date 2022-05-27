@@ -31,6 +31,7 @@
         android:usesCleartextTraffic="true">
         <activity
             android:name=".MainActivity"
+            android:exported="true"
             android:launchMode="singleTop"
             android:label="wechat_flutter"
             android:theme="@style/LaunchTheme"

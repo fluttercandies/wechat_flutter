@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:wechat_flutter/im/model/chat_data.dart';
 import 'package:wechat_flutter/pages/chat/chat_more_page.dart';
 import 'package:wechat_flutter/pages/group/group_details_page.dart';
@@ -107,8 +108,8 @@ class _ChatPageState extends State<ChatPage> {
     if (!mounted) return;
 
     if (_msgStreamSubs == null) {
-      _msgStreamSubs =
-          im.onMessage.listen((dynamic onData) => getChatMsgData());
+      // _msgStreamSubs =
+      //     im.onMessage.listen((dynamic onData) => getChatMsgData());
     }
   }
 
@@ -223,7 +224,7 @@ class _ChatPageState extends State<ChatPage> {
     var rWidget = [
       new InkWell(
         child: new Image.asset('assets/images/right_more.png'),
-        onTap: () => routePush(widget.type == 2
+        onTap: () => Get.to(widget.type == 2
             ? new GroupDetailsPage(
                 widget?.id ?? widget.title,
                 callBack: (v) {},

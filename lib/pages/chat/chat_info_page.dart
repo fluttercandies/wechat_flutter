@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:get/get.dart';
 import 'package:wechat_flutter/im/entity/i_person_info_entity.dart';
 import 'package:wechat_flutter/im/entity/person_info_entity.dart';
 import 'package:wechat_flutter/im/info_handle.dart';
@@ -58,7 +59,7 @@ class _ChatInfoPageState extends State<ChatInfoPage> {
       new LabelRow(
         label: '查找聊天记录',
         margin: EdgeInsets.only(top: 10.0),
-        onPressed: () => routePush(new SearchPage()),
+        onPressed: () => Get.to(new SearchPage()),
       ),
       new Column(
         children: switchItems.map(buildSwitch).toList(),
@@ -66,7 +67,7 @@ class _ChatInfoPageState extends State<ChatInfoPage> {
       new LabelRow(
         label: '设置当前聊天背景',
         margin: EdgeInsets.only(top: 10.0),
-        onPressed: () => routePush(new ChatBackgroundPage()),
+        onPressed: () => Get.to(new ChatBackgroundPage()),
       ),
       new LabelRow(
         label: '清空聊天记录',
@@ -85,7 +86,7 @@ class _ChatInfoPageState extends State<ChatInfoPage> {
       new LabelRow(
         label: '投诉',
         margin: EdgeInsets.only(top: 10.0),
-        onPressed: () => routePush(new WebViewPage(helpUrl, '投诉')),
+        onPressed: () => Get.to(new WebViewPage(helpUrl, '投诉')),
       ),
     ];
   }

@@ -2,7 +2,6 @@ export 'dart:ui';
 export 'dart:async';
 export 'package:flutter/services.dart';
 export 'dart:io';
-export 'package:dim/dim.dart';
 export 'package:cached_network_image/cached_network_image.dart';
 export 'package:wechat_flutter/ui/bar/commom_bar.dart';
 export 'package:wechat_flutter/config/const.dart';
@@ -21,17 +20,19 @@ export 'package:wechat_flutter/config/api.dart';
 export 'package:wechat_flutter/http/req.dart';
 export 'package:wechat_flutter/tools/data/data.dart';
 export 'package:wechat_flutter/ui/view/null_view.dart';
+export 'package:wechat_flutter/tools/commom/ui.dart';
+export 'package:wechat_flutter/tools/commom/check.dart';
+export 'package:wechat_flutter/tools/commom/win_media.dart';
+
 import 'dart:ui';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:dim/dim.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
-
-Dim im = new Dim();
 
 var subscription = Connectivity();
 
 typedef Callback(data);
+typedef VoidCallbackConfirm = void Function(bool isOk);
 
 DefaultCacheManager cacheManager = new DefaultCacheManager();
 

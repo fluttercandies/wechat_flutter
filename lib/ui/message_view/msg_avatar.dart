@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:get/get.dart';
 import 'package:wechat_flutter/im/model/chat_data.dart';
 import 'package:wechat_flutter/pages/contacts/contacts_details_page.dart';
 import 'package:wechat_flutter/provider/global_model.dart';
@@ -68,7 +69,7 @@ class _MsgAvatarState extends State<MsgAvatar> with TickerProviderStateMixin {
         setState(() => start(false));
       },
       onTap: () {
-        routePush(new ContactsDetailsPage(
+        Get.to(new ContactsDetailsPage(
           title: widget.model.nickName,
           avatar: widget.model.avatar,
           id: widget.model.id,

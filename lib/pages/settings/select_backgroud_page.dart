@@ -31,7 +31,7 @@ class _SelectBgPageState extends State<SelectBgPage> {
       ),
       onTap: () => showToast(context, '敬请期待'),
 //      onTap: () =>
-//          routePush(new ChatBackgroundDetailsPage(item['img'], item['name'])),
+//          Get.to(new ChatBackgroundDetailsPage(item['img'], item['name'])),
     );
   }
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:wechat_flutter/config/provider_config.dart';
 import 'package:wechat_flutter/im/login_handle.dart';
@@ -22,7 +23,7 @@ class _LoginBeginPageState extends State<LoginBeginPage> {
         text: S.of(context).login,
         margin: EdgeInsets.only(left: 10.0),
         width: 100.0,
-        onTap: () => routePush(
+        onTap: () => Get.to(
             ProviderConfig.getInstance().getLoginPage(new LoginPage())),
       ),
       new ComMomButton(
@@ -31,7 +32,7 @@ class _LoginBeginPageState extends State<LoginBeginPage> {
           style:
               TextStyle(fontSize: 15.0, color: Color.fromRGBO(8, 191, 98, 1.0)),
           margin: EdgeInsets.only(right: 10.0),
-          onTap: () => routePush(
+          onTap: () => Get.to(
               ProviderConfig.getInstance().getLoginPage(new RegisterPage())),
           width: 100.0),
     ];
@@ -47,7 +48,7 @@ class _LoginBeginPageState extends State<LoginBeginPage> {
               child: new Text(S.of(context).language,
                   style: TextStyle(color: Colors.white)),
             ),
-            onTap: () => routePush(new LanguagePage()),
+            onTap: () => Get.to(new LanguagePage()),
           ),
         ),
         new Row(

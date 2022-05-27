@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:wechat_flutter/im/friend/fun_dim_friend.dart';
 import 'package:wechat_flutter/im/fun_dim_group_model.dart';
 import 'package:wechat_flutter/pages/group/select_members_page.dart';
@@ -30,8 +31,8 @@ class _GroupMembersPageState extends State<GroupMembersPage> {
 
   handle(String uId) {
     if (!strNoEmpty(uId)) {
-      routePush(new SelectMembersPage());
-//      routePush(CreateGroupChat(
+      Get.to(new SelectMembersPage());
+//      Get.to(CreateGroupChat(
 //        'invite',
 //        groupId: widget.groupId,
 //        callBack: (data) {
@@ -42,7 +43,7 @@ class _GroupMembersPageState extends State<GroupMembersPage> {
 //        },
 //      ));
 //    } else {
-//      routePush(ConversationDetailPage(
+//      Get.to(ConversationDetailPage(
 //        title: uId,
 //        type: 1,
 //      ));

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:wechat_flutter/im/fun_dim_group_model.dart';
 import 'package:wechat_flutter/pages/chat/chat_page.dart';
 import 'package:wechat_flutter/pages/contacts/group_launch_page.dart';
@@ -37,7 +38,7 @@ class _GroupListPageState extends State<GroupListPage> {
       String gFaceURL, String title) {
     return FlatButton(
       onPressed: () {
-        routePush(ChatPage(
+        Get.to(ChatPage(
           title: gName,
           type: 2,
           id: gId,
@@ -91,7 +92,7 @@ class _GroupListPageState extends State<GroupListPage> {
           width: 60.0,
           child: new Image.asset('assets/images/search_black.webp'),
         ),
-        onTap: () => routePush(new SearchPage()),
+        onTap: () => Get.to(new SearchPage()),
       ),
       new InkWell(
         child: new Container(
@@ -99,7 +100,7 @@ class _GroupListPageState extends State<GroupListPage> {
           child: new Image.asset('assets/images/contact/ic_contact_add.webp',
               color: Colors.black, width: 22.0, fit: BoxFit.fitWidth),
         ),
-        onTap: () => routePush(new GroupLaunchPage()),
+        onTap: () => Get.to(new GroupLaunchPage()),
       ),
     ];
 

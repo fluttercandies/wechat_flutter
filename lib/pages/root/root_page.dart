@@ -29,11 +29,6 @@ class _RootPageState extends State<RootPage> {
           .listen((ConnectivityResult result) async {
         if (result == ConnectivityResult.mobile ||
             result == ConnectivityResult.wifi) {
-          final currentUser = await im.getCurrentLoginUser();
-          if (currentUser == '' || currentUser == null) {
-            final account = await SharedUtil.instance.getString(Keys.account);
-            im.imAutoLogin(account);
-          }
           await SharedUtil.instance.saveBoolean(Keys.brokenNetwork, false);
         }
       });
@@ -70,7 +65,6 @@ class _RootPageState extends State<RootPage> {
       ),
     ];
     return new Scaffold(
-      key: scaffoldGK,
       body: new RootTabBar(pages: pages, currentIndex: 0),
     );
   }

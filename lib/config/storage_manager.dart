@@ -34,14 +34,14 @@ class StorageManager {
             result != ConnectivityResult.wifi) {
           await SharedUtil.instance.saveBoolean(Keys.brokenNetwork, true);
         } else {
-          await SharedUtil.instance.saveBoolean(Keys.brokenNetwork, false);
-          final hasLogged =
-          await SharedUtil.instance.getBoolean(Keys.hasLogged);
-          final currentUser = await im.getCurrentLoginUser();
-          if (hasLogged) if (currentUser == '' || currentUser == null) {
-            final account = await SharedUtil.instance.getString(Keys.account);
-            im.imAutoLogin(account);
-          }
+          // await SharedUtil.instance.saveBoolean(Keys.brokenNetwork, false);
+          // final hasLogged =
+          // await SharedUtil.instance.getBoolean(Keys.hasLogged);
+          // final currentUser = await im.getCurrentLoginUser();
+          // if (hasLogged) if (currentUser == '' || currentUser == null) {
+          //   final account = await SharedUtil.instance.getString(Keys.account);
+          //   im.imAutoLogin(account);
+          // }
         }
       });
     } on PlatformException {

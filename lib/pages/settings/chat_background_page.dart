@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:wechat_flutter/pages/group/group_details_page.dart';
@@ -24,7 +25,7 @@ class _ChatBackgroundPageState extends State<ChatBackgroundPage> {
         children: <Widget>[
           new GroupItem(
             title: '选择背景图',
-            onPressed: () => routePush(new SelectBgPage()),
+            onPressed: () => Get.to(new SelectBgPage()),
           ),
           new GroupItem(
             title: '从手机相册选择',

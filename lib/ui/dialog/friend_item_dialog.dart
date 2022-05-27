@@ -1,5 +1,6 @@
 import 'package:wechat_flutter/im/friend_handle.dart';
 import 'package:flutter/material.dart';
+import 'package:wechat_flutter/tools/commom/win_media.dart';
 
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 

@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:wechat_flutter/pages/contacts/group_select_page.dart';
 import 'package:flutter/material.dart';
 
@@ -22,7 +23,7 @@ class LaunchGroupItem extends StatelessWidget {
         padding: EdgeInsets.symmetric(vertical: 15.0),
         onPressed: () {
           if (item == '选择一个群') {
-            routePush(new GroupSelectPage());
+            Get.to(new GroupSelectPage());
           } else {
             showToast(context, '敬请期待');
           }

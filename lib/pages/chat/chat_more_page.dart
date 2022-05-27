@@ -1,4 +1,3 @@
-import 'package:camera/camera.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 import 'package:wechat_flutter/im/message_handle.dart';
 import 'package:wechat_flutter/im/send_handle.dart';
@@ -62,16 +61,16 @@ class _ChatMorePageState extends State<ChatMorePage> {
         });
       });
     } else if (name == '拍摄') {
-      try {
-        List<CameraDescription> cameras;
-
-        WidgetsFlutterBinding.ensureInitialized();
-        cameras = await availableCameras();
-
-        routePush(new ShootPage(cameras));
-      } on CameraException catch (e) {
-        logError(e.code, e.description);
-      }
+      // try {
+      //   List<CameraDescription> cameras;
+      //
+      //   WidgetsFlutterBinding.ensureInitialized();
+      //   cameras = await availableCameras();
+      //
+      //   Get.to(new ShootPage(cameras));
+      // } on CameraException catch (e) {
+      //   logError(e.code, e.description);
+      // }
     } else if (name == '红包') {
       showToast(context, '测试发送红包消息');
       await sendTextMsg('${widget?.id}', widget.type, "测试发送红包消息");

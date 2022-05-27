@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:wechat_flutter/pages/contacts/all_label_page.dart';
 import 'package:wechat_flutter/pages/contacts/contacts_details_page.dart';
 import 'package:wechat_flutter/pages/contacts/group_list_page.dart';
@@ -139,15 +140,15 @@ class ContactItemState extends State<ContactItem> {
           return;
         }
         if (widget.title == '新的朋友') {
-          routePush(new NewFriendPage());
+          Get.to(new NewFriendPage());
         } else if (widget.title == '群聊') {
-          routePush(new GroupListPage());
+          Get.to(new GroupListPage());
         } else if (widget.title == '标签') {
-          routePush(new AllLabelPage());
+          Get.to(new AllLabelPage());
         } else if (widget.title == '公众号') {
-          routePush(new PublicPage());
+          Get.to(new PublicPage());
         } else {
-          routePush(new ContactsDetailsPage(
+          Get.to(new ContactsDetailsPage(
               id: widget.identifier,
               avatar: widget.avatar,
               title: widget.title));

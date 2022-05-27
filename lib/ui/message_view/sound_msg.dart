@@ -1,4 +1,3 @@
-import 'package:audioplayers/audioplayers.dart';
 import 'package:wechat_flutter/im/entity/i_sound_msg_entity.dart';
 import 'package:wechat_flutter/im/entity/sound_msg_entity.dart';
 import 'package:wechat_flutter/im/model/chat_data.dart';
@@ -6,7 +5,6 @@ import 'package:wechat_flutter/provider/global_model.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'package:wechat_flutter/ui/message_view/msg_avatar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_sound/flutter_sound.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:provider/provider.dart';
 
@@ -25,8 +23,8 @@ class _SoundMsgState extends State<SoundMsg> with TickerProviderStateMixin {
 
   AnimationController controller;
   Animation animation;
-  FlutterSound flutterSound;
-  AudioPlayer audioPlayer = AudioPlayer();
+  // FlutterSound flutterSound;
+  // AudioPlayer audioPlayer = AudioPlayer();
 
   StreamSubscription _positionSubscription;
   StreamSubscription _audioPlayerStateSubscription;
@@ -38,7 +36,7 @@ class _SoundMsgState extends State<SoundMsg> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    flutterSound = new FlutterSound();
+    // flutterSound = new FlutterSound();
     // flutterSound.setSubscriptionDuration(0.01);
     // flutterSound.setDbPeakLevelUpdate(0.8);
     // flutterSound.setDbLevelEnabled(true);
@@ -106,12 +104,12 @@ class _SoundMsgState extends State<SoundMsg> with TickerProviderStateMixin {
   }
 
   playNew(url) async {
-    int result = await audioPlayer.play(url);
-    if (result == 1) {
-      showToast(context, '播放中');
-    } else {
-      showToast(context, '播放出问题了');
-    }
+    // int result = await audioPlayer.play(url);
+    // if (result == 1) {
+    //   showToast(context, '播放中');
+    // } else {
+    //   showToast(context, '播放出问题了');
+    // }
   }
 
   @override

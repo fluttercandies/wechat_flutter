@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:wechat_flutter/im/friend/fun_dim_friend.dart';
 import 'package:wechat_flutter/im/fun_dim_group_model.dart';
 import 'package:wechat_flutter/im/group/fun_dim_info.dart';
@@ -117,7 +118,7 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
         ),
 
         /// "+" 和 "-" 点击之后
-        onTap: () => routePush(new SelectMembersPage()),
+        onTap: () => Get.to(new SelectMembersPage()),
       );
     }
     return new FutureBuilder(
@@ -132,7 +133,7 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
           width: (winWidth(context) - 60) / 5,
           child: FlatButton(
             onPressed: () =>
-                routePush(GroupMemberDetails(Data.user() == uId, uId)),
+                Get.to(GroupMemberDetails(Data.user() == uId, uId)),
             padding: EdgeInsets.all(0),
             highlightColor: Colors.transparent,
             child: Column(
@@ -211,7 +212,7 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
                   '查看全部群成员',
                   style: TextStyle(fontSize: 14.0, color: Colors.black54),
                 ),
-                onPressed: () => routePush(new GroupMembersPage(widget.peer)),
+                onPressed: () => Get.to(new GroupMembersPage(widget.peer)),
               ),
             ),
             SizedBox(height: 10.0),
@@ -338,10 +339,10 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
   handle(String title) {
     switch (title) {
       case '备注':
-        routePush(new GroupRemarksPage());
+        Get.to(new GroupRemarksPage());
         break;
       case '群聊名称':
-        routePush(
+        Get.to(
           new GroupRemarksPage(
             groupInfoType: GroupInfoType.name,
             text: groupName,
@@ -353,10 +354,10 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
         });
         break;
       case '群二维码':
-        routePush(new CodePage(true));
+        Get.to(new CodePage(true));
         break;
       case '群公告':
-        routePush(
+        Get.to(
           new GroupBillBoardPage(
             dataGroup[0]['groupOwner'],
             groupNotification,
@@ -369,7 +370,7 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
         });
         break;
       case '查找聊天记录':
-        routePush(new SearchPage());
+        Get.to(new SearchPage());
         break;
       case '消息免打扰':
         _dnd = !_dnd;
@@ -381,10 +382,10 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
         _top ? _setTop(1) : _setTop(2);
         break;
       case '设置当前聊天背景':
-        routePush(new ChatBackgroundPage());
+        Get.to(new ChatBackgroundPage());
         break;
       case '我在群里的昵称':
-        routePush(
+        Get.to(
           new GroupRemarksPage(
             groupInfoType: GroupInfoType.cardName,
             text: cardName,
@@ -395,7 +396,7 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
         });
         break;
       case '投诉':
-        routePush(new WebViewPage(helpUrl, '投诉'));
+        Get.to(new WebViewPage(helpUrl, '投诉'));
         break;
       case '清空聊天记录':
         confirmAlert(

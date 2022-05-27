@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:wechat_flutter/im/model/chat_data.dart';
 import 'package:wechat_flutter/ui/message_view/msg_avatar.dart';
 import 'package:flutter/material.dart';
@@ -42,7 +43,7 @@ class ImgMsg extends StatelessWidget {
                       imageUrl: url, height: resultH, fit: BoxFit.cover),
             ),
           ),
-          onTap: () => routePush(
+          onTap: () => Get.to(
             new PhotoView(
               imageProvider: isFile ? FileImage(File(url)) : NetworkImage(url),
               onTapUp: (c, f, s) => Navigator.of(context).pop(),

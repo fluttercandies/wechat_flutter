@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:wechat_flutter/im/all_im.dart';
 import 'package:wechat_flutter/pages/mine/personal_info_page.dart';
@@ -23,10 +24,10 @@ class _MinePageState extends State<MinePage> {
         loginOut(context);
         break;
       case '支付':
-        routePush(new PayHomePage());
+        Get.to(new PayHomePage());
         break;
       default:
-        routePush(new LanguagePage());
+        Get.to(new LanguagePage());
         break;
     }
   }
@@ -124,7 +125,7 @@ class _MinePageState extends State<MinePage> {
             child: new Row(
                 crossAxisAlignment: CrossAxisAlignment.center, children: row),
           ),
-          onTap: () => routePush(new PersonalInfoPage()),
+          onTap: () => Get.to(new PersonalInfoPage()),
         ),
         new Column(children: data.map(buildContent).toList()),
       ],

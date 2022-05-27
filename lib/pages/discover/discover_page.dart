@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:wechat_flutter/pages/settings/language_page.dart';
 import 'package:wechat_flutter/pages/wechat_friends/page/wechat_friends_circle.dart';
 import 'package:wechat_flutter/ui/view/indicator_page_view.dart';
@@ -38,9 +39,9 @@ class _DiscoverPageState extends State<DiscoverPage> {
       margin: EdgeInsets.only(bottom: isShow() ? 10.0 : 0.0),
       onPressed: () {
         if (item['name'] == '朋友圈') {
-          routePush(new WeChatFriendsCircle());
+          Get.to(new WeChatFriendsCircle());
         } else {
-          routePush(new LanguagePage());
+          Get.to(new LanguagePage());
         }
       },
     );

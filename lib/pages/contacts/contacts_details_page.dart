@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:wechat_flutter/pages/chat/chat_page.dart';
 import 'package:wechat_flutter/pages/chat/more_info_page.dart';
 import 'package:wechat_flutter/pages/chat/set_remark_page.dart';
@@ -36,7 +37,7 @@ class _ContactsDetailsPageState extends State<ContactsDetailsPage> {
         visible: !isSelf,
         child: new LabelRow(
           label: '设置备注和标签',
-          onPressed: () => routePush(new SetRemarkPage()),
+          onPressed: () => Get.to(new SetRemarkPage()),
         ),
       ),
       new Space(),
@@ -44,17 +45,17 @@ class _ContactsDetailsPageState extends State<ContactsDetailsPage> {
         label: '朋友圈',
         isLine: true,
         lineWidth: 0.3,
-        onPressed: () => routePush(new WeChatFriendsCircle()),
+        onPressed: () => Get.to(new WeChatFriendsCircle()),
       ),
       new LabelRow(
         label: '更多信息',
-        onPressed: () => routePush(new MoreInfoPage()),
+        onPressed: () => Get.to(new MoreInfoPage()),
       ),
       new ButtonRow(
         margin: EdgeInsets.only(top: 10.0),
         text: '发消息',
         isBorder: true,
-        onPressed: () => routePushReplace(
+        onPressed: () => Get.off(
             new ChatPage(id: widget.id, title: widget.title, type: 1)),
       ),
       new Visibility(

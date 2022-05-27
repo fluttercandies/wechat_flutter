@@ -1,3 +1,4 @@
+import 'package:lpinyin/lpinyin.dart';
 import 'package:wechat_flutter/im/entity/i_contact_info_entity.dart';
 import 'package:wechat_flutter/im/entity/person_info_entity.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +7,6 @@ import 'package:wechat_flutter/im/info_handle.dart';
 import 'dart:convert';
 
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
-import 'package:dim/pinyin/pinyin_helper.dart';
 
 class Contact {
   Contact({

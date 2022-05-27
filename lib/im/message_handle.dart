@@ -6,40 +6,10 @@ import 'package:wechat_flutter/tools/commom.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
 Future<dynamic> getDimMessages(String id,
-    {int type, Callback callback, int num = 50}) async {
-  try {
-    var result = await im.getMessages(id, num, type ?? 1);
-    return result;
-  } on PlatformException {
-    debugPrint('获取失败');
-  }
-}
+    {int type, Callback callback, int num = 50}) async {}
 
 Future<void> sendImageMsg(String userName, int type,
-    {Callback callback, ImageSource source, File file}) async {
-  XFile image;
-  if (file.existsSync()) {
-    image = XFile(file.path);
-  } else {
-    image = await ImagePicker().pickImage(source: source);
-  }
-  if (image == null) return;
-  File compressImg = await singleCompressFile(File(image.path));
-
-  try {
-    await im.sendImageMessages(userName, compressImg.path, type: type);
-    callback(compressImg.path);
-  } on PlatformException {
-    debugPrint("发送图片消息失败");
-  }
-}
+    {Callback callback, ImageSource source, File file}) async {}
 
 Future<dynamic> sendSoundMessages(String id, String soundPath, int duration,
-    int type, Callback callback) async {
-  try {
-    var result = await im.sendSoundMessages(id, soundPath, type, duration);
-    callback(result);
-  } on PlatformException {
-    debugPrint('发送语音  失败');
-  }
-}
+    int type, Callback callback) async {}

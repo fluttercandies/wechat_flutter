@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:get/get.dart';
 import 'package:wechat_flutter/pages/more/add_friend_page.dart';
 import 'package:wechat_flutter/ui/orther/label_row.dart';
 import 'package:flutter/cupertino.dart';
@@ -106,7 +107,7 @@ class _NewFriendPageState extends State<NewFriendPage> {
   }
 
   getUser() async {
-    currentUser = await im.getCurrentLoginUser();
+    // currentUser = await im.getCurrentLoginUser();
     setState(() {});
   }
 
@@ -123,7 +124,7 @@ class _NewFriendPageState extends State<NewFriendPage> {
     List<dynamic> dataMap = json.decode(data);
     Map map = dataMap[0];
     if (strNoEmpty(map['allowType'])) {
-      routePush(new AddFriendsDetails('search', map['identifier'],
+      Get.to(new AddFriendsDetails('search', map['identifier'],
           map['faceUrl'], map['nickName'], map['gender']));
     } else {
       isResult = true;
@@ -187,7 +188,7 @@ class _NewFriendPageState extends State<NewFriendPage> {
     );
 
     var rWidget = new FlatButton(
-      onPressed: () => routePush(new AddFriendPage()),
+      onPressed: () => Get.to(new AddFriendPage()),
       child: new Text('添加朋友'),
     );
 

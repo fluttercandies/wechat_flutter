@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:get/get.dart';
 import 'package:wechat_flutter/pages/contacts/group_launch_page.dart';
 import 'package:wechat_flutter/pages/home/search_page.dart';
 import 'package:wechat_flutter/pages/settings/language_page.dart';
@@ -49,13 +50,13 @@ class RootTabBarState extends State<RootTabBar> {
 
   actionsHandle(v) {
     if (v == '添加朋友') {
-      routePush(new AddFriendPage());
+      Get.to(new AddFriendPage());
     } else if (v == '发起群聊') {
-      routePush(new GroupLaunchPage());
+      Get.to(new GroupLaunchPage());
     } else if (v == '帮助与反馈') {
-      routePush(new WebViewPage(helpUrl, '帮助与反馈'));
+      Get.to(new WebViewPage(helpUrl, '帮助与反馈'));
     } else {
-      routePush(new LanguagePage());
+      Get.to(new LanguagePage());
     }
   }
 
@@ -94,7 +95,7 @@ class RootTabBarState extends State<RootTabBar> {
             width: 60.0,
             child: new Image.asset('assets/images/search_black.webp'),
           ),
-          onTap: () => routeFadePush(new SearchPage()),
+          onTap: () => Get.to(new SearchPage()),
         ),
         new WPopupMenu(
           menuWidth: winWidth(context) / 2.5,

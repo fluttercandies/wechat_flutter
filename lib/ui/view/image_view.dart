@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wechat_flutter/tools/commom/check.dart';
 
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 

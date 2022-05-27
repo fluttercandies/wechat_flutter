@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:wechat_flutter/im/conversation_handle.dart';
 import 'package:wechat_flutter/im/model/chat_list.dart';
 import 'package:wechat_flutter/pages/chat/chat_page.dart';
@@ -83,8 +84,8 @@ class _HomePageState extends State<HomePage>
     if (!mounted) return;
 
     if (_messageStreamSubscription == null) {
-      _messageStreamSubscription =
-          im.onMessage.listen((dynamic onData) => getChatData());
+      // _messageStreamSubscription =
+      //     im.onMessage.listen((dynamic onData) => getChatData());
     }
   }
 
@@ -131,7 +132,7 @@ class _HomePageState extends State<HomePage>
 
             return InkWell(
               onTap: () {
-                routePush(new ChatPage(
+                Get.to(new ChatPage(
                     id: model.identifier,
                     title: model.name,
                     type: model.type == 'Group' ? 2 : 1));

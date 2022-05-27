@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:wechat_flutter/provider/login_model.dart';
@@ -98,7 +99,7 @@ class _RegisterPageState extends State<RegisterPage> {
           ),
         ),
         onTap: () async {
-          final result = await routePush(new SelectLocationPage());
+          final result = await Get.to(new SelectLocationPage());
           if (result == null) return;
           model.area = result;
           model.refresh();
@@ -152,7 +153,7 @@ class _RegisterPageState extends State<RegisterPage> {
               S.of(context).protocolName,
               style: TextStyle(color: tipColor),
             ),
-            onTap: () => routePush(new WebViewPage(
+            onTap: () => Get.to(new WebViewPage(
                 S.of(context).protocolUrl, S.of(context).protocolTitle)),
           ),
         ],
@@ -173,7 +174,7 @@ class _RegisterPageState extends State<RegisterPage> {
             return;
           }
           showToast(context, '注册成功');
-          popToRootPage();
+          Get.offNamedUntil('/', (route) => false);
         },
       ),
     ];
