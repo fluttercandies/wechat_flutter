@@ -1,8 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:wechat_flutter/config/contacts.dart';
-import 'package:wechat_flutter/im/message_handle.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'package:wechat_flutter/ui/item/chat_voice.dart';
-import 'package:flutter/material.dart';
 
 class ChatDetailsRow extends StatefulWidget {
   final GestureTapCallback voiceOnTap;
@@ -36,20 +35,20 @@ class ChatDetailsRowState extends State<ChatDetailsRow> {
     Notice.addListener(WeChatActions.voiceImg(), (v) {
       if (!v) return;
       if (!strNoEmpty(path)) return;
-      sendSoundMessages(
-        widget.id,
-        path,
-        2,
-        widget.type,
-        (value) => Notice.send(WeChatActions.msg(), v ?? ''),
-      );
+      // sendSoundMessages(
+      //   widget.id,
+      //   path,
+      //   2,
+      //   widget.type,
+      //   (value) => Notice.send(WeChatActions.msg(), v ?? ''),
+      // );
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return new GestureDetector(
-      child:           new Container(
+      child: new Container(
         height: 50.0,
         padding: EdgeInsets.symmetric(horizontal: 8.0),
         decoration: BoxDecoration(
@@ -80,10 +79,10 @@ class ChatDetailsRowState extends State<ChatDetailsRow> {
                     borderRadius: BorderRadius.circular(5.0)),
                 child: widget.isVoice
                     ? new ChatVoice(
-                  voiceFile: (path) {
-                    setState(() => this.path = path);
-                  },
-                )
+                        voiceFile: (path) {
+                          setState(() => this.path = path);
+                        },
+                      )
                     : new LayoutBuilder(builder: widget.edit),
               ),
             ),
@@ -101,5 +100,4 @@ class ChatDetailsRowState extends State<ChatDetailsRow> {
       onTap: () {},
     );
   }
-
 }

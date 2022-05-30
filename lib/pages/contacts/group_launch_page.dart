@@ -1,16 +1,13 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wechat_flutter/config/dictionary.dart';
-import 'package:wechat_flutter/im/friend_handle.dart';
 import 'package:wechat_flutter/im/model/contacts.dart';
+import 'package:wechat_flutter/pages/more/add_friend_details.dart';
+import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'package:wechat_flutter/ui/item/contact_item.dart';
 import 'package:wechat_flutter/ui/item/contact_view.dart';
 import 'package:wechat_flutter/ui/item/launch_group.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:wechat_flutter/tools/wechat_flutter.dart';
-import 'dart:convert';
-import 'package:wechat_flutter/im/info_handle.dart';
-import 'package:wechat_flutter/pages/more/add_friend_details.dart';
 
 class GroupLaunchPage extends StatefulWidget {
   @override
@@ -58,9 +55,7 @@ class _GroupLaunchPageState extends State<GroupLaunchPage> {
   }
 
   Future getContacts() async {
-    final str = await ContactsPageData().listFriend();
-
-    List<Contact> listContact = str;
+    List<Contact> listContact = [];
     _contacts.clear();
     _contacts..addAll(listContact);
     _contacts
@@ -84,8 +79,7 @@ class _GroupLaunchPageState extends State<GroupLaunchPage> {
 
   // 搜索好友
   Future search(String userName) async {
-    final data = await getUsersProfile([userName]);
-    List<dynamic> dataMap = json.decode(data);
+    List<dynamic> dataMap = [];
     if (strNoEmpty(dataMap[0]['allowType'])) {
       Get.to(
         new AddFriendsDetails(
@@ -137,16 +131,10 @@ class _GroupLaunchPageState extends State<GroupLaunchPage> {
           showToast(context, 'IOS暂不支持发起群聊');
           return;
         }
-        createGroupChat(selectData, name: selectData.join(),
-            callback: (callBack) {
-          if (callBack.toString().contains('succ')) {
-            showToast(context, '创建群组成功');
-            if (Navigator.of(context).canPop()) {
-              Navigator.of(context).pop();
-            }
-          }
-        });
-        showToast(context, '当前ID：${selectData.toString()}');
+        showToast(context, '创建群组成功');
+        if (Navigator.of(context).canPop()) {
+          Navigator.of(context).pop();
+        }
       },
     );
 

@@ -34,11 +34,11 @@ const defIcon = 'assets/images/def_avatar.png';
 
 const contactAssets = 'assets/images/contact/';
 
-const defAvatar = 'http://flutterj.com/f.jpeg';
+const defAvatar = 'http://www.shenmeniuma.com/mockImg/test1.png';
 
-const myCode = 'http://flutterj.com/c.jpg';
+const myCode = 'http://www.shenmeniuma.com/mockImg/test_code.png';
 
-const download = 'http://flutterj.com/download.png';
+const download = 'http://www.shenmeniuma.com/mockImg/test2.png';
 
 const helpUrl =
     'https://kf.qq.com/touch/product/wechat_app.html?scene_id=kf338';

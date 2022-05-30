@@ -1,12 +1,8 @@
-import 'package:wechat_assets_picker/wechat_assets_picker.dart';
-import 'package:wechat_flutter/im/message_handle.dart';
-import 'package:wechat_flutter/im/send_handle.dart';
-import 'package:wechat_flutter/pages/chat/shoot_page.dart';
-import 'package:wechat_flutter/tools/utils/handle_util.dart';
-import 'package:wechat_flutter/tools/wechat_flutter.dart';
-import 'package:wechat_flutter/ui/card/more_item_card.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_manager/photo_manager.dart';
+import 'package:wechat_assets_picker/wechat_assets_picker.dart';
+import 'package:wechat_flutter/tools/wechat_flutter.dart';
+import 'package:wechat_flutter/ui/card/more_item_card.dart';
 
 class ChatMorePage extends StatefulWidget {
   final int index;
@@ -52,12 +48,7 @@ class _ChatMorePageState extends State<ChatMorePage> {
         ),
       ).then((List<AssetEntity> result) {
         result.forEach((AssetEntity element) async {
-          sendImageMsg(widget.id, widget.type, file: await element.file,
-              callback: (v) {
-            if (v == null) return;
-            Notice.send(WeChatActions.msg(), v ?? '');
-          });
-          element.file;
+          Notice.send(WeChatActions.msg(), '');
         });
       });
     } else if (name == '拍摄') {
@@ -73,7 +64,7 @@ class _ChatMorePageState extends State<ChatMorePage> {
       // }
     } else if (name == '红包') {
       showToast(context, '测试发送红包消息');
-      await sendTextMsg('${widget?.id}', widget.type, "测试发送红包消息");
+      // await sendTextMsg('${widget?.id}', widget.type, "测试发送红包消息");
     } else {
       showToast(context, '敬请期待$name');
     }

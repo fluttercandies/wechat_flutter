@@ -1,18 +1,13 @@
-import 'dart:convert';
-
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:wechat_flutter/im/entity/i_person_info_entity.dart';
 import 'package:wechat_flutter/im/entity/person_info_entity.dart';
-import 'package:wechat_flutter/im/info_handle.dart';
 import 'package:wechat_flutter/pages/home/search_page.dart';
 import 'package:wechat_flutter/pages/settings/chat_background_page.dart';
+import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'package:wechat_flutter/ui/dialog/confirm_alert.dart';
 import 'package:wechat_flutter/ui/item/chat_mamber.dart';
 import 'package:wechat_flutter/ui/orther/label_row.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
-
-import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
 class ChatInfoPage extends StatefulWidget {
   final String id;
@@ -24,7 +19,7 @@ class ChatInfoPage extends StatefulWidget {
 }
 
 class _ChatInfoPageState extends State<ChatInfoPage> {
-  var model;
+  PersonInfoEntity model;
 
   bool isRemind = false;
   bool isTop = false;
@@ -98,14 +93,8 @@ class _ChatInfoPageState extends State<ChatInfoPage> {
   }
 
   getInfo() async {
-    final info = await getUsersProfile([widget.id]);
-    List infoList = json.decode(info);
     setState(() {
-      if (Platform.isIOS) {
-        model = IPersonInfoEntity.fromJson(infoList[0]);
-      } else {
-        model = PersonInfoEntity.fromJson(infoList[0]);
-      }
+      // model = PersonInfoEntity.fromJson();
     });
   }
 

@@ -1,21 +1,17 @@
-import 'dart:convert';
-
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 import 'package:wechat_flutter/im/entity/i_person_info_entity.dart';
 import 'package:wechat_flutter/im/entity/person_info_entity.dart';
 import 'package:wechat_flutter/pages/mine/code_page.dart';
+import 'package:wechat_flutter/pages/more/add_friend_details.dart';
 import 'package:wechat_flutter/pages/root/user_page.dart';
 import 'package:wechat_flutter/provider/global_model.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:wechat_flutter/im/info_handle.dart';
-import 'package:wechat_flutter/pages/more/add_friend_details.dart';
-
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'package:wechat_flutter/ui/view/list_tile_view.dart';
 import 'package:wechat_flutter/ui/view/search_main_view.dart';
 import 'package:wechat_flutter/ui/view/search_tile_view.dart';
-import 'package:provider/provider.dart';
 
 class AddFriendPage extends StatefulWidget {
   @override
@@ -173,8 +169,7 @@ class _AddFriendPageState extends State<AddFriendPage> {
 
   // 搜索好友
   Future search(String userName) async {
-    final data = await getUsersProfile([userName]);
-    List<dynamic> dataMap = json.decode(data);
+    List<dynamic> dataMap = [];
     setState(() {
       if (Platform.isIOS) {
         IPersonInfoEntity model = IPersonInfoEntity.fromJson(dataMap[0]);

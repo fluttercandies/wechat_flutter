@@ -1,12 +1,11 @@
+import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:wechat_flutter/im/info_handle.dart';
+import 'package:provider/provider.dart';
 import 'package:wechat_flutter/im/other/update_entity.dart';
 import 'package:wechat_flutter/provider/global_model.dart';
 import 'package:wechat_flutter/tools/commom/check.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'package:wechat_flutter/ui/dialog/update_dialog.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 /// 随机头像 [Random avatar]
 void postSuggestionWithAvatar(BuildContext context) async {
@@ -16,21 +15,10 @@ void postSuggestionWithAvatar(BuildContext context) async {
     API.cat,
     (v) async {
       String avatarUrl = v['url'];
-      final data = await setUsersProfileMethod(
-        context,
-        avatarStr: avatarUrl,
-        nickNameStr: model.nickName,
-        callback: (data) {},
-      );
-
-      if (data.toString().contains('ucc')) {
-        showToast(context, '设置头像成功');
-        model.avatar = avatarUrl;
-        model.refresh();
-        await SharedUtil.instance.saveString(Keys.faceUrl, avatarUrl);
-      } else {
-        showToast(context, '设置头像失败');
-      }
+      showToast(context, '设置头像成功');
+      model.avatar = avatarUrl;
+      model.refresh();
+      await SharedUtil.instance.saveString(Keys.faceUrl, avatarUrl);
     },
   );
 }

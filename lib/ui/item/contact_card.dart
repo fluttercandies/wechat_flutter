@@ -75,7 +75,7 @@ class ContactCard extends StatelessWidget {
               ),
               new Padding(
                 padding: EdgeInsets.only(top: 3.0),
-                child: new Text("昵称：" + nickName ?? '', style: labelStyle),
+                child: new Text("昵称：" + (nickName ?? ''), style: labelStyle),
               ),
               new Text("微信号：" + id ?? '', style: labelStyle),
               new Text("地区：" + area ?? '', style: labelStyle),

@@ -1,10 +1,7 @@
-import 'dart:convert';
-
-import 'package:wechat_flutter/im/entity/i_person_info_entity.dart';
-import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:wechat_flutter/im/info_handle.dart';
+import 'package:wechat_flutter/im/entity/i_person_info_entity.dart';
 import 'package:wechat_flutter/provider/loginc/global_loginc.dart';
+import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
 class GlobalModel extends ChangeNotifier {
   BuildContext context;
@@ -52,26 +49,17 @@ class GlobalModel extends ChangeNotifier {
   }
 
   void initInfo() async {
-    final data = await getUsersProfile([account]);
-    if (data == null) return;
-    List<dynamic> result = json.decode(data);
-    if (Platform.isAndroid) {
-      nickName = result[0]['nickName'];
-      await SharedUtil.instance
-          .saveString(Keys.nickName, result[0]['nickName']);
-      avatar = result[0]['faceUrl'];
-      await SharedUtil.instance.saveString(Keys.faceUrl, result[0]['faceUrl']);
-      gender = result[0]['gender'];
-      await SharedUtil.instance.saveInt(Keys.gender, result[0]['gender']);
-    } else {
-      IPersonInfoEntity model = IPersonInfoEntity.fromJson(result[0]);
-      nickName = model.nickname;
-      await SharedUtil.instance.saveString(Keys.nickName, model.nickname);
-      avatar = model.faceURL;
-      await SharedUtil.instance.saveString(Keys.faceUrl, model.faceURL);
-      gender = model.gender;
-      await SharedUtil.instance.saveInt(Keys.gender, model.gender);
-    }
+    IPersonInfoEntity model = IPersonInfoEntity(
+      nickname: "大菠萝",
+      faceURL: defAvatar,
+      gender: 12,
+    );
+    nickName = model.nickname;
+    await SharedUtil.instance.saveString(Keys.nickName, model.nickname);
+    avatar = model.faceURL;
+    await SharedUtil.instance.saveString(Keys.faceUrl, model.faceURL);
+    gender = model.gender;
+    await SharedUtil.instance.saveInt(Keys.gender, model.gender);
   }
 
   @override

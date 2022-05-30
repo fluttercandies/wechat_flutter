@@ -66,11 +66,13 @@ bool listNoEmpty(List list) {
 
 /// 判断是否网络
 bool isNetWorkImg(String img) {
+  if (!strNoEmpty(img)) return false;
   return img.startsWith('http') || img.startsWith('https');
 }
 
 /// 判断是否资源图片
 bool isAssetsImg(String img) {
+  if (String == null) return false;
   return img.startsWith('asset') || img.startsWith('assets');
 }
 
@@ -88,12 +90,12 @@ String stringAsFixed(value, num) {
   return str;
 }
 
-String hiddenPhone(String phone){
+String hiddenPhone(String phone) {
   String result = '';
 
-  if(phone != null && phone.length >= 11){
-    String sub = phone.substring(0,3);
-    String end = phone.substring(8,11);
+  if (phone != null && phone.length >= 11) {
+    String sub = phone.substring(0, 3);
+    String end = phone.substring(8, 11);
     result = '$sub****$end';
   }
 

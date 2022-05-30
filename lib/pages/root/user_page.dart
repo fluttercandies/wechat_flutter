@@ -1,11 +1,8 @@
-import 'package:wechat_flutter/im/friend_handle.dart';
+import 'package:flutter/material.dart';
 import 'package:wechat_flutter/im/model/user_data.dart';
-import 'package:wechat_flutter/im/send_handle.dart';
+import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'package:wechat_flutter/ui/dialog/confirm_alert.dart';
 import 'package:wechat_flutter/ui/new_friend_card.dart';
-import 'package:flutter/material.dart';
-
-import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
 class UserPage extends StatefulWidget {
   @override
@@ -22,26 +19,13 @@ class _UserPageState extends State<UserPage> {
   }
 
   Future getUserData() async {
-    final str = await UserDataPageGet().listUserData();
-
-    List<UserData> listData = str;
+    List<UserData> listData = [];
     _userData.clear();
     _userData..addAll(listData.reversed);
     if (mounted) setState(() {});
   }
 
-  action(UserData model) {
-    addFriend(
-      model.identifier,
-      context,
-      suCc: (v) {
-        if (v) {
-          sendTextMsg(model.identifier, 1, '你好${model.name}，我添加你为好友啦');
-          Navigator.of(context).maybePop();
-        }
-      },
-    );
-  }
+  action(UserData model) {}
 
   Widget body() {
     if (_userData == null || _userData?.length == 0)

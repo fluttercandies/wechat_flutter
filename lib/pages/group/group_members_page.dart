@@ -1,9 +1,5 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:wechat_flutter/im/friend/fun_dim_friend.dart';
-import 'package:wechat_flutter/im/fun_dim_group_model.dart';
 import 'package:wechat_flutter/pages/group/select_members_page.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
@@ -72,68 +68,55 @@ class _GroupMembersPageState extends State<GroupMembersPage> {
       );
     }
 
-    return new FutureBuilder(
-      future: DimFriend.getUsersProfile(item['user'], (cb) {
-        userInfo = json.decode(cb.toString());
-        uId = userInfo[0]['identifier'];
-        uFace = userInfo[0]['faceUrl'];
-        nickName = userInfo[0]['nickName'];
-      }),
-      builder: (context, snap) {
-        return new SizedBox(
-          width: (winWidth(context) - 60) / 5,
-          child: FlatButton(
-            onPressed: () => handle(uId),
-            padding: EdgeInsets.all(0),
-            highlightColor: Colors.transparent,
-            child: Column(
-              children: <Widget>[
-                ClipRRect(
-                  borderRadius: BorderRadius.all(Radius.circular(5)),
-                  child: !strNoEmpty(uFace)
-                      ? new Image.asset(
-                          defIcon,
-                          height: 48.0,
-                          width: 48.0,
-                          fit: BoxFit.cover,
-                        )
-                      : CachedNetworkImage(
-                          imageUrl: uFace,
-                          height: 48.0,
-                          width: 48.0,
-                          cacheManager: cacheManager,
-                          fit: BoxFit.cover,
-                        ),
-                ),
-                SizedBox(height: 2),
-                Container(
-                  alignment: Alignment.center,
-                  height: 20.0,
-                  width: 50,
-                  child: Text(
-                    nickName == null || nickName == ''
-                        ? '默认昵称'
-                        : nickName.length > 5
-                            ? '${nickName.substring(0, 3)}...'
-                            : nickName,
-                    style: TextStyle(fontSize: 12.0),
-                  ),
-                ),
-              ],
+    return new SizedBox(
+      width: (winWidth(context) - 60) / 5,
+      child: FlatButton(
+        onPressed: () => handle(uId),
+        padding: EdgeInsets.all(0),
+        highlightColor: Colors.transparent,
+        child: Column(
+          children: <Widget>[
+            ClipRRect(
+              borderRadius: BorderRadius.all(Radius.circular(5)),
+              child: !strNoEmpty(uFace)
+                  ? new Image.asset(
+                      defIcon,
+                      height: 48.0,
+                      width: 48.0,
+                      fit: BoxFit.cover,
+                    )
+                  : CachedNetworkImage(
+                      imageUrl: uFace,
+                      height: 48.0,
+                      width: 48.0,
+                      cacheManager: cacheManager,
+                      fit: BoxFit.cover,
+                    ),
             ),
-          ),
-        );
-      },
+            SizedBox(height: 2),
+            Container(
+              alignment: Alignment.center,
+              height: 20.0,
+              width: 50,
+              child: Text(
+                nickName == null || nickName == ''
+                    ? '默认昵称'
+                    : nickName.length > 5
+                        ? '${nickName.substring(0, 3)}...'
+                        : nickName,
+                style: TextStyle(fontSize: 12.0),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 
   Future _gerData() async {
-    return DimGroup.getGroupMembersListModel(widget.groupId,
-        callback: (result) {
-      setState(() {
-        memberList.insertAll(
-            0, json.decode(result.toString().replaceAll("'", '"')));
-      });
+    ck:
+    setState(() {
+      memberList.insertAll(0, []);
     });
   }
 

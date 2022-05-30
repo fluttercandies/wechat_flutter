@@ -1,9 +1,9 @@
+import 'package:flutter/material.dart';
 import 'package:wechat_flutter/config/dictionary.dart';
 import 'package:wechat_flutter/im/model/contacts.dart';
-import 'package:wechat_flutter/ui/item/contact_view.dart';
-import 'package:flutter/material.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'package:wechat_flutter/ui/item/contact_item.dart';
+import 'package:wechat_flutter/ui/item/contact_view.dart';
 
 class ContactsPage extends StatefulWidget {
   _ContactsPageState createState() => _ContactsPageState();
@@ -29,10 +29,18 @@ class _ContactsPageState extends State<ContactsPage>
   final Map _letterPosMap = {INDEX_BAR_WORDS[0]: 0.0};
 
   Future getContacts() async {
-    final str = await ContactsPageData().listFriend();
-    isNull = await ContactsPageData().contactIsNull();
+    // final str = await ContactsPageData().listFriend();
+    // isNull = await ContactsPageData().contactIsNull();
 
-    List<Contact> listContact = str;
+    List<Contact> listContact = List.generate(
+      3,
+      (index) => Contact(
+        name: "无花果$index",
+        identifier: "12$index",
+        nameIndex: 'W',
+        avatar: defAvatar,
+      ),
+    );
     _contacts.clear();
     _contacts..addAll(listContact);
     _contacts

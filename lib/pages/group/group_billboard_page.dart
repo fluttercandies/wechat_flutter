@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:wechat_flutter/im/fun_dim_group_model.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
 class GroupBillBoardPage extends StatefulWidget {
@@ -39,8 +38,6 @@ class _GroupBillBoardPageState extends State<GroupBillBoardPage> {
           '${DateTime.now().hour}:' +
           '${DateTime.now().minute}';
       debugPrint('发布时间>>>>> $_publishTime');
-      DimGroup.modifyGroupNotificationModel(
-          widget.groupId, _textController.text, _publishTime);
       widget.callback(_publishTime);
       Navigator.pop(context, _textController.text);
       inputState = false;

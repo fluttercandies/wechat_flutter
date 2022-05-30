@@ -1,12 +1,11 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:wechat_flutter/im/conversation_handle.dart';
 import 'package:wechat_flutter/im/model/chat_list.dart';
 import 'package:wechat_flutter/pages/chat/chat_page.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
-import 'package:wechat_flutter/ui/view/indicator_page_view.dart';
-import 'package:flutter/material.dart';
-import 'package:wechat_flutter/ui/edit/text_span_builder.dart';
 import 'package:wechat_flutter/ui/chat/my_conversation_view.dart';
+import 'package:wechat_flutter/ui/edit/text_span_builder.dart';
+import 'package:wechat_flutter/ui/view/indicator_page_view.dart';
 import 'package:wechat_flutter/ui/view/pop_view.dart';
 
 class HomePage extends StatefulWidget {
@@ -30,8 +29,25 @@ class _HomePageState extends State<HomePage>
   }
 
   Future getChatData() async {
-    final str = await ChatListData().chatListData();
-    List<ChatList> listChat = str;
+    List<ChatList> listChat = List.generate(
+      12,
+      (index) {
+        final bool isGroup = index.isEven;
+        return ChatList(
+            identifier: '112$index',
+            msgType: 'personal',
+            avatar: defAvatar,
+            content: {
+              "message": {
+                "text": "爱你",
+                "type": "Text",
+              }
+            },
+            name: '${isGroup ? "群群" : "顾"}啥$index',
+            type: isGroup ? "Group" : "Personnal",
+            time: 0);
+      },
+    );
     if (!listNoEmpty(listChat)) return;
     _chatData.clear();
     _chatData..addAll(listChat?.reversed);
@@ -53,22 +69,9 @@ class _HomePageState extends State<HomePage>
         ]).then<String>((String selected) {
       switch (selected) {
         case '删除该聊天':
-          deleteConversationAndLocalMsgModel(type, id, callback: (str) {
-            debugPrint('deleteConversationAndLocalMsgModel' + str.toString());
-          });
-          delConversationModel(id, type, callback: (str) {
-            debugPrint('deleteConversationModel' + str.toString());
-          });
           getChatData();
           break;
         case '标为已读':
-          getUnreadMessageNumModel(type, id, callback: (str) {
-            int num = int.parse(str.toString());
-            if (num != 0) {
-              setReadMessageModel(type, id);
-              setState(() {});
-            }
-          });
           break;
       }
     });

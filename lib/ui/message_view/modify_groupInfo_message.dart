@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:wechat_flutter/im/group/fun_dim_info.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
 class ModifyGroupInfoMessage extends StatefulWidget {
@@ -24,11 +23,8 @@ class ModifyGroupInfoMessageState extends State<ModifyGroupInfoMessage> {
   }
 
   getCardName(String user) async {
-    await InfoModel.getGroupMembersInfoModel(widget.data['groupId'], [user],
-        callback: (str) {
-      String strToData = str.toString().replaceAll("'", '"');
-      membersData = json.decode(strToData);
-    });
+    String strToData = "";
+    membersData = json.decode(strToData);
     var userPhone = await getStoreValue('userPhone');
     if (listNoEmpty(membersData)) if (user == userPhone)
       name = '你';

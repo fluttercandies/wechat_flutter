@@ -1,14 +1,10 @@
-import 'dart:convert';
-
-import 'package:get/get.dart';
-import 'package:wechat_flutter/pages/more/add_friend_page.dart';
-import 'package:wechat_flutter/ui/orther/label_row.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:wechat_flutter/im/info_handle.dart';
+import 'package:get/get.dart';
 import 'package:wechat_flutter/pages/more/add_friend_details.dart';
-
+import 'package:wechat_flutter/pages/more/add_friend_page.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
+import 'package:wechat_flutter/ui/orther/label_row.dart';
 import 'package:wechat_flutter/ui/view/list_tile_view.dart';
 import 'package:wechat_flutter/ui/view/search_main_view.dart';
 import 'package:wechat_flutter/ui/view/search_tile_view.dart';
@@ -120,12 +116,11 @@ class _NewFriendPageState extends State<NewFriendPage> {
 
   /// 搜索好友
   Future search(String userName) async {
-    final data = await getUsersProfile([userName]);
-    List<dynamic> dataMap = json.decode(data);
+    List<dynamic> dataMap = [];
     Map map = dataMap[0];
     if (strNoEmpty(map['allowType'])) {
-      Get.to(new AddFriendsDetails('search', map['identifier'],
-          map['faceUrl'], map['nickName'], map['gender']));
+      Get.to(new AddFriendsDetails('search', map['identifier'], map['faceUrl'],
+          map['nickName'], map['gender']));
     } else {
       isResult = true;
       setState(() {});

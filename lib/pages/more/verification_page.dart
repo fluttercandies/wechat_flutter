@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:wechat_flutter/im/friend_handle.dart';
-
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'package:wechat_flutter/ui/orther/verify_input.dart';
 import 'package:wechat_flutter/ui/orther/verify_switch.dart';
@@ -57,7 +55,7 @@ class _VerificationPageState extends State<VerificationPage> {
             width: 55.0,
             margin: EdgeInsets.only(right: 15.0, top: 10.0, bottom: 10.0),
             radius: 4.0,
-            onTap: () => addFriend(widget.id, context),
+            onTap: () {},
           ),
         ],
       ),

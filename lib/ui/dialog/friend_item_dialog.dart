@@ -1,19 +1,17 @@
-import 'package:wechat_flutter/im/friend_handle.dart';
 import 'package:flutter/material.dart';
 import 'package:wechat_flutter/tools/commom/win_media.dart';
-
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
 import 'confirm_alert.dart';
 
-friendItemDialog(BuildContext context, {String userId, OnSuCc suCc}) {
+friendItemDialog(BuildContext context, {String userId}) {
   action(v) {
     Navigator.of(context).pop();
     if (v == '删除') {
       confirmAlert(
         context,
         (bool) {
-          if (bool) delFriend(userId, context, suCc: (v) => suCc(v));
+          if (bool) {}
         },
         tips: '你确定要删除此联系人吗',
         okBtn: '删除',

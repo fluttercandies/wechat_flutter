@@ -1,18 +1,17 @@
+import 'package:extended_text_field/extended_text_field.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wechat_flutter/im/model/chat_data.dart';
 import 'package:wechat_flutter/pages/chat/chat_more_page.dart';
 import 'package:wechat_flutter/pages/group/group_details_page.dart';
+import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'package:wechat_flutter/ui/chat/chat_details_body.dart';
 import 'package:wechat_flutter/ui/chat/chat_details_row.dart';
+import 'package:wechat_flutter/ui/edit/emoji_text.dart';
+import 'package:wechat_flutter/ui/edit/text_span_builder.dart';
 import 'package:wechat_flutter/ui/item/chat_more_icon.dart';
 import 'package:wechat_flutter/ui/view/indicator_page_view.dart';
 
-import 'package:extended_text_field/extended_text_field.dart';
-import 'package:flutter/material.dart';
-import 'package:wechat_flutter/im/send_handle.dart';
-import 'package:wechat_flutter/tools/wechat_flutter.dart';
-import 'package:wechat_flutter/ui/edit/text_span_builder.dart';
-import 'package:wechat_flutter/ui/edit/emoji_text.dart';
 import 'chat_info_page.dart';
 
 enum ButtonType { voice, more }
@@ -61,9 +60,17 @@ class _ChatPageState extends State<ChatPage> {
   }
 
   Future getChatMsgData() async {
-    final str =
-        await ChatDataRep().repData(widget?.id ?? widget.title, widget.type);
-    List<ChatData> listChat = str;
+    List<ChatData> listChat = List.generate(
+      10,
+      (index) => ChatData(msg: {
+        "message": {
+          "text": "爱你",
+          "type": "Text",
+          "avatar": defAvatar,
+          "id": "$index",
+        }
+      }, id: "$index"),
+    );
     chatData.clear();
     chatData..addAll(listChat.reversed);
     if (mounted) setState(() {});
@@ -115,8 +122,8 @@ class _ChatPageState extends State<ChatPage> {
 
   _handleSubmittedData(String text) async {
     _textController.clear();
-    chatData.insert(0, new ChatData(msg: {"text": text}));
-    await sendTextMsg('${widget?.id ?? widget.title}', widget.type, text);
+    chatData.insert(0, new ChatData(msg: {"text": text}, id: '1'));
+    // await sendTextMsg('${widget?.id ?? widget.title}', widget.type, text);
   }
 
   onTapHandle(ButtonType type) {

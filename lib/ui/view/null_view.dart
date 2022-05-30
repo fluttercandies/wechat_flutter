@@ -1,7 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wechat_flutter/pages/root/user_page.dart';
-import 'package:flutter/material.dart';
-
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
 class HomeNullView extends StatelessWidget {

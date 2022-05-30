@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:wechat_flutter/tools/commom/check.dart';
-
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
 class ImageView extends StatelessWidget {
@@ -21,7 +20,14 @@ class ImageView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Widget image;
-    if (isNetWorkImg(img)) {
+    if (!strNoEmpty(img)) {
+      image = new CachedNetworkImage(
+        imageUrl: defAvatar,
+        width: width,
+        height: height,
+        fit: width != null && height != null ? BoxFit.fill : fit,
+      );
+    } else if (isNetWorkImg(img)) {
       image = new CachedNetworkImage(
         imageUrl: img,
         width: width,
@@ -46,13 +52,13 @@ class ImageView extends StatelessWidget {
     } else {
       image = new Container(
         decoration: BoxDecoration(
-          color: Colors.black26.withOpacity(0.1),
-          border: Border.all(color: Colors.black.withOpacity(0.2),width: 0.3)
-        ),
+            color: Colors.black26.withOpacity(0.1),
+            border:
+                Border.all(color: Colors.black.withOpacity(0.2), width: 0.3)),
         child: new Image.asset(
           defIcon,
-          width: width-1,
-          height: height-1,
+          width: width - 1,
+          height: height - 1,
           fit: width != null && height != null ? BoxFit.fill : fit,
         ),
       );

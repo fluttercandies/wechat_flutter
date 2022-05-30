@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:wechat_flutter/config/provider_config.dart';
-import 'package:wechat_flutter/im/login_handle.dart';
 import 'package:wechat_flutter/pages/login/register_page.dart';
 import 'package:wechat_flutter/pages/settings/language_page.dart';
 import 'package:wechat_flutter/provider/global_model.dart';
-
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
 import 'login_page.dart';
@@ -23,8 +21,8 @@ class _LoginBeginPageState extends State<LoginBeginPage> {
         text: S.of(context).login,
         margin: EdgeInsets.only(left: 10.0),
         width: 100.0,
-        onTap: () => Get.to(
-            ProviderConfig.getInstance().getLoginPage(new LoginPage())),
+        onTap: () =>
+            Get.to(ProviderConfig.getInstance().getLoginPage(new LoginPage())),
       ),
       new ComMomButton(
           text: S.of(context).register,
@@ -62,7 +60,6 @@ class _LoginBeginPageState extends State<LoginBeginPage> {
   @override
   void initState() {
     super.initState();
-    init(context);
   }
 
   @override
