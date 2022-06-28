@@ -6,8 +6,16 @@
 > 还是出错的话在项目主目录执行`flutter clean`再重新运行。
 > 如果出现插件版本不适配记得看`pubspec.yaml`文件介绍的插件flutter版本是否与自己本地Flutter适配。
 
+# 相关文档
+[问题列表与解决方案](issues_list.md)
+
+# 公告
+目前正在以flutter2.10.4重构，具体进度查看`refactor`分支，将放弃`dim`插件，接入`tencent_im_sdk_plugin`，解决所有插件兼容问题，合并master后还可能会兼容空安全与代码整体规范。
+
 # log
 
+* 2022.05.28 更新环境信息与贴出`问题列表与解决方案`索引
+  
 * 2022.05.26 开始兼容flutter2.10.4
 
 * 2022.05.26 列出错误列表及修复方式
@@ -173,47 +181,52 @@ IOS
 
 # 我的Flutter环境
 
-```
- q1@q1deMacBook-Pro  ~/Documents/git/wechat_flutter   master  flutter doctor -v
-[✓] Flutter (Channel stable, 2.5.2, on macOS 11.2.3 20D91 darwin-x64, locale zh-Hans-CN)
-    • Flutter version 2.5.2 at /Users/q1/flutterNewVersion/flutter
-    • Upstream repository https://github.com/flutter/flutter.git
-    • Framework revision 3595343e20 (6 weeks ago), 2021-09-30 12:58:18 -0700
-    • Engine revision 6ac856380f
-    • Dart version 2.14.3
+```q1@q1deMacBook-Pro  ~/Documents/git/wechat_flutter   master  flutter doctor -v
+[✓] Flutter (Channel unknown, 2.10.4, on macOS 12.2.1 21D62 darwin-x64, locale en-CN)
+    • Flutter version 2.10.4 at /opt/fvm/versions/2.10.4
+    • Upstream repository unknown
+    • Framework revision c860cba910 (9 weeks ago), 2022-03-25 00:23:12 -0500
+    • Engine revision 57d3bac3dd
+    • Dart version 2.16.2
+    • DevTools version 2.9.2
     • Pub download mirror https://pub.flutter-io.cn
     • Flutter download mirror https://storage.flutter-io.cn
 
 [✓] Android toolchain - develop for Android devices (Android SDK version 31.0.0-rc1)
     • Android SDK at /Users/q1/android-sdk-macosx
     • Platform android-31, build-tools 31.0.0-rc1
-    • Java binary at: /Applications/Android Studio.app/Contents/jre/jdk/Contents/Home/bin/java
-    • Java version OpenJDK Runtime Environment (build 1.8.0_242-release-1644-b3-6915495)
+    • Java binary at: /Applications/Android Studio.app/Contents/jre/Contents/Home/bin/java
+    • Java version OpenJDK Runtime Environment (build 11.0.11+0-b60-7590822)
     • All Android licenses accepted.
 
-[✓] Xcode - develop for iOS and macOS
+[✓] Xcode - develop for iOS and macOS (Xcode 13.3.1)
     • Xcode at /Applications/Xcode.app/Contents/Developer
-    • Xcode 12.5.1, Build version 12E507
-    • CocoaPods version 1.11.0.beta.2
+    • CocoaPods version 1.11.3
 
 [✓] Chrome - develop for the web
     • Chrome at /Applications/Google Chrome.app/Contents/MacOS/Google Chrome
 
-[✓] Android Studio (version 4.1)
+[✓] Android Studio (version 2021.1)
     • Android Studio at /Applications/Android Studio.app/Contents
     • Flutter plugin can be installed from:
       🔨 https://plugins.jetbrains.com/plugin/9212-flutter
     • Dart plugin can be installed from:
       🔨 https://plugins.jetbrains.com/plugin/6351-dart
-    • Java version OpenJDK Runtime Environment (build 1.8.0_242-release-1644-b3-6915495)
+    • Java version OpenJDK Runtime Environment (build 11.0.11+0-b60-7590822)
 
-[✓] Connected device (4 available)
-    • SEA AL10 (mobile) • 6HJ4C20219007098          • android-arm64  • Android 10 (API 29)
-    • iPhone (mobile)   • 00008020-0016343E2692002E • ios            • iOS 14.7.1 18G82
-    • macOS (desktop)   • macos                     • darwin-x64     • macOS 11.2.3 20D91 darwin-x64
-    • Chrome (web)      • chrome                    • web-javascript • Google Chrome 95.0.4638.69
+[✓] VS Code (version 1.66.2)
+    • VS Code at /Applications/Visual Studio Code.app/Contents
+    • Flutter extension version 3.38.1
 
-• No issues found!
+[✓] Connected device (3 available)
+    • SEA AL10 (mobile) • 6HJ4C20219007098 • android-arm64  • Android 10 (API 29)
+    • macOS (desktop)   • macos            • darwin-x64     • macOS 12.2.1 21D62 darwin-x64
+    • Chrome (web)      • chrome           • web-javascript • Google Chrome 102.0.5005.61
+
+[!] HTTP Host Availability
+    ✗ HTTP host https://maven.google.com/ is not reachable. Reason: An error occurred while checking the HTTP host: Operation timed out
+
+! Doctor found issues in 1 category.
 ```
 
 # 运行安卓androidx.core:core问题
