@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage>
         return ChatList(
             identifier: '112$index',
             msgType: 'personal',
-            avatar: defAvatar,
+            avatar: isGroup ? defGroupAvatar : defAvatar,
             content: {
               "message": {
                 "text": "爱你",
