@@ -7,7 +7,12 @@
 > 如果出现插件版本不适配记得看`pubspec.yaml`文件介绍的插件flutter版本是否与自己本地Flutter适配。
 
 # 关于作者
-本人目前全职接单flutter，详情联系18826987045（微信同号）
+本人目前全职接单flutter，详情联系18826987045（微信同号），下面为我的微信二维码：
+
+<img src="assets/git/left_group.png" height="200" width="210" style="zoom:30%;" />
+
+[上图无法显示点我](http://www.shenmeniuma.com/mockImg/git/left_group.png)
+
 
 # 相关文档
 [问题列表与解决方案](issues_list.md)
@@ -17,6 +22,10 @@
 
 # log
 
+* 2022.06.28 更换纯ui分支模拟图片地址 【12:00】
+  
+* 2022.06.28 创建纯ui分支【10:00】
+  
 * 2022.05.28 更新环境信息与贴出`问题列表与解决方案`索引
   
 * 2022.05.26 开始兼容flutter2.10.4
@@ -285,7 +294,7 @@ android {
 
 <img src="assets/git/left_group.png" height="200" width="210" style="zoom:30%;" />
 
-[上图无法显示点我](http://www.flutterj.com/left_group.png)
+[上图无法显示点我](http://www.shenmeniuma.com/mockImg/git/left_group.png)
 
 Flutter教程网：www.flutterj.com
 
