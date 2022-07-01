@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+import 'package:wechat_flutter/im/login_handle.dart';
 import 'package:wechat_flutter/pages/mine/personal_info_page.dart';
 import 'package:wechat_flutter/pages/settings/language_page.dart';
 import 'package:wechat_flutter/pages/wallet/pay_home_page.dart';
@@ -19,6 +20,7 @@ class _MinePageState extends State<MinePage> {
   void action(name) {
     switch (name) {
       case '设置':
+        loginOut(context);
         break;
       case '支付':
         Get.to(new PayHomePage());

@@ -8,7 +8,7 @@ import 'package:tencent_im_sdk_plugin/models/v2_tim_message_receipt.dart';
 import 'package:tencent_im_sdk_plugin/models/v2_tim_user_full_info.dart';
 import 'package:tencent_im_sdk_plugin/models/v2_tim_user_info.dart';
 
-class Event with ChangeNotifier {
+class IMEvent with ChangeNotifier {
   List<Map<String, dynamic>> events = List.empty(growable: true);
 
   void addEvents(Map<String, dynamic> event) {

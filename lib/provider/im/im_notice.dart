@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-class Notice with ChangeNotifier {
+class IMNotice with ChangeNotifier {
   int _noticeCount = 0;
   int get noticeCount => _noticeCount;
 
