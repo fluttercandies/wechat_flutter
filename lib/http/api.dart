@@ -18,7 +18,7 @@ void postSuggestionWithAvatar(BuildContext context) async {
       showToast(context, '设置头像成功');
       model.avatar = avatarUrl;
       model.refresh();
-      await SharedUtil.instance.saveString(Keys.faceUrl, avatarUrl);
+      await SharedUtil.instance.saveString(Keys.faceUrl, avatarUrl ?? '');
     },
   );
 }

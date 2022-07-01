@@ -21,7 +21,7 @@ Future<void> login(String userName, BuildContext context) async {
     if (result.code == 0) {
       model.account = userName;
       model.goToLogin = false;
-      await SharedUtil.instance.saveString(Keys.account, userName);
+      await SharedUtil.instance.saveString(Keys.account, userName ?? '');
       await SharedUtil.instance.saveBoolean(Keys.hasLogged, true);
       model.refresh();
       Get.offAll(new RootPage());

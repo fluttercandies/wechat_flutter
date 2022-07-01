@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:wechat_flutter/im/entity/i_person_info_entity.dart';
+import 'package:tencent_im_sdk_plugin/models/v2_tim_user_full_info.dart';
+import 'package:wechat_flutter/im/im_handle/Im_api.dart';
 import 'package:wechat_flutter/provider/loginc/global_loginc.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
@@ -49,17 +50,14 @@ class GlobalModel extends ChangeNotifier {
   }
 
   void initInfo() async {
-    IPersonInfoEntity model = IPersonInfoEntity(
-      nickname: "大菠萝",
-      faceURL: defAvatar,
-      gender: 12,
-    );
-    nickName = model.nickname;
-    await SharedUtil.instance.saveString(Keys.nickName, model.nickname);
-    avatar = model.faceURL;
-    await SharedUtil.instance.saveString(Keys.faceUrl, model.faceURL);
-    gender = model.gender;
-    await SharedUtil.instance.saveInt(Keys.gender, model.gender);
+    final List<V2TimUserFullInfo> data = await ImApi.getUsersInfo([account]);
+    if (!listNoEmpty(data)) return;
+    nickName = data[0].nickName;
+    await SharedUtil.instance.saveString(Keys.nickName, data[0].nickName);
+    avatar = data[0].faceUrl;
+    await SharedUtil.instance.saveString(Keys.faceUrl, data[0].faceUrl);
+    gender = data[0].gender;
+    await SharedUtil.instance.saveInt(Keys.gender, data[0].gender);
   }
 
   @override

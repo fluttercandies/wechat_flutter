@@ -1,6 +1,7 @@
 import 'package:wechat_flutter/config/keys.dart';
-export 'package:wechat_flutter/config/keys.dart';
 import 'package:wechat_flutter/config/storage_manager.dart';
+
+export 'package:wechat_flutter/config/keys.dart';
 
 class SharedUtil {
   factory SharedUtil() => _getInstance();
@@ -20,15 +21,14 @@ class SharedUtil {
     return _instance;
   }
 
-
   /// save
   Future saveString(String key, String value) async {
     if (key == Keys.account) {
-      await StorageManager.sp.setString(key, value);
+      await StorageManager.sp.setString(key, value ?? "");
       return;
     }
     String account = StorageManager.sp.getString(Keys.account) ?? "default";
-    await StorageManager.sp.setString(key + account, value);
+    await StorageManager.sp.setString(key + account, value ?? "");
   }
 
   Future saveInt(String key, int value) async {

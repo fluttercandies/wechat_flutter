@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:wechat_flutter/im/model/chat_list.dart';
+import 'package:tencent_im_sdk_plugin/models/v2_tim_conversation.dart';
+import 'package:tencent_im_sdk_plugin/models/v2_tim_conversation_result.dart';
+import 'package:tencent_im_sdk_plugin/models/v2_tim_friend_info.dart';
+import 'package:wechat_flutter/im/im_handle/im_conversation_api.dart';
+import 'package:wechat_flutter/im/im_handle/im_friend_api.dart';
+import 'package:wechat_flutter/im/im_handle/im_msg_api.dart';
 import 'package:wechat_flutter/pages/chat/chat_page.dart';
+import 'package:wechat_flutter/tools/app_config.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'package:wechat_flutter/ui/chat/my_conversation_view.dart';
 import 'package:wechat_flutter/ui/edit/text_span_builder.dart';
@@ -15,43 +21,64 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage>
     with AutomaticKeepAliveClientMixin {
-  List<ChatList> _chatData = [];
+  List<V2TimConversation> _chatData = [];
 
   var tapPos;
   TextSpanBuilder _builder = TextSpanBuilder();
   StreamSubscription<dynamic> _messageStreamSubscription;
 
+  /// 下一页请求标识码
+  String nextSeq = "0";
+
   @override
   void initState() {
     super.initState();
     initPlatformState();
-    getChatData();
+    getChatData(notDataCall: () {
+      /// 如果当前没有消息，且没有添加自己和微信团队
+      /// 自动添加自己和微信团队且发送一条消息
+      addMsg();
+    });
   }
 
-  Future getChatData() async {
-    List<ChatList> listChat = List.generate(
-      12,
-      (index) {
-        final bool isGroup = index.isEven;
-        return ChatList(
-            identifier: '112$index',
-            msgType: 'personal',
-            avatar: isGroup ? defGroupAvatar : defAvatar,
-            content: {
-              "message": {
-                "text": "爱你",
-                "type": "Text",
-              }
-            },
-            name: '${isGroup ? "群群" : "顾"}啥$index',
-            type: isGroup ? "Group" : "Personnal",
-            time: 0);
-      },
-    );
-    if (!listNoEmpty(listChat)) return;
-    _chatData.clear();
-    _chatData..addAll(listChat?.reversed);
+/*
+* 获取会话列表数据
+* */
+  Future getChatData({VoidCallback notDataCall}) async {
+    final V2TimConversationResult cvsResult =
+        await IMConversationApi.getConversationList(nextSeq);
+    nextSeq = cvsResult.nextSeq;
+    if (!listNoEmpty(cvsResult.conversationList)) {
+      if (notDataCall != null) notDataCall();
+      return;
+    }
+
+    _chatData = cvsResult.conversationList;
     if (mounted) setState(() {});
+  }
+
+  /// 如果当前没有消息则添加"微信团队"然后发送一条消息
+  Future addMsg() async {
+    List<V2TimFriendInfo> friends = await ImFriendApi.getFriendList();
+    bool isHaveMySelf = false;
+    bool isHaveWxTeam = false;
+    for (V2TimFriendInfo element in friends) {
+      if (element.userID == Data.user()) {
+        isHaveMySelf = true;
+      } else if (element.userID == AppConfig.wxTeamUserId) {
+        isHaveWxTeam = true;
+      }
+    }
+    if (!isHaveMySelf) {
+      ImFriendApi.addFriend(Data.user());
+      ImMsgApi.sendTextMessage("我们已经是好友了，现在开始聊天吧", receiver: Data.user());
+    }
+    if (!isHaveWxTeam) {
+      ImFriendApi.addFriend(AppConfig.wxTeamUserId);
+      ImMsgApi.sendTextMessage("我们已经是好友了，现在开始聊天吧",
+          receiver: AppConfig.wxTeamUserId);
+    }
+    getChatData();
   }
 
   _showMenu(BuildContext context, Offset tapPos, int type, String id) {
@@ -131,32 +158,29 @@ class _HomePageState extends State<HomePage>
         behavior: MyBehavior(),
         child: new ListView.builder(
           itemBuilder: (BuildContext context, int index) {
-            ChatList model = _chatData[index];
+            V2TimConversation model = _chatData[index];
 
             return InkWell(
               onTap: () {
                 Get.to(new ChatPage(
-                    id: model.identifier,
-                    title: model.name,
-                    type: model.type == 'Group' ? 2 : 1));
+                    id: model.userID, title: model.showName, type: model.type));
               },
               onTapDown: (TapDownDetails details) {
                 tapPos = details.globalPosition;
               },
               onLongPress: () {
                 if (Platform.isAndroid) {
-                  _showMenu(context, tapPos, model.type == 'Group' ? 2 : 1,
-                      model.identifier);
+                  _showMenu(context, tapPos, model.type, model.userID);
                 } else {
                   debugPrint("IOS聊天长按选项功能开发中");
                 }
               },
               child: new MyConversationView(
-                imageUrl: model.avatar,
-                title: model?.name ?? '',
-                content: model?.content,
-                time: timeView(model?.time ?? 0),
-                isBorder: model?.name != _chatData[0].name,
+                imageUrl: model.faceUrl,
+                title: model?.showName ?? '',
+                content: model?.lastMessage,
+                time: timeView(model?.lastMessage?.timestamp ?? 0),
+                isBorder: model?.showName != _chatData[0].userID,
               ),
             );
           },

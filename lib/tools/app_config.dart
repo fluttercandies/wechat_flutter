@@ -29,4 +29,10 @@ class AppConfig {
 
   /// 倒计时秒
   static int countdownSecond = 60;
+
+  /// 会话列表[conversation]一页获取数量
+  static var cvsPageCount = 30;
+
+  /// 微信团队用户id
+  static String wxTeamUserId = "166";
 }

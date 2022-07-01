@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'package:wechat_flutter/im/entity/i_person_info_entity.dart';
 import 'package:wechat_flutter/im/entity/person_info_entity.dart';
 import 'package:wechat_flutter/pages/mine/code_page.dart';
 import 'package:wechat_flutter/pages/more/add_friend_details.dart';
@@ -172,13 +171,13 @@ class _AddFriendPageState extends State<AddFriendPage> {
     List<dynamic> dataMap = [];
     setState(() {
       if (Platform.isIOS) {
-        IPersonInfoEntity model = IPersonInfoEntity.fromJson(dataMap[0]);
-        if (strNoEmpty(model.allowType.toString())) {
-          Get.to(new AddFriendsDetails('search', model.identifier,
-              model.faceURL, model.nickname, model.gender));
-        } else {
-          isResult = true;
-        }
+        // IPersonInfoEntity model = IPersonInfoEntity.fromJson(dataMap[0]);
+        // if (strNoEmpty(model.allowType.toString())) {
+        //   Get.to(new AddFriendsDetails('search', model.identifier,
+        //       model.faceURL, model.nickname, model.gender));
+        // } else {
+        //   isResult = true;
+        // }
       } else {
         PersonInfoEntity model = PersonInfoEntity.fromJson(dataMap[0]);
         if (strNoEmpty(model.allowType)) {
