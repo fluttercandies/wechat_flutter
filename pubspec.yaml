@@ -18,6 +18,9 @@ dependencies:
   cupertino_icons: ^0.1.2
   #即时通讯【腾讯云】
 #  tencent_im_sdk_plugin: ^3.6.9
+  tencent_im_sdk_plugin: ^4.0.2
+  #加解密
+  archive: ^3.1.6
   #持久化存储
   #  shared_preferences: 0.5.2+2 #[Flutter2及之前]用这个
   shared_preferences: ^2.0.8
