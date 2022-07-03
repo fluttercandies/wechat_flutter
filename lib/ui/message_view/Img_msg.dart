@@ -1,17 +1,17 @@
-import 'package:get/get.dart';
-import 'package:wechat_flutter/im/model/chat_data.dart';
-import 'package:wechat_flutter/ui/message_view/msg_avatar.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:provider/provider.dart';
+import 'package:tencent_im_sdk_plugin/models/v2_tim_message.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
+import 'package:wechat_flutter/ui/message_view/msg_avatar.dart';
 
 import '../../provider/global_model.dart';
 
 class ImgMsg extends StatelessWidget {
   final msg;
 
-  final ChatData model;
+  final V2TimMessage model;
 
   ImgMsg(this.msg, this.model);
 
@@ -55,7 +55,7 @@ class ImgMsg extends StatelessWidget {
       ),
       new Spacer(),
     ];
-    if (model.id == globalModel.account) {
+    if (model.sender == globalModel.account) {
       body = body.reversed.toList();
     } else {
       body = body;

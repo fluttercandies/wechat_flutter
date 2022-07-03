@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:wechat_flutter/config/const.dart';
 
 class ComMomBar extends StatelessWidget implements PreferredSizeWidget {
@@ -11,11 +11,13 @@ class ComMomBar extends StatelessWidget implements PreferredSizeWidget {
       this.mainColor = Colors.black,
       this.titleW,
       this.bottom,
+      this.showPop,
       this.leadingImg = '',
       this.leadingW});
 
   final String title;
   final bool showShadow;
+  final bool showPop;
   final List<Widget> rightDMActions;
   final Color backgroundColor;
   final Color mainColor;
@@ -29,7 +31,7 @@ class ComMomBar extends StatelessWidget implements PreferredSizeWidget {
 
   Widget leading(BuildContext context) {
     final bool isShow = Navigator.canPop(context);
-    if (isShow) {
+    if (isShow && (showPop ?? true)) {
       return new InkWell(
         child: new Container(
           width: 15,

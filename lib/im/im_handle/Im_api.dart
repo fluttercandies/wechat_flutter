@@ -305,6 +305,11 @@ class ImApi {
 
     final userInfoList = await getUsersInfo([userID]);
 
+    /// 获取用户信息失败了
+    if (!listNoEmpty(userInfoList)) {
+      return res;
+    }
+
     /// 如果昵称不为空则直接返回
     /// 如果昵称为空去设置信息
     if (strNoEmpty(userInfoList[0].nickName)) {

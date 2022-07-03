@@ -1,15 +1,14 @@
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wechat_flutter/pages/contacts/group_launch_page.dart';
 import 'package:wechat_flutter/pages/home/search_page.dart';
-import 'package:wechat_flutter/pages/settings/language_page.dart';
-import 'package:wechat_flutter/ui/view/indicator_page_view.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:wechat_flutter/pages/more/add_friend_page.dart';
-
+import 'package:wechat_flutter/pages/settings/language_page.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
+import 'package:wechat_flutter/ui/view/indicator_page_view.dart';
 import 'package:wechat_flutter/ui/w_pop/w_popup_menu.dart';
 
 typedef CheckLogin(index);
@@ -89,6 +88,7 @@ class RootTabBarState extends State<RootTabBar> {
     var appBar = new ComMomBar(
       title: widget.pages[currentIndex].title,
       showShadow: false,
+      showPop: false,
       rightDMActions: <Widget>[
         new InkWell(
           child: new Container(

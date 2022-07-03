@@ -58,6 +58,8 @@ class StartPage extends StatefulWidget {
 }
 
 class _StartPageState extends State<StartPage> {
+  bool isInitOk = false;
+
   @override
   void initState() {
     super.initState();
@@ -71,10 +73,18 @@ class _StartPageState extends State<StartPage> {
     await ImApi.init(context);
 
     await ImApi.checkLogin();
+    isInitOk = true;
+    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
+    if (!isInitOk) {
+      return Material(
+        color: Colors.white,
+        child: Center(child: Text('加载中')),
+      );
+    }
     return widget.model.goToLogin ? new LoginBeginPage() : new RootPage();
   }
 }

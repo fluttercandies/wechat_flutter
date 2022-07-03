@@ -138,7 +138,7 @@ class ImMsgApi {
   /*
   * 获取C2C历史消息
   * */
-  static Future getC2CHistoryMessageList(
+  static Future<List<V2TimMessage>> getC2CHistoryMessageList(
       String userID, String lastMsgID) async {
     V2TimValueCallback<List<V2TimMessage>> res = await TencentImSDKPlugin
         .v2TIMManager
@@ -149,6 +149,7 @@ class ImMsgApi {
           lastMsgID: lastMsgID,
         );
     ImApi.imPrint(res.toJson(), "获取C2C历史消息");
+    return res.data;
   }
 
   /*

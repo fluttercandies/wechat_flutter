@@ -1,7 +1,9 @@
 import 'package:extended_text_field/extended_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:wechat_flutter/im/model/chat_data.dart';
+import 'package:tencent_im_sdk_plugin/models/v2_tim_message.dart';
+import 'package:tencent_im_sdk_plugin/models/v2_tim_text_elem.dart';
+import 'package:wechat_flutter/im/im_handle/im_msg_api.dart';
 import 'package:wechat_flutter/pages/chat/chat_more_page.dart';
 import 'package:wechat_flutter/pages/group/group_details_page.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
@@ -12,6 +14,7 @@ import 'package:wechat_flutter/ui/edit/text_span_builder.dart';
 import 'package:wechat_flutter/ui/item/chat_more_icon.dart';
 import 'package:wechat_flutter/ui/view/indicator_page_view.dart';
 
+import '../../tools/eventbus/msg_bus.dart';
 import 'chat_info_page.dart';
 
 enum ButtonType { voice, more }
@@ -28,13 +31,16 @@ class ChatPage extends StatefulWidget {
 }
 
 class _ChatPageState extends State<ChatPage> {
-  List<ChatData> chatData = [];
+  List<V2TimMessage> chatData = [];
   StreamSubscription<dynamic> _msgStreamSubs;
   bool _isVoice = false;
   bool _isMore = false;
   double keyboardHeight = 270.0;
   bool _emojiState = false;
   String newGroupName;
+
+  /// 最新消息id【可空】
+  String lastMsgID;
 
   TextEditingController _textController = TextEditingController();
   FocusNode _focusNode = new FocusNode();
@@ -60,19 +66,16 @@ class _ChatPageState extends State<ChatPage> {
   }
 
   Future getChatMsgData() async {
-    List<ChatData> listChat = List.generate(
-      10,
-      (index) => ChatData(msg: {
-        "message": {
-          "text": "爱你",
-          "type": "Text",
-          "avatar": defAvatar,
-          "id": "$index",
-        }
-      }, id: "$index"),
-    );
-    chatData.clear();
-    chatData..addAll(listChat.reversed);
+    if (widget.type == 1) {
+      chatData = await ImMsgApi.getC2CHistoryMessageList(widget.id, lastMsgID);
+      lastMsgID = chatData.last.msgID;
+      // ImMsgApi.getHistoryMessageList(
+      //     userID: widget.id, lastMsgID: lastMsgID); //
+    } else {
+      // ImMsgApi.getGroupHistoryMessageList(groupID)
+    }
+    // chatData.clear();
+    // chatData..addAll(listChat.reversed);
     if (mounted) setState(() {});
   }
 
@@ -122,8 +125,26 @@ class _ChatPageState extends State<ChatPage> {
 
   _handleSubmittedData(String text) async {
     _textController.clear();
-    chatData.insert(0, new ChatData(msg: {"text": text}, id: '1'));
-    // await sendTextMsg('${widget?.id ?? widget.title}', widget.type, text);
+    chatData.insert(
+      0,
+      new V2TimMessage(
+          textElem: V2TimTextElem(text: text),
+          sender: Data.user(),
+          id: '1',
+          elemType: 9),
+    );
+    String senToUserId = '${widget?.id ?? widget.title}';
+    await ImMsgApi.sendTextMessage(
+      text,
+      receiver: widget.type == 1 ? senToUserId : null,
+      groupID: widget.type != 1 ? senToUserId : null,
+    );
+    if (mounted) setState(() {});
+
+    /// 事件总线发送，让其他地方同步消息
+    Future.delayed(Duration(milliseconds: 1000)).then((value) {
+      msgBus.fire(MsgBusModel(widget.id));
+    });
   }
 
   onTapHandle(ButtonType type) {

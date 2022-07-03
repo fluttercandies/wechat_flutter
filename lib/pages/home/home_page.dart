@@ -8,6 +8,7 @@ import 'package:wechat_flutter/im/im_handle/im_friend_api.dart';
 import 'package:wechat_flutter/im/im_handle/im_msg_api.dart';
 import 'package:wechat_flutter/pages/chat/chat_page.dart';
 import 'package:wechat_flutter/tools/app_config.dart';
+import 'package:wechat_flutter/tools/eventbus/msg_bus.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'package:wechat_flutter/ui/chat/my_conversation_view.dart';
 import 'package:wechat_flutter/ui/edit/text_span_builder.dart';
@@ -54,7 +55,7 @@ class _HomePageState extends State<HomePage>
     }
 
     _chatData = cvsResult.conversationList;
-    if (mounted) setState(() {});
+    setState(() {});
   }
 
   /// 如果当前没有消息则添加"微信团队"然后发送一条消息
@@ -62,6 +63,10 @@ class _HomePageState extends State<HomePage>
     List<V2TimFriendInfo> friends = await ImFriendApi.getFriendList();
     bool isHaveMySelf = false;
     bool isHaveWxTeam = false;
+    // 获取失败了
+    if (!listNoEmpty(friends)) {
+      return;
+    }
     for (V2TimFriendInfo element in friends) {
       if (element.userID == Data.user()) {
         isHaveMySelf = true;
@@ -114,8 +119,14 @@ class _HomePageState extends State<HomePage>
     if (!mounted) return;
 
     if (_messageStreamSubscription == null) {
-      // _messageStreamSubscription =
-      //     im.onMessage.listen((dynamic onData) => getChatData());
+      _messageStreamSubscription = msgBus.on<MsgBusModel>().listen((event) {
+        print("收到新消息，发送给${event.toUserId}");
+
+        /// 表示从第一个消息开始读取
+        nextSeq = '0';
+
+        getChatData();
+      });
     }
   }
 

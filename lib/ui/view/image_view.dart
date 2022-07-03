@@ -21,8 +21,8 @@ class ImageView extends StatelessWidget {
   Widget build(BuildContext context) {
     Widget image;
     if (!strNoEmpty(img)) {
-      image = new CachedNetworkImage(
-        imageUrl: defAvatar,
+      image = new Image.asset(
+        defIcon,
         width: width,
         height: height,
         fit: width != null && height != null ? BoxFit.fill : fit,

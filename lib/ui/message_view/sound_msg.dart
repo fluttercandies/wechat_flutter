@@ -1,15 +1,13 @@
-import 'package:wechat_flutter/im/entity/i_sound_msg_entity.dart';
-import 'package:wechat_flutter/im/entity/sound_msg_entity.dart';
-import 'package:wechat_flutter/im/model/chat_data.dart';
-import 'package:wechat_flutter/provider/global_model.dart';
-import 'package:wechat_flutter/tools/wechat_flutter.dart';
-import 'package:wechat_flutter/ui/message_view/msg_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:provider/provider.dart';
+import 'package:tencent_im_sdk_plugin/models/v2_tim_message.dart';
+import 'package:wechat_flutter/provider/global_model.dart';
+import 'package:wechat_flutter/tools/wechat_flutter.dart';
+import 'package:wechat_flutter/ui/message_view/msg_avatar.dart';
 
 class SoundMsg extends StatefulWidget {
-  final ChatData model;
+  final V2TimMessage model;
 
   SoundMsg(this.model);
 
@@ -136,12 +134,12 @@ class _SoundMsgState extends State<SoundMsg> with TickerProviderStateMixin {
       soundImg = leftSoundNames;
     }
 
-    SoundMsgEntity model = SoundMsgEntity.fromJson(widget.model.msg);
-    ISoundMsgEntity iModel = ISoundMsgEntity.fromJson(widget.model.msg);
-    bool isIos = Platform.isIOS;
-    if (!listNoEmpty(isIos ? iModel.soundUrls : model.urls)) return Container();
+    // SoundMsgEntity model = SoundMsgEntity.fromJson(widget.model.msg);
+    // ISoundMsgEntity iModel = ISoundMsgEntity.fromJson(widget.model.msg);
+    // bool isIos = Platform.isIOS;
+    // if (!listNoEmpty(isIos ? iModel.soundUrls : model.urls)) return Container();
 
-    var urls = isIos ? iModel.soundUrls[0] : model.urls[0];
+    // var urls = isIos ? iModel.soundUrls[0] : model.urls[0];
     var body = [
       new MsgAvatar(model: widget.model, globalModel: globalModel),
       new Container(
@@ -170,11 +168,11 @@ class _SoundMsgState extends State<SoundMsg> with TickerProviderStateMixin {
               ? Color(0xff98E165)
               : Colors.white,
           onPressed: () {
-            if (strNoEmpty(urls)) {
-              playNew(urls);
-            } else {
-              showToast(context, '未知错误');
-            }
+            // if (strNoEmpty(urls)) {
+            //   playNew(urls);
+            // } else {
+            //   showToast(context, '未知错误');
+            // }
           },
         ),
       ),
