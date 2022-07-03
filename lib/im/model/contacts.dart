@@ -1,15 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:tencent_im_sdk_plugin/models/v2_tim_friend_info.dart';
 
 class Contact {
   Contact({
-    @required this.avatar,
-    @required this.name,
     @required this.nameIndex,
-    @required this.identifier,
+    @required this.showName,
+    @required this.info,
   });
 
-  final String avatar;
-  final String name;
   final String nameIndex;
-  final String identifier;
+  final String showName;
+  final V2TimFriendInfo info;
+
+  String get avatar {
+    return info?.userProfile?.faceUrl;
+  }
+
+  String get identifier {
+    return info?.userProfile?.userID;
+  }
+
+  String get name {
+    return showName;
+  }
 }

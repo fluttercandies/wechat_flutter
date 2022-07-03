@@ -1,7 +1,8 @@
-import 'package:wechat_flutter/im/model/contacts.dart';
-import 'package:wechat_flutter/ui/view/indicator_page_view.dart';
 import 'package:flutter/material.dart';
+import 'package:wechat_flutter/im/model/contacts.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
+import 'package:wechat_flutter/ui/view/indicator_page_view.dart';
+
 import 'contact_item.dart';
 
 enum ClickType { select, open }
@@ -61,7 +62,7 @@ class ContactView extends StatelessWidget {
             return new Column(children: <Widget>[
               new ContactItem(
                 avatar: _contact.avatar,
-                title: _contact.name,
+                title: _contact.showName,
                 identifier: _contact.identifier,
                 groupTitle: _isGroupTitle ? _contact.nameIndex : null,
                 isLine: false,

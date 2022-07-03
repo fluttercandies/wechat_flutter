@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:lpinyin/lpinyin.dart';
+import 'package:tencent_im_sdk_plugin/models/v2_tim_friend_info.dart';
 import 'package:wechat_flutter/config/dictionary.dart';
+import 'package:wechat_flutter/im/im_handle/im_friend_api.dart';
 import 'package:wechat_flutter/im/model/contacts.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'package:wechat_flutter/ui/item/contact_item.dart';
@@ -29,18 +32,20 @@ class _ContactsPageState extends State<ContactsPage>
   final Map _letterPosMap = {INDEX_BAR_WORDS[0]: 0.0};
 
   Future getContacts() async {
-    // final str = await ContactsPageData().listFriend();
-    // isNull = await ContactsPageData().contactIsNull();
+    List<V2TimFriendInfo> listFriendInfo = await ImFriendApi.getFriendList();
+    List<Contact> listContact = listFriendInfo.map((e) {
+      final String showName = strNoEmpty(e?.friendRemark)
+          ? e?.friendRemark
+          : e.userProfile.nickName;
 
-    List<Contact> listContact = List.generate(
-      3,
-      (index) => Contact(
-        name: "无花果$index",
-        identifier: "12$index",
-        nameIndex: 'W',
-        avatar: defAvatar,
-      ),
-    );
+      String pinyin = PinyinHelper.getFirstWordPinyin(showName);
+      String tag = pinyin.substring(0, 1).toUpperCase();
+      return Contact(
+        nameIndex: tag,
+        showName: showName,
+        info: e,
+      );
+    }).toList();
     _contacts.clear();
     _contacts..addAll(listContact);
     _contacts
