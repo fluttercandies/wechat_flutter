@@ -67,8 +67,11 @@ class _ChatPageState extends State<ChatPage> {
 
   Future getChatMsgData() async {
     if (widget.type == 1) {
-      chatData = await ImMsgApi.getC2CHistoryMessageList(widget.id, lastMsgID);
-      lastMsgID = chatData.last.msgID;
+      chatData =
+          (await ImMsgApi.getC2CHistoryMessageList(widget.id, lastMsgID)) ?? [];
+      if (listNoEmpty(chatData)) {
+        lastMsgID = chatData.last.msgID;
+      }
       // ImMsgApi.getHistoryMessageList(
       //     userID: widget.id, lastMsgID: lastMsgID); //
     } else {
