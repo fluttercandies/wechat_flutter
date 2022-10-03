@@ -5,23 +5,21 @@ import 'package:provider/provider.dart';
 import 'package:tencent_im_sdk_plugin/models/v2_tim_message.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'package:wechat_flutter/ui/message_view/msg_avatar.dart';
-
 import '../../provider/global_model.dart';
 
 class ImgMsg extends StatelessWidget {
   final msg;
-
   final V2TimMessage model;
 
   ImgMsg(this.msg, this.model);
 
   @override
   Widget build(BuildContext context) {
-    if (!listNoEmpty(msg['imageList'])) return Text('发送中');
-    var msgInfo = msg['imageList'][1];
-    var _height = msgInfo['height'].toDouble();
+    if (!listNoEmpty(msg.imageList)) return Text('发送中');
+    var msgInfo = msg.imageList[1];
+    var _height = msgInfo.height.toDouble();
     var resultH = _height > 200.0 ? 200.0 : _height;
-    var url = msgInfo['url'];
+    var url = msgInfo.url;
     var isFile = File(url).existsSync();
     final globalModel = Provider.of<GlobalModel>(context);
     var body = [
