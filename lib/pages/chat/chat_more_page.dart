@@ -3,6 +3,7 @@ import 'package:photo_manager/photo_manager.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'package:wechat_flutter/ui/card/more_item_card.dart';
+import 'package:wechat_camera_picker/wechat_camera_picker.dart';
 
 class ChatMorePage extends StatefulWidget {
   final int index;
@@ -52,6 +53,10 @@ class _ChatMorePageState extends State<ChatMorePage> {
         });
       });
     } else if (name == '拍摄') {
+      CameraPicker.pickFromCamera(
+        context,
+        pickerConfig: const CameraPickerConfig(enableRecording: true),
+      );
       // try {
       //   List<CameraDescription> cameras;
       //

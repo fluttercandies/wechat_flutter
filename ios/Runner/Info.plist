@@ -50,5 +50,11 @@
     </dict>
     <key>NSPhotoLibraryUsageDescription</key>
     <string>Replace with your permission description.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Take a photo for display</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Take a video for display</string>
+	<key>CADisableMinimumFrameDurationOnPhone</key>
+	<true/>
 </dict>
 </plist>
