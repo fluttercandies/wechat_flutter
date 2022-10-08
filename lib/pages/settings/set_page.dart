@@ -1,6 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:wechat_flutter/pages/settings/friend_pro_page.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'package:wechat_flutter/im/login_handle.dart';
+import 'package:wechat_flutter/ui/card/set_item.dart';
 
 class SetPage extends StatefulWidget {
   const SetPage({Key key}) : super(key: key);
@@ -32,6 +36,9 @@ class _SetPageState extends State<SetPage> {
 
   void actionHandle(e) {
     switch (e) {
+      case "朋友权限":
+        Get.to(FriendProPage());
+        break;
       case "退出登录":
         loginOut(context);
         break;
@@ -78,30 +85,11 @@ class _SetPageState extends State<SetPage> {
                     style: TextStyle(color: Colors.black.withOpacity(0.6)),
                   ),
                 ),
-              Material(
-                color: Colors.white,
-                child: InkWell(
-                  onTap: () => actionHandle(e),
-                  child: Container(
-                    width: double.infinity,
-                    padding: EdgeInsets.symmetric(vertical: 15),
-                    margin: EdgeInsets.only(left: 15),
-                    decoration: BoxDecoration(
-                      border: Border(
-                        bottom: BorderSide(
-                          color:
-                              Colors.grey.withOpacity(isNotBorder(e) ? 0 : 0.2),
-                        ),
-                      ),
-                    ),
-                    child: Text(
-                      e,
-                      style: TextStyle(
-                        fontSize: 15,
-                      ),
-                    ),
-                  ),
-                ),
+              SetItem(
+                onTap: () => actionHandle(e),
+                isBorder: isNotBorder(e),
+                text: e,
+                subText: e == "关于微信" ? '版本 8.0.29' : "",
               ),
             ],
           );
