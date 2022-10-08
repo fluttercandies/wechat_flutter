@@ -7,6 +7,7 @@ import 'package:wechat_flutter/pages/contacts/group_launch_page.dart';
 import 'package:wechat_flutter/pages/home/search_page.dart';
 import 'package:wechat_flutter/pages/more/add_friend_page.dart';
 import 'package:wechat_flutter/pages/settings/language_page.dart';
+import 'package:wechat_flutter/pages/tools/scan_page.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'package:wechat_flutter/ui/view/indicator_page_view.dart';
 import 'package:wechat_flutter/ui/w_pop/w_popup_menu.dart';
@@ -54,6 +55,8 @@ class RootTabBarState extends State<RootTabBar> {
       Get.to(new GroupLaunchPage());
     } else if (v == '帮助与反馈') {
       Get.to(new WebViewPage(helpUrl, '帮助与反馈'));
+    } else if (v == '扫一扫') {
+      Get.to(new ScanPage());
     } else {
       Get.to(new LanguagePage());
     }

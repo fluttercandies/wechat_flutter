@@ -116,6 +116,8 @@ dependencies:
   event_bus: ^2.0.0
   #拍摄和录制视频
   wechat_camera_picker: 3.6.1
+  #扫码功能
+  flutter_scankit: 1.2.4
 
 dev_dependencies:
   flutter_test:
