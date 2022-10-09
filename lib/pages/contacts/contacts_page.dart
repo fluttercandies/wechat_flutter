@@ -33,19 +33,22 @@ class _ContactsPageState extends State<ContactsPage>
 
   Future getContacts() async {
     List<V2TimFriendInfo> listFriendInfo = await ImFriendApi.getFriendList();
-    List<Contact> listContact = listFriendInfo.map((e) {
-      final String showName = strNoEmpty(e?.friendRemark)
-          ? e?.friendRemark
-          : e.userProfile.nickName;
+    List<Contact> listContact = listFriendInfo?.map((e) {
+          final String showName = strNoEmpty(e?.friendRemark)
+              ? e?.friendRemark ?? ""
+              : e.userProfile.nickName;
 
-      String pinyin = PinyinHelper.getFirstWordPinyin(showName);
-      String tag = pinyin.substring(0, 1).toUpperCase();
-      return Contact(
-        nameIndex: tag,
-        showName: showName,
-        info: e,
-      );
-    }).toList();
+          String pinyin = PinyinHelper.getFirstWordPinyin(
+              strNoEmpty(showName) ? showName : "");
+          String tag =
+              strNoEmpty(pinyin) ? pinyin.substring(0, 1).toUpperCase() : "#";
+          return Contact(
+            nameIndex: tag,
+            showName: showName,
+            info: e,
+          );
+        })?.toList() ??
+        [];
     _contacts.clear();
     _contacts..addAll(listContact);
     _contacts

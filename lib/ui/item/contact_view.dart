@@ -44,7 +44,7 @@ class ContactView extends StatelessWidget {
           if (_contact.name != contacts[contacts.length - 1].name) {
             return new ContactItem(
               avatar: _contact.avatar,
-              title: _contact.name,
+              title: _contact?.name ?? "",
               identifier: _contact.identifier,
               groupTitle: _isGroupTitle ? _contact.nameIndex : null,
               isLine: _isBorder,
