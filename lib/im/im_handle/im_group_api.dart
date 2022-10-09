@@ -254,4 +254,39 @@ class ImGroupApi {
         .searchGroupMembers(param: searchGroupMembers);
     ImApi.imPrint(res.toJson(), "搜索群成员");
   }
+
+  /*
+  * 加入群组-加入群聊
+  * */
+  static Future<V2TimCallback> joinGroup(String groupID,
+      [String message = "申请加入群聊"]) async {
+    V2TimCallback res = await TencentImSDKPlugin.v2TIMManager.joinGroup(
+      groupID: groupID,
+      message: message,
+    );
+    ImApi.imPrint(res.toJson(), "加入群组-加入群聊");
+    return res;
+  }
+
+  /*
+  * 退出群聊
+  * */
+  static Future<bool> quitGroup(String groupID) async {
+    V2TimCallback res = await TencentImSDKPlugin.v2TIMManager.quitGroup(
+      groupID: groupID,
+    );
+    ImApi.imPrint(res.toJson(), "退出群聊");
+    return res.code == 0;
+  }
+
+  /*
+  * 解散群聊
+  * */
+  static Future<bool> dismissGroup(String groupID) async {
+    V2TimCallback res = await TencentImSDKPlugin.v2TIMManager.dismissGroup(
+      groupID: groupID,
+    );
+    ImApi.imPrint(res.toJson(), "解散群聊");
+    return res.code == 0;
+  }
 }
