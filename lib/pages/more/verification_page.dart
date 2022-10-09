@@ -32,6 +32,10 @@ class _VerificationPageState extends State<VerificationPage> {
       Navigator.of(context).pop();
       showToast(context, "添加成功");
       return;
+    } else if (model.resultCode == 30539) {
+      Navigator.of(context).pop();
+      showToast(context, "等待对方通过好友申请");
+      return;
     } else {
       showToast(
           context, ImResponseTipUtil.getInfoOResultCode(model.resultCode));

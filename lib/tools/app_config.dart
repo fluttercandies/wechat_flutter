@@ -12,11 +12,11 @@ class AppConfig {
   static bool isArrowAddSelf = false;
 
   /// 腾讯云IM AppId
-  static int IMSdkAppID = 1400250651;
+  static int IMSdkAppID = 1400597090;
 
   /// 腾讯云IM 签名
   static String ImSdkSign =
-      "4236133554a57c8fa7ae748534177e97cac28b0750f57ca2edbb974a17a14544";
+      "0dba8e0d933e3bb73e1a8c7befc4730cdadcc3a5733f126f5487b013ea373aaa";
 
   // 注册是否需要邀请码
   static bool needInviteCode = true;
