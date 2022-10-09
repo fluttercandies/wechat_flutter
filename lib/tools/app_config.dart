@@ -1,10 +1,11 @@
+import 'package:wechat_flutter/tools/wechat_flutter.dart';
+
 class AppConfig {
   /// 应用名字
   static String appName = "微信";
 
   /// 模拟封面
-  static String mockCover =
-      "http://img1.gtimg.com/cul/pics/hv1/23/243/1470/95648738.jpg";
+  static String mockCover = defIcon;
 
   static String logoImg = "images/main/home_logo.webp";
 

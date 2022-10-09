@@ -147,7 +147,7 @@ class _GroupLaunchPageState extends State<GroupLaunchPage> {
               return V2TimGroupMember(role: role, userID: e);
             }).toList());
 
-        if (callBack.desc.toString().contains('succ')) {
+        if (callBack.code == 0) {
           showToast(context, '创建群组成功');
           if (Navigator.of(context).canPop()) {
             Navigator.of(context).pop();
