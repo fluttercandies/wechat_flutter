@@ -89,6 +89,8 @@ class ImFriendApi {
 
   /*
   * 检测好友
+  *
+  * element.resultType;//与查询用户的关系类型 0:不是好友 1:对方在我的好友列表中 2:我在对方的好友列表中 3:互为好友
   * */
   static Future<List<V2TimFriendCheckResult>> checkFriend(
       List<String> userIDList) async {
@@ -106,6 +108,18 @@ class ImFriendApi {
 
   /*
   * 获取好友申请列表
+  *
+  * 关于type可能是。
+  *
+  * enum FriendApplicationTypeEnum {
+  V2TIM_FRIEND_APPLICATION_NULL, // dart 不支持枚举初始值，所以这里加一个null
+  // 别人发给我的加好友请求
+  V2TIM_FRIEND_APPLICATION_COME_IN,
+  //我发给别人的加好友请求
+  V2TIM_FRIEND_APPLICATION_SEND_OUT,
+  // 别人发给我的和我发给别人的加好友请求。仅在拉取时有效。
+  V2TIM_FRIEND_APPLICATION_BOTH,
+}
   * */
   static Future<List<V2TimFriendApplication>> getFriendApplicationList() async {
     V2TimValueCallback<V2TimFriendApplicationResult> res =
@@ -114,12 +128,15 @@ class ImFriendApi {
             .getFriendApplicationList();
     ImApi.imPrint(res.toJson(), "获取好友申请列表");
     return res.data.friendApplicationList;
+    // flutter: [IM]:-------------获取好友申请列表-----------
+    // flutter: [IM]:{"code":0,"desc":"ok","data":{"unreadCount":1,"friendApplicationList":[{"userID":"165","nickname":"u165","faceUrl":null,"addTime":1665300529,"addSource":"AddSource_Type_Unknow","addWording":null,"type":1}]}}
   }
 
   /*
   * 同意好友申请
   * */
-  static Future acceptFriendApplication(String userID) async {
+  static Future<V2TimValueCallback<V2TimFriendOperationResult>>
+      acceptFriendApplication(String userID) async {
     V2TimValueCallback<V2TimFriendOperationResult> res =
         await TencentImSDKPlugin.v2TIMManager
             .getFriendshipManager()
@@ -130,6 +147,7 @@ class ImFriendApi {
                 type: FriendApplicationTypeEnum.V2TIM_FRIEND_APPLICATION_BOTH);
 
     ImApi.imPrint(res.toJson(), "同意好友申请");
+    return res;
   }
 
   /*

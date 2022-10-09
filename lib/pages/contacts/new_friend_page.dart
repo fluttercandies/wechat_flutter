@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tencent_im_sdk_plugin/models/v2_tim_friend_application.dart';
+import 'package:tencent_im_sdk_plugin/models/v2_tim_friend_check_result.dart';
 import 'package:tencent_im_sdk_plugin/models/v2_tim_user_full_info.dart';
 import 'package:wechat_flutter/im/im_handle/Im_api.dart';
 import 'package:wechat_flutter/im/im_handle/im_friend_api.dart';
@@ -34,6 +35,9 @@ class _NewFriendPageState extends State<NewFriendPage> {
   String currentUser;
 
   List<V2TimFriendApplication> allData = [];
+
+  /// 是否是好友数据 key=用户id
+  Map<String, bool> isFriendData = {};
   bool isLoadOk = false;
 
   FocusNode searchF = new FocusNode();
@@ -48,21 +52,13 @@ class _NewFriendPageState extends State<NewFriendPage> {
   Future getData() async {
     allData = await ImFriendApi.getFriendApplicationList();
 
-    /// 模拟数据
-    allData.insert(
-      0,
-      V2TimFriendApplication(
-        userID: '12',
-        type: 0,
-        nickname: "昵称",
-        addTime:
-            DateTime.now().subtract(Duration(hours: 30)).millisecondsSinceEpoch,
-      ),
-    );
+    List<String> userIdList = [];
 
     /// 处理数据
     if (listNoEmpty(allData)) {
       for (int i = 0; i < allData.length; i++) {
+        userIdList.add(allData[i].userID);
+
         final int addTime = allData[i].addTime;
         bool isNeedInsert = addTime <=
             DateTime.now().subtract(Duration(days: 3)).millisecondsSinceEpoch ~/
@@ -76,6 +72,14 @@ class _NewFriendPageState extends State<NewFriendPage> {
 
       allData.insert(
           0, V2TimFriendApplication(userID: 'Nearly three days', type: -1));
+    }
+
+    List<V2TimFriendCheckResult> checkFriend =
+        await ImFriendApi.checkFriend(userIdList);
+    for (V2TimFriendCheckResult result in checkFriend) {
+      /// result.resultType = 3 表示双向好友
+      isFriendData[result.userID] = result.resultType == 3;
+      print("新数据::${isFriendData.toString()}");
     }
 
     isLoadOk = true;
@@ -141,12 +145,16 @@ class _NewFriendPageState extends State<NewFriendPage> {
             title: friendModel?.nickname ?? "",
             des: friendModel?.addWording ?? "",
             onTap: () {
-              Get.to(ContactsDetailsPage(
+              Get.to(
+                ContactsDetailsPage(
                   id: friendModel?.userID,
                   title: friendModel?.nickname ?? "",
-                  avatar: friendModel?.faceUrl ?? AppConfig.mockCover));
+                  avatar: friendModel?.faceUrl ?? AppConfig.mockCover,
+                  friendModel: friendModel,
+                ),
+              );
             },
-            endWidget: (friendModel?.type != 0)
+            endWidget: (isFriendData[friendModel?.userID])
                 ? Text("已添加")
                 : Container(
                     alignment: Alignment.center,

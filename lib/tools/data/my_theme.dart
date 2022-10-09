@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class MyTheme {
   static MaterialColor themeColor() {
-    final _colorValue = Colors.green.value;
+    final _colorValue = 0xff3bb565;
     final _colorEntity = Color(_colorValue);
     MaterialColor themeColor = MaterialColor(
       _colorValue,
