@@ -19,6 +19,9 @@ Future<void> login(String userName, BuildContext context) async {
       return;
     }
     if (result.code == 0) {
+      /// 数据初始化
+      await Data.initData();
+
       model.account = userName;
       model.goToLogin = false;
       await SharedUtil.instance.saveString(Keys.account, userName ?? '');
@@ -51,5 +54,9 @@ Future<void> loginOut(BuildContext context) async {
   model.refresh();
   await SharedUtil.instance.saveBoolean(Keys.hasLogged, false);
   await SharedUtil.instance.saveString(Keys.account, "");
+
+  /// 数据清除
+  await Data.clearData();
+
   await Get.offAll(new LoginBeginPage());
 }

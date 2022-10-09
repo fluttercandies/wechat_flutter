@@ -35,8 +35,10 @@ class _ContactsPageState extends State<ContactsPage>
     List<V2TimFriendInfo> listFriendInfo = await ImFriendApi.getFriendList();
     List<Contact> listContact = listFriendInfo?.map((e) {
           final String showName = strNoEmpty(e?.friendRemark)
-              ? e?.friendRemark ?? ""
-              : e.userProfile.nickName;
+              ? e?.friendRemark
+              : strNoEmpty(e.userProfile.nickName)
+                  ? e.userProfile.nickName
+                  : e.userID;
 
           String pinyin = PinyinHelper.getFirstWordPinyin(
               strNoEmpty(showName) ? showName : "");

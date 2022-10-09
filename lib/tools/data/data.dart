@@ -26,4 +26,8 @@ class Data {
       Store(WeChatActions.user()).value = data;
     });
   }
+
+  static Future clearData() async {
+    Store(WeChatActions.user()).value = "";
+  }
 }

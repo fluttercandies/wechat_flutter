@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tencent_im_sdk_plugin/models/v2_tim_friend_application.dart';
+import 'package:tencent_im_sdk_plugin/models/v2_tim_user_full_info.dart';
+import 'package:wechat_flutter/im/im_handle/Im_api.dart';
 import 'package:wechat_flutter/im/im_handle/im_friend_api.dart';
 import 'package:wechat_flutter/pages/contacts/contact_system_page.dart';
 import 'package:wechat_flutter/pages/contacts/contacts_details_page.dart';
@@ -214,11 +216,15 @@ class _NewFriendPageState extends State<NewFriendPage> {
 
   /// 搜索好友
   Future search(String userName) async {
-    List<dynamic> dataMap = [];
-    Map map = dataMap[0];
-    if (strNoEmpty(map['allowType'])) {
-      Get.to(new AddFriendsDetails('search', map['identifier'], map['faceUrl'],
-          map['nickName'], map['gender']));
+    final List<V2TimUserFullInfo> data = await ImApi.getUsersInfo([userName]);
+    if (!listNoEmpty(data)) {
+      showToast(context, "未找到用户");
+      return;
+    }
+    V2TimUserFullInfo model = data[0];
+    if (strNoEmpty("${model?.allowType ?? ''}")) {
+      Get.to(new AddFriendsDetails(
+          'search', model.userID, model.faceUrl, model.nickName, model.gender));
     } else {
       isResult = true;
       setState(() {});
