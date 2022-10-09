@@ -1,13 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tencent_im_sdk_plugin/models/v2_tim_friend_application.dart';
+import 'package:wechat_flutter/im/im_handle/im_friend_api.dart';
+import 'package:wechat_flutter/pages/contacts/contacts_details_page.dart';
 import 'package:wechat_flutter/pages/more/add_friend_details.dart';
 import 'package:wechat_flutter/pages/more/add_friend_page.dart';
+import 'package:wechat_flutter/tools/app_config.dart';
+import 'package:wechat_flutter/tools/data/my_theme.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
+import 'package:wechat_flutter/ui/item/circle_item_widget.dart';
 import 'package:wechat_flutter/ui/orther/label_row.dart';
 import 'package:wechat_flutter/ui/view/list_tile_view.dart';
 import 'package:wechat_flutter/ui/view/search_main_view.dart';
 import 'package:wechat_flutter/ui/view/search_tile_view.dart';
+import 'package:wechat_flutter/ui_commom/data/no_data_view.dart';
 
 class NewFriendPage extends StatefulWidget {
   @override
@@ -21,8 +28,54 @@ class _NewFriendPageState extends State<NewFriendPage> {
 
   String currentUser;
 
+  List<V2TimFriendApplication> allData = [];
+  bool isLoadOk = false;
+
   FocusNode searchF = new FocusNode();
   TextEditingController searchC = new TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
+
+  Future getData() async {
+    allData = await ImFriendApi.getFriendApplicationList();
+
+    /// 模拟数据
+    allData.insert(
+      0,
+      V2TimFriendApplication(
+        userID: '12',
+        type: 0,
+        nickname: "昵称",
+        addTime:
+            DateTime.now().subtract(Duration(hours: 30)).millisecondsSinceEpoch,
+      ),
+    );
+
+    /// 处理数据
+    if (listNoEmpty(allData)) {
+      for (int i = 0; i < allData.length; i++) {
+        final int addTime = allData[i].addTime;
+        bool isNeedInsert = addTime <=
+            DateTime.now().subtract(Duration(days: 3)).millisecondsSinceEpoch ~/
+                1000;
+        if (isNeedInsert) {
+          allData.insert(
+              i, V2TimFriendApplication(userID: 'Three days ago', type: -1));
+          break;
+        }
+      }
+
+      allData.insert(
+          0, V2TimFriendApplication(userID: 'Nearly three days', type: -1));
+    }
+
+    isLoadOk = true;
+    if (mounted) setState(() {});
+  }
 
   Widget buildItem(item) {
     return new ListTileView(
@@ -31,6 +84,15 @@ class _NewFriendPageState extends State<NewFriendPage> {
           : Border(top: BorderSide(color: lineColor, width: 0.2)),
       title: item['title'],
       label: item['label'],
+    );
+  }
+
+  Widget titleWidget(String title) {
+    return Container(
+      width: winWidth(context),
+      padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+      color: Colors.grey.withOpacity(0.2),
+      child: Text(title),
     );
   }
 
@@ -52,7 +114,48 @@ class _NewFriendPageState extends State<NewFriendPage> {
               width: 25, fit: BoxFit.cover),
         ),
         label: '添加手机联系人',
-      )
+      ),
+
+      /// 不需要显示暂无数据模式
+      // if (!listNoEmpty(allData) && isLoadOk) NoDataView(),
+      ...List.generate(allData.length, (index) {
+        V2TimFriendApplication friendModel = allData[index];
+        if (friendModel.userID == "Nearly three days" &&
+            friendModel.type == -1) {
+          return titleWidget("近三天");
+        } else if (friendModel.userID == "Three days ago" &&
+            friendModel.type == -1) {
+          return titleWidget("三天前");
+        } else {
+          return CircleItemWidget(
+            type: 2,
+            imageUrl: friendModel?.faceUrl ?? AppConfig.mockCover,
+            title: friendModel?.nickname ?? "",
+            des: friendModel?.addWording ?? "",
+            onTap: () {
+              Get.to(ContactsDetailsPage(
+                  id: friendModel?.userID,
+                  title: friendModel?.nickname ?? "",
+                  avatar: friendModel?.faceUrl ?? AppConfig.mockCover));
+            },
+            endWidget: (friendModel?.type != 0)
+                ? Text("已添加")
+                : Container(
+                    alignment: Alignment.center,
+                    width: 45,
+                    padding: EdgeInsets.symmetric(vertical: 5),
+                    decoration: BoxDecoration(
+                      color: MyTheme.themeColor()[200],
+                      borderRadius: BorderRadius.all(Radius.circular(3)),
+                    ),
+                    child: Text(
+                      '查看',
+                      style: TextStyle(color: MyTheme.themeColor()),
+                    ),
+                  ),
+          );
+        }
+      })
     ];
 
     return new Column(children: content);
@@ -94,17 +197,6 @@ class _NewFriendPageState extends State<NewFriendPage> {
         )
       ];
     }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    getUser();
-  }
-
-  getUser() async {
-    // currentUser = await im.getCurrentLoginUser();
-    setState(() {});
   }
 
   unFocusMethod() {

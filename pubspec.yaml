@@ -118,6 +118,10 @@ dependencies:
   wechat_camera_picker: 3.6.1
   #扫码功能
   flutter_scankit: 1.2.4
+  #防止重复点击
+  just_throttle_it: 2.0.0
+  #通讯录
+  flutter_contacts: 1.1.4
 
 dev_dependencies:
   flutter_test:
