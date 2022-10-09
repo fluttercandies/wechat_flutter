@@ -383,7 +383,7 @@ class ImApi {
     String faceUrl,
     String selfSignature,
     String gender,
-    String allowType,
+    int allowType,
     String customInfo,
   }) async {
     // todo 设置基本信息只需填某个，未填的传原本的，或者不传
