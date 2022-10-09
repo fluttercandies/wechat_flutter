@@ -155,7 +155,7 @@ class ImMsgApi {
   /*
   * 获取Group历史消息
   * */
-  static Future<List<V2TimMessage>> getGroupHistoryMessageList(String groupID,
+  static Future<V2TimValueCallback<List<V2TimMessage>>> getGroupHistoryMessageList(String groupID,
       {String lastMsgID, int count = 20}) async {
     V2TimValueCallback<List<V2TimMessage>> res = await TencentImSDKPlugin
         .v2TIMManager
@@ -166,7 +166,7 @@ class ImMsgApi {
           lastMsgID: lastMsgID,
         );
     ImApi.imPrint(res.toJson(), "获取Group历史消息");
-    return res.data;
+    return res;
   }
 
   /*

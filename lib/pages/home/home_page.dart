@@ -171,19 +171,20 @@ class _HomePageState extends State<HomePage>
           itemBuilder: (BuildContext context, int index) {
             V2TimConversation model = _chatData[index];
 
+            final String id = model.type == 2 ? model.groupID : model.userID;
             return InkWell(
               onTap: () {
                 Get.to(new ChatPage(
-                    id: model.userID, title: model.showName, type: model.type));
+                    id: id, title: model.showName, type: model.type));
               },
               onTapDown: (TapDownDetails details) {
                 tapPos = details.globalPosition;
               },
               onLongPress: () {
                 if (Platform.isAndroid) {
-                  _showMenu(context, tapPos, model.type, model.userID);
+                  _showMenu(context, tapPos, model.type, id);
                 } else {
-                  debugPrint("IOS聊天长按选项功能开发中");
+                  debugPrint("IOS聊天是左右滑动切换的");
                 }
               },
               child: new MyConversationView(
@@ -191,7 +192,7 @@ class _HomePageState extends State<HomePage>
                 title: model?.showName ?? '',
                 content: model?.lastMessage,
                 time: timeView(model?.lastMessage?.timestamp ?? 0),
-                isBorder: model?.showName != _chatData[0].userID,
+                isBorder: model?.showName != id,
               ),
             );
           },

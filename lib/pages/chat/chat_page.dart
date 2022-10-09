@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tencent_im_sdk_plugin/models/v2_tim_message.dart';
 import 'package:tencent_im_sdk_plugin/models/v2_tim_text_elem.dart';
+import 'package:tencent_im_sdk_plugin/models/v2_tim_value_callback.dart';
 import 'package:wechat_flutter/im/im_handle/im_msg_api.dart';
+import 'package:wechat_flutter/im/util/im_response_tip_util.dart';
 import 'package:wechat_flutter/pages/chat/chat_more_page.dart';
 import 'package:wechat_flutter/pages/group/group_details_page.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
@@ -75,7 +77,17 @@ class _ChatPageState extends State<ChatPage> {
       // ImMsgApi.getHistoryMessageList(
       //     userID: widget.id, lastMsgID: lastMsgID); //
     } else {
-      // ImMsgApi.getGroupHistoryMessageList(groupID)
+      V2TimValueCallback<List<V2TimMessage>> result =
+          await ImMsgApi.getGroupHistoryMessageList(widget.id ?? widget.title);
+
+      if (result.code != 200 && result.code != 0) {
+        showToast(context, ImResponseTipUtil.getInfoOResultCode(result.code));
+        return;
+      }
+
+      chatData = result.data;
+
+      lastMsgID = chatData.last.msgID;
     }
     // chatData.clear();
     // chatData..addAll(listChat.reversed);

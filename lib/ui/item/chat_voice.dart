@@ -1,4 +1,5 @@
 import 'dart:async';
+// import 'package:flutter_sound/flutter_sound.dart';
 import 'package:wechat_flutter/tools/date.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'package:wechat_flutter/ui/dialog/voice_dialog.dart';
@@ -26,56 +27,57 @@ class _ChatVoiceWidgetState extends State<ChatVoice> {
   String toastShow = "手指上滑,取消发送";
   String voiceIco = "images/voice_volume_1.png";
 
-  // StreamSubscription _recorderSubscription;
-  // StreamSubscription _dbPeakSubscription;
+  StreamSubscription _recorderSubscription;
+  StreamSubscription _dbPeakSubscription;
 
   ///默认隐藏状态
   bool voiceState = true;
   OverlayEntry overlayEntry;
-  // FlutterSound flutterSound;
+  // FlutterSoundRecorder flutterSound = FlutterSoundRecorder();
 
   @override
   void initState() {
     super.initState();
-    // flutterSound = new FlutterSound();
-    // flutterSound.setSubscriptionDuration(0.01);
-    // flutterSound.setDbPeakLevelUpdate(0.8);
+    // flutterSound.openRecorder();
+    // flutterSound.setSubscriptionDuration(Duration(milliseconds: 100));
+    // flutterSound.thePlayer.setDbPeakLevelUpdate(0.8);
     // flutterSound.setDbLevelEnabled(true);
     initializeDateFormatting();
   }
 
   void start() async {
     print('开始拉。当前路径');
-    showToast(context, "正在兼容最新flutter");
-    // try {
-    //   String path = await flutterSound
-    //       .startRecorder(Platform.isIOS ? 'ios.m4a' : 'android.mp4');
-    //   widget.voiceFile(path);
-    //   _recorderSubscription =
-    //       flutterSound.onRecorderStateChanged.listen((e) {});
-    // } catch (err) {
-    //   RecorderRunningException e = err;
-    //   showToast(context, 'startRecorder error: ${e.message}');
-    // }
+    try {
+      // await flutterSound.startRecorder(
+      //     toFile: Platform.isIOS ? 'ios.m4a' : 'android.mp4');
+      // widget.voiceFile(path);
+      // _recorderSubscription =
+      //     flutterSound.onRecorderStateChanged.listen((e) {});
+    } catch (err) {
+      // RecorderRunningException e = err;
+      print("startRecorder errorLLL${err.toString()}");
+      showToast(context, 'startRecorder error: ${err.toString()}');
+    }
   }
 
   void stop() async {
-    // try {
-    //   String result = await flutterSound.stopRecorder();
-    //   print('stopRecorder: $result');
-    //
-    //   if (_recorderSubscription != null) {
-    //     _recorderSubscription.cancel();
-    //     _recorderSubscription = null;
-    //   }
-    //   if (_dbPeakSubscription != null) {
-    //     _dbPeakSubscription.cancel();
-    //     _dbPeakSubscription = null;
-    //   }
-    // } catch (err) {
-    //   RecorderStoppedException e = err;
-    //   showToast(context, 'stopRecorder error: ${e.message}');
-    // }
+    try {
+      // String result = await flutterSound.stopRecorder();
+      // print('stopRecorder: $result');
+
+      if (_recorderSubscription != null) {
+        _recorderSubscription.cancel();
+        _recorderSubscription = null;
+      }
+      if (_dbPeakSubscription != null) {
+        _dbPeakSubscription.cancel();
+        _dbPeakSubscription = null;
+      }
+    } catch (err) {
+      // RecorderStoppedException e = err;
+      print('stopRecorder error: ${err.toString()}');
+      showToast(context, 'stopRecorder error: ${err.toString()}');
+    }
   }
 
   showVoiceView() {
@@ -90,6 +92,7 @@ class _ChatVoiceWidgetState extends State<ChatVoice> {
       String recordingTime =
           DateTimeForMater.formatDateV(current, format: "ss:SS");
       index = int.parse(recordingTime.toString().substring(3, 5));
+      print("indexindexindex::$index");
     });
 
     start();
@@ -157,5 +160,11 @@ class _ChatVoiceWidgetState extends State<ChatVoice> {
         child: Text(textShow),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    // flutterSound.closeRecorder();
   }
 }

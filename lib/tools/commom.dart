@@ -1,5 +1,3 @@
-
-
 /*
 * 屏幕适配
 * SizeConfig().init(context); 初始化
@@ -18,7 +16,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-// import 'package:flutter_image_compress/flutter_image_compress.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
 
 class SizeConfig {
   static MediaQueryData _mediaQueryData;
@@ -48,7 +46,6 @@ class SizeConfig {
   }
 }
 
-
 Future<File> singleCompressFile(File file) async {
   return file;
 //  try {
@@ -64,19 +61,19 @@ Future<File> singleCompressFile(File file) async {
 //  }
 }
 
-// Future<List<int>> compressFile(File file) async {
-//   try {
-//     var result = await FlutterImageCompress.compressWithFile(
-//       file.absolute.path,
-//       minWidth: 200,
-//       minHeight: 300,
-//       quality: 80,
-//     );
-//     print(file.lengthSync());
-//     print(result.length);
-//     return result;
-//   } catch (e) {
-//     print('e => ${e.toString()}');
-//     return null;
-//   }
-// }
+Future<List<int>> compressFile(File file) async {
+  try {
+    var result = await FlutterImageCompress.compressWithFile(
+      file.absolute.path,
+      minWidth: 200,
+      minHeight: 300,
+      quality: 80,
+    );
+    print(file.lengthSync());
+    print(result.length);
+    return result;
+  } catch (e) {
+    print('e => ${e.toString()}');
+    return null;
+  }
+}

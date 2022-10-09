@@ -8,6 +8,8 @@ class ImResponseTipUtil {
       return "对方的好友数已达系统上限";
     } else if (code == 30539) {
       return "等待对方通过好友申请";
+    } else if (code == 10015) {
+      return "群组不存在或已经被解散。";
     } else if (code == -1) {
       return "不能申请添加自己为好友";
     } else {

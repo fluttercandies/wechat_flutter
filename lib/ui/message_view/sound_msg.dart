@@ -1,4 +1,6 @@
+// import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+// import 'package:flutter_sound/flutter_sound.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:provider/provider.dart';
 import 'package:tencent_im_sdk_plugin/models/v2_tim_message.dart';
@@ -35,9 +37,9 @@ class _SoundMsgState extends State<SoundMsg> with TickerProviderStateMixin {
   void initState() {
     super.initState();
     // flutterSound = new FlutterSound();
-    // flutterSound.setSubscriptionDuration(0.01);
-    // flutterSound.setDbPeakLevelUpdate(0.8);
-    // flutterSound.setDbLevelEnabled(true);
+    // flutterSound.thePlayer.setSubscriptionDuration(Duration(milliseconds: 100));
+    // flutterSound.thePlayer.setDbPeakLevelUpdate(0.8);
+    // flutterSound.thePlayer.setDbLevelEnabled(true);
     initializeDateFormatting();
     initAudioPlayer();
   }
@@ -57,57 +59,56 @@ class _SoundMsgState extends State<SoundMsg> with TickerProviderStateMixin {
           controller.forward();
         }
       });
-//
-//    _audioPlayerStateSubscription =
-//        flutterSound.onPlayerStateChanged.listen((s) {
-//      if (s != null) {
-//      } else {
-//        controller.reset();
-//        setState(() {
-//          position = duration;
-//        });
-//      }
-//    }, onError: (msg) {
-//      setState(() {
-//        duration = new Duration(seconds: 0);
-//        position = new Duration(seconds: 0);
-//      });
-//    });
+
+    // _audioPlayerStateSubscription =
+    //     flutterSound.onPlayerStateChanged.listen((s) {
+    //   if (s != null) {
+    //   } else {
+    //     controller.reset();
+    //     setState(() {
+    //       position = duration;
+    //     });
+    //   }
+    // }, onError: (msg) {
+    //   setState(() {
+    //     duration = new Duration(seconds: 0);
+    //     position = new Duration(seconds: 0);
+    //   });
+    // });
   }
 
   void start(String path) async {
-    showToast(context, "正在兼容最新flutter");
-    // try {
-    //   controller.forward();
-    //   await flutterSound.startPlayer(path);
-    //   await flutterSound.setVolume(1.0);
-    //   debugPrint('startPlayer: $path');
-    //
-    //   _playerSubscription = flutterSound.onPlayerStateChanged.listen((e) {
-    //     if (e != null) {
-    //       sliderCurrentPosition = e.currentPosition;
-    //       maxDuration = e.duration;
-    //
-    //       DateTime date = new DateTime.fromMillisecondsSinceEpoch(
-    //           e.currentPosition.toInt(),
-    //           isUtc: true);
-    //       String txt = DateFormat('mm:ss:SS', 'en_GB').format(date);
-    //
-    //       print(txt.substring(0, 8).toString());
-    //     }
-    //   });
-    // } catch (err) {
-    //   print('error: $err');
-    // }
+    try {
+      controller.forward();
+      // await flutterSound.thePlayer.startPlayer(fromURI: path);
+      // await flutterSound.thePlayer.setVolume(1.0);
+      // debugPrint('startPlayer: $path');
+
+      // _playerSubscription = flutterSound.thePlayer.onPlayerStateChanged.listen((e) {
+      //   if (e != null) {
+      //     sliderCurrentPosition = e.currentPosition;
+      //     maxDuration = e.duration;
+      //
+      //     DateTime date = new DateTime.fromMillisecondsSinceEpoch(
+      //         e.currentPosition.toInt(),
+      //         isUtc: true);
+      //     String txt = DateFormat('mm:ss:SS', 'en_GB').format(date);
+      //
+      //     print(txt.substring(0, 8).toString());
+      //   }
+      // });
+    } catch (err) {
+      print('error: $err');
+    }
   }
 
   playNew(url) async {
-    // int result = await audioPlayer.play(url);
-    // if (result == 1) {
-    //   showToast(context, '播放中');
-    // } else {
-    //   showToast(context, '播放出问题了');
-    // }
+    try {
+      // await audioPlayer.play(url);
+      showToast(context, '播放中');
+    } catch (e) {
+      showToast(context, '播放出问题了');
+    }
   }
 
   @override
