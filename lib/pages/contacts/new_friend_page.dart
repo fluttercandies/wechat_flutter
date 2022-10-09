@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tencent_im_sdk_plugin/models/v2_tim_friend_application.dart';
 import 'package:wechat_flutter/im/im_handle/im_friend_api.dart';
+import 'package:wechat_flutter/pages/contacts/contact_system_page.dart';
 import 'package:wechat_flutter/pages/contacts/contacts_details_page.dart';
 import 'package:wechat_flutter/pages/more/add_friend_details.dart';
 import 'package:wechat_flutter/pages/more/add_friend_page.dart';
 import 'package:wechat_flutter/tools/app_config.dart';
 import 'package:wechat_flutter/tools/data/my_theme.dart';
+import 'package:wechat_flutter/tools/func/func.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'package:wechat_flutter/ui/item/circle_item_widget.dart';
 import 'package:wechat_flutter/ui/orther/label_row.dart';
@@ -15,6 +17,7 @@ import 'package:wechat_flutter/ui/view/list_tile_view.dart';
 import 'package:wechat_flutter/ui/view/search_main_view.dart';
 import 'package:wechat_flutter/ui/view/search_tile_view.dart';
 import 'package:wechat_flutter/ui_commom/data/no_data_view.dart';
+import 'package:wechat_flutter/ui_commom/image/sw_image.dart';
 
 class NewFriendPage extends StatefulWidget {
   @override
@@ -114,6 +117,9 @@ class _NewFriendPageState extends State<NewFriendPage> {
               width: 25, fit: BoxFit.cover),
         ),
         label: '添加手机联系人',
+        onPressed: () {
+          Get.to(ContactSystemPage());
+        },
       ),
 
       /// 不需要显示暂无数据模式
@@ -298,6 +304,150 @@ class _NewFriendPageState extends State<NewFriendPage> {
         }
         return;
       },
+    );
+  }
+}
+
+class SearchMainViewNew extends StatefulWidget {
+  final TextEditingController controller;
+  final Function(bool hasFocus) onCallFocus;
+  final ValueChanged<String> onChanged;
+  final Color color;
+  final GestureTapCallback onTap;
+  final String hintText;
+  final ValueChanged<String> onSubmitted;
+
+  const SearchMainViewNew(
+      {@required this.controller,
+      @required this.onCallFocus,
+      @required this.onChanged,
+      this.onSubmitted,
+      this.color,
+      this.onTap,
+      this.hintText,
+      Key key})
+      : super(key: key);
+
+  @override
+  State<SearchMainViewNew> createState() => _SearchMainViewNewState();
+}
+
+class _SearchMainViewNewState extends State<SearchMainViewNew> {
+  bool isSearch = false;
+
+  FocusNode focusNode = FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+
+    focusNode.addListener(() {
+      if (!focusNode.hasFocus) {
+        isSearch = false;
+        setState(() {});
+      } else {
+        if (!isSearch) {
+          isSearch = true;
+          setState(() {});
+        }
+      }
+      widget.onCallFocus.call(focusNode.hasFocus);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    TextStyle hintStyle = TextStyle(color: Colors.grey, fontSize: 15);
+    String hintText = widget.hintText ?? "搜索";
+    return MyInkWell(
+      child: Row(
+        children: [
+          Expanded(
+            child: Container(
+              margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+              height: 35,
+              decoration: BoxDecoration(
+                  color: widget.color == null ? Colors.white : widget.color,
+                  borderRadius: BorderRadius.all(Radius.circular(5))),
+              alignment: Alignment.center,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Space(width: 5),
+                  SwImage(
+                    'assets/images/contact/ic_search_long.png',
+                    color: Colors.grey,
+                    width: 20,
+                  ),
+                  Space(width: 5),
+                  if (isSearch)
+                    Expanded(
+                      child: TextField(
+                        autofocus: true,
+                        expands: true,
+                        maxLines: null,
+                        focusNode: focusNode,
+                        controller: widget.controller,
+                        textInputAction: TextInputAction.search,
+                        onSubmitted: widget.onSubmitted,
+                        decoration: InputDecoration(
+                          hintStyle: hintStyle,
+                          hintText: hintText,
+                          border: InputBorder.none,
+                          contentPadding: EdgeInsets.symmetric(vertical: 5),
+                        ),
+                        onChanged: (value) {
+                          if (mounted) setState(() {});
+                          widget.onChanged(value);
+                        },
+                      ),
+                    )
+                  else
+                    Text(
+                      hintText,
+                      style: hintStyle,
+                    ),
+                  () {
+                    if (!strNoEmpty(widget.controller?.text) || !isSearch) {
+                      return Container();
+                    }
+                    return SwImage(
+                      'images/main/ic_delete.webp',
+                      width: 15,
+                      margin: EdgeInsets.symmetric(horizontal: 10, vertical: 3),
+                      onTap: () {
+                        widget.controller.text = "";
+                        setState(() {});
+
+                        widget.onChanged("");
+                      },
+                    );
+                  }()
+                ],
+              ),
+            ),
+          ),
+          if (isSearch)
+            TextButton(
+              style: ButtonStyle(
+                shadowColor: MaterialStateProperty.all(Colors.transparent),
+                overlayColor: MaterialStateProperty.all(Colors.transparent),
+                backgroundColor: MaterialStateProperty.all(Colors.transparent),
+              ),
+              onPressed: () {
+                focusNode.unfocus();
+              },
+              child: Text('取消'),
+            )
+        ],
+      ),
+      onTap: widget.onTap ??
+          () {
+            isSearch = true;
+            focusNode.requestFocus();
+            setState(() {});
+          },
     );
   }
 }

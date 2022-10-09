@@ -215,6 +215,7 @@ flutter:
     - assets/images/contact/ic_scanqr.webp
     - assets/images/contact/ic_search_wework.webp
     - assets/images/contact/ic_contact_add.webp
+    - assets/images/contact/ic_search_long.png
 
     - assets/images/discover/ff_Icon_album.webp
     - assets/images/discover/ff_Icon_shake.webp
