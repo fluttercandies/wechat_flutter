@@ -1,13 +1,22 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tencent_im_sdk_plugin/enum/group_member_role_enum.dart';
+import 'package:tencent_im_sdk_plugin/models/v2_tim_friend_info.dart';
+import 'package:tencent_im_sdk_plugin/models/v2_tim_group_member.dart';
+import 'package:tencent_im_sdk_plugin/models/v2_tim_user_full_info.dart';
 import 'package:wechat_flutter/config/dictionary.dart';
+import 'package:wechat_flutter/im/im_handle/Im_api.dart';
+import 'package:wechat_flutter/im/im_handle/im_friend_api.dart';
+import 'package:wechat_flutter/im/im_handle/im_group_api.dart';
 import 'package:wechat_flutter/im/model/contacts.dart';
-import 'package:wechat_flutter/pages/more/add_friend_details.dart';
-import 'package:wechat_flutter/tools/wechat_flutter.dart';
+import 'package:wechat_flutter/tools/im/im_info_util.dart';
 import 'package:wechat_flutter/ui/item/contact_item.dart';
 import 'package:wechat_flutter/ui/item/contact_view.dart';
 import 'package:wechat_flutter/ui/item/launch_group.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:wechat_flutter/tools/wechat_flutter.dart';
+import 'dart:convert';
+import 'package:wechat_flutter/pages/more/add_friend_details.dart';
 
 class GroupLaunchPage extends StatefulWidget {
   @override
@@ -55,7 +64,10 @@ class _GroupLaunchPageState extends State<GroupLaunchPage> {
   }
 
   Future getContacts() async {
-    List<Contact> listContact = [];
+    final List<V2TimFriendInfo> listFriendInfo =
+        await ImFriendApi.getFriendList();
+    List<Contact> listContact =
+        ImInfoUtil.friendListToContactList(listFriendInfo);
     _contacts.clear();
     _contacts..addAll(listContact);
     _contacts
@@ -79,16 +91,16 @@ class _GroupLaunchPageState extends State<GroupLaunchPage> {
 
   // 搜索好友
   Future search(String userName) async {
-    List<dynamic> dataMap = [];
-    if (strNoEmpty(dataMap[0]['allowType'])) {
+    final List<V2TimUserFullInfo> data = await ImApi.getUsersInfo([userName]);
+    if (!listNoEmpty(data)) {
+      showToast(context, "未找到用户");
+      return;
+    }
+    V2TimUserFullInfo model = data[0];
+    if (strNoEmpty("${model?.allowType ?? ""}")) {
       Get.to(
-        new AddFriendsDetails(
-          'search',
-          dataMap[0]['identifier'],
-          dataMap[0]['faceUrl'],
-          dataMap[0]['nickName'],
-          dataMap[0]['gender'],
-        ),
+        new AddFriendsDetails('search', model?.userID, model?.faceUrl,
+            model?.nickName, model?.gender),
       );
     } else {
       isResult = true;
@@ -126,14 +138,22 @@ class _GroupLaunchPageState extends State<GroupLaunchPage> {
       width: 45.0,
       margin: EdgeInsets.all(10.0),
       radius: 4.0,
-      onTap: () {
-        if (Platform.isIOS) {
-          showToast(context, 'IOS暂不支持发起群聊');
-          return;
-        }
-        showToast(context, '创建群组成功');
-        if (Navigator.of(context).canPop()) {
-          Navigator.of(context).pop();
+      onTap: () async {
+        final callBack = await ImGroupApi.createGroupV2(selectData.join(),
+            memberList: selectData.map((e) {
+              GroupMemberRoleTypeEnum role = e == Data.user()
+                  ? GroupMemberRoleTypeEnum.V2TIM_GROUP_MEMBER_ROLE_OWNER
+                  : GroupMemberRoleTypeEnum.V2TIM_GROUP_MEMBER_ROLE_MEMBER;
+              return V2TimGroupMember(role: role, userID: e);
+            }).toList());
+
+        if (callBack.desc.toString().contains('succ')) {
+          showToast(context, '创建群组成功');
+          if (Navigator.of(context).canPop()) {
+            Navigator.of(context).pop();
+          }
+        } else {
+          showToast(context, callBack.desc);
         }
       },
     );

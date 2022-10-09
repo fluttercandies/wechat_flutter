@@ -4,6 +4,7 @@ import 'package:tencent_im_sdk_plugin/models/v2_tim_friend_info.dart';
 import 'package:wechat_flutter/config/dictionary.dart';
 import 'package:wechat_flutter/im/im_handle/im_friend_api.dart';
 import 'package:wechat_flutter/im/model/contacts.dart';
+import 'package:wechat_flutter/tools/im/im_info_util.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'package:wechat_flutter/ui/item/contact_item.dart';
 import 'package:wechat_flutter/ui/item/contact_view.dart';
@@ -33,24 +34,7 @@ class _ContactsPageState extends State<ContactsPage>
 
   Future getContacts() async {
     List<V2TimFriendInfo> listFriendInfo = await ImFriendApi.getFriendList();
-    List<Contact> listContact = listFriendInfo?.map((e) {
-          final String showName = strNoEmpty(e?.friendRemark)
-              ? e?.friendRemark
-              : strNoEmpty(e.userProfile.nickName)
-                  ? e.userProfile.nickName
-                  : e.userID;
-
-          String pinyin = PinyinHelper.getFirstWordPinyin(
-              strNoEmpty(showName) ? showName : "");
-          String tag =
-              strNoEmpty(pinyin) ? pinyin.substring(0, 1).toUpperCase() : "#";
-          return Contact(
-            nameIndex: tag,
-            showName: showName,
-            info: e,
-          );
-        })?.toList() ??
-        [];
+    List<Contact> listContact = ImInfoUtil.friendListToContactList(listFriendInfo);
     _contacts.clear();
     _contacts..addAll(listContact);
     _contacts

@@ -19,7 +19,7 @@ class ImGroupApi {
   /*
   * 高级创建群
   * */
-  static Future<String> createGroupV2(
+  static Future<V2TimValueCallback<String>> createGroupV2(
     String groupName, {
     String groupID,
     List<V2TimGroupMember> memberList,
@@ -37,7 +37,7 @@ class ImGroupApi {
               memberList: memberList,
             );
     ImApi.imPrint(res.toJson(), "创建群");
-    return res.data;
+    return res;
   }
 
   /*
