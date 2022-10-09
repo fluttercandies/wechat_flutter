@@ -5,11 +5,10 @@ class GroupBillBoardPage extends StatefulWidget {
   final String groupOwner;
   final String groupNotice;
   final String groupId;
-  final String time;
   final Callback callback;
 
   GroupBillBoardPage(this.groupOwner, this.groupNotice,
-      {this.groupId, this.time, this.callback});
+      {this.groupId, this.callback});
 
   @override
   _GroupBillBoardPageState createState() => _GroupBillBoardPageState();
@@ -32,13 +31,6 @@ class _GroupBillBoardPageState extends State<GroupBillBoardPage> {
 
   onChange() {
     if (inputState) {
-      _publishTime = '${DateTime.now().year}-' +
-          '${DateTime.now().month}-' +
-          '${DateTime.now().day} ' +
-          '${DateTime.now().hour}:' +
-          '${DateTime.now().minute}';
-      debugPrint('发布时间>>>>> $_publishTime');
-      widget.callback(_publishTime);
       Navigator.pop(context, _textController.text);
       inputState = false;
     } else {
