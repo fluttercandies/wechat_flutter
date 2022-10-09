@@ -102,7 +102,7 @@ class _AddFriendPageState extends State<AddFriendPage> {
             new InkWell(
               child: new Image.asset('assets/images/mine/ic_small_code.png',
                   color: mainTextColor.withOpacity(0.7)),
-              onTap: () => Get.to(new CodePage()),
+              onTap: () => Get.to(new CodePage(id: model.account)),
             )
           ],
         ),

@@ -22,7 +22,7 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
 
   action(v) {
     if (v == '二维码名片') {
-      Get.to(new CodePage());
+      Get.to(new CodePage(id: Data.user()));
     } else {
       print(v);
     }

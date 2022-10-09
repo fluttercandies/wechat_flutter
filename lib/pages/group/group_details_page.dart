@@ -118,8 +118,8 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
     return new SizedBox(
       width: (winWidth(context) - 60) / 5,
       child: FlatButton(
-        onPressed: () => Get.to(
-            GroupMemberDetails(Data.user() == item.userID, item.userID)),
+        onPressed: () =>
+            Get.to(GroupMemberDetails(Data.user() == item.userID, item.userID)),
         padding: EdgeInsets.all(0),
         highlightColor: Colors.transparent,
         child: Column(
@@ -128,18 +128,18 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
               borderRadius: BorderRadius.all(Radius.circular(5)),
               child: !strNoEmpty(item.faceUrl)
                   ? new Image.asset(
-                defIcon,
-                height: 48.0,
-                width: 48.0,
-                fit: BoxFit.cover,
-              )
+                      defIcon,
+                      height: 48.0,
+                      width: 48.0,
+                      fit: BoxFit.cover,
+                    )
                   : CachedNetworkImage(
-                imageUrl: item.faceUrl,
-                height: 48.0,
-                width: 48.0,
-                cacheManager: cacheManager,
-                fit: BoxFit.cover,
-              ),
+                      imageUrl: item.faceUrl,
+                      height: 48.0,
+                      width: 48.0,
+                      cacheManager: cacheManager,
+                      fit: BoxFit.cover,
+                    ),
             ),
             SizedBox(height: 2),
             Container(
@@ -338,7 +338,7 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
         });
         break;
       case '群二维码':
-        Get.to(new CodePage(true));
+        Get.to(new CodePage(isGroup: true, id: dataGroupInfo.groupID));
         break;
       case '群公告':
         Get.to(

@@ -1,3 +1,5 @@
+import 'package:qr_flutter/qr_flutter.dart';
+import 'package:wechat_flutter/tools/data/qr_data.dart';
 import 'package:wechat_flutter/ui/dialog/code_dialog.dart';
 import 'package:flutter/material.dart';
 
@@ -5,8 +7,9 @@ import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
 class CodePage extends StatefulWidget {
   final bool isGroup;
+  final String id;
 
-  CodePage([this.isGroup = false]);
+  CodePage({this.isGroup = false, @required this.id});
 
   @override
   _CodePageState createState() => _CodePageState();
@@ -18,6 +21,9 @@ class _CodePageState extends State<CodePage> {
 
   @override
   Widget build(BuildContext context) {
+    DateTime dt = DateTime.now().add(Duration(days: 7));
+    final String dtStr = "${dt.month}月${dt.day}";
+
     var rWidget = [
       new SizedBox(
         width: 60,
@@ -41,10 +47,11 @@ class _CodePageState extends State<CodePage> {
           borderRadius: BorderRadius.all(Radius.circular(4.0)),
         ),
         child: new Padding(
-          padding: EdgeInsets.all(20.0),
+          padding: EdgeInsets.symmetric(vertical: 20.0),
           child: new Column(
             children: <Widget>[
-              new SizedBox(
+              new Container(
+                padding: EdgeInsets.symmetric(horizontal: 20.0),
                 width: winWidth(context) - 40.0,
                 child: new CardPerson(
                   name: 'CrazyQ1',
@@ -53,21 +60,20 @@ class _CodePageState extends State<CodePage> {
                   groupName: widget.isGroup ? 'wechat_flutter 101号群' : null,
                 ),
               ),
-              new Space(width: mainSpace),
               new Container(
                 padding: EdgeInsets.symmetric(
-                  horizontal: !widget.isGroup ? 0 : 20,
-                  vertical: !widget.isGroup ? 0 : 20,
+                  horizontal: 20,
+                  vertical: 20,
                 ),
-                child: new CachedNetworkImage(
-                  imageUrl: widget.isGroup ? download : myCode,
-                  fit: BoxFit.cover,
-                  width: winWidth(context) - 40,
+                alignment: Alignment.center,
+                child: QrImage(
+                  data: QrData.generateData(widget.isGroup, widget.id),
+                  version: QrVersions.auto,
+                  size: winWidth(context) - 110,
                 ),
               ),
-              new Space(height: mainSpace * 2),
               new Text(
-                '${widget.isGroup ? '该二维码7天内(7月1日前)有效，重新进入将更新' : '扫一扫上面的二维码图案，加我微信'}',
+                '${widget.isGroup ? '该二维码7天内($dtStr前)有效，重新进入将更新' : '扫一扫上面的二维码图案，加我微信'}',
                 style: TextStyle(color: mainTextColor),
               ),
             ],
