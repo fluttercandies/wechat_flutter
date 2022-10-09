@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tencent_im_sdk_plugin/models/v2_tim_group_info.dart';
+import 'package:wechat_flutter/im/im_handle/im_group_api.dart';
 import 'package:wechat_flutter/pages/chat/chat_page.dart';
 import 'package:wechat_flutter/pages/contacts/group_launch_page.dart';
 import 'package:wechat_flutter/pages/home/search_page.dart';
+
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
 class GroupListPage extends StatefulWidget {
@@ -11,7 +14,7 @@ class GroupListPage extends StatefulWidget {
 }
 
 class _GroupListPageState extends State<GroupListPage> {
-  List _groupList = new List();
+  List<V2TimGroupInfo> _groupList = [];
 
   @override
   void initState() {
@@ -24,16 +27,14 @@ class _GroupListPageState extends State<GroupListPage> {
 
   // 获取群聊列表
   Future _getGroupListModel() async {
-    setState(() {
-      _groupList = List.generate(12, (index) {
-        return {"groupName": "群呀不$index"};
-      });
-    });
+    final List<V2TimGroupInfo> result = await ImGroupApi.getJoinedGroupList();
+    _groupList = result;
+    setState(() {});
   }
 
   Widget groupItem(BuildContext context, String gName, String gId,
       String gFaceURL, String title) {
-    return FlatButton(
+    return TextButton(
       onPressed: () {
         Get.to(ChatPage(
           title: gName,
@@ -61,7 +62,10 @@ class _GroupListPageState extends State<GroupListPage> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(gName),
+                  Text(
+                    gName,
+                    style: TextStyle(color: Colors.black),
+                  ),
                   // 群聊Id
 //                        Text(
 //                          gId,
@@ -112,12 +116,12 @@ class _GroupListPageState extends State<GroupListPage> {
                     _groupList.length > 0
                         ? groupItem(
                             context,
-                            _groupList[index]['groupName'] ?? '',
-                            _groupList[index]['groupId'] ?? '',
-                            !strNoEmpty(_groupList[index]['getFaceUrl'])
+                            _groupList[index].groupName ?? '',
+                            _groupList[index].groupID ?? '',
+                            !strNoEmpty(_groupList[index].faceUrl)
                                 ? defGroupAvatar
-                                : _groupList[index]['getFaceUrl'],
-                            _groupList[index]['groupId'] ?? '',
+                                : _groupList[index].faceUrl,
+                            _groupList[index].groupID ?? '',
                           )
                         : SizedBox(height: 1),
                   ],
