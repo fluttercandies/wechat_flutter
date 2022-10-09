@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:photo_manager/photo_manager.dart';
+import 'package:tencent_im_sdk_plugin/models/v2_tim_message.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
+import 'package:wechat_flutter/im/im_handle/im_msg_api.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'package:wechat_flutter/ui/card/more_item_card.dart';
 import 'package:wechat_camera_picker/wechat_camera_picker.dart';
@@ -49,7 +51,14 @@ class _ChatMorePageState extends State<ChatMorePage> {
         ),
       ).then((List<AssetEntity> result) {
         result.forEach((AssetEntity element) async {
+          await ImMsgApi.sendImageMessage(
+            (await element.file).path,
+            receiver: widget.type == 1 ? widget.id : null,
+            groupID: widget.type != 1 ? widget.id : null,
+          );
+          // if (v == null) return;
           Notice.send(WeChatActions.msg(), '');
+          // element.file;
         });
       });
     } else if (name == '拍摄') {

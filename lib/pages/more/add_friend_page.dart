@@ -2,7 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+import 'package:tencent_im_sdk_plugin/manager/v2_tim_manager.dart';
+import 'package:tencent_im_sdk_plugin/models/v2_tim_user_full_info.dart';
 import 'package:wechat_flutter/im/entity/person_info_entity.dart';
+import 'package:wechat_flutter/im/im_handle/Im_api.dart';
 import 'package:wechat_flutter/pages/mine/code_page.dart';
 import 'package:wechat_flutter/pages/more/add_friend_details.dart';
 import 'package:wechat_flutter/pages/root/user_page.dart';
@@ -168,24 +171,21 @@ class _AddFriendPageState extends State<AddFriendPage> {
 
   // 搜索好友
   Future search(String userName) async {
-    List<dynamic> dataMap = [];
+    final List<V2TimUserFullInfo> userInfoList =
+        await ImApi.getUsersInfo([userName]);
     setState(() {
-      if (Platform.isIOS) {
-        // IPersonInfoEntity model = IPersonInfoEntity.fromJson(dataMap[0]);
-        // if (strNoEmpty(model.allowType.toString())) {
-        //   Get.to(new AddFriendsDetails('search', model.identifier,
-        //       model.faceURL, model.nickname, model.gender));
-        // } else {
-        //   isResult = true;
-        // }
+      /// 获取用户信息失败了
+      if (!listNoEmpty(userInfoList)) {
+        isResult = true;
+        return;
+      }
+
+      V2TimUserFullInfo model = userInfoList[0];
+      if (model.allowType != null) {
+        Get.to(new AddFriendsDetails('search', model.userID, model.faceUrl,
+            model.nickName, model.gender));
       } else {
-        PersonInfoEntity model = PersonInfoEntity.fromJson(dataMap[0]);
-        if (strNoEmpty(model.allowType)) {
-          Get.to(new AddFriendsDetails('search', model.identifier,
-              model.faceUrl, model.nickName, model.gender));
-        } else {
-          isResult = true;
-        }
+        isResult = true;
       }
     });
   }
