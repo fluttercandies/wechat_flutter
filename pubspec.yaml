@@ -51,15 +51,15 @@ dependencies:
   #获取包信息
   package_info_plus: 1.4.2
   #音频处理
-#  flutter_sound: ^9.1.7 # flutter 2.10用这个
+  flutter_sound: 9.2.13
   #权限处理
   permission_handler: 9.2.0
   #音频处理
-#  audioplayers: ^0.20.1 #flutter 2.10用这个
+  audioplayers: 1.1.1
   #视频播放
-#  video_player: ^2.3.0 #flutter 2.10用这个
+  video_player: 2.4.7
   #图片压缩
-#  flutter_image_compress: ^1.1.0 # flutter 2.10用这个
+  flutter_image_compress: 1.1.3
   #拼音
   lpinyin: 2.0.3
   #特殊列表滑动
