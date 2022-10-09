@@ -15,105 +15,65 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   #IOS风格材料图标
-  cupertino_icons: ^0.1.2
+  cupertino_icons: 0.1.2
   #即时通讯【腾讯云】
-#  tencent_im_sdk_plugin: ^3.6.9
-  tencent_im_sdk_plugin: ^4.0.2
+  tencent_im_sdk_plugin: 4.1.3
   #加解密
-  archive: ^3.1.6
+  archive: 3.3.1
   #持久化存储
-  #  shared_preferences: 0.5.2+2 #[Flutter2及之前]用这个
-  shared_preferences: ^2.0.8
+  shared_preferences: 2.0.15
   #状态管理
-  #  provider: 4.3.1 #1.22.5版本Flutter用这个
-  provider: ^6.0.1 #Flutter2.5用这个
-  #  provider: ^5.0.0 #Flutter2用这个
-  #  cached_network_image: 1.1.1 # 1.9版本flutter
-  #  cached_network_image: 2.0.0 #1.22.5版本Flutter用这个
-  cached_network_image: ^3.0.0 #Flutter2用这个
+  provider: 6.0.3
+  #图片显示
+  cached_network_image: 3.2.0
   #toast提示框
   toast: 0.1.5
   #web显示
-#  webview_flutter: 0.3.22+1 #flutter2或者之前的使用这个
-  webview_flutter: ^3.0.1 #Flutter2.10用这个,,其他可注释
+  webview_flutter: 3.0.4
   #选取图库
-#  image_picker: 0.6.1+2 #flutter2或者之前的使用这个
-  image_picker: ^0.8.5+3 #Flutter2.10用这个,,其他可注释
+  image_picker: 0.8.5+3
   #文本扩展显示
-  #  extended_text: 1.0.1  #1.17版本Flutter用这个
-  #  extended_text: 4.0.0 #1.20版本Flutter用这个
-  #  extended_text: 4.0.1 #1.22.5版本Flutter用这个
-  #  extended_text: ^6.0.5 #Flutter2用这个,,其他可注释
-  #  extended_text: ^7.0.0 #flutter2.5用这个,,其他可注释
-  extended_text: ^9.0.0 #flutter2.10.4用这个,,其他可注释
+  extended_text: 9.0.0
   #文字表情混入
-  #  extended_text_field: 1.0.1  #1.17版本Flutter用这个
-  #  extended_text_field: 4.0.0  #1.20版本Flutter用这个
-  #  extended_text_field: 5.0.1 #1.22.5版本Flutter用这个
-  #  extended_text_field: ^7.0.1 #Flutter2用这个,,其他可注释
-  #  extended_text_field: ^8.0.0 #Flutter2.5用这个,,其他可注释
-  extended_text_field: ^10.0.0 #Flutter2.10用这个,,其他可注释
-  #  extended_text_library: 4.0.2 #1.22.5版本Flutter用这个,,其他可注释
-  #  extended_text_library: ^6.0.0 #Flutter2用这个,,其他可注释
-  #  extended_text_library: ^7.0.0 #Flutter2.5用这个,,其他可注释
-  extended_text_library: ^9.0.0 #Flutter2.10用这个,,其他可注释
+  extended_text_field: 10.0.1
+  #文字表情混入【支持库】
+  extended_text_library: 9.0.0
   #打开系统浏览器
-#  url_launcher: 5.2.7
-  url_launcher: ^6.0.20
+  url_launcher: 6.1.6
   #网络连接
-#  connectivity: 0.4.6 #Flutter2.5用这个,,其他可注释
-  connectivity_plus: ^2.2.1 #Flutter2.10用这个,,其他可注释
+  connectivity_plus: 2.3.9
   #图片显示
-#  photo_view: 0.4.2 #Flutter2.5用这个,,其他可注释
-  photo_view: ^0.14.0 #Flutter2.10用这个,,其他可注释
-  #  dio: 2.2.2  #低于Flutter-1.17使用此版本
-  #  dio: 3.0.9  #1.22.5版本Flutter用这个
-  dio: ^4.0.0 #Flutter2用这个
+  photo_view: 0.14.0
+  #网络请求
+  dio: 4.0.6
   #打开文件
-#  open_file: 2.0.3  #flutter2或者之前的使用这个
-  open_file: ^3.2.1 #flutter 2.10使用这个
+  open_file: 3.2.1
   #获取包信息
-#  package_info: 0.4.0+2 #flutter2或者之前的使用这个
-  package_info_plus: ^1.4.0 #flutter 2.10使用这个
+  package_info_plus: 1.4.2
   #音频处理
-#  flutter_sound: 1.7.0 # flutter 2.10之前的用这个
 #  flutter_sound: ^9.1.7 # flutter 2.10用这个
   #权限处理
-#  permission_handler: 3.1.0  # flutter 2.10之前的用这个
-  permission_handler: ^9.2.0 # flutter 2.10用这个
+  permission_handler: 9.2.0
   #音频处理
-  #  audioplayers: 0.13.3 #1.22.5版本Flutter用这个
-  #  audioplayers: ^0.19.0 #Flutter2用这个
 #  audioplayers: ^0.20.1 #flutter 2.10用这个
-  #调用相机
-#  camera: # 0.5.7+1
-#    path: plugin/camera
   #视频播放
-  #  video_player: 0.10.11+2 #1.22.5版本Flutter用这个
-#  video_player: ^2.1.1 #Flutter2用这个
 #  video_player: ^2.3.0 #flutter 2.10用这个
   #图片压缩
-#  flutter_image_compress: 0.6.8 # flutter 2.10之前的用这个
 #  flutter_image_compress: ^1.1.0 # flutter 2.10用这个
   #拼音
-#  lpinyin: ^1.0.7 # flutter 2.10之前的用这个
-  lpinyin: ^2.0.3 # flutter 2.10用这个
+  lpinyin: 2.0.3
   #特殊列表滑动
-#  azlistview: ^0.1.0 # flutter 2.10之前的用这个
-  azlistview: ^2.0.0 # flutter 2.10用这个
+  azlistview: 2.0.0
   #微信图库
-  #  wechat_assets_picker: ^4.2.1 #1.22.5版本Flutter用这个
-  #  wechat_assets_picker: ^5.4.0 #Flutter2用这个
-#  wechat_assets_picker: ^6.2.3 #flutter2.5用这个
-  wechat_assets_picker: ^7.0.5 # flutter 2.10用这个
+  wechat_assets_picker: 7.2.0
   #扩展图片
-  extended_image: 6.0.2+1 # flutter 2.10 用这个
+  extended_image: 6.0.2+1
   #平台
-  platform: ^3.1.0 # flutter 2.10 用这个
+  platform: 3.1.0
   #状态管理
   get: 4.6.1
   #事件总线
-  event_bus: ^2.0.0
+  event_bus: 2.0.0
   #拍摄和录制视频
   wechat_camera_picker: 3.6.1
   #扫码功能
@@ -122,6 +82,8 @@ dependencies:
   just_throttle_it: 2.0.0
   #通讯录
   flutter_contacts: 1.1.4
+  #二维码生成
+  qr_flutter: 4.0.0
 
 dev_dependencies:
   flutter_test:
