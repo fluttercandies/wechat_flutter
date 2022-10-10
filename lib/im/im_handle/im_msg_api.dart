@@ -8,6 +8,7 @@ import 'package:tencent_im_sdk_plugin/models/v2_tim_msg_create_info_result.dart'
 import 'package:tencent_im_sdk_plugin/models/v2_tim_value_callback.dart';
 import 'package:tencent_im_sdk_plugin/tencent_im_sdk_plugin.dart';
 import 'package:video_thumbnail/video_thumbnail.dart';
+import 'package:wechat_flutter/tools/commom/check.dart';
 import 'package:wechat_flutter/tools/utils/file_util.dart';
 import 'package:wechat_flutter/tools/utils/video_util.dart';
 
@@ -73,25 +74,32 @@ class ImMsgApi {
     String receiver,
     String groupID,
   }) async {
-    // final snapshotBasePath = (await getTemporaryDirectory()).path;
-    // final fileName = await VideoThumbnail.thumbnailFile(
-    //   video: videoPath,
-    //   thumbnailPath: snapshotBasePath,
-    //   imageFormat: ImageFormat.PNG,
-    //   maxHeight: 64,
-    //   quality: 75,
-    // );
-    //
-    // final String snapshotPath = snapshotBasePath + fileName;
+    final snapshotBasePath = (await getTemporaryDirectory()).path;
+    final fileName = await VideoThumbnail.thumbnailFile(
+      video: videoPath,
+      thumbnailPath: snapshotBasePath,
+      imageFormat: ImageFormat.PNG,
+      quality: 75,
+    );
+
+    final String snapshotPath = fileName;
 
     final VideoUtilModel videoUtilModel = await VideoUtil.getVideoDuration(videoPath);
+
+    if(!strNoEmpty(snapshotPath)){
+      print("视频封面为空");
+      return null;
+    }
+    
+    print("封面整:$snapshotPath");
 
     V2TimValueCallback<V2TimMsgCreateInfoResult> createMessage =
         await TencentImSDKPlugin.v2TIMManager
             .getMessageManager()
             .createVideoMessage(
               duration: videoUtilModel.duration,
-              snapshotPath: videoUtilModel.coverPath,
+              snapshotPath: snapshotPath,
+              // snapshotPath: videoUtilModel.coverPath,
               type: FileUtil.getInstance().videoTypeOfPath(videoPath),
               videoFilePath: videoPath,
             );

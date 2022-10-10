@@ -62,23 +62,24 @@ class _ChatMorePageState extends State<ChatMorePage> {
           final int mediaType =
               FileUtil.getInstance().mediaTypeOfPath((await element.file).path);
 
+          V2TimMessage v;
+
           /// 判断是图片还是视频
           if (mediaType == 1) {
-            await ImMsgApi.sendImageMessage(
+            v = await ImMsgApi.sendImageMessage(
               (await element.file).path,
               receiver: widget.type == 1 ? widget.id : null,
               groupID: widget.type != 1 ? widget.id : null,
             );
           } else {
-            await ImMsgApi.sendVideoMessage(
+            v = await ImMsgApi.sendVideoMessage(
               (await element.file).path,
               receiver: widget.type == 1 ? widget.id : null,
               groupID: widget.type != 1 ? widget.id : null,
             );
           }
-          // if (v == null) return;
+          if (v == null) return;
           Notice.send(WeChatActions.msg(), '');
-          // element.file;
         });
       });
     } else if (name == '拍摄') {

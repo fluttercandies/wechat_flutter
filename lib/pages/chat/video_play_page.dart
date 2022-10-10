@@ -2,6 +2,7 @@ import 'package:fijkplayer/fijkplayer.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 import 'package:wechat_flutter/tools/commom/win_media.dart';
+import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
 class VideoPlayPage extends StatefulWidget {
   final String url;
@@ -24,6 +25,7 @@ class _VideoPlayPageState extends State<VideoPlayPage> {
   }
 
   void startPlay() async {
+    print("widget.url:::${widget.url}");
     await player.setOption(FijkOption.hostCategory, "request-screen-on", 1);
     await player.setOption(FijkOption.hostCategory, "request-audio-focus", 1);
     await player.setDataSource(widget.url, autoPlay: true).catchError((e) {
@@ -45,6 +47,7 @@ class _VideoPlayPageState extends State<VideoPlayPage> {
               child: FijkView(
                 player: player,
                 panelBuilder: fijkPanel2Builder(snapShot: true),
+                color: Colors.black,
                 fsFit: FijkFit.fill,
                 // panelBuilder: simplestUI,
                 // panelBuilder: (FijkPlayer player, BuildContext context,
@@ -60,10 +63,15 @@ class _VideoPlayPageState extends State<VideoPlayPage> {
           ),
 
           /// 控件位置
-          SafeArea(
-            child: Text(
-              '我是空间',
-              style: TextStyle(color: Colors.white),
+          Positioned(
+            top: 0,
+            child: SizedBox(
+              height: topBarHeight(context),
+              width: winWidth(context),
+              child: ComMomBar(
+                backgroundColor: Colors.transparent,
+                mainColor: Colors.white,
+              ),
             ),
           )
         ],

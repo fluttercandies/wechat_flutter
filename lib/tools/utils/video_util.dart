@@ -38,10 +38,10 @@ class VideoUtil {
     player.prepareAsync();
     player.addListener(() async {
       player.prepareAsync();
-      String saveCoverValue = await saveCover(await player.takeSnapShot());
+      // String saveCoverValue = await saveCover(await player.takeSnapShot());
 
       VideoUtilModel model =
-          VideoUtilModel(player.value.duration.inSeconds, saveCoverValue);
+          VideoUtilModel(player.value.duration.inSeconds, "");//saveCoverValue
       print("最终数据::${model.toString()}");
       completer.complete(model);
 

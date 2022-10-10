@@ -127,6 +127,7 @@ flutter:
     - assets/images/ic_add_friend.webp
     - assets/images/ic_no_data.webp
     - assets/images/loading.gif
+    - assets/images/ic_chat_play_icon.png
 
     - assets/images/login/select_avatar.webp
     - assets/images/login/ic_select_have.webp
