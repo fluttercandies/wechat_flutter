@@ -1,10 +1,15 @@
+import 'package:fijkplayer/fijkplayer.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:tencent_im_sdk_plugin/models/v2_tim_callback.dart';
 import 'package:tencent_im_sdk_plugin/models/v2_tim_message.dart';
 import 'package:tencent_im_sdk_plugin/models/v2_tim_message_search_param.dart';
 import 'package:tencent_im_sdk_plugin/models/v2_tim_msg_create_info_result.dart';
 import 'package:tencent_im_sdk_plugin/models/v2_tim_value_callback.dart';
 import 'package:tencent_im_sdk_plugin/tencent_im_sdk_plugin.dart';
+import 'package:video_thumbnail/video_thumbnail.dart';
+import 'package:wechat_flutter/tools/utils/file_util.dart';
+import 'package:wechat_flutter/tools/utils/video_util.dart';
 
 import 'Im_api.dart';
 
@@ -36,7 +41,7 @@ class ImMsgApi {
   }
 
   /*
-  * 发送文本消息
+  * 发送图片消息
   * */
   static Future<V2TimMessage> sendImageMessage(
     String imagePath, {
@@ -57,6 +62,49 @@ class ImMsgApi {
             groupID: groupID,
             localCustomData: "自定义localCustomData");
     ImApi.imPrint(res.toJson(), "发送图片消息");
+    return res.data;
+  }
+
+  /*
+  * 发送视频消息
+  * */
+  static Future<V2TimMessage> sendVideoMessage(
+    String videoPath, {
+    String receiver,
+    String groupID,
+  }) async {
+    // final snapshotBasePath = (await getTemporaryDirectory()).path;
+    // final fileName = await VideoThumbnail.thumbnailFile(
+    //   video: videoPath,
+    //   thumbnailPath: snapshotBasePath,
+    //   imageFormat: ImageFormat.PNG,
+    //   maxHeight: 64,
+    //   quality: 75,
+    // );
+    //
+    // final String snapshotPath = snapshotBasePath + fileName;
+
+    final VideoUtilModel videoUtilModel = await VideoUtil.getVideoDuration(videoPath);
+
+    V2TimValueCallback<V2TimMsgCreateInfoResult> createMessage =
+        await TencentImSDKPlugin.v2TIMManager
+            .getMessageManager()
+            .createVideoMessage(
+              duration: videoUtilModel.duration,
+              snapshotPath: videoUtilModel.coverPath,
+              type: FileUtil.getInstance().videoTypeOfPath(videoPath),
+              videoFilePath: videoPath,
+            );
+    String id = createMessage.data.id;
+
+    V2TimValueCallback<V2TimMessage> res = await TencentImSDKPlugin.v2TIMManager
+        .getMessageManager()
+        .sendMessage(
+            id: id,
+            receiver: receiver,
+            groupID: groupID,
+            localCustomData: "自定义localCustomData");
+    ImApi.imPrint(res.toJson(), "发送视频消息");
     return res.data;
   }
 
@@ -155,8 +203,9 @@ class ImMsgApi {
   /*
   * 获取Group历史消息
   * */
-  static Future<V2TimValueCallback<List<V2TimMessage>>> getGroupHistoryMessageList(String groupID,
-      {String lastMsgID, int count = 20}) async {
+  static Future<V2TimValueCallback<List<V2TimMessage>>>
+      getGroupHistoryMessageList(String groupID,
+          {String lastMsgID, int count = 20}) async {
     V2TimValueCallback<List<V2TimMessage>> res = await TencentImSDKPlugin
         .v2TIMManager
         .getMessageManager()

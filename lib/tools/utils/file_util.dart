@@ -59,7 +59,7 @@ class FileUtil {
     if (!exists) {
       var data = await rootBundle.load(assetPath + assetName);
       List<int> bytes =
-      data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
+          data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
       await File(newPath + name).writeAsBytes(bytes);
       return newPath + name;
     } else
@@ -68,9 +68,9 @@ class FileUtil {
 
   void downloadFile(
       {String url,
-        String filePath,
-        String fileName,
-        Function onComplete}) async {
+      String filePath,
+      String fileName,
+      Function onComplete}) async {
     final path = await FileUtil.getInstance().getSavePath(filePath);
     String name = fileName ?? url.split("/").last;
     Req.getInstance().client.download(
@@ -84,5 +84,26 @@ class FileUtil {
       },
       options: Options(sendTimeout: 15 * 1000, receiveTimeout: 360 * 1000),
     );
+  }
+
+  /// 媒体文件类型，1=图片；2=视频；
+  int mediaTypeOfPath(String path) {
+    if (path.endsWith("MP4") ||
+        path.endsWith("mp4") ||
+        path.endsWith("mov") ||
+        path.endsWith("MOV")) {
+      return 2;
+    } else {
+      return 1;
+    }
+  }
+
+  /// 视频文件类型
+  String videoTypeOfPath(String path) {
+    if (path.endsWith("MP4") || path.endsWith("mp4")) {
+      return "mp4";
+    } else {
+      return "mov";
+    }
   }
 }

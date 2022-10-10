@@ -5,6 +5,7 @@ import 'package:wechat_flutter/ui/message_view/Img_msg.dart';
 import 'package:wechat_flutter/ui/message_view/red_package.dart';
 import 'package:wechat_flutter/ui/message_view/sound_msg.dart';
 import 'package:wechat_flutter/ui/message_view/text_msg.dart';
+import 'package:wechat_flutter/ui/message_view/video_message.dart';
 
 class SendMessageView extends StatefulWidget {
   final V2TimMessage model;
@@ -31,9 +32,8 @@ class _SendMessageViewState extends State<SendMessageView> {
       return new ImgMsg(model.imageElem, widget.model);
     } else if (model.soundElem != null) {
       return new SoundMsg(widget.model);
-//    } else if (msg.toString().contains('snapshotPath') &&
-//        msg.toString().contains('videoPath')) {
-//      return VideoMessage(msg, msgType, widget.data);
+    } else if (model.videoElem != null) {
+      return VideoMessage(widget.model);
 //     } else if (msg['tipsType'] == 'Join') {
 //       return JoinMessage(msg);
 //     } else if (msg['tipsType'] == 'Quit') {

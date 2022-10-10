@@ -378,7 +378,7 @@ class ImApi {
   /*
   * 设置个人信息
   * */
-  static Future setSelfInfo({
+  static Future<V2TimCallback> setSelfInfo({
     String nickname,
     String faceUrl,
     String selfSignature,
@@ -398,5 +398,6 @@ class ImApi {
       }),
     );
     imPrint(res.toJson(), "设置个人信息");
+    return res;
   }
 }

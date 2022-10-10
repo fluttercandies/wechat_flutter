@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tencent_im_sdk_plugin/models/v2_tim_callback.dart';
+import 'package:wechat_flutter/im/im_handle/Im_api.dart';
 import 'package:wechat_flutter/provider/global_model.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'package:wechat_flutter/ui/orther/tip_verify_Input.dart';
@@ -19,7 +21,7 @@ class _ChangeNamePageState extends State<ChangeNamePage> {
 
   String initContent;
 
-  void setInfoMethod(GlobalModel model) {
+  Future setInfoMethod(GlobalModel model) async {
     if (!strNoEmpty(_tc.text)) {
       showToast(context, '输入的内容不能为空');
       return;
@@ -29,9 +31,18 @@ class _ChangeNamePageState extends State<ChangeNamePage> {
       return;
     }
 
-    showToast(context, '设置名字成功');
-    model.refresh();
-    Navigator.of(context).pop();
+    final V2TimCallback result = await ImApi.setSelfInfo(
+      nickname: _tc.text,
+      faceUrl: model.avatar,
+    );
+
+    if (result.code == 200 || result.code == 0) {
+      showToast(context, '设置名字成功');
+      model.refresh();
+      Navigator.of(context).pop();
+    } else {
+      showToast(context, '设置名字失败');
+    }
   }
 
   Widget body() {

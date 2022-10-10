@@ -171,6 +171,12 @@ class _AddFriendPageState extends State<AddFriendPage> {
 
   // 搜索好友
   Future search(String userName) async {
+    /// 如果是搜索自己的话直接提示出来
+    if (userName == Data.user()) {
+      showToast(context, '你不能添加自己到通讯录');
+      return;
+    }
+
     final List<V2TimUserFullInfo> userInfoList =
         await ImApi.getUsersInfo([userName]);
     setState(() {
