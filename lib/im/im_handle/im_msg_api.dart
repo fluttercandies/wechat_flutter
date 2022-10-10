@@ -4,6 +4,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:tencent_im_sdk_plugin/models/v2_tim_callback.dart';
 import 'package:tencent_im_sdk_plugin/models/v2_tim_message.dart';
 import 'package:tencent_im_sdk_plugin/models/v2_tim_message_search_param.dart';
+import 'package:tencent_im_sdk_plugin/models/v2_tim_message_search_result.dart';
 import 'package:tencent_im_sdk_plugin/models/v2_tim_msg_create_info_result.dart';
 import 'package:tencent_im_sdk_plugin/models/v2_tim_value_callback.dart';
 import 'package:tencent_im_sdk_plugin/tencent_im_sdk_plugin.dart';
@@ -84,13 +85,14 @@ class ImMsgApi {
 
     final String snapshotPath = fileName;
 
-    final VideoUtilModel videoUtilModel = await VideoUtil.getVideoDuration(videoPath);
+    final VideoUtilModel videoUtilModel =
+        await VideoUtil.getVideoDuration(videoPath);
 
-    if(!strNoEmpty(snapshotPath)){
+    if (!strNoEmpty(snapshotPath)) {
       print("视频封面为空");
       return null;
     }
-    
+
     print("封面整:$snapshotPath");
 
     V2TimValueCallback<V2TimMsgCreateInfoResult> createMessage =
@@ -383,9 +385,9 @@ class ImMsgApi {
   /*
   * 搜索本地消息
   * */
-  static Future searchLocaltMessage(
-      String keyword, String conversationID) async {
-    if (keyword == '') return;
+  static Future<V2TimValueCallback<V2TimMessageSearchResult>>
+      searchLocaltMessage(String keyword, String conversationID) async {
+    if (keyword == '') return null;
     V2TimMessageSearchParam searchParam = V2TimMessageSearchParam(
       keywordList: [keyword],
       type: 1,
@@ -394,12 +396,14 @@ class ImMsgApi {
       // size 写死
       pageIndex: 0,
       // index写死
-      conversationID: conversationID, // 不传代表指定所有会话,而且不会返回messageList
+      // conversationID: conversationID, // 不传代表指定所有会话,而且不会返回messageList
     );
-    var res = await TencentImSDKPlugin.v2TIMManager
+    V2TimValueCallback<V2TimMessageSearchResult> res = await TencentImSDKPlugin
+        .v2TIMManager
         .getMessageManager()
         .searchLocalMessages(searchParam: searchParam);
     ImApi.imPrint(res.toJson(), "搜索本地消息");
+    return res;
   }
 
   /*

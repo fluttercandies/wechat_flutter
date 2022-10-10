@@ -9,6 +9,7 @@ import 'package:tencent_im_sdk_plugin/models/v2_tim_group_member_info_result.dar
 import 'package:tencent_im_sdk_plugin/models/v2_tim_user_full_info.dart';
 import 'package:wechat_flutter/im/im_handle/Im_api.dart';
 import 'package:wechat_flutter/im/im_handle/im_group_api.dart';
+import 'package:wechat_flutter/pages/chat/search_record_page.dart';
 import 'package:wechat_flutter/pages/group/group_billboard_page.dart';
 import 'package:wechat_flutter/pages/group/group_member_details.dart';
 import 'package:wechat_flutter/pages/group/group_members_page.dart';
@@ -352,7 +353,7 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
         });
         break;
       case '查找聊天记录':
-        Get.to(new SearchPage());
+        Get.to(new SearchRecordPage(true, dataGroupInfo.groupID));
         break;
       case '消息免打扰':
         _dnd = !_dnd;
