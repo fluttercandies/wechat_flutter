@@ -6,7 +6,7 @@ import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'package:wechat_flutter/ui_commom/image/sw_image.dart';
 
 class SearchRecordResultPage extends StatefulWidget {
-  List<V2TimMessageSearchResultItem> messageSearchResultItems;
+  List<V2TimMessage> messageSearchResultItems;
 
   SearchRecordResultPage(this.messageSearchResultItems);
 
@@ -17,7 +17,7 @@ class SearchRecordResultPage extends StatefulWidget {
 class _SearchRecordResultPageState extends State<SearchRecordResultPage> {
   @override
   Widget build(BuildContext context) {
-    List<V2TimMessage> msgList = widget.messageSearchResultItems[0].messageList;
+    List<V2TimMessage> msgList = widget.messageSearchResultItems;
     return ListView.builder(
       itemCount: msgList.length,
       itemBuilder: (context, index) {

@@ -2,13 +2,16 @@ import 'package:fijkplayer/fijkplayer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:tencent_im_sdk_plugin/models/v2_tim_callback.dart';
+import 'package:tencent_im_sdk_plugin/models/v2_tim_conversation.dart';
 import 'package:tencent_im_sdk_plugin/models/v2_tim_message.dart';
 import 'package:tencent_im_sdk_plugin/models/v2_tim_message_search_param.dart';
 import 'package:tencent_im_sdk_plugin/models/v2_tim_message_search_result.dart';
+import 'package:tencent_im_sdk_plugin/models/v2_tim_message_search_result_item.dart';
 import 'package:tencent_im_sdk_plugin/models/v2_tim_msg_create_info_result.dart';
 import 'package:tencent_im_sdk_plugin/models/v2_tim_value_callback.dart';
 import 'package:tencent_im_sdk_plugin/tencent_im_sdk_plugin.dart';
 import 'package:video_thumbnail/video_thumbnail.dart';
+import 'package:wechat_flutter/im/im_handle/im_conversation_api.dart';
 import 'package:wechat_flutter/tools/commom/check.dart';
 import 'package:wechat_flutter/tools/utils/file_util.dart';
 import 'package:wechat_flutter/tools/utils/video_util.dart';
@@ -404,6 +407,43 @@ class ImMsgApi {
         .searchLocalMessages(searchParam: searchParam);
     ImApi.imPrint(res.toJson(), "搜索本地消息");
     return res;
+  }
+
+  /*
+  * 搜索本地消息【根据群】
+  * */
+  static Future<List<V2TimMessage>> searchLocaltMessageOfGroup(
+      String keyword, String groupId) async {
+    if (keyword == '') return null;
+    V2TimMessageSearchParam searchParam = V2TimMessageSearchParam(
+      keywordList: [keyword],
+      type: 1,
+      // 对应 keywordListMatchType.KEYWORD_LIST_MATCH_TYPE_AND sdk层处理  代表 或 与关系
+      pageSize: 50,
+      // size 写死
+      pageIndex: 0,
+      // index写死
+      // conversationID: conversationID, // 不传代表指定所有会话,而且不会返回messageList
+    );
+    V2TimValueCallback<V2TimMessageSearchResult> res = await TencentImSDKPlugin
+        .v2TIMManager
+        .getMessageManager()
+        .searchLocalMessages(searchParam: searchParam);
+    ImApi.imPrint(res.toJson(), "搜索本地消息");
+    if (res.data.totalCount == 0) {
+      return [];
+    }
+    for (V2TimMessageSearchResultItem item
+        in res.data.messageSearchResultItems) {
+      V2TimValueCallback<V2TimConversation> cov =
+          await IMConversationApi.getConversation(item.conversationID);
+
+      final bool covSuccess = cov.code == 0 || cov.code == 200;
+      if (covSuccess && groupId == cov.data.groupID) {
+        return item.messageList;
+      }
+    }
+    return [];
   }
 
   /*

@@ -40,7 +40,8 @@ class IMConversationApi {
   /*
   * 获取会话详情【单个】
   * */
-  static Future getConversation(String conversationID) async {
+  static Future<V2TimValueCallback<V2TimConversation>> getConversation(
+      String conversationID) async {
     V2TimValueCallback<V2TimConversation> res = await TencentImSDKPlugin
         .v2TIMManager
         .getConversationManager()
@@ -48,6 +49,7 @@ class IMConversationApi {
           conversationID: conversationID,
         );
     ImApi.imPrint(res.toJson(), "获取会话详情【单个】");
+    return res;
   }
 
   /*

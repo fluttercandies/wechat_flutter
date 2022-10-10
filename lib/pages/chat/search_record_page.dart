@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tencent_im_sdk_plugin/models/v2_tim_message.dart';
 import 'package:tencent_im_sdk_plugin/models/v2_tim_message_search_result.dart';
 import 'package:tencent_im_sdk_plugin/models/v2_tim_message_search_result_item.dart';
 import 'package:tencent_im_sdk_plugin/models/v2_tim_value_callback.dart';
@@ -25,8 +26,7 @@ class _SearchRecordPageState extends State<SearchRecordPage> {
 
   List words = ['群成员', '日期', '图片及视频', '文件', '链接', '音乐', '交易', '小程序'];
 
-  RxList<V2TimMessageSearchResultItem> data =
-      <V2TimMessageSearchResultItem>[].obs;
+  RxList<V2TimMessage> data = <V2TimMessage>[].obs;
 
   @override
   void initState() {
@@ -36,14 +36,14 @@ class _SearchRecordPageState extends State<SearchRecordPage> {
 
   /// 开始搜索
   Future search() async {
-    final V2TimValueCallback<V2TimMessageSearchResult> searResult =
-        await ImMsgApi.searchLocaltMessage(_searchC.text, widget.id);
-    if (searResult == null || searResult.data.totalCount < 1) {
+    final List<V2TimMessage> searResult =
+        await ImMsgApi.searchLocaltMessageOfGroup(_searchC.text, widget.id);
+    if (searResult == null || searResult.length < 1) {
       showToast(context, "未找到数据");
       return;
     }
-    print("搜索结果::${searResult.data.totalCount}");
-    data.value = searResult.data.messageSearchResultItems;
+    print("搜索结果::${searResult.length}");
+    data.value = searResult;
   }
 
   Widget wordView(item) {
