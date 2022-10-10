@@ -34,8 +34,6 @@ class _VideoMessageState extends State<VideoMessage> {
 
   @override
   Widget build(BuildContext context) {
-    print(
-        "widget.model.videoElem.snapshotUrl::${widget.model.videoElem.snapshotUrl}");
     final globalModel = Provider.of<GlobalModel>(context);
     List<Widget> body = [
       new MsgAvatar(model: widget.model, globalModel: globalModel),

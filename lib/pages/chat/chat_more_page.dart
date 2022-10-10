@@ -40,6 +40,27 @@ class _ChatMorePageState extends State<ChatMorePage> {
 
   List<AssetEntity> assets = <AssetEntity>[];
 
+  itemBuild(data) {
+    return new Container(
+      margin: EdgeInsets.all(20.0),
+      padding: EdgeInsets.only(bottom: 20.0),
+      child: new Wrap(
+        runSpacing: 10.0,
+        spacing: 10,
+        children: List.generate(data.length, (index) {
+          String name = data[index]['name'];
+          String icon = data[index]['icon'];
+          return new MoreItemCard(
+            name: name,
+            icon: icon,
+            keyboardHeight: widget.keyboardHeight,
+            onPressed: () => action(name),
+          );
+        }),
+      ),
+    );
+  }
+
   action(String name) async {
     if (name == '相册') {
       AssetPicker.pickAssets(
@@ -83,47 +104,40 @@ class _ChatMorePageState extends State<ChatMorePage> {
         });
       });
     } else if (name == '拍摄') {
-      CameraPicker.pickFromCamera(
+      final AssetEntity assetEntity = await CameraPicker.pickFromCamera(
         context,
         pickerConfig: const CameraPickerConfig(enableRecording: true),
       );
-      // try {
-      //   List<CameraDescription> cameras;
-      //
-      //   WidgetsFlutterBinding.ensureInitialized();
-      //   cameras = await availableCameras();
-      //
-      //   Get.to(new ShootPage(cameras));
-      // } on CameraException catch (e) {
-      //   logError(e.code, e.description);
-      // }
+
+      if (assetEntity == null || !strNoEmpty((await assetEntity.file).path)) {
+        return;
+      }
+
+      V2TimMessage v;
+
+      /// 判断是图片还是视频
+      if (assetEntity.type == AssetType.image) {
+        v = await ImMsgApi.sendImageMessage(
+          (await assetEntity.file).path,
+          receiver: widget.type == 1 ? widget.id : null,
+          groupID: widget.type != 1 ? widget.id : null,
+        );
+      } else {
+        v = await ImMsgApi.sendVideoMessage(
+          (await assetEntity.file).path,
+          receiver: widget.type == 1 ? widget.id : null,
+          groupID: widget.type != 1 ? widget.id : null,
+        );
+      }
+
+      if (v == null) return;
+      Notice.send(WeChatActions.msg(), '');
     } else if (name == '红包') {
       showToast(context, '测试发送红包消息');
       // await sendTextMsg('${widget?.id}', widget.type, "测试发送红包消息");
     } else {
       showToast(context, '敬请期待$name');
     }
-  }
-
-  itemBuild(data) {
-    return new Container(
-      margin: EdgeInsets.all(20.0),
-      padding: EdgeInsets.only(bottom: 20.0),
-      child: new Wrap(
-        runSpacing: 10.0,
-        spacing: 10,
-        children: List.generate(data.length, (index) {
-          String name = data[index]['name'];
-          String icon = data[index]['icon'];
-          return new MoreItemCard(
-            name: name,
-            icon: icon,
-            keyboardHeight: widget.keyboardHeight,
-            onPressed: () => action(name),
-          );
-        }),
-      ),
-    );
   }
 
   @override

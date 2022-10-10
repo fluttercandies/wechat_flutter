@@ -34,20 +34,25 @@ class VideoUtil {
     player.setOption(FijkOption.hostCategory, "enable-snapshot", 1);
 
     Completer<VideoUtilModel> completer = Completer<VideoUtilModel>();
-    player.setDataSource(url);
-    player.prepareAsync();
-    player.addListener(() async {
+    try {
+      player.setDataSource(url);
       player.prepareAsync();
-      // String saveCoverValue = await saveCover(await player.takeSnapShot());
+      player.addListener(() async {
+        player.prepareAsync();
+        // String saveCoverValue = await saveCover(await player.takeSnapShot());
 
-      VideoUtilModel model =
-          VideoUtilModel(player.value.duration.inSeconds, "");//saveCoverValue
-      print("最终数据::${model.toString()}");
-      completer.complete(model);
+        VideoUtilModel model = VideoUtilModel(
+            player.value.duration.inSeconds, ""); //saveCoverValue
+        print("最终数据::${model.toString()}");
+        completer.complete(model);
 
-      // player.removeListener(() {});
-      // player.dispose();
-    });
+        player.removeListener(() {});
+        // player.dispose();
+      });
+    } catch (e) {
+      print("getVideoDuration出现错误：：${e.toString()}");
+      return VideoUtilModel(0, "");
+    }
 
     return completer.future;
   }
