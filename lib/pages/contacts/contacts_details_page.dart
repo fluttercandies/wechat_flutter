@@ -55,7 +55,7 @@ class _ContactsDetailsPageState extends State<ContactsDetailsPage> {
     return [
       new ContactCard(
         img: widget.avatar,
-        id: widget.id,
+        id: widget.id ?? widget.title,
         title: widget.title,
         nickName: widget.title,
         area: '北京 海淀',
