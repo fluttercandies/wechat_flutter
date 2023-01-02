@@ -7,12 +7,18 @@
 > If the plug-in version does not match, remember to check whether the plug-in flutter version introduced in the `pubspec.yaml` file is compatible with your local Flutter.
 
 # Related documents
+
 [List of problems and solutions](issues_list.md)
 
 # Notice
-Currently being refactored with flutter2.10.4, check the `refactor` branch for specific progress. The `dim` plugin will be abandoned and the `tencent_im_sdk_plugin` will be connected to solve all plug-in compatibility issues. After merging the master, it may also be compatible with empty security and overall code specifications.
+
+Currently being refactored with flutter2.10.4, check the `refactor` branch for specific progress.
+The `dim` plugin will be abandoned and the `tencent_im_sdk_plugin` will be connected to solve all
+plug-in compatibility issues. After merging the master, it may also be compatible with empty
+security and overall code specifications.
 
 # log
+
 * 2022.06.28 Replace the pure ui branch simulation picture address 【12:00】
 
 * 2022.06.28 Create a pure ui branch【10:00】
@@ -31,7 +37,8 @@ Currently being refactored with flutter2.10.4, check the `refactor` branch for s
 
 * 2021.05.10 Adapt to Flutter2 stable branch 【11:45】
 
-* 2021.05.10 Fix im plugin example cannot get dependencies, fix `lib/ui/flutter/my_cupertino_dialog.dart`【】
+* 2021.05.10 Fix im plugin example cannot get dependencies,
+  fix `lib/ui/flutter/my_cupertino_dialog.dart`【】
 
 * 2021.01.16 Added a new payment page, waiting for the icon to be completed 【14:49】
 
@@ -41,17 +48,23 @@ Currently being refactored with flutter2.10.4, check the `refactor` branch for s
 
 * 2020.07.29 Capture error when uploading avatar【15:45】
 
-* 2020.07.29 Repair login, logout, and modify information report status management monitoring errors;
+* 2020.07.29 Repair login, logout, and modify information report status management monitoring
+  errors;
 
-* 2020.06.30 Only when the number of group members is more than 20 can all group members be displayed, and the group owner will display the group management item [afternoon]
+* 2020.06.30 Only when the number of group members is more than 20 can all group members be
+  displayed, and the group owner will display the group management item [afternoon]
 
-* 2020.06.30 The conversation list has no conversation message judgment display, repairs the conversation error report, and the group announcement is fully displayed [morning]
+* 2020.06.30 The conversation list has no conversation message judgment display, repairs the
+  conversation error report, and the group announcement is fully displayed [morning]
 
-* 2020.06.26 Exit group chat and disband group chat functions, chat member page, select member page [afternoon]
+* 2020.06.26 Exit group chat and disband group chat functions, chat member page, select member
+  page [afternoon]
 
-* 2020.06.26 Modify the group chat name page, change the chat background page, and repair the webView [morning]
+* 2020.06.26 Modify the group chat name page, change the chat background page, and repair the
+  webView [morning]
 
-* 2020.06.24 Group announcement, change the content display of the group announcement message body, add a group note, add a group QR code page;
+* 2020.06.24 Group announcement, change the content display of the group announcement message body,
+  add a group note, add a group QR code page;
 
 * 2020.06.23 Creation of group chat details page;
 
@@ -78,17 +91,19 @@ Currently being refactored with flutter2.10.4, check the `refactor` branch for s
 * 2020.02.16 Adapt to flutter v1.12.13 and Androidx, fix Android running problems;
 
 * 2019.12.30 cancel extended_text_field;
+
 # introduce
 
-wechat_flutter is the flutter version of WeChat. Currently, it has realized the basic functions of instant messaging, supports Android and IOS, and has a specific download experience.
+wechat_flutter is the flutter version of WeChat. Currently, it has realized the basic functions of
+instant messaging, supports Android and IOS, and has a specific download experience.
 ![start.gif](https://github.com/fluttercandies/wechat_flutter/blob/master/assets/git/start.gif)
 
 # rendering
 
-|![1.gif](https://github.com/fluttercandies/wechat_flutter/blob/master/assets/git/1.jpg)| ![2.gif](https://github.com/fluttercandies/ wechat_flutter/blob/master/assets/git/2.gif) | ![3.gif](https://github.com/fluttercandies/wechat_flutter/blob/master/assets/git/3.gif)|
+|![1.gif](https://github.com/fluttercandies/wechat_flutter/blob/master/assets/git/1.jpg)| ![2.gif](https://github.com/fluttercandies/wechat_flutter/blob/master/assets/git/2.gif) | ![3.gif](https://github.com/fluttercandies/wechat_flutter/blob/master/assets/git/3.gif)|
 | --- | --- | --- |
-| ![4.gif](https://github.com/fluttercandies/wechat_flutter/blob/master/assets/git/4.gif) | ![5.gif](https://github.com/fluttercandies/ wechat_flutter/blob/master/assets/git/5.gif) | ![6.gif](https://github.com/fluttercandies/wechat_flutter/blob/master/assets/git/6.gif) |
-| ![7.gif](https://github.com/fluttercandies/wechat_flutter/blob/master/assets/git/7.gif) | ![8.gif](https://github.com/fluttercandies/ wechat_flutter/blob/master/assets/git/8.gif) | ![9.gif](https://github.com/fluttercandies/wechat_flutter/blob/master/assets/git/9.gif) |
+| ![4.gif](https://github.com/fluttercandies/wechat_flutter/blob/master/assets/git/4.gif) | ![5.gif](https://github.com/fluttercandies/wechat_flutter/blob/master/assets/git/5.gif) | ![6.gif](https://github.com/fluttercandies/wechat_flutter/blob/master/assets/git/6.gif) |
+| ![7.gif](https://github.com/fluttercandies/wechat_flutter/blob/master/assets/git/7.gif) | ![8.gif](https://github.com/fluttercandies/wechat_flutter/blob/master/assets/git/8.gif) | ![9.gif](https://github.com/fluttercandies/wechat_flutter/blob/master/assets/git/9.gif) |
 
 Download experience (Android)
 [Test account 166, log in directly]: [https://wwc.lanzoul.com/iQlkj04vnhsj](https://wwc.lanzoul.com/iQlkj04vnhsj)
@@ -169,7 +184,8 @@ IOS can directly pull down the project and run it directly,
 # Use tutorial
 
 * Use command (pull project): $ git clone https://github.com/fluttercandies/wechat_flutter.git
-* Then command (get dependencies): $ flutter packages get (IOS executes the IOS part and then executes the next step)
+* Then command (get dependencies): $ flutter packages get (IOS executes the IOS part and then
+  executes the next step)
 * Final command (run): $ flutter run
 
 IOS
@@ -178,8 +194,8 @@ IOS
 * Update Pod (not required): $ pod update
 * Install Pods: $ pod install
 
-If `(Connection refused - connect(2) for "raw.githubusercontent.com" port 443)` appears, it means that the domestic source has not been set.
-Or try to climb over the wall.
+If `(Connection refused - connect(2) for "raw.githubusercontent.com" port 443)` appears, it means
+that the domestic source has not been set. Or try to climb over the wall.
 
 # My Flutter environment
 
@@ -230,6 +246,7 @@ Or try to climb over the wall.
 
 ! Doctor found issues in 1 category.
 ```
+
 # Run Android androidx.core:core problem
 
 ##### Error message:
@@ -265,17 +282,22 @@ android {
     }
 }
 ```
+
 Then change the permission_handler as well.
 
 # About the project has not been updated for too long
 
-Recently, I have been too busy with work, and basically have no time to update. Then, I was working on other open source projects before, which caused this project to have no substantial progress for a long time. Sorry everyone, it will enter the maintenance state from now on.
+Recently, I have been too busy with work, and basically have no time to update. Then, I was working
+on other open source projects before, which caused this project to have no substantial progress for
+a long time. Sorry everyone, it will enter the maintenance state from now on.
 ![](assets/git/cui.png)
 
-#Future
+# Future
 
-* In the later stage, the problems encountered in the project and the ideas for solving them will be written into a blog for everyone to learn.
-* Imitation of WeChat recording audio open source library: https://github.com/yxwandroid/flutter_plugin_record
+* In the later stage, the problems encountered in the project and the ideas for solving them will be
+  written into a blog for everyone to learn.
+* Imitation of WeChat recording audio open source
+  library: https://github.com/yxwandroid/flutter_plugin_record
 * WeChat Gallery: https://github.com/fluttercandies/flutter_wechat_assets_picker
 
 # Flutter WeChat group
@@ -292,7 +314,10 @@ Flutter exchange QQ group: [874592746](https://jq.qq.com/?_wv=1027&k=5coTYqE)
 
 <img src="http://www.flutterj.com/public.jpg" height="200" width="200" style="zoom:30%;" />
 
-Pay attention to the official account "`Flutter Frontline`", various Flutter project practical experience skills, working knowledge, answers to Flutter interview questions, waiting for you to collect.
+Pay attention to the official account "`Flutter Frontline`", various Flutter project practical
+experience skills, working knowledge, answers to Flutter interview questions, waiting for you to
+collect.
+
 ### LICENSE
 
 ```
