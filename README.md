@@ -87,7 +87,8 @@ I take flutter orders remotely full-time or part-time. If you have any intractab
 # Introduction
 
 wechat_flutter is a flutter version of WeChat, currently has implemented the basic functions of instant messaging, support for Android and IOS, specific download experience.
-Download it and experience it! [start.gif](https://github.com/fluttercandies/wechat_flutter/blob/master/assets/git/start.gif)
+Download it and experience it! 
+![start.gif](https://github.com/fluttercandies/wechat_flutter/blob/master/assets/git/start.gif)
 
 # Effect
 
