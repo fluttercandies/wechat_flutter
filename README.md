@@ -247,6 +247,7 @@ Android dependency 'androidx.core:core' has different version for
 the compile (1.0.0) and runtime (1.0.2) classpath. 
 manually set the same version via DependencyResolution
 You should set the same version via DependencyResolution.
+```
 
 ##### Solution
 
