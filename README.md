@@ -2,188 +2,191 @@
 [![GitHub forks](https://img.shields.io/github/forks/fluttercandies/wechat_flutter)](https://github.com/fluttercandies/wechat_flutter/network)
 [![GitHub issues](https://img.shields.io/github/issues/fluttercandies/wechat_flutter)](https://github.com/fluttercandies/wechat_flutter/issues)
 
-> 如果产生其他依赖无法编译的问题，可以尝试将`pubspec.yaml`中的`dependencies`中的所有依赖的"^"去掉或者插件版本号改为any，重新编译尝试。
-> 还是出错的话在项目主目录执行`flutter clean`再重新运行。
-> 如果出现插件版本不适配记得看`pubspec.yaml`文件介绍的插件flutter版本是否与自己本地Flutter适配。
+> If there is a problem that other dependencies cannot be compiled, you can try to remove the "^" of all dependencies in `dependencies` in `pubspec.yaml` or change the plug-in version number to any, and try to compile again.
+6
+> If there is still an error, execute `flutter clean` in the main directory of the project and run again.
+7
+> If the plug-in version does not match, remember to check whether the plug-in flutter version introduced in the `pubspec.yaml` file is compatible with your local Flutter.
 
-# 相关文档
-[问题列表与解决方案](issues_list.md)
+# Related documents
+[List of problems and solutions](issues_list.md)
 
-# 公告
+# Notice
 本人远程全职或兼职接单flutter，任何疑难杂症也可以联系我，微信：18826987045.
+I take flutter orders remotely full-time or part-time. If you have any intractable diseases, you can also contact me. Telegram: +86 18826987045.
 
 # log
 
-* 2022.06.28 更换纯ui分支模拟图片地址 【12:00】
+* 2022.06.28 Replace the pure ui branch simulation picture address [12:00]
   
-* 2022.06.28 创建纯ui分支【10:00】
+* 2022.06.28 create pure ui branch [10:00]
   
-* 2022.05.28 更新环境信息与贴出`问题列表与解决方案`索引
+* 2022.05.28 Update environment information and post `problem list and solution` index
   
-* 2022.05.26 开始兼容flutter2.10.4
+* 2022.05.26 Began to be compatible with flutter2.10.4
 
-* 2022.05.26 列出错误列表及修复方式
+* 2022.05.26 List the errors and how to fix them
 
-* 2022.05.15 修复补Android安装包链接和二维码
+* 2022.05.15 Repair and supplement Android installation package link and QR code
 
-* 2021.11.08 适配flutter 2.5
+* 2021.11.08 Adapt to flutter 2.5
 
-* 2021.05.12 适配iOS，解决运行问题
+* 2021.05.12 Adapt to iOS, solve running problems
 
-* 2021.05.10 适配 Flutter2 稳定分支 【11:45】
+* 2021.05.10 Adapt to Flutter2 stable branch [11:45]
 
-* 2021.05.10 修复im插件例子不能获取依赖、修复`lib/ui/flutter/my_cupertino_dialog.dart`【】
+* 2021.05.10 Fix im plugin example can not get dependencies, fix `lib/ui/flutter/my_cupertino_dialog.dart`
 
-* 2021.01.16 新增支付页面，等待图标补全 【14:49】
+* 2021.01.16 Added a new payment page, waiting for the icon to be completed [14:49]
 
-* 2021.01.16 适配Flutter (Channel stable, 1.22.5)
+* 2021.01.16 Adapt to Flutter (Channel stable, 1.22.5)
 
-* 2020.08.25 适配Flutter (Channel stable, 1.20.2)
+* 2020.08.25 Adapt to Flutter (Channel stable, 1.20.2)
 
-* 2020.07.29 上传头像捕获错误【15:45】
+* 2020.07.29 Upload avatar capture error [15:45]
 
-* 2020.07.29 修复登录、退出登录、修改信息报状态管理监听错误；
+* 2020.07.29 Repair login, logout, and modify information reporting status management monitoring errors;
 
-* 2020.06.30 群成员大于20才显示查看全部群成员、群主则显示群管理item【下午】
+* 2020.06.30 Only when the group members are more than 20 will it display all group members, and the group owner will display the group management item [afternoon]
 
-* 2020.06.30 会话列表无会话消息判断显示、修复会话报错、群公告完整显示【上午】
+* 2020.06.30 Session list no session message judgment display, fix session error reporting, group announcement complete display [AM
 
-* 2020.06.26 退出群聊和解散群聊功能、聊天成员页面、选择成员页面【下午】
+* 2020.06.26 Quit group chat and disband group chat functions, chat member page, select member page [PM].
 
-* 2020.06.26 修改群聊名称页面、更换聊天背景页面、修复webView【上午】
+* 2020.06.26 Modify group chat name page, change chat background page, fix webView [AM].
 
-* 2020.06.24 群公告、更改群公告消息体内容显示、新增群备注、新增群二维码页；
+* 2020.06.24 Group announcement, change group announcement message body content display, add group notes, add group QR code page;
 
-* 2020.06.23 群聊详情页面制作；
+* 2020.06.23 Group chat detail page creation;
 
-* 2020.06.21 会话列表聊天内容显示表情【10点】
+* 2020.06.21 Session list chat content display expressions [10 points].
 
-* 2020.06.20 修复录制视频完成停止录制的时候报错【17点48分】
+* 2020.06.20 Fix an error when recording video is finished [17:48].
 
-* 2020.06.20 去掉初始化拍一拍效果【17点】
+* 2020.06.20 Remove the initialized tap effect [17 points
 
-* 2020.06.20 修复会话列表时而为空【12点】
+* 2020.06.20 Fix the empty session list [12:00].
 
-* 2020.06.20 修复群聊消息不出现在会话列表【09点】
+* 2020.06.20 Fix group chat messages not appearing in the session list [09 points].
 
-* 2020.06.18 新增微信拍一拍效果；
+* 2020.06.18 Added WeChat tap effect;
 
-* 2020.06.17 新增发起群聊和群聊列表展示；
+* 2020.06.17 Added display of initiated group chat and group chat list;
 
-* 2020.06.16 新增表情聊天功能；
+* 2020.06.16 Added the function of chatting with expressions;
 
-* 2020.06.15 修复打包闪退问题；
+* 2020.06.15 Fix the package flashback problem;
 
-* 2020.02.14 适配 Flutter v1.17.3；
+* 2020.02.14 Adaptation of Flutter v1.17.3;
 
-* 2020.02.16 适配flutter v1.12.13和Androidx，修复Android运行问题；
+* 2020.02.16 adapt flutter v1.12.13 and Androidx, fix Android running problems;
 
-* 2019.12.30 取消extended_text_field；
+* 2019.12.30 remove extended_text_field;
 
-# 介绍
+# Introduction
 
-wechat_flutter是flutter版微信，目前已实现即时通讯基本功能，支持安卓和IOS，具体下载体验。
-![start.gif](https://github.com/fluttercandies/wechat_flutter/blob/master/assets/git/start.gif)
+wechat_flutter is a flutter version of WeChat, currently has implemented the basic functions of instant messaging, support for Android and IOS, specific download experience.
+Download it and experience it! [start.gif](https://github.com/fluttercandies/wechat_flutter/blob/master/assets/git/start.gif)
 
-# 效果图
+# Effect
 
-|![1.gif](https://github.com/fluttercandies/wechat_flutter/blob/master/assets/git/1.jpg)| ![2.gif](https://github.com/fluttercandies/wechat_flutter/blob/master/assets/git/2.gif) | ![3.gif](https://github.com/fluttercandies/wechat_flutter/blob/master/assets/git/3.gif)|
+|! [1.gif](https://github.com/fluttercandies/wechat_flutter/blob/master/assets/git/1.jpg)| ! [2.gif](https://github.com/fluttercandies/wechat_flutter/blob/master/assets/git/2.gif) | ! [3.gif](https://github.com/fluttercandies/wechat_flutter/blob/master/assets/git/3.gif)|
 | --- | --- | --- |
-| ![4.gif](https://github.com/fluttercandies/wechat_flutter/blob/master/assets/git/4.gif) | ![5.gif](https://github.com/fluttercandies/wechat_flutter/blob/master/assets/git/5.gif) | ![6.gif](https://github.com/fluttercandies/wechat_flutter/blob/master/assets/git/6.gif) |
-| ![7.gif](https://github.com/fluttercandies/wechat_flutter/blob/master/assets/git/7.gif) | ![8.gif](https://github.com/fluttercandies/wechat_flutter/blob/master/assets/git/8.gif) | ![9.gif](https://github.com/fluttercandies/wechat_flutter/blob/master/assets/git/9.gif) |
+| ! [4.gif](https://github.com/fluttercandies/wechat_flutter/blob/master/assets/git/4.gif) | ! [5.gif](https://github.com/fluttercandies/wechat_flutter/blob/master/assets/git/5.gif) | ! [6.gif](https://github.com/fluttercandies/wechat_flutter/blob/master/assets/git/6.gif) | !
+| ! [7.gif](https://github.com/fluttercandies/wechat_flutter/blob/master/assets/git/7.gif) | ! [8.gif](https://github.com/fluttercandies/wechat_flutter/blob/master/assets/git/8.gif) | ! [9.gif](https://github.com/fluttercandies/wechat_flutter/blob/master/assets/git/9.gif) | !
 
-下载体验(Android)
-【测试账号166，直接登录】：[https://wwc.lanzoul.com/iQlkj04vnhsj](https://wwc.lanzoul.com/iQlkj04vnhsj)
+Download Experience(Android)
+[Test account 166, login directly]: [https://wwc.lanzoul.com/iQlkj04vnhsj](https://wwc.lanzoul.com/iQlkj04vnhsj)
 
 
 <img src="assets/git/qr_code.png" style="zoom:50%;" />
 
-防止上方二维码不显示：
+To prevent the QR code above from not displaying:
 
 <img src="https://oss.shenmeniuma.com/images/app/qr_code.png" style="zoom:50%;" />
 
 
 
-IOS的直接拉下项目直接跑即可,
+For IOS, just pull down the project and run it directly.
 
-# 特性
+# Features
 
-* [x] 文字消息
-* [x] 表情消息
-* [x] 图片消息
-* [x] 语音消息
-* [x] 删除会话
-* [x] 语言国际化
-* [x] 账号注册
-* [x] 账号登陆
-* [x] 自动登陆
-* [x] 会话列表
-* [x] 通讯录
-* [x] 更改头像
-* [x] 显示头像
-* [x] 显示昵称
-* [x] 更改昵称
-* [x] 搜索好友
-* [x] 添加好友
-* [x] 删除好友
-* [x] 视频拍摄
-* [ ] 视频消息
-* [ ] 位置消息
-* [x] 创建群聊
-* [x] 退出群聊
-* [x] 解散群聊
-* [x] 群聊列表
-* [x] 群聊公告
-* [x] 修改群名
-* [x] 群聊消息（文字）
-* [ ] 扫一扫
-* [ ] 设置备注
+* [x] text message
+* [x] Emotion messages
+* [x] Image messages
+* [x] Voice messages
+* [x] Delete session
+* [x] Language internationalization
+* [x] Account registration
+* [x] Account login
+* [x] Auto-login
+* [x] Session list
+* [x] Address Book
+* [x] Change avatar
+* [x] Show avatar
+* [x] Show nickname
+* [x] Change nickname
+* [x] Search for friends
+* [x] Add a friend
+* [x] Delete Friends
+* [x] Video shooting
+* [ ] Video message
+* [ ] Location messages
+* [x] Create a group chat
+* [x] Quit group chat
+* [x] Dismiss a group chat
+* [x] Group chat list
+* [x] Group chat announcement
+* [x] Modify group name
+* [x] Group chat message (text)
+* [ ] Swipe
+* [ ] Set notes
 
-# 第三方框架
+# Third Party Framework
 
-|  库   | 功能  |
-|  ----  | ----  |
-| dim  | 即时通讯 |
-| shared_preferences  | 持久化存储 |
-| provider  | 状态管理 |
-| cached_network_image  | 图片缓存 |
-| toast  | 消息提示 |
-| webview_flutter  | web页面显示 |
-| image_picker  | 图片和视频选择 |
-| extended_text  | 扩展文本 |
-| url_launcher  | 打开浏览器浏览 |
-| connectivity  | 检查网络连接 |
-| photo_view  | 图片放大显示 |
-| dio  | 网络框架 |
-| open_file  | 打开文件 |
-| package_info  | 包信息 |
-| flutter_sound  | 音频录制处理 |
-| permission_handler  | 权限管理 |
-| audioplayers  | 音频播放处理 |
-| camera  | 相机 |
-| video_player  | 视频播放 |
-| extended_text_field  | 扩展文本输入 |
-| flutter_image_compress  | 图片压缩 |
-| lpinyin  | 获取中文的拼音 |
-| azlistview  | 特殊列表滑动 |
-| wechat_assets_picker  | 微信图库 |
+| Library | Features |
+| ---- | ---- |
+| dim | instant messaging |
+| shared_preferences | persistent_storage |
+| provider | state management |
+| cached_network_image | Image caching |
+| toast | message alerts |
+| webview_flutter | web page display |
+| image_picker | image and video selection |
+| extended_text | extended_text |
+| url_launcher |open_browser_browse |
+| connectivity | check network connection |
+| photo_view | zoom in on images |
+| dio | network_frame |
+| open_file | open_file |
+| package_info | package information |
+| flutter_sound | Audio recording and processing |
+| permission_handler | permission management |
+| audioplayers | audio playback processing |
+| camera | camera
+| video_player | video_players |
+| extended_text_field | extended_text_input |
+| flutter_image_compress | image compression |
+| lpinyin | Get Chinese pinyin |
+| azlistview | Special list slider |
+| wechat_assets_picker | WeChat image gallery |
 
-# 使用教程
+# Tutorials for using
 
-* 使用命令（拉取项目）：$ git clone https://github.com/fluttercandies/wechat_flutter.git
-* 然后命令（获取依赖）：$ flutter packages get  (IOS执行IOS部分再执行下一步)
-* 最后命令（运行）：$ flutter run
+* Use the command (pull the project): $ git clone https://github.com/fluttercandies/wechat_flutter.git
+* Then command (get dependencies): $ flutter packages get (IOS execute the IOS part and then execute the next step)
+* Final command (run): $ flutter run
 
 IOS
 
-* 进入项目IOS目录：$ cd ios/
-* 更新Pod（非必须）：$ pod update
-* 安装Pod：$ pod install
+* Enter the project IOS directory: $ cd ios/
+* Update Pod (not required): $ pod update
+* Install Pod: $ pod install
 
-如果出现`(Connection refused - connect(2) for "raw.githubusercontent.com" port 443)`，则表示还没设置国内源，
-或者尝试下翻墙。
+If you get `(Connection refused - connect(2) for "raw.githubusercontent.com" port 443)`, then you haven't set up the domestic source.
+Or try to go over the wall.
 
-# 我的Flutter环境
+# My Flutter environment
 
 ```q1@q1deMacBook-Pro  ~/Documents/git/wechat_flutter   master  flutter doctor -v
 [✓] Flutter (Channel unknown, 2.10.4, on macOS 12.2.1 21D62 darwin-x64, locale en-CN)
@@ -233,23 +236,23 @@ IOS
 ! Doctor found issues in 1 category.
 ```
 
-# 运行安卓androidx.core:core问题
+# Problems running androidx.core:core
 
-##### 错误信息：
+##### Error message:
 
 ```
 Android dependency 'androidx.core:core' has different version for 
-the compile (1.0.0) and runtime (1.0.2) classpath. You should 
+the compile (1.0.0) and runtime (1.0.2) classpath. 
 manually set the same version via DependencyResolution
-```
+You should set the same version via DependencyResolution.
 
-##### 解决方案
+##### Solution
 
-项目最下方的`External Libraries` => `Flutter Plugins` => `image_picker-0.6.1+2`
-=> `android` => `build.gradle` 然后最下方有`androidx.core:core:版本`。
+`External Libraries` => `Flutter Plugins` => `image_picker-0.6.1+2` at the bottom of the project
+=> `android` => `build.gradle` then at the bottom there is `androidx.core:core:version`.
 
-直接改为`androidx.core:core:1.0.0`，
-![](assets/git/core.png)
+Change it directly to `androidx.core:core:1.0.0`.
+! [](assets/git/core.png)
 
 ```
 android {
@@ -269,34 +272,29 @@ android {
 }
 ```
 
-然后permission_handler也一样改下。
+And then change the permission_handler as well.
 
-# 关于项目太久没更
+# About the project has not been updated for too long
 
-最近工作太繁忙，基本没啥时间更新，然后之前是做其他开源项目，导致这个项目太久没实质性进展， 不好意思哈各位，从现在开始进入维护状态。
-![](assets/git/cui.png)
+I'm sorry guys, but from now on I'm in maintenance mode.
+Sorry guys, from now on into maintenance. [](assets/git/cui.png)
 
 # Future
 
-* 后期会把项目里所遇到的问题及解决的思路写成博客给大家学习。
-* 仿微信录制音频开源库：https://github.com/yxwandroid/flutter_plugin_record
-* 微信图库：https://github.com/fluttercandies/flutter_wechat_assets_picker
+* Later the problems encountered in the project and the solution to the idea of writing a blog for everyone to learn.
+* Imitation WeChat recording audio open source library : https://github.com/yxwandroid/flutter_plugin_record
+* WeChat image library : https://github.com/fluttercandies/flutter_wechat_assets_picker
 
-# Flutter微信群
+# Flutter WeChat group
 
 <img src="assets/git/left_group.png" height="200" width="210" style="zoom:30%;" />
 
-[上图无法显示点我](http://www.shenmeniuma.com/mockImg/git/left_group.png)
+[The above image cannot be displayed click me](http://www.shenmeniuma.com/mockImg/git/left_group.png)
 
-Flutter教程网：www.flutterj.com
+Flutter tutorial website: www.flutterj.com
 
-Flutter交流QQ群：[874592746](https://jq.qq.com/?_wv=1027&k=5coTYqE)
+Flutter exchange QQ group: [874592746](https://jq.qq.com/? _wv=1027&k=5coTYqE)
 
-# 公众号
-
-<img src="http://www.flutterj.com/public.jpg" height="200" width="200" style="zoom:30%;" />
-
-关注公众号“`Flutter前线`”，各种Flutter项目实战经验技巧，干活知识，Flutter面试题答案，等你来领取。
 
 ### LICENSE
 
