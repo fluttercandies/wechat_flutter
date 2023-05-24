@@ -10,7 +10,7 @@
 [问题列表与解决方案](issues_list.md)
 
 # 公告
-目前正在以flutter2.10.4重构，具体进度查看`refactor`分支，将放弃`dim`插件，接入`tencent_im_sdk_plugin`，解决所有插件兼容问题，合并master后还可能会兼容空安全与代码整体规范。
+本人远程全职或兼职接单flutter，任何疑难杂症也可以联系我，微信：18826987045.
 
 # log
 
