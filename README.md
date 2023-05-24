@@ -255,7 +255,7 @@ You should set the same version via DependencyResolution.
 => `android` => `build.gradle` then at the bottom there is `androidx.core:core:version`.
 
 Change it directly to `androidx.core:core:1.0.0`.
-! [](assets/git/core.png)
+![](assets/git/core.png)
 
 ```
 android {
