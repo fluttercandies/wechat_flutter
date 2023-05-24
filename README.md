@@ -296,7 +296,7 @@ Sorry guys, from now on into maintenance. [](assets/git/cui.png)
 
 Flutter tutorial website: www.flutterj.com
 
-Flutter exchange QQ group: [874592746](https://jq.qq.com/? _wv=1027&k=5coTYqE)
+Flutter exchange QQ group: [874592746](https://jq.qq.com/?_wv=1027&k=5coTYqE)
 
 
 ### LICENSE
