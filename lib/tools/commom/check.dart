@@ -43,20 +43,27 @@ bool isAliPayName(String value) {
 }
 
 /// 字符串不为空
-bool strNoEmpty(String value) {
+bool strNoEmpty(String? value) {
   if (value == null) return false;
 
   return value.trim().isNotEmpty;
 }
 
+/// 数字不为空
+bool numNoEmpty(int? value) {
+  if (value == null) return false;
+
+  return value == 0;
+}
+
 /// 字符串不为空
-bool mapNoEmpty(Map value) {
+bool mapNoEmpty(Map? value) {
   if (value == null) return false;
   return value.isNotEmpty;
 }
 
 ///判断List是否为空
-bool listNoEmpty(List list) {
+bool listNoEmpty(List? list) {
   if (list == null) return false;
 
   if (list.length == 0) return false;
@@ -65,15 +72,15 @@ bool listNoEmpty(List list) {
 }
 
 /// 判断是否网络
-bool isNetWorkImg(String img) {
+bool isNetWorkImg(String? img) {
   if (!strNoEmpty(img)) return false;
-  return img.startsWith('http') || img.startsWith('https');
+  return img!.startsWith('http');
 }
 
 /// 判断是否资源图片
-bool isAssetsImg(String img) {
+bool isAssetsImg(String? img) {
   if (String == null) return false;
-  return img.startsWith('asset') || img.startsWith('assets');
+  return img!.startsWith('asset') || img.startsWith('assets');
 }
 
 double getMemoryImageCashe() {
@@ -127,4 +134,21 @@ String removeDot(v) {
   String vStr = v.toString().replaceAll('.', '');
 
   return vStr;
+}
+
+///补齐数字两位
+String doubleNum(v) {
+  int _v;
+  if (v is int) {
+    _v = v;
+  } else {
+    _v = int.parse(removeDot(v));
+  }
+  if (_v <= 0) {
+    return '00';
+  } else if (_v.toString().length < 2) {
+    return '0$_v';
+  } else {
+    return '$_v';
+  }
 }

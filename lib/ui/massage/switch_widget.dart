@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 class SwitchWidget extends StatefulWidget {
   final bool value;
   final String title;
-  final String id;
-  final Function functionT;
-  final Function functionF;
+  final String? id;
+  final Function? functionT;
+  final Function? functionF;
 
   SwitchWidget(this.value, this.title,
       {this.id, this.functionT, this.functionF});
@@ -15,7 +15,7 @@ class SwitchWidget extends StatefulWidget {
 }
 
 class _SwitchWidgetState extends State<SwitchWidget> {
-  bool valueCan;
+  late bool valueCan;
 
   @override
   void initState() {
@@ -27,9 +27,12 @@ class _SwitchWidgetState extends State<SwitchWidget> {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        FlatButton(
-          padding: EdgeInsets.symmetric(vertical: 4.0, horizontal: 20.0),
-          color: Colors.white,
+        TextButton(
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all(Colors.white),
+            padding: MaterialStateProperty.all(
+                EdgeInsets.symmetric(vertical: 4.0, horizontal: 20.0)),
+          ),
           onPressed: () {
             valueCan = !valueCan;
             setState(() {});

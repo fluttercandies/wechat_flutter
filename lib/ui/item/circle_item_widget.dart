@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:wechat_flutter/tools/data/my_theme.dart';
+import 'package:wechat_flutter/tools/theme/my_theme.dart';
 import 'package:wechat_flutter/tools/func/func.dart';
 import 'package:wechat_flutter/ui_commom/image/sw_image.dart';
 
 import '../../tools/wechat_flutter.dart';
 
 class CircleItemWidget extends StatelessWidget {
-  final String imageUrl;
-  final String title;
-  final String des;
-  final Widget desWidget;
-  final Widget time;
-  final Widget endWidget;
+  final String? imageUrl;
+  final String? title;
+  final String? des;
+  final Widget? desWidget;
+  final Widget? time;
+  final Widget? endWidget;
   final bool isBorder;
   final bool isSubText;
-  final GestureTapCallback onTap;
-  final String id;
-  final int type;
-  final double rSpace;
+  final GestureTapCallback? onTap;
+  final String? id;
+  final int? type;
+  final double? rSpace;
 
   CircleItemWidget({
     this.imageUrl,
@@ -71,7 +71,7 @@ class CircleItemWidget extends StatelessWidget {
               ? endWidget
               : new Column(
                   children: [
-                    time,
+                    time!,
                     new Icon(Icons.flag, color: Colors.transparent),
                   ],
                 ),
@@ -91,7 +91,7 @@ class CircleItemWidget extends StatelessWidget {
                 img: imageUrl, height: 50.0, width: 50.0, fit: BoxFit.cover),
             new Container(
               padding: EdgeInsets.only(right: 18.0, top: 12.0, bottom: 12.0),
-              width: winWidth(context) - 68,
+              width: FrameSize.winWidth() - 68,
               decoration: BoxDecoration(
                 border: isBorder
                     ? Border(
@@ -118,17 +118,17 @@ class CircleItemWidget extends StatelessWidget {
 }
 
 class CircleItemWidgetNew extends StatelessWidget {
-  final String imageUrl;
-  final String title;
-  final String des;
-  final Widget desWidget;
-  final Widget time;
-  final Widget endWidget;
+  final String? imageUrl;
+  final String? title;
+  final String? des;
+  final Widget? desWidget;
+  final Widget? time;
+  final Widget? endWidget;
   final bool isBorder;
-  final GestureTapCallback onTap;
-  final String id;
-  final int type;
-  final double rSpace;
+  final GestureTapCallback? onTap;
+  final String? id;
+  final int? type;
+  final double? rSpace;
   final bool isOwner;
 
   CircleItemWidgetNew({

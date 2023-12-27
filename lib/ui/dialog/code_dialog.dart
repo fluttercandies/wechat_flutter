@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:wechat_flutter/tools/commom/win_media.dart';
 
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
-codeDialog(BuildContext context, List items) {
+Future<String?> codeDialog(BuildContext context, List items) {
   Widget item(item) {
     return new Container(
-      width: winWidth(context),
+      width: FrameSize.winWidth(),
       decoration: BoxDecoration(
         border: item != '重置二维码'
             ? Border(
@@ -14,19 +13,21 @@ codeDialog(BuildContext context, List items) {
               )
             : null,
       ),
-      child: new FlatButton(
-        color: Colors.white,
-        padding: EdgeInsets.symmetric(vertical: 15.0),
+      child: new TextButton(
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all(Colors.white),
+          padding:
+              MaterialStateProperty.all(EdgeInsets.symmetric(vertical: 15.0)),
+        ),
         onPressed: () {
-          Navigator.of(context).pop();
-          showToast(context, '$item正在开发中');
+          Navigator.of(context).pop(item);
         },
         child: new Text(item),
       ),
     );
   }
 
-  showModalBottomSheet(
+  return showModalBottomSheet(
     context: context,
     builder: (context) {
       return new Center(
@@ -50,12 +51,16 @@ codeDialog(BuildContext context, List items) {
                     children: <Widget>[
                       new Column(children: items.map(item).toList()),
                       new HorizontalLine(color: appBarColor, height: 10.0),
-                      new FlatButton(
-                        padding: EdgeInsets.symmetric(vertical: 15.0),
-                        color: Colors.white,
+                      new TextButton(
+                        style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.white),
+                          padding: MaterialStateProperty.all(
+                              EdgeInsets.symmetric(vertical: 15.0)),
+                        ),
                         onPressed: () => Navigator.of(context).pop(),
                         child: new Container(
-                          width: winWidth(context),
+                          width: FrameSize.winWidth(),
                           alignment: Alignment.center,
                           child: new Text('取消'),
                         ),

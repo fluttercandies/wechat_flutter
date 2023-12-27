@@ -5,8 +5,8 @@ import 'package:wechat_flutter/ui/massage/wait1.dart';
 import 'package:wechat_flutter/ui/view/indicator_page_view.dart';
 
 class ChatDetailsBody extends StatelessWidget {
-  final ScrollController sC;
-  final List<V2TimMessage> chatData;
+  final ScrollController? sC;
+  final List<V2TimMessage>? chatData;
 
   ChatDetailsBody({this.sC, this.chatData});
 
@@ -20,10 +20,10 @@ class ChatDetailsBody extends StatelessWidget {
           padding: EdgeInsets.all(8.0),
           reverse: true,
           itemBuilder: (context, int index) {
-            V2TimMessage model = chatData[index];
+            V2TimMessage model = chatData![index];
             return new SendMessageView(model);
           },
-          itemCount: chatData.length,
+          itemCount: chatData!.length,
           dragStartBehavior: DragStartBehavior.down,
         ),
       ),

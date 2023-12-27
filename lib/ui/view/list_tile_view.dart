@@ -4,18 +4,18 @@ import 'package:flutter/material.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
 class ListTileView extends StatelessWidget {
-  final BoxBorder border;
-  final VoidCallback onPressed;
-  final String title;
-  final String label;
-  final String icon;
+  final BoxBorder? border;
+  final VoidCallback? onPressed;
+  final String? title;
+  final String? label;
+  final String? icon;
   final double width;
   final double horizontal;
   final TextStyle titleStyle;
   final bool isLabel;
   final EdgeInsetsGeometry padding;
-  final EdgeInsetsGeometry margin;
-  final BoxFit fit;
+  final EdgeInsetsGeometry? margin;
+  final BoxFit? fit;
 
   ListTileView({
     this.border,
@@ -38,7 +38,7 @@ class ListTileView extends StatelessWidget {
     var text = new Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        new Text(title ?? '', style: titleStyle ?? null),
+        new Text(title ?? '', style: titleStyle),
         new Text(
           label ?? '',
           style: TextStyle(color: mainTextColor, fontSize: 12),
@@ -47,7 +47,7 @@ class ListTileView extends StatelessWidget {
     );
 
     var view = [
-      isLabel ? text : new Text(title, style: titleStyle),
+      isLabel ? text : new Text(title!, style: titleStyle),
       new Spacer(),
       new Container(
         width: 7.0,
@@ -69,7 +69,7 @@ class ListTileView extends StatelessWidget {
               new ImageView(img: icon, width: width, fit: fit),
         ),
         new Container(
-          width: winWidth(context) - 60,
+          width: FrameSize.winWidth() - 60,
           padding: padding,
           decoration: BoxDecoration(border: border),
           child: new Row(children: view),
@@ -79,9 +79,11 @@ class ListTileView extends StatelessWidget {
 
     return new Container(
       margin: margin,
-      child: new FlatButton(
-        color: Colors.white,
-        padding: EdgeInsets.all(0),
+      child: new TextButton(
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all(Colors.white),
+          padding: MaterialStateProperty.all(EdgeInsets.all(0)),
+        ),
         onPressed: onPressed ?? () {},
         child: row,
       ),

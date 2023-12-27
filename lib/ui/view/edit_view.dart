@@ -3,29 +3,36 @@ import 'package:flutter/material.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
 class EditView extends StatelessWidget {
-  final String label;
-  final String hint;
-  final TextEditingController controller;
-  final Color bottomLineColor;
-  final FocusNode focusNode;
-  final GestureTapCallback onTap;
-  final ValueChanged<String> onChanged;
+  final String? label;
+  final String? hint;
+  final TextEditingController? controller;
+  final Color? bottomLineColor;
+  final FocusNode? focusNode;
+  final GestureTapCallback? onTap;
+  final ValueChanged<String>? onChanged;
+  final bool obscureText;
+  final TextInputType? keyboardType;
+  final Widget? rWidget;
 
-  EditView(
-      {this.label,
-      this.hint,
-      this.controller,
-      this.bottomLineColor,
-      this.focusNode,
-      this.onTap,
-      this.onChanged});
+  EditView({
+    this.label,
+    this.hint,
+    this.controller,
+    this.bottomLineColor,
+    this.focusNode,
+    this.onTap,
+    this.onChanged,
+    this.obscureText = false,
+    this.keyboardType,
+    this.rWidget,
+  });
 
   @override
   Widget build(BuildContext context) {
     var row = new Row(
       children: <Widget>[
         new Container(
-          width: winWidth(context) * 0.25,
+          width: FrameSize.winWidth() * 0.25,
           alignment: Alignment.centerLeft,
           child: new Text(label ?? '',
               style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w400)),
@@ -39,8 +46,11 @@ class EditView extends StatelessWidget {
                 InputDecoration(hintText: hint ?? '', border: InputBorder.none),
             onTap: onTap ?? () {},
             onChanged: onChanged ?? (str) {},
+            obscureText: obscureText,
+            keyboardType: keyboardType,
           ),
         ),
+        if (rWidget != null) rWidget!,
       ],
     );
 

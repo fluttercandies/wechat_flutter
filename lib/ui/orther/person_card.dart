@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
 class PersonCard extends StatelessWidget {
-  final String imageUrl;
-  final String name;
-  final String area;
+  final String? imageUrl;
+  final String? name;
+  final String? area;
   final int gender;
 
   PersonCard({this.imageUrl, this.name, this.area, this.gender = 0});
@@ -44,7 +44,7 @@ class PersonCard extends StatelessWidget {
           new Row(
             children: <Widget>[
               new Text(
-                name,
+                name!,
                 style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w500),
               ),
               new Space(),

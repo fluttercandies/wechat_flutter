@@ -3,8 +3,8 @@ import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'package:wechat_flutter/ui/w_pop/magic_pop.dart';
 
 class ImgItemContainer extends StatefulWidget {
-  final Widget child;
-  final double height;
+  final Widget? child;
+  final double? height;
 
   ImgItemContainer({this.child, this.height});
 
@@ -31,12 +31,12 @@ class _ImgItemContainerState extends State<ImgItemContainer> {
       child: new Container(
         height: widget.height ?? null,
         constraints: BoxConstraints(
-          maxWidth: (winWidth(context) - 66) - 100,
+          maxWidth: (FrameSize.winWidth() - 66) - 100,
           maxHeight: 250,
         ),
         padding: EdgeInsets.all(5.0),
-//            width: text.length > 30 ? (winWidth(context) - 66) - 100 : null,
-        width: (winWidth(context) - 66) - 100,
+//            width: text.length > 30 ? (FrameSize.winWidth() - 66) - 100 : null,
+        width: (FrameSize.winWidth() - 66) - 100,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.all(

@@ -11,6 +11,8 @@ import 'package:tencent_im_sdk_plugin/models/v2_tim_group_member_search_param.da
 import 'package:tencent_im_sdk_plugin/models/v2_tim_group_search_param.dart';
 import 'package:tencent_im_sdk_plugin/models/v2_tim_value_callback.dart';
 import 'package:tencent_im_sdk_plugin/tencent_im_sdk_plugin.dart';
+import 'package:wechat_flutter/im/im_handle/im_msg_api.dart';
+import 'package:wechat_flutter/tools/eventbus/msg_bus.dart';
 
 import 'Im_api.dart';
 
@@ -21,8 +23,8 @@ class ImGroupApi {
   * */
   static Future<V2TimValueCallback<String>> createGroupV2(
     String groupName, {
-    String groupID,
-    List<V2TimGroupMember> memberList,
+    String? groupID,
+    List<V2TimGroupMember>? memberList,
     // Work 工作群
     // Public 公开群
     // Meeting 会议群
@@ -37,13 +39,20 @@ class ImGroupApi {
               memberList: memberList,
             );
     ImApi.imPrint(res.toJson(), "创建群");
+
+    await ImMsgApi.sendTextMessage("欢迎大家加入本群。",
+        groupID: res.data!, receiver: '');
+
+    /// 事件总线发送，让其他地方同步消息
+    msgBus.fire(MsgBusModel(res.data));
+
     return res;
   }
 
   /*
   * 获取加群列表
   * */
-  static Future<List<V2TimGroupInfo>> getJoinedGroupList() async {
+  static Future<List<V2TimGroupInfo>?> getJoinedGroupList() async {
     V2TimValueCallback<List<V2TimGroupInfo>> res = await TencentImSDKPlugin
         .v2TIMManager
         .getGroupManager()
@@ -55,7 +64,7 @@ class ImGroupApi {
   /*
   * 获取群组信息
   * */
-  static Future<List<V2TimGroupInfoResult>> getGroupsInfo(
+  static Future<List<V2TimGroupInfoResult>?> getGroupsInfo(
       List<String> groupIDList) async {
     V2TimValueCallback<List<V2TimGroupInfoResult>> res =
         await TencentImSDKPlugin.v2TIMManager
@@ -70,14 +79,14 @@ class ImGroupApi {
   * */
   static Future setGroupInfo(
     String groupID, {
-    String groupName,
-    String groupType,
-    String notification,
-    String introduction,
-    String faceUrl,
-    String isAllMuted,
-    String addOpt,
-    String customInfo,
+    String? groupName,
+    String? groupType,
+    String? notification,
+    String? introduction,
+    String? faceUrl,
+    String? isAllMuted,
+    String? addOpt,
+    String? customInfo,
   }) async {
     V2TimCallback res =
         await TencentImSDKPlugin.v2TIMManager.getGroupManager().setGroupInfo(
@@ -113,7 +122,7 @@ class ImGroupApi {
   /*
   * 获取群成员列表
   * */
-  static Future<V2TimGroupMemberInfoResult> getGroupMemberList(
+  static Future<V2TimGroupMemberInfoResult?> getGroupMemberList(
     String groupID, {
     GroupMemberFilterTypeEnum filter =
         GroupMemberFilterTypeEnum.V2TIM_GROUP_MEMBER_FILTER_ALL,
@@ -149,7 +158,7 @@ class ImGroupApi {
   * 设置群成员信息
   * */
   static Future setGroupMemberInfo(String groupID, String userID,
-      {String nameCard}) async {
+      {String? nameCard}) async {
     V2TimCallback res = await TencentImSDKPlugin.v2TIMManager
         .getGroupManager()
         .setGroupMemberInfo(

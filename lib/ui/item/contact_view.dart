@@ -8,11 +8,11 @@ import 'contact_item.dart';
 enum ClickType { select, open }
 
 class ContactView extends StatelessWidget {
-  final ScrollController sC;
+  final ScrollController? sC;
   final List<ContactItem> functionButtons;
   final List<Contact> contacts;
-  final ClickType type;
-  final Callback callback;
+  final ClickType? type;
+  final Callback? callback;
 
   ContactView({
     this.sC,
@@ -29,6 +29,7 @@ class ContactView extends StatelessWidget {
       behavior: MyBehavior(),
       child: new ListView.builder(
         controller: sC,
+        physics: BouncingScrollPhysics(),
         itemBuilder: (BuildContext context, int index) {
           if (index < functionButtons.length) return functionButtons[index];
 
@@ -44,18 +45,18 @@ class ContactView extends StatelessWidget {
           if (_contact.name != contacts[contacts.length - 1].name) {
             return new ContactItem(
               avatar: _contact.avatar,
-              title: _contact?.name ?? "",
+              title: _contact.name ?? "",
               identifier: _contact.identifier,
               groupTitle: _isGroupTitle ? _contact.nameIndex : null,
               isLine: _isBorder,
               type: type,
               cancel: (v) {
                 data.remove(v);
-                callback(data);
+                callback!(data);
               },
               add: (v) {
                 data.add(v);
-                callback(data);
+                callback!(data);
               },
             );
           } else {
@@ -69,11 +70,11 @@ class ContactView extends StatelessWidget {
                 type: type,
                 cancel: (v) {
                   data.remove(v);
-                  callback(data);
+                  callback!(data);
                 },
                 add: (v) {
                   data.add(v);
-                  callback(data);
+                  callback!(data);
                 },
               ),
               new HorizontalLine(),

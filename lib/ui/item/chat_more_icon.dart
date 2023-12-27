@@ -4,12 +4,14 @@ import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
 class ChatMoreIcon extends StatelessWidget {
   final bool isMore;
-  final String value;
-  final VoidCallback onTap;
-  final GestureTapCallback moreTap;
+  final bool isEmoji;
+  final String? value;
+  final VoidCallback? onTap;
+  final GestureTapCallback? moreTap;
 
   ChatMoreIcon({
     this.isMore = false,
+    this.isEmoji = false,
     this.value,
     this.onTap,
     this.moreTap,
@@ -17,7 +19,7 @@ class ChatMoreIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return strNoEmpty(value)
+    return strNoEmpty(value) && !isEmoji
         ? new ComMomButton(
             text: '发送',
             style: TextStyle(color: Colors.white),
@@ -38,7 +40,7 @@ class ChatMoreIcon extends StatelessWidget {
             ),
             onTap: () {
               if (moreTap != null) {
-                moreTap();
+                moreTap!();
               }
             },
           );

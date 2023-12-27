@@ -7,8 +7,8 @@ import 'package:flutter/services.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
 class MyScaffold extends StatelessWidget {
-  final Widget body;
-  final PreferredSizeWidget appBar;
+  final Widget? body;
+  final PreferredSizeWidget? appBar;
 
   /// 是否删除滑动焦点，为true则滑动到顶无焦点显示
   /// 默认为true
@@ -24,19 +24,19 @@ class MyScaffold extends StatelessWidget {
   /// 是否删除[状态栏高度-安全区顶部]的边距
   final bool removeTop;
 
-  final Color backgroundColor;
+  final Color? backgroundColor;
 
   /// 控制状态栏字体颜色的，
   /// [SystemUiOverlayStyle.dark] = 黑色状态栏字体颜色
   /// [SystemUiOverlayStyle.light] = 百色状态栏字体颜色
-  final SystemUiOverlayStyle overlayStyle;
-  final Widget bottomSheet;
+  final SystemUiOverlayStyle? overlayStyle;
+  final Widget? bottomSheet;
 
   /// 动画加载
   final bool animateLoading;
 
   /// 键盘不遮盖视图，遮盖的话传false
-  final bool resizeToAvoidBottomInset;
+  final bool? resizeToAvoidBottomInset;
 
   const MyScaffold({
     this.body,
@@ -59,14 +59,14 @@ class MyScaffold extends StatelessWidget {
           animateLoading ? CrossFadeState.showFirst : CrossFadeState.showSecond,
       duration: const Duration(milliseconds: 500),
       firstChild: Container(
-        width: winWidth(context),
-        height: winHeight(context),
+        width: FrameSize.winWidth(),
+        height: FrameSize.winHeight(),
         color: animateLoading ? Colors.white : Colors.white,
         child: const CupertinoActivityIndicator(radius: 12),
       ),
       secondChild: SizedBox(
-        width: winWidth(context),
-        height: winHeight(context),
+        width: FrameSize.winWidth(),
+        height: FrameSize.winHeight(),
         child: ModalProgressHUD(
           inAsyncCall: inAsync,
           color: isShowLoading ? Colors.black : Colors.transparent,
@@ -87,7 +87,7 @@ class MyScaffold extends StatelessWidget {
     );
     _content = MainInputBody(child: _content);
     _content = MediaQuery.removePadding(
-      removeTop: removeTop ?? false,
+      removeTop: removeTop,
       context: context,
       child: Scaffold(
         body: _content,
@@ -99,7 +99,7 @@ class MyScaffold extends StatelessWidget {
     );
     if (overlayStyle != null) {
       return AnnotatedRegion<SystemUiOverlayStyle>(
-        value: overlayStyle,
+        value: overlayStyle!,
         child: _content,
       );
     }
@@ -112,33 +112,33 @@ class ModalProgressHUD extends StatelessWidget {
   final double opacity;
   final Color color;
   final Widget progressIndicator;
-  final Offset offset;
+  final Offset? offset;
   final bool dismissible;
-  final Widget child;
+  final Widget? child;
 
   const ModalProgressHUD({
-    Key key,
-    @required this.inAsyncCall,
+    Key? key,
+    required this.inAsyncCall,
     this.opacity = 0.3,
     this.color = Colors.grey,
     this.progressIndicator = const CircularProgressIndicator(),
     this.offset,
     this.dismissible = false,
-    @required this.child,
+    required this.child,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     List<Widget> widgetList = [];
-    widgetList.add(child);
+    widgetList.add(child ?? Container());
     if (inAsyncCall) {
       Widget layOutProgressIndicator;
       if (offset == null)
         layOutProgressIndicator = Center(child: progressIndicator);
       else {
         layOutProgressIndicator = Positioned(
-          left: offset.dx,
-          top: offset.dy,
+          left: offset!.dx,
+          top: offset!.dy,
           child: progressIndicator,
         );
       }
@@ -152,7 +152,7 @@ class ModalProgressHUD extends StatelessWidget {
       widgetList += modal;
     }
     return Stack(
-      children: widgetList,
+      children: widgetList as List<Widget>,
     );
   }
 }

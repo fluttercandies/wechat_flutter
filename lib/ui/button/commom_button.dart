@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
 class ComMomButton extends StatelessWidget {
-  final double width;
+  final double? width;
   final double height;
-  final List<BoxShadow> boxShadow;
+  final List<BoxShadow>? boxShadow;
   final double radius;
   final String text;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
   final EdgeInsetsGeometry padding;
-  final EdgeInsetsGeometry margin;
-  final TextStyle style;
-  final Color color;
+  final EdgeInsetsGeometry? margin;
+  final TextStyle? style;
+  final Color? color;
   final bool isBorder;
   final int borderColor;
   final Gradient gradient;

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tencent_im_sdk_plugin/models/v2_tim_message.dart';
+import 'package:wechat_flutter/tools/provider/global_model.dart';
 import 'package:wechat_flutter/ui/message_view/msg_avatar.dart';
 import 'package:wechat_flutter/ui/message_view/text_item_container.dart';
 
-import '../../provider/global_model.dart';
 
 class TextMsg extends StatelessWidget {
-  final String text;
+  final String? text;
   final V2TimMessage model;
 
   TextMsg(this.text, this.model);

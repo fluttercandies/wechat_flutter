@@ -7,15 +7,15 @@ enum PressType { longPress, singleClick }
 
 class PopupMenuRoute extends PopupRoute {
   final BuildContext btnContext;
-  double _height;
-  double _width;
+  double? _height;
+  double? _width;
   final List actions;
   final int _pageMaxChildCount;
   final Color backgroundColor;
   final double menuWidth;
   final double menuHeight;
-  final EdgeInsets padding;
-  final EdgeInsets margin;
+  final EdgeInsets? padding;
+  final EdgeInsets? margin;
   final ValueChanged<String> onValueChanged;
 
   PopupMenuRoute(
@@ -28,14 +28,14 @@ class PopupMenuRoute extends PopupRoute {
       this.padding,
       this.margin,
       this.onValueChanged) {
-    _height = btnContext.size.height -
+    _height = btnContext.size!.height -
         (padding == null
-            ? margin == null ? 0 : margin.vertical
-            : padding.vertical);
-    _width = btnContext.size.width -
+            ? margin == null ? 0 : margin!.vertical
+            : padding!.vertical);
+    _width = btnContext.size!.width -
         (padding == null
-            ? margin == null ? 0 : margin.horizontal
-            : padding.horizontal);
+            ? margin == null ? 0 : margin!.horizontal
+            : padding!.horizontal);
   }
 
   @override
@@ -48,13 +48,13 @@ class PopupMenuRoute extends PopupRoute {
   }
 
   @override
-  Color get barrierColor => null;
+  Color? get barrierColor => null;
 
   @override
   bool get barrierDismissible => true;
 
   @override
-  String get barrierLabel => null;
+  String? get barrierLabel => null;
 
   @override
   Widget buildPage(BuildContext context, Animation<double> animation,

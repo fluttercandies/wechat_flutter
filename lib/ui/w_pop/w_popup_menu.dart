@@ -3,10 +3,10 @@ import 'package:wechat_flutter/ui/w_pop/popup_menu_route.dart';
 
 class WPopupMenu extends StatefulWidget {
   WPopupMenu({
-    Key key,
-    @required this.onValueChanged,
-    @required this.actions,
-    @required this.child,
+    Key? key,
+    required this.onValueChanged,
+    required this.actions,
+    required this.child,
     this.pressType = PressType.singleClick,
     this.pageMaxChildCount = 5,
     this.backgroundColor = Colors.black,
@@ -14,12 +14,12 @@ class WPopupMenu extends StatefulWidget {
     this.menuHeight = 250,
     this.alignment,
     this.padding,
-    Color color,
-    Decoration decoration,
+    Color? color,
+    Decoration? decoration,
     this.foregroundDecoration,
-    double width,
-    double height,
-    BoxConstraints constraints,
+    double? width,
+    double? height,
+    BoxConstraints? constraints,
     this.margin,
     this.transform,
   })  : assert(onValueChanged != null),
@@ -41,14 +41,14 @@ class WPopupMenu extends StatefulWidget {
             : constraints,
         super(key: key);
 
-  final BoxConstraints constraints;
-  final Decoration decoration;
-  final AlignmentGeometry alignment;
-  final EdgeInsets padding;
-  final Decoration foregroundDecoration;
-  final EdgeInsets margin;
-  final Matrix4 transform;
-  final ValueChanged<String> onValueChanged;
+  final BoxConstraints? constraints;
+  final Decoration? decoration;
+  final AlignmentGeometry? alignment;
+  final EdgeInsets? padding;
+  final Decoration? foregroundDecoration;
+  final EdgeInsets? margin;
+  final Matrix4? transform;
+  final ValueChanged<String?> onValueChanged;
   final List actions;
   final Widget child;
   final PressType pressType; // 点击方式 长按 还是单击

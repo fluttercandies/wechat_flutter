@@ -7,13 +7,13 @@ import 'package:wechat_flutter/tools/wechat_flutter.dart';
 class ScrollDialog extends StatefulWidget {
   final Widget child;
   final bool barrierDismissible;
-  final WillPopCallback onWillPop;
+  final WillPopCallback? onWillPop;
   final bool isDecoration;
-  final double width;
-  final double height;
+  final double? width;
+  final double? height;
 
   const ScrollDialog({
-    @required this.child,
+    required this.child,
     this.barrierDismissible = false,
     this.isDecoration = false,
     this.onWillPop,
@@ -37,10 +37,10 @@ class _ScrollDialogState extends State<ScrollDialog> {
   }
 
   double getHeight() {
-    final RenderBox box = key.currentContext?.findRenderObject() as RenderBox;
+    final RenderBox? box = key.currentContext?.findRenderObject() as RenderBox?;
     double size;
-    final _fullHeight = winHeight(context) - winTop(context);
-    final _boxHeight = box?.size?.height ?? 0;
+    final _fullHeight = FrameSize.winHeight() - FrameSize.padTopH();
+    final _boxHeight = box?.size.height ?? 0;
     if (_boxHeight == 0) {
       size = _fullHeight;
     } else {
@@ -70,7 +70,7 @@ class _ScrollDialogState extends State<ScrollDialog> {
                     ),
                     padding: const EdgeInsets.symmetric(
                         horizontal: 25, vertical: 24),
-                    width: winWidth(context) - 60,
+                    width: FrameSize.winWidth() - 60,
                     child: widget.child,
                   )
                 else

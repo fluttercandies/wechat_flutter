@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
 class ButtonRow extends StatelessWidget {
-  final EdgeInsetsGeometry margin;
-  final String text;
+  final EdgeInsetsGeometry? margin;
+  final String? text;
   final TextStyle style;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
   final bool isBorder;
   final double lineWidth;
 
@@ -31,14 +31,16 @@ class ButtonRow extends StatelessWidget {
               )
             : null,
       ),
-      child: new FlatButton(
-        padding: EdgeInsets.all(0),
-        color: Colors.white,
+      child: new TextButton(
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all(Colors.white),
+          padding: MaterialStateProperty.all(EdgeInsets.all(0)),
+        ),
         onPressed: onPressed ?? () {},
         child: new Container(
           padding: EdgeInsets.symmetric(vertical: 15.0),
           alignment: Alignment.center,
-          child: new Text(text, style: style),
+          child: new Text(text!, style: style),
         ),
       ),
     );

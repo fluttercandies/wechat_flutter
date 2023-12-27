@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:wechat_flutter/config/const.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'package:wechat_flutter/ui/w_pop/popup_menu_route_layout.dart';
 import 'triangle_painter.dart';
 
 class MenuPopWidget extends StatefulWidget {
   final BuildContext btnContext;
-  final double _height;
-  final double _width;
+  final double? _height;
+  final double? _width;
   final List actions;
   final int _pageMaxChildCount;
   final Color backgroundColor;
   final double menuWidth;
   final double menuHeight;
-  final EdgeInsets padding;
-  final EdgeInsets margin;
+  final EdgeInsets? padding;
+  final EdgeInsets? margin;
 
   MenuPopWidget(
     this.btnContext,
@@ -41,21 +40,21 @@ class _MenuPopWidgetState extends State<MenuPopWidget> {
 
   Color itemColor = itemBgColor;
 
-  RenderBox button;
-  RenderBox overlay;
-  RelativeRect position;
+  RenderBox? button;
+  RenderBox? overlay;
+  RelativeRect? position;
 
   @override
   void initState() {
     super.initState();
-    button = widget.btnContext.findRenderObject();
-    overlay = Overlay.of(widget.btnContext).context.findRenderObject();
+    button = widget.btnContext.findRenderObject() as RenderBox?;
+    overlay = Overlay.of(widget.btnContext)!.context.findRenderObject() as RenderBox?;
     position = new RelativeRect.fromRect(
       new Rect.fromPoints(
-        button.localToGlobal(Offset(-10, 100), ancestor: overlay),
-        button.localToGlobal(Offset(-10, 0), ancestor: overlay),
+        button!.localToGlobal(Offset(-10, 100), ancestor: overlay),
+        button!.localToGlobal(Offset(-10, 0), ancestor: overlay),
       ),
-      Offset.zero & overlay.size,
+      Offset.zero & overlay!.size,
     );
   }
 
@@ -93,7 +92,7 @@ class _MenuPopWidgetState extends State<MenuPopWidget> {
             color: itemBgColor,
             position: position,
             isInverted: true,
-            size: button.size,
+            size: button!.size,
             screenWidth: MediaQuery.of(context).size.width,
           ),
         ),
@@ -140,7 +139,10 @@ class _MenuPopWidgetState extends State<MenuPopWidget> {
       new Padding(
         padding: EdgeInsets.symmetric(horizontal: 10.0),
         child: strNoEmpty(item['icon'])
-            ? new Image.asset(item['icon'])
+            ? new Image.asset(
+                item['icon'],
+                width: 30.0,
+              )
             : new Icon(Icons.phone, color: Colors.white),
       ),
       new Expanded(
@@ -160,8 +162,10 @@ class _MenuPopWidgetState extends State<MenuPopWidget> {
         ),
       )
     ];
-    return new FlatButton(
-      padding: EdgeInsets.all(0),
+    return new TextButton(
+      style: ButtonStyle(
+        padding: MaterialStateProperty.all(EdgeInsets.all(0)),
+      ),
       onPressed: () {
         isShow = false;
         setState(() {});

@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:wechat_flutter/tools/data/my_theme.dart';
+import 'package:wechat_flutter/tools/theme/my_theme.dart';
 import 'package:wechat_flutter/tools/func/func.dart';
 
 const Color _kDisabledBackground = Color(0xFFA9A9A9);
@@ -15,8 +15,8 @@ const EdgeInsets _kBackgroundButtonPadding =
 
 class SmallButton extends StatefulWidget {
   const SmallButton({
-    Key key,
-    @required this.child,
+    Key? key,
+    required this.child,
     this.padding,
     this.margin = const EdgeInsets.symmetric(horizontal: 37),
     this.width,
@@ -32,28 +32,31 @@ class SmallButton extends StatefulWidget {
     this.border,
     this.gradient,
     this.filled = false,
-    @required this.onPressed,
-  })  : assert(pressedOpacity == null ||
-            (pressedOpacity >= 0.0 && pressedOpacity <= 1.0)),
+    this.isCanMultipleClick = false,
+    required this.onPressed,
+  })  : assert((pressedOpacity >= 0.0 && pressedOpacity <= 1.0)),
         super(key: key);
 
   final Widget child;
-  final EdgeInsetsGeometry padding;
+  final EdgeInsetsGeometry? padding;
   final EdgeInsetsGeometry margin;
-  final Color color;
+  final Color? color;
   final Color disabledColor;
   final GestureTapCallback onPressed;
   final double minWidth;
   final double minHeight;
-  final double width;
-  final double height;
+  final double? width;
+  final double? height;
   final double pressedOpacity;
   final BorderRadius borderRadius;
   final bool filled;
   final bool isShadow;
-  final Color shadowColor;
-  final BoxBorder border;
-  final Gradient gradient;
+  final Color? shadowColor;
+  final BoxBorder? border;
+  final Gradient? gradient;
+
+  /// 是否可以多次点击
+  final bool isCanMultipleClick;
 
   bool get enabled => onPressed != null;
 
@@ -72,8 +75,8 @@ class _SmallButtonState extends State<SmallButton>
     with SingleTickerProviderStateMixin {
   final Tween<double> _opacityTween = Tween<double>(begin: 1);
 
-  AnimationController _animationController;
-  Animation<double> _opacityAnimation;
+  AnimationController? _animationController;
+  late Animation<double> _opacityAnimation;
 
   bool isInkWellProcessing = false;
 
@@ -85,7 +88,7 @@ class _SmallButtonState extends State<SmallButton>
       value: 0,
       vsync: this,
     );
-    _opacityAnimation = _animationController
+    _opacityAnimation = _animationController!
         .drive(CurveTween(curve: Curves.decelerate))
         .drive(_opacityTween);
     _setTween();
@@ -98,12 +101,12 @@ class _SmallButtonState extends State<SmallButton>
   }
 
   void _setTween() {
-    _opacityTween.end = widget.pressedOpacity ?? 1.0;
+    _opacityTween.end = widget.pressedOpacity;
   }
 
   @override
   void dispose() {
-    _animationController.dispose();
+    _animationController!.dispose();
     _animationController = null;
     super.dispose();
   }
@@ -113,8 +116,7 @@ class _SmallButtonState extends State<SmallButton>
     final Color color = widget.color ?? MyTheme.themeColor();
     final bool enabled = widget.enabled;
     final Color primaryColor = CupertinoTheme.of(context).primaryColor;
-    final Color backgroundColor =
-        color ?? (widget.filled ? primaryColor : null);
+    final Color backgroundColor = color;
     final Color foregroundColor = backgroundColor != null
         ? CupertinoTheme.of(context).primaryContrastingColor
         : enabled
@@ -124,59 +126,44 @@ class _SmallButtonState extends State<SmallButton>
         .textTheme
         .textStyle
         .copyWith(color: foregroundColor);
-    final Color resultColor = backgroundColor != null && !enabled
-        ? widget.disabledColor ?? _kDisabledBackground
+    final Color resultColor = !enabled
+        ? widget.disabledColor
         : backgroundColor;
-    return Container(
-      margin: widget.margin,
-      width: widget.width,
-      height: widget.height,
-      decoration: BoxDecoration(borderRadius: widget.borderRadius),
-      child: ClickEvent(
-        onTap: () {
-          if (widget.onPressed != null) {
-            widget.onPressed();
-          }
-        },
-        child: Semantics(
-          button: true,
-          child: ConstrainedBox(
-            constraints: widget.minWidth == null || widget.minHeight == null
-                ? const BoxConstraints()
-                : BoxConstraints(
-                    minWidth: widget.minWidth, minHeight: widget.minHeight),
-            child: FadeTransition(
-              opacity: _opacityAnimation,
-              child: DecoratedBox(
-                decoration: BoxDecoration(
-                  borderRadius: widget.borderRadius,
-                  color: widget.gradient != null ? null : resultColor,
-                  gradient: widget.gradient,
-                  boxShadow: widget.isShadow
-                      ? [
-                          BoxShadow(
-                              color: widget.shadowColor,
-                              blurRadius: 10,
-                              spreadRadius: 0.5),
-                        ]
-                      : [],
-                  border: widget.border,
-                ),
-                child: Padding(
-                  padding: widget.padding ??
-                      (backgroundColor != null
-                          ? _kBackgroundButtonPadding
-                          : _kButtonPadding),
-                  child: Center(
-                    widthFactor: 1,
-                    heightFactor: 1,
-                    child: DefaultTextStyle(
-                      style: textStyle,
-                      child: IconTheme(
-                        data: IconThemeData(color: foregroundColor),
-                        child: widget.child,
-                      ),
-                    ),
+    final btWidget = Semantics(
+      button: true,
+      child: ConstrainedBox(
+        constraints: BoxConstraints(
+                minWidth: widget.minWidth, minHeight: widget.minHeight),
+        child: FadeTransition(
+          opacity: _opacityAnimation,
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              borderRadius: widget.borderRadius,
+              color: widget.gradient != null ? null : resultColor,
+              gradient: widget.gradient,
+              boxShadow: widget.isShadow
+                  ? [
+                      BoxShadow(
+                          color: widget.shadowColor!,
+                          blurRadius: 10,
+                          spreadRadius: 0.5),
+                    ]
+                  : [],
+              border: widget.border,
+            ),
+            child: Padding(
+              padding: widget.padding ??
+                  (backgroundColor != null
+                      ? _kBackgroundButtonPadding
+                      : _kButtonPadding),
+              child: Center(
+                widthFactor: 1,
+                heightFactor: 1,
+                child: DefaultTextStyle(
+                  style: textStyle,
+                  child: IconTheme(
+                    data: IconThemeData(color: foregroundColor),
+                    child: widget.child,
                   ),
                 ),
               ),
@@ -184,6 +171,25 @@ class _SmallButtonState extends State<SmallButton>
           ),
         ),
       ),
+    );
+    return Container(
+      margin: widget.margin,
+      width: widget.width,
+      height: widget.height,
+      decoration: BoxDecoration(borderRadius: widget.borderRadius),
+      child: widget.isCanMultipleClick
+          ? MyInkWell(
+              onTap: () {
+                widget.onPressed();
+              },
+              child: btWidget,
+            )
+          : ClickEvent(
+              onTap: () {
+                widget.onPressed();
+              },
+              child: btWidget,
+            ),
     );
   }
 }

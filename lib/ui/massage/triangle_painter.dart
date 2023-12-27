@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class TrianglePainter extends CustomPainter {
-  Paint _paint;
+  late Paint _paint;
   final Color color;
   final RelativeRect position;
   final Size size;
@@ -9,9 +9,9 @@ class TrianglePainter extends CustomPainter {
   final bool isInverted;
 
   TrianglePainter(
-      {@required this.color,
-        @required this.position,
-        @required this.size,
+      {required this.color,
+        required this.position,
+        required this.size,
         this.radius = 20,
         this.isInverted = false}) {
     _paint = Paint()

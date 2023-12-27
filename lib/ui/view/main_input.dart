@@ -8,10 +8,10 @@ class MainInputBody extends StatefulWidget {
     this.onTap,
   });
 
-  final Widget child;
+  final Widget? child;
   final Color color;
-  final Decoration decoration;
-  final GestureTapCallback onTap;
+  final Decoration? decoration;
+  final GestureTapCallback? onTap;
 
   @override
   State<StatefulWidget> createState() => new MainInputBodyState();
@@ -31,7 +31,7 @@ class MainInputBodyState extends State<MainInputBody> {
               onTap: () {
                 FocusScope.of(context).requestFocus(new FocusNode());
                 if (widget.onTap != null) {
-                  widget.onTap();
+                  widget.onTap!();
                 }
               },
             ),
@@ -46,7 +46,7 @@ class MainInputBodyState extends State<MainInputBody> {
               onTap: () {
                 FocusScope.of(context).requestFocus(new FocusNode());
                 if (widget.onTap != null) {
-                  widget.onTap();
+                  widget.onTap!();
                 }
               },
             ),

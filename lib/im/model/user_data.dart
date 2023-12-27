@@ -1,11 +1,10 @@
-import 'package:flutter/material.dart';
 
 class UserData {
   UserData({
-    @required this.avatar,
-    @required this.name,
-    @required this.identifier,
-    @required this.isAdd,
+    required this.avatar,
+    required this.name,
+    required this.identifier,
+    required this.isAdd,
   });
 
   final String avatar;

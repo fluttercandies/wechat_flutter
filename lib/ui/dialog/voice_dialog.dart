@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-showVoiceDialog(BuildContext context, {int index}) {
+showVoiceDialog(BuildContext context, {int? index}) {
   OverlayEntry overlayEntry = new OverlayEntry(builder: (content) {
     return Positioned(
       top: MediaQuery.of(context).size.height * 0.5 - 80,
@@ -8,13 +8,13 @@ showVoiceDialog(BuildContext context, {int index}) {
       child: new VoiceDialog(index),
     );
   });
-  Overlay.of(context).insert(overlayEntry);
+  Overlay.of(context)!.insert(overlayEntry);
 
   return overlayEntry;
 }
 
 class VoiceDialog extends StatefulWidget {
-  final int index;
+  final int? index;
 
   VoiceDialog(this.index);
 
@@ -25,10 +25,10 @@ class VoiceDialog extends StatefulWidget {
 class _VoiceDialogState extends State<VoiceDialog> {
   @override
   Widget build(BuildContext context) {
-    int index = widget.index;
+    int? index = widget.index;
 
     String icon() {
-      if (index > 0 && index <= 16) {
+      if (index! > 0 && index <= 16) {
         return 'assets/images/chat/voice_volume_2.webp';
       } else if (16 < index && index <= 32) {
         return 'assets/images/chat/voice_volume_3.webp';

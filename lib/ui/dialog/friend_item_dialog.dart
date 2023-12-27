@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:wechat_flutter/tools/commom/win_media.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
 import 'confirm_alert.dart';
 
-friendItemDialog(BuildContext context, {String userId}) {
+friendItemDialog(BuildContext context, {String? userId}) {
   action(v) {
     Navigator.of(context).pop();
     if (v == '删除') {
@@ -20,13 +19,13 @@ friendItemDialog(BuildContext context, {String userId}) {
         style: TextStyle(fontWeight: FontWeight.w500),
       );
     } else {
-      showToast(context, '删除功能是好的');
+      q1Toast('删除功能是好的');
     }
   }
 
   Widget item(item) {
     return new Container(
-      width: winWidth(context),
+      width: FrameSize.winWidth(),
       decoration: BoxDecoration(
         border: item != '删除'
             ? Border(
@@ -34,9 +33,11 @@ friendItemDialog(BuildContext context, {String userId}) {
               )
             : null,
       ),
-      child: new FlatButton(
-        color: Colors.white,
-        padding: EdgeInsets.symmetric(vertical: 15.0),
+      child: new TextButton(
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all(Colors.white),
+          padding: MaterialStateProperty.all(EdgeInsets.symmetric(vertical: 15.0)),
+        ),
         onPressed: () => action(item),
         child: new Text(item),
       ),
@@ -79,12 +80,16 @@ friendItemDialog(BuildContext context, {String userId}) {
                     children: <Widget>[
                       new Column(children: data.map(item).toList()),
                       new HorizontalLine(color: appBarColor, height: 10.0),
-                      new FlatButton(
-                        padding: EdgeInsets.symmetric(vertical: 15.0),
-                        color: Colors.white,
+                      new TextButton(
+                        style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.white),
+                          padding: MaterialStateProperty.all(
+                              EdgeInsets.symmetric(vertical: 15.0)),
+                        ),
                         onPressed: () => Navigator.of(context).pop(),
                         child: new Container(
-                          width: winWidth(context),
+                          width: FrameSize.winWidth(),
                           alignment: Alignment.center,
                           child: new Text('取消'),
                         ),

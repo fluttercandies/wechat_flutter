@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:wechat_flutter/tools/commom/check.dart';
 
 class SetItem extends StatelessWidget {
-  final GestureTapCallback onTap;
-  final bool isBorder;
-  final String text;
-  final String bottomText;
-  final String subText;
-  final Widget rWidget;
+  final GestureTapCallback? onTap;
+  final bool? isBorder;
+  final String? text;
+  final String? bottomText;
+  final String? subText;
+  final Widget? rWidget;
 
   SetItem({
     this.onTap,
@@ -32,7 +32,7 @@ class SetItem extends StatelessWidget {
           decoration: BoxDecoration(
             border: Border(
               bottom: BorderSide(
-                color: Colors.grey.withOpacity(isBorder ? 0 : 0.2),
+                color: Colors.grey.withOpacity(isBorder! ? 0 : 0.2),
               ),
             ),
           ),
@@ -42,7 +42,7 @@ class SetItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    text,
+                    text!,
                     style: TextStyle(
                       fontSize: 15,
                     ),
@@ -51,7 +51,7 @@ class SetItem extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.only(top: 5),
                       child: Text(
-                        bottomText,
+                        bottomText!,
                         style: TextStyle(
                           fontSize: 12,
                           color: Colors.grey,
@@ -65,12 +65,12 @@ class SetItem extends StatelessWidget {
                 Container(
                   margin: EdgeInsets.only(right: 5),
                   child: Text(
-                    subText,
+                    subText!,
                     style: TextStyle(color: Colors.grey, fontSize: 15),
                   ),
                 ),
               if (rWidget != null)
-                rWidget
+                rWidget!
               else
                 Container(
                   margin: EdgeInsets.only(right: 15),

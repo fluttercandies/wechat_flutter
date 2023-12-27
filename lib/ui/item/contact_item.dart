@@ -1,9 +1,9 @@
 import 'package:get/get.dart';
-import 'package:wechat_flutter/pages/contacts/all_label_page.dart';
-import 'package:wechat_flutter/pages/contacts/contacts_details_page.dart';
-import 'package:wechat_flutter/pages/contacts/group_list_page.dart';
-import 'package:wechat_flutter/pages/contacts/new_friend_page.dart';
-import 'package:wechat_flutter/pages/contacts/public_page.dart';
+import 'package:wechat_flutter/pages/common/contacts/all_label_page.dart';
+import 'package:wechat_flutter/pages/common/contacts/contacts_details_page.dart';
+import 'package:wechat_flutter/pages/common/contacts/group_list_page.dart';
+import 'package:wechat_flutter/pages/common/contacts/new_friend_page.dart';
+import 'package:wechat_flutter/pages/common/contacts/public_page.dart';
 import 'package:flutter/material.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
@@ -13,18 +13,18 @@ typedef OnAdd = void Function(String v);
 typedef OnCancel = void Function(String v);
 
 class ContactItem extends StatefulWidget {
-  final String avatar;
-  final String title;
-  final String identifier;
-  final String groupTitle;
+  final String? avatar;
+  final String? title;
+  final String? identifier;
+  final String? groupTitle;
   final bool isLine;
-  final ClickType type;
-  final OnAdd add;
-  final OnCancel cancel;
+  final ClickType? type;
+  final OnAdd? add;
+  final OnCancel? cancel;
 
   ContactItem({
-    @required this.avatar,
-    @required this.title,
+    required this.avatar,
+    required this.title,
     this.identifier,
     this.isLine = true,
     this.groupTitle,
@@ -56,7 +56,7 @@ class ContactItemState extends State<ContactItem> {
 
   bool isSelect = false;
 
-  Map<String, dynamic> mapData;
+  Map<String, dynamic>? mapData;
 
   bool isLine() {
     if (widget.isLine) {
@@ -108,7 +108,7 @@ class ContactItemState extends State<ContactItem> {
           ),
 
           /// 姓名
-          child: new Text(widget.title,
+          child: new Text(widget.title!,
               style: TextStyle(fontWeight: FontWeight.w400), maxLines: 1),
         ),
       ),
@@ -122,21 +122,23 @@ class ContactItemState extends State<ContactItem> {
               ),
               onTap: () {
                 setState(() => isSelect = !isSelect);
-                if (isSelect) widget.add(widget.identifier);
-                if (!isSelect) widget.cancel(widget.identifier);
+                if (isSelect) widget.add!(widget.identifier ?? "");
+                if (!isSelect) widget.cancel!(widget.identifier ?? '');
               },
             )
           : new Container()
     ];
 
     /// 列表项主体部分
-    Widget button = new FlatButton(
-      color: Colors.white,
+    Widget button = new TextButton(
+      style: ButtonStyle(
+        backgroundColor: MaterialStateProperty.all(Colors.white),
+      ),
       onPressed: () {
         if (widget.type == ClickType.select) {
           setState(() => isSelect = !isSelect);
-          if (isSelect) widget.add(widget.identifier);
-          if (!isSelect) widget.cancel(widget.identifier);
+          if (isSelect) widget.add!(widget.identifier ?? "");
+          if (!isSelect) widget.cancel!(widget.identifier ?? "");
           return;
         }
         if (widget.title == '新的朋友') {
@@ -173,7 +175,7 @@ class ContactItemState extends State<ContactItem> {
               ),
             ),
             alignment: Alignment.centerLeft,
-            child: new Text(widget.groupTitle,
+            child: new Text(widget.groupTitle!,
                 style: AppStyles.GroupTitleItemTextStyle),
           ),
           button,

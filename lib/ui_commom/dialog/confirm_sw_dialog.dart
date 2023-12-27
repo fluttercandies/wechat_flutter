@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:wechat_flutter/tools/commom/win_media.dart';
 import 'package:wechat_flutter/tools/func/func.dart';
+import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'package:wechat_flutter/ui_commom/dialog/sw_scroll_dialog.dart';
 
 bool _canShow = true;
@@ -9,29 +9,29 @@ typedef CallAppState = Function(AppLifecycleState state);
 
 Future confirmSwDialog(
   BuildContext context, {
-  String text,
-  TextStyle headTextStyle,
-  TextStyle contentStyle,
-  VoidCallback onPressed,
-  VoidCallback onCancel,
-  String cancelText,
-  TextStyle cancelTextStyle,
-  String okText,
-  TextStyle okTextStyle,
-  Widget head,
+  String? text,
+  TextStyle? headTextStyle,
+  TextStyle? contentStyle,
+  VoidCallback? onPressed,
+  VoidCallback? onCancel,
+  String? cancelText,
+  TextStyle? cancelTextStyle,
+  String? okText,
+  TextStyle? okTextStyle,
+  Widget? head,
   int type = 1,
   TextAlign textAlign = TextAlign.center,
-  Widget child,
-  bool barrierDismissible,
-  double headTopPadding,
-  double headBottomPadding,
-  double textBottomPadding,
-  String title,
-  bool isOkPop,
-  bool isDarkMode,
+  Widget? child,
+  bool? barrierDismissible,
+  double? headTopPadding,
+  double? headBottomPadding,
+  double? textBottomPadding,
+  String? title,
+  bool? isOkPop,
+  bool? isDarkMode,
   bool isHaveCancel = true,
-  final WillPopCallback onWillPop,
-  final CallAppState callAppState,
+  final WillPopCallback? onWillPop,
+  final CallAppState? callAppState,
 }) {
   if (!_canShow) {
     return Future.value();
@@ -75,29 +75,29 @@ Future confirmSwDialog(
 }
 
 class SwDialog extends StatefulWidget {
-  final String text;
-  final TextStyle contentStyle;
-  final String title;
-  final String cancelText;
-  final TextStyle cancelTextStyle;
-  final String okText;
-  final TextStyle okTextStyle;
-  final VoidCallback onPressed;
-  final VoidCallback onCancel;
-  final Widget head;
-  final TextStyle headTextStyle;
+  final String? text;
+  final TextStyle? contentStyle;
+  final String? title;
+  final String? cancelText;
+  final TextStyle? cancelTextStyle;
+  final String? okText;
+  final TextStyle? okTextStyle;
+  final VoidCallback? onPressed;
+  final VoidCallback? onCancel;
+  final Widget? head;
+  final TextStyle? headTextStyle;
   final int type;
   final TextAlign textAlign;
-  final Widget child;
-  final bool barrierDismissible;
-  final double headTopPadding;
-  final double headBottomPadding;
-  final double textBottomPadding;
-  final bool isOkPop;
-  final bool isDarkMode;
-  final bool isHaveCancel;
-  final WillPopCallback onWillPop;
-  final CallAppState callAppState;
+  final Widget? child;
+  final bool? barrierDismissible;
+  final double? headTopPadding;
+  final double? headBottomPadding;
+  final double? textBottomPadding;
+  final bool? isOkPop;
+  final bool? isDarkMode;
+  final bool? isHaveCancel;
+  final WillPopCallback? onWillPop;
+  final CallAppState? callAppState;
 
   const SwDialog(
     this.title,
@@ -146,7 +146,7 @@ class _SwDialogState extends State<SwDialog> with WidgetsBindingObserver {
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (widget.callAppState != null) {
-      widget.callAppState(state);
+      widget.callAppState!(state);
     }
   }
 
@@ -160,19 +160,19 @@ class _SwDialogState extends State<SwDialog> with WidgetsBindingObserver {
         child: Stack(
           children: [
             SizedBox(
-              width: winWidth(context),
+              width: FrameSize.winWidth(),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
                     decoration: BoxDecoration(
-                      color: widget.isDarkMode
+                      color: widget.isDarkMode!
                           ? Colors.black.withOpacity(0.85)
                           : Colors.white,
                       borderRadius: const BorderRadius.all(Radius.circular(8)),
                     ),
                     padding: EdgeInsets.only(top: widget.headTopPadding ?? 20),
-                    width: winHeight(context) - (47.5 * 2),
+                    width: FrameSize.winHeight() - (47.5 * 2),
                     margin: EdgeInsets.only(
                         bottom: MediaQuery.of(context).viewInsets.bottom),
                     child: Column(
@@ -183,7 +183,7 @@ class _SwDialogState extends State<SwDialog> with WidgetsBindingObserver {
                                 widget.title ?? '提    示',
                                 style: widget.headTextStyle ??
                                     TextStyle(
-                                      color: widget.isDarkMode
+                                      color: widget.isDarkMode!
                                           ? Colors.white
                                           : const Color(0xff121212),
                                       fontSize: 18,
@@ -193,7 +193,7 @@ class _SwDialogState extends State<SwDialog> with WidgetsBindingObserver {
                         SizedBox(height: widget.headBottomPadding ?? 30),
                         if (widget.child != null)
                           SizedBox(
-                            width: winHeight(context),
+                            width: FrameSize.winHeight(),
                             child: widget.child,
                           )
                         else
@@ -204,7 +204,7 @@ class _SwDialogState extends State<SwDialog> with WidgetsBindingObserver {
                               widget.text ?? '请输入内容',
                               style: widget.contentStyle ??
                                   TextStyle(
-                                    color: widget.isDarkMode
+                                    color: widget.isDarkMode!
                                         ? Colors.white
                                         : const Color(0xff121212),
                                     fontSize: 16,
@@ -214,9 +214,9 @@ class _SwDialogState extends State<SwDialog> with WidgetsBindingObserver {
                           ),
                         Container(
                           key: key,
-                          width: winHeight(context) - 50,
+                          width: FrameSize.winHeight() - 50,
                           height: 0,
-                          color: widget.isDarkMode
+                          color: widget.isDarkMode!
                               ? const Color(0xff333333)
                               : Colors.grey.withOpacity(0.5),
                         ),
@@ -228,19 +228,19 @@ class _SwDialogState extends State<SwDialog> with WidgetsBindingObserver {
                             child: Container(
                               decoration: BoxDecoration(
                                 border: Border(top: borderSide),
-                                color: widget.isDarkMode
+                                color: widget.isDarkMode!
                                     ? Colors.transparent
                                     : Colors.white,
                               ),
                               child: Row(
                                 children: [
-                                  if (widget.isHaveCancel)
+                                  if (widget.isHaveCancel!)
                                     Expanded(
                                       child: ClickEvent(
                                         onTap: () async {
                                           Navigator.pop(context);
                                           if (widget.onCancel != null) {
-                                            widget.onCancel();
+                                            widget.onCancel!();
                                           }
                                         },
                                         child: Container(
@@ -254,7 +254,7 @@ class _SwDialogState extends State<SwDialog> with WidgetsBindingObserver {
                                             style: widget.cancelTextStyle ??
                                                 TextStyle(
                                                   fontSize: (17),
-                                                  color: widget.isDarkMode
+                                                  color: widget.isDarkMode!
                                                       ? Colors.white
                                                       : const Color(0xff363940),
                                                 ),
@@ -265,10 +265,10 @@ class _SwDialogState extends State<SwDialog> with WidgetsBindingObserver {
                                   Expanded(
                                     child: InkWell(
                                       onTap: () {
-                                        if (widget.isOkPop)
+                                        if (widget.isOkPop!)
                                           Navigator.pop(context);
                                         if (widget.onPressed != null) {
-                                          widget.onPressed();
+                                          widget.onPressed!();
                                         }
                                       },
                                       child: Container(
@@ -279,7 +279,7 @@ class _SwDialogState extends State<SwDialog> with WidgetsBindingObserver {
                                           style: widget.okTextStyle ??
                                               TextStyle(
                                                 fontSize: (17),
-                                                color: widget.isDarkMode
+                                                color: widget.isDarkMode!
                                                     ? const Color(0xff1677FF)
                                                     : const Color(0xff6179f2),
                                               ),
@@ -294,19 +294,19 @@ class _SwDialogState extends State<SwDialog> with WidgetsBindingObserver {
                         else
                           InkWell(
                             onTap: () {
-                              if (widget.isOkPop) Navigator.pop(context);
+                              if (widget.isOkPop!) Navigator.pop(context);
                               if (widget.onPressed != null) {
-                                widget.onPressed();
+                                widget.onPressed!();
                               }
                             },
                             child: Container(
                               alignment: Alignment.center,
-                              width: winHeight(context),
+                              width: FrameSize.winHeight(),
                               height: (55.5),
                               decoration: BoxDecoration(
                                 border: Border(
                                   top: BorderSide(
-                                    color: widget.isDarkMode
+                                    color: widget.isDarkMode!
                                         ? const Color(0xff333333)
                                         : const Color(0xff8f959e)
                                             .withOpacity(0.2),
@@ -318,7 +318,7 @@ class _SwDialogState extends State<SwDialog> with WidgetsBindingObserver {
                                 widget.okText ?? '确定',
                                 style: TextStyle(
                                   fontSize: (17),
-                                  color: widget.isDarkMode
+                                  color: widget.isDarkMode!
                                       ? const Color(0xff1677FF)
                                       : const Color(0xff6179f2),
                                   fontWeight: FontWeight.w600,

@@ -1,0 +1,81 @@
+import 'package:get/get.dart';
+import 'package:wechat_flutter/pages/common/tools/scan_page.dart';
+import 'package:wechat_flutter/pages/common/wechat_friends/page/wechat_friends_circle.dart';
+import 'package:wechat_flutter/ui/view/indicator_page_view.dart';
+import 'package:flutter/material.dart';
+
+import 'package:wechat_flutter/tools/wechat_flutter.dart';
+import 'package:wechat_flutter/ui/view/list_tile_view.dart';
+
+class DiscoverPage extends StatefulWidget {
+  @override
+  _DiscoverPageState createState() => _DiscoverPageState();
+}
+
+class _DiscoverPageState extends State<DiscoverPage> {
+  action(String? value) {
+    switch (value) {
+      case "朋友圈":
+        Get.to(new WeChatFriendsCircle());
+        break;
+      case "扫一扫":
+        Get.to(new ScanPage());
+        break;
+      default:
+        q1Toast( "开发中");
+        break;
+    }
+  }
+
+  Widget buildContent(item) {
+    bool isShow() {
+      if (item['name'] == '朋友圈' ||
+          item['name'] == '社交圈' ||
+          item['name'] == '摇一摇' ||
+          item['name'] == '搜一搜' ||
+          item['name'] == '附近的餐厅' ||
+          item['name'] == '购物' ||
+          item['name'] == '游戏' ||
+          item['name'] == '小程序') {
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    return new ListTileView(
+      border: isShow()
+          ? null
+          : Border(bottom: BorderSide(color: lineColor, width: 0.3)),
+      title: item['name'],
+      titleStyle: TextStyle(fontSize: 15.0),
+      isLabel: false,
+      padding: EdgeInsets.symmetric(vertical: 16.0),
+      icon: item['icon'],
+      margin: EdgeInsets.only(bottom: isShow() ? 10.0 : 0.0),
+      onPressed: () {
+        action(item['name']);
+      },
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    List data = [
+      {'icon': 'assets/images/discover/ff_Icon_album.webp', 'name': '社交圈'},
+      {'icon': 'assets/images/discover/ff_Icon_qr_code.webp', 'name': '扫一扫'},
+      {'icon': 'assets/images/discover/ff_Icon_qr_code.webp', 'name': '购物'},
+      {'icon': 'assets/images/discover/game_center_h5.webp', 'name': '游戏'},
+    ];
+
+    return new Scaffold(
+      backgroundColor: appBarColor,
+      body: new ScrollConfiguration(
+        behavior: MyBehavior(),
+        child: new SingleChildScrollView(
+          child: new Column(children: data.map(buildContent).toList()),
+        ),
+      ),
+    );
+  }
+}

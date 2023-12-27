@@ -5,7 +5,7 @@ const double _kMenuHorizontalPadding = 16.0;
 const double _kMenuItemHeight = 48.0;
 
 class MyPopupMenuItem<T> extends PopupMenuEntry<T> {
-  final T value;
+  final T? value;
   final bool enabled;
   @override
   final double height;
@@ -15,10 +15,10 @@ class MyPopupMenuItem<T> extends PopupMenuEntry<T> {
       {this.value,
       this.enabled = true,
       this.height = _kMenuItemHeight,
-      @required this.child});
+      required this.child});
 
   @override
-  bool represents(T value) => value == this.value;
+  bool represents(T? value) => value == this.value;
 
   @override
   PopupMenuItemState<T, MyPopupMenuItem<T>> createState() =>
@@ -38,15 +38,15 @@ class PopupMenuItemState<T, W extends MyPopupMenuItem<T>> extends State<W> {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     /// 适配flutter2.5.2
-    TextStyle style = theme.textTheme.subtitle1;
-    if (!widget.enabled) style = style.copyWith(color: theme.disabledColor);
+    TextStyle? style = theme.textTheme.subtitle1;
+    if (!widget.enabled) style = style!.copyWith(color: theme.disabledColor);
 
     Widget item = AnimatedDefaultTextStyle(
-      style: style,
+      style: style!,
       duration: Duration(milliseconds: 20),
       child: Baseline(
         baseline: widget.height - _kBaselineOffsetFromBottom,
-        baselineType: style.textBaseline,
+        baselineType: style.textBaseline!,
         child: buildChild(),
       ),
     );

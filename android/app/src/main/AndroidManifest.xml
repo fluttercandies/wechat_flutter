@@ -36,7 +36,6 @@
         android:usesCleartextTraffic="true"
         android:requestLegacyExternalStorage="true">
         <activity
-            android:exported="true"
             android:name=".MainActivity"
             android:exported="true"
             android:launchMode="singleTop"

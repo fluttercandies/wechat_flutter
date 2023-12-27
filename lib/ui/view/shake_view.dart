@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 /// 封装之后的拍一拍
 class ShakeView extends StatefulWidget {
-  final Widget child;
+  final Widget? child;
 
   ShakeView({
     this.child,
@@ -15,8 +15,8 @@ class ShakeView extends StatefulWidget {
 
 class _ShakeViewState extends State<ShakeView>
     with SingleTickerProviderStateMixin {
-  Animation<double> animation;
-  AnimationController controller;
+  late Animation<double> animation;
+  late AnimationController controller;
 
   initState() {
     super.initState();
@@ -44,14 +44,14 @@ class _ShakeViewState extends State<ShakeView>
 }
 
 class AnimateWidget extends AnimatedWidget {
-  final Widget child;
+  final Widget? child;
 
-  AnimateWidget({Animation<double> animation, this.child})
+  AnimateWidget({required Animation<double> animation, this.child})
       : super(listenable: animation);
 
   @override
   Widget build(BuildContext context) {
-    final Animation<double> animation = listenable;
+    final Animation<double> animation = listenable as Animation<double>;
     var result = Transform(
       transform: Matrix4.rotationZ(animation.value * pi / 180),
       alignment: Alignment.bottomCenter,

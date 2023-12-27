@@ -6,8 +6,8 @@ import 'package:wechat_flutter/ui/edit/text_span_builder.dart';
 import 'package:wechat_flutter/ui/w_pop/magic_pop.dart';
 
 class TextItemContainer extends StatefulWidget {
-  final String text;
-  final String action;
+  final String? text;
+  final String? action;
   final bool isMyself;
 
   TextItemContainer({this.text, this.action, this.isMyself = true});
@@ -34,7 +34,7 @@ class _TextItemContainerState extends State<TextItemContainer> {
       pressType: PressType.longPress,
       actions: ['复制', '转发', '收藏', '撤回', '删除'],
       child: new Container(
-        width: widget.text.length > 24 ? (winWidth(context) - 66) - 100 : null,
+        width: widget.text!.length > 24 ? (FrameSize.winWidth() - 66) - 100 : null,
         padding: EdgeInsets.all(5.0),
         decoration: BoxDecoration(
           color: widget.isMyself ? Color(0xff98E165) : Colors.white,

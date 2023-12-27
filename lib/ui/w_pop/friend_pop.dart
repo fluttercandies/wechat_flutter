@@ -4,16 +4,16 @@ class PopRoute extends PopupRoute {
   final Duration _duration = Duration(milliseconds: 300);
   Widget child;
 
-  PopRoute({@required this.child});
+  PopRoute({required this.child});
 
   @override
-  Color get barrierColor => null;
+  Color? get barrierColor => null;
 
   @override
   bool get barrierDismissible => true;
 
   @override
-  String get barrierLabel => null;
+  String? get barrierLabel => null;
 
   @override
   Widget buildPage(BuildContext context, Animation<double> animation,
@@ -26,13 +26,13 @@ class PopRoute extends PopupRoute {
 }
 
 class Popup extends StatefulWidget {
-  final BuildContext btnContext;
+  final BuildContext? btnContext;
   final Widget child;
-  final Function onClick; //点击child事件
+  final Function? onClick; //点击child事件
 
   Popup({
     this.btnContext,
-    @required this.child,
+    required this.child,
     this.onClick,
   });
 
@@ -40,21 +40,21 @@ class Popup extends StatefulWidget {
 }
 
 class PopupState extends State<Popup> {
-  RenderBox button;
-  RenderBox overlay;
-  RelativeRect position;
+  RenderBox? button;
+  RenderBox? overlay;
+  late RelativeRect position;
 
   @override
   void initState() {
     super.initState();
-    button = widget.btnContext.findRenderObject();
-    overlay = Overlay.of(widget.btnContext).context.findRenderObject();
+    button = widget.btnContext!.findRenderObject() as RenderBox?;
+    overlay = Overlay.of(widget.btnContext!)!.context.findRenderObject() as RenderBox?;
     position = RelativeRect.fromRect(
       Rect.fromPoints(
-        button.localToGlobal(Offset.zero, ancestor: overlay),
-        button.localToGlobal(Offset.zero, ancestor: overlay),
+        button!.localToGlobal(Offset.zero, ancestor: overlay),
+        button!.localToGlobal(Offset.zero, ancestor: overlay),
       ),
-      Offset.zero & overlay.size,
+      Offset.zero & overlay!.size,
     );
   }
 
@@ -97,7 +97,7 @@ class PopupState extends State<Popup> {
                   //点击子child
                   if (widget.onClick != null) {
                     Navigator.of(context).pop();
-                    widget.onClick();
+                    widget.onClick!();
                   }
                 },
               ),

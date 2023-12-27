@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:wechat_flutter/tools/data/store.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
 class ModifyGroupInfoMessage extends StatefulWidget {
@@ -12,24 +13,24 @@ class ModifyGroupInfoMessage extends StatefulWidget {
 }
 
 class ModifyGroupInfoMessageState extends State<ModifyGroupInfoMessage> {
-  String name;
-  List membersData;
+  String? name;
+  List? membersData;
 
   @override
   void initState() {
     super.initState();
-    String user = widget.data['opGroupMemberInfo']['user'];
+    String? user = widget.data['opGroupMemberInfo']['user'];
     getCardName(user);
   }
 
-  getCardName(String user) async {
+  getCardName(String? user) async {
     String strToData = "";
     membersData = json.decode(strToData);
     var userPhone = await getStoreValue('userPhone');
     if (listNoEmpty(membersData)) if (user == userPhone)
       name = '你';
-    else if (strNoEmpty(membersData[0]['nameCard']))
-      name = membersData[0]['nameCard'];
+    else if (strNoEmpty(membersData![0]['nameCard']))
+      name = membersData![0]['nameCard'];
     else
       name = user;
     setState(() {});

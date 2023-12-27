@@ -5,7 +5,7 @@ import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'package:wechat_flutter/ui/edit/text_span_builder.dart';
 
 class ContentMsg extends StatefulWidget {
-  final V2TimMessage msg;
+  final V2TimMessage? msg;
 
   ContentMsg(this.msg);
 
@@ -14,11 +14,11 @@ class ContentMsg extends StatefulWidget {
 }
 
 class _ContentMsgState extends State<ContentMsg> {
-  String str = "[未知消息]";
+  String? str = "[未知消息]";
 
   TextStyle _style = TextStyle(color: mainTextColor, fontSize: 14.0);
 
-  V2TimMessage get msg {
+  V2TimMessage? get msg {
     return widget.msg;
   }
 
@@ -26,13 +26,13 @@ class _ContentMsgState extends State<ContentMsg> {
   Widget build(BuildContext context) {
     if (msg == null) return new Text('未知消息', style: _style);
 
-    if (msg.textElem != null) {
-      str = widget.msg.textElem.text;
-    } else if (msg.imageElem != null) {
+    if (msg!.textElem != null) {
+      str = widget.msg!.textElem!.text;
+    } else if (msg!.imageElem != null) {
       str = '[图片]';
-    } else if (msg.soundElem != null) {
+    } else if (msg!.soundElem != null) {
       str = '[语音消息]';
-    } else if (msg.videoElem != null) {
+    } else if (msg!.videoElem != null) {
       str = '[视频]';
     } else {
       str = '[未知消息]';
@@ -48,7 +48,7 @@ class _ContentMsgState extends State<ContentMsg> {
     // }
 
     return new ExtendedText(
-      str,
+      str!,
       specialTextSpanBuilder: TextSpanBuilder(showAtBackground: true),
       maxLines: 1,
       overflow: TextOverflow.ellipsis,

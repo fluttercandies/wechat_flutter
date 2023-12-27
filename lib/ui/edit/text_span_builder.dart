@@ -10,23 +10,23 @@ class TextSpanBuilder extends SpecialTextSpanBuilder {
   });
 
   @override
-  TextSpan build(String data, {TextStyle textStyle, onTap}) {
+  TextSpan build(String data, {TextStyle? textStyle, onTap}) {
     TextSpan result = super.build(data, textStyle: textStyle, onTap: onTap);
     return result;
   }
 
   @override
-  SpecialText createSpecialText(String flag,
-      {TextStyle textStyle, SpecialTextGestureTapCallback onTap, int index}) {
+  SpecialText? createSpecialText(String flag,
+      {TextStyle? textStyle, SpecialTextGestureTapCallback? onTap, int? index}) {
     if (flag == null || flag == "") return null;
 
     if (isStart(flag, EmojiText.flag)) {
-      return EmojiText(textStyle, start: index - (EmojiText.flag.length - 1));
+      return EmojiText(textStyle, start: index! - (EmojiText.flag.length - 1));
     }
     return null;
   }
 }
 
 class SpecialTextStyle {
-  TextRange textRange;
+  TextRange? textRange;
 }

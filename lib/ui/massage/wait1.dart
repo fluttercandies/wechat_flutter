@@ -24,10 +24,10 @@ class _SendMessageViewState extends State<SendMessageView> {
   @override
   Widget build(BuildContext context) {
     if ((model.textElem != null) &&
-        widget.model.textElem.text.toString().contains("测试发送红包消息")) {
+        widget.model.textElem!.text.toString().contains("测试发送红包消息")) {
       return new RedPackage(widget.model);
     } else if (model.textElem != null) {
-      return new TextMsg(model.textElem.text, widget.model);
+      return new TextMsg(model.textElem!.text, widget.model);
     } else if (model.imageElem != null) {
       return new ImgMsg(model.imageElem, widget.model);
     } else if (model.soundElem != null) {

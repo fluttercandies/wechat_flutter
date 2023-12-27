@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tencent_im_sdk_plugin/models/v2_tim_message.dart';
-import 'package:wechat_flutter/config/const.dart';
-import 'package:wechat_flutter/pages/red_package/red_receive_dialog.dart';
-import 'package:wechat_flutter/provider/global_model.dart';
+import 'package:wechat_flutter/pages/common/red_package/red_receive_dialog.dart';
+import 'package:wechat_flutter/tools/provider/global_model.dart';
+import 'package:wechat_flutter/tools/config/app_config.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
 import 'msg_avatar.dart';
@@ -53,7 +53,7 @@ class RedPackage extends StatelessWidget {
               ),
               HorizontalLine(color: Colors.white, height: 1),
               Text(
-                '微信红包',
+                '${AppConfig.appName}红包',
                 style: TextStyle(
                     color: Colors.white.withOpacity(0.7), fontSize: 8),
               )

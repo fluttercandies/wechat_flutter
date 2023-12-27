@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:wechat_flutter/pages/contacts/group_select_page.dart';
+import 'package:wechat_flutter/pages/common/contacts/group_select_page.dart';
 import 'package:flutter/material.dart';
 
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
@@ -18,18 +18,21 @@ class LaunchGroupItem extends StatelessWidget {
         ),
       ),
       alignment: Alignment.centerLeft,
-      child: new FlatButton(
-        color: Colors.white,
-        padding: EdgeInsets.symmetric(vertical: 15.0),
+      child: new TextButton(
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all(Colors.white),
+          padding:
+              MaterialStateProperty.all(EdgeInsets.symmetric(vertical: 15.0)),
+        ),
         onPressed: () {
           if (item == '选择一个群') {
             Get.to(new GroupSelectPage());
           } else {
-            showToast(context, '敬请期待');
+            q1Toast('敬请期待');
           }
         },
         child: new Container(
-          width: winWidth(context),
+          width: FrameSize.winWidth(),
           padding: EdgeInsets.only(left: 20.0),
           child: new Text(item),
         ),
@@ -39,12 +42,12 @@ class LaunchGroupItem extends StatelessWidget {
 }
 
 class LaunchSearch extends StatelessWidget {
-  final FocusNode searchF;
-  final TextEditingController searchC;
-  final ValueChanged<String> onChanged;
-  final GestureTapCallback onTap;
-  final ValueChanged<String> onSubmitted;
-  final GestureTapCallback delOnTap;
+  final FocusNode? searchF;
+  final TextEditingController? searchC;
+  final ValueChanged<String>? onChanged;
+  final GestureTapCallback? onTap;
+  final ValueChanged<String>? onSubmitted;
+  final GestureTapCallback? delOnTap;
 
   LaunchSearch({
     this.searchF,
@@ -80,12 +83,12 @@ class LaunchSearch extends StatelessWidget {
             onSubmitted: onSubmitted,
           ),
         ),
-        strNoEmpty(searchC.text)
+        strNoEmpty(searchC!.text)
             ? new InkWell(
                 child: new Image.asset('assets/images/ic_delete.webp'),
                 onTap: () {
-                  searchC.text = '';
-                  delOnTap();
+                  searchC!.text = '';
+                  delOnTap!();
                 },
               )
             : new Container()

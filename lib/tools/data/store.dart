@@ -1,7 +1,7 @@
-import 'package:wechat_flutter/tools/data/notice.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
 typedef Widget StoreBuilder<T>(T item);
 
@@ -12,9 +12,9 @@ class Store<T> {
 
   const Store(this._action);
 
-  T get value => _storeMap[_action];
+  T? get value => _storeMap[_action];
 
-  set value(T v) {
+  set value(T? v) {
     if (!(v is List) && !(v is Set) && !(v is Map) && v == _storeMap[_action])
       return;
 
@@ -45,20 +45,20 @@ class CacheWidget<T> extends StatefulWidget {
   final StoreBuilder<T> builder;
   final data;
 
-  CacheWidget(this.action, this.builder, {Key key,this.data}) : super(key: key);
+  CacheWidget(this.action, this.builder, {Key? key,this.data}) : super(key: key);
 
   @override
   _CacheWidgetState createState() => new _CacheWidgetState<T>();
 }
 
-class _CacheWidgetState<T> extends State<CacheWidget<T>>
+class _CacheWidgetState<T> extends State<CacheWidget<T?>>
     with BusStateMixin {
-  T item;
+  T? item;
 
   void init() {
     final action = widget.action;
 
-    item = _storeMap[action] as T;
+    item = _storeMap[action] as T?;
 
     bus('Store::$action', onData);
   }
@@ -71,7 +71,7 @@ class _CacheWidgetState<T> extends State<CacheWidget<T>>
   }
 
   @override
-  void didUpdateWidget(CacheWidget oldWidget) {
+  void didUpdateWidget(CacheWidget<T> oldWidget) {
     super.didUpdateWidget(oldWidget);
     busDel(onData);
 
@@ -91,7 +91,7 @@ storeString(String k,v) async {
   prefs.setString(k, v);
 }
 
-Future<String> getStoreValue(String k) async {
+Future<String?> getStoreValue(String k) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
-  return prefs.get(k);
+  return prefs.get(k) as String?;
 }

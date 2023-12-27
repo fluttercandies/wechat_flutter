@@ -21,8 +21,8 @@ void restoreTemporaryProcess([int milliseconds = 500]) {
 
 /// 通用防重复【防多点】点击组件
 class ClickEvent extends StatefulWidget {
-  final Widget child;
-  final GestureTapCallback onTap;
+  final Widget? child;
+  final GestureTapCallback? onTap;
   final bool isNet;
 
   const ClickEvent({
@@ -51,7 +51,7 @@ class _ClickEventState extends State<ClickEvent> {
         isTemporaryTapProcessing = true;
         restoreTemporaryProcess(300);
 
-        Throttle.milliseconds(widget.isNet ? 1000 : 300, widget.onTap);
+        Throttle.milliseconds(widget.isNet ? 1000 : 300, widget.onTap!);
       },
       child: widget.child ?? Container(),
     );
@@ -59,14 +59,14 @@ class _ClickEventState extends State<ClickEvent> {
 
   @override
   void dispose() {
-    Throttle.clear(widget.onTap);
+    Throttle.clear(widget.onTap!);
     super.dispose();
   }
 }
 
 class MyInkWell extends StatelessWidget {
-  final Widget child;
-  final GestureTapCallback onTap;
+  final Widget? child;
+  final GestureTapCallback? onTap;
 
   MyInkWell({this.child, this.onTap});
 

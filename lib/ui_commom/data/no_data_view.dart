@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:wechat_flutter/tools/data/my_theme.dart';
+import 'package:wechat_flutter/tools/theme/my_theme.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'package:wechat_flutter/ui_commom/bt/small_button.dart';
 
 class NoDataView extends StatefulWidget {
-  final String label;
-  final VoidCallback onRefresh;
+  final String? label;
+  final VoidCallback? onRefresh;
   final bool isTeam;
-  final Function onPressed;
-  final double height;
+  final Function? onPressed;
+  final double? height;
 
   NoDataView({
     this.label,
@@ -30,13 +30,13 @@ class NoDataViewState extends State<NoDataView> {
     final double imgWidth = widget.isTeam ? 168 : 84.5;
     return Container(
       height: widget.height ?? 320,
-      width: winWidth(context),
+      width: FrameSize.winWidth(),
       child: new Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           new Image.asset(
               'images/main/${widget.isTeam ? 'ic_empty' : 'ic_no_data'}.png',
-              width: widget.height != null ? widget.height / 2 : imgWidth),
+              width: widget.height != null ? widget.height! / 2 : imgWidth),
           new Space(height: mainSpace * 1.5),
           new Text(
             label,
@@ -65,7 +65,7 @@ class NoDataViewState extends State<NoDataView> {
   }
 
   handle() {
-    widget.onRefresh();
+    widget.onRefresh!();
 
     if (mounted) setState(() => isWay = true);
     new Future.delayed(new Duration(seconds: 2), () {}).then((v) {

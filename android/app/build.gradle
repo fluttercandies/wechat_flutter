@@ -25,7 +25,7 @@ apply plugin: 'com.android.application'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion 33
 
     lintOptions {
         disable 'InvalidPackage'
@@ -34,13 +34,27 @@ android {
     defaultConfig {
         applicationId "com.example.wechat_flutter"
         minSdkVersion 23
-        targetSdkVersion 31
+        targetSdkVersion 33
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }
 
+//    signingConfigs {
+//        release {
+//            keyAlias 'android.keystore'
+//            keyPassword '123456'
+//            storeFile file('android.keystore')
+//            storePassword '123456'
+//        }
+//    }
+
     buildTypes {
         release {
+            minifyEnabled false //删除无用代码
+            shrinkResources false //删除无用资源
+            signingConfig signingConfigs.debug
+        }
+        debug {
             minifyEnabled false //删除无用代码
             shrinkResources false //删除无用资源
             signingConfig signingConfigs.debug

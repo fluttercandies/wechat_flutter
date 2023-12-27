@@ -12,14 +12,14 @@ import 'package:flutter/cupertino.dart';
 ///生成腾讯云即时通信测试用userSig
 ///
 class GenerateTestUserSig {
-  GenerateTestUserSig({@required this.sdkappid, @required this.key});
+  GenerateTestUserSig({required this.sdkappid, required this.key});
   int sdkappid;
   String key;
 
   ///生成UserSig
   String genSig({
-    @required String identifier,
-    @required int expire,
+    required String identifier,
+    required int expire,
   }) {
     int currTime = _getCurrentTime();
     String sig = '';
@@ -48,8 +48,8 @@ class GenerateTestUserSig {
   }
 
   String _hmacsha256({
-    @required String identifier,
-    @required int currTime,
+    required String identifier,
+    required int currTime,
     int expire = 30 * 24 * 60 * 60,
   }) {
     int sdkappid = this.sdkappid;
@@ -62,7 +62,7 @@ class GenerateTestUserSig {
   }
 
   String _escape({
-    @required String content,
+    required String content,
   }) {
     return content
         .replaceAll('\+', '*')

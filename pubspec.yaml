@@ -3,10 +3,10 @@ description: A new Flutter project..
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-version: 1.0.1+101
+version: 1.0.0+100
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: '>=2.16.2 <3.0.0'
 
 dependencies:
   flutter:
@@ -15,29 +15,32 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   #IOS风格材料图标
-  cupertino_icons: 0.1.2
+  cupertino_icons: 1.0.5
   #即时通讯【腾讯云】
-  tencent_im_sdk_plugin: 4.1.3
+  tencent_im_sdk_plugin: 5.0.2
+  tencent_im_sdk_plugin_platform_interface: 0.3.8
   #加解密
-  archive: 3.3.1
+  archive: 3.3.4
   #持久化存储
   shared_preferences: 2.0.15
   #状态管理
-  provider: 6.0.3
+  provider: 6.0.4
   #图片显示
   cached_network_image: 3.2.0
+  flutter_cache_manager: 3.3.0
   #toast提示框
-  toast: 0.1.5
+#  toast: 0.3.0
+  oktoast: 3.1.2
   #web显示
   webview_flutter: 3.0.4
   #选取图库
-  image_picker: 0.8.5+3
-  #文本扩展显示
-  extended_text: 9.0.0
-  #文字表情混入
-  extended_text_field: 10.0.1
-  #文字表情混入【支持库】
-  extended_text_library: 9.0.0
+  image_picker: 0.8.6
+  #Text expanded show.
+  extended_text: 9.1.1
+  #Text insert emoji.
+  extended_text_field: 10.1.1
+  #Text insert emoji.[support lib]
+  extended_text_library: 9.1.0
   #打开系统浏览器
   url_launcher: 6.1.6
   #网络连接
@@ -53,7 +56,7 @@ dependencies:
   #音频处理
   flutter_sound: 9.2.13
   #权限处理
-  permission_handler: 9.2.0
+  permission_handler: 10.2.0
   #音频处理
   audioplayers: 1.1.1
   #视频播放
@@ -67,21 +70,21 @@ dependencies:
   #微信图库
   wechat_assets_picker: 7.2.0
   #扩展图片
-  extended_image: 6.0.2+1
+  extended_image: 6.2.0
   #平台
   platform: 3.1.0
   #状态管理
-  get: 4.6.1
+  get: 4.6.5
   #事件总线
   event_bus: 2.0.0
   #拍摄和录制视频
-  wechat_camera_picker: 3.6.1
+  wechat_camera_picker: 3.6.3
   #扫码功能
   flutter_scankit: 1.2.4
   #防止重复点击
-  just_throttle_it: 2.0.0
+  just_throttle_it: 2.1.0
   #通讯录
-  flutter_contacts: 1.1.4
+  flutter_contacts: 1.1.5+1
   #二维码生成
   qr_flutter: 4.0.0
   #获取视频缩略图
@@ -92,6 +95,20 @@ dependencies:
   fijkplayer: 0.10.1
   #保存图片
   image_gallery_saver: 1.7.1
+  #本地数据库管理
+  sqflite: 2.0.2+1
+  #日志
+  logging: 1.1.0
+  #获取视频信息
+  flutter_video_info: 1.3.1
+  #音视频
+  tencent_trtc_cloud: 2.3.9
+#  #音视频通话
+#  wechat_flutter_call:
+#    path: plugin/wechat_flutter_call
+#  #工具集
+#  wechat_flutter_util:
+#    path: plugin/wechat_flutter_util
 
 dev_dependencies:
   flutter_test:
@@ -202,6 +219,7 @@ flutter:
     - assets/images/group/
     - assets/images/wechat/
     - assets/images/wechat/in/
+    - assets/images/live/
 
     - assets/data/contacts.json
     - assets/data/friends.json

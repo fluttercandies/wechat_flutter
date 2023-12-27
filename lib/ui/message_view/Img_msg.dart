@@ -1,30 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:get/get.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:provider/provider.dart';
 import 'package:tencent_im_sdk_plugin/models/v2_tim_image_elem.dart';
 import 'package:tencent_im_sdk_plugin/models/v2_tim_message.dart';
+import 'package:wechat_flutter/tools/provider/global_model.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'package:wechat_flutter/ui/message_view/msg_avatar.dart';
-import '../../provider/global_model.dart';
 
 class ImgMsg extends StatelessWidget {
-  final V2TimImageElem msg;
+  final V2TimImageElem? msg;
   final V2TimMessage model;
 
   ImgMsg(this.msg, this.model);
 
   @override
   Widget build(BuildContext context) {
-    if (!listNoEmpty(msg.imageList)) return Text('发送中');
-    if (msg.imageList.length < 2) {
+    if (!listNoEmpty(msg!.imageList)) return Text('发送中');
+    if (msg!.imageList!.length < 2) {
       /// 图片异常了
       return Container();
     }
-    var msgInfo = msg.imageList[1];
-    var _height = msgInfo.height.toDouble();
+    var msgInfo = msg!.imageList![1]!;
+    var _height = msgInfo.height!.toDouble();
     var resultH = _height > 200.0 ? 200.0 : _height;
-    var url = msgInfo.url;
+    var url = msgInfo.url!;
+
+    LogUtil.d("加载图片::$url");
     var isFile = File(url).existsSync();
     final globalModel = Provider.of<GlobalModel>(context);
     var body = [
@@ -43,12 +46,18 @@ class ImgMsg extends StatelessWidget {
               child: isFile
                   ? new Image.file(File(url))
                   : new CachedNetworkImage(
-                      imageUrl: url, height: resultH, fit: BoxFit.cover),
+                      imageUrl: url,
+                      height: resultH,
+                      fit: BoxFit.cover,
+                      cacheKey: url,
+                      // cacheManager: DefaultCacheManager(),
+                    ),
             ),
           ),
           onTap: () => Get.to(
             new PhotoView(
-              imageProvider: isFile ? FileImage(File(url)) : NetworkImage(url),
+              imageProvider: (isFile ? FileImage(File(url)) : NetworkImage(url))
+                  as ImageProvider<Object>?,
               onTapUp: (c, f, s) => Navigator.of(context).pop(),
               maxScale: 3.0,
               minScale: 1.0,

@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
 class IndicatorPageView extends StatefulWidget {
-  final PageController pageC;
-  final List<Widget> pages;
+  final PageController? pageC;
+  final List<Widget>? pages;
 
   IndicatorPageView({this.pageC, this.pages});
 
@@ -44,14 +44,14 @@ class IndicatorPageViewState extends State<IndicatorPageView> {
               onPageChanged: (v) {
                 setState(() => currentMoreIndex = v);
               },
-              children: widget.pages,
+              children: widget.pages!,
             ),
           ),
           new Container(
             padding: EdgeInsets.only(bottom: 10.0),
             child: new Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: List.generate(widget.pages.length, itemView),
+              children: List.generate(widget.pages!.length, itemView),
             ),
           )
         ],

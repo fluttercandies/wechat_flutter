@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:wechat_flutter/provider/global_model.dart';
+import 'package:wechat_flutter/tools/provider/global_model.dart';
 
 class QuitMessage extends StatelessWidget {
   final dynamic data;

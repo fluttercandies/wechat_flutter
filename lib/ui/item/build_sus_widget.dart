@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:wechat_flutter/tools/data/my_theme.dart';
+import 'package:wechat_flutter/tools/theme/my_theme.dart';
 
 class BuildSubWidget extends StatelessWidget {
   final String susTag;
 
-  const BuildSubWidget(this.susTag, {Key key}) : super(key: key);
+  const BuildSubWidget(this.susTag, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

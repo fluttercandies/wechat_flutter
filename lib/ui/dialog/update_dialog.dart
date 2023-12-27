@@ -8,9 +8,9 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:open_file/open_file.dart';
 
 class UpdateDialog extends StatefulWidget {
-  final String version;
-  final String updateInfo;
-  final String updateUrl;
+  final String? version;
+  final String? updateInfo;
+  final String? updateUrl;
   final bool isForce;
 
   UpdateDialog({
@@ -26,7 +26,7 @@ class UpdateDialog extends StatefulWidget {
 
 class UpdateDialogState extends State<UpdateDialog> {
   int _downloadProgress = 0;
-  CancelToken token;
+  CancelToken? token;
   UploadingFlag uploadingFlag = UploadingFlag.idle;
 
   @override
@@ -68,11 +68,11 @@ class UpdateDialogState extends State<UpdateDialog> {
               flex: 2,
               child: Row(
                 children: <Widget>[
-                  new Space(width: (winWidth(context) - 40) / 2),
+                  new Space(width: (FrameSize.winWidth() - 40) / 2),
                   !widget.isForce
                       ? Expanded(
                           flex: 1,
-                          child: FlatButton(
+                          child: TextButton(
                               onPressed: () {
                                 Navigator.of(context).pop();
                               },
@@ -85,7 +85,7 @@ class UpdateDialogState extends State<UpdateDialog> {
                       : SizedBox(),
                   Expanded(
                     flex: 1,
-                    child: FlatButton(
+                    child: TextButton(
                         onPressed: () async {
                           if (uploadingFlag == UploadingFlag.uploading) return;
                           uploadingFlag = UploadingFlag.uploading;
@@ -111,10 +111,10 @@ class UpdateDialogState extends State<UpdateDialog> {
   }
 
   void _androidUpdate() async {
-    final apkPath = await FileUtil.getInstance().getSavePath("/Download/");
+    final apkPath = await FileUtil.getInstance()!.getSavePath("/Download/");
     try {
-      await Req.getInstance().client.download(
-        widget.updateUrl,
+      await Req.getInstance()!.client!.download(
+        widget.updateUrl!,
         apkPath + "wechat_flutter.apk",
         cancelToken: token,
         onReceiveProgress: (int count, int total) {
@@ -216,7 +216,7 @@ class UpdateDialogState extends State<UpdateDialog> {
   }
 
   void _iosUpdate() {
-    launch(widget.updateUrl);
+    launch(widget.updateUrl!);
   }
 
   @override
@@ -227,7 +227,7 @@ class UpdateDialogState extends State<UpdateDialog> {
 
   @override
   void dispose() {
-    if (!token.isCancelled) token?.cancel();
+    if (!token!.isCancelled) token?.cancel();
     super.dispose();
     debugPrint("升级销毁");
   }

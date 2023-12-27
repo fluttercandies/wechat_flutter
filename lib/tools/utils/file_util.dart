@@ -6,9 +6,9 @@ import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 
 class FileUtil {
-  static FileUtil _instance;
+  static FileUtil? _instance;
 
-  static FileUtil getInstance() {
+  static FileUtil? getInstance() {
     if (_instance == null) {
       _instance = FileUtil._internal();
     }
@@ -53,7 +53,7 @@ class FileUtil {
   ///[fileName]  例子 'girl.jpg'
   Future<String> copyAssetToFile(String assetPath, String assetName,
       String filePath, String fileName) async {
-    String newPath = await FileUtil.getInstance().getSavePath(filePath);
+    String newPath = await FileUtil.getInstance()!.getSavePath(filePath);
     String name = fileName;
     bool exists = await new File(newPath + name).exists();
     if (!exists) {
@@ -67,13 +67,13 @@ class FileUtil {
   }
 
   void downloadFile(
-      {String url,
-      String filePath,
-      String fileName,
-      Function onComplete}) async {
-    final path = await FileUtil.getInstance().getSavePath(filePath);
+      {required String url,
+      required String filePath,
+      String? fileName,
+      Function? onComplete}) async {
+    final path = await FileUtil.getInstance()!.getSavePath(filePath);
     String name = fileName ?? url.split("/").last;
-    Req.getInstance().client.download(
+    Req.getInstance()!.client!.download(
       url,
       path + name,
       onReceiveProgress: (int count, int total) {

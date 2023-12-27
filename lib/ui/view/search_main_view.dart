@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
 class SearchMainView extends StatelessWidget {
-  final GestureTapCallback onTap;
-  final String text;
+  final GestureTapCallback? onTap;
+  final String? text;
   final bool isBorder;
 
   SearchMainView({
@@ -22,7 +22,7 @@ class SearchMainView extends StatelessWidget {
           child: new Icon(Icons.search, color: mainTextColor),
         ),
         new Text(
-          text,
+          text!,
           style: TextStyle(color: mainTextColor),
         )
       ],

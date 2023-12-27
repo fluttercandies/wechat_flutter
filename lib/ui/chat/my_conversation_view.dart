@@ -4,10 +4,10 @@ import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'package:wechat_flutter/ui/message_view/content_msg.dart';
 
 class MyConversationView extends StatefulWidget {
-  final String imageUrl;
-  final String title;
-  final V2TimMessage content;
-  final Widget time;
+  final String? imageUrl;
+  final String? title;
+  final V2TimMessage? content;
+  final Widget? time;
   final bool isBorder;
 
   MyConversationView({
@@ -37,14 +37,14 @@ class _MyConversationViewState extends State<MyConversationView> {
                 style: TextStyle(fontSize: 17.0, fontWeight: FontWeight.normal),
               ),
               new SizedBox(height: 2.0),
-              new ContentMsg(widget?.content),
+              new ContentMsg(widget.content),
             ],
           ),
         ),
         new Space(width: mainSpace),
         new Column(
           children: [
-            widget.time,
+            widget.time!,
             new Icon(Icons.flag, color: Colors.transparent),
           ],
         )
@@ -64,7 +64,7 @@ class _MyConversationViewState extends State<MyConversationView> {
               fit: BoxFit.cover),
           new Container(
             padding: EdgeInsets.only(right: 18.0, top: 12.0, bottom: 12.0),
-            width: winWidth(context) - 68,
+            width: FrameSize.winWidth() - 68,
             decoration: BoxDecoration(
               border: widget.isBorder
                   ? Border(

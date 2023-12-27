@@ -1,18 +1,16 @@
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
-import 'package:wechat_flutter/ui/view/image_view.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
-import 'package:get/get.dart';
 
 class ContactCard extends StatelessWidget {
-  final String img, title, nickName, id, area;
+  final String? img, title, nickName, id, area;
   final bool isBorder;
   final double lineWidth;
 
   ContactCard({
-    @required this.img,
+    required this.img,
     this.title,
-    this.id,
+    required String this.id,
     this.nickName,
     this.area,
     this.isBorder = false,
@@ -31,7 +29,7 @@ class ContactCard extends StatelessWidget {
               )
             : null,
       ),
-      width: winWidth(context),
+      width: FrameSize.winWidth(),
       padding: EdgeInsets.only(right: 15.0, left: 15.0, bottom: 20.0),
       child: new Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -43,14 +41,14 @@ class ContactCard extends StatelessWidget {
               if (isNetWorkImg(img)) {
                 Get.to(
                   new PhotoView(
-                    imageProvider: NetworkImage(img),
+                    imageProvider: NetworkImage(img!),
                     onTapUp: (c, f, s) => Navigator.of(context).pop(),
                     maxScale: 3.0,
                     minScale: 1.0,
                   ),
                 );
               } else {
-                showToast(context, '无头像');
+                q1Toast('无头像');
               }
             },
           ),
@@ -77,8 +75,8 @@ class ContactCard extends StatelessWidget {
                 padding: EdgeInsets.only(top: 3.0),
                 child: new Text("昵称：" + (nickName ?? ''), style: labelStyle),
               ),
-              new Text("微信号：" + id ?? '', style: labelStyle),
-              new Text("地区：" + area ?? '', style: labelStyle),
+              new Text("${AppConfig.appName}号：" + id!, style: labelStyle),
+              new Text("地区：" + area!, style: labelStyle),
             ],
           )
         ],

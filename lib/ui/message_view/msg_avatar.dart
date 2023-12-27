@@ -1,10 +1,8 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:tencent_im_sdk_plugin/models/v2_tim_message.dart';
-import 'package:wechat_flutter/pages/contacts/contacts_details_page.dart';
-import 'package:wechat_flutter/provider/global_model.dart';
+import 'package:wechat_flutter/pages/common/contacts/contacts_details_page.dart';
+import 'package:wechat_flutter/tools/provider/global_model.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'package:wechat_flutter/ui/view/shake_view.dart';
 
@@ -14,16 +12,16 @@ class MsgAvatar extends StatefulWidget {
   final V2TimMessage model;
 
   MsgAvatar({
-    @required this.globalModel,
-    @required this.model,
+    required this.globalModel,
+    required this.model,
   });
 
   _MsgAvatarState createState() => _MsgAvatarState();
 }
 
 class _MsgAvatarState extends State<MsgAvatar> with TickerProviderStateMixin {
-  Animation<double> animation;
-  AnimationController controller;
+  late Animation<double> animation;
+  late AnimationController controller;
 
   @override
   initState() {
@@ -84,16 +82,16 @@ class _MsgAvatarState extends State<MsgAvatar> with TickerProviderStateMixin {
 }
 
 class AnimateWidget extends AnimatedWidget {
-  final Widget child;
+  final Widget? child;
 
   AnimateWidget({
-    Animation<double> animation,
+    required Animation<double> animation,
     this.child,
   }) : super(listenable: animation);
 
   @override
   Widget build(BuildContext context) {
-    final Animation<double> animation = listenable;
+    final Animation<double> animation = listenable as Animation<double>;
     var result = Transform(
       transform: Matrix4.rotationZ(animation.value * pi / 180),
       alignment: Alignment.bottomCenter,

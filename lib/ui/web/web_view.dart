@@ -59,7 +59,7 @@ class WebViewPageState extends State<WebViewPage> {
     return new JavascriptChannel(
       name: 'Toaster',
       onMessageReceived: (JavascriptMessage message) {
-        Scaffold.of(context).showSnackBar(
+        ScaffoldMessenger.of(context).showSnackBar(
           new SnackBar(content: Text(message.message)),
         );
       },

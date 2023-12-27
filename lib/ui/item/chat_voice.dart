@@ -1,6 +1,5 @@
 import 'dart:async';
-// import 'package:flutter_sound/flutter_sound.dart';
-import 'package:wechat_flutter/tools/date.dart';
+import 'package:wechat_flutter/tools/func/date.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'package:wechat_flutter/ui/dialog/voice_dialog.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -9,7 +8,7 @@ import 'package:flutter/material.dart';
 typedef VoiceFile = void Function(String path);
 
 class ChatVoice extends StatefulWidget {
-  final VoiceFile voiceFile;
+  final VoiceFile? voiceFile;
 
   ChatVoice({this.voiceFile});
 
@@ -20,19 +19,19 @@ class ChatVoice extends StatefulWidget {
 class _ChatVoiceWidgetState extends State<ChatVoice> {
   double startY = 0.0;
   double offset = 0.0;
-  int index;
+  int? index;
 
   bool isUp = false;
   String textShow = "按住说话";
   String toastShow = "手指上滑,取消发送";
   String voiceIco = "images/voice_volume_1.png";
 
-  StreamSubscription _recorderSubscription;
-  StreamSubscription _dbPeakSubscription;
+  StreamSubscription? _recorderSubscription;
+  StreamSubscription? _dbPeakSubscription;
 
   ///默认隐藏状态
   bool voiceState = true;
-  OverlayEntry overlayEntry;
+  OverlayEntry? overlayEntry;
   // FlutterSoundRecorder flutterSound = FlutterSoundRecorder();
 
   @override
@@ -56,7 +55,7 @@ class _ChatVoiceWidgetState extends State<ChatVoice> {
     } catch (err) {
       // RecorderRunningException e = err;
       print("startRecorder errorLLL${err.toString()}");
-      showToast(context, 'startRecorder error: ${err.toString()}');
+      q1Toast( 'startRecorder error: ${err.toString()}');
     }
   }
 
@@ -66,22 +65,22 @@ class _ChatVoiceWidgetState extends State<ChatVoice> {
       // print('stopRecorder: $result');
 
       if (_recorderSubscription != null) {
-        _recorderSubscription.cancel();
+        _recorderSubscription!.cancel();
         _recorderSubscription = null;
       }
       if (_dbPeakSubscription != null) {
-        _dbPeakSubscription.cancel();
+        _dbPeakSubscription!.cancel();
         _dbPeakSubscription = null;
       }
     } catch (err) {
       // RecorderStoppedException e = err;
       print('stopRecorder error: ${err.toString()}');
-      showToast(context, 'stopRecorder error: ${err.toString()}');
+      q1Toast( 'stopRecorder error: ${err.toString()}');
     }
   }
 
   showVoiceView() {
-    int index;
+    int? index;
     setState(() {
       textShow = "松开结束";
       voiceState = false;
@@ -110,7 +109,7 @@ class _ChatVoiceWidgetState extends State<ChatVoice> {
 
     stop();
     if (overlayEntry != null) {
-      overlayEntry.remove();
+      overlayEntry!.remove();
       overlayEntry = null;
     }
 
@@ -155,7 +154,7 @@ class _ChatVoiceWidgetState extends State<ChatVoice> {
       child: new Container(
         height: 50.0,
         alignment: Alignment.center,
-        width: winWidth(context),
+        width: FrameSize.winWidth(),
         color: Colors.white,
         child: Text(textShow),
       ),

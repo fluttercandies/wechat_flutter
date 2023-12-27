@@ -47,7 +47,7 @@ class VerticalLine extends StatelessWidget {
 }
 
 class Space extends StatelessWidget {
-  final double width;
+  final double? width;
   final double height;
 
   Space({this.width = 10.0, this.height = 10.0});

@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
 class TipVerifyInput extends StatefulWidget {
-  final String title;
-  final String defStr;
-  final TextEditingController controller;
-  final FocusNode focusNode;
+  final String? title;
+  final String? defStr;
+  final TextEditingController? controller;
+  final FocusNode? focusNode;
   final Color color;
 
   TipVerifyInput(
@@ -24,7 +24,7 @@ class _VerifyInputState extends State<TipVerifyInput> {
   @override
   void initState() {
     super.initState();
-    widget.controller.text = widget.defStr;
+    widget.controller!.text = widget.defStr!;
   }
 
   Widget contentBuild() {
@@ -39,21 +39,21 @@ class _VerifyInputState extends State<TipVerifyInput> {
           },
           onTap: () => setState(() {}),
           style: TextStyle(
-            color: widget.focusNode.hasFocus ? Colors.black : Colors.grey,
+            color: widget.focusNode!.hasFocus ? Colors.black : Colors.grey,
             textBaseline: TextBaseline.alphabetic,
           ),
         ),
       ),
-      widget.controller.text != ''
+      widget.controller!.text != ''
           ? new Visibility(
-              visible: widget.focusNode.hasFocus,
+              visible: widget.focusNode!.hasFocus,
               child: new InkWell(
                 child: new Padding(
                   padding: EdgeInsets.all(2.0),
                   child: new Image.asset('assets/images/ic_delete.webp'),
                 ),
                 onTap: () {
-                  widget.controller.text = '';
+                  widget.controller!.text = '';
                   setState(() {});
                 },
               ))
@@ -66,11 +66,11 @@ class _VerifyInputState extends State<TipVerifyInput> {
         new Space(height: mainSpace),
         new Expanded(
           child: new Container(
-            width: winWidth(context) - 20,
+            width: FrameSize.winWidth() - 20,
             decoration: BoxDecoration(
               border: Border(
                 bottom: BorderSide(
-                    color: widget.focusNode.hasFocus
+                    color: widget.focusNode!.hasFocus
                         ? Colors.green
                         : lineColor.withOpacity(0.5),
                     width: 0.5),
@@ -95,7 +95,7 @@ class _VerifyInputState extends State<TipVerifyInput> {
   Widget build(BuildContext context) {
     return new Container(
       height: 100.0,
-      width: winWidth(context),
+      width: FrameSize.winWidth(),
       color: widget.color,
       padding: EdgeInsets.all(10.0),
       margin: EdgeInsets.symmetric(horizontal: 10.0),

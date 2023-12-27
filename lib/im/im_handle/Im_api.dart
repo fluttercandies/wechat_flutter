@@ -15,22 +15,24 @@ import 'package:tencent_im_sdk_plugin/models/v2_tim_user_full_info.dart';
 import 'package:tencent_im_sdk_plugin/models/v2_tim_value_callback.dart';
 import 'package:tencent_im_sdk_plugin/tencent_im_sdk_plugin.dart';
 import 'package:wechat_flutter/im/im_handle/GenerateTestUserSig.dart';
-import 'package:wechat_flutter/provider/im/im_event.dart';
-import 'package:wechat_flutter/tools/app_config.dart';
+import 'package:wechat_flutter/tools/http/api_v2.dart';
+import 'package:wechat_flutter/im/login_handle.dart';
+import 'package:wechat_flutter/tools/provider/im/im_event.dart';
+import 'package:wechat_flutter/tools/config/app_config.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
 /// IM基础功能模块Api
 class ImApi {
   static String printHead = "[IM]";
 
-  static V2TimSimpleMsgListener simpleMsgListener;
-  static V2TimAdvancedMsgListener advancedMsgListener;
-  static V2TimSignalingListener signalingListener;
+  static V2TimSimpleMsgListener? simpleMsgListener;
+  static V2TimAdvancedMsgListener? advancedMsgListener;
+  static V2TimSignalingListener? signalingListener;
 
   /*
   * im打印
   * */
-  static void imPrint(Map jsonData, [String title]) {
+  static void imPrint(Map jsonData, [String? title]) {
     debugPrint("$printHead:-------------${title ?? "imPrint"}-----------");
     debugPrint("$printHead:${json.encode(jsonData)}");
     debugPrint("");
@@ -62,7 +64,7 @@ class ImApi {
     addIMEventListener(context);
 
     // 检测登录
-    checkLogin();
+    await checkLogin(context);
   }
 
   /*
@@ -106,7 +108,7 @@ class ImApi {
     //注册简单消息监听器
     // ignore: deprecated_member_use
     await TencentImSDKPlugin.v2TIMManager.addSimpleMsgListener(
-      listener: simpleMsgListener,
+      listener: simpleMsgListener!,
     );
     //注册群组消息监听器
     await TencentImSDKPlugin.v2TIMManager.setGroupListener(
@@ -149,13 +151,13 @@ class ImApi {
     await TencentImSDKPlugin.v2TIMManager
         .getMessageManager()
         .addAdvancedMsgListener(
-          listener: advancedMsgListener,
+          listener: advancedMsgListener!,
         );
     //注册信令消息监听器
     await TencentImSDKPlugin.v2TIMManager
         .getSignalingManager()
         .addSignalingListener(
-          listener: signalingListener,
+          listener: signalingListener!,
         );
     //注册会话监听器
     await TencentImSDKPlugin.v2TIMManager
@@ -180,21 +182,6 @@ class ImApi {
         .setFriendListener(
           listener: new V2TimFriendshipListener(),
         );
-  }
-
-  /*
-  * 注销simpleMsgListener事件
-  * */
-  removeSimpleMsgListener() async {
-    await TencentImSDKPlugin.v2TIMManager
-        .removeSimpleMsgListener(listener: simpleMsgListener);
-  }
-
-  /*
-  * 注销所有simpleMsgListener事件
-  * */
-  removeAllSimpleMsgListener() async {
-    await TencentImSDKPlugin.v2TIMManager.removeSimpleMsgListener();
   }
 
   /*
@@ -243,12 +230,12 @@ class ImApi {
   }
 
   /// 检测登录
-  static Future checkLogin() async {
+  static Future checkLogin(BuildContext context) async {
     // 获取登录状态
-    final int loginStatus = await getLoginStatus();
+    final int? loginStatus = await getLoginStatus();
 
     // 获取用户id
-    final String userId = Data.user();
+    final String userId = Q1Data.user();
 
     // 登录状态
     // V2TIM_STATUS_LOGINED 已登录1
@@ -258,7 +245,8 @@ class ImApi {
       // 已登录
 
       // 判断登录的是否当前用户
-      final String _getLoginUser = await getLoginUser();
+      final String? _getLoginUser = await getLoginUser();
+      LogUtil.d("是否是当前登录的用户::${_getLoginUser == userId}");
       if (_getLoginUser == userId) {
         // 是当前用户不再继续执行
         return;
@@ -288,7 +276,7 @@ class ImApi {
   /*
   * 登录
   * */
-  static Future<V2TimCallback> login(String userID) async {
+  static Future<V2TimCallback?> login(String userID) async {
     // 正式环境请在服务端计算userSIg
     String userSig = new GenerateTestUserSig(
       sdkappid: AppConfig.IMSdkAppID,
@@ -297,6 +285,10 @@ class ImApi {
       identifier: userID,
       expire: 7 * 24 * 60 * 1000, // userSIg有效期
     );
+
+    Q1Data.userSig = userSig;
+    await SharedUtil.instance!.saveString(Keys.userSig, userSig);
+
     V2TimCallback res = await TencentImSDKPlugin.v2TIMManager.login(
       userID: userID,
       userSig: userSig,
@@ -312,7 +304,7 @@ class ImApi {
 
     /// 如果昵称不为空则直接返回
     /// 如果昵称为空去设置信息
-    if (strNoEmpty(userInfoList[0].nickName)) {
+    if (strNoEmpty(userInfoList![0].nickName)) {
       return res;
     }
 
@@ -342,7 +334,7 @@ class ImApi {
   /*
   * 获取当前登录用户
   * */
-  static Future<String> getLoginUser() async {
+  static Future<String?> getLoginUser() async {
     V2TimValueCallback<String> res =
         await TencentImSDKPlugin.v2TIMManager.getLoginUser();
     imPrint(res.toJson(), "获取当前登录用户");
@@ -353,7 +345,7 @@ class ImApi {
   /*
   * 获取当前登录状态
   * */
-  static Future<int> getLoginStatus() async {
+  static Future<int?> getLoginStatus() async {
     V2TimValueCallback<int> res =
         await TencentImSDKPlugin.v2TIMManager.getLoginStatus();
     imPrint(res.toJson(), "获取当前登录状态");
@@ -365,7 +357,7 @@ class ImApi {
   /*
   * 获取用户信息
   * */
-  static Future<List<V2TimUserFullInfo>> getUsersInfo(
+  static Future<List<V2TimUserFullInfo>?> getUsersInfo(
       List<String> users) async {
     V2TimValueCallback<List<V2TimUserFullInfo>> res =
         await TencentImSDKPlugin.v2TIMManager.getUsersInfo(
@@ -379,12 +371,12 @@ class ImApi {
   * 设置个人信息
   * */
   static Future<V2TimCallback> setSelfInfo({
-    String nickname,
-    String faceUrl,
-    String selfSignature,
-    String gender,
-    int allowType,
-    String customInfo,
+    String? nickname,
+    String? faceUrl,
+    String? selfSignature,
+    String? gender,
+    int? allowType,
+    String? customInfo,
   }) async {
     // todo 设置基本信息只需填某个，未填的传原本的，或者不传
     V2TimCallback res = await TencentImSDKPlugin.v2TIMManager.setSelfInfo(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 OverlayEntry showDialogTipView(BuildContext context, int index, int type) {
-   Widget img() {
+  Widget img() {
     if (0 <= index && index <= 16) {
       return Image.asset('assets/images/chat/3.0x/dialog_audio_v1.png');
     } else if (16 < index && index <= 32) {
@@ -15,6 +15,7 @@ OverlayEntry showDialogTipView(BuildContext context, int index, int type) {
     } else if (80 < index && index <= 99) {
       return Image.asset('assets/images/chat/3.0x/dialog_audio_v6.png');
     }
+    return Image.asset('assets/images/chat/3.0x/dialog_audio_v6.png');
   }
 
   OverlayEntry overlayEntry = OverlayEntry(builder: (context) {
@@ -77,7 +78,7 @@ OverlayEntry showDialogTipView(BuildContext context, int index, int type) {
       ),
     );
   });
-  Overlay.of(context).insert(overlayEntry);
+  Overlay.of(context)!.insert(overlayEntry);
 
   return overlayEntry;
 }

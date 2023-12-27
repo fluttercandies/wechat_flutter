@@ -1,12 +1,9 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'package:tencent_im_sdk_plugin/models/v2_tim_message.dart';
-import 'package:wechat_flutter/pages/chat/video_play_page.dart';
+import 'package:wechat_flutter/pages/common/chat/video_play_page.dart';
 
-// import 'package:wechat_flutter/pages/chat/video_play_page.dart';
-import 'package:wechat_flutter/provider/global_model.dart';
+// import 'package:wechat_flutter/pages/common/chat/video_play_page.dart';
+import 'package:wechat_flutter/tools/provider/global_model.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'package:wechat_flutter/ui/massage/img_item_container.dart';
 import 'package:wechat_flutter/ui/message_view/msg_avatar.dart';
@@ -26,7 +23,7 @@ class _VideoMessageState extends State<VideoMessage> {
       margin: EdgeInsets.only(right: 8.0, bottom: 5.0),
       alignment: Alignment.bottomRight,
       child: new Text(
-        '0:0${widget.model.videoElem.duration}',
+        '0:0${widget.model.videoElem!.duration}',
         style: TextStyle(color: Colors.white),
       ),
     );
@@ -47,11 +44,11 @@ class _VideoMessageState extends State<VideoMessage> {
               new ClipRRect(
                 borderRadius: BorderRadius.all(Radius.circular(5.0)),
                 child: new CachedNetworkImage(
-                  imageUrl: '${widget.model.videoElem.snapshotUrl}',
-                  width:
-                      double.parse('${widget.model.videoElem.snapshotWidth}.0'),
+                  imageUrl: '${widget.model.videoElem!.snapshotUrl}',
+                  width: double.parse(
+                      '${widget.model.videoElem!.snapshotWidth}.0'),
                   height: double.parse(
-                      '${widget.model.videoElem.snapshotHeight}.0'),
+                      '${widget.model.videoElem!.snapshotHeight}.0'),
                   fit: BoxFit.cover,
                   cacheManager: cacheManager,
                 ),
@@ -64,7 +61,7 @@ class _VideoMessageState extends State<VideoMessage> {
             ],
           ),
           onTap: () {
-            Get.to(VideoPlayPage(widget.model.videoElem.videoUrl));
+            Get.to(VideoPlayPage(widget.model.videoElem!.videoUrl));
           },
         ),
       ),

@@ -7,16 +7,19 @@ import 'package:wechat_flutter/tools/func/func.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
 class SwImage extends StatelessWidget {
-  final String image;
-  final double width;
-  final double height;
-  final Color color;
-  final BoxFit fit;
-  final String package;
-  final BorderRadius borderRadius;
-  final GestureTapCallback onTap;
-  final EdgeInsetsGeometry margin;
-  final Alignment alignment;
+  final String? image;
+  final double? width;
+  final double? height;
+  final Color? color;
+  final BoxFit? fit;
+  final String? package;
+  final BorderRadius? borderRadius;
+  final GestureTapCallback? onTap;
+  final EdgeInsetsGeometry? margin;
+  final Alignment? alignment;
+
+  final PlaceholderWidgetBuilder? placeholder;
+  final LoadingErrorWidgetBuilder? errorWidget;
 
   const SwImage(
     this.image, {
@@ -28,8 +31,10 @@ class SwImage extends StatelessWidget {
     this.borderRadius,
     this.onTap,
     this.margin,
+        this.placeholder,
+        this.errorWidget,
     this.alignment,
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -40,31 +45,39 @@ class SwImage extends StatelessWidget {
         imageWidget = const DefImageView();
       } else if (isNetWorkImg(image)) {
         imageWidget = CachedNetworkImage(
-          imageUrl: image,
+          imageUrl: image!,
           width: width,
           height: height,
           fit: fit,
           color: color,
-          alignment: alignment,
-          placeholder: (context, url) {
-            return const DefImageView();
-          },
-          errorWidget: (context, url, error) {
-            return const DefImageView();
-          },
+          alignment: alignment!,
+          placeholder: placeholder ??
+                  (context, url) {
+                return DefImageView(
+                  width: width,
+                  height: height,
+                );
+              },
+          errorWidget: errorWidget ??
+                  (context, url, error) {
+                return DefImageView(
+                  width: width,
+                  height: height,
+                );
+              },
         );
       } else if (isAssetsImg(image)) {
         imageWidget = Image.asset(
-          image,
+          image!,
           width: width,
           height: height,
           fit: fit,
           package: package,
           color: color,
         );
-      } else if (File(image).existsSync()) {
+      } else if (File(image!).existsSync()) {
         imageWidget = Image.file(
-          File(image),
+          File(image!),
           width: width,
           height: height,
           fit: fit,
@@ -74,7 +87,7 @@ class SwImage extends StatelessWidget {
         imageWidget = const DefImageView();
       } else {
         imageWidget = Image.memory(
-          image.codeUnits as Uint8List,
+          image!.codeUnits as Uint8List,
           width: width,
           height: height,
           fit: fit,
@@ -101,8 +114,8 @@ class SwImage extends StatelessWidget {
   }
 }
 
-ImageProvider swImageProvider(String image) {
-  ImageProvider imageProvider;
+ImageProvider? swImageProvider(String image) {
+  ImageProvider? imageProvider;
 
   if (!strNoEmpty(image)) {
   } else if (isNetWorkImg(image)) {
@@ -119,8 +132,8 @@ ImageProvider swImageProvider(String image) {
 
 /// 同步改一下[11.6]
 class DefImageView extends StatelessWidget {
-  final double width;
-  final double height;
+  final double? width;
+  final double? height;
 
   const DefImageView({this.width, this.height});
 

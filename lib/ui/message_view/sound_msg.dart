@@ -1,10 +1,11 @@
 // import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+
 // import 'package:flutter_sound/flutter_sound.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:provider/provider.dart';
 import 'package:tencent_im_sdk_plugin/models/v2_tim_message.dart';
-import 'package:wechat_flutter/provider/global_model.dart';
+import 'package:wechat_flutter/tools/provider/global_model.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'package:wechat_flutter/ui/message_view/msg_avatar.dart';
 
@@ -18,17 +19,18 @@ class SoundMsg extends StatefulWidget {
 }
 
 class _SoundMsgState extends State<SoundMsg> with TickerProviderStateMixin {
-  Duration duration;
-  Duration position;
+  Duration? duration;
+  Duration? position;
 
-  AnimationController controller;
-  Animation animation;
+  late AnimationController controller;
+  Animation? animation;
+
   // FlutterSound flutterSound;
   // AudioPlayer audioPlayer = AudioPlayer();
 
-  StreamSubscription _positionSubscription;
-  StreamSubscription _audioPlayerStateSubscription;
-  StreamSubscription _playerSubscription;
+  StreamSubscription? _positionSubscription;
+  StreamSubscription? _audioPlayerStateSubscription;
+  StreamSubscription? _playerSubscription;
 
   double sliderCurrentPosition = 0.0;
   double maxDuration = 1.0;
@@ -50,7 +52,7 @@ class _SoundMsgState extends State<SoundMsg> with TickerProviderStateMixin {
         duration: const Duration(milliseconds: 1000), vsync: this);
     final Animation curve =
         CurvedAnimation(parent: controller, curve: Curves.easeOut);
-    animation = IntTween(begin: 0, end: 3).animate(curve)
+    animation = IntTween(begin: 0, end: 3).animate(curve as Animation<double>)
       ..addStatusListener((status) {
         if (status == AnimationStatus.completed) {
           controller.reverse();
@@ -105,9 +107,9 @@ class _SoundMsgState extends State<SoundMsg> with TickerProviderStateMixin {
   playNew(url) async {
     try {
       // await audioPlayer.play(url);
-      showToast(context, '播放中');
+      q1Toast('播放中');
     } catch (e) {
-      showToast(context, '播放出问题了');
+      q1Toast('播放出问题了');
     }
   }
 
@@ -146,8 +148,17 @@ class _SoundMsgState extends State<SoundMsg> with TickerProviderStateMixin {
       new Container(
         width: 100.0,
         padding: EdgeInsets.only(right: 10.0),
-        child: new FlatButton(
-          padding: EdgeInsets.only(left: 18.0, right: 4.0),
+        child: new TextButton(
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all(
+                widget.model.id == globalModel.account
+                    ? Color(0xff98E165)
+                    : Colors.white),
+            shape: MaterialStateProperty.all(
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(4))),
+            padding: MaterialStateProperty.all(
+                EdgeInsets.only(left: 18.0, right: 4.0)),
+          ),
           child: new Row(
             mainAxisAlignment:
                 isSelf ? MainAxisAlignment.end : MainAxisAlignment.start,
@@ -156,7 +167,7 @@ class _SoundMsgState extends State<SoundMsg> with TickerProviderStateMixin {
               new Space(width: mainSpace / 2),
               new Image.asset(
                   animation != null
-                      ? soundImg[animation.value % 3]
+                      ? soundImg[animation!.value % 3]
                       : soundImg[3],
                   height: 20.0,
                   color: Colors.black,
@@ -164,15 +175,11 @@ class _SoundMsgState extends State<SoundMsg> with TickerProviderStateMixin {
               new Space(width: mainSpace)
             ],
           ),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
-          color: widget.model.id == globalModel.account
-              ? Color(0xff98E165)
-              : Colors.white,
           onPressed: () {
             // if (strNoEmpty(urls)) {
             //   playNew(urls);
             // } else {
-            //   showToast(context, '未知错误');
+            //   q1Toast( '未知错误');
             // }
           },
         ),
@@ -193,13 +200,13 @@ class _SoundMsgState extends State<SoundMsg> with TickerProviderStateMixin {
   @override
   void dispose() {
     if (_positionSubscription != null) {
-      _positionSubscription.cancel();
+      _positionSubscription!.cancel();
     }
     if (_audioPlayerStateSubscription != null) {
-      _audioPlayerStateSubscription.cancel();
+      _audioPlayerStateSubscription!.cancel();
     }
     if (_playerSubscription != null) {
-      _playerSubscription.cancel();
+      _playerSubscription!.cancel();
     }
     controller.dispose();
     super.dispose();

@@ -12,7 +12,7 @@ import 'package:tencent_im_sdk_plugin/models/v2_tim_friend_search_param.dart';
 import 'package:tencent_im_sdk_plugin/models/v2_tim_value_callback.dart';
 import 'package:tencent_im_sdk_plugin/tencent_im_sdk_plugin.dart';
 import 'package:wechat_flutter/im/im_handle/Im_api.dart';
-import 'package:wechat_flutter/tools/app_config.dart';
+import 'package:wechat_flutter/tools/config/app_config.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
 /// IM好友模块Api
@@ -20,7 +20,7 @@ class ImFriendApi {
   /*
   * 获取好友列表
   * */
-  static Future<List<V2TimFriendInfo>> getFriendList() async {
+  static Future<List<V2TimFriendInfo>?> getFriendList() async {
     V2TimValueCallback<List<V2TimFriendInfo>> res = await TencentImSDKPlugin
         .v2TIMManager
         .getFriendshipManager()
@@ -45,15 +45,15 @@ class ImFriendApi {
   /*
   * 添加好友
   * */
-  static Future<V2TimFriendOperationResult> addFriend(String userID) async {
-    if (userID == Data.user() && !AppConfig.isArrowAddSelf) {
+  static Future<V2TimFriendOperationResult?> addFriend(String? userID) async {
+    if (userID == Q1Data.user() && !AppConfig.isArrowAddSelf) {
       return V2TimFriendOperationResult(
           userID: userID, resultCode: -1, resultInfo: "不能申请添加自己为好友");
     }
 
     V2TimValueCallback<V2TimFriendOperationResult> res =
         await TencentImSDKPlugin.v2TIMManager.getFriendshipManager().addFriend(
-              userID: userID,
+              userID: userID!,
               addType: FriendTypeEnum.V2TIM_FRIEND_TYPE_BOTH,
             );
     ImApi.imPrint(res.toJson(), "添加好友");
@@ -73,7 +73,7 @@ class ImFriendApi {
   /*
   * 删除好友
   * */
-  static Future<List<V2TimFriendOperationResult>> deleteFromFriendList(
+  static Future<List<V2TimFriendOperationResult>?> deleteFromFriendList(
       List<String> userIDList) async {
     V2TimValueCallback<List<V2TimFriendOperationResult>> res =
         await TencentImSDKPlugin.v2TIMManager
@@ -92,7 +92,7 @@ class ImFriendApi {
   *
   * element.resultType;//与查询用户的关系类型 0:不是好友 1:对方在我的好友列表中 2:我在对方的好友列表中 3:互为好友
   * */
-  static Future<List<V2TimFriendCheckResult>> checkFriend(
+  static Future<List<V2TimFriendCheckResult>?> checkFriend(
       List<String> userIDList) async {
     V2TimValueCallback<List<V2TimFriendCheckResult>> res =
         await TencentImSDKPlugin.v2TIMManager
@@ -121,13 +121,13 @@ class ImFriendApi {
   V2TIM_FRIEND_APPLICATION_BOTH,
 }
   * */
-  static Future<List<V2TimFriendApplication>> getFriendApplicationList() async {
+  static Future<List<V2TimFriendApplication?>?> getFriendApplicationList() async {
     V2TimValueCallback<V2TimFriendApplicationResult> res =
         await TencentImSDKPlugin.v2TIMManager
             .getFriendshipManager()
             .getFriendApplicationList();
     ImApi.imPrint(res.toJson(), "获取好友申请列表");
-    return res.data.friendApplicationList;
+    return res.data!.friendApplicationList;
     // flutter: [IM]:-------------获取好友申请列表-----------
     // flutter: [IM]:{"code":0,"desc":"ok","data":{"unreadCount":1,"friendApplicationList":[{"userID":"165","nickname":"u165","faceUrl":null,"addTime":1665300529,"addSource":"AddSource_Type_Unknow","addWording":null,"type":1}]}}
   }
@@ -146,7 +146,7 @@ class ImFriendApi {
                     FriendResponseTypeEnum.V2TIM_FRIEND_ACCEPT_AGREE_AND_ADD,
                 type: FriendApplicationTypeEnum.V2TIM_FRIEND_APPLICATION_BOTH);
 
-    ImApi.imPrint(res.toJson(), "同意好友申请");
+    ImApi.imPrint(res.toJson(), "同意好友申请,userID:$userID");
     return res;
   }
 

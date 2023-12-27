@@ -3,11 +3,10 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:wechat_flutter/pages/contacts/group_launch_page.dart';
-import 'package:wechat_flutter/pages/home/search_page.dart';
-import 'package:wechat_flutter/pages/more/add_friend_page.dart';
-import 'package:wechat_flutter/pages/settings/language_page.dart';
-import 'package:wechat_flutter/pages/tools/scan_page.dart';
+import 'package:wechat_flutter/pages/common/contacts/group_launch_page.dart';
+import 'package:wechat_flutter/pages/common/home/search_page.dart';
+import 'package:wechat_flutter/pages/common/settings/language_page.dart';
+import 'package:wechat_flutter/pages/common/tools/scan_page.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'package:wechat_flutter/ui/view/indicator_page_view.dart';
 import 'package:wechat_flutter/ui/w_pop/w_popup_menu.dart';
@@ -17,8 +16,8 @@ typedef CheckLogin(index);
 class RootTabBar extends StatefulWidget {
   RootTabBar({this.pages, this.checkLogin, this.currentIndex = 0});
 
-  final List pages;
-  final CheckLogin checkLogin;
+  final List? pages;
+  final CheckLogin? checkLogin;
   final int currentIndex;
 
   @override
@@ -26,21 +25,21 @@ class RootTabBar extends StatefulWidget {
 }
 
 class RootTabBarState extends State<RootTabBar> {
-  var pages = new List<BottomNavigationBarItem>();
-  int currentIndex;
-  var contents = new List<Offstage>();
-  PageController pageController;
+  var pages = <BottomNavigationBarItem>[];
+  late int currentIndex;
+  var contents = <Offstage>[];
+  PageController? pageController;
 
   @override
   void initState() {
     super.initState();
     currentIndex = widget.currentIndex;
     pageController = PageController(initialPage: currentIndex);
-    for (int i = 0; i < widget.pages.length; i++) {
-      TabBarModel model = widget.pages[i];
+    for (int i = 0; i < widget.pages!.length; i++) {
+      TabBarModel model = widget.pages![i];
       pages.add(
         new BottomNavigationBarItem(
-          icon: model.icon,
+          icon: model.icon!,
           activeIcon: model.selectIcon,
           label: model.title,
         ),
@@ -50,7 +49,7 @@ class RootTabBarState extends State<RootTabBar> {
 
   actionsHandle(v) {
     if (v == '添加朋友') {
-      Get.to(new AddFriendPage());
+      Get.toNamed(RouteConfig.addFriendPage);
     } else if (v == '发起群聊') {
       Get.to(new GroupLaunchPage());
     } else if (v == '帮助与反馈') {
@@ -80,7 +79,7 @@ class RootTabBarState extends State<RootTabBar> {
       unselectedItemColor: mainTextColor,
       onTap: (int index) {
         setState(() => currentIndex = index);
-        pageController.jumpToPage(currentIndex);
+        pageController!.jumpToPage(currentIndex);
       },
       unselectedFontSize: 12.0,
       selectedFontSize: 12.0,
@@ -89,7 +88,7 @@ class RootTabBarState extends State<RootTabBar> {
     );
 
     var appBar = new ComMomBar(
-      title: widget.pages[currentIndex].title,
+      title: widget.pages![currentIndex].title,
       showShadow: false,
       showPop: false,
       rightDMActions: <Widget>[
@@ -101,12 +100,13 @@ class RootTabBarState extends State<RootTabBar> {
           onTap: () => Get.to(new SearchPage()),
         ),
         new WPopupMenu(
-          menuWidth: winWidth(context) / 2.5,
+          menuWidth: FrameSize.winWidth() / 2.5,
           alignment: Alignment.center,
-          onValueChanged: (String value) {
+          onValueChanged: (String? value) {
             if (!strNoEmpty(value)) return;
             actionsHandle(value);
           },
+          menuHeight: (actions.length * 50) + 10.0,
           actions: actions,
           child: new Container(
             margin: EdgeInsets.symmetric(horizontal: 15.0),
@@ -130,13 +130,14 @@ class RootTabBarState extends State<RootTabBar> {
           child: bottomNavigationBar,
         ),
       ),
-      appBar:
-          widget.pages[currentIndex].title != S.of(context).me ? appBar : null,
+      appBar: widget.pages![currentIndex].title != "我"
+          ? appBar
+          : null,
       body: new ScrollConfiguration(
         behavior: MyBehavior(),
         child: new PageView.builder(
           itemBuilder: (BuildContext context, int index) =>
-              widget.pages[index].page,
+              widget.pages![index].page,
           controller: pageController,
           itemCount: pages.length,
           physics: Platform.isAndroid
@@ -154,8 +155,8 @@ class RootTabBarState extends State<RootTabBar> {
 class TabBarModel {
   const TabBarModel({this.title, this.page, this.icon, this.selectIcon});
 
-  final String title;
-  final Widget icon;
-  final Widget selectIcon;
-  final Widget page;
+  final String? title;
+  final Widget? icon;
+  final Widget? selectIcon;
+  final Widget? page;
 }

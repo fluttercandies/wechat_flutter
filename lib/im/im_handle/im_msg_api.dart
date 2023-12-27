@@ -1,5 +1,3 @@
-import 'package:fijkplayer/fijkplayer.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:tencent_im_sdk_plugin/models/v2_tim_callback.dart';
 import 'package:tencent_im_sdk_plugin/models/v2_tim_conversation.dart';
@@ -23,16 +21,16 @@ class ImMsgApi {
   /*
   * 发送文本消息
   * */
-  static Future<V2TimMessage> sendTextMessage(
+  static Future<V2TimMessage?> sendTextMessage(
     String text, {
-    String receiver,
-    String groupID,
+    required String receiver,
+    required String groupID,
   }) async {
     V2TimValueCallback<V2TimMsgCreateInfoResult> createMessage =
         await TencentImSDKPlugin.v2TIMManager
             .getMessageManager()
             .createTextMessage(text: text);
-    String id = createMessage.data.id;
+    String id = createMessage.data!.id!;
 
     V2TimValueCallback<V2TimMessage> res = await TencentImSDKPlugin.v2TIMManager
         .getMessageManager()
@@ -48,16 +46,16 @@ class ImMsgApi {
   /*
   * 发送图片消息
   * */
-  static Future<V2TimMessage> sendImageMessage(
+  static Future<V2TimMessage?> sendImageMessage(
     String imagePath, {
-    String receiver,
-    String groupID,
+    required String receiver,
+    required String groupID,
   }) async {
     V2TimValueCallback<V2TimMsgCreateInfoResult> createMessage =
         await TencentImSDKPlugin.v2TIMManager
             .getMessageManager()
             .createImageMessage(imagePath: imagePath);
-    String id = createMessage.data.id;
+    String id = createMessage.data!.id!;
 
     V2TimValueCallback<V2TimMessage> res = await TencentImSDKPlugin.v2TIMManager
         .getMessageManager()
@@ -73,10 +71,10 @@ class ImMsgApi {
   /*
   * 发送视频消息
   * */
-  static Future<V2TimMessage> sendVideoMessage(
+  static Future<V2TimMessage?> sendVideoMessage(
     String videoPath, {
-    String receiver,
-    String groupID,
+    String? receiver,
+    String? groupID,
   }) async {
     final snapshotBasePath = (await getTemporaryDirectory()).path;
     final fileName = await VideoThumbnail.thumbnailFile(
@@ -86,7 +84,7 @@ class ImMsgApi {
       quality: 75,
     );
 
-    final String snapshotPath = fileName;
+    final String? snapshotPath = fileName;
 
     final VideoUtilModel videoUtilModel =
         await VideoUtil.getVideoDuration(videoPath);
@@ -103,19 +101,19 @@ class ImMsgApi {
             .getMessageManager()
             .createVideoMessage(
               duration: videoUtilModel.duration,
-              snapshotPath: snapshotPath,
+              snapshotPath: snapshotPath!,
               // snapshotPath: videoUtilModel.coverPath,
-              type: FileUtil.getInstance().videoTypeOfPath(videoPath),
+              type: FileUtil.getInstance()!.videoTypeOfPath(videoPath),
               videoFilePath: videoPath,
             );
-    String id = createMessage.data.id;
+    String id = createMessage.data!.id!;
 
     V2TimValueCallback<V2TimMessage> res = await TencentImSDKPlugin.v2TIMManager
         .getMessageManager()
         .sendMessage(
             id: id,
-            receiver: receiver,
-            groupID: groupID,
+            receiver: receiver!,
+            groupID: groupID!,
             localCustomData: "自定义localCustomData");
     ImApi.imPrint(res.toJson(), "发送视频消息");
     return res.data;
@@ -126,14 +124,14 @@ class ImMsgApi {
   * */
   static Future sendCustomMessage(
     String data, {
-    String receiver,
-    String groupID,
+    required String receiver,
+    required String groupID,
   }) async {
     V2TimValueCallback<V2TimMsgCreateInfoResult> createMessage =
         await TencentImSDKPlugin.v2TIMManager
             .getMessageManager()
             .createCustomMessage(data: data);
-    String id = createMessage.data.id;
+    String id = createMessage.data!.id!;
     V2TimValueCallback<V2TimMessage> res =
         await TencentImSDKPlugin.v2TIMManager.getMessageManager().sendMessage(
               id: id,
@@ -150,14 +148,14 @@ class ImMsgApi {
   static Future sendTextAtMessage(
     String text,
     List<String> atUserList, {
-    String receiver,
-    String groupID,
+    required String receiver,
+    required String groupID,
   }) async {
     V2TimValueCallback<V2TimMsgCreateInfoResult> createMessage =
         await TencentImSDKPlugin.v2TIMManager
             .getMessageManager()
             .createTextAtMessage(text: text, atUserList: atUserList);
-    String id = createMessage.data.id;
+    String id = createMessage.data!.id!;
     V2TimValueCallback<V2TimMessage> res = await TencentImSDKPlugin.v2TIMManager
         .getMessageManager()
         .sendMessage(
@@ -174,8 +172,8 @@ class ImMsgApi {
   static Future sendFaceMessage(
     int index,
     String data, {
-    String receiver,
-    String groupID,
+    required String receiver,
+    required String groupID,
   }) async {
     V2TimValueCallback<V2TimMsgCreateInfoResult> createMessage =
         await TencentImSDKPlugin.v2TIMManager
@@ -184,7 +182,7 @@ class ImMsgApi {
               index: index,
               data: data,
             );
-    String id = createMessage.data.id;
+    String id = createMessage.data!.id!;
 
     V2TimValueCallback<V2TimMessage> res =
         await TencentImSDKPlugin.v2TIMManager.getMessageManager().sendMessage(
@@ -199,8 +197,8 @@ class ImMsgApi {
   /*
   * 获取C2C历史消息
   * */
-  static Future<List<V2TimMessage>> getC2CHistoryMessageList(
-      String userID, String lastMsgID) async {
+  static Future<List<V2TimMessage>?> getC2CHistoryMessageList(
+      String userID, String? lastMsgID) async {
     V2TimValueCallback<List<V2TimMessage>> res = await TencentImSDKPlugin
         .v2TIMManager
         .getMessageManager()
@@ -218,7 +216,7 @@ class ImMsgApi {
   * */
   static Future<V2TimValueCallback<List<V2TimMessage>>>
       getGroupHistoryMessageList(String groupID,
-          {String lastMsgID, int count = 20}) async {
+          {String? lastMsgID, int count = 20}) async {
     V2TimValueCallback<List<V2TimMessage>> res = await TencentImSDKPlugin
         .v2TIMManager
         .getMessageManager()
@@ -234,8 +232,8 @@ class ImMsgApi {
   /*
   * 获取历史消息高级接口
   * */
-  static Future<List<V2TimMessage>> getHistoryMessageList(
-      {String userID, String groupID, String lastMsgID}) async {
+  static Future<List<V2TimMessage>?> getHistoryMessageList(
+      {String? userID, String? groupID, String? lastMsgID}) async {
     V2TimValueCallback<List<V2TimMessage>> res = await TencentImSDKPlugin
         .v2TIMManager
         .getMessageManager()
@@ -319,9 +317,9 @@ class ImMsgApi {
   * 向group中插入一条本地消息
   * */
   static Future insertGroupMessageToLocalStorage({
-    @required String groupID,
-    @required String data,
-    @required String sender,
+    required String groupID,
+    required String data,
+    required String sender,
   }) async {
     V2TimValueCallback<V2TimMessage> res = await TencentImSDKPlugin.v2TIMManager
         .getMessageManager()
@@ -337,9 +335,9 @@ class ImMsgApi {
   * 向c2c会话中插入一条本地消息
   * */
   static Future insertC2CMessageToLocalStorage({
-    @required String userID,
-    @required String data,
-    @required String sender,
+    required String userID,
+    required String data,
+    required String sender,
   }) async {
     V2TimValueCallback<V2TimMessage> res = await TencentImSDKPlugin.v2TIMManager
         .getMessageManager()
@@ -388,7 +386,7 @@ class ImMsgApi {
   /*
   * 搜索本地消息
   * */
-  static Future<V2TimValueCallback<V2TimMessageSearchResult>>
+  static Future<V2TimValueCallback<V2TimMessageSearchResult>?>
       searchLocaltMessage(String keyword, String conversationID) async {
     if (keyword == '') return null;
     V2TimMessageSearchParam searchParam = V2TimMessageSearchParam(
@@ -412,7 +410,7 @@ class ImMsgApi {
   /*
   * 搜索本地消息【根据群】
   * */
-  static Future<List<V2TimMessage>> searchLocaltMessageOfGroup(
+  static Future<List<V2TimMessage>?> searchLocaltMessageOfGroup(
       String keyword, String groupId) async {
     if (keyword == '') return null;
     V2TimMessageSearchParam searchParam = V2TimMessageSearchParam(
@@ -430,16 +428,16 @@ class ImMsgApi {
         .getMessageManager()
         .searchLocalMessages(searchParam: searchParam);
     ImApi.imPrint(res.toJson(), "搜索本地消息");
-    if (res.data.totalCount == 0) {
+    if (res.data!.totalCount == 0) {
       return [];
     }
     for (V2TimMessageSearchResultItem item
-        in res.data.messageSearchResultItems) {
+        in res.data!.messageSearchResultItems!) {
       V2TimValueCallback<V2TimConversation> cov =
-          await IMConversationApi.getConversation(item.conversationID);
+          await IMConversationApi.getConversation(item.conversationID!);
 
       final bool covSuccess = cov.code == 0 || cov.code == 200;
-      if (covSuccess && groupId == cov.data.groupID) {
+      if (covSuccess && groupId == cov.data!.groupID) {
         return item.messageList;
       }
     }

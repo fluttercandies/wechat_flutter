@@ -4,7 +4,7 @@ import 'package:tencent_im_sdk_plugin/models/v2_tim_conversation_result.dart';
 import 'package:tencent_im_sdk_plugin/models/v2_tim_value_callback.dart';
 import 'package:tencent_im_sdk_plugin/tencent_im_sdk_plugin.dart';
 import 'package:wechat_flutter/im/im_handle/Im_api.dart';
-import 'package:wechat_flutter/tools/app_config.dart';
+import 'package:wechat_flutter/tools/config/app_config.dart';
 
 /// IM会话模块Api
 class IMConversationApi {
@@ -13,7 +13,7 @@ class IMConversationApi {
   *
   * @param nextSeq 默认传0
   * */
-  static Future<V2TimConversationResult> getConversationList(
+  static Future<V2TimConversationResult?> getConversationList(
       String nextSeq) async {
     V2TimValueCallback<V2TimConversationResult> res = await TencentImSDKPlugin
         .v2TIMManager
