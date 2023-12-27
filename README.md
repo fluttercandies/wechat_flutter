@@ -11,6 +11,9 @@
 # Related documents
 [List of problems and solutions](issues_list.md)
 
+# 课程说明
+本项目出配套课程啦，耗时6个月打造，flutter3最新版本，从0到1实现微信，包含im聊天单聊群聊功能：https://edu.csdn.net/course/detail/39189
+
 # Notice
 本人远程全职或兼职接单flutter，任何疑难杂症也可以联系我，微信：18826987045.
 
