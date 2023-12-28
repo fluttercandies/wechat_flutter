@@ -45,15 +45,15 @@ class _ChatMorePageState extends State<ChatMorePage> {
     if (name == '相册') {
       AssetPicker.pickAssets(
         context,
-        maxAssets: 9,
-        pageSize: 320,
-        pathThumbSize: 80,
-        gridCount: 4,
-        selectedAssets: assets,
-        themeColor: Colors.green,
-        // textDelegate: DefaultAssetsPickerTextDelegate(),
-        routeCurve: Curves.easeIn,
-        routeDuration: const Duration(milliseconds: 500),
+        // maxAssets: 9,
+        // pageSize: 320,
+        // pathThumbSize: 80,
+        // gridCount: 4,
+        // selectedAssets: assets,
+        // themeColor: Colors.green,
+        // // textDelegate: DefaultAssetsPickerTextDelegate(),
+        // routeCurve: Curves.easeIn,
+        // routeDuration: const Duration(milliseconds: 500),
       ).then((List<AssetEntity> result) {
         result.forEach((AssetEntity element) async {
           sendImageMsg(widget.id, widget.type, file: await element.file,

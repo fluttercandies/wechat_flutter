@@ -177,6 +177,10 @@ class _AddFriendPageState extends State<AddFriendPage> {
   // 搜索好友
   Future search(String userName) async {
     final data = await getUsersProfile([userName]);
+    if(data == null){
+      showToast(context, '该用户不存在【可搜"188"或"18888"试试】');
+      return;
+    }
     List<dynamic> dataMap = json.decode(data);
     setState(() {
       if (Platform.isIOS) {
