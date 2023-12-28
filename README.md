@@ -21,6 +21,8 @@ I take flutter orders remotely full-time or part-time. If you have any intractab
 
 # log
 
+* 2023.12.28 merge 3.0.5 of flutter version and Android sdk 33【android 13】.
+
 * 2022.06.28 Replace the pure ui branch simulation picture address [12:00]
   
 * 2022.06.28 create pure ui branch [10:00]
@@ -193,52 +195,52 @@ Or try to go over the wall.
 
 # My Flutter environment
 
-```q1@q1deMacBook-Pro  ~/Documents/git/wechat_flutter   master  flutter doctor -v
-[✓] Flutter (Channel unknown, 2.10.4, on macOS 12.2.1 21D62 darwin-x64, locale en-CN)
-    • Flutter version 2.10.4 at /opt/fvm/versions/2.10.4
+```
+[✓] Flutter (Channel unknown, 3.0.5, on macOS 13.0 22A5331f darwin-x64, locale en-CN)
+    • Flutter version 3.0.5 at /opt/fvm/versions/3.0.5
     • Upstream repository unknown
-    • Framework revision c860cba910 (9 weeks ago), 2022-03-25 00:23:12 -0500
-    • Engine revision 57d3bac3dd
-    • Dart version 2.16.2
-    • DevTools version 2.9.2
+    • Framework revision f1875d570e (1 year, 5 months ago), 2022-07-13 11:24:16 -0700
+    • Engine revision e85ea0e79c
+    • Dart version 2.17.6
+    • DevTools version 2.12.2
     • Pub download mirror https://pub.flutter-io.cn
     • Flutter download mirror https://storage.flutter-io.cn
 
-[✓] Android toolchain - develop for Android devices (Android SDK version 31.0.0-rc1)
+[!] Android toolchain - develop for Android devices (Android SDK version 33.0.0)
     • Android SDK at /Users/q1/android-sdk-macosx
-    • Platform android-31, build-tools 31.0.0-rc1
+    • Platform android-34, build-tools 33.0.0
     • Java binary at: /Applications/Android Studio.app/Contents/jre/Contents/Home/bin/java
-    • Java version OpenJDK Runtime Environment (build 11.0.11+0-b60-7590822)
-    • All Android licenses accepted.
+    • Java version OpenJDK Runtime Environment (build 11.0.13+0-b1751.21-8125866)
+    ✗ Android license status unknown.
+      Run `flutter doctor --android-licenses` to accept the SDK licenses.
+      See https://flutter.dev/docs/get-started/install/macos#android-setup for more details.
 
-[✓] Xcode - develop for iOS and macOS (Xcode 13.3.1)
+[✓] Xcode - develop for iOS and macOS (Xcode 14.2)
     • Xcode at /Applications/Xcode.app/Contents/Developer
     • CocoaPods version 1.11.3
 
 [✓] Chrome - develop for the web
     • Chrome at /Applications/Google Chrome.app/Contents/MacOS/Google Chrome
 
-[✓] Android Studio (version 2021.1)
+[✓] Android Studio (version 2021.3)
     • Android Studio at /Applications/Android Studio.app/Contents
     • Flutter plugin can be installed from:
       🔨 https://plugins.jetbrains.com/plugin/9212-flutter
     • Dart plugin can be installed from:
       🔨 https://plugins.jetbrains.com/plugin/6351-dart
-    • Java version OpenJDK Runtime Environment (build 11.0.11+0-b60-7590822)
+    • Java version OpenJDK Runtime Environment (build 11.0.13+0-b1751.21-8125866)
 
-[✓] VS Code (version 1.66.2)
+[✓] VS Code (version 1.84.2)
     • VS Code at /Applications/Visual Studio Code.app/Contents
-    • Flutter extension version 3.38.1
+    • Flutter extension version 3.76.0
 
 [✓] Connected device (3 available)
-    • SEA AL10 (mobile) • 6HJ4C20219007098 • android-arm64  • Android 10 (API 29)
-    • macOS (desktop)   • macos            • darwin-x64     • macOS 12.2.1 21D62 darwin-x64
-    • Chrome (web)      • chrome           • web-javascript • Google Chrome 102.0.5005.61
+    • SHARK KSR A0 (mobile) • 6fc7fbe3 • android-arm64  • Android 11 (API 30)
+    • macOS (desktop)       • macos    • darwin-x64     • macOS 13.0 22A5331f darwin-x64
+    • Chrome (web)          • chrome   • web-javascript • Google Chrome 120.0.6099.129
 
-[!] HTTP Host Availability
-    ✗ HTTP host https://maven.google.com/ is not reachable. Reason: An error occurred while checking the HTTP host: Operation timed out
-
-! Doctor found issues in 1 category.
+[✓] HTTP Host Availability
+    • All required HTTP hosts are available
 ```
 
 # Problems running androidx.core:core

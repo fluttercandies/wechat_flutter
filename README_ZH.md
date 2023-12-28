@@ -19,6 +19,8 @@ I take flutter orders remotely full-time or part-time. If you have any intractab
 
 # log
 
+* 2023.12.28 兼容 flutter 3.0.5 版本 和 Android sdk 33【android 13】.
+
 * 2022.06.28 更换纯ui分支模拟图片地址 【12:00】
   
 * 2022.06.28 创建纯ui分支【10:00】
