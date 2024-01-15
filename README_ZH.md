@@ -12,11 +12,6 @@
 # 课程说明
 本项目出配套课程啦，耗时6个月打造，flutter3最新版本，从0到1实现微信，包含im聊天单聊群聊功能：https://edu.csdn.net/course/detail/39189
 
-# 公告
-本人远程全职或兼职接单flutter，任何疑难杂症也可以联系我，微信：18826987045.
-
-I take flutter orders remotely full-time or part-time. If you have any intractable diseases, you can also contact me. Telegram: +86 18826987045.
-
 # log
 
 * 2023.12.28 兼容 flutter 3.0.5 版本 和 Android sdk 33【android 13】.
