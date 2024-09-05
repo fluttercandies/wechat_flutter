@@ -12,6 +12,8 @@
 # 课程说明
 本项目出配套课程啦，耗时6个月打造，flutter3最新版本，从0到1实现微信，包含im聊天单聊群聊功能：https://edu.csdn.net/course/detail/39189
 
+课程demo下载地址 https://wwpj.lanzouu.com/s/wechat-new-demo
+
 # log
 
 * 2023.12.28 兼容 flutter 3.0.5 版本 和 Android sdk 33【android 13】.
