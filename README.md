@@ -18,6 +18,8 @@
 
 课程demo下载地址 https://wwpj.lanzouu.com/s/wechat-new-demo
 
+商务合作联系微信18826987045.
+
 # log
 
 * 2023.12.28 merge 3.0.5 of flutter version and Android sdk 33【android 13】.
