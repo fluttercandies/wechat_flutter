@@ -1,9 +1,7 @@
-import 'package:dim/commom/route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
-import 'package:wechat_flutter/config/storage_manager.dart';
 import 'package:wechat_flutter/pages/login/login_begin_page.dart';
 import 'package:wechat_flutter/pages/root/root_page.dart';
 import 'package:wechat_flutter/provider/global_model.dart';

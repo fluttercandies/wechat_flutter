@@ -1,3 +1,3 @@
-fvm use 3.0.5
+fvm use 3.24.3
 flutter clean
 flutter build apk

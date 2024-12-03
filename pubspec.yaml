@@ -6,120 +6,44 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.1+101
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=3.5.3 <4.0.0"
 
 dependencies:
-  flutter:
+  flutter: #flutter sdk
     sdk: flutter
-  #本地化
-  flutter_localizations:
+  flutter_localizations: #本地化
     sdk: flutter
-  #IOS风格材料图标
-  cupertino_icons: 0.1.3
-  #即时通讯【腾讯云】
-  dim:
-    path: plugin/wechat_flutter_plugin
-  #持久化存储
-  #  shared_preferences: 0.5.2+2 #[Flutter2及之前]用这个
-#  shared_preferences: ^2.0.8
-  shared_preferences: 2.0.15 #Flutter3用这个
-  #状态管理
-  #  provider: 4.3.1 #1.22.5版本Flutter用这个
-#  provider: ^6.0.1 #Flutter2.5用这个
-  provider: 6.0.4 #Flutter3用这个
-  #  provider: ^5.0.0 #Flutter2用这个
-  #  cached_network_image: 1.1.1 # 1.9版本flutter
-  #  cached_network_image: 2.0.0 #1.22.5版本Flutter用这个
-#  cached_network_image: ^3.0.0 #Flutter2用这个
-  cached_network_image: 3.2.0 #Flutter3用这个
-  #toast提示框
-  toast: 0.1.5
-  #web显示
-  webview_flutter: 0.3.22+1
-  #选取图库
-#  image_picker: 0.6.1+2 #flutter2或者之前的使用这个
-#  image_picker: ^0.8.5+3 #Flutter2.10用这个,,其他可注释
-  image_picker: 0.8.6 #Flutter2.10用这个,,其他可注释
-  #文本扩展显示
-  #  extended_text: 1.0.1  #1.17版本Flutter用这个
-  #  extended_text: 4.0.0 #1.20版本Flutter用这个
-  #  extended_text: 4.0.1 #1.22.5版本Flutter用这个
-  #  extended_text: ^6.0.5 #Flutter2用这个,,其他可注释
-  #  extended_text: ^7.0.0 #flutter2.5用这个,,其他可注释
-#  extended_text: ^9.0.0 #flutter2.10.4用这个,,其他可注释
-  extended_text: 9.1.1 #flutter3用这个,,其他可注释
-  #文字表情混入
-  #  extended_text_field: 1.0.1  #1.17版本Flutter用这个
-  #  extended_text_field: 4.0.0  #1.20版本Flutter用这个
-  #  extended_text_field: 5.0.1 #1.22.5版本Flutter用这个
-  #  extended_text_field: ^7.0.1 #Flutter2用这个,,其他可注释
-  #  extended_text_field: ^8.0.0 #Flutter2.5用这个,,其他可注释
-#  extended_text_field: ^10.0.0 #Flutter2.10用这个,,其他可注释
-  extended_text_field: 10.1.1 #Flutter3用这个,,其他可注释
-  #  extended_text_library: 4.0.2 #1.22.5版本Flutter用这个,,其他可注释
-  #  extended_text_library: ^6.0.0 #Flutter2用这个,,其他可注释
-  #  extended_text_library: ^7.0.0 #Flutter2.5用这个,,其他可注释
-#  extended_text_library: ^9.0.0 #Flutter2.10用这个,,其他可注释
-  extended_text_library: 9.1.0 #Flutter3用这个,,其他可注释
-  #打开系统浏览器
-  url_launcher: 5.2.7
-  #网络连接
-  connectivity: 0.4.6
-  #图片显示
-  photo_view: 0.4.2
-  #  dio: 2.2.2  #低于Flutter-1.17使用此版本
-  #  dio: 3.0.9  #1.22.5版本Flutter用这个
-#  dio: ^4.0.0 #Flutter2用这个
-  dio: 4.0.6 #Flutter3用这个
-  #打开文件
-#  open_file: 2.0.3  #flutter2或者之前的使用这个
-#  open_file: ^3.2.1 #flutter 2.10使用这个
-  open_file: 3.2.1 #flutter 3使用这个
-  #获取包信息
-#  package_info: 0.4.0+2 #flutter2或者之前的使用这个
-#  package_info_plus: ^1.4.0 #flutter 2.10使用这个
-  package_info_plus: 1.4.2 #flutter 3使用这个
-  #音频处理
-#  flutter_sound: 1.7.0 # flutter 2.10之前的用这个
-#  flutter_sound: ^9.1.2 # flutter 2.10用这个
-  flutter_sound: 9.2.13 # flutter 3用这个
-  #权限处理
-#  permission_handler: 3.1.0  # flutter 2.10之前的用这个
-#  permission_handler: ^9.2.0 # flutter 2.10用这个
-  permission_handler: 9.2.0 # flutter 3用这个
-  #音频处理
-  #  audioplayers: 0.13.3 #1.22.5版本Flutter用这个
-#  audioplayers: ^0.19.0 #Flutter2用这个
-  audioplayers: 0.19.1 #Flutter2用这个
-  #调用相机
-  camera: # 0.5.7+1
-    path: plugin/camera
-  #视频播放
-  #  video_player: 0.10.11+2 #1.22.5版本Flutter用这个
-#  video_player: ^2.1.1 #Flutter2用这个
-  video_player: 2.4.7 #Flutter3用这个
-  #图片压缩
-#  flutter_image_compress: 0.6.8 # flutter 2.10之前的用这个
-#  flutter_image_compress: ^1.1.0 # flutter 2.10用这个
-  #拼音
-#  lpinyin: ^1.0.7
-  lpinyin: 1.1.1 #flutter3用这个
-  #特殊列表滑动
-#  azlistview: ^0.1.0
-  azlistview: 0.1.2 #flutter3用这个
-  #微信图库
-  #  wechat_assets_picker: ^4.2.1 #1.22.5版本Flutter用这个
-  #  wechat_assets_picker: ^5.4.0 #Flutter2用这个
-#  wechat_assets_picker: ^6.2.3 #flutter2.5用这个
-#  wechat_assets_picker: ^7.1.1 #flutter3用这个
-  wechat_assets_picker: 7.2.0 #flutter3.0.5用这个
-  #扩展图片
-#  extended_image: #6.0.2+1 # flutter 2.10 用这个
-  extended_image: 6.0.2+1 # flutter 3 用这个
-  #平台
-#  platform: ^3.1.0 # flutter 2.10 用这个
-  platform: 3.1.0 # flutter 3 用这个
-  photo_manager: 2.8.0
+  cupertino_icons: 1.0.8 #IOS风格材料图标
+  tencent_cloud_chat_sdk: 8.3.6498 #腾讯云im
+  shared_preferences: 2.3.3 #持久化存储
+  provider: 6.1.2 #状态管理
+  get: 4.6.6 #状态管理
+  cached_network_image: 3.4.1 #图片缓存，图片显示
+  oktoast: 3.4.0 #toast提示框
+  webview_flutter: 4.10.0 #web显示
+  image_picker: 0.8.6 #选取图库
+  extended_text: 14.2.0 #文本扩展显示
+  extended_text_field: 16.0.1 #文字表情混入
+  extended_text_library: 12.0.1 #extended 支持库
+  url_launcher: 6.3.1 #打开系统浏览器
+  connectivity_plus: 6.1.0 #网络连接
+  photo_view: 0.15.0 #图片显示
+  dio: 5.7.0 #网络请求
+  open_file: 3.5.10 #打开文件
+  package_info_plus: 8.1.1 #获取包信息
+  flutter_sound: 9.17.5 #音频处理
+  permission_handler: 11.3.1 #权限处理
+  audioplayers: 6.1.0 #音频处理
+  video_player: 2.9.2 #视频播放
+  lpinyin: 2.0.3 #拼音
+  azlistview_plus: 3.0.0 #特殊列表滑动
+  wechat_assets_picker: 9.4.1 #微信图库
+  photo_manager: 3.5.0 #wechat_assets_picker的配件
+  extended_image: 9.0.7 #扩展图片
+  platform: 3.1.0 #平台
+
+dependency_overrides:
+  js: 0.7.1
 
 dev_dependencies:
   flutter_test:
