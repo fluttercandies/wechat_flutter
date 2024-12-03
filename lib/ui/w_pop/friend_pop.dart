@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 
 class PopRoute extends PopupRoute {
   final Duration _duration = Duration(milliseconds: 300);
-  Widget child;
+  final Widget child;
 
-  PopRoute({@required this.child});
+  PopRoute({required this.child});
 
   @override
-  Color get barrierColor => null;
+  Color? get barrierColor => null;
 
   @override
   bool get barrierDismissible => true;
 
   @override
-  String get barrierLabel => null;
+  String? get barrierLabel => null;
 
   @override
   Widget buildPage(BuildContext context, Animation<double> animation,
@@ -28,27 +28,28 @@ class PopRoute extends PopupRoute {
 class Popup extends StatefulWidget {
   final BuildContext btnContext;
   final Widget child;
-  final Function onClick; //点击child事件
+  final VoidCallback? onClick; // Click event for child
 
   Popup({
-    this.btnContext,
-    @required this.child,
+    required this.btnContext,
+    required this.child,
     this.onClick,
   });
 
+  @override
   PopupState createState() => PopupState();
 }
 
 class PopupState extends State<Popup> {
-  RenderBox button;
-  RenderBox overlay;
-  RelativeRect position;
+  late RenderBox button;
+  late RenderBox overlay;
+  late RelativeRect position;
 
   @override
   void initState() {
     super.initState();
-    button = widget.btnContext.findRenderObject();
-    overlay = Overlay.of(widget.btnContext).context.findRenderObject();
+    button = widget.btnContext.findRenderObject() as RenderBox;
+    overlay = Overlay.of(widget.btnContext)!.context.findRenderObject() as RenderBox;
     position = RelativeRect.fromRect(
       Rect.fromPoints(
         button.localToGlobal(Offset.zero, ancestor: overlay),
@@ -71,19 +72,19 @@ class PopupState extends State<Popup> {
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height,
               color: Colors.transparent,
-              child: new Column(
+              child: Column(
                 children: <Widget>[
-                  new Container(
+                  Container(
                     color: Colors.cyan.withOpacity(0.5),
                     margin: EdgeInsets.only(top: 80),
                     padding: EdgeInsets.all(20.0),
-                    child: new Column(
+                    child: Column(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: <Widget>[
-                        new Text('position.bottom:: ${position.bottom}', style: style),
-                        new Text('position.top:: ${position.top}', style: style),
-                        new Text('position.left:: ${position.left}', style: style),
-                        new Text('position.right:: ${position.right}', style: style),
+                        Text('position.bottom:: ${position.bottom}', style: style),
+                        Text('position.top:: ${position.top}', style: style),
+                        Text('position.left:: ${position.left}', style: style),
+                        Text('position.right:: ${position.right}', style: style),
                       ],
                     ),
                   )
@@ -94,10 +95,10 @@ class PopupState extends State<Popup> {
               child: GestureDetector(
                 child: widget.child,
                 onTap: () {
-                  //点击子child
+                  // Click event for child
                   if (widget.onClick != null) {
                     Navigator.of(context).pop();
-                    widget.onClick();
+                    widget.onClick!();
                   }
                 },
               ),
@@ -107,7 +108,7 @@ class PopupState extends State<Popup> {
           ],
         ),
         onTap: () {
-          //点击空白处
+          // Click event for empty space
           Navigator.of(context).pop();
         },
       ),

@@ -27,7 +27,7 @@ Future<void> login(String userName, BuildContext context) async {
       await SharedUtil.instance.saveString(Keys.account, userName);
       await SharedUtil.instance.saveBoolean(Keys.hasLogged, true);
       model.refresh();
-      await routePushAndRemove(new RootPage());
+      await Get.toAndRemove(new RootPage());
     } else {
       print('error::' + result.toString());
     }
@@ -49,11 +49,11 @@ Future<void> loginOut(BuildContext context) async {
     model.goToLogin = true;
     model.refresh();
     await SharedUtil.instance.saveBoolean(Keys.hasLogged, false);
-    await routePushAndRemove(new LoginBeginPage());
+    await Get.toAndRemove(new LoginBeginPage());
   } on PlatformException {
     model.goToLogin = true;
     model.refresh();
     await SharedUtil.instance.saveBoolean(Keys.hasLogged, false);
-    await routePushAndRemove(new LoginBeginPage());
+    await Get.toAndRemove(new LoginBeginPage());
   }
 }

@@ -49,13 +49,13 @@ class RootTabBarState extends State<RootTabBar> {
 
   actionsHandle(v) {
     if (v == '添加朋友') {
-      routePush(new AddFriendPage());
+      Get.to(new AddFriendPage());
     } else if (v == '发起群聊') {
-      routePush(new GroupLaunchPage());
+      Get.to(new GroupLaunchPage());
     } else if (v == '帮助与反馈') {
-      routePush(new WebViewPage(helpUrl, '帮助与反馈'));
+      Get.to(new WebViewPage(helpUrl, '帮助与反馈'));
     } else {
-      routePush(new LanguagePage());
+      Get.to(new LanguagePage());
     }
   }
 
@@ -97,7 +97,7 @@ class RootTabBarState extends State<RootTabBar> {
           onTap: () => routeFadePush(new SearchPage()),
         ),
         new WPopupMenu(
-          menuWidth: winWidth(context) / 2.5,
+          menuWidth: Get.width / 2.5,
           alignment: Alignment.center,
           onValueChanged: (String value) {
             if (!strNoEmpty(value)) return;

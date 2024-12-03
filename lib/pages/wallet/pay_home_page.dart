@@ -68,7 +68,7 @@ class _PayHomePageState extends State<PayHomePage> {
                 {'label': '钱包', 'icon': ''},
               ].map((e) {
                 return new Container(
-                  width: (winWidth(context) - 22) / 2,
+                  width: (Get.width - 22) / 2,
                   padding: EdgeInsets.symmetric(vertical: 35),
                   child: new Column(
                     children: [
@@ -76,7 +76,7 @@ class _PayHomePageState extends State<PayHomePage> {
                         Icons.event,
                         color: Colors.white,
                       ),
-                      new Space(height: 7),
+                      new SizedBox(height: 7),
                       new Text(
                         '${e['label']}',
                         style: TextStyle(color: Colors.white),
@@ -108,12 +108,12 @@ class _PayHomePageState extends State<PayHomePage> {
                   new Wrap(
                     children: out['data'].map<Widget>((e) {
                       return new Container(
-                        width: (winWidth(context) - 42) / 4,
+                        width: (Get.width - 42) / 4,
                         padding: EdgeInsets.symmetric(vertical: 20),
                         child: new Column(
                           children: [
                             new Icon(Icons.event),
-                            new Space(height: 7),
+                            new SizedBox(height: 7),
                             new Text('$e'),
                           ],
                         ),

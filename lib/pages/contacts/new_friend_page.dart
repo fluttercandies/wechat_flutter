@@ -66,7 +66,7 @@ class _NewFriendPageState extends State<NewFriendPage> {
       return [
         new Container(
           color: Colors.white,
-          width: winWidth(context),
+          width: Get.width,
           height: 110.0,
           alignment: Alignment.center,
           child: new Text(
@@ -74,11 +74,11 @@ class _NewFriendPageState extends State<NewFriendPage> {
             style: TextStyle(color: mainTextColor),
           ),
         ),
-        new Space(height: mainSpace),
+        new SizedBox(height: mainSpace),
         new SearchTileView(searchC.text, type: 1),
         new Container(
           color: Colors.white,
-          width: winWidth(context),
+          width: Get.width,
           height: (winHeight(context) - 185 * 1.38),
         )
       ];
@@ -90,7 +90,7 @@ class _NewFriendPageState extends State<NewFriendPage> {
         ),
         new Container(
           color: strNoEmpty(searchC.text) ? Colors.white : appBarColor,
-          width: winWidth(context),
+          width: Get.width,
           height: strNoEmpty(searchC.text)
               ? (winHeight(context) - 65 * 2.1) - winKeyHeight(context)
               : winHeight(context),
@@ -123,7 +123,7 @@ class _NewFriendPageState extends State<NewFriendPage> {
     List<dynamic> dataMap = json.decode(data);
     Map map = dataMap[0];
     if (strNoEmpty(map['allowType'])) {
-      routePush(new AddFriendsDetails('search', map['identifier'],
+      Get.to(new AddFriendsDetails('search', map['identifier'],
           map['faceUrl'], map['nickName'], map['gender']));
     } else {
       isResult = true;
@@ -186,8 +186,8 @@ class _NewFriendPageState extends State<NewFriendPage> {
           : body(),
     );
 
-    var rWidget = new FlatButton(
-      onPressed: () => routePush(new AddFriendPage()),
+    var rWidget = new TextButton(
+      onPressed: () => Get.to(new AddFriendPage()),
       child: new Text('添加朋友'),
     );
 

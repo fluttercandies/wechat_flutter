@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 
-import 'package:wechat_flutter/tools/wechat_flutter.dart';
-
 class IndicatorPageView extends StatefulWidget {
   final PageController pageC;
   final List<Widget> pages;
 
-  IndicatorPageView({this.pageC, this.pages});
+  IndicatorPageView({required this.pageC, required this.pages});
 
+  @override
   IndicatorPageViewState createState() => IndicatorPageViewState();
 }
 
@@ -15,8 +14,8 @@ class IndicatorPageViewState extends State<IndicatorPageView> {
   int currentMoreIndex = 0;
   double size = 5.0;
 
-  Widget itemView(index) {
-    return new Container(
+  Widget itemView(int index) {
+    return Container(
       height: size,
       width: size,
       margin: EdgeInsets.symmetric(horizontal: size),
@@ -33,13 +32,13 @@ class IndicatorPageViewState extends State<IndicatorPageView> {
 
   @override
   Widget build(BuildContext context) {
-    return new GestureDetector(
-      child: new Stack(
+    return GestureDetector(
+      child: Stack(
         alignment: Alignment.bottomCenter,
         children: <Widget>[
-          new ScrollConfiguration(
+          ScrollConfiguration(
             behavior: MyBehavior(),
-            child: new PageView(
+            child: PageView(
               controller: widget.pageC,
               onPageChanged: (v) {
                 setState(() => currentMoreIndex = v);
@@ -47,9 +46,9 @@ class IndicatorPageViewState extends State<IndicatorPageView> {
               children: widget.pages,
             ),
           ),
-          new Container(
+          Container(
             padding: EdgeInsets.only(bottom: 10.0),
-            child: new Row(
+            child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: List.generate(widget.pages.length, itemView),
             ),
@@ -61,14 +60,4 @@ class IndicatorPageViewState extends State<IndicatorPageView> {
   }
 }
 
-class MyBehavior extends ScrollBehavior {
-  @override
-  Widget buildViewportChrome(
-      BuildContext context, Widget child, AxisDirection axisDirection) {
-    if (Platform.isAndroid || Platform.isFuchsia) {
-      return child;
-    } else {
-      return super.buildViewportChrome(context, child, axisDirection);
-    }
-  }
-}
+class MyBehavior extends ScrollBehavior {}

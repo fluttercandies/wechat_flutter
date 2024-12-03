@@ -16,12 +16,12 @@ class ItemDynamic extends StatelessWidget {
   Widget build(BuildContext context) {
     int imageSize = this.dynamic.images.length;
 
-    double imageWidth = (winWidth(context) - 20 - 50 - 10) /
+    double imageWidth = (Get.width - 20 - 50 - 10) /
         ((imageSize == 3 || imageSize > 4)
             ? 3.0
             : (imageSize == 2 || imageSize == 4) ? 2.0 : 1.5);
 
-    double videoWidth = (winWidth(context) - 20 - 50 - 10) / 2.2;
+    double videoWidth = (Get.width - 20 - 50 - 10) / 2.2;
 
     String desc = this.dynamic.desc;
 
@@ -179,13 +179,13 @@ class _TestPushState extends State<TestPush> {
       child: new Row(
         children: <Widget>[
           new Expanded(
-            child: new FlatButton(
+            child: new TextButton(
               onPressed: () {},
               child: new Text('赞', style: labelStyle),
             ),
           ),
           new Expanded(
-            child: new FlatButton(
+            child: new TextButton(
               onPressed: () {},
               child: new Text('评论', style: labelStyle),
             ),

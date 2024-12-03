@@ -131,7 +131,7 @@ class _HomePageState extends State<HomePage>
 
             return InkWell(
               onTap: () {
-                routePush(new ChatPage(
+                Get.to(new ChatPage(
                     id: model.identifier,
                     title: model.name,
                     type: model.type == 'Group' ? 2 : 1));

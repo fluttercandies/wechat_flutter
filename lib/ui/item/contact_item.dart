@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:wechat_flutter/pages/contacts/all_label_page.dart';
 import 'package:wechat_flutter/pages/contacts/contacts_details_page.dart';
 import 'package:wechat_flutter/pages/contacts/group_list_page.dart';
@@ -14,16 +15,16 @@ typedef OnCancel = void Function(String v);
 class ContactItem extends StatefulWidget {
   final String avatar;
   final String title;
-  final String identifier;
-  final String groupTitle;
+  final String? identifier;
+  final String? groupTitle;
   final bool isLine;
   final ClickType type;
-  final OnAdd add;
-  final OnCancel cancel;
+  final OnAdd? add;
+  final OnCancel? cancel;
 
   ContactItem({
-    @required this.avatar,
-    @required this.title,
+    required this.avatar,
+    required this.title,
     this.identifier,
     this.isLine = true,
     this.groupTitle,
@@ -32,6 +33,7 @@ class ContactItem extends StatefulWidget {
     this.cancel,
   });
 
+  @override
   ContactItemState createState() => ContactItemState();
 }
 
@@ -55,8 +57,6 @@ class ContactItemState extends State<ContactItem> {
 
   bool isSelect = false;
 
-  Map<String, dynamic> mapData;
-
   bool isLine() {
     if (widget.isLine) {
       if (widget.title != '公众号') {
@@ -72,7 +72,7 @@ class ContactItemState extends State<ContactItem> {
   @override
   Widget build(BuildContext context) {
     /// 定义左边图标Widget
-    Widget _avatarIcon = new ImageView(
+    Widget _avatarIcon = ImageView(
       img: widget.avatar,
       width: Constants.ContactAvatarSize,
       height: Constants.ContactAvatarSize,
@@ -86,9 +86,9 @@ class ContactItemState extends State<ContactItem> {
       _avatarIcon,
 
       ///  头像离名字的距离
-      new Space(width: 15.0),
-      new Expanded(
-        child: new Container(
+      SizedBox(width: 15.0),
+      Expanded(
+        child: Container(
           padding: const EdgeInsets.only(right: MARGIN_HORIZONTAL),
           height: heightItem(false),
 
@@ -98,70 +98,71 @@ class ContactItemState extends State<ContactItem> {
             border: !isLine()
                 ? null
                 : Border(
-                    bottom: BorderSide(
-
-                        /// 下划线粗细及颜色
-                        width: Constants.DividerWidth,
-                        color: lineColor),
-                  ),
+              bottom: BorderSide(
+                /// 下划线粗细及颜色
+                  width: Constants.DividerWidth,
+                  color: lineColor),
+            ),
           ),
 
           /// 姓名
-          child: new Text(widget.title,
+          child: Text(widget.title,
               style: TextStyle(fontWeight: FontWeight.w400), maxLines: 1),
         ),
       ),
       widget.type == ClickType.select
-          ? new InkWell(
-              child: new Image.asset(
-                'assets/images/login/${isSelect ? 'ic_select_have.webp' : 'ic_select_no.png'}',
-                width: 25.0,
-                height: 25.0,
-                fit: BoxFit.cover,
-              ),
-              onTap: () {
-                setState(() => isSelect = !isSelect);
-                if (isSelect) widget.add(widget.identifier);
-                if (!isSelect) widget.cancel(widget.identifier);
-              },
-            )
-          : new Container()
+          ? InkWell(
+        child: Image.asset(
+          'assets/images/login/${isSelect ? 'ic_select_have.webp' : 'ic_select_no.png'}',
+          width: 25.0,
+          height: 25.0,
+          fit: BoxFit.cover,
+        ),
+        onTap: () {
+          setState(() => isSelect = !isSelect);
+          if (isSelect) widget.add?.call(widget.identifier ?? '');
+          if (!isSelect) widget.cancel?.call(widget.identifier ?? '');
+        },
+      )
+          : Container()
     ];
 
     /// 列表项主体部分
-    Widget button = new FlatButton(
-      color: Colors.white,
+    Widget button = TextButton(
+      style: TextButton.styleFrom(
+        backgroundColor: Colors.white,
+      ),
       onPressed: () {
         if (widget.type == ClickType.select) {
           setState(() => isSelect = !isSelect);
-          if (isSelect) widget.add(widget.identifier);
-          if (!isSelect) widget.cancel(widget.identifier);
+          if (isSelect) widget.add?.call(widget.identifier ?? '');
+          if (!isSelect) widget.cancel?.call(widget.identifier ?? '');
           return;
         }
         if (widget.title == '新的朋友') {
-          routePush(new NewFriendPage());
+          Get.to(NewFriendPage());
         } else if (widget.title == '群聊') {
-          routePush(new GroupListPage());
+          Get.to(GroupListPage());
         } else if (widget.title == '标签') {
-          routePush(new AllLabelPage());
+          Get.to(AllLabelPage());
         } else if (widget.title == '公众号') {
-          routePush(new PublicPage());
+          Get.to(PublicPage());
         } else {
-          routePush(new ContactsDetailsPage(
-              id: widget.identifier,
+          Get.to(ContactsDetailsPage(
+              id: widget.identifier ?? '',
               avatar: widget.avatar,
               title: widget.title));
         }
       },
-      child: new Row(children: content),
+      child: Row(children: content),
     );
 
     /// 定义分组标签（左边的ABC...）
     Widget itemBody;
     if (widget.groupTitle != null) {
-      itemBody = new Column(
+      itemBody = Column(
         children: <Widget>[
-          new Container(
+          Container(
             height: GROUP_TITLE_HEIGHT,
             padding: EdgeInsets.only(left: 16.0, right: 16.0),
             decoration: BoxDecoration(
@@ -172,7 +173,7 @@ class ContactItemState extends State<ContactItem> {
               ),
             ),
             alignment: Alignment.centerLeft,
-            child: new Text(widget.groupTitle,
+            child: Text(widget.groupTitle!,
                 style: AppStyles.GroupTitleItemTextStyle),
           ),
           button,

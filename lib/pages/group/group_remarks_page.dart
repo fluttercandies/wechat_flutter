@@ -73,7 +73,7 @@ class _GroupRemarksPageState extends State<GroupRemarksPage> {
           child: new Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              new Space(height: 30),
+              new SizedBox(height: 30),
               new Text(
                 '$label',
                 style: TextStyle(
@@ -142,9 +142,9 @@ class _GroupRemarksPageState extends State<GroupRemarksPage> {
               new ComMomButton(
                 text: '完成',
                 onTap: () => handle(),
-                width: winWidth(context) / 2,
+                width: Get.width / 2,
               ),
-              new Space(height: winKeyHeight(context) > 1 ? 15 : 50),
+              new SizedBox(height: winKeyHeight(context) > 1 ? 15 : 50),
             ],
           ),
         ),

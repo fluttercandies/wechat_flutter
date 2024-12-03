@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
-
+import 'package:get/get.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
 class TipVerifyInput extends StatefulWidget {
-  final String title;
+  final String? title;
   final String defStr;
   final TextEditingController controller;
   final FocusNode focusNode;
   final Color color;
 
-  TipVerifyInput(
-      {this.title,
-      this.controller,
-      this.defStr = '',
-      this.focusNode,
-      this.color = Colors.white});
+  TipVerifyInput({
+    this.title,
+    required this.controller,
+    this.defStr = '',
+    required this.focusNode,
+    this.color = Colors.white,
+  });
 
   @override
   _VerifyInputState createState() => new _VerifyInputState();
@@ -46,27 +47,27 @@ class _VerifyInputState extends State<TipVerifyInput> {
       ),
       widget.controller.text != ''
           ? new Visibility(
-              visible: widget.focusNode.hasFocus,
-              child: new InkWell(
-                child: new Padding(
-                  padding: EdgeInsets.all(2.0),
-                  child: new Image.asset('assets/images/ic_delete.webp'),
-                ),
-                onTap: () {
-                  widget.controller.text = '';
-                  setState(() {});
-                },
-              ))
+          visible: widget.focusNode.hasFocus,
+          child: new InkWell(
+            child: new Padding(
+              padding: EdgeInsets.all(2.0),
+              child: new Image.asset('assets/images/ic_delete.webp'),
+            ),
+            onTap: () {
+              widget.controller.text = '';
+              setState(() {});
+            },
+          ))
           : new Container()
     ];
 
     return new Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        new Space(height: mainSpace),
+        new SizedBox(height: mainSpace),
         new Expanded(
           child: new Container(
-            width: winWidth(context) - 20,
+            width: Get.width - 20,
             decoration: BoxDecoration(
               border: Border(
                 bottom: BorderSide(
@@ -81,11 +82,11 @@ class _VerifyInputState extends State<TipVerifyInput> {
             child: new Row(children: view),
           ),
         ),
-        new Space(height: mainSpace),
+        new SizedBox(height: mainSpace),
         new Text(
           widget.title ?? '',
           style:
-              TextStyle(color: mainTextColor.withOpacity(0.7), fontSize: 15.0),
+          TextStyle(color: mainTextColor.withOpacity(0.7), fontSize: 15.0),
         ),
       ],
     );
@@ -95,7 +96,7 @@ class _VerifyInputState extends State<TipVerifyInput> {
   Widget build(BuildContext context) {
     return new Container(
       height: 100.0,
-      width: winWidth(context),
+      width: Get.width,
       color: widget.color,
       padding: EdgeInsets.all(10.0),
       margin: EdgeInsets.symmetric(horizontal: 10.0),

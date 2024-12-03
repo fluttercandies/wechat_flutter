@@ -23,10 +23,10 @@ class _MinePageState extends State<MinePage> {
         loginOut(context);
         break;
       case '支付':
-        routePush(new PayHomePage());
+        Get.to(new PayHomePage());
         break;
       default:
-        routePush(new LanguagePage());
+        Get.to(new LanguagePage());
         break;
     }
   }
@@ -124,7 +124,7 @@ class _MinePageState extends State<MinePage> {
             child: new Row(
                 crossAxisAlignment: CrossAxisAlignment.center, children: row),
           ),
-          onTap: () => routePush(new PersonalInfoPage()),
+          onTap: () => Get.to(new PersonalInfoPage()),
         ),
         new Column(children: data.map(buildContent).toList()),
       ],

@@ -18,7 +18,7 @@ class _SelectBgPageState extends State<SelectBgPage> {
   ];
 
   Widget buildBg(item) {
-    double _size = (winWidth(context) - 30) / 3;
+    double _size = (Get.width - 30) / 3;
     return new InkWell(
       child: new ClipRRect(
         borderRadius: BorderRadius.all(Radius.circular(5)),
@@ -31,7 +31,7 @@ class _SelectBgPageState extends State<SelectBgPage> {
       ),
       onTap: () => showToast(context, '敬请期待'),
 //      onTap: () =>
-//          routePush(new ChatBackgroundDetailsPage(item['img'], item['name'])),
+//          Get.to(new ChatBackgroundDetailsPage(item['img'], item['name'])),
     );
   }
 

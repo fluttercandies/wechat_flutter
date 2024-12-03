@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
 class LabelRow extends StatelessWidget {
-  final String label;
-  final VoidCallback onPressed;
-  final double labelWidth;
+  final String? label;
+  final VoidCallback? onPressed;
+  final double? labelWidth;
   final bool isRight;
   final bool isLine;
-  final String value;
-  final String rValue;
-  final Widget rightW;
-  final EdgeInsetsGeometry margin;
+  final String? value;
+  final String? rValue;
+  final Widget? rightW;
+  final EdgeInsetsGeometry? margin;
   final EdgeInsetsGeometry padding;
-  final Widget headW;
+  final Widget? headW;
   final double lineWidth;
 
   LabelRow({
@@ -34,12 +33,15 @@ class LabelRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new Container(
-      child: new FlatButton(
-        color: Colors.white,
-        padding: EdgeInsets.all(0),
+    return Container(
+      margin: margin,
+      child: TextButton(
+        style: TextButton.styleFrom(
+          backgroundColor: Colors.white,
+          padding: EdgeInsets.all(0),
+        ),
         onPressed: onPressed ?? () {},
-        child: new Container(
+        child: Container(
           padding: padding,
           margin: EdgeInsets.only(left: 20.0),
           decoration: BoxDecoration(
@@ -47,39 +49,44 @@ class LabelRow extends StatelessWidget {
                 ? Border(bottom: BorderSide(color: lineColor, width: lineWidth))
                 : null,
           ),
-          child: new Row(
+          child: Row(
             children: <Widget>[
-              if (headW != null) headW,
-              new SizedBox(
+              if (headW != null) headW!,
+              SizedBox(
                 width: labelWidth,
-                child: new Text(
+                child: Text(
                   label ?? '',
                   style: TextStyle(fontSize: 17.0),
                 ),
               ),
-              value != null
-                  ? new Text(value,
-                      style: TextStyle(
-                        color: mainTextColor.withOpacity(0.7),
-                      ))
-                  : new Container(),
-              new Spacer(),
-              rValue != null
-                  ? new Text(rValue,
-                      style: TextStyle(
-                          color: mainTextColor.withOpacity(0.7),
-                          fontWeight: FontWeight.w400))
-                  : new Container(),
-              rightW != null ? rightW : new Container(),
-              isRight
-                  ? new Icon(CupertinoIcons.right_chevron,
-                      color: mainTextColor.withOpacity(0.5))
-                  : new Container(width: 10.0)
+              if (value != null)
+                Text(
+                  value!,
+                  style: TextStyle(
+                    color: mainTextColor.withOpacity(0.7),
+                  ),
+                ),
+              Spacer(),
+              if (rValue != null)
+                Text(
+                  rValue!,
+                  style: TextStyle(
+                    color: mainTextColor.withOpacity(0.7),
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              if (rightW != null) rightW!,
+              if (isRight)
+                Icon(
+                  CupertinoIcons.right_chevron,
+                  color: mainTextColor.withOpacity(0.5),
+                )
+              else
+                Container(width: 10.0),
             ],
           ),
         ),
       ),
-      margin: margin,
     );
   }
 }

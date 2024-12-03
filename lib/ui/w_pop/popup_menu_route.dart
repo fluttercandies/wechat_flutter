@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:wechat_flutter/ui/w_pop/menu_popup_widget.dart';
 
 /// 1.长按  2.单击
@@ -7,9 +6,9 @@ enum PressType { longPress, singleClick }
 
 class PopupMenuRoute extends PopupRoute {
   final BuildContext btnContext;
-  double _height;
-  double _width;
-  final List actions;
+  late double _height;
+  late double _width;
+  final List<Map<String, String>> actions;
   final int _pageMaxChildCount;
   final Color backgroundColor;
   final double menuWidth;
@@ -27,20 +26,25 @@ class PopupMenuRoute extends PopupRoute {
       this.menuHeight,
       this.padding,
       this.margin,
-      this.onValueChanged) {
-    _height = btnContext.size.height -
+      this.onValueChanged,
+      ) {
+    _height = btnContext.size!.height -
         (padding == null
-            ? margin == null ? 0 : margin.vertical
+            ? margin == null
+            ? 0
+            : margin.vertical
             : padding.vertical);
-    _width = btnContext.size.width -
+    _width = btnContext.size!.width -
         (padding == null
-            ? margin == null ? 0 : margin.horizontal
+            ? margin == null
+            ? 0
+            : margin.horizontal
             : padding.horizontal);
   }
 
   @override
   Animation<double> createAnimation() {
-    return new CurvedAnimation(
+    return CurvedAnimation(
       parent: super.createAnimation(),
       curve: Curves.linear,
       reverseCurve: const Interval(0.0, 2.0 / 3.0),
@@ -48,30 +52,31 @@ class PopupMenuRoute extends PopupRoute {
   }
 
   @override
-  Color get barrierColor => null;
+  Color? get barrierColor => null;
 
   @override
   bool get barrierDismissible => true;
 
   @override
-  String get barrierLabel => null;
+  String? get barrierLabel => null;
 
   @override
   Widget buildPage(BuildContext context, Animation<double> animation,
       Animation<double> secondaryAnimation) {
-    return new MenuPopWidget(
-        this.btnContext,
-        _height,
-        _width,
-        actions,
-        _pageMaxChildCount,
-        backgroundColor,
-        menuWidth,
-        menuHeight,
-        padding,
-        margin);
+    return MenuPopWidget(
+      btnContext: btnContext,
+      height: _height,
+      width: _width,
+      actions: actions,
+      pageMaxChildCount: _pageMaxChildCount,
+      backgroundColor: backgroundColor,
+      menuWidth: menuWidth,
+      menuHeight: menuHeight,
+      padding: padding,
+      margin: margin,
+    );
   }
 
   @override
-  Duration get transitionDuration => new Duration(milliseconds: 300);
+  Duration get transitionDuration => Duration(milliseconds: 300);
 }

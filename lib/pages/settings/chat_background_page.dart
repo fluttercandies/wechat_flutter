@@ -24,7 +24,7 @@ class _ChatBackgroundPageState extends State<ChatBackgroundPage> {
         children: <Widget>[
           new GroupItem(
             title: '选择背景图',
-            onPressed: () => routePush(new SelectBgPage()),
+            onPressed: () => Get.to(new SelectBgPage()),
           ),
           new GroupItem(
             title: '从手机相册选择',
@@ -35,7 +35,7 @@ class _ChatBackgroundPageState extends State<ChatBackgroundPage> {
             onPressed: () =>
                 _openGallery(globalModel, context, source: ImageSource.camera),
           ),
-          new Space(height: 15),
+          new SizedBox(height: 15),
           new SizedBox(),
         ],
       ),

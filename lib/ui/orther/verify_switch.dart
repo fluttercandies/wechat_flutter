@@ -1,11 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
 class VerifySwitch extends StatefulWidget {
-  final String title;
+  final String? title;
   final String defStr;
 
   VerifySwitch({this.title, this.defStr = ''});
@@ -40,9 +41,9 @@ class _VerifySwitchState extends State<VerifySwitch> {
           widget.title ?? '',
           style: TextStyle(color: mainTextColor, fontSize: 15.0),
         ),
-        new Space(height: mainSpace * 1),
+        new SizedBox(height: mainSpace * 1),
         new Container(
-          width: winWidth(context) - 20,
+          width: Get.width - 20,
           padding: EdgeInsets.symmetric(horizontal: 10.0),
           alignment: Alignment.center,
           child: row,
@@ -55,7 +56,7 @@ class _VerifySwitchState extends State<VerifySwitch> {
   Widget build(BuildContext context) {
     return new Container(
       height: 100.0,
-      width: winWidth(context),
+      width: Get.width,
       color: Colors.white,
       padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
       child: contentBuild(),

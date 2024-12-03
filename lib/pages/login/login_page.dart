@@ -58,13 +58,13 @@ class _LoginPageState extends State<LoginPage> {
           child: new Text(S.of(context).mobileNumberLogin,
               style: TextStyle(fontSize: 25.0)),
         ),
-        new FlatButton(
+        new TextButton(
           child: new Padding(
             padding: EdgeInsets.symmetric(horizontal: 10.0),
             child: new Row(
               children: <Widget>[
                 new Container(
-                  width: winWidth(context) * 0.25,
+                  width: Get.width * 0.25,
                   alignment: Alignment.centerLeft,
                   child: new Text(S.of(context).phoneCity,
                       style: TextStyle(
@@ -83,7 +83,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ),
           onPressed: () async {
-            final result = await routePush(new SelectLocationPage());
+            final result = await Get.to(new SelectLocationPage());
             if (result == null) return;
             model.area = result;
             model.refresh();
@@ -98,7 +98,7 @@ class _LoginPageState extends State<LoginPage> {
           child: new Row(
             children: <Widget>[
               new Container(
-                width: winWidth(context) * 0.25,
+                width: Get.width * 0.25,
                 alignment: Alignment.centerLeft,
                 margin: EdgeInsets.only(left: 25.0),
                 child: new Text(
@@ -135,7 +135,7 @@ class _LoginPageState extends State<LoginPage> {
             onTap: () => showToast(context, S.of(context).notOpen),
           ),
         ),
-        new Space(height: mainSpace * 2.5),
+        new SizedBox(height: mainSpace * 2.5),
         new ComMomButton(
           text: S.of(context).nextStep,
           style: TextStyle(

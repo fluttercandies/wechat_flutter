@@ -1,75 +1,87 @@
 import 'package:flutter/material.dart';
-
+import 'package:get/get.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
 class PersonCard extends StatelessWidget {
-  final String imageUrl;
+  final String? imageUrl;
   final String name;
   final String area;
   final int gender;
 
-  PersonCard({this.imageUrl, this.name, this.area, this.gender = 0});
+  PersonCard({
+    this.imageUrl,
+    required this.name,
+    required this.area,
+    this.gender = 0,
+  });
 
-  Widget dynamicAvatar(avatar, {size}) {
-    if (isNetWorkImg(avatar))
-      return new CachedNetworkImage(
-          imageUrl: avatar,
-          cacheManager: cacheManager,
-          width: size ?? null,
-          height: size ?? null,
-          fit: BoxFit.fill);
-    else
-      return new Image.asset(avatar,
-          fit: BoxFit.fill, width: size ?? null, height: size ?? null);
+  Widget dynamicAvatar(String avatar, {double? size}) {
+    if (GetUtils.isURL(avatar)) {
+      return CachedNetworkImage(
+        imageUrl: avatar,
+        cacheManager: cacheManager,
+        width: size,
+        height: size,
+        fit: BoxFit.fill,
+      );
+    } else {
+      return Image.asset(
+        avatar,
+        fit: BoxFit.fill,
+        width: size,
+        height: size,
+      );
+    }
   }
 
   List<Widget> content() {
     return [
-      new Space(),
-      new Container(
+      SizedBox(width: 10.0),
+      Container(
         margin: EdgeInsets.all(15.0),
         width: 60.0,
         height: 60.0,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(6.0),
-          child: strNoEmpty(imageUrl)
-              ? dynamicAvatar(imageUrl)
-              : new Image.asset(defIcon, fit: BoxFit.cover),
+          child: imageUrl != null && strNoEmpty(imageUrl!)
+              ? dynamicAvatar(imageUrl!)
+              : Image.asset(defIcon, fit: BoxFit.cover),
         ),
       ),
-      new Column(
+      Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          new Row(
+          Row(
             children: <Widget>[
-              new Text(
+              Text(
                 name,
                 style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w500),
               ),
-              new Space(),
-              new Image.asset(
-                  'assets/images/Contact_${gender == 0 ? 'Female' : 'Male'}.webp',
-                  fit: BoxFit.cover,
-                  width: 20.0)
+              SizedBox(width: 10),
+              Image.asset(
+                'assets/images/Contact_${gender == 0 ? 'Female' : 'Male'}.webp',
+                fit: BoxFit.cover,
+                width: 20.0,
+              ),
             ],
           ),
-          new Space(height: mainSpace * 0.3),
-          new Text(
+          SizedBox(height: mainSpace * 0.3),
+          Text(
             '地区： $area',
             style: TextStyle(color: labelTextColor, fontSize: 13),
-          )
+          ),
         ],
-      )
+      ),
     ];
   }
 
   @override
   Widget build(BuildContext context) {
-    return new Container(
+    return Container(
       color: Colors.white,
       height: 90.0,
-      child: new Row(children: content()),
+      child: Row(children: content()),
     );
   }
 }

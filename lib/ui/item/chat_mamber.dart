@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:wechat_flutter/im/entity/person_info_entity.dart';
 import 'package:wechat_flutter/pages/contacts/contacts_details_page.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +27,7 @@ class _ChatMamBerState extends State<ChatMamBer> {
 
     wrap.add(
       new Wrap(
-        spacing: (winWidth(context) - 315) / 5,
+        spacing: (Get.width - 315) / 5,
         runSpacing: 10.0,
         children: [0].map((item) {
           return new InkWell(
@@ -40,7 +41,7 @@ class _ChatMamBerState extends State<ChatMamBer> {
                     height: 55.0,
                     fit: BoxFit.cover,
                   ),
-                  new Space(height: mainSpace / 2),
+                  new SizedBox(height: mainSpace / 2),
                   new Text(
                     strNoEmpty(name) ? name : '无名氏',
                     style: TextStyle(color: mainTextColor),
@@ -49,7 +50,7 @@ class _ChatMamBerState extends State<ChatMamBer> {
                 ],
               ),
             ),
-            onTap: () => routePush(new ContactsDetailsPage(
+            onTap: () => Get.to(new ContactsDetailsPage(
                 id: widget.model.identifier, title: name, avatar: face)),
           );
         }).toList(),
@@ -64,16 +65,16 @@ class _ChatMamBerState extends State<ChatMamBer> {
           child: new Image.asset('assets/images/chat/ic_details_add.png',
               width: 55.0, height: 55.0, fit: BoxFit.cover),
         ),
-        onTap: () => routePush(new GroupLaunchPage()),
+        onTap: () => Get.to(new GroupLaunchPage()),
       ),
     );
 
     return Container(
       color: Colors.white,
-      width: winWidth(context),
+      width: Get.width,
       padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 15.0),
       child: new Wrap(
-        spacing: (winWidth(context) - 315) / 5,
+        spacing: (Get.width - 315) / 5,
         runSpacing: 10.0,
         children: wrap,
       ),

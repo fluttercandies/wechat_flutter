@@ -38,9 +38,9 @@ class _DiscoverPageState extends State<DiscoverPage> {
       margin: EdgeInsets.only(bottom: isShow() ? 10.0 : 0.0),
       onPressed: () {
         if (item['name'] == '朋友圈') {
-          routePush(new WeChatFriendsCircle());
+          Get.to(new WeChatFriendsCircle());
         } else {
-          routePush(new LanguagePage());
+          Get.to(new LanguagePage());
         }
       },
     );

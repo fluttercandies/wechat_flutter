@@ -71,7 +71,7 @@ class _ChatMorePageState extends State<ChatMorePage> {
         WidgetsFlutterBinding.ensureInitialized();
         cameras = await availableCameras();
 
-        routePush(new ShootPage(cameras));
+        Get.to(new ShootPage(cameras));
       } on CameraException catch (e) {
         logError(e.code, e.description);
       }

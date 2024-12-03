@@ -35,9 +35,9 @@ class _GroupListPageState extends State<GroupListPage> {
 
   Widget groupItem(BuildContext context, String gName, String gId,
       String gFaceURL, String title) {
-    return FlatButton(
+    return TextButton(
       onPressed: () {
-        routePush(ChatPage(
+        Get.to(ChatPage(
           title: gName,
           type: 2,
           id: gId,
@@ -75,7 +75,7 @@ class _GroupListPageState extends State<GroupListPage> {
           ),
           Container(
             height: 1.0,
-            width: winWidth(context),
+            width: Get.width,
             color: mainBGColor,
           )
         ],
@@ -91,7 +91,7 @@ class _GroupListPageState extends State<GroupListPage> {
           width: 60.0,
           child: new Image.asset('assets/images/search_black.webp'),
         ),
-        onTap: () => routePush(new SearchPage()),
+        onTap: () => Get.to(new SearchPage()),
       ),
       new InkWell(
         child: new Container(
@@ -99,7 +99,7 @@ class _GroupListPageState extends State<GroupListPage> {
           child: new Image.asset('assets/images/contact/ic_contact_add.webp',
               color: Colors.black, width: 22.0, fit: BoxFit.fitWidth),
         ),
-        onTap: () => routePush(new GroupLaunchPage()),
+        onTap: () => Get.to(new GroupLaunchPage()),
       ),
     ];
 

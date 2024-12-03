@@ -1,5 +1,3 @@
-import 'package:dim/commom/check.dart';
-import 'package:dim/commom/ui.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:wechat_flutter/config/const.dart';
@@ -20,7 +18,7 @@ class RedPackage extends StatelessWidget {
     final globalModel = Provider.of<GlobalModel>(context);
     var body = [
       new MsgAvatar(model: model, globalModel: globalModel),
-      new Space(width: mainSpace),
+      new SizedBox(width: mainSpace),
       InkWell(
         child: new Container(
           padding: EdgeInsets.only(left: 15, right: 15, top: 10, bottom: 3),
@@ -45,7 +43,7 @@ class RedPackage extends StatelessWidget {
                   children: [
                     Image.asset('assets/images/wechat/c2c_hongbao_icon_hk.png',
                         width: 30),
-                    Space(width: 5),
+                    SizedBox(width: 5),
                     Text(
                       '恭喜发财，大吉大利',
                       style: TextStyle(color: Colors.white, fontSize: 15),
@@ -53,7 +51,7 @@ class RedPackage extends StatelessWidget {
                   ],
                 ),
               ),
-              HorizontalLine(color: Colors.white, height: 1),
+              Container(color: Colors.white, height: 1),
               Text(
                 '微信红包',
                 style: TextStyle(

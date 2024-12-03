@@ -9,12 +9,13 @@ class ModifyGroupInfoMessage extends StatefulWidget {
 
   ModifyGroupInfoMessage(this.data);
 
+  @override
   ModifyGroupInfoMessageState createState() => ModifyGroupInfoMessageState();
 }
 
 class ModifyGroupInfoMessageState extends State<ModifyGroupInfoMessage> {
-  String name;
-  List membersData;
+  String? name;
+  List<dynamic>? membersData;
 
   @override
   void initState() {
@@ -26,33 +27,36 @@ class ModifyGroupInfoMessageState extends State<ModifyGroupInfoMessage> {
   getCardName(String user) async {
     await InfoModel.getGroupMembersInfoModel(widget.data['groupId'], [user],
         callback: (str) {
-      String strToData = str.toString().replaceAll("'", '"');
-      membersData = json.decode(strToData);
-    });
+          String strToData = str.toString().replaceAll("'", '"');
+          membersData = json.decode(strToData);
+        });
     var userPhone = await getStoreValue('userPhone');
-    if (listNoEmpty(membersData)) if (user == userPhone)
-      name = '你';
-    else if (strNoEmpty(membersData[0]['nameCard']))
-      name = membersData[0]['nameCard'];
-    else
-      name = user;
+    if (listNoEmpty(membersData)) {
+      if (user == userPhone) {
+        name = '你';
+      } else if (strNoEmpty(membersData![0]['nameCard'])) {
+        name = membersData![0]['nameCard'];
+      } else {
+        name = user;
+      }
+    }
     setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
     if (widget.data['groupInfoList'].toString() != '[]') {
-      return new Container(
+      return Container(
         alignment: Alignment.center,
         margin: EdgeInsets.symmetric(vertical: 5.0),
-        child: new Text(
+        child: Text(
           '${name ?? ''} 修改群名称为 ”${widget.data['groupInfoList'][0]['content']}“',
           style: TextStyle(
               color: Color.fromRGBO(108, 108, 108, 0.8), fontSize: 11),
         ),
       );
     } else {
-      return new Container();
+      return Container();
     }
   }
 }

@@ -204,7 +204,7 @@ class _ChatPageState extends State<ChatPage> {
       ),
       new Container(
         height: _isMore && !_focusNode.hasFocus ? keyboardHeight : 0.0,
-        width: winWidth(context),
+        width: Get.width,
         color: Color(AppColors.ChatBoxBg),
         child: new IndicatorPageView(
           pageC: pageC,
@@ -223,7 +223,7 @@ class _ChatPageState extends State<ChatPage> {
     var rWidget = [
       new InkWell(
         child: new Image.asset('assets/images/right_more.png'),
-        onTap: () => routePush(widget.type == 2
+        onTap: () => Get.to(widget.type == 2
             ? new GroupDetailsPage(
                 widget?.id ?? widget.title,
                 callBack: (v) {},

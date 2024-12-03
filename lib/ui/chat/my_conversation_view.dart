@@ -26,7 +26,7 @@ class _MyConversationViewState extends State<MyConversationView> {
   Widget build(BuildContext context) {
     var row = new Row(
       children: <Widget>[
-        new Space(width: mainSpace),
+        new SizedBox(width: mainSpace),
         new Expanded(
           child: new Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -40,7 +40,7 @@ class _MyConversationViewState extends State<MyConversationView> {
             ],
           ),
         ),
-        new Space(width: mainSpace),
+        new SizedBox(width: mainSpace),
         new Column(
           children: [
             widget.time,
@@ -63,7 +63,7 @@ class _MyConversationViewState extends State<MyConversationView> {
               fit: BoxFit.cover),
           new Container(
             padding: EdgeInsets.only(right: 18.0, top: 12.0, bottom: 12.0),
-            width: winWidth(context) - 68,
+            width: Get.width - 68,
             decoration: BoxDecoration(
               border: widget.isBorder
                   ? Border(

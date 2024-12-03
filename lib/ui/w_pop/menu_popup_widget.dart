@@ -6,28 +6,28 @@ import 'triangle_painter.dart';
 
 class MenuPopWidget extends StatefulWidget {
   final BuildContext btnContext;
-  final double _height;
-  final double _width;
-  final List actions;
-  final int _pageMaxChildCount;
+  final double height;
+  final double width;
+  final List<Map<String, String>> actions;
+  final int pageMaxChildCount;
   final Color backgroundColor;
   final double menuWidth;
   final double menuHeight;
   final EdgeInsets padding;
   final EdgeInsets margin;
 
-  MenuPopWidget(
-    this.btnContext,
-    this._height,
-    this._width,
-    this.actions,
-    this._pageMaxChildCount,
-    this.backgroundColor,
-    this.menuWidth,
-    this.menuHeight,
-    this.padding,
-    this.margin,
-  );
+  MenuPopWidget({
+    required this.btnContext,
+    required this.height,
+    required this.width,
+    required this.actions,
+    required this.pageMaxChildCount,
+    required this.backgroundColor,
+    required this.menuWidth,
+    required this.menuHeight,
+    required this.padding,
+    required this.margin,
+  });
 
   @override
   _MenuPopWidgetState createState() => _MenuPopWidgetState();
@@ -41,138 +41,146 @@ class _MenuPopWidgetState extends State<MenuPopWidget> {
 
   Color itemColor = itemBgColor;
 
-  RenderBox button;
-  RenderBox overlay;
-  RelativeRect position;
+  late RenderBox button;
+  late RenderBox overlay;
+  late RelativeRect position;
 
   @override
   void initState() {
     super.initState();
-    button = widget.btnContext.findRenderObject();
-    overlay = Overlay.of(widget.btnContext).context.findRenderObject();
-    position = new RelativeRect.fromRect(
-      new Rect.fromPoints(
-        button.localToGlobal(Offset(-10, 100), ancestor: overlay),
-        button.localToGlobal(Offset(-10, 0), ancestor: overlay),
-      ),
-      Offset.zero & overlay.size,
-    );
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      button = widget.btnContext.findRenderObject() as RenderBox;
+      overlay = Overlay.of(widget.btnContext)!.context.findRenderObject() as RenderBox;
+      position = RelativeRect.fromRect(
+        Rect.fromPoints(
+          button.localToGlobal(Offset(-10, 100), ancestor: overlay),
+          button.localToGlobal(Offset(-10, 0), ancestor: overlay),
+        ),
+        Offset.zero & overlay.size,
+      );
+      setState(() {});
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return new MediaQuery.removePadding(
+    return MediaQuery.removePadding(
       context: context,
       removeTop: true,
       removeBottom: true,
       removeLeft: true,
       removeRight: true,
       child: Builder(builder: (BuildContext context) {
-        return new CustomSingleChildLayout(
-          // 这里计算偏移量
-          delegate: new PopupMenuRouteLayout(
-              position,
-              null,
-              Directionality.of(widget.btnContext),
-              widget._width,
-              widget.menuWidth,
-              widget._height),
+        return CustomSingleChildLayout(
+          delegate: PopupMenuRouteLayout(
+            position,
+            null,
+            Directionality.of(widget.btnContext),
+            widget.width,
+            widget.menuWidth,
+            widget.height,
+          ),
           child: contentBuild(),
         );
       }),
     );
   }
 
-  Widget body(width) {
-    return new Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
-      new Visibility(
-        visible: isShow,
-        child: new CustomPaint(
-          size: Size(width, _triangleHeight),
-          painter: new TrianglePainter(
-            color: itemBgColor,
-            position: position,
-            isInverted: true,
-            size: button.size,
-            screenWidth: MediaQuery.of(context).size.width,
+  Widget body(double width) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        Visibility(
+          visible: isShow,
+          child: CustomPaint(
+            size: Size(width, _triangleHeight),
+            painter: TrianglePainter(
+              color: itemBgColor,
+              position: position,
+              isInverted: true,
+              size: button.size,
+              screenWidth: MediaQuery.of(context).size.width,
+            ),
           ),
         ),
-      ),
-      new Visibility(
-        visible: isShow,
-        child: new Expanded(
-          child: Stack(children: <Widget>[
-            new ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(5)),
-              child: Container(color: itemBgColor, height: widget.menuHeight),
+        Visibility(
+          visible: isShow,
+          child: Expanded(
+            child: Stack(
+              children: <Widget>[
+                ClipRRect(
+                  borderRadius: BorderRadius.all(Radius.circular(5)),
+                  child: Container(color: itemBgColor, height: widget.menuHeight),
+                ),
+                Column(
+                  children: widget.actions.map(itemBuild).toList(),
+                ),
+              ],
             ),
-            new Column(
-              children: widget.actions.map(itemBuild).toList(),
-            ),
-          ]),
+          ),
         ),
-      ),
-    ]);
+      ],
+    );
   }
 
   Widget contentBuild() {
-    // 这里计算出来 当前页的 child 一共有多少个
-    int _curPageChildCount =
-        (_curPage + 1) * widget._pageMaxChildCount > widget.actions.length
-            ? widget.actions.length % widget._pageMaxChildCount
-            : widget._pageMaxChildCount;
+    int _curPageChildCount = (_curPage + 1) * widget.pageMaxChildCount > widget.actions.length
+        ? widget.actions.length % widget.pageMaxChildCount
+        : widget.pageMaxChildCount;
 
     double _curArrowWidth = 0;
-    int _curArrowCount = 0; // 一共几个箭头
+    int _curArrowCount = 0;
     double _curPageWidth = widget.menuWidth +
         (_curPageChildCount - 1 + _curArrowCount) * _separatorWidth +
         _curArrowWidth;
     return SizedBox(
       height: widget.menuHeight + _triangleHeight,
       width: _curPageWidth,
-      child:
-          new Material(color: Colors.transparent, child: body(_curPageWidth)),
+      child: Material(color: Colors.transparent, child: body(_curPageWidth)),
     );
   }
 
-  Widget itemBuild(item) {
+  Widget itemBuild(Map<String, String> item) {
     var row = [
-      new Padding(
+      Padding(
         padding: EdgeInsets.symmetric(horizontal: 10.0),
-        child: strNoEmpty(item['icon'])
-            ? new Image.asset(item['icon'])
-            : new Icon(Icons.phone, color: Colors.white),
+        child: item['icon'] != null
+            ? Image.asset(item['icon']!)
+            : Icon(Icons.phone, color: Colors.white),
       ),
-      new Expanded(
-        child: new Container(
+      Expanded(
+        child: Container(
           height: 50,
           alignment: Alignment.centerLeft,
           decoration: BoxDecoration(
-              border: item['title'] == widget.actions[0]['title']
-                  ? null
-                  : Border(
-                      top: BorderSide(
-                          color: Colors.white.withOpacity(0.3), width: 0.2))),
-          child: new Text(
-            item['title'],
+            border: item['title'] == widget.actions[0]['title']
+                ? null
+                : Border(
+              top: BorderSide(
+                color: Colors.white.withOpacity(0.3),
+                width: 0.2,
+              ),
+            ),
+          ),
+          child: Text(
+            item['title']!,
             style: TextStyle(color: Colors.white),
           ),
         ),
-      )
+      ),
     ];
-    return new FlatButton(
-      padding: EdgeInsets.all(0),
+    return TextButton(
       onPressed: () {
         isShow = false;
         setState(() {});
         Navigator.of(context).pop(item['title']);
       },
-      child: new Container(
+      child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(5)),
         ),
         padding: EdgeInsets.only(left: 10.0),
-        child: new Row(children: row),
+        child: Row(children: row),
       ),
     );
   }

@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
+
+import '../../tools/commom.dart';
 
 class SearchTileView extends StatelessWidget {
   final String text;
   final int type;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
 
   SearchTileView(this.text, {this.type = 0, this.onPressed});
 
   @override
   Widget build(BuildContext context) {
-    var bt = new FlatButton(
+    var bt = new TextButton(
       onPressed: onPressed ?? () {},
       child: new Row(
         children: <Widget>[
@@ -68,7 +71,7 @@ class SearchTileView extends StatelessWidget {
             border: Border(
                 top: BorderSide(
                     color: Colors.grey.withOpacity(0.2), width: 0.5))),
-        width: winWidth(context),
+        width: Get.width,
         height: 65.0,
         child: strNoEmpty(text) ? bt : new Container(),
       );
@@ -80,9 +83,9 @@ class SearchTileView extends StatelessWidget {
             top: BorderSide(color: Colors.grey.withOpacity(0.2), width: 0.5),
           ),
         ),
-        width: winWidth(context),
+        width: Get.width,
         height: 65.0,
-        child: new FlatButton(
+        child: new TextButton(
           onPressed: () {},
           child: row,
         ),

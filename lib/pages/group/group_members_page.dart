@@ -30,8 +30,8 @@ class _GroupMembersPageState extends State<GroupMembersPage> {
 
   handle(String uId) {
     if (!strNoEmpty(uId)) {
-      routePush(new SelectMembersPage());
-//      routePush(CreateGroupChat(
+      Get.to(new SelectMembersPage());
+//      Get.to(CreateGroupChat(
 //        'invite',
 //        groupId: widget.groupId,
 //        callBack: (data) {
@@ -42,7 +42,7 @@ class _GroupMembersPageState extends State<GroupMembersPage> {
 //        },
 //      ));
 //    } else {
-//      routePush(ConversationDetailPage(
+//      Get.to(ConversationDetailPage(
 //        title: uId,
 //        type: 1,
 //      ));
@@ -60,7 +60,7 @@ class _GroupMembersPageState extends State<GroupMembersPage> {
     if (item['user'] == "+" || item['user'] == '-') {
       return new InkWell(
         child: new SizedBox(
-          width: (winWidth(context) - 60) / 5,
+          width: (Get.width - 60) / 5,
           child: Image.asset(
             'assets/images/group/${item['user']}.png',
             height: 48.0,
@@ -80,8 +80,8 @@ class _GroupMembersPageState extends State<GroupMembersPage> {
       }),
       builder: (context, snap) {
         return new SizedBox(
-          width: (winWidth(context) - 60) / 5,
-          child: FlatButton(
+          width: (Get.width - 60) / 5,
+          child: TextButton(
             onPressed: () => handle(uId),
             padding: EdgeInsets.all(0),
             highlightColor: Colors.transparent,

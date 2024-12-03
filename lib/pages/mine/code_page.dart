@@ -21,7 +21,7 @@ class _CodePageState extends State<CodePage> {
     var rWidget = [
       new SizedBox(
         width: 60,
-        child: new FlatButton(
+        child: new TextButton(
           padding: EdgeInsets.all(0),
           onPressed: () => codeDialog(
             context,
@@ -45,7 +45,7 @@ class _CodePageState extends State<CodePage> {
           child: new Column(
             children: <Widget>[
               new SizedBox(
-                width: winWidth(context) - 40.0,
+                width: Get.width - 40.0,
                 child: new CardPerson(
                   name: 'CrazyQ1',
                   area: '北京 海淀',
@@ -53,7 +53,7 @@ class _CodePageState extends State<CodePage> {
                   groupName: widget.isGroup ? 'wechat_flutter 101号群' : null,
                 ),
               ),
-              new Space(width: mainSpace),
+              new SizedBox(width: mainSpace),
               new Container(
                 padding: EdgeInsets.symmetric(
                   horizontal: !widget.isGroup ? 0 : 20,
@@ -62,10 +62,10 @@ class _CodePageState extends State<CodePage> {
                 child: new CachedNetworkImage(
                   imageUrl: widget.isGroup ? download : myCode,
                   fit: BoxFit.cover,
-                  width: winWidth(context) - 40,
+                  width: Get.width - 40,
                 ),
               ),
-              new Space(height: mainSpace * 2),
+              new SizedBox(height: mainSpace * 2),
               new Text(
                 '${widget.isGroup ? '该二维码7天内(7月1日前)有效，重新进入将更新' : '扫一扫上面的二维码图案，加我微信'}',
                 style: TextStyle(color: mainTextColor),
@@ -115,7 +115,7 @@ class CardPerson extends StatelessWidget {
                         style: TextStyle(
                             fontSize: 17.0, fontWeight: FontWeight.w600),
                       ),
-                      new Space(width: mainSpace / 2),
+                      new SizedBox(width: mainSpace / 2),
                       new Image.asset(
                         icon ?? '',
                         width: 18.0,
@@ -123,7 +123,7 @@ class CardPerson extends StatelessWidget {
                       ),
                     ],
                   ),
-                  new Space(height: mainSpace / 3),
+                  new SizedBox(height: mainSpace / 3),
                   new Text(
                     area ?? '',
                     style: TextStyle(fontSize: 14.0, color: mainTextColor),

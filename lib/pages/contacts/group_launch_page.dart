@@ -34,11 +34,11 @@ class _GroupLaunchPageState extends State<GroupLaunchPage> {
   List<Widget> searchBody() {
     if (isResult) {
       return [
-        new Space(height: mainSpace),
+        new SizedBox(height: mainSpace),
       ];
     } else {
       return [
-        new Space(height: mainSpace),
+        new SizedBox(height: mainSpace),
       ];
     }
   }
@@ -86,7 +86,7 @@ class _GroupLaunchPageState extends State<GroupLaunchPage> {
     final data = await getUsersProfile([userName]);
     List<dynamic> dataMap = json.decode(data);
     if (strNoEmpty(dataMap[0]['allowType'])) {
-      routePush(
+      Get.to(
         new AddFriendsDetails(
           'search',
           dataMap[0]['identifier'],
@@ -105,7 +105,7 @@ class _GroupLaunchPageState extends State<GroupLaunchPage> {
   Widget build(BuildContext context) {
     List<Widget> body() {
       return [
-        new Space(height: 50.0),
+        new SizedBox(height: 50.0),
         new Container(
           child: new Column(
             children:
@@ -172,7 +172,7 @@ class _GroupLaunchPageState extends State<GroupLaunchPage> {
                       color: isSearch ? Colors.green : lineColor, width: 0.3),
                 ),
               ),
-              width: winWidth(context),
+              width: Get.width,
               alignment: Alignment.center,
               height: 50.0,
               padding: EdgeInsets.symmetric(horizontal: 10.0),

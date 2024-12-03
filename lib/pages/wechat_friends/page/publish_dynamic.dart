@@ -66,7 +66,7 @@ class _PublishDynamicPageState extends State<PublishDynamicPage> {
             GridView.builder(
                 padding: EdgeInsets.all(10.0),
                 gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                    maxCrossAxisExtent: (winWidth(context) - 20) / 3,
+                    maxCrossAxisExtent: (Get.width - 20) / 3,
                     crossAxisSpacing: 5.0,
                     mainAxisSpacing: 5.0,
                     childAspectRatio: 1.0),
@@ -177,14 +177,14 @@ class _PublishDynamicPageState extends State<PublishDynamicPage> {
             //标题的padding值
             actions: <Widget>[
               //操作按钮数组
-              FlatButton(
+              TextButton(
                 onPressed: () {
                   Navigator.pop(context);
                   Navigator.pop(context, false);
                 },
                 child: Text('不保留', style: TextStyles.textGrey14),
               ),
-              FlatButton(
+              TextButton(
                 onPressed: () {
                   Navigator.pop(context);
                   Navigator.pop(context, true);

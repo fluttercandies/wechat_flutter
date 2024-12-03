@@ -165,11 +165,11 @@ class _ContactsPageState extends State<ContactsPage>
             child: new Text(currentLetter,
                 style: AppStyles.IndexLetterBoxTextStyle)),
         new Icon(Icons.arrow_right),
-        new Space(width: mainSpace * 5),
+        new SizedBox(width: mainSpace * 5),
       ];
       body.add(
         new Container(
-          width: winWidth(context),
+          width: Get.width,
           height: winHeight(context),
           child:
               new Row(mainAxisAlignment: MainAxisAlignment.end, children: row),

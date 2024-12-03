@@ -17,18 +17,18 @@ class LaunchGroupItem extends StatelessWidget {
         ),
       ),
       alignment: Alignment.centerLeft,
-      child: new FlatButton(
+      child: new TextButton(
         color: Colors.white,
         padding: EdgeInsets.symmetric(vertical: 15.0),
         onPressed: () {
           if (item == '选择一个群') {
-            routePush(new GroupSelectPage());
+            Get.to(new GroupSelectPage());
           } else {
             showToast(context, '敬请期待');
           }
         },
         child: new Container(
-          width: winWidth(context),
+          width: Get.width,
           padding: EdgeInsets.only(left: 20.0),
           child: new Text(item),
         ),

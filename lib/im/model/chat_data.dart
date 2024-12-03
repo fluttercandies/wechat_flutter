@@ -1,32 +1,30 @@
 import 'dart:convert';
+import 'dart:io';
 
-import 'package:wechat_flutter/im/entity/i_chat_person_entity.dart';
-import 'package:wechat_flutter/im/entity/i_person_info_entity.dart';
-import 'package:wechat_flutter/im/entity/person_info_entity.dart';
-import 'package:wechat_flutter/im/info_handle.dart';
-import 'package:wechat_flutter/tools/wechat_flutter.dart';
-import 'package:flutter/material.dart';
-import 'package:wechat_flutter/im/all_im.dart';
+import '../entity/i_person_info_entity.dart';
+import '../entity/person_info_entity.dart';
+import '../info_handle.dart';
+import '../message_handle.dart';
 
 class ChatData {
-  final Map msg;
+  final Map<String, dynamic> msg;
   final String id;
   final int time;
   final String nickName;
   final String avatar;
 
   ChatData({
-    @required this.msg,
-    this.avatar,
-    this.time,
-    this.nickName,
-    this.id,
+    required this.msg,
+    required this.avatar,
+    required this.time,
+    required this.nickName,
+    required this.id,
   });
 }
 
 class ChatDataRep {
-  repData(String id, int type) async {
-    List<ChatData> chatData = new List<ChatData>();
+  Future<List<ChatData>> repData(String id, int type) async {
+    List<ChatData> chatData = [];
     final chatMsgData = await getDimMessages(id, type: type);
     if (Platform.isAndroid) {
       List chatMsgDataList = json.decode(chatMsgData);
@@ -36,7 +34,7 @@ class ChatDataRep {
 
         chatData.insert(
           0,
-          new ChatData(
+          ChatData(
             msg: chatMsgDataList[i]['message'],
             avatar: model.faceUrl,
             time: chatMsgDataList[i]['timeStamp'],
@@ -53,7 +51,7 @@ class ChatDataRep {
         IPersonInfoEntity model = IPersonInfoEntity.fromJson(infoList[0]);
         chatData.insert(
           0,
-          new ChatData(
+          ChatData(
             msg: chatMsgDataList[i]['message'],
             avatar: model.faceURL,
             time: chatMsgDataList[i]['timeStamp'],

@@ -42,7 +42,7 @@ class _AddFriendPageState extends State<AddFriendPage> {
           ? item['icon']
           : 'assets/images/favorite.webp',
       fit: BoxFit.cover,
-      onPressed: () => routePush(new UserPage()),
+      onPressed: () => Get.to(new UserPage()),
     );
   }
 
@@ -99,11 +99,11 @@ class _AddFriendPageState extends State<AddFriendPage> {
               '我的微信号：${currentUser ?? '[${model.account}]'}',
               style: TextStyle(color: mainTextColor, fontSize: 14.0),
             ),
-            new Space(width: mainSpace * 1.5),
+            new SizedBox(width: mainSpace * 1.5),
             new InkWell(
               child: new Image.asset('assets/images/mine/ic_small_code.png',
                   color: mainTextColor.withOpacity(0.7)),
-              onTap: () => routePush(new CodePage()),
+              onTap: () => Get.to(new CodePage()),
             )
           ],
         ),
@@ -119,7 +119,7 @@ class _AddFriendPageState extends State<AddFriendPage> {
       return [
         new Container(
           color: Colors.white,
-          width: winWidth(context),
+          width: Get.width,
           height: 110.0,
           alignment: Alignment.center,
           child: new Text(
@@ -127,11 +127,11 @@ class _AddFriendPageState extends State<AddFriendPage> {
             style: TextStyle(color: mainTextColor),
           ),
         ),
-        new Space(height: mainSpace),
+        new SizedBox(height: mainSpace),
         new SearchTileView(searchC.text, type: 1),
         new Container(
           color: Colors.white,
-          width: winWidth(context),
+          width: Get.width,
           height: (winHeight(context) - 185 * 1.38),
         )
       ];
@@ -143,7 +143,7 @@ class _AddFriendPageState extends State<AddFriendPage> {
         ),
         new Container(
           color: strNoEmpty(searchC.text) ? Colors.white : appBarColor,
-          width: winWidth(context),
+          width: Get.width,
           height: strNoEmpty(searchC.text)
               ? (winHeight(context) - 65 * 2.1) - winKeyHeight(context)
               : winHeight(context),
@@ -186,7 +186,7 @@ class _AddFriendPageState extends State<AddFriendPage> {
       if (Platform.isIOS) {
         IPersonInfoEntity model = IPersonInfoEntity.fromJson(dataMap[0]);
         if (strNoEmpty(model.allowType.toString())) {
-          routePush(new AddFriendsDetails('search', model.identifier,
+          Get.to(new AddFriendsDetails('search', model.identifier,
               model.faceURL, model.nickname, model.gender));
         } else {
           isResult = true;
@@ -194,7 +194,7 @@ class _AddFriendPageState extends State<AddFriendPage> {
       } else {
         PersonInfoEntity model = PersonInfoEntity.fromJson(dataMap[0]);
         if (strNoEmpty(model.allowType)) {
-          routePush(new AddFriendsDetails('search', model.identifier,
+          Get.to(new AddFriendsDetails('search', model.identifier,
               model.faceUrl, model.nickName, model.gender));
         } else {
           isResult = true;

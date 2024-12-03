@@ -26,7 +26,7 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
 
   action(v) {
     if (v == '二维码名片') {
-      routePush(new CodePage());
+      Get.to(new CodePage());
     } else {
       print(v);
     }
@@ -108,7 +108,7 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
         isLine: true,
         isRight: true,
         rValue: model.nickName,
-        onPressed: () => routePush(new ChangeNamePage(model.nickName)),
+        onPressed: () => Get.to(new ChangeNamePage(model.nickName)),
       ),
       new Column(
         children: data.map((item) => buildContent(item, model)).toList(),

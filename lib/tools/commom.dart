@@ -1,5 +1,3 @@
-
-
 /*
 * 屏幕适配
 * SizeConfig().init(context); 初始化
@@ -48,7 +46,6 @@ class SizeConfig {
   }
 }
 
-
 Future<File> singleCompressFile(File file) async {
   return file;
 //  try {
@@ -80,3 +77,15 @@ Future<File> singleCompressFile(File file) async {
 //     return null;
 //   }
 // }
+
+bool strNoEmpty(String? str) {
+  return str != null && str.isNotEmpty;
+}
+
+bool listNoEmpty(List? list) {
+  return list != null && list.isNotEmpty;
+}
+
+bool isNetWorkImg(String url) {
+  return url.startsWith('http') || url.startsWith('https');
+}

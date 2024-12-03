@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-
+import 'package:get/get.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
 class ImageView extends StatelessWidget {
   final String img;
-  final double width;
-  final double height;
-  final BoxFit fit;
+  final double? width;
+  final double? height;
+  final BoxFit? fit;
   final bool isRadius;
 
   ImageView({
-    @required this.img,
+    required this.img,
     this.height,
     this.width,
     this.fit,
@@ -20,8 +20,8 @@ class ImageView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Widget image;
-    if (isNetWorkImg(img)) {
-      image = new CachedNetworkImage(
+    if (GetUtils.isURL(img)) {
+      image = CachedNetworkImage(
         imageUrl: img,
         width: width,
         height: height,
@@ -29,35 +29,35 @@ class ImageView extends StatelessWidget {
         cacheManager: cacheManager,
       );
     } else if (File(img).existsSync()) {
-      image = new Image.file(
+      image = Image.file(
         File(img),
         width: width,
         height: height,
         fit: fit,
       );
-    } else if (isAssetsImg(img)) {
-      image = new Image.asset(
+    } else if (img.startsWith('assets/')) {
+      image = Image.asset(
         img,
         width: width,
         height: height,
         fit: width != null && height != null ? BoxFit.fill : fit,
       );
     } else {
-      image = new Container(
+      image = Container(
         decoration: BoxDecoration(
           color: Colors.black26.withOpacity(0.1),
-          border: Border.all(color: Colors.black.withOpacity(0.2),width: 0.3)
+          border: Border.all(color: Colors.black.withOpacity(0.2), width: 0.3),
         ),
-        child: new Image.asset(
+        child: Image.asset(
           defIcon,
-          width: width-1,
-          height: height-1,
+          width: width != null ? width! - 1 : null,
+          height: height != null ? height! - 1 : null,
           fit: width != null && height != null ? BoxFit.fill : fit,
         ),
       );
     }
     if (isRadius) {
-      return new ClipRRect(
+      return ClipRRect(
         borderRadius: BorderRadius.all(
           Radius.circular(4.0),
         ),

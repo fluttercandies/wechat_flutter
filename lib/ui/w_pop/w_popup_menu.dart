@@ -2,11 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:wechat_flutter/ui/w_pop/popup_menu_route.dart';
 
 class WPopupMenu extends StatefulWidget {
+  final BoxConstraints? constraints;
+  final Decoration? decoration;
+  final AlignmentGeometry? alignment;
+  final EdgeInsets? padding;
+  final Decoration? foregroundDecoration;
+  final EdgeInsets? margin;
+  final Matrix4? transform;
+  final ValueChanged<String> onValueChanged;
+  final List<Map<String, String>> actions;
+  final Widget child;
+  final PressType pressType; // 点击方式 长按 还是单击
+  final int pageMaxChildCount;
+  final Color backgroundColor;
+  final double menuWidth;
+  final double menuHeight;
+
   WPopupMenu({
-    Key key,
-    @required this.onValueChanged,
-    @required this.actions,
-    @required this.child,
+    Key? key,
+    required this.onValueChanged,
+    required this.actions,
+    required this.child,
     this.pressType = PressType.singleClick,
     this.pageMaxChildCount = 5,
     this.backgroundColor = Colors.black,
@@ -14,48 +30,16 @@ class WPopupMenu extends StatefulWidget {
     this.menuHeight = 250,
     this.alignment,
     this.padding,
-    Color color,
-    Decoration decoration,
+    Color? color,
+    this.decoration,
     this.foregroundDecoration,
-    double width,
-    double height,
-    BoxConstraints constraints,
+    double? width,
+    double? height,
+    this.constraints,
     this.margin,
     this.transform,
-  })  : assert(onValueChanged != null),
-        assert(actions != null && actions.length > 0),
-        assert(child != null),
-        assert(margin == null || margin.isNonNegative),
-        assert(padding == null || padding.isNonNegative),
-        assert(decoration == null || decoration.debugAssertIsValid()),
-        assert(constraints == null || constraints.debugAssertIsValid()),
-        assert(
-            color == null || decoration == null,
-            'Cannot provide both a color and a decoration\n'
-            'The color argument is just a shorthand for "decoration: new BoxDecoration(color: color)".'),
-        decoration =
-            decoration ?? (color != null ? BoxDecoration(color: color) : null),
-        constraints = (width != null || height != null)
-            ? constraints?.tighten(width: width, height: height) ??
-                BoxConstraints.tightFor(width: width, height: height)
-            : constraints,
+  })  : assert(actions.isNotEmpty),
         super(key: key);
-
-  final BoxConstraints constraints;
-  final Decoration decoration;
-  final AlignmentGeometry alignment;
-  final EdgeInsets padding;
-  final Decoration foregroundDecoration;
-  final EdgeInsets margin;
-  final Matrix4 transform;
-  final ValueChanged<String> onValueChanged;
-  final List actions;
-  final Widget child;
-  final PressType pressType; // 点击方式 长按 还是单击
-  final int pageMaxChildCount;
-  final Color backgroundColor;
-  final double menuWidth;
-  final double menuHeight;
 
   @override
   _WPopupMenuState createState() => _WPopupMenuState();
@@ -64,7 +48,7 @@ class WPopupMenu extends StatefulWidget {
 class _WPopupMenuState extends State<WPopupMenu> {
   @override
   Widget build(BuildContext context) {
-    return new InkWell(
+    return InkWell(
       child: Container(
         key: widget.key,
         padding: widget.padding,
@@ -80,24 +64,32 @@ class _WPopupMenuState extends State<WPopupMenu> {
           onTap();
         }
       },
+      onLongPress: () {
+        if (widget.pressType == PressType.longPress) {
+          onTap();
+        }
+      },
     );
   }
 
   void onTap() {
     Navigator.push(
+      context,
+      PopupMenuRoute(
         context,
-        new PopupMenuRoute(
-          context,
-          widget.actions,
-          widget.pageMaxChildCount,
-          widget.backgroundColor,
-          widget.menuWidth,
-          widget.menuHeight,
-          widget.padding,
-          widget.margin,
-          widget.onValueChanged,
-        )).then((index) {
-      widget.onValueChanged(index);
+        widget.actions,
+        widget.pageMaxChildCount,
+        widget.backgroundColor,
+        widget.menuWidth,
+        widget.menuHeight,
+        widget.padding ?? EdgeInsets.zero,
+        widget.margin ?? EdgeInsets.zero,
+        widget.onValueChanged,
+      ),
+    ).then((index) {
+      if (index != null) {
+        widget.onValueChanged(index);
+      }
     });
   }
 }

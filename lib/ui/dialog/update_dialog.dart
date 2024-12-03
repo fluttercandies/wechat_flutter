@@ -68,11 +68,11 @@ class UpdateDialogState extends State<UpdateDialog> {
               flex: 2,
               child: Row(
                 children: <Widget>[
-                  new Space(width: (winWidth(context) - 40) / 2),
+                  new SizedBox(width: (Get.width - 40) / 2),
                   !widget.isForce
                       ? Expanded(
                           flex: 1,
-                          child: FlatButton(
+                          child: TextButton(
                               onPressed: () {
                                 Navigator.of(context).pop();
                               },
@@ -85,7 +85,7 @@ class UpdateDialogState extends State<UpdateDialog> {
                       : SizedBox(),
                   Expanded(
                     flex: 1,
-                    child: FlatButton(
+                    child: TextButton(
                         onPressed: () async {
                           if (uploadingFlag == UploadingFlag.uploading) return;
                           uploadingFlag = UploadingFlag.uploading;

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-showVoiceDialog(BuildContext context, {int index}) {
-  OverlayEntry overlayEntry = new OverlayEntry(builder: (content) {
+OverlayEntry showVoiceDialog(BuildContext context, {required int index}) {
+  OverlayEntry overlayEntry = OverlayEntry(builder: (content) {
     return Positioned(
       top: MediaQuery.of(context).size.height * 0.5 - 80,
       left: MediaQuery.of(context).size.width * 0.5 - 80,
-      child: new VoiceDialog(index),
+      child: VoiceDialog(index: index),
     );
   });
-  Overlay.of(context).insert(overlayEntry);
+  Overlay.of(context)?.insert(overlayEntry);
 
   return overlayEntry;
 }
@@ -16,7 +16,7 @@ showVoiceDialog(BuildContext context, {int index}) {
 class VoiceDialog extends StatefulWidget {
   final int index;
 
-  VoiceDialog(this.index);
+  VoiceDialog({required this.index});
 
   @override
   _VoiceDialogState createState() => _VoiceDialogState();
@@ -61,7 +61,7 @@ class _VoiceDialogState extends State<VoiceDialog> {
               children: <Widget>[
                 Container(
                   margin: EdgeInsets.only(top: 10),
-                  child: new Image.asset(icon(), width: 100, height: 100),
+                  child: Image.asset(icon(), width: 100, height: 100),
                 ),
                 Text(
                   '语音功能待完善',

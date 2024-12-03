@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
 class SearchMainView extends StatelessWidget {
-  final GestureTapCallback onTap;
+  final GestureTapCallback? onTap;
   final String text;
   final bool isBorder;
 
   SearchMainView({
     this.onTap,
-    this.text,
+    required this.text,
     this.isBorder = false,
   });
 

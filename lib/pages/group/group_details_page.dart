@@ -108,7 +108,7 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
     if (item['user'] == "+" || item['user'] == '-') {
       return new InkWell(
         child: new SizedBox(
-          width: (winWidth(context) - 60) / 5,
+          width: (Get.width - 60) / 5,
           child: Image.asset(
             'assets/images/group/${item['user']}.png',
             height: 48.0,
@@ -117,7 +117,7 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
         ),
 
         /// "+" 和 "-" 点击之后
-        onTap: () => routePush(new SelectMembersPage()),
+        onTap: () => Get.to(new SelectMembersPage()),
       );
     }
     return new FutureBuilder(
@@ -129,10 +129,10 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
       }),
       builder: (context, snap) {
         return new SizedBox(
-          width: (winWidth(context) - 60) / 5,
-          child: FlatButton(
+          width: (Get.width - 60) / 5,
+          child: TextButton(
             onPressed: () =>
-                routePush(GroupMemberDetails(Data.user() == uId, uId)),
+                Get.to(GroupMemberDetails(Data.user() == uId, uId)),
             padding: EdgeInsets.all(0),
             highlightColor: Colors.transparent,
             child: Column(
@@ -195,7 +195,7 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
             new Container(
               color: Colors.white,
               padding: EdgeInsets.only(top: 10.0, bottom: 10),
-              width: winWidth(context),
+              width: Get.width,
               child: Wrap(
                 runSpacing: 20.0,
                 spacing: 10,
@@ -204,14 +204,14 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
             ),
             new Visibility(
               visible: memberList.length > 20,
-              child: new FlatButton(
+              child: new TextButton(
                 padding: EdgeInsets.only(top: 15.0, bottom: 20.0),
                 color: Colors.white,
                 child: new Text(
                   '查看全部群成员',
                   style: TextStyle(fontSize: 14.0, color: Colors.black54),
                 ),
-                onPressed: () => routePush(new GroupMembersPage(widget.peer)),
+                onPressed: () => Get.to(new GroupMembersPage(widget.peer)),
               ),
             ),
             SizedBox(height: 10.0),
@@ -235,9 +235,9 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
               child: functionBtn('群管理'),
             ),
             functionBtn('备注'),
-            new Space(height: 10.0),
+            new SizedBox(height: 10.0),
             functionBtn('查找聊天记录'),
-            new Space(height: 10.0),
+            new SizedBox(height: 10.0),
             functionBtn('消息免打扰',
                 right: CupertinoSwitch(
                   value: _dnd,
@@ -265,7 +265,7 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
                     value ? _setTop(1) : _setTop(2);
                   },
                 )),
-            new Space(height: 10.0),
+            new SizedBox(height: 10.0),
             functionBtn('我在群里的昵称', detail: cardName),
             functionBtn('显示群成员昵称',
                 right: CupertinoSwitch(
@@ -282,7 +282,7 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
             new Space(),
             functionBtn('清空聊天记录'),
             new Space(),
-            FlatButton(
+            TextButton(
               padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 20.0),
               color: Colors.white,
               onPressed: () {
@@ -338,10 +338,10 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
   handle(String title) {
     switch (title) {
       case '备注':
-        routePush(new GroupRemarksPage());
+        Get.to(new GroupRemarksPage());
         break;
       case '群聊名称':
-        routePush(
+        Get.to(
           new GroupRemarksPage(
             groupInfoType: GroupInfoType.name,
             text: groupName,
@@ -353,10 +353,10 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
         });
         break;
       case '群二维码':
-        routePush(new CodePage(true));
+        Get.to(new CodePage(true));
         break;
       case '群公告':
-        routePush(
+        Get.to(
           new GroupBillBoardPage(
             dataGroup[0]['groupOwner'],
             groupNotification,
@@ -369,7 +369,7 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
         });
         break;
       case '查找聊天记录':
-        routePush(new SearchPage());
+        Get.to(new SearchPage());
         break;
       case '消息免打扰':
         _dnd = !_dnd;
@@ -381,10 +381,10 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
         _top ? _setTop(1) : _setTop(2);
         break;
       case '设置当前聊天背景':
-        routePush(new ChatBackgroundPage());
+        Get.to(new ChatBackgroundPage());
         break;
       case '我在群里的昵称':
-        routePush(
+        Get.to(
           new GroupRemarksPage(
             groupInfoType: GroupInfoType.cardName,
             text: cardName,
@@ -395,7 +395,7 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
         });
         break;
       case '投诉':
-        routePush(new WebViewPage(helpUrl, '投诉'));
+        Get.to(new WebViewPage(helpUrl, '投诉'));
         break;
       case '清空聊天记录':
         confirmAlert(
@@ -466,7 +466,7 @@ class GroupItem extends StatelessWidget {
         title == '投诉' ||
         title == '清空聊天记录';
 
-    return FlatButton(
+    return TextButton(
       padding: EdgeInsets.only(left: 15, right: 15.0),
       color: Colors.white,
       onPressed: () => onPressed(),
@@ -500,7 +500,7 @@ class GroupItem extends StatelessWidget {
                   ),
                 ),
                 right != null ? right : new Container(),
-                new Space(width: 10.0),
+                new SizedBox(width: 10.0),
                 isSwitch
                     ? Container()
                     : Image.asset(

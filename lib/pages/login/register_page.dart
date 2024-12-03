@@ -79,7 +79,7 @@ class _RegisterPageState extends State<RegisterPage> {
           child: new Row(
             children: <Widget>[
               new Container(
-                width: winWidth(context) * 0.25,
+                width: Get.width * 0.25,
                 alignment: Alignment.centerLeft,
                 child: new Text(S.of(context).phoneCity,
                     style:
@@ -99,7 +99,7 @@ class _RegisterPageState extends State<RegisterPage> {
           ),
         ),
         onTap: () async {
-          final result = await routePush(new SelectLocationPage());
+          final result = await Get.to(new SelectLocationPage());
           if (result == null) return;
           model.area = result;
           model.refresh();
@@ -125,7 +125,7 @@ class _RegisterPageState extends State<RegisterPage> {
           setState(() {});
         },
       ),
-      new Space(height: mainSpace * 2),
+      new SizedBox(height: mainSpace * 2),
       new Row(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -153,7 +153,7 @@ class _RegisterPageState extends State<RegisterPage> {
               S.of(context).protocolName,
               style: TextStyle(color: tipColor),
             ),
-            onTap: () => routePush(new WebViewPage(
+            onTap: () => Get.to(new WebViewPage(
                 S.of(context).protocolUrl, S.of(context).protocolTitle)),
           ),
         ],

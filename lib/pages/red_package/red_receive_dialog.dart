@@ -28,7 +28,7 @@ class _RedReceiveDialogState extends State<RedReceiveDialog> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            width: winWidth(context) - 100,
+            width: Get.width - 100,
             height: winHeight(context) / 1.8,
             margin: EdgeInsets.symmetric(horizontal: 50),
             decoration: BoxDecoration(
@@ -49,7 +49,7 @@ class _RedReceiveDialogState extends State<RedReceiveDialog> {
                         height: 30,
                       ),
                     ),
-                    Space(width: 5),
+                    SizedBox(width: 5),
                     Text(
                       'xxx发出的红包',
                       style: TextStyle(
@@ -57,7 +57,7 @@ class _RedReceiveDialogState extends State<RedReceiveDialog> {
                     ),
                   ],
                 ),
-                Space(height: 5),
+                SizedBox(height: 5),
                 Text(
                   '恭喜发财，大吉大利',
                   style: TextStyle(

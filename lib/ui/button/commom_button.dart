@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
 class ComMomButton extends StatelessWidget {
-  final double width;
+  final double? width;
   final double height;
-  final List<BoxShadow> boxShadow;
+  final List<BoxShadow>? boxShadow;
   final double radius;
   final String text;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
   final EdgeInsetsGeometry padding;
-  final EdgeInsetsGeometry margin;
-  final TextStyle style;
-  final Color color;
+  final EdgeInsetsGeometry? margin;
+  final TextStyle? style;
+  final Color? color;
   final bool isBorder;
   final int borderColor;
   final Gradient gradient;
@@ -42,43 +42,41 @@ class ComMomButton extends StatelessWidget {
   Widget build(BuildContext context) {
     Color _color = Color.fromRGBO(225, 225, 225, enable ? 1 : 0.3);
 
-    return new Container(
+    return Container(
       margin: margin,
-      child: new InkWell(
-        child: new Container(
+      child: InkWell(
+        child: Container(
           alignment: Alignment.center,
           padding: padding,
           width: width,
           height: height,
           decoration: color == null
               ? BoxDecoration(
-                  gradient: gradient,
-                  boxShadow: boxShadow,
-                  border: isBorder
-                      ? Border.all(width: 0.5, color: Color(borderColor))
-                      : null,
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(radius),
-                  ),
-                )
+            gradient: gradient,
+            boxShadow: boxShadow,
+            border: isBorder
+                ? Border.all(width: 0.5, color: Color(borderColor))
+                : null,
+            borderRadius: BorderRadius.all(
+              Radius.circular(radius),
+            ),
+          )
               : BoxDecoration(
-                  color: color,
-                  boxShadow: boxShadow,
-                  border: isBorder
-                      ? Border.all(width: 0.5, color: Color(borderColor))
-                      : null,
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(radius),
-                  ),
-                ),
-          child: new Text(
-            '$text',
-            style: style != null
-                ? style
-                : TextStyle(fontSize: 15.0, color: _color),
+            color: color,
+            boxShadow: boxShadow,
+            border: isBorder
+                ? Border.all(width: 0.5, color: Color(borderColor))
+                : null,
+            borderRadius: BorderRadius.all(
+              Radius.circular(radius),
+            ),
+          ),
+          child: Text(
+            text,
+            style: style ?? TextStyle(fontSize: 15.0, color: _color),
           ),
         ),
-        onTap: enable ? onTap : () {},
+        onTap: enable ? onTap : null,
       ),
     );
   }

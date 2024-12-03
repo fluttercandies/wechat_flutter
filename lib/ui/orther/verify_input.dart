@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:get/get.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
 class VerifyInput extends StatefulWidget {
@@ -8,7 +8,12 @@ class VerifyInput extends StatefulWidget {
   final TextEditingController controller;
   final FocusNode focusNode;
 
-  VerifyInput({this.title, this.controller, this.defStr = '', this.focusNode});
+  VerifyInput({
+    required this.title,
+    required this.controller,
+    this.defStr = '',
+    required this.focusNode,
+  });
 
   @override
   _VerifyInputState createState() => new _VerifyInputState();
@@ -40,17 +45,17 @@ class _VerifyInputState extends State<VerifyInput> {
       ),
       widget.controller.text != ''
           ? new Visibility(
-              visible: widget.focusNode.hasFocus,
-              child: new InkWell(
-                child: new Padding(
-                  padding: EdgeInsets.all(2.0),
-                  child: new Image.asset('assets/images/ic_delete.webp'),
-                ),
-                onTap: () {
-                  widget.controller.text = '';
-                  setState(() {});
-                },
-              ))
+          visible: widget.focusNode.hasFocus,
+          child: new InkWell(
+            child: new Padding(
+              padding: EdgeInsets.all(2.0),
+              child: new Image.asset('assets/images/ic_delete.webp'),
+            ),
+            onTap: () {
+              widget.controller.text = '';
+              setState(() {});
+            },
+          ))
           : new Container()
     ];
 
@@ -58,13 +63,13 @@ class _VerifyInputState extends State<VerifyInput> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         new Text(
-          widget.title ?? '',
+          widget.title,
           style: TextStyle(color: mainTextColor, fontSize: 15.0),
         ),
-        new Space(height: mainSpace),
+        new SizedBox(height: mainSpace),
         new Expanded(
           child: new Container(
-            width: winWidth(context) - 20,
+            width: Get.width - 20,
             decoration: BoxDecoration(
               border: Border(
                 bottom: BorderSide(
@@ -87,7 +92,7 @@ class _VerifyInputState extends State<VerifyInput> {
   Widget build(BuildContext context) {
     return new Container(
       height: 100.0,
-      width: winWidth(context),
+      width: Get.width,
       color: Colors.white,
       padding: EdgeInsets.all(10.0),
       child: contentBuild(),

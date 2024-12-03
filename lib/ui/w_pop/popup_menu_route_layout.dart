@@ -13,7 +13,7 @@ class PopupMenuRouteLayout extends SingleChildLayoutDelegate {
   // The distance from the top of the menu to the middle of selected item.
   //
   // This will be null if there's no item to position in this way.
-  final double selectedItemOffset;
+  final double? selectedItemOffset;
 
   // Whether to prefer going to the left or to the right.
   final TextDirection textDirection;
@@ -30,8 +30,12 @@ class PopupMenuRouteLayout extends SingleChildLayoutDelegate {
   BoxConstraints getConstraintsForChild(BoxConstraints constraints) {
     // The menu can be at most the size of the overlay minus 8.0 pixels in each
     // direction.
-    return BoxConstraints.loose(constraints.biggest -
-        const Offset(_kMenuScreenPadding * 2.0, _kMenuScreenPadding * 2.0));
+    return BoxConstraints.loose(
+      Size(
+        constraints.biggest.width - (_kMenuScreenPadding * 2.0),
+        constraints.biggest.height - (_kMenuScreenPadding * 2.0),
+      ),
+    );
   }
 
   @override
@@ -47,7 +51,7 @@ class PopupMenuRouteLayout extends SingleChildLayoutDelegate {
     } else {
       y = position.top +
           (size.height - position.top - position.bottom) / 2.0 -
-          selectedItemOffset;
+          selectedItemOffset!;
     }
 
     // Find the ideal horizontal position.

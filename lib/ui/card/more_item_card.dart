@@ -18,7 +18,7 @@ class MoreItemCard extends StatelessWidget {
 
     return new Container(
       padding: EdgeInsets.only(top: _top, bottom: 5.0),
-      width: (winWidth(context) - 70) / 4,
+      width: (Get.width - 70) / 4,
       child: new Column(
         children: <Widget>[
           new Container(
@@ -28,7 +28,7 @@ class MoreItemCard extends StatelessWidget {
                 Radius.circular(10.0),
               ),
             ),
-            child: new FlatButton(
+            child: new TextButton(
               onPressed: () {
                 if (onPressed != null) {
                   onPressed();
@@ -47,7 +47,7 @@ class MoreItemCard extends StatelessWidget {
               ),
             ),
           ),
-          new prefix0.Space(height: mainSpace / 2),
+          new prefix0.SizedBox(height: mainSpace / 2),
           new Text(
             name ?? '',
             style: TextStyle(color: mainTextColor, fontSize: 11),

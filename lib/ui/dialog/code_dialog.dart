@@ -5,7 +5,7 @@ import 'package:wechat_flutter/tools/wechat_flutter.dart';
 codeDialog(BuildContext context, List items) {
   Widget item(item) {
     return new Container(
-      width: winWidth(context),
+      width: Get.width,
       decoration: BoxDecoration(
         border: item != '重置二维码'
             ? Border(
@@ -13,7 +13,7 @@ codeDialog(BuildContext context, List items) {
               )
             : null,
       ),
-      child: new FlatButton(
+      child: new TextButton(
         color: Colors.white,
         padding: EdgeInsets.symmetric(vertical: 15.0),
         onPressed: () {
@@ -49,12 +49,12 @@ codeDialog(BuildContext context, List items) {
                     children: <Widget>[
                       new Column(children: items.map(item).toList()),
                       new HorizontalLine(color: appBarColor, height: 10.0),
-                      new FlatButton(
+                      new TextButton(
                         padding: EdgeInsets.symmetric(vertical: 15.0),
                         color: Colors.white,
                         onPressed: () => Navigator.of(context).pop(),
                         child: new Container(
-                          width: winWidth(context),
+                          width: Get.width,
                           alignment: Alignment.center,
                           child: new Text('取消'),
                         ),

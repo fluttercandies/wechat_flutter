@@ -60,7 +60,7 @@
 //                  ],
 //                ),
 //                onTap: () {
-//                  routePush(
+//                  Get.to(
 //                    VideoPlayPage(widget.video['video']['urls'][0]),
 //                  );
 //                },
@@ -95,12 +95,12 @@
 //                  ],
 //                ),
 //                onTap: () {
-//                  routePush(
+//                  Get.to(
 //                    VideoPlayPage(widget.video['video']['urls'][0]),
 //                  );
 //                },
 //              )),
-//          new Space(width: 8.0),
+//          new SizedBox(width: 8.0),
 //          new MassageAvatar(widget.data, type: 0),
 //        ],
 //      );

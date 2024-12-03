@@ -88,7 +88,7 @@ class _WeChatFriendsCircleState extends State<WeChatFriendsCircle> {
                       child: ImageLoadView(backgroundImage,
                           fit: BoxFit.cover,
                           height: headerHeight,
-                          width: winWidth(context)),
+                          width: Get.width),
                       margin: EdgeInsets.only(bottom: 30.0)),
                   Container(
                     child: Row(
@@ -229,7 +229,7 @@ class _WeChatFriendsCircleState extends State<WeChatFriendsCircle> {
 //      debugPrint(images.toString());
 //
 //      if (images.isNotEmpty) {
-//        routePush(PublishDynamicPage(images: images, maxImages: maxImages));
+//        Get.to(PublishDynamicPage(images: images, maxImages: maxImages));
 //      }
 //    });
   }

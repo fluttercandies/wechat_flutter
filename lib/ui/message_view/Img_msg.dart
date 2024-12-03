@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:wechat_flutter/im/model/chat_data.dart';
 import 'package:wechat_flutter/ui/message_view/msg_avatar.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +26,7 @@ class ImgMsg extends StatelessWidget {
     final globalModel = Provider.of<GlobalModel>(context);
     var body = [
       new MsgAvatar(model: model, globalModel: globalModel),
-      new Space(width: mainSpace),
+      new SizedBox(width: mainSpace),
       new Expanded(
         child: new GestureDetector(
           child: new Container(
@@ -42,7 +43,7 @@ class ImgMsg extends StatelessWidget {
                       imageUrl: url, height: resultH, fit: BoxFit.cover),
             ),
           ),
-          onTap: () => routePush(
+          onTap: () => Get.to(
             new PhotoView(
               imageProvider: isFile ? FileImage(File(url)) : NetworkImage(url),
               onTapUp: (c, f, s) => Navigator.of(context).pop(),

@@ -1,22 +1,26 @@
-import 'package:wechat_flutter/tools/wechat_flutter.dart';
-import 'package:wechat_flutter/ui/view/image_view.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:photo_view/photo_view.dart';
+import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
 class ContactCard extends StatelessWidget {
-  final String img, title, nickName, id, area;
+  final String img;
+  final String? title;
+  final String id;
+  final String? nickName;
+  final String? area;
   final bool isBorder;
   final double lineWidth;
 
   ContactCard({
-    @required this.img,
+    required this.img,
+    required this.id,
     this.title,
-    this.id,
     this.nickName,
     this.area,
     this.isBorder = false,
     this.lineWidth = mainLineWidth,
-  }) : assert(id != null);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -30,18 +34,18 @@ class ContactCard extends StatelessWidget {
               )
             : null,
       ),
-      width: winWidth(context),
+      width: Get.width,
       padding: EdgeInsets.only(right: 15.0, left: 15.0, bottom: 20.0),
-      child: new Row(
+      child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          new GestureDetector(
-            child: new ImageView(
-                img: img, width: 55, height: 55, fit: BoxFit.cover),
+          GestureDetector(
+            child:
+                ImageView(img: img, width: 55, height: 55, fit: BoxFit.cover),
             onTap: () {
               if (isNetWorkImg(img)) {
-                routePush(
-                  new PhotoView(
+                Get.to(
+                  PhotoView(
                     imageProvider: NetworkImage(img),
                     onTapUp: (c, f, s) => Navigator.of(context).pop(),
                     maxScale: 3.0,
@@ -53,13 +57,13 @@ class ContactCard extends StatelessWidget {
               }
             },
           ),
-          new Space(width: mainSpace * 2),
-          new Column(
+          SizedBox(width: mainSpace * 2),
+          Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              new Row(
+              Row(
                 children: <Widget>[
-                  new Text(
+                  Text(
                     title ?? '未知',
                     style: TextStyle(
                       color: Colors.black,
@@ -67,17 +71,17 @@ class ContactCard extends StatelessWidget {
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  new Space(width: mainSpace / 3),
-                  new Image.asset('assets/images/Contact_Female.webp',
+                  SizedBox(width: mainSpace / 3),
+                  Image.asset('assets/images/Contact_Female.webp',
                       width: 20.0, fit: BoxFit.fill),
                 ],
               ),
-              new Padding(
+              Padding(
                 padding: EdgeInsets.only(top: 3.0),
-                child: new Text("昵称：" + nickName ?? '', style: labelStyle),
+                child: Text("昵称：" + (nickName ?? ''), style: labelStyle),
               ),
-              new Text("微信号：" + id ?? '', style: labelStyle),
-              new Text("地区：" + area ?? '', style: labelStyle),
+              Text("微信号：" + id, style: labelStyle),
+              Text("地区：" + (area ?? ''), style: labelStyle),
             ],
           )
         ],

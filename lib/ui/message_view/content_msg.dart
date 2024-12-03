@@ -5,7 +5,7 @@ import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'package:wechat_flutter/ui/edit/text_span_builder.dart';
 
 class ContentMsg extends StatefulWidget {
-  final Map msg;
+  final Map? msg;
 
   ContentMsg(this.msg);
 
@@ -14,14 +14,14 @@ class ContentMsg extends StatefulWidget {
 }
 
 class _ContentMsgState extends State<ContentMsg> {
-  String str;
+  late String str;
 
   TextStyle _style = TextStyle(color: mainTextColor, fontSize: 14.0);
 
   @override
   Widget build(BuildContext context) {
     if (widget.msg == null) return new Text('未知消息', style: _style);
-    Map msg = widget.msg['message'];
+    Map msg = widget.msg!['message'];
     String msgType = msg['type'];
     String msgStr = msg.toString();
 

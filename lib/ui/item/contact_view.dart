@@ -6,8 +6,10 @@ import 'contact_item.dart';
 
 enum ClickType { select, open }
 
+typedef Callback = void Function(List<String> data);
+
 class ContactView extends StatelessWidget {
-  final ScrollController sC;
+  final ScrollController? sC;
   final List<ContactItem> functionButtons;
   final List<Contact> contacts;
   final ClickType type;
@@ -17,16 +19,16 @@ class ContactView extends StatelessWidget {
     this.sC,
     this.functionButtons = const [],
     this.contacts = const [],
-    this.type,
-    this.callback,
+    required this.type,
+    required this.callback,
   });
 
   @override
   Widget build(BuildContext context) {
     List<String> data = [];
-    return new ScrollConfiguration(
+    return ScrollConfiguration(
       behavior: MyBehavior(),
-      child: new ListView.builder(
+      child: ListView.builder(
         controller: sC,
         itemBuilder: (BuildContext context, int index) {
           if (index < functionButtons.length) return functionButtons[index];
@@ -41,7 +43,7 @@ class ContactView extends StatelessWidget {
           bool _isBorder = _contactIndex < contacts.length - 1 &&
               _contact.nameIndex == contacts[_contactIndex + 1].nameIndex;
           if (_contact.name != contacts[contacts.length - 1].name) {
-            return new ContactItem(
+            return ContactItem(
               avatar: _contact.avatar,
               title: _contact.name,
               identifier: _contact.identifier,
@@ -58,8 +60,8 @@ class ContactView extends StatelessWidget {
               },
             );
           } else {
-            return new Column(children: <Widget>[
-              new ContactItem(
+            return Column(children: <Widget>[
+              ContactItem(
                 avatar: _contact.avatar,
                 title: _contact.name,
                 identifier: _contact.identifier,
@@ -75,10 +77,10 @@ class ContactView extends StatelessWidget {
                   callback(data);
                 },
               ),
-              new HorizontalLine(),
-              new Container(
+              HorizontalLine(),
+              Container(
                 padding: EdgeInsets.symmetric(vertical: 10.0),
-                child: new Text(
+                child: Text(
                   '${contacts.length}位联系人',
                   style: TextStyle(color: mainTextColor, fontSize: 16),
                 ),
