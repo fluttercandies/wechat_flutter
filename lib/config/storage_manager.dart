@@ -1,10 +1,11 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
-import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
 class StorageManager {
   /// app全局配置
-  static SharedPreferences sp;
+  static late SharedPreferences sp;
 
   /// 网络连接
   var connect;
@@ -22,25 +23,24 @@ class StorageManager {
     }
   }
 
-
   initAutoLogin() async {
     try {
       // 监测网络变化
       connect = Connectivity()
           .onConnectivityChanged
-          .listen((ConnectivityResult result) async {
-        if (result != ConnectivityResult.mobile &&
-            result != ConnectivityResult.wifi) {
+          .listen((List<ConnectivityResult> result) async {
+        if (!result.contains(ConnectivityResult.mobile) &&
+            !result.contains(ConnectivityResult.wifi)) {
           await SharedUtil.instance.saveBoolean(Keys.brokenNetwork, true);
         } else {
           await SharedUtil.instance.saveBoolean(Keys.brokenNetwork, false);
           final hasLogged =
-          await SharedUtil.instance.getBoolean(Keys.hasLogged);
-          final currentUser = await im.getCurrentLoginUser();
-          if (hasLogged) if (currentUser == '' || currentUser == null) {
-            final account = await SharedUtil.instance.getString(Keys.account);
-            im.imAutoLogin(account);
-          }
+              await SharedUtil.instance.getBoolean(Keys.hasLogged);
+          // final currentUser = await im.getCurrentLoginUser();
+          // if (hasLogged) if (currentUser == '' || currentUser == null) {
+          //   final account = await SharedUtil.instance.getString(Keys.account);
+          //   im.imAutoLogin(account);
+          // }
         }
       });
     } on PlatformException {

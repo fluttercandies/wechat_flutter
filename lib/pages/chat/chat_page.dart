@@ -1,17 +1,18 @@
+import 'package:extended_text_field/extended_text_field.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:wechat_flutter/im/model/chat_data.dart';
+import 'package:wechat_flutter/im/send_handle.dart';
 import 'package:wechat_flutter/pages/chat/chat_more_page.dart';
 import 'package:wechat_flutter/pages/group/group_details_page.dart';
+import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'package:wechat_flutter/ui/chat/chat_details_body.dart';
 import 'package:wechat_flutter/ui/chat/chat_details_row.dart';
+import 'package:wechat_flutter/ui/edit/emoji_text.dart';
+import 'package:wechat_flutter/ui/edit/text_span_builder.dart';
 import 'package:wechat_flutter/ui/item/chat_more_icon.dart';
 import 'package:wechat_flutter/ui/view/indicator_page_view.dart';
 
-import 'package:extended_text_field/extended_text_field.dart';
-import 'package:flutter/material.dart';
-import 'package:wechat_flutter/im/send_handle.dart';
-import 'package:wechat_flutter/tools/wechat_flutter.dart';
-import 'package:wechat_flutter/ui/edit/text_span_builder.dart';
-import 'package:wechat_flutter/ui/edit/emoji_text.dart';
 import 'chat_info_page.dart';
 
 enum ButtonType { voice, more }
@@ -21,7 +22,7 @@ class ChatPage extends StatefulWidget {
   final int type;
   final String id;
 
-  ChatPage({this.id, this.title, this.type = 1});
+  ChatPage({required this.id, required this.title, this.type = 1});
 
   @override
   _ChatPageState createState() => _ChatPageState();
@@ -29,12 +30,12 @@ class ChatPage extends StatefulWidget {
 
 class _ChatPageState extends State<ChatPage> {
   List<ChatData> chatData = [];
-  StreamSubscription<dynamic> _msgStreamSubs;
+  StreamSubscription<dynamic>? _msgStreamSubs;
   bool _isVoice = false;
   bool _isMore = false;
   double keyboardHeight = 270.0;
   bool _emojiState = false;
-  String newGroupName;
+  String newGroupName = "";
 
   TextEditingController _textController = TextEditingController();
   FocusNode _focusNode = new FocusNode();
@@ -100,15 +101,15 @@ class _ChatPageState extends State<ChatPage> {
   }
 
   void canCelListener() {
-    if (_msgStreamSubs != null) _msgStreamSubs.cancel();
+    if (_msgStreamSubs != null) _msgStreamSubs!.cancel();
   }
 
   Future<void> initPlatformState() async {
     if (!mounted) return;
 
     if (_msgStreamSubs == null) {
-      _msgStreamSubs =
-          im.onMessage.listen((dynamic onData) => getChatMsgData());
+      // _msgStreamSubs =
+      //     im.onMessage.listen((dynamic onData) => getChatMsgData());
     }
   }
 
@@ -258,7 +259,8 @@ class _ChatPageState extends State<ChatPage> {
           scrollDirection: Axis.horizontal,
           itemBuilder: (context, index) {
             return GestureDetector(
-              child: Image.asset(EmojiUitl.instance.emojiMap["[${index + 1}]"]),
+              child:
+                  Image.asset(EmojiUitl.instance.emojiMap["[${index + 1}]"]!),
               behavior: HitTestBehavior.translucent,
               onTap: () {
                 insertText("[${index + 1}]");

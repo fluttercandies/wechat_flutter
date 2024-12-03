@@ -1,14 +1,10 @@
-import 'package:camera/camera.dart';
+import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 import 'package:wechat_flutter/im/message_handle.dart';
 import 'package:wechat_flutter/im/send_handle.dart';
-import 'package:wechat_flutter/pages/chat/shoot_page.dart';
-import 'package:wechat_flutter/tools/utils/handle_util.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'package:wechat_flutter/ui/card/more_item_card.dart';
-import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:photo_manager/photo_manager.dart';
 
 class ChatMorePage extends StatefulWidget {
   final int index;
@@ -16,7 +12,11 @@ class ChatMorePage extends StatefulWidget {
   final int type;
   final double keyboardHeight;
 
-  ChatMorePage({this.index = 0, this.id, this.type, this.keyboardHeight});
+  ChatMorePage(
+      {this.index = 0,
+      required this.id,
+      required this.type,
+      required this.keyboardHeight});
 
   @override
   _ChatMorePageState createState() => _ChatMorePageState();
@@ -54,32 +54,33 @@ class _ChatMorePageState extends State<ChatMorePage> {
         // // textDelegate: DefaultAssetsPickerTextDelegate(),
         // routeCurve: Curves.easeIn,
         // routeDuration: const Duration(milliseconds: 500),
-      ).then((List<AssetEntity> result) {
-        result.forEach((AssetEntity element) async {
-          sendImageMsg(widget.id, widget.type, file: await element.file,
+      ).then((List<AssetEntity>? result) {
+        result?.forEach((AssetEntity element) async {
+          sendImageMsg(widget.id, widget.type, file: (await element.file)!,
               callback: (v) {
             if (v == null) return;
             Notice.send(WeChatActions.msg(), v ?? '');
-          });
+          }, source: ImageSource.camera);
           element.file;
         });
       });
     } else if (name == '拍摄') {
-      try {
-        List<CameraDescription> cameras;
-
-        WidgetsFlutterBinding.ensureInitialized();
-        cameras = await availableCameras();
-
-        Get.to(new ShootPage(cameras));
-      } on CameraException catch (e) {
-        logError(e.code, e.description);
-      }
+      showToast("使用wechat picker");
+      // try {
+      //   List<CameraDescription> cameras;
+      //
+      //   WidgetsFlutterBinding.ensureInitialized();
+      //   cameras = await availableCameras();
+      //
+      //   Get.to(new ShootPage(cameras));
+      // } on CameraException catch (e) {
+      //   logError(e.code, e.description);
+      // }
     } else if (name == '红包') {
-      showToast( '测试发送红包消息');
+      showToast('测试发送红包消息');
       await sendTextMsg('${widget?.id}', widget.type, "测试发送红包消息");
     } else {
-      showToast( '敬请期待$name');
+      showToast('敬请期待$name');
     }
   }
 

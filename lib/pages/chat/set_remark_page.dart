@@ -12,7 +12,7 @@ class _SetRemarkPageState extends State<SetRemarkPage> {
   TextEditingController _tc = new TextEditingController();
   FocusNode _f = new FocusNode();
 
-  String initContent;
+  String initContent = "";
 
   Widget body() {
     return new SingleChildScrollView(

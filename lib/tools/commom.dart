@@ -112,3 +112,11 @@ double topBarHeight(BuildContext context) {
   final double appBarHeight = kToolbarHeight;
   return statusBarHeight + appBarHeight;
 }
+
+String removeDot(String version) {
+  return version.replaceAll('.', '');
+}
+
+bool mapNoEmpty(Map? map) {
+  return map != null && map.isNotEmpty;
+}

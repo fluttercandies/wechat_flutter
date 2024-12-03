@@ -1,17 +1,17 @@
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:wechat_flutter/im/entity/i_person_info_entity.dart';
 import 'package:wechat_flutter/im/entity/person_info_entity.dart';
 import 'package:wechat_flutter/im/info_handle.dart';
 import 'package:wechat_flutter/pages/home/search_page.dart';
 import 'package:wechat_flutter/pages/settings/chat_background_page.dart';
+import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'package:wechat_flutter/ui/dialog/confirm_alert.dart';
 import 'package:wechat_flutter/ui/item/chat_mamber.dart';
 import 'package:wechat_flutter/ui/orther/label_row.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
-
-import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
 class ChatInfoPage extends StatefulWidget {
   final String id;
@@ -75,7 +75,7 @@ class _ChatInfoPageState extends State<ChatInfoPage> {
           confirmAlert(
             context,
             (isOK) {
-              if (isOK) showToast( '敬请期待');
+              if (isOK) showToast('敬请期待');
             },
             tips: '确定删除群的聊天记录吗？',
             okBtn: '清空',
@@ -85,7 +85,7 @@ class _ChatInfoPageState extends State<ChatInfoPage> {
       new LabelRow(
         label: '投诉',
         margin: EdgeInsets.only(top: 10.0),
-        onPressed: () => Get.to(new WebViewPage(helpUrl, '投诉')),
+        onPressed: () => Get.to(new WebViewPage(url: helpUrl, title: '投诉')),
       ),
     ];
   }

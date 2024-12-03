@@ -8,17 +8,17 @@ import '../message_handle.dart';
 
 class ChatData {
   final Map<String, dynamic> msg;
-  final String id;
-  final int time;
-  final String nickName;
-  final String avatar;
+  final String? id;
+  final int? time;
+  final String? nickName;
+  final String? avatar;
 
   ChatData({
     required this.msg,
-    required this.avatar,
-    required this.time,
-    required this.nickName,
-    required this.id,
+    this.avatar,
+    this.time,
+    this.nickName,
+    this.id,
   });
 }
 

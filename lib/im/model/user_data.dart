@@ -7,7 +7,6 @@ import 'package:wechat_flutter/im/info_handle.dart';
 import 'dart:convert';
 
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
-import 'package:dim/pinyin/pinyin_helper.dart';
 
 class UserData {
   UserData({

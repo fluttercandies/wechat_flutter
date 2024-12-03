@@ -44,7 +44,7 @@ void updateApi(BuildContext context) async {
 
       UpdateEntity model = UpdateEntity.fromJson(v);
       int currentVersion = int.parse(removeDot(packageInfo.version));
-      int netVersion = int.parse(removeDot(model.appVersion));
+      int netVersion = int.parse(removeDot(model.appVersion!));
       if (currentVersion >= netVersion) {
         debugPrint('当前版本是最新版本');
         return;
@@ -53,9 +53,9 @@ void updateApi(BuildContext context) async {
           context: context,
           builder: (ctx2) {
             return UpdateDialog(
-              version: model.appVersion,
-              updateUrl: model.downloadUrl,
-              updateInfo: model.updateInfo,
+              version: model.appVersion!,
+              updateUrl: model.downloadUrl!,
+              updateInfo: model.updateInfo!,
             );
           });
     },
