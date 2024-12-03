@@ -1,11 +1,12 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:wechat_flutter/im/conversation_handle.dart';
 import 'package:wechat_flutter/im/model/chat_list.dart';
 import 'package:wechat_flutter/pages/chat/chat_page.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
-import 'package:wechat_flutter/ui/view/indicator_page_view.dart';
-import 'package:flutter/material.dart';
-import 'package:wechat_flutter/ui/edit/text_span_builder.dart';
 import 'package:wechat_flutter/ui/chat/my_conversation_view.dart';
+import 'package:wechat_flutter/ui/edit/text_span_builder.dart';
+import 'package:wechat_flutter/ui/view/indicator_page_view.dart';
 import 'package:wechat_flutter/ui/view/pop_view.dart';
 
 class HomePage extends StatefulWidget {
@@ -19,7 +20,7 @@ class _HomePageState extends State<HomePage>
 
   var tapPos;
   TextSpanBuilder _builder = TextSpanBuilder();
-  StreamSubscription<dynamic> _messageStreamSubscription;
+  StreamSubscription<dynamic>? _messageStreamSubscription;
 
   @override
   void initState() {
@@ -33,12 +34,12 @@ class _HomePageState extends State<HomePage>
     List<ChatList> listChat = str;
     if (!listNoEmpty(listChat)) return;
     _chatData.clear();
-    _chatData..addAll(listChat?.reversed);
+    _chatData..addAll(listChat?.reversed?.toList() ?? []);
     if (mounted) setState(() {});
   }
 
   _showMenu(BuildContext context, Offset tapPos, int type, String id) {
-    final RenderBox overlay = Overlay.of(context).context.findRenderObject();
+    final RenderBox overlay = Overlay.of(context).context.findRenderObject() as RenderBox;
     final RelativeRect position = RelativeRect.fromLTRB(tapPos.dx, tapPos.dy,
         overlay.size.width - tapPos.dx, overlay.size.height - tapPos.dy);
     showMenu<String>(
@@ -49,7 +50,7 @@ class _HomePageState extends State<HomePage>
           new MyPopupMenuItem(child: Text('置顶聊天'), value: '置顶聊天'),
           new MyPopupMenuItem(child: Text('删除该聊天'), value: '删除该聊天'),
           // ignore: missing_return
-        ]).then<String>((String selected) {
+        ]).then<void>((String? selected) {
       switch (selected) {
         case '删除该聊天':
           deleteConversationAndLocalMsgModel(type, id, callback: (str) {
@@ -75,7 +76,7 @@ class _HomePageState extends State<HomePage>
 
   void canCelListener() {
     if (_messageStreamSubscription != null) {
-      _messageStreamSubscription.cancel();
+      _messageStreamSubscription!.cancel();
     }
   }
 
@@ -83,8 +84,8 @@ class _HomePageState extends State<HomePage>
     if (!mounted) return;
 
     if (_messageStreamSubscription == null) {
-      _messageStreamSubscription =
-          im.onMessage.listen((dynamic onData) => getChatData());
+      // _messageStreamSubscription =
+      //     im.onMessage.listen((dynamic onData) => getChatData());
     }
   }
 

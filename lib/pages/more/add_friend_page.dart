@@ -1,20 +1,20 @@
 import 'dart:convert';
 
-import 'package:wechat_flutter/im/entity/i_person_info_entity.dart';
-import 'package:wechat_flutter/im/entity/person_info_entity.dart';
-import 'package:wechat_flutter/pages/mine/code_page.dart';
-import 'package:wechat_flutter/pages/root/user_page.dart';
-import 'package:wechat_flutter/provider/global_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:provider/provider.dart';
+import 'package:wechat_flutter/im/entity/i_person_info_entity.dart';
+import 'package:wechat_flutter/im/entity/person_info_entity.dart';
 import 'package:wechat_flutter/im/info_handle.dart';
+import 'package:wechat_flutter/pages/mine/code_page.dart';
 import 'package:wechat_flutter/pages/more/add_friend_details.dart';
-
+import 'package:wechat_flutter/pages/root/user_page.dart';
+import 'package:wechat_flutter/provider/global_model.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'package:wechat_flutter/ui/view/list_tile_view.dart';
 import 'package:wechat_flutter/ui/view/search_main_view.dart';
 import 'package:wechat_flutter/ui/view/search_tile_view.dart';
-import 'package:provider/provider.dart';
 
 class AddFriendPage extends StatefulWidget {
   @override
@@ -26,7 +26,7 @@ class _AddFriendPageState extends State<AddFriendPage> {
   bool showBtn = false;
   bool isResult = false;
 
-  String currentUser;
+  String? currentUser;
 
   FocusNode searchF = new FocusNode();
   TextEditingController searchC = new TextEditingController();
@@ -132,7 +132,7 @@ class _AddFriendPageState extends State<AddFriendPage> {
         new Container(
           color: Colors.white,
           width: Get.width,
-          height: (winHeight(context) - 185 * 1.38),
+          height: (Get.height - 185 * 1.38),
         )
       ];
     } else {
@@ -145,8 +145,8 @@ class _AddFriendPageState extends State<AddFriendPage> {
           color: strNoEmpty(searchC.text) ? Colors.white : appBarColor,
           width: Get.width,
           height: strNoEmpty(searchC.text)
-              ? (winHeight(context) - 65 * 2.1) - winKeyHeight(context)
-              : winHeight(context),
+              ? (Get.height - 65 * 2.1) - winKeyHeight(context)
+              : Get.height,
         )
       ];
     }
@@ -159,11 +159,11 @@ class _AddFriendPageState extends State<AddFriendPage> {
   }
 
   getUser() async {
-    if (Platform.isAndroid) {
-      currentUser = await im.getCurrentLoginUser();
-    } else {
-      currentUser = null;
-    }
+    // if (Platform.isAndroid) {
+    //   currentUser = await im.getCurrentLoginUser();
+    // } else {
+    //   currentUser = null;
+    // }
     setState(() {});
   }
 
@@ -177,8 +177,8 @@ class _AddFriendPageState extends State<AddFriendPage> {
   // 搜索好友
   Future search(String userName) async {
     final data = await getUsersProfile([userName]);
-    if(data == null){
-      showToast( '该用户不存在【可搜"188"或"18888"试试】');
+    if (data == null) {
+      showToast('该用户不存在【可搜"188"或"18888"试试】');
       return;
     }
     List<dynamic> dataMap = json.decode(data);
@@ -268,13 +268,13 @@ class _AddFriendPageState extends State<AddFriendPage> {
         ),
         body: bodyView,
       ),
-      onWillPop: () {
+      onWillPop: () async {
         if (isSearch) {
           unFocusMethod();
         } else {
           Navigator.pop(context);
         }
-        return;
+        return true;
       },
     );
   }

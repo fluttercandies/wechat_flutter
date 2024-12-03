@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:wechat_flutter/im/fun_dim_group_model.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
+import '../../ui/item/contact_view.dart';
+
 class GroupBillBoardPage extends StatefulWidget {
   final String groupOwner;
   final String groupNotice;
-  final String groupId;
-  final String time;
-  final Callback callback;
+  final String? groupId;
+  final String? time;
+  final Callback? callback;
 
   GroupBillBoardPage(this.groupOwner, this.groupNotice,
       {this.groupId, this.time, this.callback});
@@ -20,7 +22,7 @@ class _GroupBillBoardPageState extends State<GroupBillBoardPage> {
   bool inputState = false;
   FocusNode _focusNode = FocusNode();
   TextEditingController _textController = new TextEditingController();
-  String _publishTime;
+  String? _publishTime;
 
   TextStyle styleLabel =
       TextStyle(fontSize: 12.0, color: Colors.black.withOpacity(0.8));
@@ -40,8 +42,8 @@ class _GroupBillBoardPageState extends State<GroupBillBoardPage> {
           '${DateTime.now().minute}';
       debugPrint('发布时间>>>>> $_publishTime');
       DimGroup.modifyGroupNotificationModel(
-          widget.groupId, _textController.text, _publishTime);
-      widget.callback(_publishTime);
+          widget.groupId!, _textController.text, _publishTime!);
+      widget.callback!(_publishTime);
       Navigator.pop(context, _textController.text);
       inputState = false;
     } else {

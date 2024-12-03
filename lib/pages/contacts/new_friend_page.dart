@@ -1,13 +1,13 @@
 import 'dart:convert';
 
-import 'package:wechat_flutter/pages/more/add_friend_page.dart';
-import 'package:wechat_flutter/ui/orther/label_row.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:wechat_flutter/im/info_handle.dart';
 import 'package:wechat_flutter/pages/more/add_friend_details.dart';
-
+import 'package:wechat_flutter/pages/more/add_friend_page.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
+import 'package:wechat_flutter/ui/orther/label_row.dart';
 import 'package:wechat_flutter/ui/view/list_tile_view.dart';
 import 'package:wechat_flutter/ui/view/search_main_view.dart';
 import 'package:wechat_flutter/ui/view/search_tile_view.dart';
@@ -22,7 +22,7 @@ class _NewFriendPageState extends State<NewFriendPage> {
   bool showBtn = false;
   bool isResult = false;
 
-  String currentUser;
+  String? currentUser;
 
   FocusNode searchF = new FocusNode();
   TextEditingController searchC = new TextEditingController();
@@ -79,7 +79,7 @@ class _NewFriendPageState extends State<NewFriendPage> {
         new Container(
           color: Colors.white,
           width: Get.width,
-          height: (winHeight(context) - 185 * 1.38),
+          height: (Get.height - 185 * 1.38),
         )
       ];
     } else {
@@ -92,8 +92,8 @@ class _NewFriendPageState extends State<NewFriendPage> {
           color: strNoEmpty(searchC.text) ? Colors.white : appBarColor,
           width: Get.width,
           height: strNoEmpty(searchC.text)
-              ? (winHeight(context) - 65 * 2.1) - winKeyHeight(context)
-              : winHeight(context),
+              ? (Get.height - 65 * 2.1) - winKeyHeight(context)
+              : Get.height,
         )
       ];
     }
@@ -106,8 +106,8 @@ class _NewFriendPageState extends State<NewFriendPage> {
   }
 
   getUser() async {
-    currentUser = await im.getCurrentLoginUser();
-    setState(() {});
+    // currentUser = await im.getCurrentLoginUser();
+    // setState(() {});
   }
 
   unFocusMethod() {
@@ -123,8 +123,8 @@ class _NewFriendPageState extends State<NewFriendPage> {
     List<dynamic> dataMap = json.decode(data);
     Map map = dataMap[0];
     if (strNoEmpty(map['allowType'])) {
-      Get.to(new AddFriendsDetails('search', map['identifier'],
-          map['faceUrl'], map['nickName'], map['gender']));
+      Get.to(new AddFriendsDetails('search', map['identifier'], map['faceUrl'],
+          map['nickName'], map['gender']));
     } else {
       isResult = true;
       setState(() {});
@@ -202,13 +202,13 @@ class _NewFriendPageState extends State<NewFriendPage> {
         ),
         body: bodyView,
       ),
-      onWillPop: () {
+      onWillPop: () async {
         if (isSearch) {
           unFocusMethod();
         } else {
           Navigator.pop(context);
         }
-        return;
+        return true;
       },
     );
   }

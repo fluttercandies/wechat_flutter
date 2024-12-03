@@ -133,10 +133,10 @@ class Req {
       if (response != null) {
         if (response.data is List) {
           Map data = response.data[0];
-          callBack(data);
+          if(callback!= null)callback!(data);
         } else {
           Map data = response.data;
-          callBack(data);
+          if(callback!= null)callback!(data);
         }
         print('HTTP_REQUEST_URL::[$id]::$url');
         print('HTTP_REQUEST_BODY::[$id]::${params ?? ' no'}');

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
 /// 微信领取红包对话框
@@ -29,7 +30,7 @@ class _RedReceiveDialogState extends State<RedReceiveDialog> {
         children: [
           Container(
             width: Get.width - 100,
-            height: winHeight(context) / 1.8,
+            height: Get.height / 1.8,
             margin: EdgeInsets.symmetric(horizontal: 50),
             decoration: BoxDecoration(
               color: Color(0xffd26853),

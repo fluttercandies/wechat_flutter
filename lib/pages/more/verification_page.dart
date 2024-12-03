@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:wechat_flutter/im/friend_handle.dart';
-
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'package:wechat_flutter/ui/orther/verify_input.dart';
 import 'package:wechat_flutter/ui/orther/verify_switch.dart';
@@ -9,7 +8,7 @@ class VerificationPage extends StatefulWidget {
   final String nickName;
   final String id;
 
-  VerificationPage({this.nickName = '', this.id});
+  VerificationPage({this.nickName = '', required this.id});
 
   @override
   _VerificationPageState createState() => new _VerificationPageState();

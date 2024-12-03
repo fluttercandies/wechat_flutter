@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:wechat_flutter/im/info_handle.dart';
 import 'package:wechat_flutter/provider/global_model.dart';
-
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'package:wechat_flutter/ui/orther/tip_verify_Input.dart';
 
@@ -19,15 +18,15 @@ class _ChangeNamePageState extends State<ChangeNamePage> {
   TextEditingController _tc = new TextEditingController();
   FocusNode _f = new FocusNode();
 
-  String initContent;
+  late String initContent;
 
   void setInfoMethod(GlobalModel model) {
     if (!strNoEmpty(_tc.text)) {
-      showToast( '输入的内容不能为空');
+      showToast('输入的内容不能为空');
       return;
     }
     if (_tc.text.length > 12) {
-      showToast( '输入的内容太长了');
+      showToast('输入的内容太长了');
       return;
     }
 
@@ -37,11 +36,11 @@ class _ChangeNamePageState extends State<ChangeNamePage> {
       avatarStr: model.avatar,
       callback: (data) {
         if (data.toString().contains('succ')) {
-          showToast( '设置名字成功');
+          showToast('设置名字成功');
           model.refresh();
           Navigator.of(context).pop();
         } else
-          showToast( '设置名字失败');
+          showToast('设置名字失败');
       },
     );
   }
@@ -60,8 +59,8 @@ class _ChangeNamePageState extends State<ChangeNamePage> {
 
   @override
   void initState() {
-    super.initState();
     initContent = widget.name;
+    super.initState();
   }
 
   @override

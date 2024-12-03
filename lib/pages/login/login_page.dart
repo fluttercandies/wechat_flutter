@@ -1,9 +1,9 @@
 import 'dart:ui';
 
-import 'package:dim/commom/win_media.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:wechat_flutter/im/login_handle.dart';
 import 'package:wechat_flutter/pages/login/select_location_page.dart';

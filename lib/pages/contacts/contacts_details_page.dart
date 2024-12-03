@@ -1,19 +1,19 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 import 'package:wechat_flutter/pages/chat/chat_page.dart';
 import 'package:wechat_flutter/pages/chat/more_info_page.dart';
 import 'package:wechat_flutter/pages/chat/set_remark_page.dart';
 import 'package:wechat_flutter/pages/wechat_friends/page/wechat_friends_circle.dart';
 import 'package:wechat_flutter/provider/global_model.dart';
+import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'package:wechat_flutter/ui/dialog/friend_item_dialog.dart';
 import 'package:wechat_flutter/ui/item/contact_card.dart';
 import 'package:wechat_flutter/ui/orther/button_row.dart';
 import 'package:wechat_flutter/ui/orther/label_row.dart';
-import 'package:flutter/material.dart';
-
-import 'package:wechat_flutter/tools/wechat_flutter.dart';
-import 'package:provider/provider.dart';
 
 class ContactsDetailsPage extends StatefulWidget {
-  final String avatar, title, id;
+  final String? avatar, title, id;
 
   ContactsDetailsPage({this.avatar, this.title, this.id});
 
@@ -25,8 +25,8 @@ class _ContactsDetailsPageState extends State<ContactsDetailsPage> {
   List<Widget> body(bool isSelf) {
     return [
       new ContactCard(
-        img: widget.avatar,
-        id: widget.id,
+        img: widget.avatar!,
+        id: widget.id!,
         title: widget.title,
         nickName: widget.title,
         area: '北京 海淀',
@@ -54,14 +54,14 @@ class _ContactsDetailsPageState extends State<ContactsDetailsPage> {
         margin: EdgeInsets.only(top: 10.0),
         text: '发消息',
         isBorder: true,
-        onPressed: () => Get.toReplace(
-            new ChatPage(id: widget.id, title: widget.title, type: 1)),
+        onPressed: () => Get.replace(
+            new ChatPage(id: widget.id!, title: widget.title!, type: 1)),
       ),
       new Visibility(
         visible: !isSelf,
         child: new ButtonRow(
           text: '音视频通话',
-          onPressed: () => showToast( '敬请期待'),
+          onPressed: () => showToast('敬请期待'),
         ),
       ),
     ];
@@ -76,9 +76,10 @@ class _ContactsDetailsPageState extends State<ContactsDetailsPage> {
       new SizedBox(
         width: 60,
         child: new TextButton(
-          padding: EdgeInsets.all(0),
+          style:
+              ButtonStyle(padding: WidgetStatePropertyAll(EdgeInsets.all(0))),
           onPressed: () =>
-              friendItemDialog(context, userId: widget.id, suCc: (v) {
+              friendItemDialog(context, userId: widget.id!, suCc: (v) {
             if (v) Navigator.of(context).maybePop();
           }),
           child: new Image.asset(contactAssets + 'ic_contacts_details.png'),

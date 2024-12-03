@@ -1,9 +1,8 @@
+import 'dart:convert';
+
+import 'package:azlistview_plus/azlistview_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'dart:convert';
-import 'package:flutter/services.dart';
-import 'package:azlistview/azlistview.dart';
-
 import 'package:lpinyin/lpinyin.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
@@ -15,7 +14,7 @@ class SelectMembersPage extends StatefulWidget {
 }
 
 class _SelectMembersPageState extends State<SelectMembersPage> {
-  List<ContactInfoModel> _contacts = List();
+  List<ContactInfoModel> _contacts = [];
 
   int _suspensionHeight = 30;
   int _itemHeight = 60;
@@ -44,7 +43,7 @@ class _SelectMembersPageState extends State<SelectMembersPage> {
   void _handleList(List<ContactInfoModel> list) {
     if (list == null || list.isEmpty) return;
     for (int i = 0, length = list.length; i < length; i++) {
-      String pinyin = PinyinHelper.getPinyinE(list[i].name);
+      String pinyin = PinyinHelper.getPinyinE(list[i].name!);
       String tag = pinyin.substring(0, 1).toUpperCase();
       list[i].namePinyin = pinyin;
       if (RegExp("[A-Z]").hasMatch(tag)) {
@@ -93,10 +92,10 @@ class _SelectMembersPageState extends State<SelectMembersPage> {
                 new Padding(
                   padding: EdgeInsets.symmetric(horizontal: mainSpace * 1.5),
                   child: new Icon(
-                    model.isSelect
+                    model.isSelect!
                         ? CupertinoIcons.check_mark_circled_solid
                         : CupertinoIcons.check_mark_circled,
-                    color: model.isSelect ? Colors.green : Colors.grey,
+                    color: model.isSelect! ? Colors.green : Colors.grey,
                   ),
                 ),
                 new ClipRRect(
@@ -129,7 +128,7 @@ class _SelectMembersPageState extends State<SelectMembersPage> {
                           : null,
                     ),
                     child: new Text(
-                      model.name,
+                      model.name!,
                       style: TextStyle(fontSize: 14.0),
                     ),
                   ),
@@ -137,8 +136,8 @@ class _SelectMembersPageState extends State<SelectMembersPage> {
               ],
             ),
             onTap: () {
-              model.isSelect = !model.isSelect;
-              if (model.isSelect) {
+              model.isSelect = !model.isSelect!;
+              if (model.isSelect!) {
                 selects.insert(0, model);
               } else {
                 selects.remove(model);
@@ -161,7 +160,7 @@ class _SelectMembersPageState extends State<SelectMembersPage> {
             margin: EdgeInsets.symmetric(vertical: 7, horizontal: 5),
             onTap: () {
               if (!listNoEmpty(selects)) {
-                showToast( '请选择要添加的成员');
+                showToast('请选择要添加的成员');
               }
             },
             text: '确定',
@@ -169,71 +168,73 @@ class _SelectMembersPageState extends State<SelectMembersPage> {
         ],
       ),
       backgroundColor: Colors.white,
-      body: AzListView(
-        data: _contacts,
-        itemBuilder: (context, model) => _buildListItem(model),
-        isUseRealIndex: true,
-        itemHeight: _itemHeight,
-        suspensionHeight: _suspensionHeight,
-        header: AzListViewHeader(
-          height: _headHeight.toInt(),
-          builder: (context) {
-            String uFace = '';
-
-            if (!listNoEmpty(selects)) {
-              return new Container(
-                padding: EdgeInsets.symmetric(horizontal: 15),
-                child: new Row(
-                  children: <Widget>[
-                    new Icon(
-                      CupertinoIcons.search,
-                      color: Colors.grey,
-                    ),
-                    new Space(),
-                  ],
-                ),
-              );
-            }
-            return new ListView(
-              scrollDirection: Axis.horizontal,
-              children: selects.map((item) {
-                return new UnconstrainedBox(
-                  child: new Container(
-                    margin: EdgeInsets.only(left: 10),
-                    padding: EdgeInsets.symmetric(horizontal: 4),
-                    child: new ClipRRect(
-                      borderRadius: BorderRadius.all(Radius.circular(5)),
-                      child: !strNoEmpty(uFace)
-                          ? new Image.asset(
-                        defIcon,
-                        height: 48.0,
-                        width: 48.0,
-                        fit: BoxFit.cover,
-                      )
-                          : CachedNetworkImage(
-                        imageUrl: uFace,
-                        height: 48.0,
-                        width: 48.0,
-                        cacheManager: cacheManager,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                );
-              }).toList(),
-            );
-          },
-        ),
-      ),
+      body: Text("等待修复"),
+      // body: AzListView(
+      //   data: _contacts,
+      //   itemBuilder: (context, model) => _buildListItem(model),
+      //   isUseRealIndex: true,
+      //   itemHeight: _itemHeight,
+      //   suspensionHeight: _suspensionHeight,
+      //   header: AzListViewHeader(
+      //     height: _headHeight.toInt(),
+      //     builder: (context) {
+      //       String uFace = '';
+      //
+      //       if (!listNoEmpty(selects)) {
+      //         return new Container(
+      //           padding: EdgeInsets.symmetric(horizontal: 15),
+      //           child: new Row(
+      //             children: <Widget>[
+      //               new Icon(
+      //                 CupertinoIcons.search,
+      //                 color: Colors.grey,
+      //               ),
+      //               new Space(),
+      //             ],
+      //           ),
+      //         );
+      //       }
+      //       return new ListView(
+      //         scrollDirection: Axis.horizontal,
+      //         children: selects.map((item) {
+      //           return new UnconstrainedBox(
+      //             child: new Container(
+      //               margin: EdgeInsets.only(left: 10),
+      //               padding: EdgeInsets.symmetric(horizontal: 4),
+      //               child: new ClipRRect(
+      //                 borderRadius: BorderRadius.all(Radius.circular(5)),
+      //                 child: !strNoEmpty(uFace)
+      //                     ? new Image.asset(
+      //                         defIcon,
+      //                         height: 48.0,
+      //                         width: 48.0,
+      //                         fit: BoxFit.cover,
+      //                       )
+      //                     : CachedNetworkImage(
+      //                         imageUrl: uFace,
+      //                         height: 48.0,
+      //                         width: 48.0,
+      //                         cacheManager: cacheManager,
+      //                         fit: BoxFit.cover,
+      //                       ),
+      //               ),
+      //             ),
+      //           );
+      //         }).toList(),
+      //       );
+      //     },
+      //   ),
+      //   itemCount: _contacts.length,
+      // ),
     );
   }
 }
 
 class ContactInfoModel extends ISuspensionBean {
-  String name;
-  String tagIndex;
-  String namePinyin;
-  bool isSelect;
+  String? name;
+  String? tagIndex;
+  String? namePinyin;
+  bool? isSelect;
 
   ContactInfoModel({
     this.name = 'aTest',
@@ -254,8 +255,9 @@ class ContactInfoModel extends ISuspensionBean {
       };
 
   @override
-  String getSuspensionTag() => tagIndex;
+  String getSuspensionTag() => tagIndex ?? "";
 
   @override
-  String toString() => "CityBean {" + " \"name\":\"" + name + "\"" + '}';
+  String toString() =>
+      "CityBean {" + " \"name\":\"" + (name ?? "") + "\"" + '}';
 }

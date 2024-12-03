@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:wechat_flutter/im/friend/fun_dim_friend.dart';
 import 'package:wechat_flutter/im/fun_dim_group_model.dart';
 import 'package:wechat_flutter/pages/group/select_members_page.dart';
@@ -16,7 +17,7 @@ class GroupMembersPage extends StatefulWidget {
 }
 
 class _GroupMembersPageState extends State<GroupMembersPage> {
-  Future _futureBuilderFuture;
+  late Future _futureBuilderFuture;
   List memberList = [
     {'user': '+'},
 //    {'user': '-'}
@@ -24,11 +25,11 @@ class _GroupMembersPageState extends State<GroupMembersPage> {
 
   @override
   void initState() {
-    super.initState();
     _futureBuilderFuture = _gerData();
+    super.initState();
   }
 
-  handle(String uId) {
+  handle(String? uId) {
     if (!strNoEmpty(uId)) {
       Get.to(new SelectMembersPage());
 //      Get.to(CreateGroupChat(
@@ -47,15 +48,15 @@ class _GroupMembersPageState extends State<GroupMembersPage> {
 //        type: 1,
 //      ));
     } else {
-      showToast( '敬请期待');
+      showToast('敬请期待');
     }
   }
 
   Widget memberItem(item) {
     List userInfo;
-    String uId;
-    String uFace;
-    String nickName;
+    String? uId;
+    String? uFace;
+    String? nickName;
 
     if (item['user'] == "+" || item['user'] == '-') {
       return new InkWell(
@@ -83,8 +84,10 @@ class _GroupMembersPageState extends State<GroupMembersPage> {
           width: (Get.width - 60) / 5,
           child: TextButton(
             onPressed: () => handle(uId),
-            padding: EdgeInsets.all(0),
-            highlightColor: Colors.transparent,
+            style: ButtonStyle(
+              padding: WidgetStatePropertyAll(EdgeInsets.all(0)),
+              // highlightColor: Colors.transparent,
+            ),
             child: Column(
               children: <Widget>[
                 ClipRRect(
@@ -97,7 +100,7 @@ class _GroupMembersPageState extends State<GroupMembersPage> {
                           fit: BoxFit.cover,
                         )
                       : CachedNetworkImage(
-                          imageUrl: uFace,
+                          imageUrl: uFace!,
                           height: 48.0,
                           width: 48.0,
                           cacheManager: cacheManager,
@@ -112,9 +115,9 @@ class _GroupMembersPageState extends State<GroupMembersPage> {
                   child: Text(
                     nickName == null || nickName == ''
                         ? '默认昵称'
-                        : nickName.length > 5
-                            ? '${nickName.substring(0, 3)}...'
-                            : nickName,
+                        : nickName!.length > 5
+                            ? '${nickName!.substring(0, 3)}...'
+                            : nickName!,
                     style: TextStyle(fontSize: 12.0),
                   ),
                 ),

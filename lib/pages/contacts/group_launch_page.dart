@@ -1,15 +1,16 @@
+import 'dart:convert';
+
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:wechat_flutter/config/dictionary.dart';
 import 'package:wechat_flutter/im/friend_handle.dart';
+import 'package:wechat_flutter/im/info_handle.dart';
 import 'package:wechat_flutter/im/model/contacts.dart';
+import 'package:wechat_flutter/pages/more/add_friend_details.dart';
+import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'package:wechat_flutter/ui/item/contact_item.dart';
 import 'package:wechat_flutter/ui/item/contact_view.dart';
 import 'package:wechat_flutter/ui/item/launch_group.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:wechat_flutter/tools/wechat_flutter.dart';
-import 'dart:convert';
-import 'package:wechat_flutter/im/info_handle.dart';
-import 'package:wechat_flutter/pages/more/add_friend_details.dart';
 
 class GroupLaunchPage extends StatefulWidget {
   @override
@@ -27,7 +28,7 @@ class _GroupLaunchPageState extends State<GroupLaunchPage> {
 
   FocusNode searchF = new FocusNode();
   TextEditingController searchC = new TextEditingController();
-  ScrollController sC;
+  ScrollController? sC;
 
   final Map _letterPosMap = {INDEX_BAR_WORDS[0]: 0.0};
 
@@ -108,8 +109,9 @@ class _GroupLaunchPageState extends State<GroupLaunchPage> {
         new SizedBox(height: 50.0),
         new Container(
           child: new Column(
-            children:
-                defItems.map((item) => new LaunchGroupItem(item)).toList(),
+            children: defItems
+                .map((item) => new LaunchGroupItem(item: item))
+                .toList(),
           ),
         ),
         new Expanded(
@@ -133,19 +135,19 @@ class _GroupLaunchPageState extends State<GroupLaunchPage> {
       radius: 4.0,
       onTap: () {
         if (Platform.isIOS) {
-          showToast( 'IOS暂不支持发起群聊');
+          showToast('IOS暂不支持发起群聊');
           return;
         }
         createGroupChat(selectData, name: selectData.join(),
             callback: (callBack) {
           if (callBack.toString().contains('succ')) {
-            showToast( '创建群组成功');
+            showToast('创建群组成功');
             if (Navigator.of(context).canPop()) {
               Navigator.of(context).pop();
             }
           }
         });
-        showToast( '当前ID：${selectData.toString()}');
+        showToast('当前ID：${selectData.toString()}');
       },
     );
 
@@ -198,13 +200,13 @@ class _GroupLaunchPageState extends State<GroupLaunchPage> {
           ],
         ),
       ),
-      onWillPop: () {
+      onWillPop: () async {
         if (isSearch) {
           unFocusMethod();
         } else {
           Navigator.pop(context);
         }
-        return;
+        return true;
       },
     );
   }

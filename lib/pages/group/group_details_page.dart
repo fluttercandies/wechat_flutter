@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:wechat_flutter/im/friend/fun_dim_friend.dart';
 import 'package:wechat_flutter/im/fun_dim_group_model.dart';
 import 'package:wechat_flutter/im/group/fun_dim_info.dart';
@@ -13,48 +14,38 @@ import 'package:wechat_flutter/pages/group/select_members_page.dart';
 import 'package:wechat_flutter/pages/home/search_page.dart';
 import 'package:wechat_flutter/pages/mine/code_page.dart';
 import 'package:wechat_flutter/pages/settings/chat_background_page.dart';
-import 'package:wechat_flutter/tools/commom.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'package:wechat_flutter/ui/dialog/confirm_alert.dart';
 import 'package:wechat_flutter/ui/view/indicator_page_view.dart';
 
 class GroupDetailsPage extends StatefulWidget {
   final String peer;
-  final Callback callBack;
+  final Callback? callBack;
 
-  GroupDetailsPage(this.peer, {this.callBack});
+  const GroupDetailsPage(this.peer, {Key? key, this.callBack})
+      : super(key: key);
 
   @override
   _GroupDetailsPageState createState() => _GroupDetailsPageState();
 }
 
 class _GroupDetailsPageState extends State<GroupDetailsPage> {
-  /// 是否聊天置顶
   bool _top = false;
-
-  /// 是否显示群成员昵称
   bool _showName = false;
-
-  /// 是否保存到通讯录
   bool _contact = false;
-
-  /// 是否免打扰
   bool _dnd = false;
 
-  String groupName;
-  String groupNotification;
-  String time;
+  String? groupName;
+  String? groupNotification;
+  String? time;
   String cardName = '默认';
 
-  /// 是否群的创建者
   bool isGroupOwner = false;
 
-  /// 成员列表数据
   List memberList = [
     {'user': '+'},
-//    {'user': '-'}
   ];
-  List dataGroup;
+  List? dataGroup;
 
   @override
   void initState() {
@@ -71,23 +62,21 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
     });
   }
 
-  // 获取群组信息
   _getGroupInfo() {
     DimGroup.getGroupInfoListModel([widget.peer], callback: (result) async {
       dataGroup = json.decode(result.toString().replaceAll("'", '"'));
       final user = await SharedUtil.instance.getString(Keys.account);
-      isGroupOwner = dataGroup[0]['groupOwner'] == user;
-      groupName = dataGroup[0]['groupName'].toString();
-      String notice = strNoEmpty(dataGroup[0]['groupNotification'].toString())
-          ? dataGroup[0]['groupNotification'].toString()
+      isGroupOwner = dataGroup![0]['groupOwner'] == user;
+      groupName = dataGroup![0]['groupName'].toString();
+      String notice = strNoEmpty(dataGroup![0]['groupNotification'].toString())
+          ? dataGroup![0]['groupNotification'].toString()
           : '暂无公告';
       groupNotification = notice;
-      time = dataGroup[0]['groupIntroduction'].toString();
+      time = dataGroup![0]['groupIntroduction'].toString();
       setState(() {});
     });
   }
 
-  // 获取群成员列表
   _getGroupMembers() async {
     await DimGroup.getGroupMembersListModelLIST(widget.peer,
         callback: (result) {
@@ -97,17 +86,15 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
     });
   }
 
-  /// 成员item的UI序列渲染
   Widget memberItem(item) {
-    List<dynamic> userInfo;
-    String uId;
+    List<dynamic> userInfo = [];
+    String uId = '';
     String uFace = '';
-    String nickName;
+    String nickName = '';
 
-    /// "+" 和 "-"
     if (item['user'] == "+" || item['user'] == '-') {
-      return new InkWell(
-        child: new SizedBox(
+      return InkWell(
+        child: SizedBox(
           width: (Get.width - 60) / 5,
           child: Image.asset(
             'assets/images/group/${item['user']}.png',
@@ -115,12 +102,10 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
             width: 48.0,
           ),
         ),
-
-        /// "+" 和 "-" 点击之后
-        onTap: () => Get.to(new SelectMembersPage()),
+        onTap: () => Get.to(() => SelectMembersPage()),
       );
     }
-    return new FutureBuilder(
+    return FutureBuilder(
       future: DimFriend.getUsersProfile(item['user'], (cb) {
         userInfo = json.decode(cb.toString());
         uId = userInfo[0]['identifier'];
@@ -128,19 +113,18 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
         nickName = userInfo[0]['nickName'];
       }),
       builder: (context, snap) {
-        return new SizedBox(
+        return SizedBox(
           width: (Get.width - 60) / 5,
           child: TextButton(
             onPressed: () =>
-                Get.to(GroupMemberDetails(Data.user() == uId, uId)),
-            padding: EdgeInsets.all(0),
-            highlightColor: Colors.transparent,
+                Get.to(() => GroupMemberDetails(Data.user() == uId, uId)),
+            style: TextButton.styleFrom(padding: EdgeInsets.zero),
             child: Column(
               children: <Widget>[
                 ClipRRect(
                   borderRadius: BorderRadius.all(Radius.circular(5)),
                   child: !strNoEmpty(uFace)
-                      ? new Image.asset(
+                      ? Image.asset(
                           defIcon,
                           height: 48.0,
                           width: 48.0,
@@ -172,7 +156,6 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
     );
   }
 
-  // 设置消息免打扰
   _setDND(int type) {
     DimGroup.setReceiveMessageOptionModel(widget.peer, Data.user(), type,
         callback: (_) {});
@@ -182,17 +165,17 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     if (!listNoEmpty(dataGroup)) {
-      return new Container(color: Colors.white);
+      return Container(color: Colors.white);
     }
 
     return Scaffold(
       backgroundColor: Color(0xffEDEDED),
-      appBar: new ComMomBar(title: '聊天信息 (${dataGroup[0]['memberNum']})'),
-      body: new ScrollConfiguration(
+      appBar: ComMomBar(title: '聊天信息 (${dataGroup![0]['memberNum']})'),
+      body: ScrollConfiguration(
         behavior: MyBehavior(),
-        child: new ListView(
+        child: ListView(
           children: <Widget>[
-            new Container(
+            Container(
               color: Colors.white,
               padding: EdgeInsets.only(top: 10.0, bottom: 10),
               width: Get.width,
@@ -202,16 +185,18 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
                 children: memberList.map(memberItem).toList(),
               ),
             ),
-            new Visibility(
+            Visibility(
               visible: memberList.length > 20,
-              child: new TextButton(
-                padding: EdgeInsets.only(top: 15.0, bottom: 20.0),
-                color: Colors.white,
-                child: new Text(
+              child: TextButton(
+                style: TextButton.styleFrom(
+                  padding: EdgeInsets.only(top: 15.0, bottom: 20.0),
+                  backgroundColor: Colors.white,
+                ),
+                child: Text(
                   '查看全部群成员',
                   style: TextStyle(fontSize: 14.0, color: Colors.black54),
                 ),
-                onPressed: () => Get.to(new GroupMembersPage(widget.peer)),
+                onPressed: () => Get.to(() => GroupMembersPage(widget.peer)),
               ),
             ),
             SizedBox(height: 10.0),
@@ -223,21 +208,21 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
             ),
             functionBtn(
               '群二维码',
-              right: new Image.asset('assets/images/group/group_code.png',
-                  width: 20),
+              right:
+                  Image.asset('assets/images/group/group_code.png', width: 20),
             ),
             functionBtn(
               '群公告',
               detail: groupNotification.toString(),
             ),
-            new Visibility(
+            Visibility(
               visible: isGroupOwner,
               child: functionBtn('群管理'),
             ),
             functionBtn('备注'),
-            new SizedBox(height: 10.0),
+            SizedBox(height: 10.0),
             functionBtn('查找聊天记录'),
-            new SizedBox(height: 10.0),
+            SizedBox(height: 10.0),
             functionBtn('消息免打扰',
                 right: CupertinoSwitch(
                   value: _dnd,
@@ -265,7 +250,7 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
                     value ? _setTop(1) : _setTop(2);
                   },
                 )),
-            new SizedBox(height: 10.0),
+            SizedBox(height: 10.0),
             functionBtn('我在群里的昵称', detail: cardName),
             functionBtn('显示群成员昵称',
                 right: CupertinoSwitch(
@@ -276,15 +261,17 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
                     value ? _setTop(1) : _setTop(2);
                   },
                 )),
-            new Space(),
+            Space(),
             functionBtn('设置当前聊天背景'),
             functionBtn('投诉'),
-            new Space(),
+            Space(),
             functionBtn('清空聊天记录'),
-            new Space(),
+            Space(),
             TextButton(
-              padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 20.0),
-              color: Colors.white,
+              style: TextButton.styleFrom(
+                padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 20.0),
+                backgroundColor: Colors.white,
+              ),
               onPressed: () {
                 if (widget.peer == '') return;
                 confirmAlert(context, (isOK) {
@@ -301,7 +288,7 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
                               Navigator.of(context).pop();
                             }
                             print('解散群聊成功');
-                            showToast( '解散群聊成功');
+                            showToast('解散群聊成功');
                           }
                         });
                       } else if (str.toString().contains('succ')) {
@@ -311,7 +298,7 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
                           Navigator.of(context).pop();
                         }
                         print('退出成功');
-                        showToast( '退出成功');
+                        showToast('退出成功');
                       }
                     });
                   }
@@ -332,44 +319,41 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
     );
   }
 
-  /*
-  * 点击之后的事件处理，[title]是标题，点击之后的具体事件就是通过标题来判断
-  * */
   handle(String title) {
     switch (title) {
       case '备注':
-        Get.to(new GroupRemarksPage());
+        Get.to(() => GroupRemarksPage(groupId: widget.peer));
         break;
       case '群聊名称':
         Get.to(
-          new GroupRemarksPage(
+          () => GroupRemarksPage(
             groupInfoType: GroupInfoType.name,
-            text: groupName,
+            text: groupName ?? "",
             groupId: widget.peer,
           ),
-        ).then((data) {
+        )?.then((data) {
           groupName = data ?? groupName;
           Notice.send(WeChatActions.groupName(), groupName);
         });
         break;
       case '群二维码':
-        Get.to(new CodePage(true));
+        Get.to(() => CodePage(true));
         break;
       case '群公告':
         Get.to(
-          new GroupBillBoardPage(
-            dataGroup[0]['groupOwner'],
-            groupNotification,
+          () => GroupBillBoardPage(
+            dataGroup![0]['groupOwner'],
+            groupNotification!,
             groupId: widget.peer,
             time: time,
             callback: (timeData) => time = timeData,
           ),
-        ).then((data) {
+        )?.then((data) {
           groupNotification = data ?? groupNotification;
         });
         break;
       case '查找聊天记录':
-        Get.to(new SearchPage());
+        Get.to(() => SearchPage());
         break;
       case '消息免打扰':
         _dnd = !_dnd;
@@ -381,30 +365,30 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
         _top ? _setTop(1) : _setTop(2);
         break;
       case '设置当前聊天背景':
-        Get.to(new ChatBackgroundPage());
+        Get.to(() => ChatBackgroundPage());
         break;
       case '我在群里的昵称':
         Get.to(
-          new GroupRemarksPage(
+          () => GroupRemarksPage(
             groupInfoType: GroupInfoType.cardName,
             text: cardName,
             groupId: widget.peer,
           ),
-        ).then((data) {
+        )?.then((data) {
           cardName = data ?? cardName;
         });
         break;
       case '投诉':
-        Get.to(new WebViewPage(helpUrl, '投诉'));
+        Get.to(() => WebViewPage(url: helpUrl, title: '投诉'));
         break;
       case '清空聊天记录':
         confirmAlert(
           context,
           (isOK) {
-            if (isOK) showToast( '敬请期待');
+            if (isOK) showToast('敬请期待');
           },
           tips: '确定删除群的聊天记录吗？',
-          okBtn: '清空',
+          okBtn: '清���',
         );
         break;
     }
@@ -412,13 +396,10 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
 
   _setTop(int i) {}
 
-  /*
-  * item封装调用
-  * */
   functionBtn(
-    title, {
-    final String detail,
-    final Widget right,
+    String title, {
+    String? detail,
+    Widget? right,
   }) {
     return GroupItem(
       detail: detail,
@@ -430,26 +411,29 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
 }
 
 class GroupItem extends StatelessWidget {
-  final String detail;
+  final String? detail;
   final String title;
   final VoidCallback onPressed;
-  final Widget right;
+  final Widget? right;
 
-  GroupItem({
+  const GroupItem({
+    Key? key,
     this.detail,
-    this.title,
-    this.onPressed,
+    required this.title,
+    required this.onPressed,
     this.right,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    if (detail == null && detail == '') {
-      return new Container();
+    if (detail == null || detail == '') {
+      return Container();
     }
-    double widthT() {
+    double? widthT() {
       if (detail != null) {
-        return detail.length > 35 ? SizeConfig.blockSizeHorizontal * 60 : null;
+        return detail!.length > 35
+            ? SizeConfig.blockSizeHorizontal! * 60
+            : null;
       } else {
         return null;
       }
@@ -457,7 +441,7 @@ class GroupItem extends StatelessWidget {
 
     bool isSwitch = title == '消息免打扰' ||
         title == '聊天置顶' ||
-        title == '保存到通讯录' ||
+        title == '��存到通讯录' ||
         title == '显示群成员昵称';
     bool noBorder = title == '备注' ||
         title == '查找聊天记录' ||
@@ -467,10 +451,12 @@ class GroupItem extends StatelessWidget {
         title == '清空聊天记录';
 
     return TextButton(
-      padding: EdgeInsets.only(left: 15, right: 15.0),
-      color: Colors.white,
-      onPressed: () => onPressed(),
-      child: new Container(
+      style: TextButton.styleFrom(
+        padding: EdgeInsets.only(left: 15, right: 15.0),
+        backgroundColor: Colors.white,
+      ),
+      onPressed: onPressed,
+      child: Container(
         padding: EdgeInsets.only(
           top: isSwitch ? 10 : 15.0,
           bottom: isSwitch ? 10 : 15.0,
@@ -480,17 +466,17 @@ class GroupItem extends StatelessWidget {
               ? null
               : Border(bottom: BorderSide(color: Colors.grey, width: 0.2)),
         ),
-        child: new Column(
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            new Row(
+            Row(
               children: <Widget>[
-                new Expanded(
+                Expanded(
                   child: Text(title),
                 ),
-                new Visibility(
+                Visibility(
                   visible: title != '群公告',
-                  child: new SizedBox(
+                  child: SizedBox(
                     width: widthT(),
                     child: Text(
                       detail ?? '',
@@ -499,8 +485,8 @@ class GroupItem extends StatelessWidget {
                     ),
                   ),
                 ),
-                right != null ? right : new Container(),
-                new SizedBox(width: 10.0),
+                right ?? Container(),
+                SizedBox(width: 10.0),
                 isSwitch
                     ? Container()
                     : Image.asset(
@@ -509,9 +495,9 @@ class GroupItem extends StatelessWidget {
                       ),
               ],
             ),
-            new Visibility(
+            Visibility(
               visible: title == '群公告',
-              child: new Padding(
+              child: Padding(
                 padding: EdgeInsets.symmetric(vertical: 3),
                 child: Text(
                   detail ?? '',

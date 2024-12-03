@@ -1,26 +1,25 @@
-import 'package:wechat_flutter/im/model/contacts.dart';
-import 'package:wechat_flutter/ui/view/indicator_page_view.dart';
 import 'package:flutter/material.dart';
+import 'package:wechat_flutter/im/model/contacts.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
+import 'package:wechat_flutter/ui/view/indicator_page_view.dart';
+
 import 'contact_item.dart';
 
 enum ClickType { select, open }
-
-typedef Callback = void Function(List<String> data);
 
 class ContactView extends StatelessWidget {
   final ScrollController? sC;
   final List<ContactItem> functionButtons;
   final List<Contact> contacts;
-  final ClickType type;
-  final Callback callback;
+  final ClickType? type;
+  final Callback? callback;
 
   ContactView({
     this.sC,
     this.functionButtons = const [],
     this.contacts = const [],
-    required this.type,
-    required this.callback,
+    this.type,
+    this.callback,
   });
 
   @override
@@ -49,14 +48,14 @@ class ContactView extends StatelessWidget {
               identifier: _contact.identifier,
               groupTitle: _isGroupTitle ? _contact.nameIndex : null,
               isLine: _isBorder,
-              type: type,
+              type: type!,
               cancel: (v) {
                 data.remove(v);
-                callback(data);
+                if (callback != null) callback!(data);
               },
               add: (v) {
                 data.add(v);
-                callback(data);
+                if (callback != null) callback!(data);
               },
             );
           } else {
@@ -67,14 +66,14 @@ class ContactView extends StatelessWidget {
                 identifier: _contact.identifier,
                 groupTitle: _isGroupTitle ? _contact.nameIndex : null,
                 isLine: false,
-                type: type,
+                type: type!,
                 cancel: (v) {
                   data.remove(v);
-                  callback(data);
+                  if (callback != null) callback!(data);
                 },
                 add: (v) {
                   data.add(v);
-                  callback(data);
+                  if (callback != null) callback!(data);
                 },
               ),
               HorizontalLine(),

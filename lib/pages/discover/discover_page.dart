@@ -1,9 +1,9 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:wechat_flutter/pages/settings/language_page.dart';
 import 'package:wechat_flutter/pages/wechat_friends/page/wechat_friends_circle.dart';
-import 'package:wechat_flutter/ui/view/indicator_page_view.dart';
-import 'package:flutter/material.dart';
-
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
+import 'package:wechat_flutter/ui/view/indicator_page_view.dart';
 import 'package:wechat_flutter/ui/view/list_tile_view.dart';
 
 class DiscoverPage extends StatefulWidget {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:get/get.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
 class SearchPage extends StatefulWidget {
@@ -23,7 +23,7 @@ class _SearchPageState extends State<SearchPage> {
           style: TextStyle(color: tipColor),
         ),
       ),
-      onTap: () => showToast( '$item功能小编正在开发'),
+      onTap: () => showToast('$item功能小编正在开发'),
     );
   }
 

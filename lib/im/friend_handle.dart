@@ -4,7 +4,7 @@ import 'package:wechat_flutter/tools/wechat_flutter.dart';
 typedef OnSuCc = void Function(bool v);
 
 Future<dynamic> addFriend(String userName, BuildContext context,
-    {OnSuCc suCc}) async {
+    {OnSuCc? suCc}) async {
   try {
     var result = await im.addFriend(userName);
     if (result.toString().contains('Friend_Exist')) {

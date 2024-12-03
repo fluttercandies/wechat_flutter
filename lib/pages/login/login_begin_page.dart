@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:wechat_flutter/config/provider_config.dart';
 import 'package:wechat_flutter/im/login_handle.dart';

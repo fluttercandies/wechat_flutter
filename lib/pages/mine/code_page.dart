@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:wechat_flutter/ui/dialog/code_dialog.dart';
 import 'package:flutter/material.dart';
 
@@ -13,8 +14,8 @@ class CodePage extends StatefulWidget {
 }
 
 class _CodePageState extends State<CodePage> {
-  List data = ['换个样式', '保存到手机', '扫描二维码', '重置二维码'];
-  List groupData = ['保存到手机', '扫描二维码'];
+  List<String> data = ['换个样式', '保存到手机', '扫描二维码', '重置二维码'];
+  List<String> groupData = ['保存到手机', '扫描二维码'];
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,9 @@ class _CodePageState extends State<CodePage> {
       new SizedBox(
         width: 60,
         child: new TextButton(
-          padding: EdgeInsets.all(0),
+          style: ButtonStyle(
+            padding: WidgetStateProperty.all(EdgeInsets.zero),
+          ),
           onPressed: () => codeDialog(
             context,
             widget.isGroup ? groupData : data,
@@ -35,7 +38,7 @@ class _CodePageState extends State<CodePage> {
     var body = [
       new Container(
         margin: EdgeInsets.only(
-            left: 20.0, right: 20.0, top: winHeight(context) / 10),
+            left: 20.0, right: 20.0, top: Get.height / 10),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.all(Radius.circular(4.0)),
@@ -50,7 +53,7 @@ class _CodePageState extends State<CodePage> {
                   name: 'CrazyQ1',
                   area: '北京 海淀',
                   icon: 'assets/images/Contact_Male.webp',
-                  groupName: widget.isGroup ? 'wechat_flutter 101号群' : null,
+                  groupName: widget.isGroup ? 'wechat_flutter 101号群' : "未知",
                 ),
               ),
               new SizedBox(width: mainSpace),
@@ -85,7 +88,7 @@ class _CodePageState extends State<CodePage> {
 }
 
 class CardPerson extends StatelessWidget {
-  final String name, icon, area, groupName;
+  final String? name, icon, area, groupName;
 
   CardPerson({this.name, this.icon, this.area, this.groupName});
 

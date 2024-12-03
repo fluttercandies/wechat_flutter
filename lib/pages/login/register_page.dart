@@ -1,11 +1,8 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
-import 'package:wechat_flutter/pages/login/login_begin_page.dart';
 import 'package:wechat_flutter/provider/login_model.dart';
-
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'package:wechat_flutter/ui/view/edit_view.dart';
 
@@ -29,7 +26,7 @@ class _RegisterPageState extends State<RegisterPage> {
   String localAvatarImgPath = '';
 
   _openGallery() async {
-    XFile img = await ImagePicker().pickImage(source: ImageSource.gallery);
+    XFile? img = await ImagePicker().pickImage(source: ImageSource.gallery);
 
     if (img != null) {
       localAvatarImgPath = img.path;
@@ -153,8 +150,9 @@ class _RegisterPageState extends State<RegisterPage> {
               S.of(context).protocolName,
               style: TextStyle(color: tipColor),
             ),
-            onTap: () => Get.to(new WebViewPage(
-                S.of(context).protocolUrl, S.of(context).protocolTitle)),
+            onTap: () => Get.to(WebViewPage(
+                url: S.of(context).protocolUrl,
+                title: S.of(context).protocolTitle)),
           ),
         ],
       ),
@@ -169,11 +167,11 @@ class _RegisterPageState extends State<RegisterPage> {
             : Color.fromRGBO(8, 191, 98, 1.0),
         onTap: () {
           if (!strNoEmpty(pWC.text)) return;
-          if (!isMobilePhoneNumber(phoneC.text)) {
-            showToast( '请输入正确的手机号');
+          if (!GetUtils.isPhoneNumber(phoneC.text)) {
+            showToast('请输入正确的手机号');
             return;
           }
-          showToast( '注册成功');
+          showToast('注册成功');
           popToRootPage();
         },
       ),

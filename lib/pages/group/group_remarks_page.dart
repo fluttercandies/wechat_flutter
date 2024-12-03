@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:wechat_flutter/im/fun_dim_group_model.dart';
-
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
 enum GroupInfoType { remark, name, cardName }
@@ -13,7 +13,7 @@ class GroupRemarksPage extends StatefulWidget {
   GroupRemarksPage({
     this.groupInfoType = GroupInfoType.remark,
     this.text = '',
-    this.groupId,
+    required this.groupId,
   });
 
   @override
@@ -25,7 +25,7 @@ class _GroupRemarksPageState extends State<GroupRemarksPage> {
 
   handle() {
     if (!strNoEmpty(_textController.text)) {
-      showToast( '请输入内容');
+      showToast('请输入内容');
       return;
     }
     if (widget.groupInfoType == GroupInfoType.name) {
@@ -33,7 +33,7 @@ class _GroupRemarksPageState extends State<GroupRemarksPage> {
           callback: (_) {});
       Navigator.pop(context, _textController.text);
     } else {
-      showToast( '敬请期待');
+      showToast('敬请期待');
     }
   }
 

@@ -1,16 +1,11 @@
-import 'dart:convert';
-
-import 'package:wechat_flutter/http/api.dart';
-import 'package:wechat_flutter/pages/mine/code_page.dart';
-import 'package:wechat_flutter/tools/commom.dart';
-import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
-import 'package:wechat_flutter/im/info_handle.dart';
 import 'package:wechat_flutter/pages/mine/change_name_page.dart';
+import 'package:wechat_flutter/pages/mine/code_page.dart';
 import 'package:wechat_flutter/provider/global_model.dart';
-
+import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'package:wechat_flutter/ui/orther/label_row.dart';
 
 class PersonalInfoPage extends StatefulWidget {
@@ -33,7 +28,7 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
   }
 
   _openGallery({type = ImageSource.gallery}) async {
-    showToast( '服务器正在调整，敬请期待');
+    showToast('服务器正在调整，敬请期待');
 
     // final model = Provider.of<GlobalModel>(context, listen: false);
     // File imageFile = await ImagePicker.pickImage(source: type);

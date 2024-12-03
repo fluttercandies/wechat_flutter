@@ -16,6 +16,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 // import 'package:flutter_image_compress/flutter_image_compress.dart';
 
 class SizeConfig {
@@ -92,4 +93,22 @@ bool isNetWorkImg(String url) {
 
 double navigationBarHeight(BuildContext context) {
   return MediaQuery.of(context).padding.top + kToolbarHeight;
+}
+
+double winKeyHeight(BuildContext context) {
+  return MediaQuery.of(context).viewInsets.bottom;
+}
+
+void popToHomePage(BuildContext context) {
+  Navigator.of(context).popUntil((route) => route.isFirst);
+}
+
+void popToRootPage() {
+  Navigator.of(Get.context!).popUntil((route) => route.isFirst);
+}
+
+double topBarHeight(BuildContext context) {
+  final double statusBarHeight = MediaQuery.of(context).padding.top;
+  final double appBarHeight = kToolbarHeight;
+  return statusBarHeight + appBarHeight;
 }

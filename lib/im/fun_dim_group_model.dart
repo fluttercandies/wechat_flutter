@@ -96,7 +96,7 @@ class DimGroup {
 
   static Future<dynamic> modifyGroupNameModel(
       String groupId, String setGroupName,
-      {Callback callback}) async {
+      {required Callback callback}) async {
     try {
       var result = await dim.modifyGroupName(groupId, setGroupName);
       callback(result);
@@ -107,7 +107,7 @@ class DimGroup {
 
   static Future<dynamic> modifyGroupIntroductionModel(
       String groupId, String setIntroduction,
-      {Callback callback}) async {
+      {required Callback callback}) async {
     try {
       var result = await dim.modifyGroupIntroduction(groupId, setIntroduction);
       callback(result);
