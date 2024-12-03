@@ -11,6 +11,8 @@
 # Related documents
 [List of problems and solutions](issues_list.md)
 
+[中文文档 README_ZH.md](README_ZH.md)
+
 # 课程说明
 本项目出配套课程啦，耗时6个月打造，flutter3最新版本，从0到1实现微信，包含im聊天单聊群聊功能：https://edu.csdn.net/course/detail/39189
 
