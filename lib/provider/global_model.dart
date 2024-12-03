@@ -7,7 +7,7 @@ import 'package:wechat_flutter/im/info_handle.dart';
 import 'package:wechat_flutter/provider/loginc/global_loginc.dart';
 
 class GlobalModel extends ChangeNotifier {
-  BuildContext context;
+  BuildContext? context;
 
   ///app的名字
   String appName = "微信flutter";
@@ -21,15 +21,15 @@ class GlobalModel extends ChangeNotifier {
   ///当前语言
   List<String> currentLanguageCode = ["zh", "CN"];
   String currentLanguage = "中文";
-  Locale currentLocale;
+  Locale? currentLocale;
 
   ///是否进入登录页
   bool goToLogin = true;
 
-  GlobalLogic logic;
+  late GlobalLogic logic;
 
   GlobalModel() {
-    logic = GlobalLogic(this);
+    this.logic = GlobalLogic(this);
   }
 
   void setContext(BuildContext context) {

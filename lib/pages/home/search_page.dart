@@ -23,7 +23,7 @@ class _SearchPageState extends State<SearchPage> {
           style: TextStyle(color: tipColor),
         ),
       ),
-      onTap: () => showToast(context, '$item功能小编正在开发'),
+      onTap: () => showToast( '$item功能小编正在开发'),
     );
   }
 

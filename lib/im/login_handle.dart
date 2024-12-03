@@ -12,7 +12,7 @@ Future<void> init(BuildContext context) async {
     var result = await im.init(appId);
     debugPrint('初始化结果 ======>   ${result.toString()}');
   } on PlatformException {
-    showToast(context, "初始化失败");
+    showToast( "初始化失败");
   }
 }
 
@@ -32,7 +32,7 @@ Future<void> login(String userName, BuildContext context) async {
       print('error::' + result.toString());
     }
   } on PlatformException {
-    showToast(context, '你已登录或者其他错误');
+    showToast( '你已登录或者其他错误');
   }
 }
 
@@ -42,7 +42,7 @@ Future<void> loginOut(BuildContext context) async {
   try {
     var result = await im.imLogout();
     if (result.toString().contains('ucc')) {
-      showToast(context, '登出成功');
+      showToast( '登出成功');
     } else {
       print('error::' + result.toString());
     }

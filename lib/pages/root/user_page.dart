@@ -76,7 +76,7 @@ class _UserPageState extends State<UserPage> {
               confirmAlert(
                 context,
                 (bool) {
-                  if (bool) showToast(context, '感谢支持');
+                  if (bool) showToast( '感谢支持');
                 },
                 tips:
                     '如果显示添加成功了好友列表还是没这个好友，说明对方的好友数量上限了，你可以选择下一个或者自己注册一个新的来测试。',

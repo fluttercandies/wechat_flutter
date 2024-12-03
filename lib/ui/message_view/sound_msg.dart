@@ -64,16 +64,16 @@ class _SoundMsgState extends State<SoundMsg> with TickerProviderStateMixin {
   }
 
   void start(String path) async {
-    showToast(context, "正在兼容最新flutter");
+    showToast( "正在兼容最新flutter");
   }
 
   playNew(String url) async {
-    showToast(context, "正在兼容最新flutter");
+    showToast( "正在兼容最新flutter");
      // await audioPlayer.play(url);
     // if (result == 1) {
-    //   showToast(context, '播放中');
+    //   showToast( '播放中');
     // } else {
-    //   showToast(context, '播放出问题了');
+    //   showToast( '播放出问题了');
     // }
   }
 
@@ -141,7 +141,7 @@ class _SoundMsgState extends State<SoundMsg> with TickerProviderStateMixin {
             if (strNoEmpty(urls)) {
               playNew(urls);
             } else {
-              showToast(context, '未知错误');
+              showToast( '未知错误');
             }
           },
         ),

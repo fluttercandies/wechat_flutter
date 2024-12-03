@@ -1,93 +1,67 @@
-import 'package:wechat_flutter/im/friend_handle.dart';
 import 'package:flutter/material.dart';
-
+import 'package:get/get.dart';
+import 'package:oktoast/oktoast.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
-import 'confirm_alert.dart';
-
-friendItemDialog(BuildContext context, {String userId, OnSuCc suCc}) {
-  action(v) {
-    Navigator.of(context).pop();
-    if (v == '删除') {
-      confirmAlert(
-        context,
-        (bool) {
-          if (bool) delFriend(userId, context, suCc: (v) => suCc(v));
-        },
-        tips: '你确定要删除此联系人吗',
-        okBtn: '删除',
-        warmStr: '删除联系人',
-        isWarm: true,
-        style: TextStyle(fontWeight: FontWeight.w500),
-      );
-    } else {
-      showToast(context, '删除功能是好的');
-    }
-  }
-
-  Widget item(item) {
-    return new Container(
+void friendItemDialog(BuildContext context, List<String> items) {
+  Widget item(String item) {
+    return Container(
       width: Get.width,
       decoration: BoxDecoration(
-        border: item != '删除'
+        border: item != '重置二维码'
             ? Border(
                 bottom: BorderSide(color: lineColor, width: 0.2),
               )
             : null,
       ),
-      child: new TextButton(
-        color: Colors.white,
-        padding: EdgeInsets.symmetric(vertical: 15.0),
-        onPressed: () => action(item),
-        child: new Text(item),
+      child: TextButton(
+        style: TextButton.styleFrom(
+          backgroundColor: Colors.white,
+          padding: EdgeInsets.symmetric(vertical: 15.0),
+        ),
+        onPressed: () {
+          Navigator.of(context).pop();
+          showToast('$item正在开发中');
+        },
+        child: Text(item),
       ),
     );
   }
 
   showModalBottomSheet(
     context: context,
-    isScrollControlled: true,
     builder: (context) {
-      List data = [
-        '设置备注和标签',
-        '把她推荐给朋友',
-        '设为星标好友',
-        '设置朋友圈和视频动态权限',
-        '加入黑名单',
-        '投诉',
-        '添加到桌面',
-        '删除',
-      ];
-
-      return new Center(
-        child: new Material(
+      return Center(
+        child: Material(
           type: MaterialType.transparency,
-          child: new Column(
+          child: Column(
             children: <Widget>[
-              new Expanded(
-                child: new InkWell(
-                  child: new Container(),
+              Expanded(
+                child: InkWell(
+                  child: Container(),
                   onTap: () => Navigator.of(context).pop(),
                 ),
               ),
-              new ClipRRect(
+              ClipRRect(
                 borderRadius: BorderRadius.all(
                   Radius.circular(10.0),
                 ),
-                child: new Container(
+                child: Container(
                   color: Colors.white,
-                  child: new Column(
+                  child: Column(
                     children: <Widget>[
-                      new Column(children: data.map(item).toList()),
-                      new HorizontalLine(color: appBarColor, height: 10.0),
-                      new TextButton(
-                        padding: EdgeInsets.symmetric(vertical: 15.0),
-                        color: Colors.white,
+                      Column(children: items.map(item).toList()),
+                      HorizontalLine(color: appBarColor, height: 10.0),
+                      TextButton(
+                        style: TextButton.styleFrom(
+                          backgroundColor: Colors.white,
+                          padding: EdgeInsets.symmetric(vertical: 15.0),
+                        ),
                         onPressed: () => Navigator.of(context).pop(),
-                        child: new Container(
+                        child: Container(
                           width: Get.width,
                           alignment: Alignment.center,
-                          child: new Text('取消'),
+                          child: Text('取消'),
                         ),
                       ),
                     ],

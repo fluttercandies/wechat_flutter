@@ -73,7 +73,7 @@ class _RedReceiveDialogState extends State<RedReceiveDialog> {
                     width: 80,
                   ),
                   onTap: () {
-                    showToast(context, ' 敬请期待');
+                    showToast( ' 敬请期待');
                   },
                 ),
                 Spacer(),

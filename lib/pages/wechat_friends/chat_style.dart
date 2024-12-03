@@ -4,11 +4,11 @@ var backgroundImage =
     'https://hbimg.huabanimg.com/907605885b6dac544640128d8f5c6b089de96519117bb5-VdbptL';
 
 class Line extends StatelessWidget {
-  final Color color;
-  final EdgeInsetsGeometry margin;
+  final Color? color;
+  final EdgeInsetsGeometry? margin;
   final double lineHeight;
 
-  Line({Key key, this.color, this.margin, this.lineHeight: 0.2})
+  const Line({Key? key, this.color, this.margin, this.lineHeight = 0.2})
       : super(key: key);
 
   @override
@@ -16,15 +16,16 @@ class Line extends StatelessWidget {
     return Container(
         height: lineHeight,
         color: color ?? Colors.white,
-        margin: margin ?? EdgeInsets.only(top: 10.0, bottom: 10.0));
+        margin: margin ?? const EdgeInsets.only(top: 10.0, bottom: 10.0));
   }
 }
 
 class TextStyles {
-  static TextStyle textStyle(
-      {double fontSize: Dimens.font_sp12,
-        Color color: Colors.white,
-        FontWeight fontWeight}) {
+  static TextStyle textStyle({
+    double fontSize = Dimens.font_sp12,
+    Color color = Colors.white,
+    FontWeight? fontWeight,
+  }) {
     return TextStyle(
         fontSize: fontSize,
         color: color,
@@ -33,37 +34,26 @@ class TextStyles {
   }
 
   static TextStyle textWhite14 = textStyle(fontSize: Dimens.font_sp14);
-  static TextStyle textRed14 =
-  textStyle(fontSize: Dimens.font_sp14, color: Colors.red);
-
-  static TextStyle textGrey14 =
-  textStyle(fontSize: Dimens.font_sp14, color: Colors.grey);
-  static TextStyle textDark14 =
-  textStyle(fontSize: Dimens.font_sp14, color: grey3Color);
+  static TextStyle textRed14 = textStyle(fontSize: Dimens.font_sp14, color: Colors.red);
+  static TextStyle textGrey14 = textStyle(fontSize: Dimens.font_sp14, color: Colors.grey);
+  static TextStyle textDark14 = textStyle(fontSize: Dimens.font_sp14, color: grey3Color);
   static TextStyle textBoldDark14 = textStyle(
       fontSize: Dimens.font_sp14,
       color: Colors.black,
       fontWeight: FontWeight.bold);
-  static TextStyle textBoldWhile14 =
-  textStyle(fontSize: Dimens.font_sp14, fontWeight: FontWeight.bold);
+  static TextStyle textBoldWhile14 = textStyle(fontSize: Dimens.font_sp14, fontWeight: FontWeight.bold);
   static TextStyle textBoldBlue14 = textStyle(
       fontSize: Dimens.font_sp14,
       fontWeight: FontWeight.bold,
       color: Colors.blueAccent);
 
-  static TextStyle textReader16 =
-  textStyle(fontSize: Dimens.font_sp16, color: readerMainColor);
-  static TextStyle textRed16 =
-  textStyle(fontSize: Dimens.font_sp16, color: Colors.red);
-  static TextStyle textBlue16 =
-  textStyle(fontSize: Dimens.font_sp16, color: Colors.blueAccent);
+  static TextStyle textReader16 = textStyle(fontSize: Dimens.font_sp16, color: readerMainColor);
+  static TextStyle textRed16 = textStyle(fontSize: Dimens.font_sp16, color: Colors.red);
+  static TextStyle textBlue16 = textStyle(fontSize: Dimens.font_sp16, color: Colors.blueAccent);
   static TextStyle textWhite16 = textStyle(fontSize: Dimens.font_sp16);
-  static TextStyle textGreyC16 =
-  textStyle(fontSize: Dimens.font_sp16, color: greyCColor);
-  static TextStyle textGrey16 =
-  textStyle(fontSize: Dimens.font_sp16, color: Colors.grey);
-  static TextStyle textDark16 =
-  textStyle(fontSize: Dimens.font_sp16, color: grey3Color);
+  static TextStyle textGreyC16 = textStyle(fontSize: Dimens.font_sp16, color: greyCColor);
+  static TextStyle textGrey16 = textStyle(fontSize: Dimens.font_sp16, color: Colors.grey);
+  static TextStyle textDark16 = textStyle(fontSize: Dimens.font_sp16, color: grey3Color);
 }
 
 class Dimens {
@@ -107,38 +97,37 @@ class Dimens {
   static const double chapterItemHeight = 50.0;
 }
 
-const Color accentColor = const Color(0xFFF08F8F);
-const Color lightAccentColor = const Color(0xFFFfaFaF);
-const Color darkAccentColor = const Color(0xFFd06F6F);
+const Color accentColor = Color(0xFFF08F8F);
+const Color lightAccentColor = Color(0xFFFfaFaF);
+const Color darkAccentColor = Color(0xFFd06F6F);
 
-const Color readerMainColor = const Color(0xFF33C3A5);
-const Color readerMainDisColor = const Color(0xFFE0FFFF);
+const Color readerMainColor = Color(0xFF33C3A5);
+const Color readerMainDisColor = Color(0xFFE0FFFF);
 
-const Color colorGreyA = const Color(0xFFAAAAAA);
+const Color colorGreyA = Color(0xFFAAAAAA);
 
-const Color colorNavajoWhite = const Color(0xFFFFDEAD);
-const Color colorPapayaWhip = const Color(0xFFFFEFD5);
-const Color colorPeachPuff = const Color(0xFFFFDAB9);
-const Color colorMoccasin = const Color(0xFFFFE4B5);
-const Color colorLemonChiffon = const Color(0xFFFFFACD);
-const Color colorHoneydew = const Color(0xFFF0FFF0);
-const Color colorMintCream = const Color(0xFFF5FFFA);
-const Color colorMistyRose = const Color(0xFFFFE4E1);
-const Color colorLightBlue2 = const Color(0xFFB2DFEE);
-const Color colorLightCyan1 = const Color(0xFFE0FFFF);
-const Color colorPink1 = const Color(0xFFFFB5C5);
+const Color colorNavajoWhite = Color(0xFFFFDEAD);
+const Color colorPapayaWhip = Color(0xFFFFEFD5);
+const Color colorPeachPuff = Color(0xFFFFDAB9);
+const Color colorMoccasin = Color(0xFFFFE4B5);
+const Color colorLemonChiffon = Color(0xFFFFFACD);
+const Color colorHoneydew = Color(0xFFF0FFF0);
+const Color colorMintCream = Color(0xFFF5FFFA);
+const Color colorMistyRose = Color(0xFFFFE4E1);
+const Color colorLightBlue2 = Color(0xFFB2DFEE);
+const Color colorLightCyan1 = Color(0xFFE0FFFF);
+const Color colorPink1 = Color(0xFFFFB5C5);
 
-const Color colorDarkGoldenrod3 = const Color(0xFFCD950C);
+const Color colorDarkGoldenrod3 = Color(0xFFCD950C);
 
-const Color colorSnow = const Color(0xFFFFFAFA);
+const Color colorSnow = Color(0xFFFFFAFA);
 
-const Color starColor = const Color(0xFFFACE41);
+const Color starColor = Color(0xFFFACE41);
 
-const Color greyCColor = const Color(0xFFCCCCCC);
-const Color grey3Color = const Color(0xFF333333);
-const Color grey6Color = const Color(0xFF666666);
-const Color grey9Color = const Color(0xFF999999);
+const Color greyCColor = Color(0xFFCCCCCC);
+const Color grey3Color = Color(0xFF333333);
+const Color grey6Color = Color(0xFF666666);
+const Color grey9Color = Color(0xFF999999);
 
-const Color qdailyMajorColor = const Color(0xFFFFD003);
-const Color qdailyMinorColor = const Color(0xFFFFE48E);
-
+const Color qdailyMajorColor = Color(0xFFFFD003);
+const Color qdailyMinorColor = Color(0xFFFFE48E);

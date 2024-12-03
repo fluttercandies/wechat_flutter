@@ -40,7 +40,7 @@ class _SetRemarkPageState extends State<SetRemarkPage> {
       radius: 4.0,
       onTap: () {
         if (!strNoEmpty(_tc.text)) {
-          showToast(context, '输入的内容不能为空');
+          showToast( '输入的内容不能为空');
           return;
         }
       },

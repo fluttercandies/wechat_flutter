@@ -6,7 +6,7 @@ class SharedUtil {
   factory SharedUtil() => _getInstance();
 
   static SharedUtil get instance => _getInstance();
-  static SharedUtil _instance;
+  static SharedUtil? _instance;
 
   SharedUtil._internal() {
     //初始化
@@ -17,7 +17,7 @@ class SharedUtil {
     if (_instance == null) {
       _instance = new SharedUtil._internal();
     }
-    return _instance;
+    return _instance!;
   }
 
 
@@ -75,7 +75,7 @@ class SharedUtil {
   }
 
   /// get
-  Future<String> getString(String key) async {
+  Future<String?> getString(String key) async {
     if (key == Keys.account) {
       return StorageManager.sp.getString(key);
     }
@@ -83,12 +83,12 @@ class SharedUtil {
     return StorageManager.sp.getString(key + account);
   }
 
-  Future<int> getInt(String key) async {
+  Future<int?> getInt(String key) async {
     String account = StorageManager.sp.getString(Keys.account) ?? "default";
     return StorageManager.sp.getInt(key + account);
   }
 
-  Future<double> getDouble(String key) async {
+  Future<double?> getDouble(String key) async {
     String account = StorageManager.sp.getString(Keys.account) ?? "default";
     return StorageManager.sp.getDouble(key + account);
   }
@@ -98,7 +98,7 @@ class SharedUtil {
     return StorageManager.sp.getBool(key + account) ?? false;
   }
 
-  Future<List<String>> getStringList(String key) async {
+  Future<List<String>?> getStringList(String key) async {
     String account = StorageManager.sp.getString(Keys.account) ?? "default";
     return StorageManager.sp.getStringList(key + account);
   }

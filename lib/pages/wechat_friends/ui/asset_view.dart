@@ -6,9 +6,9 @@ import 'package:flutter/material.dart';
 class AssetView extends StatefulWidget {
 //  final Asset asset;
   final dynamic asset;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
 
-  AssetView({Key key, this.asset, this.onTap}) : super(key: key);
+  AssetView({Key? key, this.asset, this.onTap}) : super(key: key);
 
   @override
   createState() => _AssetState();

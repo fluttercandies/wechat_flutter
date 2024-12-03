@@ -46,7 +46,7 @@ class _ChatVoiceWidgetState extends State<ChatVoice> {
 
   void start() async {
     print('开始拉。当前路径');
-    showToast(context, "正在兼容最新flutter");
+    showToast( "正在兼容最新flutter");
     // try {
     //   String path = await flutterSound
     //       .startRecorder(Platform.isIOS ? 'ios.m4a' : 'android.mp4');
@@ -55,7 +55,7 @@ class _ChatVoiceWidgetState extends State<ChatVoice> {
     //       flutterSound.onRecorderStateChanged.listen((e) {});
     // } catch (err) {
     //   RecorderRunningException e = err;
-    //   showToast(context, 'startRecorder error: ${e.message}');
+    //   showToast( 'startRecorder error: ${e.message}');
     // }
   }
 
@@ -70,7 +70,7 @@ class _ChatVoiceWidgetState extends State<ChatVoice> {
     //   _dbPeakSubscription = null;
     // } catch (err) {
     //   RecorderStoppedException e = err;
-    //   showToast(context, 'stopRecorder error: ${e.message}');
+    //   showToast( 'stopRecorder error: ${e.message}');
     // }
   }
 

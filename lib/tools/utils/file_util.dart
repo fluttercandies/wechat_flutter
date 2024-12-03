@@ -1,18 +1,15 @@
-import 'dart:io';
-
-import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
 class FileUtil {
-  static FileUtil _instance;
+  static FileUtil? _instance;
 
   static FileUtil getInstance() {
     if (_instance == null) {
       _instance = FileUtil._internal();
     }
-    return _instance;
+    return _instance!;
   }
 
   FileUtil._internal();
@@ -59,30 +56,37 @@ class FileUtil {
     if (!exists) {
       var data = await rootBundle.load(assetPath + assetName);
       List<int> bytes =
-      data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
+          data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
       await File(newPath + name).writeAsBytes(bytes);
       return newPath + name;
     } else
       return newPath + name;
   }
 
-  void downloadFile(
-      {String url,
-        String filePath,
-        String fileName,
-        Function onComplete}) async {
+  void downloadFile({
+    required String url,
+    required String filePath,
+    String? fileName,
+    Function(String)? onComplete,
+  }) async {
     final path = await FileUtil.getInstance().getSavePath(filePath);
     String name = fileName ?? url.split("/").last;
-    Req.getInstance().client.download(
-      url,
-      path + name,
-      onReceiveProgress: (int count, int total) {
-        final downloadProgress = ((count / total) * 100).toInt();
-        if (downloadProgress == 100) {
-          if (onComplete != null) onComplete(path + name);
-        }
-      },
-      options: Options(sendTimeout: 15 * 1000, receiveTimeout: 360 * 1000),
-    );
+    try {
+      await Dio().download(
+        url,
+        path + name,
+        onReceiveProgress: (int count, int total) {
+          final downloadProgress = ((count / total) * 100).toInt();
+          if (downloadProgress == 100) {
+            if (onComplete != null) onComplete(path + name);
+          }
+        },
+        options: Options(
+            sendTimeout: Duration(seconds: 15),
+            receiveTimeout: Duration(minutes: 6)),
+      );
+    } catch (e) {
+      print('Download failed: $e');
+    }
   }
 }

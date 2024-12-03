@@ -33,7 +33,7 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
   }
 
   _openGallery({type = ImageSource.gallery}) async {
-    showToast(context, '服务器正在调整，敬请期待');
+    showToast( '服务器正在调整，敬请期待');
 
     // final model = Provider.of<GlobalModel>(context, listen: false);
     // File imageFile = await ImagePicker.pickImage(source: type);
@@ -42,7 +42,7 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
     //   String base64Img = 'data:image/jpeg;base64,${base64Encode(imageBytes)}';
     //   uploadImgApi(context, base64Img, (v) {
     //     if (v == null) {
-    //       showToast(context, '上传头像失败,请换张图像再试');
+    //       showToast( '上传头像失败,请换张图像再试');
     //       return;
     //     }
     //
@@ -52,11 +52,11 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
     //       nickNameStr: model.nickName,
     //       callback: (data) {
     //         if (data.toString().contains('ucc')) {
-    //           showToast(context, '设置头像成功');
+    //           showToast( '设置头像成功');
     //           model.avatar = v;
     //           model.refresh();
     //         } else {
-    //           showToast(context, '设置头像失败');
+    //           showToast( '设置头像失败');
     //         }
     //       },
     //     );

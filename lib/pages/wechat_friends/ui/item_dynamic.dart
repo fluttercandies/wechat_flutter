@@ -1,29 +1,30 @@
-import 'package:wechat_flutter/pages/wechat_friends/from.dart';
-import 'package:wechat_flutter/tools/wechat_flutter.dart' as prefix1;
-import 'package:wechat_flutter/ui/w_pop/friend_pop.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:wechat_flutter/pages/wechat_friends/from.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
-import 'package:flutter/material.dart' as prefix0;
+import 'package:wechat_flutter/ui/w_pop/friend_pop.dart';
 
 import 'load_view.dart';
 
 class ItemDynamic extends StatelessWidget {
   final FriendsDynamic dynamic;
 
-  ItemDynamic(this.dynamic, {Key key}) : super(key: key);
+  ItemDynamic(this.dynamic, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    int imageSize = this.dynamic.images.length;
+    int imageSize = this.dynamic.images?.length ?? 0;
 
     double imageWidth = (Get.width - 20 - 50 - 10) /
         ((imageSize == 3 || imageSize > 4)
             ? 3.0
-            : (imageSize == 2 || imageSize == 4) ? 2.0 : 1.5);
+            : (imageSize == 2 || imageSize == 4)
+                ? 2.0
+                : 1.5);
 
     double videoWidth = (Get.width - 20 - 50 - 10) / 2.2;
 
-    String desc = this.dynamic.desc;
+    String desc = this.dynamic.desc ?? "";
 
     String def =
         'https://c-ssl.duitang.com/uploads/item/201803/04/20180304085215_WGFx8.thumb.700_0.jpeg';
@@ -76,7 +77,7 @@ class ItemDynamic extends StatelessWidget {
                                             childAspectRatio: 1),
                                     itemBuilder: (context, index) =>
                                         ImageLoadView(
-                                          '${this.dynamic.images.isNotEmpty ? this.dynamic.images[index].image : def}',
+                                          '${(this.dynamic.images?.isNotEmpty ?? false) ? this.dynamic.images![index].image : def}',
                                           fit: BoxFit.cover,
                                           width: imageWidth,
                                           height: imageWidth,
@@ -132,7 +133,7 @@ class ItemDynamic extends StatelessWidget {
                                     style: TextStyle(
                                         color: Colors.grey[500], fontSize: 13)),
                                 Offstage(
-                                    offstage: !this.dynamic.isSelf,
+                                    offstage: !this.dynamic.isSelf!,
                                     child: Padding(
                                         padding: EdgeInsets.only(left: 10.0),
                                         child: Text('删除',
@@ -154,8 +155,6 @@ class ItemDynamic extends StatelessWidget {
       ]),
     );
   }
-
-
 }
 
 class TestPush extends StatefulWidget {
@@ -164,7 +163,6 @@ class TestPush extends StatefulWidget {
 }
 
 class _TestPushState extends State<TestPush> {
-
   Widget _buildExit() {
     TextStyle labelStyle = TextStyle(color: Colors.white);
     return Container(
@@ -194,6 +192,7 @@ class _TestPushState extends State<TestPush> {
       ),
     );
   }
+
   @override
   Widget build(BuildContext context) {
     return IconButton(

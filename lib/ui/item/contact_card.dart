@@ -53,7 +53,7 @@ class ContactCard extends StatelessWidget {
                   ),
                 );
               } else {
-                showToast(context, '无头像');
+                showToast( '无头像');
               }
             },
           ),

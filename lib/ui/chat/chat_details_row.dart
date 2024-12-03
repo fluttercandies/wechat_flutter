@@ -5,7 +5,7 @@ import 'package:wechat_flutter/ui/item/chat_voice.dart';
 import 'package:flutter/material.dart';
 
 class ChatDetailsRow extends StatefulWidget {
-  final GestureTapCallback voiceOnTap;
+  final GestureTapCallback? voiceOnTap;
   final bool isVoice;
   final LayoutWidgetBuilder edit;
   final VoidCallback onEmojio;
@@ -15,19 +15,19 @@ class ChatDetailsRow extends StatefulWidget {
 
   ChatDetailsRow({
     this.voiceOnTap,
-    this.isVoice,
-    this.edit,
-    this.more,
-    this.id,
-    this.type,
-    this.onEmojio,
+    required this.isVoice,
+    required this.edit,
+    required this.more,
+    required this.id,
+    required this.type,
+    required this.onEmojio,
   });
 
   ChatDetailsRowState createState() => ChatDetailsRowState();
 }
 
 class ChatDetailsRowState extends State<ChatDetailsRow> {
-  String path;
+  String? path;
 
   @override
   void initState() {
@@ -38,7 +38,7 @@ class ChatDetailsRowState extends State<ChatDetailsRow> {
       if (!strNoEmpty(path)) return;
       sendSoundMessages(
         widget.id,
-        path,
+        path!,
         2,
         widget.type,
         (value) => Notice.send(WeChatActions.msg(), v ?? ''),
@@ -67,7 +67,7 @@ class ChatDetailsRowState extends State<ChatDetailsRow> {
                   width: 25, color: mainTextColor),
               onTap: () {
                 if (widget.voiceOnTap != null) {
-                  widget.voiceOnTap();
+                  widget.voiceOnTap!();
                 }
               },
             ),

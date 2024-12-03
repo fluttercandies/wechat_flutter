@@ -1,36 +1,38 @@
+import 'package:get/get.dart';
 import 'package:wechat_flutter/pages/contacts/group_select_page.dart';
 import 'package:flutter/material.dart';
-
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
 class LaunchGroupItem extends StatelessWidget {
-  final item;
+  final String item;
 
-  LaunchGroupItem(this.item);
+  LaunchGroupItem({required this.item});
 
   @override
   Widget build(BuildContext context) {
-    return new Container(
+    return Container(
       decoration: BoxDecoration(
         border: Border(
           bottom: BorderSide(color: lineColor, width: 0.3),
         ),
       ),
       alignment: Alignment.centerLeft,
-      child: new TextButton(
-        color: Colors.white,
-        padding: EdgeInsets.symmetric(vertical: 15.0),
+      child: TextButton(
+        style: TextButton.styleFrom(
+          backgroundColor: Colors.white,
+          padding: EdgeInsets.symmetric(vertical: 15.0),
+        ),
         onPressed: () {
           if (item == '选择一个群') {
-            Get.to(new GroupSelectPage());
+            Get.to(GroupSelectPage());
           } else {
-            showToast(context, '敬请期待');
+            showToast( '敬请期待');
           }
         },
-        child: new Container(
+        child: Container(
           width: Get.width,
           padding: EdgeInsets.only(left: 20.0),
-          child: new Text(item),
+          child: Text(item),
         ),
       ),
     );
@@ -38,12 +40,12 @@ class LaunchGroupItem extends StatelessWidget {
 }
 
 class LaunchSearch extends StatelessWidget {
-  final FocusNode searchF;
-  final TextEditingController searchC;
-  final ValueChanged<String> onChanged;
-  final GestureTapCallback onTap;
-  final ValueChanged<String> onSubmitted;
-  final GestureTapCallback delOnTap;
+  final FocusNode? searchF;
+  final TextEditingController? searchC;
+  final ValueChanged<String>? onChanged;
+  final GestureTapCallback? onTap;
+  final ValueChanged<String>? onSubmitted;
+  final GestureTapCallback? delOnTap;
 
   LaunchSearch({
     this.searchF,
@@ -56,15 +58,15 @@ class LaunchSearch extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new Row(
+    return Row(
       children: <Widget>[
-        new Padding(
+        Padding(
           padding: EdgeInsets.only(right: 10.0),
-          child: new Image.asset('assets/images/search_black.webp',
+          child: Image.asset('assets/images/search_black.webp',
               color: mainTextColor),
         ),
-        new Expanded(
-          child: new TextField(
+        Expanded(
+          child: TextField(
             focusNode: searchF,
             controller: searchC,
             style: TextStyle(textBaseline: TextBaseline.alphabetic),
@@ -79,15 +81,16 @@ class LaunchSearch extends StatelessWidget {
             onSubmitted: onSubmitted,
           ),
         ),
-        strNoEmpty(searchC.text)
-            ? new InkWell(
-                child: new Image.asset('assets/images/ic_delete.webp'),
-                onTap: () {
-                  searchC.text = '';
-                  delOnTap();
-                },
-              )
-            : new Container()
+        if (searchC != null && searchC!.text.isNotEmpty)
+          InkWell(
+            child: Image.asset('assets/images/ic_delete.webp'),
+            onTap: () {
+              searchC!.clear();
+              if (delOnTap != null) delOnTap!();
+            },
+          )
+        else
+          Container()
       ],
     );
   }

@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:wechat_flutter/pages/group/group_details_page.dart';
@@ -48,14 +48,14 @@ class _ChatBackgroundPageState extends State<ChatBackgroundPage> {
     BuildContext context, {
     ImageSource source = ImageSource.gallery,
   }) async {
-    XFile data = await ImagePicker().pickImage(source: source);
+    XFile? data = await ImagePicker().pickImage(source: source);
     if (data != null) {
 //      File fileImg = data;
 //      globalModel.localAvatarImgPath = fileImg.path;
 //      if (Navigator.of(context).canPop()) {
 //        Navigator.of(context).pop();
 //      }
-      showToast(context, '切换完毕');
+      showToast('切换完毕');
     } else {
       return;
     }

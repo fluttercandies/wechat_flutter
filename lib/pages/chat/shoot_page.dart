@@ -170,7 +170,7 @@ class _ShootPageState extends State<ShootPage> with WidgetsBindingObserver {
                         if (!isOnPress) return;
                         isOnPress = false;
                         if (_timing < 2) {
-                          showToast(context, '录制时间过短');
+                          showToast( '录制时间过短');
                           stopVideoRecording();
                           if (_timer != null) {
                             _timer.cancel();
@@ -351,7 +351,7 @@ class _ShootPageState extends State<ShootPage> with WidgetsBindingObserver {
     controller.addListener(() {
       if (mounted) setState(() {});
       if (controller.value.hasError) {
-        showToast(context, 'Camera error ${controller.value.errorDescription}');
+        showToast( 'Camera error ${controller.value.errorDescription}');
       }
     });
 
@@ -374,7 +374,7 @@ class _ShootPageState extends State<ShootPage> with WidgetsBindingObserver {
           videoController?.dispose();
           videoController = null;
         });
-        if (filePath != null) showToast(context, '图片保存到$filePath');
+        if (filePath != null) showToast( '图片保存到$filePath');
       }
     });
   }
@@ -382,34 +382,34 @@ class _ShootPageState extends State<ShootPage> with WidgetsBindingObserver {
   void onVideoRecordButtonPressed() {
     startVideoRecording().then((String filePath) {
       if (mounted) setState(() {});
-      if (filePath != null) showToast(context, '开始录制');
+      if (filePath != null) showToast( '开始录制');
     });
   }
 
   void onStopButtonPressed() {
     stopVideoRecording().then((_) {
       if (mounted) setState(() {});
-      showToast(context, '视频记录到$videoPath');
+      showToast( '视频记录到$videoPath');
     });
   }
 
   void onPauseButtonPressed() {
     pauseVideoRecording().then((_) {
       if (mounted) setState(() {});
-      showToast(context, '录制视频暂停');
+      showToast( '录制视频暂停');
     });
   }
 
   void onResumeButtonPressed() {
     resumeVideoRecording().then((_) {
       if (mounted) setState(() {});
-      showToast(context, '录制视频恢复');
+      showToast( '录制视频恢复');
     });
   }
 
   Future<String> startVideoRecording() async {
     if (!controller.value.isInitialized) {
-      showToast(context, '异常: 首先选择一个相机');
+      showToast( '异常: 首先选择一个相机');
       return null;
     }
 
@@ -499,7 +499,7 @@ class _ShootPageState extends State<ShootPage> with WidgetsBindingObserver {
 
   Future<String> takePicture() async {
     if (!controller.value.isInitialized) {
-      showToast(context, '异常: 首先选择一个相机');
+      showToast( '异常: 首先选择一个相机');
       return null;
     }
     final Directory extDir = await getApplicationDocumentsDirectory();
@@ -523,7 +523,7 @@ class _ShootPageState extends State<ShootPage> with WidgetsBindingObserver {
 
   void _showCameraException(CameraException e) {
     logError(e.code, e.description);
-    showToast(context, 'Error: ${e.code}\n${e.description}');
+    showToast( 'Error: ${e.code}\n${e.description}');
   }
 
   @override

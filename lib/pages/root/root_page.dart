@@ -1,5 +1,6 @@
-import 'package:wechat_flutter/http/api.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:wechat_flutter/http/api.dart';
 import 'package:wechat_flutter/pages/contacts/contacts_page.dart';
 import 'package:wechat_flutter/pages/discover/discover_page.dart';
 import 'package:wechat_flutter/pages/home/home_page.dart';
@@ -25,14 +26,14 @@ class _RootPageState extends State<RootPage> {
     if (ifNetWork) {
       /// 监测网络变化
       subscription.onConnectivityChanged
-          .listen((ConnectivityResult result) async {
-        if (result == ConnectivityResult.mobile ||
-            result == ConnectivityResult.wifi) {
-          final currentUser = await im.getCurrentLoginUser();
-          if (currentUser == '' || currentUser == null) {
-            final account = await SharedUtil.instance.getString(Keys.account);
-            im.imAutoLogin(account);
-          }
+          .listen((List<ConnectivityResult> result) async {
+        if (result.contains(ConnectivityResult.mobile) ||
+            result.contains(ConnectivityResult.wifi)) {
+          // final currentUser = await im.getCurrentLoginUser();
+          // if (currentUser == '' || currentUser == null) {
+          //   final account = await SharedUtil.instance.getString(Keys.account);
+          //   im.imAutoLogin(account);
+          // }
           await SharedUtil.instance.saveBoolean(Keys.brokenNetwork, false);
         }
       });
@@ -69,7 +70,6 @@ class _RootPageState extends State<RootPage> {
       ),
     ];
     return new Scaffold(
-      key: scaffoldGK,
       body: new RootTabBar(pages: pages, currentIndex: 0),
     );
   }

@@ -170,10 +170,10 @@ class _RegisterPageState extends State<RegisterPage> {
         onTap: () {
           if (!strNoEmpty(pWC.text)) return;
           if (!isMobilePhoneNumber(phoneC.text)) {
-            showToast(context, '请输入正确的手机号');
+            showToast( '请输入正确的手机号');
             return;
           }
-          showToast(context, '注册成功');
+          showToast( '注册成功');
           popToRootPage();
         },
       ),

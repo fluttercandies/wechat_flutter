@@ -35,7 +35,7 @@ class _LoginPageState extends State<LoginPage> {
         new InkWell(
           child: new Text(item, style: TextStyle(color: tipColor)),
           onTap: () {
-            showToast(context, S.of(context).notOpen + item);
+            showToast( S.of(context).notOpen + item);
           },
         ),
         item == S.of(context).weChatSecurityCenter
@@ -132,7 +132,7 @@ class _LoginPageState extends State<LoginPage> {
               S.of(context).userLoginTip,
               style: TextStyle(color: tipColor),
             ),
-            onTap: () => showToast(context, S.of(context).notOpen),
+            onTap: () => showToast( S.of(context).notOpen),
           ),
         ),
         new SizedBox(height: mainSpace * 2.5),
@@ -147,11 +147,11 @@ class _LoginPageState extends State<LoginPage> {
               : Color.fromRGBO(8, 191, 98, 1.0),
           onTap: () {
             if (_tC.text == '') {
-              showToast(context, '随便输入三位或以上');
+              showToast( '随便输入三位或以上');
             } else if (_tC.text.length >= 3) {
               login(_tC.text, context);
             } else {
-              showToast(context, '请输入三位或以上');
+              showToast( '请输入三位或以上');
             }
           },
         ),

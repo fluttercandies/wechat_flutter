@@ -1,19 +1,19 @@
-import 'package:flutter/material.dart';
 import 'dart:async';
-import 'package:flutter/services.dart';
 
-import '../chat_style.dart';
-import '../ui/asset_view.dart';
+import 'package:flutter/material.dart';
 //import 'package:multi_image_picker/multi_image_picker.dart';
 
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
+import '../chat_style.dart';
+import '../ui/asset_view.dart';
+
 class PublishDynamicPage extends StatefulWidget {
-//  final List<Asset> images;
-  final List images;
+  final List<dynamic> images;
   final int maxImages;
 
-  PublishDynamicPage({Key key, this.images: const [], this.maxImages: 9})
+  const PublishDynamicPage(
+      {Key? key, this.images = const [], this.maxImages = 9})
       : super(key: key);
 
   @override
@@ -21,17 +21,12 @@ class PublishDynamicPage extends StatefulWidget {
 }
 
 class _PublishDynamicPageState extends State<PublishDynamicPage> {
-//  List<Asset> _images = [];
-
-  int imageNum;
+  late int imageNum;
 
   @override
   void initState() {
     super.initState();
-
-//    _images = widget.images;
-//
-//    imageNum = _images.length;
+    imageNum = widget.images.length;
   }
 
   @override
@@ -42,36 +37,36 @@ class _PublishDynamicPageState extends State<PublishDynamicPage> {
         elevation: 0.0,
         actions: <Widget>[
           Container(
-            padding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 10),
-            child: RaisedButton(
+            padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 10),
+            child: ElevatedButton(
                 onPressed: () {
                   /// TODO
                   Navigator.of(context).pop();
                 },
-                child: Text('发表', style: TextStyle(color: Colors.white)),
-                color: Colors.green),
+                child: const Text('发表', style: TextStyle(color: Colors.white)),
+                style: ElevatedButton.styleFrom()), //primary: Colors.green
           )
         ],
       ),
       body: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         child: Column(
           children: <Widget>[
             Container(
-              padding: EdgeInsets.all(10.0),
+              padding: const EdgeInsets.all(10.0),
               height: 100,
-              child: Form(onWillPop: _onBackPressed, child: TextField()),
+              child: Form(onWillPop: _onBackPressed, child: const TextField()),
             ),
-            Line(color: Colors.grey),
+            const Line(color: Colors.grey),
             GridView.builder(
-                padding: EdgeInsets.all(10.0),
+                padding: const EdgeInsets.all(10.0),
                 gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                    maxCrossAxisExtent: (Get.width - 20) / 3,
+                    maxCrossAxisExtent:
+                        (MediaQuery.of(context).size.width - 20) / 3,
                     crossAxisSpacing: 5.0,
                     mainAxisSpacing: 5.0,
                     childAspectRatio: 1.0),
                 itemBuilder: (context, index) => AssetView(
-//                      asset: index == imageNum ? null : _images[index],
                       asset: null,
                       onTap: () {
                         if (imageNum < widget.maxImages && index == imageNum) {
@@ -83,28 +78,28 @@ class _PublishDynamicPageState extends State<PublishDynamicPage> {
                     ),
                 itemCount:
                     imageNum < widget.maxImages ? imageNum + 1 : imageNum,
-                physics: NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 primary: false),
-            Line(color: Colors.grey, margin: EdgeInsets.all(0)),
+            const Line(color: Colors.grey, margin: EdgeInsets.all(0)),
             ListTile(
-                leading: Icon(Icons.location_on),
-                title: Text('所在位置'),
-                trailing: Icon(Icons.keyboard_arrow_right),
+                leading: const Icon(Icons.location_on),
+                title: const Text('所在位置'),
+                trailing: const Icon(Icons.keyboard_arrow_right),
                 onTap: () {}),
-            Line(color: Colors.grey, margin: EdgeInsets.all(0)),
+            const Line(color: Colors.grey, margin: EdgeInsets.all(0)),
             ListTile(
-                leading: Icon(Icons.remove_red_eye),
-                title: Text('谁可以看'),
-                trailing: Icon(Icons.keyboard_arrow_right),
+                leading: const Icon(Icons.remove_red_eye),
+                title: const Text('谁可以看'),
+                trailing: const Icon(Icons.keyboard_arrow_right),
                 onTap: () {}),
-            Line(color: Colors.grey, margin: EdgeInsets.all(0)),
+            const Line(color: Colors.grey, margin: EdgeInsets.all(0)),
             ListTile(
-                leading: Icon(Icons.attachment),
-                title: Text('提醒谁看'),
-                trailing: Icon(Icons.keyboard_arrow_right),
+                leading: const Icon(Icons.attachment),
+                title: const Text('提醒谁看'),
+                trailing: const Icon(Icons.keyboard_arrow_right),
                 onTap: () {}),
-            Line(color: Colors.grey, margin: EdgeInsets.all(0)),
+            const Line(color: Colors.grey, margin: EdgeInsets.all(0)),
           ],
         ),
       ),
@@ -112,58 +107,58 @@ class _PublishDynamicPageState extends State<PublishDynamicPage> {
   }
 
   Future<void> loadAssets() async {
-//    List<Asset> resultList = List<Asset>();
-//
-//    try {
-//      resultList = await MultiImagePicker.pickImages(
-//        maxImages: widget.maxImages,
-//        enableCamera: false,
-//        selectedAssets: _images,
-//        materialOptions: MaterialOptions(
-//          actionBarColor: "#ff00a5",
-//          actionBarTitle: "Flutter App",
-//          actionBarTitleColor: "#ffffffff",
-//          allViewTitle: "All Photos",
-//          useDetailsView: true,
-//          lightStatusBar: false,
-//          selectCircleStrokeColor: "#ff11ab",
-//          statusBarColor: '#ff00a5',
-//          startInAllView: true,
-//          selectionLimitReachedText: "You can't select any more.",
-//        ),
-//        cupertinoOptions: CupertinoOptions(
-//          selectionFillColor: "#ff11ab",
-//          selectionTextColor: "#ff00a5",
-//          selectionCharacter: "✓",
-//        ),
-//      );
-//
-//      for (var r in resultList) {
-//        var t = await r.filePath;
-//        print(t);
-//      }
-//    } on PlatformException catch (e) {
-//      debugPrint(e.message.toString());
-//    } on NoImagesSelectedException catch (e) {
-//      debugPrint(e.message.toString());
-//    } on PermissionDeniedException catch (e) {
-//      debugPrint(e.message.toString());
-//    } on PermissionPermanentlyDeniedExeption catch (e) {
-//      debugPrint(e.message.toString());
-//    } on Exception catch (e) {
-//      debugPrint(e.toString());
-//    }
-//
-//    // If the widget was removed from the tree while the asynchronous platform
-//    // message was in flight, we want to discard the reply rather than calling
-//    // setState to update our non-existent appearance.
-//    if (!mounted) return;
-//
-//    setState(() {
-//      _images = resultList;
-//      imageNum = _images.length;
-//      debugPrint(_images.toString());
-//    });
+    // List<Asset> resultList = List<Asset>();
+    //
+    // try {
+    //   resultList = await MultiImagePicker.pickImages(
+    //     maxImages: widget.maxImages,
+    //     enableCamera: false,
+    //     selectedAssets: _images,
+    //     materialOptions: MaterialOptions(
+    //       actionBarColor: "#ff00a5",
+    //       actionBarTitle: "Flutter App",
+    //       actionBarTitleColor: "#ffffffff",
+    //       allViewTitle: "All Photos",
+    //       useDetailsView: true,
+    //       lightStatusBar: false,
+    //       selectCircleStrokeColor: "#ff11ab",
+    //       statusBarColor: '#ff00a5',
+    //       startInAllView: true,
+    //       selectionLimitReachedText: "You can't select any more.",
+    //     ),
+    //     cupertinoOptions: CupertinoOptions(
+    //       selectionFillColor: "#ff11ab",
+    //       selectionTextColor: "#ff00a5",
+    //       selectionCharacter: "✓",
+    //     ),
+    //   );
+    //
+    //   for (var r in resultList) {
+    //     var t = await r.filePath;
+    //     print(t);
+    //   }
+    // } on PlatformException catch (e) {
+    //   debugPrint(e.message.toString());
+    // } on NoImagesSelectedException catch (e) {
+    //   debugPrint(e.message.toString());
+    // } on PermissionDeniedException catch (e) {
+    //   debugPrint(e.message.toString());
+    // } on PermissionPermanentlyDeniedExeption catch (e) {
+    //   debugPrint(e.message.toString());
+    // } on Exception catch (e) {
+    //   debugPrint(e.toString());
+    // }
+    //
+    // // If the widget was removed from the tree while the asynchronous platform
+    // // message was in flight, we want to discard the reply rather than calling
+    // // setState to update our non-existent appearance.
+    // if (!mounted) return;
+    //
+    // setState(() {
+    //   _images = resultList;
+    //   imageNum = _images.length;
+    //   debugPrint(_images.toString());
+    // });
   }
 
   Future<bool> _onBackPressed() {
@@ -172,11 +167,8 @@ class _PublishDynamicPageState extends State<PublishDynamicPage> {
         builder: (context) {
           return AlertDialog(
             title: Text('保留此次编辑？', style: TextStyles.textBlue16),
-            //标题
-            titlePadding: EdgeInsets.all(20),
-            //标题的padding值
+            titlePadding: const EdgeInsets.all(20),
             actions: <Widget>[
-              //操作按钮数组
               TextButton(
                 onPressed: () {
                   Navigator.pop(context);
@@ -193,6 +185,6 @@ class _PublishDynamicPageState extends State<PublishDynamicPage> {
               ),
             ],
           );
-        });
+        }).then((value) => value ?? false);
   }
 }

@@ -76,10 +76,10 @@ class _ChatMorePageState extends State<ChatMorePage> {
         logError(e.code, e.description);
       }
     } else if (name == '红包') {
-      showToast(context, '测试发送红包消息');
+      showToast( '测试发送红包消息');
       await sendTextMsg('${widget?.id}', widget.type, "测试发送红包消息");
     } else {
-      showToast(context, '敬请期待$name');
+      showToast( '敬请期待$name');
     }
   }
 

@@ -1,96 +1,57 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
-typedef Callback(data);
-
 class Notice {
-  Notice._();
+  static final Map<String, List<Function>> _listeners = {};
 
-  static final _eventMap = <String, List<Callback>>{};
+  static void addListener(String event, Function callback) {
+    _listeners.putIfAbsent(event, () => []).add(callback);
+  }
 
-  static Callback addListener(String event, Callback call) {
-    var callList = _eventMap[event];
-    if (callList == null) {
-      callList = new List();
-      _eventMap[event] = callList;
+  static void removeListener(String event, Function callback) {
+    _listeners[event]?.remove(callback);
+    if (_listeners[event]?.isEmpty ?? false) {
+      _listeners.remove(event);
     }
-
-    callList.add(call);
-
-    return call;
   }
 
-  static removeListenerByEvent(String event) {
-    _eventMap.remove(event);
-  }
-
-  static removeListener(Callback call) {
-    final keys = _eventMap.keys.toList(growable: false);
-    for (final k in keys) {
-      final v = _eventMap[k];
-
-      final remove = v.remove(call);
-      if (remove && v.isEmpty) {
-        _eventMap.remove(k);
+  static void send(String event, [dynamic data]) {
+    if (_listeners.containsKey(event)) {
+      for (var callback in _listeners[event]!) {
+        callback(data);
       }
     }
   }
 
-  static once(String event, {data}) {
-    final callList = _eventMap[event];
-
-    if (callList != null) {
-      for (final item in new List.from(callList, growable: false)) {
-        removeListener(item);
-
-        _errorWrap(event, item, data);
-      }
-    }
-  }
-
-  static send(String event, [data]) {
-    var callList = _eventMap[event];
-
-    if (callList != null) {
-      for (final item in callList) {
-        _errorWrap(event, item, data);
-      }
-    }
-  }
-
-  static _errorWrap(String event, Callback call, data) {
-    try {
-//      xlog(() => 'Bus>>>$event>>>$data');
-      call(data);
-    } catch (e) {
-//      xlog(() => 'Bus>>>$event>>>$e');
-//      xlog(() => 'Bus>>>$event>>>$s');
-    }
+  static void clear() {
+    _listeners.clear();
   }
 }
 
 mixin BusStateMixin<T extends StatefulWidget> on State<T> {
-  List<Callback> _listeners;
+  final List<StreamSubscription> _subscriptions = [];
 
-  void bus(String event, Callback call) {
-    _listeners ??= new List();
-    _listeners.add(Notice.addListener(event, call));
+  void bus(String event, Function(dynamic) callback) {
+    final subscription = StreamController.broadcast().stream.listen(callback);
+    _subscriptions.add(subscription);
+    Notice.addListener(event, callback);
   }
 
-  void busDel(Callback call) {
-    if (_listeners.remove(call)) {
-      Notice.removeListener(call);
+  void busDel(Function(dynamic) callback) {
+    for (var subscription in _subscriptions) {
+      subscription.cancel();
     }
-  }
-
-  void busDelAll() {
-    _listeners?.forEach(Notice.removeListener);
-    _listeners?.clear();
+    _subscriptions.clear();
+    Notice.removeListener(callback.toString(), callback);
   }
 
   @override
   void dispose() {
-    busDelAll();
-
+    for (var subscription in _subscriptions) {
+      subscription.cancel();
+    }
+    _subscriptions.clear();
     super.dispose();
   }
 }

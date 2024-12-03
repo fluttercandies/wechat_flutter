@@ -301,7 +301,7 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
                               Navigator.of(context).pop();
                             }
                             print('解散群聊成功');
-                            showToast(context, '解散群聊成功');
+                            showToast( '解散群聊成功');
                           }
                         });
                       } else if (str.toString().contains('succ')) {
@@ -311,7 +311,7 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
                           Navigator.of(context).pop();
                         }
                         print('退出成功');
-                        showToast(context, '退出成功');
+                        showToast( '退出成功');
                       }
                     });
                   }
@@ -401,7 +401,7 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
         confirmAlert(
           context,
           (isOK) {
-            if (isOK) showToast(context, '敬请期待');
+            if (isOK) showToast( '敬请期待');
           },
           tips: '确定删除群的聊天记录吗？',
           okBtn: '清空',

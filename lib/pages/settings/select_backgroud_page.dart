@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:get/get.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
 class SelectBgPage extends StatefulWidget {
@@ -29,7 +29,7 @@ class _SelectBgPageState extends State<SelectBgPage> {
           fit: BoxFit.fill,
         ),
       ),
-      onTap: () => showToast(context, '敬请期待'),
+      onTap: () => showToast('敬请期待'),
 //      onTap: () =>
 //          Get.to(new ChatBackgroundDetailsPage(item['img'], item['name'])),
     );
@@ -45,8 +45,9 @@ class _SelectBgPageState extends State<SelectBgPage> {
         child: new Wrap(
           runSpacing: 10.0,
           spacing: 10.0,
-          children:
-              listNoEmpty(data) ? data.map(buildBg).toList() : new Container(),
+          children: listNoEmpty(data)
+              ? data.map(buildBg).toList()
+              : [new Container()],
         ),
       ),
     );

@@ -23,12 +23,12 @@ void postSuggestionWithAvatar(BuildContext context) async {
       );
 
       if (data.toString().contains('ucc')) {
-        showToast(context, '设置头像成功');
+        showToast( '设置头像成功');
         model.avatar = avatarUrl;
         model.refresh();
         await SharedUtil.instance.saveString(Keys.faceUrl, avatarUrl);
       } else {
-        showToast(context, '设置头像失败');
+        showToast( '设置头像失败');
       }
     },
   );
@@ -76,7 +76,7 @@ uploadImgApi(BuildContext context, base64Img, Callback callback) async {
       }
     },
     errorCallBack: (String msg, int code) {
-      showToast(context, msg);
+      showToast( msg);
     },
     params: {"image_base_64": base64Img},
   );

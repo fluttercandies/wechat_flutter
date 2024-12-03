@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-
+import 'package:get/get.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
-codeDialog(BuildContext context, List items) {
-  Widget item(item) {
-    return new Container(
+void codeDialog(BuildContext context, List<String> items) {
+  Widget item(String item) {
+    return Container(
       width: Get.width,
       decoration: BoxDecoration(
         border: item != '重置二维码'
@@ -13,14 +13,16 @@ codeDialog(BuildContext context, List items) {
               )
             : null,
       ),
-      child: new TextButton(
-        color: Colors.white,
-        padding: EdgeInsets.symmetric(vertical: 15.0),
+      child: TextButton(
+        style: TextButton.styleFrom(
+          backgroundColor: Colors.white,
+          padding: EdgeInsets.symmetric(vertical: 15.0),
+        ),
         onPressed: () {
           Navigator.of(context).pop();
-          showToast(context, '$item正在开发中');
+          showToast( '$item正在开发中');
         },
-        child: new Text(item),
+        child: Text(item),
       ),
     );
   }
@@ -28,35 +30,37 @@ codeDialog(BuildContext context, List items) {
   showModalBottomSheet(
     context: context,
     builder: (context) {
-      return new Center(
-        child: new Material(
+      return Center(
+        child: Material(
           type: MaterialType.transparency,
-          child: new Column(
+          child: Column(
             children: <Widget>[
-              new Expanded(
-                child: new InkWell(
-                  child: new Container(),
+              Expanded(
+                child: InkWell(
+                  child: Container(),
                   onTap: () => Navigator.of(context).pop(),
                 ),
               ),
-              new ClipRRect(
+              ClipRRect(
                 borderRadius: BorderRadius.all(
                   Radius.circular(10.0),
                 ),
-                child: new Container(
+                child: Container(
                   color: Colors.white,
-                  child: new Column(
+                  child: Column(
                     children: <Widget>[
-                      new Column(children: items.map(item).toList()),
-                      new HorizontalLine(color: appBarColor, height: 10.0),
-                      new TextButton(
-                        padding: EdgeInsets.symmetric(vertical: 15.0),
-                        color: Colors.white,
+                      Column(children: items.map(item).toList()),
+                      HorizontalLine(color: appBarColor, height: 10.0),
+                      TextButton(
+                        style: TextButton.styleFrom(
+                          backgroundColor: Colors.white,
+                          padding: EdgeInsets.symmetric(vertical: 15.0),
+                        ),
                         onPressed: () => Navigator.of(context).pop(),
-                        child: new Container(
+                        child: Container(
                           width: Get.width,
                           alignment: Alignment.center,
-                          child: new Text('取消'),
+                          child: Text('取消'),
                         ),
                       ),
                     ],

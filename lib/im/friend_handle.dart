@@ -8,15 +8,15 @@ Future<dynamic> addFriend(String userName, BuildContext context,
   try {
     var result = await im.addFriend(userName);
     if (result.toString().contains('Friend_Exist')) {
-      showToast(context, '朋友已存在');
+      showToast( '朋友已存在');
     } else if (result.toString().contains('30014')) {
-      showToast(context, '对方好友人数上限');
+      showToast( '对方好友人数上限');
       return;
     } else if (result.toString().contains('30003')) {
-      showToast(context, '添加的这个账号不存在');
+      showToast( '添加的这个账号不存在');
       return;
     } else {
-      showToast(context, '添加成功');
+      showToast( '添加成功');
     }
     if (suCc == null) {
       popToHomePage();
@@ -33,9 +33,9 @@ Future<dynamic> delFriend(String userName, BuildContext context,
   try {
     var result = await im.delFriend(userName);
     if (result.toString().contains('ucc')) {
-      showToast(context, '删除成功');
+      showToast( '删除成功');
     } else {
-      showToast(context, result);
+      showToast( result);
     }
 
     if (suCc == null) {
