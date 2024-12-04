@@ -65,12 +65,12 @@ class GlobalModel extends ChangeNotifier {
       await SharedUtil.instance.saveInt(Keys.gender, result[0]['gender']);
     } else {
       IPersonInfoEntity model = IPersonInfoEntity.fromJson(result[0]);
-      nickName = model.nickname;
-      await SharedUtil.instance.saveString(Keys.nickName, model.nickname);
-      avatar = model.faceURL;
-      await SharedUtil.instance.saveString(Keys.faceUrl, model.faceURL);
-      gender = model.gender;
-      await SharedUtil.instance.saveInt(Keys.gender, model.gender);
+      nickName = model.nickname!;
+      await SharedUtil.instance.saveString(Keys.nickName, model.nickname!);
+      avatar = model.faceURL!;
+      await SharedUtil.instance.saveString(Keys.faceUrl, model.faceURL!);
+      gender = model.gender!;
+      await SharedUtil.instance.saveInt(Keys.gender, model.gender!);
     }
   }
 

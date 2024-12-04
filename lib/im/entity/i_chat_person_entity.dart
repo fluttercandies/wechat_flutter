@@ -1,40 +1,27 @@
-/*
-* 实体类 - 会话个人信息（IOS）
-* @param birthday 生日
-* @param faceURL 头像URL
-* @param identifier ID
-* @param role 角色
-* @param gender 性别
-* @param level 等级
-* @param nickname 昵称
-* @param language 语言
-* @param customInfo 习俗信息
-* @param allowType 添加为好友方式
-*
-* */
 class IChatPersonEntity {
-  int birthday;
-  String faceURL;
-  String identifier;
-  int role;
-  int gender;
-  int level;
-  String nickname;
-  int language;
-  IChatPersonCustominfo customInfo;
+  int? birthday;
+  String? faceURL;
+  String? identifier;
+  int? role;
+  int? gender;
+  int? level;
+  String? nickname;
+  int? language;
+  IChatPersonCustominfo? customInfo;
   dynamic allowType;
 
-  IChatPersonEntity(
-      {this.birthday,
-      this.faceURL,
-      this.identifier,
-      this.role,
-      this.gender,
-      this.level,
-      this.nickname,
-      this.language,
-      this.customInfo,
-      this.allowType});
+  IChatPersonEntity({
+    this.birthday,
+    this.faceURL,
+    this.identifier,
+    this.role,
+    this.gender,
+    this.level,
+    this.nickname,
+    this.language,
+    this.customInfo,
+    this.allowType,
+  });
 
   IChatPersonEntity.fromJson(Map<String, dynamic> json) {
     birthday = json['birthday'];
@@ -46,25 +33,25 @@ class IChatPersonEntity {
     nickname = json['nickname'];
     language = json['language'];
     customInfo = json['customInfo'] != null
-        ? new IChatPersonCustominfo.fromJson(json['customInfo'])
+        ? IChatPersonCustominfo.fromJson(json['customInfo'])
         : null;
     allowType = json['allowType'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['birthday'] = this.birthday;
-    data['faceURL'] = this.faceURL;
-    data['identifier'] = this.identifier;
-    data['role'] = this.role;
-    data['gender'] = this.gender;
-    data['level'] = this.level;
-    data['nickname'] = this.nickname;
-    data['language'] = this.language;
-    if (this.customInfo != null) {
-      data['customInfo'] = this.customInfo.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['birthday'] = birthday;
+    data['faceURL'] = faceURL;
+    data['identifier'] = identifier;
+    data['role'] = role;
+    data['gender'] = gender;
+    data['level'] = level;
+    data['nickname'] = nickname;
+    data['language'] = language;
+    if (customInfo != null) {
+      data['customInfo'] = customInfo!.toJson();
     }
-    data['allowType'] = this.allowType;
+    data['allowType'] = allowType;
     return data;
   }
 }
@@ -73,7 +60,7 @@ class IChatPersonCustominfo {
   IChatPersonCustominfo.fromJson(Map<String, dynamic> json);
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     return data;
   }
 }

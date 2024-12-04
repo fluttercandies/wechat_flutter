@@ -57,7 +57,7 @@ class ChatListData {
         type = model.type ?? 'C2C';
         identifier = model.peer ?? '';
         try {
-          final profile = await getUsersProfile([model.peer]);
+          final profile = await getUsersProfile([model.peer!]);
           List<dynamic> profileData = json.decode(profile);
           for (int j = 0; j < profileData.length; j++) {
             if (Platform.isIOS) {
@@ -68,7 +68,7 @@ class ChatListData {
               } else {
                 avatar = defIcon;
               }
-              name = strNoEmpty(info.nickname) ? info.nickname : identifier;
+              name = strNoEmpty(info.nickname) ? info.nickname! : identifier;
             } else {
               PersonInfoEntity info = PersonInfoEntity.fromJson(profileData[j]);
               if (strNoEmpty(info.faceUrl) && info.faceUrl != '[]') {
@@ -76,7 +76,7 @@ class ChatListData {
               } else {
                 avatar = defIcon;
               }
-              name = strNoEmpty(info.nickName) ? info.nickName : identifier;
+              name = strNoEmpty(info.nickName) ? info.nickName! : identifier;
             }
           }
         } catch (e) {

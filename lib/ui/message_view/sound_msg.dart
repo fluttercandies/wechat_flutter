@@ -106,7 +106,7 @@ class _SoundMsgState extends State<SoundMsg> with TickerProviderStateMixin {
     bool isIos = Platform.isIOS;
     if (!listNoEmpty(isIos ? iModel.soundUrls : model.urls)) return Container();
 
-    var urls = isIos ? iModel.soundUrls[0] : model.urls[0];
+    var urls = isIos ? iModel.soundUrls![0] : model.urls![0];
     var body = [
       MsgAvatar(model: widget.model, globalModel: globalModel),
       Container(

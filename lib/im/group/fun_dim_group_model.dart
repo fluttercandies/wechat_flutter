@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
-Dim dim = new Dim();
+// Dim dim = new Dim();
 
 class DimGroup {
 //  static Future<dynamic> inviteGroupMember(List list, String groupId,
@@ -74,65 +74,65 @@ class DimGroup {
 //  }
 
   static Future<dynamic> getGroupListModel(Callback callback) async {
-    try {
-      var result = await dim.getGroupList();
-      callback(result);
-    } on PlatformException {
-      print('获取群列表  失败');
-    }
+    // try {
+    //   var result = await dim.getGroupList();
+    //   callback(result);
+    // } on PlatformException {
+    //   print('获取群列表  失败');
+    // }
   }
 
   static Future<dynamic> getGroupInfoListModel(List<String> groupID,
-      {Callback callback}) async {
-    try {
-      var result = await dim.getGroupInfoList(groupID);
-      callback(result);
-      return result;
-    } on PlatformException {
-      print('获取群资料  失败');
-    }
+      {required Callback callback}) async {
+    // try {
+    //   var result = await dim.getGroupInfoList(groupID);
+    //   callback(result);
+    //   return result;
+    // } on PlatformException {
+    //   print('获取群资料  失败');
+    // }
   }
 
   static Future<dynamic> deleteGroupModel(String groupId,
-      {Callback callback}) async {
-    try {
-      var result = await dim.deleteGroup(groupId);
-      callback(result);
-    } on PlatformException {
-      print('解散群  失败');
-    }
+      {required Callback callback}) async {
+    // try {
+    //   var result = await dim.deleteGroup(groupId);
+    //   callback(result);
+    // } on PlatformException {
+    //   print('解散群  失败');
+    // }
   }
 
   static Future<dynamic> modifyGroupNameModel(
       String groupId, String setGroupName,
-      {Callback callback}) async {
-    try {
-      var result = await dim.modifyGroupName(groupId, setGroupName);
-      callback(result);
-    } on PlatformException {
-      print('修改群名称  失败');
-    }
+      {required Callback callback}) async {
+    // try {
+    //   var result = await dim.modifyGroupName(groupId, setGroupName);
+    //   callback(result);
+    // } on PlatformException {
+    //   print('修改群名称  失败');
+    // }
   }
 
   static Future<dynamic> modifyGroupIntroductionModel(
       String groupId, String setIntroduction,
-      {Callback callback}) async {
-    try {
-      var result = await dim.modifyGroupIntroduction(groupId, setIntroduction);
-      callback(result);
-    } on PlatformException {
-      print('修改群简介  失败');
-    }
+      {required Callback callback}) async {
+    // try {
+    //   var result = await dim.modifyGroupIntroduction(groupId, setIntroduction);
+    //   callback(result);
+    // } on PlatformException {
+    //   print('修改群简介  失败');
+    // }
   }
 
   static Future<dynamic> setReceiveMessageOptionModel(
       String groupId, String identifier, int type,
-      {Callback callback}) async {
-    try {
-      var result = await dim.setReceiveMessageOption(groupId, identifier, type);
-      callback(result);
-    } on PlatformException {
-      print('修改群消息提醒选项  失败');
-    }
+      {required Callback callback}) async {
+    // try {
+    //   var result = await dim.setReceiveMessageOption(groupId, identifier, type);
+    //   callback(result);
+    // } on PlatformException {
+    //   print('修改群消息提醒选项  失败');
+    // }
   }
 }

@@ -1,14 +1,23 @@
 class ISoundMsgEntity {
-	int downloadFlag;
-	String path;
-	int businessId;
-	int dataSize;
-	List<String> soundUrls;
-	String uuid;
-	int taskId;
-	int second;
+	int? downloadFlag;
+	String? path;
+	int? businessId;
+	int? dataSize;
+	List<String>? soundUrls;
+	String? uuid;
+	int? taskId;
+	int? second;
 
-	ISoundMsgEntity({this.downloadFlag, this.path, this.businessId, this.dataSize, this.soundUrls, this.uuid, this.taskId, this.second});
+	ISoundMsgEntity({
+		this.downloadFlag,
+		this.path,
+		this.businessId,
+		this.dataSize,
+		this.soundUrls,
+		this.uuid,
+		this.taskId,
+		this.second,
+	});
 
 	ISoundMsgEntity.fromJson(Map<String, dynamic> json) {
 		downloadFlag = json['downloadFlag'];
@@ -22,15 +31,15 @@ class ISoundMsgEntity {
 	}
 
 	Map<String, dynamic> toJson() {
-		final Map<String, dynamic> data = new Map<String, dynamic>();
-		data['downloadFlag'] = this.downloadFlag;
-		data['path'] = this.path;
-		data['businessId'] = this.businessId;
-		data['dataSize'] = this.dataSize;
-		data['soundUrls'] = this.soundUrls;
-		data['uuid'] = this.uuid;
-		data['taskId'] = this.taskId;
-		data['second'] = this.second;
+		final Map<String, dynamic> data = <String, dynamic>{};
+		data['downloadFlag'] = downloadFlag;
+		data['path'] = path;
+		data['businessId'] = businessId;
+		data['dataSize'] = dataSize;
+		data['soundUrls'] = soundUrls;
+		data['uuid'] = uuid;
+		data['taskId'] = taskId;
+		data['second'] = second;
 		return data;
 	}
 }
