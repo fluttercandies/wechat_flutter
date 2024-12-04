@@ -21,7 +21,7 @@ class _MinePageState extends State<MinePage> {
   void action(name) {
     switch (name) {
       case '设置':
-        loginOut(context);
+        ImLoginManager.loginOut(context);
         break;
       case '支付':
         Get.to(new PayHomePage());

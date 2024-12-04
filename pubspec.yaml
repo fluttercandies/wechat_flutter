@@ -15,6 +15,7 @@ dependencies:
     sdk: flutter
   cupertino_icons: 1.0.8 #IOS风格材料图标
   tencent_cloud_chat_sdk: 8.3.6498 #腾讯云im
+  archive: ^3.6.1 #腾讯云im生成token需要
   shared_preferences: 2.3.3 #持久化存储
   provider: 6.1.2 #状态管理
   get: 4.6.6 #状态管理

@@ -149,7 +149,7 @@ class _LoginPageState extends State<LoginPage> {
             if (_tC.text == '') {
               showToast( '随便输入三位或以上');
             } else if (_tC.text.length >= 3) {
-              login(_tC.text, context);
+              ImLoginManager.login(_tC.text, context);
             } else {
               showToast( '请输入三位或以上');
             }
