@@ -1,5 +1,9 @@
+import 'dart:developer';
+
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:tencent_cloud_chat_sdk/manager/v2_tim_manager.dart';
+import 'package:tencent_cloud_chat_sdk/models/v2_tim_value_callback.dart';
 import 'package:wechat_flutter/http/api.dart';
 import 'package:wechat_flutter/pages/contacts/contacts_page.dart';
 import 'package:wechat_flutter/pages/discover/discover_page.dart';
@@ -29,10 +33,12 @@ class _RootPageState extends State<RootPage> {
           .listen((List<ConnectivityResult> result) async {
         if (result.contains(ConnectivityResult.mobile) ||
             result.contains(ConnectivityResult.wifi)) {
-          // final currentUser = await im.getCurrentLoginUser();
-          // if (currentUser == '' || currentUser == null) {
-          //   final account = await SharedUtil.instance.getString(Keys.account);
-          //   im.imAutoLogin(account);
+          V2TimValueCallback<String> currentUser =
+              await V2TIMManager().getLoginUser();
+          log("ConnectivityResult::currentUser::$currentUser");
+          // if (currentUser == '' ) {
+          // final account = await SharedUtil.instance.getString(Keys.account);
+          // im.imAutoLogin(account);
           // }
           await SharedUtil.instance.saveBoolean(Keys.brokenNetwork, false);
         }

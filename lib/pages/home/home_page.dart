@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tencent_cloud_chat_sdk/models/v2_tim_conversation.dart';
 import 'package:wechat_flutter/im/conversation_handle.dart';
 import 'package:wechat_flutter/im/model/chat_list.dart';
 import 'package:wechat_flutter/pages/chat/chat_page.dart';
@@ -16,7 +17,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage>
     with AutomaticKeepAliveClientMixin {
-  List<ChatList> _chatData = [];
+  List<V2TimConversation?> _chatData = [];
 
   var tapPos;
   TextSpanBuilder _builder = TextSpanBuilder();
@@ -30,8 +31,7 @@ class _HomePageState extends State<HomePage>
   }
 
   Future getChatData() async {
-    final str = await ChatListData().chatListData();
-    List<ChatList> listChat = str;
+    List<V2TimConversation?> listChat = await ChatListData().chatListData();
     if (!listNoEmpty(listChat)) return;
     _chatData.clear();
     _chatData..addAll(listChat?.reversed?.toList() ?? []);
@@ -39,7 +39,8 @@ class _HomePageState extends State<HomePage>
   }
 
   _showMenu(BuildContext context, Offset tapPos, int type, String id) {
-    final RenderBox overlay = Overlay.of(context).context.findRenderObject() as RenderBox;
+    final RenderBox overlay =
+        Overlay.of(context).context.findRenderObject() as RenderBox;
     final RelativeRect position = RelativeRect.fromLTRB(tapPos.dx, tapPos.dy,
         overlay.size.width - tapPos.dx, overlay.size.height - tapPos.dy);
     showMenu<String>(
@@ -128,13 +129,16 @@ class _HomePageState extends State<HomePage>
         behavior: MyBehavior(),
         child: new ListView.builder(
           itemBuilder: (BuildContext context, int index) {
-            ChatList model = _chatData[index];
+            V2TimConversation? model = _chatData[index];
+            if (model == null) {
+              return Container();
+            }
 
             return InkWell(
               onTap: () {
                 Get.to(new ChatPage(
-                    id: model.identifier,
-                    title: model.name,
+                    id: model.conversationID,
+                    title: model.showName ?? model.conversationID,
                     type: model.type == 'Group' ? 2 : 1));
               },
               onTapDown: (TapDownDetails details) {
@@ -143,17 +147,17 @@ class _HomePageState extends State<HomePage>
               onLongPress: () {
                 if (Platform.isAndroid) {
                   _showMenu(context, tapPos, model.type == 'Group' ? 2 : 1,
-                      model.identifier);
+                      model.conversationID);
                 } else {
                   debugPrint("IOS聊天长按选项功能开发中");
                 }
               },
               child: new MyConversationView(
-                imageUrl: model.avatar,
-                title: model?.name ?? '',
-                content: model?.content,
-                time: timeView(model?.time ?? 0),
-                isBorder: model?.name != _chatData[0].name,
+                imageUrl: model.faceUrl,
+                title: model?.showName ?? '',
+                content: model?.lastMessage,
+                time: timeView(model.lastMessage?.timestamp ?? 0),
+                isBorder: model?.showName != _chatData[0]?.showName,
               ),
             );
           },

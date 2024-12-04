@@ -1,35 +1,31 @@
 import 'dart:convert';
-import 'dart:io';
 
-import 'package:flutter/material.dart';
-import 'package:wechat_flutter/im/entity/chat_list_entity.dart';
-import 'package:wechat_flutter/im/entity/i_person_info_entity.dart';
-import 'package:wechat_flutter/im/entity/message_entity.dart';
-import 'package:wechat_flutter/im/entity/person_info_entity.dart';
+import 'package:tencent_cloud_chat_sdk/models/v2_tim_conversation.dart';
+import 'package:tencent_cloud_chat_sdk/models/v2_tim_conversation_result.dart';
+import 'package:tencent_cloud_chat_sdk/models/v2_tim_value_callback.dart';
+import 'package:tencent_cloud_chat_sdk/tencent_im_sdk_plugin.dart';
 import 'package:wechat_flutter/im/conversation_handle.dart';
-import 'package:wechat_flutter/im/info_handle.dart';
-import 'package:wechat_flutter/im/message_handle.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
-
-class ChatList {
-  ChatList({
-    required this.avatar,
-    required this.name,
-    required this.identifier,
-    required this.content,
-    required this.time,
-    required this.type,
-    required this.msgType,
-  });
-
-  final String avatar;
-  final String name;
-  final int time;
-  final Map<String, dynamic>? content;
-  final String identifier;
-  final dynamic type;
-  final String msgType;
-}
+//
+// class ChatList {
+//   ChatList({
+//     required this.avatar,
+//     required this.name,
+//     required this.identifier,
+//     required this.content,
+//     required this.time,
+//     required this.type,
+//     required this.msgType,
+//   });
+//
+//   final String avatar;
+//   final String name;
+//   final int time;
+//   final Map<String, dynamic>? content;
+//   final String identifier;
+//   final dynamic type;
+//   final String msgType;
+// }
 
 class ChatListData {
   Future<bool> isNull() async {
@@ -38,77 +34,15 @@ class ChatListData {
     return !listNoEmpty(data);
   }
 
-  Future<List<ChatList>> chatListData() async {
-    List<ChatList> chatList = [];
-    String avatar = '';
-    String name = '';
-    int time = 0;
-    String identifier = '';
-    dynamic type;
-    String msgType = '';
-
-    String str = await getConversationsListData();
-    String nullMap = '{"mConversation":{},"peer":"","type":"System"}';
-    str = str.replaceAll(',' + nullMap, '').replaceAll(nullMap + ',', '');
-    if (strNoEmpty(str) && str != '[]') {
-      List<dynamic> data = json.decode(str);
-      for (int i = 0; i < data.length; i++) {
-        ChatListEntity model = ChatListEntity.fromJson(data[i]);
-        type = model.type ?? 'C2C';
-        identifier = model.peer ?? '';
-        try {
-          final profile = await getUsersProfile([model.peer!]);
-          List<dynamic> profileData = json.decode(profile);
-          for (int j = 0; j < profileData.length; j++) {
-            if (Platform.isIOS) {
-              IPersonInfoEntity info = IPersonInfoEntity.fromJson(profileData[j]);
-
-              if (strNoEmpty(info.faceURL) && info.faceURL != '[]') {
-                avatar = info.faceURL ?? defIcon;
-              } else {
-                avatar = defIcon;
-              }
-              name = strNoEmpty(info.nickname) ? info.nickname! : identifier;
-            } else {
-              PersonInfoEntity info = PersonInfoEntity.fromJson(profileData[j]);
-              if (strNoEmpty(info.faceUrl) && info.faceUrl != '[]') {
-                avatar = info.faceUrl ?? defIcon;
-              } else {
-                avatar = defIcon;
-              }
-              name = strNoEmpty(info.nickName) ? info.nickName! : identifier;
-            }
-          }
-        } catch (e) {
-          // Handle exception
-        }
-
-        final message = await getDimMessages(identifier, num: 1, type: type == 'C2C' ? 1 : 2);
-        List<dynamic> messageData = [];
-
-        if (strNoEmpty(message) && !message.toString().contains('failed')) {
-          messageData = json.decode(message);
-        }
-        if (listNoEmpty(messageData)) {
-          MessageEntity messageModel = MessageEntity.fromJson(messageData[0]);
-          time = messageModel.time ?? 0;
-          msgType = messageModel.message?.type ?? '1';
-        }
-        if (type == 'Group') avatar = defGroupAvatar;
-        chatList.insert(
-          0,
-          ChatList(
-            type: type,
-            identifier: identifier,
-            avatar: avatar,
-            name: name,
-            time: time,
-            content: listNoEmpty(messageData) ? messageData[0] : null,
-            msgType: msgType,
-          ),
-        );
-      }
-    }
-    return chatList;
+  Future<List<V2TimConversation?>> chatListData() async {
+    V2TimValueCallback<V2TimConversationResult> getConversationListRes =
+        await TencentImSDKPlugin.v2TIMManager
+            .getConversationManager()
+            .getConversationList(
+                count: 100, //分页拉取的个数，一次分页拉取不宜太多，会影响拉取的速度，建议每次拉取 100 个会话
+                nextSeq: "0" //分页拉取的游标，第一次默认取传 0，后续分页拉传上一次分页拉取成功回调里的 nextSeq
+                );
+    return getConversationListRes.data?.conversationList ??
+        <V2TimConversation>[];
   }
 }

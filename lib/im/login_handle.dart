@@ -14,6 +14,7 @@ import 'package:tencent_cloud_chat_sdk/tencent_im_sdk_plugin.dart';
 import 'package:wechat_flutter/provider/global_model.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
+import '../pages/login/login_begin_page.dart';
 import '../pages/root/root_page.dart';
 import 'GenerateUserSig.dart';
 
@@ -90,22 +91,16 @@ class ImLoginManager {
   static Future<void> loginOut(BuildContext context) async {
     final model = Provider.of<GlobalModel>(context, listen: false);
 
-    // try {
-    //   var result = await im.imLogout();
-    //   if (result.toString().contains('ucc')) {
-    //     showToast( '登出成功');
-    //   } else {
-    //     print('error::' + result.toString());
-    //   }
-    //   model.goToLogin = true;
-    //   model.refresh();
-    //   await SharedUtil.instance.saveBoolean(Keys.hasLogged, false);
-    //   await Get.toAndRemove(new LoginBeginPage());
-    // } on PlatformException {
-    //   model.goToLogin = true;
-    //   model.refresh();
-    //   await SharedUtil.instance.saveBoolean(Keys.hasLogged, false);
-    //   await Get.toAndRemove(new LoginBeginPage());
-    // }
+    V2TimCallback call = await TencentImSDKPlugin.v2TIMManager.logout();
+    if (call.code == 0) {
+      model.goToLogin = true;
+      model.refresh();
+      await SharedUtil.instance.saveBoolean(Keys.hasLogged, false);
+      await Get.offAll(new LoginBeginPage());
+      showToast('登出成功');
+    } else {
+      showToast(call.desc);
+      print('error::' + call.desc);
+    }
   }
 }
