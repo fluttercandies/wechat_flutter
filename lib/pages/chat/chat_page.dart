@@ -1,6 +1,7 @@
 import 'package:extended_text_field/extended_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tencent_cloud_chat_sdk/models/v2_tim_message.dart';
 import 'package:wechat_flutter/im/model/chat_data.dart';
 import 'package:wechat_flutter/im/send_handle.dart';
 import 'package:wechat_flutter/pages/chat/chat_more_page.dart';
@@ -13,6 +14,7 @@ import 'package:wechat_flutter/ui/edit/text_span_builder.dart';
 import 'package:wechat_flutter/ui/item/chat_more_icon.dart';
 import 'package:wechat_flutter/ui/view/indicator_page_view.dart';
 
+import '../../tools/event/im_event.dart';
 import 'chat_info_page.dart';
 
 enum ButtonType { voice, more }
@@ -22,56 +24,59 @@ class ChatPage extends StatefulWidget {
   final int type;
   final String id;
 
-  ChatPage({required this.id, required this.title, this.type = 1});
+  ChatPage({required this.id, required this.title, required this.type});
 
   @override
   _ChatPageState createState() => _ChatPageState();
 }
 
 class _ChatPageState extends State<ChatPage> {
-  List<ChatData> chatData = [];
+  List<V2TimMessage> chatData = [];
   StreamSubscription<dynamic>? _msgStreamSubs;
   bool _isVoice = false;
   bool _isMore = false;
   double keyboardHeight = 270.0;
   bool _emojiState = false;
-  String newGroupName = "";
+  String newGroupName = '';
 
-  TextEditingController _textController = TextEditingController();
-  FocusNode _focusNode = new FocusNode();
-  ScrollController _sC = ScrollController();
-  PageController pageC = new PageController();
+  final TextEditingController _textController = TextEditingController();
+  final FocusNode _focusNode = FocusNode();
+  final ScrollController _sC = ScrollController();
+  PageController pageC = PageController();
 
   @override
   void initState() {
     super.initState();
     getChatMsgData();
 
-    _sC.addListener(() => FocusScope.of(context).requestFocus(new FocusNode()));
+    _sC.addListener(() => FocusScope.of(context).requestFocus(FocusNode()));
     initPlatformState();
     Notice.addListener(WeChatActions.msg(), (v) => getChatMsgData());
     if (widget.type == 2) {
       Notice.addListener(WeChatActions.groupName(), (v) {
-        setState(() => newGroupName = v);
+        setState(() => newGroupName = v as String);
       });
     }
     _focusNode.addListener(() {
-      if (_focusNode.hasFocus) _emojiState = false;
+      if (_focusNode.hasFocus) {
+        _emojiState = false;
+      }
     });
   }
 
-  Future getChatMsgData() async {
-    final str =
-        await ChatDataRep().repData(widget?.id ?? widget.title, widget.type);
-    List<ChatData> listChat = str;
+  Future<void> getChatMsgData() async {
+    final List<V2TimMessage> listChat =
+        await ChatDataRep().repData(widget.id, widget.type);
     chatData.clear();
-    chatData..addAll(listChat.reversed);
-    if (mounted) setState(() {});
+    chatData.addAll(listChat.reversed);
+    if (mounted) {
+      setState(() {});
+    }
   }
 
   void insertText(String text) {
-    var value = _textController.value;
-    var start = value.selection.baseOffset;
+    final value = _textController.value;
+    final start = value.selection.baseOffset;
     var end = value.selection.extentOffset;
     if (value.selection.isValid) {
       String newText = '';
@@ -101,22 +106,28 @@ class _ChatPageState extends State<ChatPage> {
   }
 
   void canCelListener() {
-    if (_msgStreamSubs != null) _msgStreamSubs!.cancel();
-  }
-
-  Future<void> initPlatformState() async {
-    if (!mounted) return;
-
-    if (_msgStreamSubs == null) {
-      // _msgStreamSubs =
-      //     im.onMessage.listen((dynamic onData) => getChatMsgData());
+    if (_msgStreamSubs != null) {
+      _msgStreamSubs!.cancel();
     }
   }
 
-  _handleSubmittedData(String text) async {
+  Future<void> initPlatformState() async {
+    if (!mounted) {
+      return;
+    }
+
+    _msgStreamSubs ??= eventBusNewMsg.listen((onData) {
+      if (onData.covId == widget.id) {
+        getChatMsgData();
+      }
+    });
+  }
+
+  Future<void> _handleSubmittedData(String text) async {
     _textController.clear();
-    chatData.insert(0, new ChatData(msg: {"text": text}));
-    await sendTextMsg('${widget?.id ?? widget.title}', widget.type, text);
+    await sendTextMsg(widget.id, widget.type, text, call: (msg) {
+      chatData.insert(0, msg);
+    });
   }
 
   onTapHandle(ButtonType type) {
@@ -138,25 +149,27 @@ class _ChatPageState extends State<ChatPage> {
     });
   }
 
-  Widget edit(context, size) {
+  Widget edit(context, BoxConstraints size) {
     // 计算当前的文本需要占用的行数
-    TextSpan _text =
+    final TextSpan text =
         TextSpan(text: _textController.text, style: AppStyles.ChatBoxTextStyle);
 
-    TextPainter _tp = TextPainter(
-        text: _text,
+    final TextPainter tp = TextPainter(
+        text: text,
         textDirection: TextDirection.ltr,
         textAlign: TextAlign.left);
-    _tp.layout(maxWidth: size.maxWidth);
+    tp.layout(maxWidth: size.maxWidth);
 
     return ExtendedTextField(
       specialTextSpanBuilder: TextSpanBuilder(showAtBackground: true),
       onTap: () => setState(() {
-        if (_focusNode.hasFocus) _emojiState = false;
+        if (_focusNode.hasFocus) {
+          _emojiState = false;
+        }
       }),
       onChanged: (v) => setState(() {}),
-      decoration: InputDecoration(
-          border: InputBorder.none, contentPadding: const EdgeInsets.all(5.0)),
+      decoration: const InputDecoration(
+          border: InputBorder.none, contentPadding: EdgeInsets.all(5.0)),
       controller: _textController,
       focusNode: _focusNode,
       maxLines: 99,
@@ -171,11 +184,12 @@ class _ChatPageState extends State<ChatPage> {
         MediaQuery.of(context).viewInsets.bottom != 0) {
       keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
     }
-    var body = [
-      chatData != null
-          ? new ChatDetailsBody(sC: _sC, chatData: chatData)
-          : new Spacer(),
-      new ChatDetailsRow(
+    final body = [
+      if (chatData != null)
+        ChatDetailsBody(sC: _sC, chatData: chatData)
+      else
+        const Spacer(),
+      ChatDetailsRow(
         voiceOnTap: () => onTapHandle(ButtonType.voice),
         onEmojio: () {
           if (_isMore) {
@@ -184,14 +198,14 @@ class _ChatPageState extends State<ChatPage> {
             _emojiState = !_emojiState;
           }
           if (_emojiState) {
-            FocusScope.of(context).requestFocus(new FocusNode());
+            FocusScope.of(context).requestFocus(FocusNode());
             _isMore = false;
           }
           setState(() {});
         },
         isVoice: _isVoice,
         edit: edit,
-        more: new ChatMoreIcon(
+        more: ChatMoreIcon(
           value: _textController.text,
           onTap: () => _handleSubmittedData(_textController.text),
           moreTap: () => onTapHandle(ButtonType.more),
@@ -199,18 +213,18 @@ class _ChatPageState extends State<ChatPage> {
         id: widget.id,
         type: widget.type,
       ),
-      new Visibility(
+      Visibility(
         visible: _emojiState,
         child: emojiWidget(),
       ),
-      new Container(
+      Container(
         height: _isMore && !_focusNode.hasFocus ? keyboardHeight : 0.0,
         width: Get.width,
-        color: Color(AppColors.ChatBoxBg),
-        child: new IndicatorPageView(
+        color: const Color(AppColors.ChatBoxBg),
+        child: IndicatorPageView(
           pageC: pageC,
           pages: List.generate(2, (index) {
-            return new ChatMorePage(
+            return ChatMorePage(
               index: index,
               id: widget.id,
               type: widget.type,
@@ -221,54 +235,54 @@ class _ChatPageState extends State<ChatPage> {
       ),
     ];
 
-    var rWidget = [
-      new InkWell(
-        child: new Image.asset('assets/images/right_more.png'),
+    final rWidget = [
+      InkWell(
+        child: Image.asset('assets/images/right_more.png'),
         onTap: () => Get.to(widget.type == 2
-            ? new GroupDetailsPage(
+            ? GroupDetailsPage(
                 widget?.id ?? widget.title,
                 callBack: (v) {},
               )
-            : new ChatInfoPage(widget.id)),
+            : ChatInfoPage(widget.id)),
       )
     ];
 
     return Scaffold(
-      appBar: new ComMomBar(
+      appBar: ComMomBar(
           title: newGroupName ?? widget.title, rightDMActions: rWidget),
-      body: new MainInputBody(
+      body: MainInputBody(
         onTap: () => setState(
           () {
             _isMore = false;
             _emojiState = false;
           },
         ),
-        decoration: BoxDecoration(color: chatBg),
-        child: new Column(children: body),
+        decoration: const BoxDecoration(color: chatBg),
+        child: Column(children: body),
       ),
     );
   }
 
   Widget emojiWidget() {
-    return new GestureDetector(
-      child: new SizedBox(
+    return GestureDetector(
+      child: SizedBox(
         height: _emojiState ? keyboardHeight : 0,
         child: GridView.builder(
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 7, crossAxisSpacing: 10.0, mainAxisSpacing: 10.0),
           scrollDirection: Axis.horizontal,
           itemBuilder: (context, index) {
             return GestureDetector(
               child:
-                  Image.asset(EmojiUitl.instance.emojiMap["[${index + 1}]"]!),
+                  Image.asset(EmojiUitl.instance.emojiMap['[${index + 1}]']!),
               behavior: HitTestBehavior.translucent,
               onTap: () {
-                insertText("[${index + 1}]");
+                insertText('[${index + 1}]');
               },
             );
           },
           itemCount: EmojiUitl.instance.emojiMap.length,
-          padding: EdgeInsets.all(5.0),
+          padding: const EdgeInsets.all(5.0),
         ),
       ),
       onTap: () {},

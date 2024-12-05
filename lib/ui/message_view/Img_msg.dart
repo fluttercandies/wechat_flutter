@@ -18,11 +18,11 @@ class ImgMsg extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (!listNoEmpty(msg['imageList'])) return Text('发送中');
-    var msgInfo = msg['imageList'][1];
-    var _height = msgInfo['height'].toDouble();
-    var resultH = _height > 200.0 ? 200.0 : _height;
-    var url = msgInfo['url'];
-    var isFile = File(url).existsSync();
+    final msgInfo = msg['imageList'][1];
+    final double _height = msgInfo['height'].toDouble();
+    final double resultH = _height > 200.0 ? 200.0 : _height;
+    final String url = msgInfo['url'];
+    final isFile = File(url).existsSync();
     final globalModel = Provider.of<GlobalModel>(context);
     var body = [
       new MsgAvatar(model: model, globalModel: globalModel),

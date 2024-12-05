@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:tencent_cloud_chat_sdk/models/v2_tim_message.dart';
 import 'package:wechat_flutter/im/model/chat_data.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'package:flutter/cupertino.dart';
@@ -18,7 +19,7 @@ import 'package:wechat_flutter/ui/message_view/text_msg.dart';
 import 'package:wechat_flutter/ui/message_view/video_message.dart';
 
 class SendMessageView extends StatefulWidget {
-  final ChatData model;
+  final V2TimMessage model;
 
   SendMessageView(this.model);
 

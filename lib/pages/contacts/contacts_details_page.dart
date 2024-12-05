@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+import 'package:tencent_cloud_chat_sdk/enum/conversation_type.dart';
 import 'package:wechat_flutter/pages/chat/chat_page.dart';
 import 'package:wechat_flutter/pages/chat/more_info_page.dart';
 import 'package:wechat_flutter/pages/chat/set_remark_page.dart';
@@ -54,8 +55,10 @@ class _ContactsDetailsPageState extends State<ContactsDetailsPage> {
         margin: EdgeInsets.only(top: 10.0),
         text: '发消息',
         isBorder: true,
-        onPressed: () => Get.replace(
-            new ChatPage(id: widget.id!, title: widget.title!, type: 1)),
+        onPressed: () => Get.replace(new ChatPage(
+            id: widget.id!,
+            title: widget.title!,
+            type: ConversationType.V2TIM_C2C)),
       ),
       new Visibility(
         visible: !isSelf,

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tencent_cloud_chat_sdk/enum/conversation_type.dart';
 import 'package:wechat_flutter/im/fun_dim_group_model.dart';
 import 'package:wechat_flutter/pages/chat/chat_page.dart';
 import 'package:wechat_flutter/pages/contacts/group_launch_page.dart';
@@ -40,7 +41,7 @@ class _GroupListPageState extends State<GroupListPage> {
       onPressed: () {
         Get.to(ChatPage(
           title: gName,
-          type: 2,
+          type: ConversationType.V2TIM_GROUP,
           id: gId,
 //                returnType: 1,
         ));

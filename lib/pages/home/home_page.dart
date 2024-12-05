@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tencent_cloud_chat_sdk/enum/conversation_type.dart';
 import 'package:tencent_cloud_chat_sdk/models/v2_tim_conversation.dart';
 import 'package:wechat_flutter/im/conversation_handle.dart';
 import 'package:wechat_flutter/im/model/chat_list.dart';
@@ -19,7 +20,7 @@ class _HomePageState extends State<HomePage>
     with AutomaticKeepAliveClientMixin {
   List<V2TimConversation?> _chatData = [];
 
-  var tapPos;
+  Offset? tapPos;
   TextSpanBuilder _builder = TextSpanBuilder();
   StreamSubscription<dynamic>? _messageStreamSubscription;
 
@@ -34,7 +35,7 @@ class _HomePageState extends State<HomePage>
     List<V2TimConversation?> listChat = await ChatListData().chatListData();
     if (!listNoEmpty(listChat)) return;
     _chatData.clear();
-    _chatData..addAll(listChat?.reversed?.toList() ?? []);
+    _chatData..addAll(listChat.reversed.toList() ?? []);
     if (mounted) setState(() {});
   }
 
@@ -139,14 +140,17 @@ class _HomePageState extends State<HomePage>
                 Get.to(new ChatPage(
                     id: model.conversationID,
                     title: model.showName ?? model.conversationID,
-                    type: model.type == 'Group' ? 2 : 1));
+                    type: model.type));
               },
               onTapDown: (TapDownDetails details) {
                 tapPos = details.globalPosition;
               },
               onLongPress: () {
                 if (Platform.isAndroid) {
-                  _showMenu(context, tapPos, model.type == 'Group' ? 2 : 1,
+                  _showMenu(
+                      context,
+                      tapPos!,
+                      model.type == ConversationType.V2TIM_GROUP ? 2 : 1,
                       model.conversationID);
                 } else {
                   debugPrint("IOS聊天长按选项功能开发中");
@@ -154,14 +158,14 @@ class _HomePageState extends State<HomePage>
               },
               child: new MyConversationView(
                 imageUrl: model.faceUrl,
-                title: model?.showName ?? '',
-                content: model?.lastMessage,
+                title: model.showName ?? '',
+                content: model.lastMessage,
                 time: timeView(model.lastMessage?.timestamp ?? 0),
-                isBorder: model?.showName != _chatData[0]?.showName,
+                isBorder: model.showName != _chatData[0]?.showName,
               ),
             );
           },
-          itemCount: _chatData?.length ?? 1,
+          itemCount: _chatData.length ?? 1,
         ),
       ),
     );
