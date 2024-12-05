@@ -20,7 +20,7 @@ class _ChangeNamePageState extends State<ChangeNamePage> {
 
   late String initContent;
 
-  void setInfoMethod(GlobalModel model) {
+  Future<void> setInfoMethod(GlobalModel model) async {
     if (!strNoEmpty(_tc.text)) {
       showToast('输入的内容不能为空');
       return;
@@ -30,19 +30,19 @@ class _ChangeNamePageState extends State<ChangeNamePage> {
       return;
     }
 
-    setUsersProfileMethod(
+    final result = await setUsersProfileMethod(
       context,
       nickNameStr: _tc.text,
       avatarStr: model.avatar,
-      callback: (data) {
-        if (data.toString().contains('succ')) {
-          showToast('设置名字成功');
-          model.refresh();
-          Navigator.of(context).pop();
-        } else
-          showToast('设置名字失败');
-      },
     );
+
+    if (result) {
+      showToast('设置名字成功');
+      model.refresh();
+      Navigator.of(context).pop();
+    } else {
+      showToast('设置名字失败');
+    }
   }
 
   Widget body() {

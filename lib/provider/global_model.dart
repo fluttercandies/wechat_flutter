@@ -1,16 +1,15 @@
-import 'dart:convert';
-
-import 'package:wechat_flutter/im/entity/i_person_info_entity.dart';
-import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:tencent_cloud_chat_sdk/models/v2_tim_user_full_info.dart';
+import 'package:wechat_flutter/im/entity/i_person_info_entity.dart';
 import 'package:wechat_flutter/im/info_handle.dart';
 import 'package:wechat_flutter/provider/loginc/global_loginc.dart';
+import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
 class GlobalModel extends ChangeNotifier {
   BuildContext? context;
 
   ///app的名字
-  String appName = "微信flutter";
+  String appName = '微信flutter';
 
   /// 用户信息
   String account = '';
@@ -19,8 +18,8 @@ class GlobalModel extends ChangeNotifier {
   int gender = 0;
 
   ///当前语言
-  List<String> currentLanguageCode = ["zh", "CN"];
-  String currentLanguage = "中文";
+  List<String> currentLanguageCode = ['zh', 'CN'];
+  String currentLanguage = '中文';
   Locale? currentLocale;
 
   ///是否进入登录页
@@ -51,37 +50,31 @@ class GlobalModel extends ChangeNotifier {
     }
   }
 
-  void initInfo() async {
-    final data = await getUsersProfile([account]);
-    if (data == null) return;
-    List<dynamic> result = json.decode(data);
-    if (Platform.isAndroid) {
-      nickName = result[0]['nickName'];
-      await SharedUtil.instance
-          .saveString(Keys.nickName, result[0]['nickName']);
-      avatar = result[0]['faceUrl'];
-      await SharedUtil.instance.saveString(Keys.faceUrl, result[0]['faceUrl']);
-      gender = result[0]['gender'];
-      await SharedUtil.instance.saveInt(Keys.gender, result[0]['gender']);
-    } else {
-      IPersonInfoEntity model = IPersonInfoEntity.fromJson(result[0]);
-      nickName = model.nickname!;
-      await SharedUtil.instance.saveString(Keys.nickName, model.nickname!);
-      avatar = model.faceURL!;
-      await SharedUtil.instance.saveString(Keys.faceUrl, model.faceURL!);
-      gender = model.gender!;
-      await SharedUtil.instance.saveInt(Keys.gender, model.gender!);
+  Future<void> initInfo() async {
+    final List<V2TimUserFullInfo> data = await getUsersProfile([account]);
+    if (data.isEmpty) {
+      return;
     }
+
+    V2TimUserFullInfo model = data[0];
+    nickName = model.nickName!;
+    await SharedUtil.instance.saveString(Keys.nickName, model.nickName!);
+    avatar = model.faceUrl!;
+    await SharedUtil.instance.saveString(Keys.faceUrl, model.faceUrl!);
+    gender = model.gender!;
+    await SharedUtil.instance.saveInt(Keys.gender, model.gender!);
   }
 
   @override
   void dispose() {
     super.dispose();
-    debugPrint("GlobalModel销毁了");
+    debugPrint('GlobalModel销毁了');
   }
 
   void refresh() {
-    if (!goToLogin) initInfo();
+    if (!goToLogin) {
+      initInfo();
+    }
     notifyListeners();
   }
 }

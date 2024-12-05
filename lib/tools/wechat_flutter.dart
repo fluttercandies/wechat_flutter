@@ -9,6 +9,7 @@ export 'dart:ui';
 
 export 'package:cached_network_image/cached_network_image.dart';
 export 'package:flutter/services.dart';
+export 'package:oktoast/oktoast.dart';
 export 'package:wechat_flutter/config/api.dart';
 export 'package:wechat_flutter/config/const.dart';
 export 'package:wechat_flutter/config/contacts.dart';
@@ -20,13 +21,12 @@ export 'package:wechat_flutter/tools/shared_util.dart';
 export 'package:wechat_flutter/ui/bar/commom_bar.dart';
 export 'package:wechat_flutter/ui/button/commom_button.dart';
 export 'package:wechat_flutter/ui/dialog/show_snack.dart';
+export 'package:wechat_flutter/ui/ui.dart';
 export 'package:wechat_flutter/ui/view/image_view.dart';
 export 'package:wechat_flutter/ui/view/loading_view.dart';
 export 'package:wechat_flutter/ui/view/main_input.dart';
 export 'package:wechat_flutter/ui/view/null_view.dart';
 export 'package:wechat_flutter/ui/web/web_view.dart';
-export 'package:wechat_flutter/ui/ui.dart';
-export 'package:oktoast/oktoast.dart';
 
 export '../../tools/commom.dart';
 
@@ -34,7 +34,7 @@ export '../../tools/commom.dart';
 
 var subscription = Connectivity();
 
-typedef Callback(data);
+typedef Callback<T> = void Function(T data);
 
 DefaultCacheManager cacheManager = new DefaultCacheManager();
 

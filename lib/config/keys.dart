@@ -6,7 +6,6 @@ class Keys {
   static final String password = "password";
   static final String hasLogged = "hasLogged";
   static final String area = "area";
-  static final String contacts = "contacts";
   static final String brokenNetwork = "brokenNetwork";
   static final String faceUrl = 'faceUrl';
   static final String nickName = 'nickName';

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
+import 'package:wechat_camera_picker/wechat_camera_picker.dart';
 import 'package:wechat_flutter/im/message_handle.dart';
 import 'package:wechat_flutter/im/send_handle.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
@@ -23,7 +24,7 @@ class ChatMorePage extends StatefulWidget {
 }
 
 class _ChatMorePageState extends State<ChatMorePage> {
-  List data = [
+  List<Map<String, String>> data = [
     {"name": "相册", "icon": "assets/images/chat/ic_details_photo.webp"},
     {"name": "拍摄", "icon": "assets/images/chat/ic_details_camera.webp"},
     {"name": "视频通话", "icon": "assets/images/chat/ic_details_media.webp"},
@@ -34,7 +35,7 @@ class _ChatMorePageState extends State<ChatMorePage> {
     {"name": "我的收藏", "icon": "assets/images/chat/ic_details_favorite.webp"},
   ];
 
-  List dataS = [
+  List<Map<String, String>> dataS = [
     {"name": "名片", "icon": "assets/images/chat/ic_details_card.webp"},
     {"name": "文件", "icon": "assets/images/chat/ic_details_file.webp"},
   ];
@@ -65,17 +66,14 @@ class _ChatMorePageState extends State<ChatMorePage> {
         });
       });
     } else if (name == '拍摄') {
-      showToast("使用wechat picker");
-      // try {
-      //   List<CameraDescription> cameras;
-      //
-      //   WidgetsFlutterBinding.ensureInitialized();
-      //   cameras = await availableCameras();
-      //
-      //   Get.to(new ShootPage(cameras));
-      // } on CameraException catch (e) {
-      //   logError(e.code, e.description);
-      // }
+      final AssetEntity? entity = await CameraPicker.pickFromCamera(context);
+      entity?.file.then((value) {
+        if (value == null) return;
+        sendImageMsg(widget.id, widget.type, file: value!, callback: (v) {
+          if (v == null) return;
+          Notice.send(WeChatActions.msg(), v ?? '');
+        }, source: ImageSource.camera);
+      });
     } else if (name == '红包') {
       showToast('测试发送红包消息');
       await sendTextMsg('${widget?.id}', widget.type, "测试发送红包消息");
@@ -84,7 +82,7 @@ class _ChatMorePageState extends State<ChatMorePage> {
     }
   }
 
-  itemBuild(data) {
+  Widget itemBuild(List<Map<String, String>> data) {
     return new Container(
       margin: EdgeInsets.all(20.0),
       padding: EdgeInsets.only(bottom: 20.0),
@@ -92,8 +90,8 @@ class _ChatMorePageState extends State<ChatMorePage> {
         runSpacing: 10.0,
         spacing: 10,
         children: List.generate(data.length, (index) {
-          String name = data[index]['name'];
-          String icon = data[index]['icon'];
+          String name = data[index]['name'] as String;
+          String icon = data[index]['icon'] as String;
           return new MoreItemCard(
             name: name,
             icon: icon,

@@ -1,13 +1,12 @@
-import 'package:get/get.dart';
-import 'package:wechat_flutter/im/entity/person_info_entity.dart';
-import 'package:wechat_flutter/pages/contacts/contacts_details_page.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:tencent_cloud_chat_sdk/models/v2_tim_user_full_info.dart';
+import 'package:wechat_flutter/pages/contacts/contacts_details_page.dart';
 import 'package:wechat_flutter/pages/contacts/group_launch_page.dart';
-
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
 class ChatMamBer extends StatefulWidget {
-  final dynamic model;
+  final V2TimUserFullInfo? model;
 
   ChatMamBer({this.model});
 
@@ -18,10 +17,8 @@ class ChatMamBer extends StatefulWidget {
 class _ChatMamBerState extends State<ChatMamBer> {
   @override
   Widget build(BuildContext context) {
-    String face =
-        Platform.isIOS ? widget.model?.faceURL : widget.model?.faceUrl;
-    String name =
-        Platform.isIOS ? widget.model?.nickname : widget.model?.nickName;
+    String face = widget.model?.faceUrl ?? "";
+    String name = widget.model?.nickName ?? "";
 
     List<Widget> wrap = [];
 
@@ -51,7 +48,7 @@ class _ChatMamBerState extends State<ChatMamBer> {
               ),
             ),
             onTap: () => Get.to(new ContactsDetailsPage(
-                id: widget.model.identifier, title: name, avatar: face)),
+                id: widget.model!.userID!, title: name, avatar: face)),
           );
         }).toList(),
       ),

@@ -1,8 +1,7 @@
-import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tencent_cloud_chat_sdk/models/v2_tim_user_full_info.dart';
 import 'package:wechat_flutter/im/entity/i_person_info_entity.dart';
 import 'package:wechat_flutter/im/entity/person_info_entity.dart';
 import 'package:wechat_flutter/im/info_handle.dart';
@@ -23,7 +22,7 @@ class ChatInfoPage extends StatefulWidget {
 }
 
 class _ChatInfoPageState extends State<ChatInfoPage> {
-  var model;
+  V2TimUserFullInfo? model;
 
   bool isRemind = false;
   bool isTop = false;
@@ -31,14 +30,14 @@ class _ChatInfoPageState extends State<ChatInfoPage> {
 
   Widget buildSwitch(item) {
     return new LabelRow(
-      label: item['label'],
+      label: item['label'] as String,
       margin: item['label'] == '消息免打扰' ? EdgeInsets.only(top: 10.0) : null,
       isLine: item['label'] != '强提醒',
       isRight: false,
       rightW: new SizedBox(
         height: 25.0,
         child: new CupertinoSwitch(
-          value: item['value'],
+          value: item['value'] as bool,
           onChanged: (v) {},
         ),
       ),
@@ -97,14 +96,9 @@ class _ChatInfoPageState extends State<ChatInfoPage> {
   }
 
   getInfo() async {
-    final info = await getUsersProfile([widget.id]);
-    List infoList = json.decode(info);
+    final List<V2TimUserFullInfo> infoList = await getUsersProfile([widget.id]);
     setState(() {
-      if (Platform.isIOS) {
-        model = IPersonInfoEntity.fromJson(infoList[0]);
-      } else {
-        model = PersonInfoEntity.fromJson(infoList[0]);
-      }
+      model = infoList[0];
     });
   }
 

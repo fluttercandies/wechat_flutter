@@ -3,24 +3,6 @@ import 'package:wechat_flutter/tools/wechat_flutter.dart';
 // Dim dim = new Dim();
 
 class DimFriend {
-  static Future<dynamic> getFriends(String userName, Callback callback) async {
-    // try {
-    //   var result = await dim.listFriends(userName);
-    //   callback(result);
-    // } on PlatformException {
-    //   print('获取好友  失败');
-    // }
-  }
-
-  static Future<dynamic> addFriend(String userName, Callback callback) async {
-    // try {
-    //   var result = await dim.addFriend(userName);
-    //   callback(result);
-    // } on PlatformException {
-    //   print('添加好友  失败');
-    // }
-  }
-
   static Future<dynamic> setUsersProfile(
       String userName, Callback callback) async {
     // try {

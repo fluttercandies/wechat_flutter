@@ -1,8 +1,5 @@
-import 'dart:convert';
-
-import 'package:flutter/material.dart';
+import 'package:tencent_cloud_chat_sdk/models/v2_tim_user_full_info.dart';
 import 'package:wechat_flutter/im/entity/i_person_info_entity.dart';
-import 'package:wechat_flutter/im/entity/person_info_entity.dart';
 import 'package:wechat_flutter/im/friend_handle.dart';
 import 'package:wechat_flutter/im/info_handle.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
@@ -66,34 +63,21 @@ class UserDataPageGet {
   listUserData() async {
     List<UserData> userData = [];
     for (int i = 0; i < ids.length; i++) {
-      final profile = await getUsersProfile([ids[i]]);
-      List<dynamic> profileData = json.decode(profile);
+      final List<V2TimUserFullInfo> profileData =
+          await getUsersProfile([ids[i]] as List<String>);
       for (int i = 0; i < profileData.length; i++) {
         String avatar;
         String? name;
-        String identifier;
-        if (Platform.isIOS) {
-          IPersonInfoEntity info = IPersonInfoEntity.fromJson(profileData[i]);
-          identifier = info.identifier!;
-          if (strNoEmpty(info?.faceURL) && info?.faceURL != '[]') {
-            avatar = info?.faceURL ?? defIcon;
-          } else {
-            avatar = defIcon;
-          }
-          name =
-              strNoEmpty(info?.nickname) ? info?.nickname : identifier ?? '未知';
-        } else {
-          PersonInfoEntity info = PersonInfoEntity.fromJson(profileData[i]);
-          identifier = info.identifier!;
-          if (strNoEmpty(info?.faceUrl) && info?.faceUrl != '[]') {
-            avatar = info?.faceUrl ?? defIcon;
-          } else {
-            avatar = defIcon;
-          }
-          name =
-              strNoEmpty(info?.nickName) ? info?.nickName : identifier ?? '未知';
-        }
+        String? identifier;
 
+        V2TimUserFullInfo info = profileData[i];
+        identifier = info.userID!;
+        if (strNoEmpty(info?.faceUrl) && info?.faceUrl != '[]') {
+          avatar = info?.faceUrl ?? defIcon;
+        } else {
+          avatar = defIcon;
+        }
+        name = strNoEmpty(info?.nickName) ? info?.nickName : identifier ?? '未知';
         final String? user = await SharedUtil.instance.getString(Keys.account);
         final result = await getContactsFriends(user!);
         userData.insert(

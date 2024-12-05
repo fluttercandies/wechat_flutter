@@ -1,7 +1,6 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tencent_cloud_chat_sdk/models/v2_tim_user_full_info.dart';
 import 'package:wechat_flutter/config/dictionary.dart';
 import 'package:wechat_flutter/im/friend_handle.dart';
 import 'package:wechat_flutter/im/info_handle.dart';
@@ -14,7 +13,7 @@ import 'package:wechat_flutter/ui/item/launch_group.dart';
 
 class GroupLaunchPage extends StatefulWidget {
   @override
-  _GroupLaunchPageState createState() => new _GroupLaunchPageState();
+  _GroupLaunchPageState createState() => _GroupLaunchPageState();
 }
 
 class _GroupLaunchPageState extends State<GroupLaunchPage> {
@@ -22,12 +21,12 @@ class _GroupLaunchPageState extends State<GroupLaunchPage> {
   bool showBtn = false;
   bool isResult = false;
 
-  List defItems = ['选择一个群', '面对面建群'];
+  List<String> defItems = ['选择一个群', '面对面建群'];
   List<Contact> _contacts = [];
   List<String> selectData = [];
 
-  FocusNode searchF = new FocusNode();
-  TextEditingController searchC = new TextEditingController();
+  FocusNode searchF = FocusNode();
+  TextEditingController searchC = TextEditingController();
   ScrollController? sC;
 
   final Map _letterPosMap = {INDEX_BAR_WORDS[0]: 0.0};
@@ -35,11 +34,11 @@ class _GroupLaunchPageState extends State<GroupLaunchPage> {
   List<Widget> searchBody() {
     if (isResult) {
       return [
-        new SizedBox(height: mainSpace),
+        SizedBox(height: mainSpace),
       ];
     } else {
       return [
-        new SizedBox(height: mainSpace),
+        SizedBox(height: mainSpace),
       ];
     }
   }
@@ -50,10 +49,12 @@ class _GroupLaunchPageState extends State<GroupLaunchPage> {
     getContacts();
   }
 
-  unFocusMethod() {
+  void unFocusMethod() {
     searchF.unfocus();
     isSearch = false;
-    if (isResult) isResult = !isResult;
+    if (isResult) {
+      isResult = !isResult;
+    }
     setState(() {});
   }
 
@@ -65,35 +66,39 @@ class _GroupLaunchPageState extends State<GroupLaunchPage> {
     _contacts..addAll(listContact);
     _contacts
         .sort((Contact a, Contact b) => a.nameIndex.compareTo(b.nameIndex));
-    sC = new ScrollController();
+    sC = ScrollController();
 
     /// 计算用于 IndexBar 进行定位的关键通讯录列表项的位置
     var _totalPos = ContactItemState.heightItem(false);
     for (int i = 0; i < _contacts.length; i++) {
       bool _hasGroupTitle = true;
       if (i > 0 &&
-          _contacts[i].nameIndex.compareTo(_contacts[i - 1].nameIndex) == 0)
+          _contacts[i].nameIndex.compareTo(_contacts[i - 1].nameIndex) == 0) {
         _hasGroupTitle = false;
+      }
 
-      if (_hasGroupTitle) _letterPosMap[_contacts[i].nameIndex] = _totalPos;
+      if (_hasGroupTitle) {
+        _letterPosMap[_contacts[i].nameIndex] = _totalPos;
+      }
 
       _totalPos += ContactItemState.heightItem(_hasGroupTitle);
     }
-    if (mounted) setState(() {});
+    if (mounted) {
+      setState(() {});
+    }
   }
 
   // 搜索好友
   Future search(String userName) async {
-    final data = await getUsersProfile([userName]);
-    List<dynamic> dataMap = json.decode(data);
-    if (strNoEmpty(dataMap[0]['allowType'])) {
+    final List<V2TimUserFullInfo> data = await getUsersProfile([userName]);
+    if (data[0].allowType != null) {
       Get.to(
-        new AddFriendsDetails(
+        AddFriendsDetails(
           'search',
-          dataMap[0]['identifier'],
-          dataMap[0]['faceUrl'],
-          dataMap[0]['nickName'],
-          dataMap[0]['gender'],
+          data[0].userID!,
+          data[0].faceUrl ?? '',
+          data[0].nickName ?? '',
+          data[0].gender ?? 0,
         ),
       );
     } else {
@@ -106,20 +111,19 @@ class _GroupLaunchPageState extends State<GroupLaunchPage> {
   Widget build(BuildContext context) {
     List<Widget> body() {
       return [
-        new SizedBox(height: 50.0),
-        new Container(
-          child: new Column(
-            children: defItems
-                .map((item) => new LaunchGroupItem(item: item))
-                .toList(),
+        SizedBox(height: 50.0),
+        Container(
+          child: Column(
+            children:
+                defItems.map((item) => LaunchGroupItem(item: item)).toList(),
           ),
         ),
-        new Expanded(
-          child: new ContactView(
+        Expanded(
+          child: ContactView(
             sC: sC,
             contacts: _contacts,
             type: ClickType.select,
-            callback: (v) {
+            callback: (List<String> v) {
               selectData = v;
             },
           ),
@@ -127,7 +131,7 @@ class _GroupLaunchPageState extends State<GroupLaunchPage> {
       ];
     }
 
-    var rWidget = new ComMomButton(
+    var rWidget = ComMomButton(
       text: '确定',
       style: TextStyle(color: Colors.white),
       width: 45.0,
@@ -152,21 +156,21 @@ class _GroupLaunchPageState extends State<GroupLaunchPage> {
     );
 
     return WillPopScope(
-      child: new Scaffold(
+      child: Scaffold(
         backgroundColor: appBarColor,
-        appBar: new ComMomBar(title: '发起群聊', rightDMActions: <Widget>[rWidget]),
-        body: new Stack(
+        appBar: ComMomBar(title: '发起群聊', rightDMActions: <Widget>[rWidget]),
+        body: Stack(
           children: <Widget>[
-            new MainInputBody(
+            MainInputBody(
               child: isSearch
-                  ? new GestureDetector(
-                      child: new Column(children: searchBody()),
+                  ? GestureDetector(
+                      child: Column(children: searchBody()),
                       onTap: () => unFocusMethod(),
                     )
-                  : new Column(children: body()),
+                  : Column(children: body()),
               onTap: () => unFocusMethod(),
             ),
-            new Container(
+            Container(
               decoration: BoxDecoration(
                 color: Colors.white.withOpacity(0.8),
                 border: Border(
@@ -178,15 +182,18 @@ class _GroupLaunchPageState extends State<GroupLaunchPage> {
               alignment: Alignment.center,
               height: 50.0,
               padding: EdgeInsets.symmetric(horizontal: 10.0),
-              child: new LaunchSearch(
+              child: LaunchSearch(
                 searchC: searchC,
                 searchF: searchF,
                 onChanged: (txt) {
-                  if (strNoEmpty(searchC.text))
+                  if (strNoEmpty(searchC.text)) {
                     showBtn = true;
-                  else
+                  } else {
                     showBtn = false;
-                  if (isResult) isResult = false;
+                  }
+                  if (isResult) {
+                    isResult = false;
+                  }
 
                   setState(() {});
                 },

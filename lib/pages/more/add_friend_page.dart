@@ -1,9 +1,8 @@
-import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+import 'package:tencent_cloud_chat_sdk/models/v2_tim_user_full_info.dart';
 import 'package:wechat_flutter/im/entity/i_person_info_entity.dart';
 import 'package:wechat_flutter/im/entity/person_info_entity.dart';
 import 'package:wechat_flutter/im/info_handle.dart';
@@ -176,26 +175,17 @@ class _AddFriendPageState extends State<AddFriendPage> {
 
   // 搜索好友
   Future search(String userName) async {
-    final data = await getUsersProfile([userName]);
-    if (data == null) {
+    final List<V2TimUserFullInfo> data = await getUsersProfile([userName]);
+    if (data.isEmpty) {
       showToast('该用户不存在【可搜"188"或"18888"试试】');
       return;
     }
-    List<dynamic> dataMap = json.decode(data);
     setState(() {
       if (Platform.isIOS) {
-        IPersonInfoEntity model = IPersonInfoEntity.fromJson(dataMap[0]);
-        if (strNoEmpty(model.allowType.toString())) {
-          Get.to(new AddFriendsDetails('search', model.identifier!,
-              model.faceURL!, model.nickname!, model.gender!));
-        } else {
-          isResult = true;
-        }
-      } else {
-        PersonInfoEntity model = PersonInfoEntity.fromJson(dataMap[0]);
-        if (strNoEmpty(model.allowType)) {
-          Get.to(new AddFriendsDetails('search', model.identifier!,
-              model.faceUrl!, model.nickName!, model.gender!));
+        V2TimUserFullInfo model = data[0];
+        if (model.allowType != null) {
+          Get.to(new AddFriendsDetails('search', model.userID!, model.faceUrl!,
+              model.nickName!, model.gender!));
         } else {
           isResult = true;
         }

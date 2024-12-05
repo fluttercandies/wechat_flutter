@@ -13,7 +13,9 @@ friendItemDialog(BuildContext context,
       confirmAlert(
         context,
         (bool) {
-          if (bool) delFriend(userId, context, suCc: (v) => suCc(v));
+          if (bool) {
+            delFriend(userId, context, suCc: (v) => suCc(v));
+          }
         },
         tips: '你确定要删除此联系人吗',
         okBtn: '删除',

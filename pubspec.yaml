@@ -39,6 +39,7 @@ dependencies:
   lpinyin: 2.0.3 #拼音
   azlistview_plus: 3.0.0 #特殊列表滑动
   wechat_assets_picker: 9.4.1 #微信图库
+  wechat_camera_picker: 4.3.6 #微信拍摄
   photo_manager: 3.5.0 #wechat_assets_picker的配件
   extended_image: 9.0.7 #扩展图片
   platform: 3.1.0 #平台

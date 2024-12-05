@@ -59,7 +59,7 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
     // }
   }
 
-  Widget dynamicAvatar(avatar, {size}) {
+  Widget dynamicAvatar(String avatar, {double? size}) {
     if (isNetWorkImg(avatar)) {
       return new CachedNetworkImage(
           imageUrl: avatar,

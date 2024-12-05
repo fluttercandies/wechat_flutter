@@ -12,7 +12,7 @@ class ContactView extends StatelessWidget {
   final List<ContactItem> functionButtons;
   final List<Contact> contacts;
   final ClickType? type;
-  final Callback? callback;
+  final Callback<List<String>>? callback;
 
   ContactView({
     this.sC,

@@ -1,8 +1,12 @@
+import 'dart:developer';
+
 import 'package:image_picker/image_picker.dart';
 import 'package:tencent_cloud_chat_sdk/enum/conversation_type.dart';
 import 'package:tencent_cloud_chat_sdk/enum/history_msg_get_type_enum.dart';
+import 'package:tencent_cloud_chat_sdk/enum/offlinePushInfo.dart';
 import 'package:tencent_cloud_chat_sdk/models/v2_tim_message.dart';
 import 'package:tencent_cloud_chat_sdk/models/v2_tim_message_list_result.dart';
+import 'package:tencent_cloud_chat_sdk/models/v2_tim_msg_create_info_result.dart';
 import 'package:tencent_cloud_chat_sdk/models/v2_tim_value_callback.dart';
 import 'package:tencent_cloud_chat_sdk/tencent_im_sdk_plugin.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
@@ -48,20 +52,74 @@ Future<void> sendImageMsg(String userName, int type,
   if (image == null) return;
   File compressImg = await singleCompressFile(File(image.path));
 
-  // try {
-  //   await im.sendImageMessages(userName, compressImg.path, type: type);
-  //   callback(compressImg.path);
-  // } on PlatformException {
-  //   debugPrint("发送图片消息失败");
-  // }
+  /// Send image message
+
+  // 创建消息
+  V2TimValueCallback<V2TimMsgCreateInfoResult> createImgMessageRes =
+      await TencentImSDKPlugin.v2TIMManager
+          .getMessageManager()
+          .createImageMessage(imagePath: file.path);
+
+  if (createImgMessageRes.code == 0) {
+    log('create message:${createImgMessageRes.toJson()}');
+    callback(compressImg.path);
+    // 文本信息创建成功
+    String? id = createImgMessageRes.data?.id;
+    // 发送消息
+    // 在sendMessage时，若只填写receiver则发个人用户单聊消息
+    //                 若只填写groupID则发群组消息
+    //                 若填写了receiver与groupID则发群内的个人用户，消息在群聊中显示，只有指定receiver能看见
+    OfflinePushInfo pushInfo = OfflinePushInfo();
+    // 测试鸿蒙推送
+    // pushInfo.harmonyCategory = "harmony-Category";
+    // pushInfo.harmonyImage = "harmony-Image";
+    // pushInfo.ignoreHarmonyBadge = true;
+    V2TimValueCallback<V2TimMessage> sendMessageRes =
+        await TencentImSDKPlugin.v2TIMManager.getMessageManager().sendMessage(
+              id: id!,
+              receiver: type == ConversationType.V2TIM_C2C ? userName : '',
+              groupID: type == ConversationType.V2TIM_GROUP ? userName : '',
+              needReadReceipt: true,
+              isSupportMessageExtension: true,
+              offlinePushInfo: pushInfo,
+            );
+    log('Send image message: ${sendMessageRes.toJson()}');
+  }
 }
 
 Future<dynamic> sendSoundMessages(String id, String soundPath, int duration,
     int type, Callback callback) async {
-  // try {
-  //   var result = await im.sendSoundMessages(id, soundPath, type, duration);
-  //   callback(result);
-  // } on PlatformException {
-  //   debugPrint('发送语音  失败');
-  // }
+  /// Send sound message
+
+  // 创建消息
+  V2TimValueCallback<V2TimMsgCreateInfoResult> createSoundMessageRes =
+      await TencentImSDKPlugin.v2TIMManager
+          .getMessageManager()
+          .createSoundMessage(soundPath: soundPath, duration: duration);
+
+  if (createSoundMessageRes.code == 0) {
+    log('create message:${createSoundMessageRes.toJson()}');
+    // 信息创建成功
+    String? id = createSoundMessageRes.data?.id;
+    // 发送消息
+    // 在sendMessage时，若只填写receiver则发个人用户单聊消息
+    //                 若只填写groupID则发群组消息
+    //                 若填写了receiver与groupID则发群内的个人用户，消息在群聊中显示，只有指定receiver能看见
+    OfflinePushInfo pushInfo = OfflinePushInfo();
+    // 测试鸿蒙推送
+    // pushInfo.harmonyCategory = "harmony-Category";
+    // pushInfo.harmonyImage = "harmony-Image";
+    // pushInfo.ignoreHarmonyBadge = true;
+    V2TimValueCallback<V2TimMessage> sendMessageRes =
+        await TencentImSDKPlugin.v2TIMManager.getMessageManager().sendMessage(
+              id: id!,
+              receiver: type == ConversationType.V2TIM_C2C ? id : '',
+              groupID: type == ConversationType.V2TIM_GROUP ? id : '',
+              needReadReceipt: true,
+              isSupportMessageExtension: true,
+              offlinePushInfo: pushInfo,
+            );
+    log('Send image message: ${sendMessageRes.toJson()}');
+    callback(sendMessageRes.code);
+  }
 }

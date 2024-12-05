@@ -1,8 +1,7 @@
-import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tencent_cloud_chat_sdk/models/v2_tim_user_full_info.dart';
 import 'package:wechat_flutter/im/info_handle.dart';
 import 'package:wechat_flutter/pages/more/add_friend_details.dart';
 import 'package:wechat_flutter/pages/more/add_friend_page.dart';
@@ -110,7 +109,7 @@ class _NewFriendPageState extends State<NewFriendPage> {
     // setState(() {});
   }
 
-  unFocusMethod() {
+  void unFocusMethod() {
     searchF.unfocus();
     isSearch = false;
     if (isResult) isResult = !isResult;
@@ -119,12 +118,11 @@ class _NewFriendPageState extends State<NewFriendPage> {
 
   /// 搜索好友
   Future search(String userName) async {
-    final data = await getUsersProfile([userName]);
-    List<dynamic> dataMap = json.decode(data);
-    Map map = dataMap[0];
-    if (strNoEmpty(map['allowType'])) {
-      Get.to(new AddFriendsDetails('search', map['identifier'], map['faceUrl'],
-          map['nickName'], map['gender']));
+    final List<V2TimUserFullInfo> data = await getUsersProfile([userName]);
+    V2TimUserFullInfo model = data[0];
+    if (model.allowType != null) {
+      Get.to(new AddFriendsDetails('search', model.userID!, model.faceUrl ?? '',
+          model.nickName ?? '', model.gender ?? 0));
     } else {
       isResult = true;
       setState(() {});

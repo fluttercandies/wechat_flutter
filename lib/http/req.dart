@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:wechat_flutter/tools/wechat_flutter.dart';
+
+import '../tools/wechat_flutter.dart';
 
 var _id = 0;
 
@@ -131,10 +132,10 @@ class Req {
       statusCode = response.statusCode!;
 
       if (response.data is List) {
-        Map data = response.data[0];
+        Map data = response.data[0] as Map;
         if (callBack != null) callBack!(data);
       } else {
-        Map data = response.data;
+        Map data = response.data as Map;
         if (callBack != null) callBack!(data);
       }
       print('HTTP_REQUEST_URL::[$id]::$url');

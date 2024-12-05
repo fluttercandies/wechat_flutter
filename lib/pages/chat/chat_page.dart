@@ -31,7 +31,7 @@ class ChatPage extends StatefulWidget {
 }
 
 class _ChatPageState extends State<ChatPage> {
-  List<V2TimMessage> chatData = [];
+  List<V2TimMessage> chatData = <V2TimMessage>[];
   StreamSubscription<dynamic>? _msgStreamSubs;
   bool _isVoice = false;
   bool _isMore = false;
@@ -75,9 +75,9 @@ class _ChatPageState extends State<ChatPage> {
   }
 
   void insertText(String text) {
-    final value = _textController.value;
-    final start = value.selection.baseOffset;
-    var end = value.selection.extentOffset;
+    final TextEditingValue value = _textController.value;
+    final int start = value.selection.baseOffset;
+    int end = value.selection.extentOffset;
     if (value.selection.isValid) {
       String newText = '';
       if (value.selection.isCollapsed) {
@@ -116,7 +116,7 @@ class _ChatPageState extends State<ChatPage> {
       return;
     }
 
-    _msgStreamSubs ??= eventBusNewMsg.listen((onData) {
+    _msgStreamSubs ??= eventBusNewMsg.listen((EventBusNewMsg onData) {
       if (onData.covId == widget.id) {
         getChatMsgData();
       }
@@ -125,12 +125,12 @@ class _ChatPageState extends State<ChatPage> {
 
   Future<void> _handleSubmittedData(String text) async {
     _textController.clear();
-    await sendTextMsg(widget.id, widget.type, text, call: (msg) {
+    await sendTextMsg(widget.id, widget.type, text, call: (V2TimMessage msg) {
       chatData.insert(0, msg);
     });
   }
 
-  onTapHandle(ButtonType type) {
+  void onTapHandle(ButtonType type) {
     setState(() {
       if (type == ButtonType.voice) {
         _focusNode.unfocus();
@@ -149,7 +149,7 @@ class _ChatPageState extends State<ChatPage> {
     });
   }
 
-  Widget edit(context, BoxConstraints size) {
+  Widget edit(BuildContext context, BoxConstraints size) {
     // 计算当前的文本需要占用的行数
     final TextSpan text =
         TextSpan(text: _textController.text, style: AppStyles.ChatBoxTextStyle);
@@ -167,7 +167,7 @@ class _ChatPageState extends State<ChatPage> {
           _emojiState = false;
         }
       }),
-      onChanged: (v) => setState(() {}),
+      onChanged: (String v) => setState(() {}),
       decoration: const InputDecoration(
           border: InputBorder.none, contentPadding: EdgeInsets.all(5.0)),
       controller: _textController,
@@ -184,7 +184,7 @@ class _ChatPageState extends State<ChatPage> {
         MediaQuery.of(context).viewInsets.bottom != 0) {
       keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
     }
-    final body = [
+    final List<Widget> body = <Widget>[
       if (chatData != null)
         ChatDetailsBody(sC: _sC, chatData: chatData)
       else
@@ -223,7 +223,7 @@ class _ChatPageState extends State<ChatPage> {
         color: const Color(AppColors.ChatBoxBg),
         child: IndicatorPageView(
           pageC: pageC,
-          pages: List.generate(2, (index) {
+          pages: List.generate(2, (int index) {
             return ChatMorePage(
               index: index,
               id: widget.id,
@@ -235,7 +235,7 @@ class _ChatPageState extends State<ChatPage> {
       ),
     ];
 
-    final rWidget = [
+    final List<InkWell> rWidget = <InkWell>[
       InkWell(
         child: Image.asset('assets/images/right_more.png'),
         onTap: () => Get.to(widget.type == 2
@@ -271,7 +271,7 @@ class _ChatPageState extends State<ChatPage> {
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 7, crossAxisSpacing: 10.0, mainAxisSpacing: 10.0),
           scrollDirection: Axis.horizontal,
-          itemBuilder: (context, index) {
+          itemBuilder: (BuildContext context, int index) {
             return GestureDetector(
               child:
                   Image.asset(EmojiUitl.instance.emojiMap['[${index + 1}]']!),
