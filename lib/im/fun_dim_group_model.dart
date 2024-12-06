@@ -1,5 +1,6 @@
-import 'dart:convert';
-
+import 'package:tencent_cloud_chat_sdk/manager/v2_tim_manager.dart';
+import 'package:tencent_cloud_chat_sdk/models/v2_tim_group_info.dart';
+import 'package:tencent_cloud_chat_sdk/models/v2_tim_value_callback.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
 // Dim dim = new Dim();
@@ -64,13 +65,13 @@ class DimGroup {
     // }
   }
 
-  static Future<dynamic> getGroupListModel(Callback callback) async {
-    // try {
-    //   var result = await dim.getGroupList();
-    //   callback(result);
-    // } on PlatformException {
-    //   print('获取群列表  失败');
-    // }
+  static Future<List<V2TimGroupInfo>> getGroupListModel() async {
+    final V2TimValueCallback<List<V2TimGroupInfo>> callback =
+        await V2TIMManager().getGroupManager().getJoinedGroupList();
+    if (callback.code != 0) {
+      showToast('获取群列表失败 code=${callback.code} desc=${callback.desc}');
+    }
+    return callback.data ?? [];
   }
 
   static Future<dynamic> getGroupInfoListModel(List<String> groupID,

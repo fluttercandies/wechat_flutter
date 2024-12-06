@@ -41,7 +41,7 @@ class _AddFriendPageState extends State<AddFriendPage> {
           ? item['icon']
           : 'assets/images/favorite.webp',
       fit: BoxFit.cover,
-      onPressed: () => Get.to(new UserPage()),
+      onPressed: () => Get.to<void>(new UserPage()),
     );
   }
 
@@ -102,7 +102,7 @@ class _AddFriendPageState extends State<AddFriendPage> {
             new InkWell(
               child: new Image.asset('assets/images/mine/ic_small_code.png',
                   color: mainTextColor.withOpacity(0.7)),
-              onTap: () => Get.to(new CodePage()),
+              onTap: () => Get.to<void>(new CodePage()),
             )
           ],
         ),
@@ -184,7 +184,7 @@ class _AddFriendPageState extends State<AddFriendPage> {
       if (Platform.isIOS) {
         V2TimUserFullInfo model = data[0];
         if (model.allowType != null) {
-          Get.to(new AddFriendsDetails('search', model.userID!, model.faceUrl!,
+          Get.to<void>(new AddFriendsDetails('search', model.userID!, model.faceUrl!,
               model.nickName!, model.gender!));
         } else {
           isResult = true;

@@ -238,7 +238,7 @@ class _ChatPageState extends State<ChatPage> {
     final List<InkWell> rWidget = <InkWell>[
       InkWell(
         child: Image.asset('assets/images/right_more.png'),
-        onTap: () => Get.to(widget.type == 2
+        onTap: () => Get.to<void>(widget.type == 2
             ? GroupDetailsPage(
                 widget?.id ?? widget.title,
                 callBack: (v) {},

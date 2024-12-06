@@ -230,7 +230,7 @@ class _WeChatFriendsCircleState extends State<WeChatFriendsCircle> {
 //      debugPrint(images.toString());
 //
 //      if (images.isNotEmpty) {
-//        Get.to(PublishDynamicPage(images: images, maxImages: maxImages));
+//        Get.to<void>(PublishDynamicPage(images: images, maxImages: maxImages));
 //      }
 //    });
   }

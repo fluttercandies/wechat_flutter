@@ -12,7 +12,7 @@ class DiscoverPage extends StatefulWidget {
 }
 
 class _DiscoverPageState extends State<DiscoverPage> {
-  Widget buildContent(item) {
+  Widget buildContent(Map<String, String> item) {
     bool isShow() {
       if (item['name'] == '朋友圈' ||
           item['name'] == '摇一摇' ||
@@ -38,9 +38,9 @@ class _DiscoverPageState extends State<DiscoverPage> {
       margin: EdgeInsets.only(bottom: isShow() ? 10.0 : 0.0),
       onPressed: () {
         if (item['name'] == '朋友圈') {
-          Get.to(new WeChatFriendsCircle());
+          Get.to<void>(new WeChatFriendsCircle());
         } else {
-          Get.to(new LanguagePage());
+          Get.to<void>(new LanguagePage());
         }
       },
     );
@@ -48,7 +48,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
 
   @override
   Widget build(BuildContext context) {
-    List data = [
+    List<Map<String, String>> data = [
       {'icon': 'assets/images/discover/ff_Icon_album.webp', 'name': '朋友圈'},
       {'icon': 'assets/images/discover/ff_Icon_qr_code.webp', 'name': '扫一扫'},
       {'icon': 'assets/images/discover/ff_Icon_shake.webp', 'name': '摇一摇'},

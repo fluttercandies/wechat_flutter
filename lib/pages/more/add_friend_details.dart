@@ -47,12 +47,12 @@ class _AddFriendsDetailsState extends State<AddFriendsDetails> {
       ),
       new LabelRow(
         label: '朋友圈',
-        onPressed: () => Get.to(new WeChatFriendsCircle()),
+        onPressed: () => Get.to<void>(new WeChatFriendsCircle()),
       ),
       new ButtonRow(
         margin: EdgeInsets.only(top: 10.0),
         text: '添加到通讯录',
-        onPressed: () => Get.to(
+        onPressed: () => Get.to<void>(
             new VerificationPage(nickName: widget.nickName, id: widget.imUser)),
       ),
     ];

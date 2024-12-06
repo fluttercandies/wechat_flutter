@@ -7,13 +7,14 @@ import 'package:wechat_flutter/pages/more/add_friend_details.dart';
 import 'package:wechat_flutter/pages/more/add_friend_page.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'package:wechat_flutter/ui/orther/label_row.dart';
-import 'package:wechat_flutter/ui/view/list_tile_view.dart';
 import 'package:wechat_flutter/ui/view/search_main_view.dart';
 import 'package:wechat_flutter/ui/view/search_tile_view.dart';
 
 class NewFriendPage extends StatefulWidget {
+  const NewFriendPage({super.key});
+
   @override
-  _NewFriendPageState createState() => new _NewFriendPageState();
+  State<NewFriendPage> createState() => _NewFriendPageState();
 }
 
 class _NewFriendPageState extends State<NewFriendPage> {
@@ -21,24 +22,12 @@ class _NewFriendPageState extends State<NewFriendPage> {
   bool showBtn = false;
   bool isResult = false;
 
-  String? currentUser;
-
-  FocusNode searchF = new FocusNode();
-  TextEditingController searchC = new TextEditingController();
-
-  Widget buildItem(item) {
-    return new ListTileView(
-      border: item['title'] == '雷达加朋友'
-          ? null
-          : Border(top: BorderSide(color: lineColor, width: 0.2)),
-      title: item['title'],
-      label: item['label'],
-    );
-  }
+  FocusNode searchF = FocusNode();
+  TextEditingController searchC = TextEditingController();
 
   Widget body() {
-    var content = [
-      new SearchMainView(
+    final List<StatelessWidget> content = <StatelessWidget>[
+      SearchMainView(
         text: '微信号/手机号',
         isBorder: true,
         onTap: () {
@@ -47,47 +36,47 @@ class _NewFriendPageState extends State<NewFriendPage> {
           searchF.requestFocus();
         },
       ),
-      new LabelRow(
-        headW: new Padding(
-          padding: EdgeInsets.only(right: 15.0),
-          child: new Image.asset('assets/images/contact/ic_voice.png',
+      LabelRow(
+        headW: Padding(
+          padding: const EdgeInsets.only(right: 15.0),
+          child: Image.asset('assets/images/contact/ic_voice.png',
               width: 25, fit: BoxFit.cover),
         ),
         label: '添加手机联系人',
       )
     ];
 
-    return new Column(children: content);
+    return Column(children: content);
   }
 
   List<Widget> searchBody() {
     if (isResult) {
-      return [
-        new Container(
+      return <Widget>[
+        Container(
           color: Colors.white,
           width: Get.width,
           height: 110.0,
           alignment: Alignment.center,
-          child: new Text(
+          child: const Text(
             '该用户不存在',
             style: TextStyle(color: mainTextColor),
           ),
         ),
-        new SizedBox(height: mainSpace),
-        new SearchTileView(searchC.text, type: 1),
-        new Container(
+        const SizedBox(height: mainSpace),
+        SearchTileView(searchC.text, type: 1),
+        Container(
           color: Colors.white,
           width: Get.width,
-          height: (Get.height - 185 * 1.38),
+          height: Get.height - 185 * 1.38,
         )
       ];
     } else {
-      return [
-        new SearchTileView(
+      return <Widget>[
+        SearchTileView(
           searchC.text,
           onPressed: () => search(searchC.text),
         ),
-        new Container(
+        Container(
           color: strNoEmpty(searchC.text) ? Colors.white : appBarColor,
           width: Get.width,
           height: strNoEmpty(searchC.text)
@@ -101,12 +90,6 @@ class _NewFriendPageState extends State<NewFriendPage> {
   @override
   void initState() {
     super.initState();
-    getUser();
-  }
-
-  getUser() async {
-    // currentUser = await im.getCurrentLoginUser();
-    // setState(() {});
   }
 
   void unFocusMethod() {
@@ -118,11 +101,12 @@ class _NewFriendPageState extends State<NewFriendPage> {
 
   /// 搜索好友
   Future search(String userName) async {
-    final List<V2TimUserFullInfo> data = await getUsersProfile([userName]);
-    V2TimUserFullInfo model = data[0];
+    final List<V2TimUserFullInfo> data =
+        await getUsersProfile(<String>[userName]);
+    final V2TimUserFullInfo model = data[0];
     if (model.allowType != null) {
-      Get.to(new AddFriendsDetails('search', model.userID!, model.faceUrl ?? '',
-          model.nickName ?? '', model.gender ?? 0));
+      Get.to<void>(AddFriendsDetails('search', model.userID!,
+          model.faceUrl ?? '', model.nickName ?? '', model.gender ?? 0));
     } else {
       isResult = true;
       setState(() {});
@@ -131,72 +115,74 @@ class _NewFriendPageState extends State<NewFriendPage> {
 
   @override
   Widget build(BuildContext context) {
-    var leading = new InkWell(
-      child: new Container(
+    final InkWell leading = InkWell(
+      child: Container(
         width: 15,
         height: 28,
-        child: new Icon(CupertinoIcons.back, color: Colors.black),
+        child: const Icon(CupertinoIcons.back, color: Colors.black),
       ),
       onTap: () => unFocusMethod(),
     );
 
     // ignore: unused_element
     List<Widget> searchView() {
-      return [
-        new Expanded(
-          child: new TextField(
-            style: TextStyle(textBaseline: TextBaseline.alphabetic),
+      return <Widget>[
+        Expanded(
+          child: TextField(
+            style: const TextStyle(textBaseline: TextBaseline.alphabetic),
             focusNode: searchF,
             controller: searchC,
-            decoration:
-                InputDecoration(hintText: '微信号/手机号', border: InputBorder.none),
-            onChanged: (txt) {
-              if (strNoEmpty(searchC.text))
+            decoration: const InputDecoration(
+                hintText: '微信号/手机号', border: InputBorder.none),
+            onChanged: (String txt) {
+              if (strNoEmpty(searchC.text)) {
                 showBtn = true;
-              else
+              } else {
                 showBtn = false;
+              }
               if (isResult) isResult = false;
 
               setState(() {});
             },
             textInputAction: TextInputAction.search,
-            onSubmitted: (txt) => search(txt),
+            onSubmitted: (String txt) => search(txt),
           ),
         ),
-        strNoEmpty(searchC.text)
-            ? new InkWell(
-                child: new Image.asset('assets/images/ic_delete.webp'),
-                onTap: () {
-                  searchC.text = '';
-                  setState(() {});
-                },
-              )
-            : new Container()
+        if (strNoEmpty(searchC.text))
+          InkWell(
+            child: Image.asset('assets/images/ic_delete.webp'),
+            onTap: () {
+              searchC.text = '';
+              setState(() {});
+            },
+          )
+        else
+          Container()
       ];
     }
 
-    var bodyView = new SingleChildScrollView(
+    final SingleChildScrollView bodyView = SingleChildScrollView(
       child: isSearch
-          ? new GestureDetector(
-              child: new Column(children: searchBody()),
+          ? GestureDetector(
+              child: Column(children: searchBody()),
               onTap: () => unFocusMethod(),
             )
           : body(),
     );
 
-    var rWidget = new TextButton(
-      onPressed: () => Get.to(new AddFriendPage()),
-      child: new Text('添加朋友'),
+    final TextButton rWidget = TextButton(
+      onPressed: () => Get.to<void>(AddFriendPage()),
+      child: const Text('添加朋友'),
     );
 
     return WillPopScope(
-      child: new Scaffold(
+      child: Scaffold(
         backgroundColor: appBarColor,
-        appBar: new ComMomBar(
+        appBar: ComMomBar(
           leadingW: isSearch ? leading : null,
           title: '新的朋友',
-          titleW: isSearch ? new Row(children: searchView()) : null,
-          rightDMActions: !isSearch ? [rWidget] : [],
+          titleW: isSearch ? Row(children: searchView()) : null,
+          rightDMActions: !isSearch ? <Widget>[rWidget] : <Widget>[],
         ),
         body: bodyView,
       ),

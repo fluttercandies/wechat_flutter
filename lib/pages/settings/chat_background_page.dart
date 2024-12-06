@@ -24,7 +24,7 @@ class _ChatBackgroundPageState extends State<ChatBackgroundPage> {
         children: <Widget>[
           new GroupItem(
             title: '选择背景图',
-            onPressed: () => Get.to(new SelectBgPage()),
+            onPressed: () => Get.to<void>(new SelectBgPage()),
           ),
           new GroupItem(
             title: '从手机相册选择',

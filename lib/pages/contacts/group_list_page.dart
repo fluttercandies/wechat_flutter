@@ -1,13 +1,11 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tencent_cloud_chat_sdk/enum/conversation_type.dart';
+import 'package:tencent_cloud_chat_sdk/models/v2_tim_group_info.dart';
 import 'package:wechat_flutter/im/fun_dim_group_model.dart';
 import 'package:wechat_flutter/pages/chat/chat_page.dart';
 import 'package:wechat_flutter/pages/contacts/group_launch_page.dart';
 import 'package:wechat_flutter/pages/home/search_page.dart';
-
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
 class GroupListPage extends StatefulWidget {
@@ -16,7 +14,7 @@ class GroupListPage extends StatefulWidget {
 }
 
 class _GroupListPageState extends State<GroupListPage> {
-  List _groupList = [];
+  List<V2TimGroupInfo> _groupList = [];
 
   @override
   void initState() {
@@ -28,18 +26,16 @@ class _GroupListPageState extends State<GroupListPage> {
   }
 
   // 获取群聊列表
-  Future _getGroupListModel() async {
-    await DimGroup.getGroupListModel((result) {
-      setState(() =>
-          _groupList = json.decode(result.toString().replaceAll("'", '"')));
-    });
+  Future<void> _getGroupListModel() async {
+    final List<V2TimGroupInfo> list = await DimGroup.getGroupListModel();
+    setState(() => _groupList = list);
   }
 
   Widget groupItem(BuildContext context, String gName, String gId,
       String gFaceURL, String title) {
     return TextButton(
       onPressed: () {
-        Get.to(ChatPage(
+        Get.to<void>(ChatPage(
           title: gName,
           type: ConversationType.V2TIM_GROUP,
           id: gId,
@@ -93,7 +89,7 @@ class _GroupListPageState extends State<GroupListPage> {
           width: 60.0,
           child: new Image.asset('assets/images/search_black.webp'),
         ),
-        onTap: () => Get.to(new SearchPage()),
+        onTap: () => Get.to<void>(new SearchPage()),
       ),
       new InkWell(
         child: new Container(
@@ -101,7 +97,7 @@ class _GroupListPageState extends State<GroupListPage> {
           child: new Image.asset('assets/images/contact/ic_contact_add.webp',
               color: Colors.black, width: 22.0, fit: BoxFit.fitWidth),
         ),
-        onTap: () => Get.to(new GroupLaunchPage()),
+        onTap: () => Get.to<void>(new GroupLaunchPage()),
       ),
     ];
 
@@ -111,25 +107,27 @@ class _GroupListPageState extends State<GroupListPage> {
           ? ListView.builder(
               itemCount: _groupList.length,
               itemBuilder: (context, index) {
+                final item = _groupList[index];
                 return Column(
                   children: <Widget>[
-                    _groupList.length > 0
-                        ? groupItem(
-                            context,
-                            _groupList[index]['groupName'] ?? '',
-                            _groupList[index]['groupId'] ?? '',
-                            !strNoEmpty(_groupList[index]['getFaceUrl'])
-                                ? defGroupAvatar
-                                : _groupList[index]['getFaceUrl'],
-                            _groupList[index]['groupId'] ?? '',
-                          )
-                        : SizedBox(height: 1),
+                    if (_groupList.isNotEmpty)
+                      groupItem(
+                        context,
+                        item.groupName ?? '',
+                        item.groupID ?? '',
+                        !strNoEmpty(item.faceUrl)
+                            ? defGroupAvatar
+                            : item.faceUrl!,
+                        item.groupID ?? '',
+                      )
+                    else
+                      SizedBox(height: 1),
                   ],
                 );
               },
             )
-          : new Center(
-              child: new Text(
+          : const Center(
+              child: Text(
                 '暂无群聊',
                 style: TextStyle(color: mainTextColor),
               ),

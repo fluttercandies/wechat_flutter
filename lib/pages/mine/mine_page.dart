@@ -24,10 +24,10 @@ class _MinePageState extends State<MinePage> {
         ImLoginManager.loginOut(context);
         break;
       case '支付':
-        Get.to(new PayHomePage());
+        Get.to<void>(new PayHomePage());
         break;
       default:
-        Get.to(new LanguagePage());
+        Get.to<void>(new LanguagePage());
         break;
     }
   }
@@ -125,7 +125,7 @@ class _MinePageState extends State<MinePage> {
             child: new Row(
                 crossAxisAlignment: CrossAxisAlignment.center, children: row),
           ),
-          onTap: () => Get.to(new PersonalInfoPage()),
+          onTap: () => Get.to<void>(new PersonalInfoPage()),
         ),
         new Column(children: data.map(buildContent).toList()),
       ],

@@ -140,15 +140,15 @@ class ContactItemState extends State<ContactItem> {
           return;
         }
         if (widget.title == '新的朋友') {
-          Get.to(NewFriendPage());
+          Get.to<void>(NewFriendPage());
         } else if (widget.title == '群聊') {
-          Get.to(GroupListPage());
+          Get.to<void>(GroupListPage());
         } else if (widget.title == '标签') {
-          Get.to(AllLabelPage());
+          Get.to<void>(AllLabelPage());
         } else if (widget.title == '公众号') {
-          Get.to(PublicPage());
+          Get.to<void>(PublicPage());
         } else {
-          Get.to(ContactsDetailsPage(
+          Get.to<void>(ContactsDetailsPage(
               id: widget.identifier ?? '',
               avatar: widget.avatar,
               title: widget.title));

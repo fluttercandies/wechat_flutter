@@ -2,8 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tencent_cloud_chat_sdk/models/v2_tim_user_full_info.dart';
-import 'package:wechat_flutter/im/entity/i_person_info_entity.dart';
-import 'package:wechat_flutter/im/entity/person_info_entity.dart';
 import 'package:wechat_flutter/im/info_handle.dart';
 import 'package:wechat_flutter/pages/home/search_page.dart';
 import 'package:wechat_flutter/pages/settings/chat_background_page.dart';
@@ -57,7 +55,7 @@ class _ChatInfoPageState extends State<ChatInfoPage> {
       new LabelRow(
         label: '查找聊天记录',
         margin: EdgeInsets.only(top: 10.0),
-        onPressed: () => Get.to(new SearchPage()),
+        onPressed: () => Get.to<void>(new SearchPage()),
       ),
       new Column(
         children: switchItems.map(buildSwitch).toList(),
@@ -65,7 +63,7 @@ class _ChatInfoPageState extends State<ChatInfoPage> {
       new LabelRow(
         label: '设置当前聊天背景',
         margin: EdgeInsets.only(top: 10.0),
-        onPressed: () => Get.to(new ChatBackgroundPage()),
+        onPressed: () => Get.to<void>(new ChatBackgroundPage()),
       ),
       new LabelRow(
         label: '清空聊天记录',
@@ -84,7 +82,7 @@ class _ChatInfoPageState extends State<ChatInfoPage> {
       new LabelRow(
         label: '投诉',
         margin: EdgeInsets.only(top: 10.0),
-        onPressed: () => Get.to(new WebViewPage(url: helpUrl, title: '投诉')),
+        onPressed: () => Get.to<void>(new WebViewPage(url: helpUrl, title: '投诉')),
       ),
     ];
   }

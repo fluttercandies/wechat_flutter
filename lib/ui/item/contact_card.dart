@@ -44,7 +44,7 @@ class ContactCard extends StatelessWidget {
                 ImageView(img: img, width: 55, height: 55, fit: BoxFit.cover),
             onTap: () {
               if (isNetWorkImg(img)) {
-                Get.to(
+                Get.to<void>(
                   PhotoView(
                     imageProvider: NetworkImage(img),
                     onTapUp: (c, f, s) => Navigator.of(context).pop(),

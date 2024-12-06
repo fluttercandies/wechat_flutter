@@ -83,7 +83,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ),
           onPressed: () async {
-            final result = await Get.to(new SelectLocationPage());
+            final result = await Get.to<void>(new SelectLocationPage());
             if (result == null) return;
             model.area = result;
             model.refresh();

@@ -18,6 +18,8 @@ import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'package:wechat_flutter/ui/dialog/confirm_alert.dart';
 import 'package:wechat_flutter/ui/view/indicator_page_view.dart';
 
+import '../../im/info_handle.dart';
+
 class GroupDetailsPage extends StatefulWidget {
   final String peer;
   final Callback? callBack;
@@ -102,11 +104,11 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
             width: 48.0,
           ),
         ),
-        onTap: () => Get.to(() => SelectMembersPage()),
+        onTap: () => Get.to<void>(() => SelectMembersPage()),
       );
     }
     return FutureBuilder(
-      future: DimFriend.getUsersProfile(item['user'], (cb) {
+      future: getUsersProfile(item['user'], (cb) {
         userInfo = json.decode(cb.toString());
         uId = userInfo[0]['identifier'];
         uFace = userInfo[0]['faceUrl'];
@@ -117,7 +119,7 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
           width: (Get.width - 60) / 5,
           child: TextButton(
             onPressed: () =>
-                Get.to(() => GroupMemberDetails(Data.user() == uId, uId)),
+                Get.to<void>(() => GroupMemberDetails(Data.user() == uId, uId)),
             style: TextButton.styleFrom(padding: EdgeInsets.zero),
             child: Column(
               children: <Widget>[
@@ -196,7 +198,7 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
                   '查看全部群成员',
                   style: TextStyle(fontSize: 14.0, color: Colors.black54),
                 ),
-                onPressed: () => Get.to(() => GroupMembersPage(widget.peer)),
+                onPressed: () => Get.to<void>(() => GroupMembersPage(widget.peer)),
               ),
             ),
             SizedBox(height: 10.0),
@@ -322,10 +324,10 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
   handle(String title) {
     switch (title) {
       case '备注':
-        Get.to(() => GroupRemarksPage(groupId: widget.peer));
+        Get.to<void>(() => GroupRemarksPage(groupId: widget.peer));
         break;
       case '群聊名称':
-        Get.to(
+        Get.to<void>(
           () => GroupRemarksPage(
             groupInfoType: GroupInfoType.name,
             text: groupName ?? "",
@@ -337,10 +339,10 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
         });
         break;
       case '群二维码':
-        Get.to(() => CodePage(true));
+        Get.to<void>(() => CodePage(true));
         break;
       case '群公告':
-        Get.to(
+        Get.to<void>(
           () => GroupBillBoardPage(
             dataGroup![0]['groupOwner'],
             groupNotification!,
@@ -353,7 +355,7 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
         });
         break;
       case '查找聊天记录':
-        Get.to(() => SearchPage());
+        Get.to<void>(() => SearchPage());
         break;
       case '消息免打扰':
         _dnd = !_dnd;
@@ -365,10 +367,10 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
         _top ? _setTop(1) : _setTop(2);
         break;
       case '设置当前聊天背景':
-        Get.to(() => ChatBackgroundPage());
+        Get.to<void>(() => ChatBackgroundPage());
         break;
       case '我在群里的昵称':
-        Get.to(
+        Get.to<void>(
           () => GroupRemarksPage(
             groupInfoType: GroupInfoType.cardName,
             text: cardName,
@@ -379,7 +381,7 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
         });
         break;
       case '投诉':
-        Get.to(() => WebViewPage(url: helpUrl, title: '投诉'));
+        Get.to<void>(() => WebViewPage(url: helpUrl, title: '投诉'));
         break;
       case '清空聊天记录':
         confirmAlert(

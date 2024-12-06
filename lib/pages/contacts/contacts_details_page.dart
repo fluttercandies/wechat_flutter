@@ -37,7 +37,7 @@ class _ContactsDetailsPageState extends State<ContactsDetailsPage> {
         visible: !isSelf,
         child: new LabelRow(
           label: '设置备注和标签',
-          onPressed: () => Get.to(new SetRemarkPage()),
+          onPressed: () => Get.to<void>(new SetRemarkPage()),
         ),
       ),
       new Space(),
@@ -45,11 +45,11 @@ class _ContactsDetailsPageState extends State<ContactsDetailsPage> {
         label: '朋友圈',
         isLine: true,
         lineWidth: 0.3,
-        onPressed: () => Get.to(new WeChatFriendsCircle()),
+        onPressed: () => Get.to<void>(new WeChatFriendsCircle()),
       ),
       new LabelRow(
         label: '更多信息',
-        onPressed: () => Get.to(new MoreInfoPage()),
+        onPressed: () => Get.to<void>(new MoreInfoPage()),
       ),
       new ButtonRow(
         margin: EdgeInsets.only(top: 10.0),

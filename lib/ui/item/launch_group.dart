@@ -24,7 +24,7 @@ class LaunchGroupItem extends StatelessWidget {
         ),
         onPressed: () {
           if (item == '选择一个群') {
-            Get.to(GroupSelectPage());
+            Get.to<void>(GroupSelectPage());
           } else {
             showToast( '敬请期待');
           }

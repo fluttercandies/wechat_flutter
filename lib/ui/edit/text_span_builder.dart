@@ -1,6 +1,7 @@
 import 'package:extended_text_library/extended_text_library.dart';
 import 'package:flutter/material.dart';
-import 'package:wechat_flutter/ui/edit/emoji_text.dart';
+
+import 'emoji_text.dart';
 
 class TextSpanBuilder extends SpecialTextSpanBuilder {
   final bool showAtBackground;
@@ -10,15 +11,21 @@ class TextSpanBuilder extends SpecialTextSpanBuilder {
   });
 
   @override
-  TextSpan build(String data, {TextStyle? textStyle, SpecialTextGestureTapCallback? onTap}) {
-    TextSpan result = super.build(data, textStyle: textStyle, onTap: onTap);
+  TextSpan build(String data,
+      {TextStyle? textStyle, SpecialTextGestureTapCallback? onTap}) {
+    final TextSpan result =
+        super.build(data, textStyle: textStyle, onTap: onTap);
     return result;
   }
 
   @override
   SpecialText? createSpecialText(String flag,
-      {TextStyle? textStyle, SpecialTextGestureTapCallback? onTap, int? index}) {
-    if (flag.isEmpty) return null;
+      {TextStyle? textStyle,
+      SpecialTextGestureTapCallback? onTap,
+      int? index}) {
+    if (flag.isEmpty) {
+      return null;
+    }
 
     if (isStart(flag, EmojiText.flag)) {
       return EmojiText(textStyle!, start: index! - (EmojiText.flag.length - 1));

@@ -49,13 +49,13 @@ class RootTabBarState extends State<RootTabBar> {
 
   void actionsHandle(String v) {
     if (v == '添加朋友') {
-      Get.to(AddFriendPage());
+      Get.to<void>(AddFriendPage());
     } else if (v == '发起群聊') {
-      Get.to(GroupLaunchPage());
+      Get.to<void>(GroupLaunchPage());
     } else if (v == '帮助与反馈') {
-      Get.to(WebViewPage(url: helpUrl, title: '帮助与反馈'));
+      Get.to<void>(WebViewPage(url: helpUrl, title: '帮助与反馈'));
     } else {
-      Get.to(LanguagePage());
+      Get.to<void>(LanguagePage());
     }
   }
 
@@ -93,7 +93,7 @@ class RootTabBarState extends State<RootTabBar> {
             width: 60.0,
             child: Image.asset('assets/images/search_black.webp'),
           ),
-          onTap: () => Get.to(SearchPage()),
+          onTap: () => Get.to<void>(SearchPage()),
         ),
         WPopupMenu(
           menuWidth: Get.width / 2.5,

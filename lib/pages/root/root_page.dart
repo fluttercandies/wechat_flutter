@@ -13,6 +13,8 @@ import 'package:wechat_flutter/pages/root/root_tabbar.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
 class RootPage extends StatefulWidget {
+  const RootPage({super.key});
+
   @override
   _RootPageState createState() => _RootPageState();
 }
@@ -25,7 +27,7 @@ class _RootPageState extends State<RootPage> {
     updateApi(context);
   }
 
-  ifBrokenNetwork() async {
+  Future<void> ifBrokenNetwork() async {
     final ifNetWork = await SharedUtil.instance.getBoolean(Keys.brokenNetwork);
     if (ifNetWork) {
       /// 监测网络变化
@@ -35,7 +37,7 @@ class _RootPageState extends State<RootPage> {
             result.contains(ConnectivityResult.wifi)) {
           V2TimValueCallback<String> currentUser =
               await V2TIMManager().getLoginUser();
-          log("ConnectivityResult::currentUser::$currentUser");
+          log('ConnectivityResult::currentUser::$currentUser');
           // if (currentUser == '' ) {
           // final account = await SharedUtil.instance.getString(Keys.account);
           // im.imAutoLogin(account);
@@ -51,46 +53,46 @@ class _RootPageState extends State<RootPage> {
   @override
   Widget build(BuildContext context) {
     List<TabBarModel> pages = <TabBarModel>[
-      new TabBarModel(
+      TabBarModel(
           title: S.of(context).weChat,
-          icon: new LoadImage("assets/images/tabbar_chat_c.webp"),
-          selectIcon: new LoadImage("assets/images/tabbar_chat_s.webp"),
-          page: new HomePage()),
-      new TabBarModel(
+          icon: LoadImage('assets/images/tabbar_chat_c.webp'),
+          selectIcon: LoadImage('assets/images/tabbar_chat_s.webp'),
+          page: HomePage()),
+      TabBarModel(
         title: S.of(context).contacts,
-        icon: new LoadImage("assets/images/tabbar_contacts_c.webp"),
-        selectIcon: new LoadImage("assets/images/tabbar_contacts_s.webp"),
-        page: new ContactsPage(),
+        icon: LoadImage('assets/images/tabbar_contacts_c.webp'),
+        selectIcon: LoadImage('assets/images/tabbar_contacts_s.webp'),
+        page: const ContactsPage(),
       ),
-      new TabBarModel(
+      TabBarModel(
         title: S.of(context).discover,
-        icon: new LoadImage("assets/images/tabbar_discover_c.webp"),
-        selectIcon: new LoadImage("assets/images/tabbar_discover_s.webp"),
-        page: new DiscoverPage(),
+        icon: LoadImage('assets/images/tabbar_discover_c.webp'),
+        selectIcon: LoadImage('assets/images/tabbar_discover_s.webp'),
+        page: DiscoverPage(),
       ),
-      new TabBarModel(
+      TabBarModel(
         title: S.of(context).me,
-        icon: new LoadImage("assets/images/tabbar_me_c.webp"),
-        selectIcon: new LoadImage("assets/images/tabbar_me_s.webp"),
-        page: new MinePage(),
+        icon: LoadImage('assets/images/tabbar_me_c.webp'),
+        selectIcon: LoadImage('assets/images/tabbar_me_s.webp'),
+        page: MinePage(),
       ),
     ];
-    return new Scaffold(
-      body: new RootTabBar(pages: pages, currentIndex: 0),
+    return Scaffold(
+      body: RootTabBar(pages: pages, currentIndex: 0),
     );
   }
 }
 
 class LoadImage extends StatelessWidget {
-  final String img;
+  const LoadImage(this.img, {super.key});
 
-  LoadImage(this.img);
+  final String img;
 
   @override
   Widget build(BuildContext context) {
-    return new Container(
-      margin: EdgeInsets.only(bottom: 2.0),
-      child: new Image.asset(img, fit: BoxFit.cover, gaplessPlayback: true),
+    return Container(
+      margin: const EdgeInsets.only(bottom: 2.0),
+      child: Image.asset(img, fit: BoxFit.cover, gaplessPlayback: true),
     );
   }
 }

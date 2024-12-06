@@ -7,6 +7,8 @@ import 'package:wechat_flutter/im/fun_dim_group_model.dart';
 import 'package:wechat_flutter/pages/group/select_members_page.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
+import '../../im/info_handle.dart';
+
 class GroupMembersPage extends StatefulWidget {
   final String groupId;
 
@@ -31,8 +33,8 @@ class _GroupMembersPageState extends State<GroupMembersPage> {
 
   handle(String? uId) {
     if (!strNoEmpty(uId)) {
-      Get.to(new SelectMembersPage());
-//      Get.to(CreateGroupChat(
+      Get.to<void>(new SelectMembersPage());
+//      Get.to<void>(CreateGroupChat(
 //        'invite',
 //        groupId: widget.groupId,
 //        callBack: (data) {
@@ -43,7 +45,7 @@ class _GroupMembersPageState extends State<GroupMembersPage> {
 //        },
 //      ));
 //    } else {
-//      Get.to(ConversationDetailPage(
+//      Get.to<void>(ConversationDetailPage(
 //        title: uId,
 //        type: 1,
 //      ));
@@ -73,7 +75,7 @@ class _GroupMembersPageState extends State<GroupMembersPage> {
     }
 
     return new FutureBuilder(
-      future: DimFriend.getUsersProfile(item['user'], (cb) {
+      future: getUsersProfile(item['user'], (cb) {
         userInfo = json.decode(cb.toString());
         uId = userInfo[0]['identifier'];
         uFace = userInfo[0]['faceUrl'];

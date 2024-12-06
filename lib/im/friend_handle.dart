@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:tencent_cloud_chat_sdk/enum/friend_type_enum.dart';
+import 'package:tencent_cloud_chat_sdk/enum/group_member_role_enum.dart';
+import 'package:tencent_cloud_chat_sdk/enum/group_type.dart';
 import 'package:tencent_cloud_chat_sdk/manager/v2_tim_manager.dart';
 import 'package:tencent_cloud_chat_sdk/models/v2_tim_friend_info.dart';
 import 'package:tencent_cloud_chat_sdk/models/v2_tim_friend_operation_result.dart';
+import 'package:tencent_cloud_chat_sdk/models/v2_tim_group_member.dart';
 import 'package:tencent_cloud_chat_sdk/models/v2_tim_value_callback.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
@@ -44,7 +47,7 @@ Future<dynamic> delFriend(String userName, BuildContext context,
   try {
     final V2TimValueCallback<List<V2TimFriendOperationResult>> result =
         await V2TIMManager().getFriendshipManager().deleteFromFriendList(
-            userIDList: [userName],
+            userIDList: <String>[userName],
             deleteType: FriendTypeEnum.V2TIM_FRIEND_TYPE_BOTH);
     if (result.code == 0) {
       showToast('删除成功');
@@ -67,15 +70,22 @@ Future<dynamic> delFriend(String userName, BuildContext context,
 Future<List<V2TimFriendInfo>> getContactsFriends(String userName) async {
   final V2TimValueCallback<List<V2TimFriendInfo>> result =
       await V2TIMManager().getFriendshipManager().getFriendList();
-  return result.data ?? [];
+  return result.data ?? <V2TimFriendInfo>[];
 }
 
-Future<dynamic> createGroupChat(List<String> personList,
-    {String? name, required Callback callback}) async {
-  // try {
-  //   var result = await im.createGroupChat(name: name, personList: personList);
-  //   callback(result);
-  // } on PlatformException {
-  //   print('创建群组  失败');
-  // }
+Future<bool> createGroupChat(List<String> personList, {String? name}) async {
+  final V2TimValueCallback<String> call =
+      await V2TIMManager().getGroupManager().createGroup(
+            groupType: GroupType.Public,
+            groupName: name ?? '',
+            memberList: personList.map(
+              (String e) {
+                return V2TimGroupMember(
+                  userID: e,
+                  role: GroupMemberRoleTypeEnum.V2TIM_GROUP_MEMBER_ROLE_MEMBER,
+                );
+              },
+            ).toList(),
+          );
+  return call.code == 0;
 }

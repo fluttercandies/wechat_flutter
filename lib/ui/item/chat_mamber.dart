@@ -47,7 +47,7 @@ class _ChatMamBerState extends State<ChatMamBer> {
                 ],
               ),
             ),
-            onTap: () => Get.to(new ContactsDetailsPage(
+            onTap: () => Get.to<void>(new ContactsDetailsPage(
                 id: widget.model!.userID!, title: name, avatar: face)),
           );
         }).toList(),
@@ -62,7 +62,7 @@ class _ChatMamBerState extends State<ChatMamBer> {
           child: new Image.asset('assets/images/chat/ic_details_add.png',
               width: 55.0, height: 55.0, fit: BoxFit.cover),
         ),
-        onTap: () => Get.to(new GroupLaunchPage()),
+        onTap: () => Get.to<void>(new GroupLaunchPage()),
       ),
     );
 

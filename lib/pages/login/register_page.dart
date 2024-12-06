@@ -96,7 +96,7 @@ class _RegisterPageState extends State<RegisterPage> {
           ),
         ),
         onTap: () async {
-          final result = await Get.to(new SelectLocationPage());
+          final result = await Get.to<void>(new SelectLocationPage());
           if (result == null) return;
           model.area = result;
           model.refresh();
@@ -150,7 +150,7 @@ class _RegisterPageState extends State<RegisterPage> {
               S.of(context).protocolName,
               style: TextStyle(color: tipColor),
             ),
-            onTap: () => Get.to(WebViewPage(
+            onTap: () => Get.to<void>(WebViewPage(
                 url: S.of(context).protocolUrl,
                 title: S.of(context).protocolTitle)),
           ),

@@ -17,7 +17,7 @@ class HomeNullView extends StatelessWidget {
           str ?? '',
           style: TextStyle(color: mainTextColor),
         ),
-        onTap: () => Get.to(new UserPage()),
+        onTap: () => Get.to<void>(new UserPage()),
       ),
     );
   }

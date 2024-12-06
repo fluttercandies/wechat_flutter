@@ -11,6 +11,8 @@ import 'package:wechat_flutter/ui/edit/text_span_builder.dart';
 import 'package:wechat_flutter/ui/view/indicator_page_view.dart';
 import 'package:wechat_flutter/ui/view/pop_view.dart';
 
+import '../../tools/event/im_event.dart';
+
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
@@ -22,7 +24,7 @@ class _HomePageState extends State<HomePage>
 
   Offset? tapPos;
   TextSpanBuilder _builder = TextSpanBuilder();
-  StreamSubscription<dynamic>? _messageStreamSubscription;
+  StreamSubscription<dynamic>? _msgStreamSubs;
 
   @override
   void initState() {
@@ -31,91 +33,90 @@ class _HomePageState extends State<HomePage>
     getChatData();
   }
 
-  Future getChatData() async {
-    List<V2TimConversation?> listChat = await ChatListData().chatListData();
-    if (!listNoEmpty(listChat)) return;
+  Future<void> getChatData() async {
+    final List<V2TimConversation?> listChat =
+        await ChatListData().chatListData();
+    if (!listNoEmpty(listChat)) {
+      return;
+    }
     _chatData.clear();
-    _chatData..addAll(listChat.reversed.toList() ?? []);
-    if (mounted) setState(() {});
+    _chatData.addAll(listChat.reversed.toList());
+    if (mounted) {
+      setState(() {});
+    }
   }
 
-  _showMenu(BuildContext context, Offset tapPos, int type, String id) {
+  void _showMenu(BuildContext context, Offset tapPos, int type, String id) {
     final RenderBox overlay =
-        Overlay.of(context).context.findRenderObject() as RenderBox;
+        Overlay.of(context).context.findRenderObject()! as RenderBox;
     final RelativeRect position = RelativeRect.fromLTRB(tapPos.dx, tapPos.dy,
         overlay.size.width - tapPos.dx, overlay.size.height - tapPos.dy);
     showMenu<String>(
         context: context,
         position: position,
         items: <MyPopupMenuItem<String>>[
-          new MyPopupMenuItem(child: Text('标为已读'), value: '标为已读'),
-          new MyPopupMenuItem(child: Text('置顶聊天'), value: '置顶聊天'),
-          new MyPopupMenuItem(child: Text('删除该聊天'), value: '删除该聊天'),
+          const MyPopupMenuItem(value: '标为已读', child: Text('标为已读')),
+          const MyPopupMenuItem(value: '置顶聊天', child: Text('置顶聊天')),
+          const MyPopupMenuItem(value: '删除该聊天', child: Text('删除该聊天')),
           // ignore: missing_return
-        ]).then<void>((String? selected) {
+        ]).then<void>((String? selected) async {
       switch (selected) {
         case '删除该聊天':
-          deleteConversationAndLocalMsgModel(type, id, callback: (str) {
-            debugPrint('deleteConversationAndLocalMsgModel' + str.toString());
-          });
-          delConversationModel(id, type, callback: (str) {
-            debugPrint('deleteConversationModel' + str.toString());
-          });
+          deleteConversationAndLocalMsgModel(id, type);
           getChatData();
           break;
         case '标为已读':
-          getUnreadMessageNumModel(type, id, callback: (str) {
-            int num = int.parse(str.toString());
-            if (num != 0) {
-              setReadMessageModel(type, id);
-              setState(() {});
-            }
-          });
+          final num = await getUnreadMessageNumModel(type, id);
+          if (num > 0) {
+            setReadMessageModel(type, id);
+            setState(() {});
+          }
           break;
       }
     });
   }
 
   void canCelListener() {
-    if (_messageStreamSubscription != null) {
-      _messageStreamSubscription!.cancel();
+    if (_msgStreamSubs != null) {
+      _msgStreamSubs!.cancel();
     }
   }
 
   Future<void> initPlatformState() async {
-    if (!mounted) return;
-
-    if (_messageStreamSubscription == null) {
-      // _messageStreamSubscription =
-      //     im.onMessage.listen((dynamic onData) => getChatData());
+    if (!mounted) {
+      return;
     }
+
+    _msgStreamSubs ??= eventBusNewMsg.listen((EventBusNewMsg onData) {
+      getChatData();
+    });
   }
 
   @override
   bool get wantKeepAlive => true;
 
   Widget timeView(int time) {
-    DateTime dateTime = DateTime.fromMillisecondsSinceEpoch(time * 1000);
+    final DateTime dateTime = DateTime.fromMillisecondsSinceEpoch(time * 1000);
 
-    String hourParse = "0${dateTime.hour}";
-    String minuteParse = "0${dateTime.minute}";
+    final String hourParse = "0${dateTime.hour}";
+    final String minuteParse = "0${dateTime.minute}";
 
-    String hour = dateTime.hour.toString().length == 1
+    final String hour = dateTime.hour.toString().length == 1
         ? hourParse
         : dateTime.hour.toString();
-    String minute = dateTime.minute.toString().length == 1
+    final String minute = dateTime.minute.toString().length == 1
         ? minuteParse
         : dateTime.minute.toString();
 
-    String timeStr = '$hour:$minute';
+    final String timeStr = '$hour:$minute';
 
-    return new SizedBox(
+    return SizedBox(
       width: 35.0,
-      child: new Text(
+      child: Text(
         timeStr,
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
-        style: TextStyle(color: mainTextColor, fontSize: 14.0),
+        style: const TextStyle(color: mainTextColor, fontSize: 14.0),
       ),
     );
   }
@@ -123,24 +124,26 @@ class _HomePageState extends State<HomePage>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    if (!listNoEmpty(_chatData)) return new HomeNullView();
-    return new Container(
-      color: Color(AppColors.BackgroundColor),
-      child: new ScrollConfiguration(
+    if (!listNoEmpty(_chatData)) {
+      return HomeNullView();
+    }
+    return Container(
+      color: const Color(AppColors.BackgroundColor),
+      child: ScrollConfiguration(
         behavior: MyBehavior(),
-        child: new ListView.builder(
+        child: ListView.builder(
           itemBuilder: (BuildContext context, int index) {
-            V2TimConversation? model = _chatData[index];
+            final V2TimConversation? model = _chatData[index];
             if (model == null) {
               return Container();
             }
 
             return InkWell(
               onTap: () {
-                Get.to(new ChatPage(
+                Get.to<void>(ChatPage(
                     id: model.conversationID,
                     title: model.showName ?? model.conversationID,
-                    type: model.type));
+                    type: model.type!));
               },
               onTapDown: (TapDownDetails details) {
                 tapPos = details.globalPosition;
@@ -156,7 +159,7 @@ class _HomePageState extends State<HomePage>
                   debugPrint("IOS聊天长按选项功能开发中");
                 }
               },
-              child: new MyConversationView(
+              child: MyConversationView(
                 imageUrl: model.faceUrl,
                 title: model.showName ?? '',
                 content: model.lastMessage,

@@ -70,7 +70,7 @@ class _MsgAvatarState extends State<MsgAvatar> with TickerProviderStateMixin {
         setState(() => start(false));
       },
       onTap: () {
-        Get.to(ContactsDetailsPage(
+        Get.to<void>(ContactsDetailsPage(
           title: widget.model.nickName,
           avatar: widget.model.avatar,
           id: widget.model.id,

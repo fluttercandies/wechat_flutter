@@ -31,7 +31,7 @@ class LoadingView extends StatelessWidget {
               ],
             ),
             onTap: () {
-              if (isStr) Get.to(new UserPage());
+              if (isStr) Get.to<void>(new UserPage());
             },
           ),
           new SizedBox(width: 10.0),
