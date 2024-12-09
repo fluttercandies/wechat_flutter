@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:wechat_flutter/pages/settings/language_page.dart';
-import 'package:wechat_flutter/pages/wechat_friends/page/wechat_friends_circle.dart';
-import 'package:wechat_flutter/tools/wechat_flutter.dart';
-import 'package:wechat_flutter/ui/view/indicator_page_view.dart';
-import 'package:wechat_flutter/ui/view/list_tile_view.dart';
+
+import '../../tools/wechat_flutter.dart';
+import '../../ui/view/indicator_page_view.dart';
+import '../../ui/view/list_tile_view.dart';
+import '../settings/language_page.dart';
+import '../wechat_friends/page/wechat_friends_circle.dart';
 
 class DiscoverPage extends StatefulWidget {
+  const DiscoverPage({super.key});
+
   @override
-  _DiscoverPageState createState() => _DiscoverPageState();
+  State<DiscoverPage> createState() => _DiscoverPageState();
 }
 
 class _DiscoverPageState extends State<DiscoverPage> {
@@ -26,21 +29,21 @@ class _DiscoverPageState extends State<DiscoverPage> {
       }
     }
 
-    return new ListTileView(
+    return ListTileView(
       border: isShow()
           ? null
-          : Border(bottom: BorderSide(color: lineColor, width: 0.3)),
-      title: item['name'],
-      titleStyle: TextStyle(fontSize: 15.0),
+          : const Border(bottom: BorderSide(color: lineColor, width: 0.3)),
+      title: item['name']!,
+      titleStyle: const TextStyle(fontSize: 15.0),
       isLabel: false,
-      padding: EdgeInsets.symmetric(vertical: 16.0),
-      icon: item['icon'],
+      padding: const EdgeInsets.symmetric(vertical: 16.0),
+      icon: item['icon']!,
       margin: EdgeInsets.only(bottom: isShow() ? 10.0 : 0.0),
       onPressed: () {
         if (item['name'] == '朋友圈') {
-          Get.to<void>(new WeChatFriendsCircle());
+          Get.to<void>(WeChatFriendsCircle());
         } else {
-          Get.to<void>(new LanguagePage());
+          Get.to<void>(LanguagePage());
         }
       },
     );
@@ -48,7 +51,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
 
   @override
   Widget build(BuildContext context) {
-    List<Map<String, String>> data = [
+    final List<Map<String, String>> data = [
       {'icon': 'assets/images/discover/ff_Icon_album.webp', 'name': '朋友圈'},
       {'icon': 'assets/images/discover/ff_Icon_qr_code.webp', 'name': '扫一扫'},
       {'icon': 'assets/images/discover/ff_Icon_shake.webp', 'name': '摇一摇'},
@@ -62,12 +65,12 @@ class _DiscoverPageState extends State<DiscoverPage> {
       {'icon': 'assets/images/discover/mini_program.webp', 'name': '小程序'},
     ];
 
-    return new Scaffold(
+    return Scaffold(
       backgroundColor: appBarColor,
-      body: new ScrollConfiguration(
+      body: ScrollConfiguration(
         behavior: MyBehavior(),
-        child: new SingleChildScrollView(
-          child: new Column(children: data.map(buildContent).toList()),
+        child: SingleChildScrollView(
+          child: Column(children: data.map(buildContent).toList()),
         ),
       ),
     );

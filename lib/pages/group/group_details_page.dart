@@ -1,9 +1,10 @@
-import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:wechat_flutter/im/friend/fun_dim_friend.dart';
+import 'package:tencent_cloud_chat_sdk/models/v2_tim_group_info.dart';
+import 'package:tencent_cloud_chat_sdk/models/v2_tim_group_info_result.dart';
+import 'package:tencent_cloud_chat_sdk/models/v2_tim_group_member_full_info.dart';
+import 'package:tencent_cloud_chat_sdk/models/v2_tim_user_full_info.dart';
 import 'package:wechat_flutter/im/fun_dim_group_model.dart';
 import 'package:wechat_flutter/im/group/fun_dim_info.dart';
 import 'package:wechat_flutter/pages/group/group_billboard_page.dart';
@@ -44,10 +45,10 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
 
   bool isGroupOwner = false;
 
-  List memberList = [
-    {'user': '+'},
+  List<V2TimGroupMemberFullInfo?> memberList = <V2TimGroupMemberFullInfo?>[
+    V2TimGroupMemberFullInfo(userID: '+'),
   ];
-  List? dataGroup;
+  V2TimGroupInfo? dataGroup;
 
   @override
   void initState() {
@@ -64,42 +65,40 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
     });
   }
 
-  _getGroupInfo() {
-    DimGroup.getGroupInfoListModel([widget.peer], callback: (result) async {
-      dataGroup = json.decode(result.toString().replaceAll("'", '"'));
-      final user = await SharedUtil.instance.getString(Keys.account);
-      isGroupOwner = dataGroup![0]['groupOwner'] == user;
-      groupName = dataGroup![0]['groupName'].toString();
-      String notice = strNoEmpty(dataGroup![0]['groupNotification'].toString())
-          ? dataGroup![0]['groupNotification'].toString()
-          : '暂无公告';
-      groupNotification = notice;
-      time = dataGroup![0]['groupIntroduction'].toString();
-      setState(() {});
-    });
+  _getGroupInfo() async {
+    final List<V2TimGroupInfoResult> listInfo =
+        await DimGroup.getGroupInfoListModel(<String>[widget.peer]);
+
+    dataGroup = listInfo.first.groupInfo!;
+    final String? user = await SharedUtil.instance.getString(Keys.account);
+    isGroupOwner = dataGroup!.owner == user;
+    groupName = dataGroup!.groupName.toString();
+    final String notice = strNoEmpty(dataGroup!.notification.toString())
+        ? dataGroup!.notification.toString()
+        : '暂无公告';
+    groupNotification = notice;
+    time = dataGroup!.introduction.toString();
+    setState(() {});
   }
 
   _getGroupMembers() async {
-    await DimGroup.getGroupMembersListModelLIST(widget.peer,
-        callback: (result) {
-      memberList.insertAll(
-          0, json.decode(result.toString().replaceAll("'", '"')));
-      setState(() {});
-    });
+    final List<V2TimGroupMemberFullInfo?>? memberDataList =
+        await DimGroup.getGroupMembersListModelLIST(widget.peer);
+
+    memberList.insertAll(0, memberDataList!.toSet());
+    setState(() {});
   }
 
-  Widget memberItem(item) {
-    List<dynamic> userInfo = [];
-    String uId = '';
-    String uFace = '';
-    String nickName = '';
-
-    if (item['user'] == "+" || item['user'] == '-') {
+  Widget memberItem(V2TimGroupMemberFullInfo? item) {
+    if (item?.userID == null) {
+      return Container();
+    }
+    if (item!.userID == '+' || item.userID == '-') {
       return InkWell(
         child: SizedBox(
           width: (Get.width - 60) / 5,
           child: Image.asset(
-            'assets/images/group/${item['user']}.png',
+            'assets/images/group/${item.userID}.png',
             height: 48.0,
             width: 48.0,
           ),
@@ -107,25 +106,26 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
         onTap: () => Get.to<void>(() => SelectMembersPage()),
       );
     }
-    return FutureBuilder(
-      future: getUsersProfile(item['user'], (cb) {
-        userInfo = json.decode(cb.toString());
-        uId = userInfo[0]['identifier'];
-        uFace = userInfo[0]['faceUrl'];
-        nickName = userInfo[0]['nickName'];
-      }),
-      builder: (context, snap) {
+    return FutureBuilder<List<V2TimUserFullInfo>>(
+      future: getUsersProfile(<String>[item.userID]),
+      builder:
+          (BuildContext context, AsyncSnapshot<List<V2TimUserFullInfo>> snap) {
+        final List<V2TimUserFullInfo> data = snap.data ?? <V2TimUserFullInfo>[];
+        if (data.isEmpty) {
+          return Container();
+        }
+        final V2TimUserFullInfo item = data.first;
         return SizedBox(
           width: (Get.width - 60) / 5,
           child: TextButton(
-            onPressed: () =>
-                Get.to<void>(() => GroupMemberDetails(Data.user() == uId, uId)),
+            onPressed: () => Get.to<void>(() =>
+                GroupMemberDetails(Data.user() == item.userID, item.userID!)),
             style: TextButton.styleFrom(padding: EdgeInsets.zero),
             child: Column(
               children: <Widget>[
                 ClipRRect(
-                  borderRadius: BorderRadius.all(Radius.circular(5)),
-                  child: !strNoEmpty(uFace)
+                  borderRadius: const BorderRadius.all(Radius.circular(5)),
+                  child: !strNoEmpty(item.faceUrl)
                       ? Image.asset(
                           defIcon,
                           height: 48.0,
@@ -133,21 +133,21 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
                           fit: BoxFit.cover,
                         )
                       : CachedNetworkImage(
-                          imageUrl: uFace,
+                          imageUrl: item.faceUrl!,
                           height: 48.0,
                           width: 48.0,
                           cacheManager: cacheManager,
                           fit: BoxFit.cover,
                         ),
                 ),
-                SizedBox(height: 2),
+                const SizedBox(height: 2),
                 Container(
                   alignment: Alignment.center,
                   height: 20.0,
                   width: 50,
                   child: Text(
-                    '${!strNoEmpty(nickName) ? uId : nickName.length > 4 ? '${nickName.substring(0, 3)}...' : nickName}',
-                    style: TextStyle(fontSize: 12.0),
+                    '${!strNoEmpty(item.nickName) ? item.userID : item.nickName!.length > 4 ? '${item.nickName!.substring(0, 3)}...' : item.nickName!}',
+                    style: const TextStyle(fontSize: 12.0),
                   ),
                 ),
               ],
@@ -166,20 +166,20 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    if (!listNoEmpty(dataGroup)) {
+    if (dataGroup == null) {
       return Container(color: Colors.white);
     }
 
     return Scaffold(
-      backgroundColor: Color(0xffEDEDED),
-      appBar: ComMomBar(title: '聊天信息 (${dataGroup![0]['memberNum']})'),
+      backgroundColor: const Color(0xffEDEDED),
+      appBar: ComMomBar(title: '聊天信息 (${dataGroup!.memberCount})'),
       body: ScrollConfiguration(
         behavior: MyBehavior(),
         child: ListView(
           children: <Widget>[
             Container(
               color: Colors.white,
-              padding: EdgeInsets.only(top: 10.0, bottom: 10),
+              padding: const EdgeInsets.only(top: 10.0, bottom: 10),
               width: Get.width,
               child: Wrap(
                 runSpacing: 20.0,
@@ -191,17 +191,18 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
               visible: memberList.length > 20,
               child: TextButton(
                 style: TextButton.styleFrom(
-                  padding: EdgeInsets.only(top: 15.0, bottom: 20.0),
+                  padding: const EdgeInsets.only(top: 15.0, bottom: 20.0),
                   backgroundColor: Colors.white,
                 ),
-                child: Text(
+                child: const Text(
                   '查看全部群成员',
                   style: TextStyle(fontSize: 14.0, color: Colors.black54),
                 ),
-                onPressed: () => Get.to<void>(() => GroupMembersPage(widget.peer)),
+                onPressed: () =>
+                    Get.to<void>(() => GroupMembersPage(widget.peer)),
               ),
             ),
-            SizedBox(height: 10.0),
+            const SizedBox(height: 10.0),
             functionBtn(
               '群聊名称',
               detail: groupName.toString().length > 7
@@ -222,9 +223,9 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
               child: functionBtn('群管理'),
             ),
             functionBtn('备注'),
-            SizedBox(height: 10.0),
+            const SizedBox(height: 10.0),
             functionBtn('查找聊天记录'),
-            SizedBox(height: 10.0),
+            const SizedBox(height: 10.0),
             functionBtn('消息免打扰',
                 right: CupertinoSwitch(
                   value: _dnd,
@@ -252,7 +253,7 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
                     value ? _setTop(1) : _setTop(2);
                   },
                 )),
-            SizedBox(height: 10.0),
+            const SizedBox(height: 10.0),
             functionBtn('我在群里的昵称', detail: cardName),
             functionBtn('显示群成员昵称',
                 right: CupertinoSwitch(
@@ -271,12 +272,13 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
             Space(),
             TextButton(
               style: TextButton.styleFrom(
-                padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 20.0),
+                padding: const EdgeInsets.symmetric(
+                    vertical: 15.0, horizontal: 20.0),
                 backgroundColor: Colors.white,
               ),
               onPressed: () {
                 if (widget.peer == '') return;
-                confirmAlert(context, (isOK) {
+                confirmAlert(context, (bool isOK) {
                   if (isOK) {
                     DimGroup.quitGroupModel(widget.peer, callback: (str) {
                       if (str.toString().contains('失败')) {
@@ -306,7 +308,7 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
                   }
                 }, tips: '确定要退出本群吗？');
               },
-              child: Text(
+              child: const Text(
                 '删除并退出',
                 style: TextStyle(
                     color: Colors.red,
@@ -314,7 +316,7 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
                     fontSize: 18.0),
               ),
             ),
-            SizedBox(height: 30.0),
+            const SizedBox(height: 30.0),
           ],
         ),
       ),
@@ -327,13 +329,13 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
         Get.to<void>(() => GroupRemarksPage(groupId: widget.peer));
         break;
       case '群聊名称':
-        Get.to<void>(
+        Get.to<String>(
           () => GroupRemarksPage(
             groupInfoType: GroupInfoType.name,
-            text: groupName ?? "",
+            text: groupName ?? '',
             groupId: widget.peer,
           ),
-        )?.then((data) {
+        )?.then((String? data) {
           groupName = data ?? groupName;
           Notice.send(WeChatActions.groupName(), groupName);
         });
@@ -342,15 +344,15 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
         Get.to<void>(() => CodePage(true));
         break;
       case '群公告':
-        Get.to<void>(
+        Get.to<String>(
           () => GroupBillBoardPage(
-            dataGroup![0]['groupOwner'],
+            dataGroup!.owner!,
             groupNotification!,
             groupId: widget.peer,
             time: time,
-            callback: (timeData) => time = timeData,
+            callback: (String? timeData) => time = timeData,
           ),
-        )?.then((data) {
+        )?.then((String? data) {
           groupNotification = data ?? groupNotification;
         });
         break;
@@ -370,13 +372,13 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
         Get.to<void>(() => ChatBackgroundPage());
         break;
       case '我在群里的昵称':
-        Get.to<void>(
+        Get.to<String>(
           () => GroupRemarksPage(
             groupInfoType: GroupInfoType.cardName,
             text: cardName,
             groupId: widget.peer,
           ),
-        )?.then((data) {
+        )?.then((String? data) {
           cardName = data ?? cardName;
         });
         break;
@@ -386,7 +388,7 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
       case '清空聊天记录':
         confirmAlert(
           context,
-          (isOK) {
+          (bool isOK) {
             if (isOK) showToast('敬请期待');
           },
           tips: '确定删除群的聊天记录吗？',
@@ -398,7 +400,7 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
 
   _setTop(int i) {}
 
-  functionBtn(
+  Widget functionBtn(
     String title, {
     String? detail,
     Widget? right,
@@ -441,11 +443,11 @@ class GroupItem extends StatelessWidget {
       }
     }
 
-    bool isSwitch = title == '消息免打扰' ||
+    final bool isSwitch = title == '消息免打扰' ||
         title == '聊天置顶' ||
         title == '��存到通讯录' ||
         title == '显示群成员昵称';
-    bool noBorder = title == '备注' ||
+    final bool noBorder = title == '备注' ||
         title == '查找聊天记录' ||
         title == '保存到通讯录' ||
         title == '显示群成员昵称' ||
@@ -454,7 +456,7 @@ class GroupItem extends StatelessWidget {
 
     return TextButton(
       style: TextButton.styleFrom(
-        padding: EdgeInsets.only(left: 15, right: 15.0),
+        padding: const EdgeInsets.only(left: 15, right: 15.0),
         backgroundColor: Colors.white,
       ),
       onPressed: onPressed,
@@ -466,7 +468,8 @@ class GroupItem extends StatelessWidget {
         decoration: BoxDecoration(
           border: noBorder
               ? null
-              : Border(bottom: BorderSide(color: Colors.grey, width: 0.2)),
+              : const Border(
+                  bottom: BorderSide(color: Colors.grey, width: 0.2)),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -483,12 +486,12 @@ class GroupItem extends StatelessWidget {
                     child: Text(
                       detail ?? '',
                       overflow: TextOverflow.ellipsis,
-                      style: TextStyle(color: Colors.grey),
+                      style: const TextStyle(color: Colors.grey),
                     ),
                   ),
                 ),
                 right ?? Container(),
-                SizedBox(width: 10.0),
+                const SizedBox(width: 10.0),
                 isSwitch
                     ? Container()
                     : Image.asset(
@@ -500,10 +503,10 @@ class GroupItem extends StatelessWidget {
             Visibility(
               visible: title == '群公告',
               child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 3),
+                padding: const EdgeInsets.symmetric(vertical: 3),
                 child: Text(
                   detail ?? '',
-                  style: TextStyle(color: Colors.grey),
+                  style: const TextStyle(color: Colors.grey),
                 ),
               ),
             )

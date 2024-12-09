@@ -2,14 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:wechat_flutter/im/fun_dim_group_model.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
-import '../../ui/item/contact_view.dart';
-
 class GroupBillBoardPage extends StatefulWidget {
   final String groupOwner;
   final String groupNotice;
   final String? groupId;
   final String? time;
-  final Callback? callback;
+  final Callback<String?>? callback;
 
   GroupBillBoardPage(this.groupOwner, this.groupNotice,
       {this.groupId, this.time, this.callback});

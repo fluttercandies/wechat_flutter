@@ -8,17 +8,17 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
-  TextEditingController _searchC = new TextEditingController();
+  TextEditingController _searchC = TextEditingController();
 
   List words = ['朋友圈', '文章', '公众号', '小程序', '音乐', '表情'];
 
   Widget wordView(item) {
-    return new InkWell(
-      child: new Container(
+    return InkWell(
+      child: Container(
         width: Get.width / 3,
         alignment: Alignment.center,
         margin: EdgeInsets.symmetric(vertical: 15.0),
-        child: new Text(
+        child: Text(
           item,
           style: TextStyle(color: tipColor),
         ),
@@ -28,17 +28,17 @@ class _SearchPageState extends State<SearchPage> {
   }
 
   Widget body() {
-    return new Column(
+    return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
-        new Padding(
+        Padding(
           padding: EdgeInsets.symmetric(vertical: 10.0),
-          child: new Text(
+          child: Text(
             '搜索指定内容',
             style: TextStyle(color: mainTextColor),
           ),
         ),
-        new Wrap(
+        Wrap(
           children: words.map(wordView).toList(),
         )
       ],
@@ -47,10 +47,10 @@ class _SearchPageState extends State<SearchPage> {
 
   @override
   Widget build(BuildContext context) {
-    var searchView = new Row(
+    var searchView = Row(
       children: <Widget>[
-        new Expanded(
-          child: new TextField(
+        Expanded(
+          child: TextField(
             controller: _searchC,
             style: TextStyle(textBaseline: TextBaseline.alphabetic),
             decoration: InputDecoration(
@@ -63,20 +63,20 @@ class _SearchPageState extends State<SearchPage> {
           ),
         ),
         strNoEmpty(_searchC.text)
-            ? new InkWell(
-                child: new Image.asset('assets/images/ic_delete.webp'),
+            ? InkWell(
+                child: Image.asset('assets/images/ic_delete.webp'),
                 onTap: () {
                   _searchC.text = '';
                   setState(() {});
                 },
               )
-            : new Container()
+            : Container()
       ],
     );
-    return new Scaffold(
+    return Scaffold(
       backgroundColor: appBarColor,
-      appBar: new ComMomBar(titleW: searchView),
-      body: new SizedBox(width: Get.width, child: body()),
+      appBar: ComMomBar(titleW: searchView),
+      body: SizedBox(width: Get.width, child: body()),
     );
   }
 }

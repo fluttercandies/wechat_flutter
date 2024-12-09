@@ -1,8 +1,7 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:wechat_flutter/im/friend/fun_dim_friend.dart';
+import 'package:tencent_cloud_chat_sdk/models/v2_tim_group_member_full_info.dart';
+import 'package:tencent_cloud_chat_sdk/models/v2_tim_user_full_info.dart';
 import 'package:wechat_flutter/im/fun_dim_group_model.dart';
 import 'package:wechat_flutter/pages/group/select_members_page.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
@@ -19,9 +18,10 @@ class GroupMembersPage extends StatefulWidget {
 }
 
 class _GroupMembersPageState extends State<GroupMembersPage> {
-  late Future _futureBuilderFuture;
-  List memberList = [
-    {'user': '+'},
+  late Future<void> _futureBuilderFuture;
+  List<V2TimGroupMemberFullInfo?> memberList = <V2TimGroupMemberFullInfo?>[
+    V2TimGroupMemberFullInfo(userID: '+'),
+    // {'user': '+'},
 //    {'user': '-'}
   ];
 
@@ -31,9 +31,9 @@ class _GroupMembersPageState extends State<GroupMembersPage> {
     super.initState();
   }
 
-  handle(String? uId) {
+  Future<void> handle(String? uId) async {
     if (!strNoEmpty(uId)) {
-      Get.to<void>(new SelectMembersPage());
+      Get.to<void>(SelectMembersPage());
 //      Get.to<void>(CreateGroupChat(
 //        'invite',
 //        groupId: widget.groupId,
@@ -54,18 +54,16 @@ class _GroupMembersPageState extends State<GroupMembersPage> {
     }
   }
 
-  Widget memberItem(item) {
-    List userInfo;
-    String? uId;
-    String? uFace;
-    String? nickName;
-
-    if (item['user'] == "+" || item['user'] == '-') {
-      return new InkWell(
-        child: new SizedBox(
+  Widget memberItem(V2TimGroupMemberFullInfo? item) {
+    if (item == null) {
+      return Container();
+    }
+    if (item.userID == '+' || item.userID == '-') {
+      return InkWell(
+        child: SizedBox(
           width: (Get.width - 60) / 5,
           child: Image.asset(
-            'assets/images/group/${item['user']}.png',
+            'assets/images/group/${item.userID}.png',
             height: 48.0,
             width: 48.0,
           ),
@@ -74,53 +72,54 @@ class _GroupMembersPageState extends State<GroupMembersPage> {
       );
     }
 
-    return new FutureBuilder(
-      future: getUsersProfile(item['user'], (cb) {
-        userInfo = json.decode(cb.toString());
-        uId = userInfo[0]['identifier'];
-        uFace = userInfo[0]['faceUrl'];
-        nickName = userInfo[0]['nickName'];
-      }),
-      builder: (context, snap) {
-        return new SizedBox(
+    return FutureBuilder<List<V2TimUserFullInfo>>(
+      future: getUsersProfile(<String>[item.userID]),
+      builder:
+          (BuildContext context, AsyncSnapshot<List<V2TimUserFullInfo>> snap) {
+        if (snap.connectionState != ConnectionState.done) {
+          return Container();
+        }
+        final V2TimUserFullInfo currentUser =
+            List<V2TimUserFullInfo>.from(snap.data!).first;
+        return SizedBox(
           width: (Get.width - 60) / 5,
           child: TextButton(
-            onPressed: () => handle(uId),
-            style: ButtonStyle(
-              padding: WidgetStatePropertyAll(EdgeInsets.all(0)),
+            onPressed: () => handle(currentUser.userID),
+            style: const ButtonStyle(
+              padding: WidgetStatePropertyAll<EdgeInsets>(EdgeInsets.zero),
               // highlightColor: Colors.transparent,
             ),
             child: Column(
               children: <Widget>[
                 ClipRRect(
-                  borderRadius: BorderRadius.all(Radius.circular(5)),
-                  child: !strNoEmpty(uFace)
-                      ? new Image.asset(
+                  borderRadius: const BorderRadius.all(Radius.circular(5)),
+                  child: !strNoEmpty(currentUser.faceUrl)
+                      ? Image.asset(
                           defIcon,
                           height: 48.0,
                           width: 48.0,
                           fit: BoxFit.cover,
                         )
                       : CachedNetworkImage(
-                          imageUrl: uFace!,
+                          imageUrl: currentUser.faceUrl!,
                           height: 48.0,
                           width: 48.0,
                           cacheManager: cacheManager,
                           fit: BoxFit.cover,
                         ),
                 ),
-                SizedBox(height: 2),
+                const SizedBox(height: 2),
                 Container(
                   alignment: Alignment.center,
                   height: 20.0,
                   width: 50,
                   child: Text(
-                    nickName == null || nickName == ''
+                    currentUser.nickName == null || currentUser.nickName == ''
                         ? '默认昵称'
-                        : nickName!.length > 5
-                            ? '${nickName!.substring(0, 3)}...'
-                            : nickName!,
-                    style: TextStyle(fontSize: 12.0),
+                        : currentUser.nickName!.length > 5
+                            ? '${currentUser.nickName!.substring(0, 3)}...'
+                            : currentUser.nickName!,
+                    style: const TextStyle(fontSize: 12.0),
                   ),
                 ),
               ],
@@ -131,23 +130,24 @@ class _GroupMembersPageState extends State<GroupMembersPage> {
     );
   }
 
-  Future _gerData() async {
-    return DimGroup.getGroupMembersListModel(widget.groupId,
-        callback: (result) {
-      setState(() {
-        memberList.insertAll(
-            0, json.decode(result.toString().replaceAll("'", '"')));
-      });
+  Future<void> _gerData() async {
+    final List<V2TimGroupMemberFullInfo?>? result =
+        await DimGroup.getGroupMembersListModelLIST(
+      widget.groupId,
+    );
+
+    setState(() {
+      memberList.insertAll(0, result!.toSet());
     });
   }
 
   Widget titleWidget() {
-    return FutureBuilder(
+    return FutureBuilder<void>(
       future: _futureBuilderFuture,
-      builder: (context, snap) {
-        return new Text(
-          '聊天成员(${memberList?.length != null ? memberList.length - 1 : 0})',
-          style: new TextStyle(
+      builder: (BuildContext context, AsyncSnapshot<void> snap) {
+        return Text(
+          '聊天成员(${memberList.isNotEmpty ? memberList.length - 1 : 0})',
+          style: const TextStyle(
               color: Colors.black, fontSize: 17.0, fontWeight: FontWeight.w600),
         );
       },
@@ -160,16 +160,15 @@ class _GroupMembersPageState extends State<GroupMembersPage> {
       return Container();
     }
 
-    return new Scaffold(
-      appBar: new ComMomBar(titleW: titleWidget()),
-      body: new ListView(
-        padding: EdgeInsets.all(10),
+    return Scaffold(
+      appBar: ComMomBar(titleW: titleWidget()),
+      body: ListView(
+        padding: const EdgeInsets.all(10),
         children: <Widget>[
-          new Wrap(
-            alignment: WrapAlignment.start,
-            children: memberList.map(memberItem).toList(),
+          Wrap(
             runSpacing: 20.0,
             spacing: 10,
+            children: memberList.map(memberItem).toList(),
           ),
         ],
       ),

@@ -1,5 +1,9 @@
+import 'package:tencent_cloud_chat_sdk/enum/group_member_filter_enum.dart';
 import 'package:tencent_cloud_chat_sdk/manager/v2_tim_manager.dart';
 import 'package:tencent_cloud_chat_sdk/models/v2_tim_group_info.dart';
+import 'package:tencent_cloud_chat_sdk/models/v2_tim_group_info_result.dart';
+import 'package:tencent_cloud_chat_sdk/models/v2_tim_group_member_full_info.dart';
+import 'package:tencent_cloud_chat_sdk/models/v2_tim_group_member_info_result.dart';
 import 'package:tencent_cloud_chat_sdk/models/v2_tim_value_callback.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
@@ -37,32 +41,14 @@ class DimGroup {
     // }
   }
 
-  static Future<dynamic> getGroupMembersListModel(String groupId,
-      {required Callback callback}) async {
-    // try {
-    //   var result = await dim.getGroupMembersList(groupId);
-    //   callback(result);
-    // } on PlatformException {
-    //   print('获取群成员  失败');
-    // }
-  }
-
-  static Future<dynamic> getGroupMembersListModelLIST(String groupId,
-      {required Callback callback}) async {
-    // try {
-    //   var result = await dim.getGroupMembersList(groupId);
-    //   List memberList = json.decode(result.toString().replaceAll("'", '"'));
-    //   if (listNoEmpty(memberList)) {
-    //     for (int i = 0; i < memberList.length; i++) {
-    //       List<String> ls = [];
-    //
-    //       ls.add(memberList[i]['user']);
-    //     }
-    //   }
-    //   callback(result);
-    // } on PlatformException {
-    //   print('获取群成员  失败');
-    // }
+  static Future<List<V2TimGroupMemberFullInfo?>?> getGroupMembersListModelLIST(
+      String groupId) async {
+    final V2TimValueCallback<V2TimGroupMemberInfoResult> callBack =
+        await V2TIMManager().getGroupManager().getGroupMemberList(
+            groupID: groupId,
+            filter: GroupMemberFilterTypeEnum.V2TIM_GROUP_MEMBER_FILTER_ALL,
+            nextSeq: '0');
+    return callBack.data?.memberInfoList ?? [];
   }
 
   static Future<List<V2TimGroupInfo>> getGroupListModel() async {
@@ -74,9 +60,12 @@ class DimGroup {
     return callback.data ?? [];
   }
 
-  static Future<dynamic> getGroupInfoListModel(List<String> groupID,
-      {required Callback callback}) async {
-    // try {
+  static Future<List<V2TimGroupInfoResult>> getGroupInfoListModel(
+      List<String> groupID) async {
+    final value = await V2TIMManager()
+        .getGroupManager()
+        .getGroupsInfo(groupIDList: groupID); // try {
+    return value.data ?? [];
     //   var result = await dim.getGroupInfoList(groupID);
     //   callback(result);
     //   return result;

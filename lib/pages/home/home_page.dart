@@ -149,15 +149,12 @@ class _HomePageState extends State<HomePage>
                 tapPos = details.globalPosition;
               },
               onLongPress: () {
-                if (Platform.isAndroid) {
-                  _showMenu(
-                      context,
-                      tapPos!,
-                      model.type == ConversationType.V2TIM_GROUP ? 2 : 1,
-                      model.conversationID);
-                } else {
-                  debugPrint("IOS聊天长按选项功能开发中");
-                }
+                _showMenu(
+                  context,
+                  tapPos!,
+                  model.type == ConversationType.V2TIM_GROUP ? 2 : 1,
+                  model.conversationID,
+                );
               },
               child: MyConversationView(
                 imageUrl: model.faceUrl,

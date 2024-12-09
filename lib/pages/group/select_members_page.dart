@@ -31,9 +31,9 @@ class _SelectMembersPageState extends State<SelectMembersPage> {
   void loadData() async {
     //加载联系人列表
     rootBundle.loadString('assets/data/contacts.json').then((value) {
-      List list = json.decode(value);
+      List list = json.decode(value) as List<Map<String, dynamic>>;
       list.forEach((value) {
-        _contacts.add(ContactInfoModel(name: value['name']));
+        _contacts.add(ContactInfoModel(name: value['name'] as String));
       });
       _handleList(_contacts);
       setState(() {});
@@ -46,10 +46,10 @@ class _SelectMembersPageState extends State<SelectMembersPage> {
       String pinyin = PinyinHelper.getPinyinE(list[i].name!);
       String tag = pinyin.substring(0, 1).toUpperCase();
       list[i].namePinyin = pinyin;
-      if (RegExp("[A-Z]").hasMatch(tag)) {
+      if (RegExp('[A-Z]').hasMatch(tag)) {
         list[i].tagIndex = tag;
       } else {
-        list[i].tagIndex = "#";
+        list[i].tagIndex = '#';
       }
     }
     //根据A-Z排序
@@ -168,7 +168,7 @@ class _SelectMembersPageState extends State<SelectMembersPage> {
         ],
       ),
       backgroundColor: Colors.white,
-      body: Text("等待修复"),
+      body: Text('等待修复'),
       // body: AzListView(
       //   data: _contacts,
       //   itemBuilder: (context, model) => _buildListItem(model),
@@ -244,7 +244,7 @@ class ContactInfoModel extends ISuspensionBean {
   });
 
   ContactInfoModel.fromJson(Map<String, dynamic> json)
-      : name = json['name'] == null ? "" : json['name'];
+      : name = json['name'] == null ? '' : json['name'] as String;
 
   Map<String, dynamic> toJson() => {
         'name': name,
@@ -255,9 +255,9 @@ class ContactInfoModel extends ISuspensionBean {
       };
 
   @override
-  String getSuspensionTag() => tagIndex ?? "";
+  String getSuspensionTag() => tagIndex ?? '';
 
   @override
   String toString() =>
-      "CityBean {" + " \"name\":\"" + (name ?? "") + "\"" + '}';
+      'CityBean {' + ' \"name\":\"' + (name ?? '') + '\"' + '}';
 }
