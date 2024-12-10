@@ -96,7 +96,7 @@ class _RegisterPageState extends State<RegisterPage> {
           ),
         ),
         onTap: () async {
-          final result = await Get.to<void>(new SelectLocationPage());
+          final result = await Get.to<String?>(new SelectLocationPage());
           if (result == null) return;
           model.area = result;
           model.refresh();

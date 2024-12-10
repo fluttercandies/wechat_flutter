@@ -7,21 +7,21 @@ class SelectLocationPage extends StatefulWidget {
 }
 
 class _SelectLocationPageState extends State<SelectLocationPage> {
-  late List state = [
-    {'name': S.of(context).australia, 'code': '+61'},
-    {'name': S.of(context).macao, 'code': '+853'},
-    {'name': S.of(context).canada, 'code': '+001'},
-    {'name': S.of(context).uS, 'code': '+001'},
-    {'name': S.of(context).taiwan, 'code': '+886'},
-    {'name': S.of(context).hongKong, 'code': '+852'},
-    {'name': S.of(context).singapore, 'code': '+65'},
-    {'name': S.of(context).chinaMainland, 'code': '+86'},
+  late List<Map<String, String>> state = <Map<String, String>>[
+    <String, String>{'name': S.of(context).australia, 'code': '+61'},
+    <String, String>{'name': S.of(context).macao, 'code': '+853'},
+    <String, String>{'name': S.of(context).canada, 'code': '+001'},
+    <String, String>{'name': S.of(context).uS, 'code': '+001'},
+    <String, String>{'name': S.of(context).taiwan, 'code': '+886'},
+    <String, String>{'name': S.of(context).hongKong, 'code': '+852'},
+    <String, String>{'name': S.of(context).singapore, 'code': '+65'},
+    <String, String>{'name': S.of(context).chinaMainland, 'code': '+86'},
   ];
 
-  Widget buildState(context, index) {
-    var item = state[index];
+  Widget buildState(BuildContext context, int index) {
+    final Map<String, String> item = state[index];
 
-    var content = new Container(
+    final Container content = new Container(
       margin: EdgeInsets.symmetric(horizontal: 20.0),
       padding: EdgeInsets.symmetric(vertical: 20.0),
       decoration: BoxDecoration(
@@ -47,7 +47,7 @@ class _SelectLocationPageState extends State<SelectLocationPage> {
     return new InkWell(
       child: content,
       onTap: () =>
-          Navigator.pop(context, item['name'] + '  ' + '(${item['code']})'),
+          Navigator.pop(context, item['name']! + '  ' + '(${item['code']})'),
     );
   }
 

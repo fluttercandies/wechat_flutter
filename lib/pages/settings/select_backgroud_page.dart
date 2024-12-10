@@ -8,7 +8,7 @@ class SelectBgPage extends StatefulWidget {
 }
 
 class _SelectBgPageState extends State<SelectBgPage> {
-  List data = [
+  List<Map<String, String>> data = [
     {'name': 'def', 'img': 'assets/images/group/local_background_default.png'},
     {'name': 'one', 'img': 'assets/images/group/local_background_one.webp'},
     {'name': 'two', 'img': 'assets/images/group/local_background_two.webp'},
@@ -17,13 +17,13 @@ class _SelectBgPageState extends State<SelectBgPage> {
     {'name': 'five', 'img': 'assets/images/group/local_background_five.webp'},
   ];
 
-  Widget buildBg(item) {
+  Widget buildBg(Map<String, String> item) {
     double _size = (Get.width - 30) / 3;
     return new InkWell(
       child: new ClipRRect(
         borderRadius: BorderRadius.all(Radius.circular(5)),
         child: new Image.asset(
-          item['img'],
+          item['img']!,
           width: _size - 0.01,
           height: _size,
           fit: BoxFit.fill,

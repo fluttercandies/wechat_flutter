@@ -29,7 +29,7 @@ class _LoginPageState extends State<LoginPage> {
     _tC.text = user ?? '';
   }
 
-  Widget bottomItem(item) {
+  Widget bottomItem(String item) {
     return new Row(
       children: <Widget>[
         new InkWell(
@@ -83,7 +83,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ),
           onPressed: () async {
-            final result = await Get.to<void>(new SelectLocationPage());
+            final result = await Get.to<String?>(new SelectLocationPage());
             if (result == null) return;
             model.area = result;
             model.refresh();
@@ -163,7 +163,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     final model = Provider.of<LoginModel>(context);
 
-    List btItem = [
+    List<String> btItem = [
       S.of(context).retrievePW,
       S.of(context).emergencyFreeze,
       S.of(context).weChatSecurityCenter,

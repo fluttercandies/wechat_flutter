@@ -1,13 +1,13 @@
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wechat_flutter/pages/wechat_friends/chat_style.dart';
 import 'package:wechat_flutter/pages/wechat_friends/from.dart';
 import 'package:wechat_flutter/pages/wechat_friends/ui/load_view.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+
 import '../ui/item_dynamic.dart';
 
 //import 'package:multi_image_picker/multi_image_picker.dart';
@@ -144,7 +144,8 @@ class _WeChatFriendsCircleState extends State<WeChatFriendsCircle> {
 
   void getData() async {
     rootBundle.loadString('assets/data/friends.json').then((value) {
-      friendsDynamic = FriendsDynamic.fromMapList(json.decode(value));
+      friendsDynamic = FriendsDynamic.fromMapList(
+          json.decode(value) as List<Map<String, dynamic>>);
       setState(() {});
     });
   }

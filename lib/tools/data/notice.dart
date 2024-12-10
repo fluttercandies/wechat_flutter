@@ -39,7 +39,7 @@ class Notice {
     final callList = _eventMap[event];
 
     if (callList != null) {
-      for (final item in new List.from(callList, growable: false)) {
+      for (final item in List<Callback>.from(callList, growable: false)) {
         removeListener(item);
 
         _errorWrap(event, item, data);

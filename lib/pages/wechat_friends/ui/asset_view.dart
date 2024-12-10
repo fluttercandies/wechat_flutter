@@ -22,10 +22,10 @@ class _AssetState extends State<AssetView> {
   }
 
   void _loadImage() async {
-    ByteData byteData =
-        await widget.asset.requestThumbnail(300, 300, quality: 60);
-
-    setState(() {});
+    // ByteData byteData =
+    //     await widget.asset.requestThumbnail(300, 300, quality: 60);
+    //
+    // setState(() {});
   }
 
   @override

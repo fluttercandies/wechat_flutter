@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:tencent_cloud_chat_sdk/models/v2_tim_user_full_info.dart';
-import 'package:wechat_flutter/im/entity/i_person_info_entity.dart';
-import 'package:wechat_flutter/im/entity/person_info_entity.dart';
 import 'package:wechat_flutter/im/info_handle.dart';
 import 'package:wechat_flutter/pages/mine/code_page.dart';
 import 'package:wechat_flutter/pages/more/add_friend_details.dart';
@@ -30,15 +28,15 @@ class _AddFriendPageState extends State<AddFriendPage> {
   FocusNode searchF = new FocusNode();
   TextEditingController searchC = new TextEditingController();
 
-  Widget buildItem(item) {
+  Widget buildItem(Map<String, String> item) {
     return new ListTileView(
       border: item['title'] == '雷达加朋友'
           ? null
           : Border(top: BorderSide(color: lineColor, width: 0.2)),
-      title: item['title'],
+      title: item['title']!,
       label: item['label'],
       icon: strNoEmpty(item['icon'])
-          ? item['icon']
+          ? item['icon']!
           : 'assets/images/favorite.webp',
       fit: BoxFit.cover,
       onPressed: () => Get.to<void>(new UserPage()),
@@ -48,7 +46,7 @@ class _AddFriendPageState extends State<AddFriendPage> {
   Widget body() {
     final model = Provider.of<GlobalModel>(context);
 
-    List data = [
+    List<Map<String, String>> data = [
       {
         'icon': contactAssets + 'ic_reda.webp',
         'title': '雷达加朋友',
@@ -184,8 +182,8 @@ class _AddFriendPageState extends State<AddFriendPage> {
       if (Platform.isIOS) {
         V2TimUserFullInfo model = data[0];
         if (model.allowType != null) {
-          Get.to<void>(new AddFriendsDetails('search', model.userID!, model.faceUrl!,
-              model.nickName!, model.gender!));
+          Get.to<void>(new AddFriendsDetails('search', model.userID!,
+              model.faceUrl!, model.nickName!, model.gender!));
         } else {
           isResult = true;
         }

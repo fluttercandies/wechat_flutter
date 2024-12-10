@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:tencent_cloud_chat_sdk/models/v2_tim_user_full_info.dart';
-import 'package:wechat_flutter/im/entity/i_person_info_entity.dart';
 import 'package:wechat_flutter/im/info_handle.dart';
 import 'package:wechat_flutter/provider/loginc/global_loginc.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';

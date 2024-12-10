@@ -10,9 +10,9 @@ class SearchPage extends StatefulWidget {
 class _SearchPageState extends State<SearchPage> {
   TextEditingController _searchC = TextEditingController();
 
-  List words = ['朋友圈', '文章', '公众号', '小程序', '音乐', '表情'];
+  List<String> words = ['朋友圈', '文章', '公众号', '小程序', '音乐', '表情'];
 
-  Widget wordView(item) {
+  Widget wordView(String item) {
     return InkWell(
       child: Container(
         width: Get.width / 3,

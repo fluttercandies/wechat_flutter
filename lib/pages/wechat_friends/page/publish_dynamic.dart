@@ -185,6 +185,6 @@ class _PublishDynamicPageState extends State<PublishDynamicPage> {
               ),
             ],
           );
-        }).then((value) => value ?? false);
+        }).then((value) => value is bool ? value : false);
   }
 }

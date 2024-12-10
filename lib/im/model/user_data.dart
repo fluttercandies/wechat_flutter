@@ -59,7 +59,7 @@ class UserDataPageGet {
     '139',
   ];
 
-  listUserData() async {
+  Future<List<UserData>> listUserData() async {
     List<UserData> userData = [];
     for (int i = 0; i < ids.length; i++) {
       final List<V2TimUserFullInfo> profileData =

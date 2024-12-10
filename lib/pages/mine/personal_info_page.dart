@@ -74,7 +74,7 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
   }
 
   Widget body(GlobalModel model) {
-    List data = [
+    List<Map<String, String>> data = [
       {'label': '微信号', 'value': model.account},
       {'label': '二维码名片', 'value': ''},
       {'label': '更多', 'value': ''},
@@ -113,7 +113,7 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
     return new Column(children: content);
   }
 
-  Widget buildContent(item, GlobalModel model) {
+  Widget buildContent(Map<String, String> item, GlobalModel model) {
     return new LabelRow(
       label: item['label'],
       rValue: item['value'],

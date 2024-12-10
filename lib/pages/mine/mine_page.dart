@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:wechat_flutter/im/all_im.dart';
@@ -8,7 +6,6 @@ import 'package:wechat_flutter/pages/mine/personal_info_page.dart';
 import 'package:wechat_flutter/pages/settings/language_page.dart';
 import 'package:wechat_flutter/pages/wallet/pay_home_page.dart';
 import 'package:wechat_flutter/provider/global_model.dart';
-
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'package:wechat_flutter/ui/view/list_tile_view.dart';
 
@@ -32,18 +29,18 @@ class _MinePageState extends State<MinePage> {
     }
   }
 
-  Widget buildContent(item) {
+  Widget buildContent(Map<String, String> item) {
     return new ListTileView(
       border: item['label'] == '支付' ||
               item['label'] == '设置' ||
               item['label'] == '表情'
           ? null
           : Border(bottom: BorderSide(color: lineColor, width: 0.2)),
-      title: item['label'],
+      title: item['label']!,
       titleStyle: TextStyle(fontSize: 15.0),
       isLabel: false,
       padding: EdgeInsets.symmetric(vertical: 16.0),
-      icon: item['icon'],
+      icon: item['icon']!,
       margin: EdgeInsets.symmetric(
           vertical:
               item['label'] == '支付' || item['label'] == '设置' ? 10.0 : 0.0),
@@ -54,16 +51,16 @@ class _MinePageState extends State<MinePage> {
     );
   }
 
-  Widget dynamicAvatar(avatar, {size}) {
+  Widget dynamicAvatar(String avatar, {double? size}) {
     return new ImageView(
         img: avatar,
-        width: size ?? null,
-        height: size ?? null,
+        width: size,
+        height: size,
         fit: BoxFit.fill);
   }
 
   Widget body(GlobalModel model) {
-    List data = [
+    List<Map<String, String>> data = [
       {'label': '支付', 'icon': 'assets/images/mine/ic_pay.png'},
       {'label': '收藏', 'icon': 'assets/images/favorite.webp'},
       {'label': '相册', 'icon': 'assets/images/mine/ic_card_package.png'},

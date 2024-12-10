@@ -8,7 +8,7 @@ class PayHomePage extends StatefulWidget {
 }
 
 class _PayHomePageState extends State<PayHomePage> {
-  List data = [
+  List<Map<String, dynamic>> data = [
     {
       'title': '金融理财',
       'data': ['信用卡还款', '理财通'],
@@ -106,7 +106,7 @@ class _PayHomePageState extends State<PayHomePage> {
                     ),
                   ),
                   new Wrap(
-                    children: out['data'].map<Widget>((e) {
+                    children: (out['data'] as List<String>).map<Widget>((e) {
                       return new Container(
                         width: (Get.width - 42) / 4,
                         padding: EdgeInsets.symmetric(vertical: 20),

@@ -2,20 +2,18 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:audioplayers/audioplayers.dart';
-import 'package:wechat_flutter/im/entity/i_sound_msg_entity.dart';
-import 'package:wechat_flutter/im/entity/sound_msg_entity.dart';
-import 'package:wechat_flutter/im/model/chat_data.dart';
-import 'package:wechat_flutter/provider/global_model.dart';
-import 'package:wechat_flutter/tools/wechat_flutter.dart';
-import 'package:wechat_flutter/ui/message_view/msg_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sound/flutter_sound.dart';
 import 'package:intl/date_symbol_data_local.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:tencent_cloud_chat_sdk/models/v2_tim_message.dart';
+
+import '../../provider/global_model.dart';
+import '../../tools/wechat_flutter.dart';
+import 'msg_avatar.dart';
 
 class SoundMsg extends StatefulWidget {
-  final ChatData model;
+  final V2TimMessage model;
 
   SoundMsg(this.model);
 
@@ -51,7 +49,7 @@ class _SoundMsgState extends State<SoundMsg> with TickerProviderStateMixin {
     controller = AnimationController(
         duration: const Duration(milliseconds: 1000), vsync: this);
     final Animation<double> curve =
-    CurvedAnimation(parent: controller, curve: Curves.easeOut);
+        CurvedAnimation(parent: controller, curve: Curves.easeOut);
     animation = IntTween(begin: 0, end: 3).animate(curve)
       ..addStatusListener((status) {
         if (status == AnimationStatus.completed) {
@@ -64,12 +62,12 @@ class _SoundMsgState extends State<SoundMsg> with TickerProviderStateMixin {
   }
 
   void start(String path) async {
-    showToast( "正在兼容最新flutter");
+    showToast("正在兼容最新flutter");
   }
 
   playNew(String url) async {
-    showToast( "正在兼容最新flutter");
-     // await audioPlayer.play(url);
+    showToast("正在兼容最新flutter");
+    // await audioPlayer.play(url);
     // if (result == 1) {
     //   showToast( '播放中');
     // } else {
@@ -118,12 +116,12 @@ class _SoundMsgState extends State<SoundMsg> with TickerProviderStateMixin {
             backgroundColor: widget.model.id == globalModel.account
                 ? Color(0xff98E165)
                 : Colors.white,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(4)),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
           ),
           child: Row(
             mainAxisAlignment:
-            isSelf ? MainAxisAlignment.end : MainAxisAlignment.start,
+                isSelf ? MainAxisAlignment.end : MainAxisAlignment.start,
             children: [
               Text("0\"", textAlign: TextAlign.start, maxLines: 1),
               SizedBox(width: mainSpace / 2),
@@ -141,7 +139,7 @@ class _SoundMsgState extends State<SoundMsg> with TickerProviderStateMixin {
             if (strNoEmpty(urls)) {
               playNew(urls);
             } else {
-              showToast( '未知错误');
+              showToast('未知错误');
             }
           },
         ),

@@ -23,19 +23,24 @@ class FriendsDynamic {
 
   static FriendsDynamic fromMap(Map<String, dynamic> map) {
     return FriendsDynamic(
-      username: map['username'],
-      userAvatar: map['userAvatar'],
-      desc: map['desc'],
-      address: map['address'],
-      datetime: map['datetime'],
-      isSelf: map['isSelf'],
-      id: map['id'],
-      video: map['video'] == null ? null : VideoBean.fromMap(map['video']),
-      images: map['images'] == null ? [] : ImagesListBean.fromMapList(map['images']),
+      username: map['username'] as String?,
+      userAvatar: map['userAvatar'] as String?,
+      desc: map['desc'] as String?,
+      address: map['address'] as String?,
+      datetime: map['datetime'] as String?,
+      isSelf: map['isSelf'] as bool?,
+      id: map['id'] as int?,
+      video: map['video'] == null
+          ? null
+          : VideoBean.fromMap(map['video'] as Map<String, dynamic>),
+      images: map['images'] == null
+          ? []
+          : ImagesListBean.fromMapList(
+              map['images'] as List<Map<String, dynamic>>),
     );
   }
 
-  static List<FriendsDynamic> fromMapList(List<dynamic> mapList) {
+  static List<FriendsDynamic> fromMapList(List<Map<String, dynamic>> mapList) {
     return mapList.map((map) => fromMap(map)).toList();
   }
 }
@@ -53,13 +58,13 @@ class VideoBean {
 
   static VideoBean fromMap(Map<String, dynamic> map) {
     return VideoBean(
-      url: map['url'],
-      image: map['image'],
-      id: map['id'],
+      url: map['url'] as String?,
+      image: map['image'] as String?,
+      id: map['id'] as int?,
     );
   }
 
-  static List<VideoBean> fromMapList(List<dynamic> mapList) {
+  static List<VideoBean> fromMapList(List<Map<String, dynamic>> mapList) {
     return mapList.map((map) => fromMap(map)).toList();
   }
 }
@@ -75,12 +80,12 @@ class ImagesListBean {
 
   static ImagesListBean fromMap(Map<String, dynamic> map) {
     return ImagesListBean(
-      image: map['image'],
-      id: map['id'],
+      image: map['image'] as String?,
+      id: map['id'] as int?,
     );
   }
 
-  static List<ImagesListBean> fromMapList(List<dynamic> mapList) {
+  static List<ImagesListBean> fromMapList(List<Map<String, dynamic>> mapList) {
     return mapList.map((map) => fromMap(map)).toList();
   }
 }
