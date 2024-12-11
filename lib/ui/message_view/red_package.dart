@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tencent_cloud_chat_sdk/models/v2_tim_message.dart';
-import 'package:wechat_flutter/config/const.dart';
-import 'package:wechat_flutter/im/model/chat_data.dart';
 import 'package:wechat_flutter/pages/red_package/red_receive_dialog.dart';
 import 'package:wechat_flutter/provider/global_model.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
@@ -10,20 +8,21 @@ import 'package:wechat_flutter/tools/wechat_flutter.dart';
 import 'msg_avatar.dart';
 
 class RedPackage extends StatelessWidget {
-  final V2TimMessage model;
+  const RedPackage(this.model, {super.key});
 
-  RedPackage(this.model);
+  final V2TimMessage model;
 
   @override
   Widget build(BuildContext context) {
-    final globalModel = Provider.of<GlobalModel>(context);
-    var body = [
-      new MsgAvatar(model: model, globalModel: globalModel),
-      new SizedBox(width: mainSpace),
+    final GlobalModel globalModel = Provider.of<GlobalModel>(context);
+    List<Widget> body = <Widget>[
+      MsgAvatar(model: model, globalModel: globalModel),
+      const SizedBox(width: mainSpace),
       InkWell(
-        child: new Container(
-          padding: EdgeInsets.only(left: 15, right: 15, top: 10, bottom: 3),
-          decoration: BoxDecoration(
+        child: Container(
+          padding:
+              const EdgeInsets.only(left: 15, right: 15, top: 10, bottom: 3),
+          decoration: const BoxDecoration(
             color: Color(0xffe3a353),
             borderRadius: BorderRadius.all(Radius.circular(5.0)),
           ),
@@ -31,7 +30,7 @@ class RedPackage extends StatelessWidget {
             crossAxisAlignment: model.id != globalModel.account
                 ? CrossAxisAlignment.start
                 : CrossAxisAlignment.end,
-            children: [
+            children: <Widget>[
               Container(
                 decoration: BoxDecoration(
                   border: Border(
@@ -39,13 +38,13 @@ class RedPackage extends StatelessWidget {
                         color: Colors.white.withOpacity(0.5), width: 0.2),
                   ),
                 ),
-                padding: EdgeInsets.only(bottom: 10),
+                padding: const EdgeInsets.only(bottom: 10),
                 child: Row(
-                  children: [
+                  children: <Widget>[
                     Image.asset('assets/images/wechat/c2c_hongbao_icon_hk.png',
                         width: 30),
-                    SizedBox(width: 5),
-                    Text(
+                    const SizedBox(width: 5),
+                    const Text(
                       '恭喜发财，大吉大利',
                       style: TextStyle(color: Colors.white, fontSize: 15),
                     ),
@@ -66,17 +65,15 @@ class RedPackage extends StatelessWidget {
         },
       ),
     ];
-    if (model.id == globalModel.account) {
+    final bool self = model.userID == globalModel.account;
+    if (self) {
       body = body.reversed.toList();
-    } else {
-      body = body;
     }
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 5.0),
-      child: new Row(
-        mainAxisAlignment: model.id != globalModel.account
-            ? MainAxisAlignment.start
-            : MainAxisAlignment.end,
+      padding: const EdgeInsets.symmetric(vertical: 5.0),
+      child: Row(
+        mainAxisAlignment:
+            !self ? MainAxisAlignment.start : MainAxisAlignment.end,
         children: body,
       ),
     );

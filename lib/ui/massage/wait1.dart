@@ -13,6 +13,8 @@ import 'package:wechat_flutter/ui/message_view/red_package.dart';
 import 'package:wechat_flutter/ui/message_view/sound_msg.dart';
 import 'package:wechat_flutter/ui/message_view/text_msg.dart';
 
+import '../message_view/video_message.dart';
+
 class SendMessageView extends StatefulWidget {
   final V2TimMessage model;
 
@@ -27,9 +29,9 @@ class _SendMessageViewState extends State<SendMessageView> {
   Widget build(BuildContext context) {
     final V2TimMessage msg = widget.model;
     final int msgType = msg.elemType;
-    final String msgStr = msg.textElem?.text ?? "";
+    final String msgStr = msg.textElem?.text ?? '';
     if ((msgType == MessageElemType.V2TIM_ELEM_TYPE_TEXT) &&
-        msgStr.contains("测试发送红包消息")) {
+        msgStr.contains('测试发送红包消息')) {
       return RedPackage(widget.model);
     } else if (msgType == MessageElemType.V2TIM_ELEM_TYPE_TEXT) {
       return TextMsg(msgStr, widget.model);
@@ -37,9 +39,8 @@ class _SendMessageViewState extends State<SendMessageView> {
       return ImgMsg(widget.model);
     } else if (msgType == MessageElemType.V2TIM_ELEM_TYPE_SOUND) {
       return SoundMsg(widget.model);
-//    } else if (msg.toString().contains('snapshotPath') &&
-//        msg.toString().contains('videoPath')) {
-//      return VideoMessage(msg, msgType, widget.data);
+   } else if (msgType == MessageElemType.V2TIM_ELEM_TYPE_VIDEO) {
+     return VideoMessage(msg);
     } else if (msgType == MessageElemType.V2TIM_ELEM_TYPE_GROUP_TIPS) {
       final V2TimGroupTipsElem groupTipsElem = msg.groupTipsElem!;
       if (groupTipsElem.type ==

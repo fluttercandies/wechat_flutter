@@ -1,12 +1,11 @@
-import 'dart:async';
-import 'dart:io';
-
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sound/flutter_sound.dart';
+import 'package:get/get.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:provider/provider.dart';
 import 'package:tencent_cloud_chat_sdk/models/v2_tim_message.dart';
+import 'package:tencent_cloud_chat_sdk/models/v2_tim_sound_elem.dart';
 
 import '../../provider/global_model.dart';
 import '../../tools/wechat_flutter.dart';
@@ -26,7 +25,7 @@ class _SoundMsgState extends State<SoundMsg> with TickerProviderStateMixin {
   Duration? position;
 
   late AnimationController controller;
-  late Animation<int> animation;
+  Animation<int>? animation;
   late FlutterSound flutterSound;
   AudioPlayer audioPlayer = AudioPlayer();
 
@@ -51,7 +50,7 @@ class _SoundMsgState extends State<SoundMsg> with TickerProviderStateMixin {
     final Animation<double> curve =
         CurvedAnimation(parent: controller, curve: Curves.easeOut);
     animation = IntTween(begin: 0, end: 3).animate(curve)
-      ..addStatusListener((status) {
+      ..addStatusListener((AnimationStatus status) {
         if (status == AnimationStatus.completed) {
           controller.reverse();
         }
@@ -62,14 +61,14 @@ class _SoundMsgState extends State<SoundMsg> with TickerProviderStateMixin {
   }
 
   void start(String path) async {
-    showToast("正在兼容最新flutter");
+    showToast('正在兼容最新flutter');
   }
 
-  playNew(String url) async {
-    showToast("正在兼容最新flutter");
-    // await audioPlayer.play(url);
+  Future<void> playNew(String url) async {
+    await audioPlayer
+        .play(url.startsWith('http') ? UrlSource(url) : DeviceFileSource(url));
     // if (result == 1) {
-    //   showToast( '播放中');
+    showToast('播放中');
     // } else {
     //   showToast( '播放出问题了');
     // }
@@ -77,17 +76,17 @@ class _SoundMsgState extends State<SoundMsg> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    final globalModel = Provider.of<GlobalModel>(context);
-    bool isSelf = widget.model.id == globalModel.account;
-    var soundImg;
-    var leftSoundNames = [
+    final GlobalModel globalModel = Provider.of<GlobalModel>(context);
+    final bool isSelf = widget.model.userID == globalModel.account;
+    List<String> soundImg;
+    final List<String> leftSoundNames = <String>[
       'assets/images/chat/sound_left_0.webp',
       'assets/images/chat/sound_left_1.webp',
       'assets/images/chat/sound_left_2.webp',
       'assets/images/chat/sound_left_3.webp',
     ];
 
-    var rightSoundNames = [
+    final List<String> rightSoundNames = <String>[
       'assets/images/chat/sound_right_0.png',
       'assets/images/chat/sound_right_1.webp',
       'assets/images/chat/sound_right_2.webp',
@@ -99,22 +98,29 @@ class _SoundMsgState extends State<SoundMsg> with TickerProviderStateMixin {
       soundImg = leftSoundNames;
     }
 
-    SoundMsgEntity model = SoundMsgEntity.fromJson(widget.model.msg);
-    ISoundMsgEntity iModel = ISoundMsgEntity.fromJson(widget.model.msg);
-    bool isIos = Platform.isIOS;
-    if (!listNoEmpty(isIos ? iModel.soundUrls : model.urls)) return Container();
+    if (widget.model.soundElem == null) {
+      return Container();
+    }
+    final V2TimSoundElem soundElem = widget.model.soundElem!;
 
-    var urls = isIos ? iModel.soundUrls![0] : model.urls![0];
-    var body = [
+    if (GetUtils.isNullOrBlank(soundElem.url)! &&
+        GetUtils.isNullOrBlank(soundElem.path)!) {
+      return Container();
+    }
+
+    final String urlUse = GetUtils.isNullOrBlank(soundElem.url)!
+        ? soundElem.path!
+        : soundElem.url!;
+    List<Widget> body = <Widget>[
       MsgAvatar(model: widget.model, globalModel: globalModel),
       Container(
         width: 100.0,
-        padding: EdgeInsets.only(right: 10.0),
+        padding: const EdgeInsets.only(right: 10.0),
         child: TextButton(
           style: TextButton.styleFrom(
-            padding: EdgeInsets.only(left: 18.0, right: 4.0),
+            padding: const EdgeInsets.only(left: 18.0, right: 4.0),
             backgroundColor: widget.model.id == globalModel.account
-                ? Color(0xff98E165)
+                ? const Color(0xff98E165)
                 : Colors.white,
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
@@ -122,35 +128,35 @@ class _SoundMsgState extends State<SoundMsg> with TickerProviderStateMixin {
           child: Row(
             mainAxisAlignment:
                 isSelf ? MainAxisAlignment.end : MainAxisAlignment.start,
-            children: [
-              Text("0\"", textAlign: TextAlign.start, maxLines: 1),
-              SizedBox(width: mainSpace / 2),
+            children: <Widget>[
+              const Text('0\"', textAlign: TextAlign.start, maxLines: 1),
+              const SizedBox(width: mainSpace / 2),
               Image.asset(
                   animation != null
-                      ? soundImg[animation.value % 3]
+                      ? soundImg[animation!.value % 3]
                       : soundImg[3],
                   height: 20.0,
                   color: Colors.black,
                   fit: BoxFit.cover),
-              SizedBox(width: mainSpace)
+              const SizedBox(width: mainSpace)
             ],
           ),
           onPressed: () {
-            if (strNoEmpty(urls)) {
-              playNew(urls);
+            if (strNoEmpty(urlUse)) {
+              playNew(urlUse);
             } else {
               showToast('未知错误');
             }
           },
         ),
       ),
-      Spacer(),
+      const Spacer(),
     ];
     if (isSelf) {
       body = body.reversed.toList();
     }
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 5.0),
+      padding: const EdgeInsets.symmetric(vertical: 5.0),
       child: Row(children: body),
     );
   }

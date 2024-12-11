@@ -15,16 +15,17 @@ class TextMsg extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final GlobalModel globalModel = Provider.of<GlobalModel>(context);
+    final bool self = model.userID == globalModel.account;
     List<Widget> body = <Widget>[
       MsgAvatar(model: model, globalModel: globalModel),
       TextItemContainer(
         text: text ?? '文字为空',
         action: '',
-        isMyself: model.id == globalModel.account,
+        isMyself: self,
       ),
       const Spacer(),
     ];
-    if (model.id == globalModel.account) {
+    if (self) {
       body = body.reversed.toList();
     }
     return Container(
