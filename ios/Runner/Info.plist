@@ -50,5 +50,9 @@
     </dict>
     <key>NSPhotoLibraryUsageDescription</key>
     <string>Replace with your permission description.</string>
+	<key>CADisableMinimumFrameDurationOnPhone</key>
+	<true/>
+	<key>UIApplicationSupportsIndirectInputEvents</key>
+	<true/>
 </dict>
 </plist>

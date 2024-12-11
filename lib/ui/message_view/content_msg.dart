@@ -16,7 +16,7 @@ class ContentMsg extends StatefulWidget {
 }
 
 class _ContentMsgState extends State<ContentMsg> {
-  late String str;
+  String? str;
 
   TextStyle _style = TextStyle(color: mainTextColor, fontSize: 14.0);
 
@@ -25,13 +25,6 @@ class _ContentMsgState extends State<ContentMsg> {
     if (widget.msg == null) {
       return Text('未知消息', style: _style);
     }
-    // String msgStr = msg.toString();
-
-    // bool isI = Platform.isIOS;
-    // bool iosText = isI && msgStr.contains('text:');
-    // bool iosImg = isI && msgStr.contains('imageList:');
-    // var iosS = msgStr.contains('downloadFlag:') && msgStr.contains('second:');
-    // bool iosSound = isI && iosS;
     if (widget.msg?.elemType == MessageElemType.V2TIM_ELEM_TYPE_TEXT) {
       str = widget.msg?.textElem?.text ?? "";
     } else if (widget.msg?.elemType == MessageElemType.V2TIM_ELEM_TYPE_IMAGE) {
@@ -57,10 +50,12 @@ class _ContentMsgState extends State<ContentMsg> {
       } else {
         str = '[系统消息]';
       }
+    }else {
+      str = '[未知消息]';
     }
 
     return ExtendedText(
-      str,
+      str!,
       specialTextSpanBuilder: TextSpanBuilder(showAtBackground: true),
       maxLines: 1,
       overflow: TextOverflow.ellipsis,

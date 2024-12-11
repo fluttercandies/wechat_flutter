@@ -18,7 +18,7 @@ class ContactItem extends StatefulWidget {
   final String? identifier;
   final String? groupTitle;
   final bool isLine;
-  final ClickType type;
+  final ClickType? type;
   final OnAdd? add;
   final OnCancel? cancel;
 

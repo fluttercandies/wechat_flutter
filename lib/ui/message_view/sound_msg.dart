@@ -119,7 +119,7 @@ class _SoundMsgState extends State<SoundMsg> with TickerProviderStateMixin {
         child: TextButton(
           style: TextButton.styleFrom(
             padding: const EdgeInsets.only(left: 18.0, right: 4.0),
-            backgroundColor: widget.model.id == globalModel.account
+            backgroundColor: widget.model.userID == globalModel.account
                 ? const Color(0xff98E165)
                 : Colors.white,
             shape:

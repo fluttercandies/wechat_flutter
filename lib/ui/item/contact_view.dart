@@ -48,7 +48,7 @@ class ContactView extends StatelessWidget {
               identifier: _contact.identifier,
               groupTitle: _isGroupTitle ? _contact.nameIndex : null,
               isLine: _isBorder,
-              type: type!,
+              type: type,
               cancel: (v) {
                 data.remove(v);
                 if (callback != null) callback!(data);
@@ -66,7 +66,7 @@ class ContactView extends StatelessWidget {
                 identifier: _contact.identifier,
                 groupTitle: _isGroupTitle ? _contact.nameIndex : null,
                 isLine: false,
-                type: type!,
+                type: type,
                 cancel: (v) {
                   data.remove(v);
                   if (callback != null) callback!(data);
