@@ -16,12 +16,12 @@ import 'package:wechat_flutter/ui/message_view/text_msg.dart';
 import '../message_view/video_message.dart';
 
 class SendMessageView extends StatefulWidget {
+  const SendMessageView(this.model, {super.key});
+
   final V2TimMessage model;
 
-  SendMessageView(this.model);
-
   @override
-  _SendMessageViewState createState() => _SendMessageViewState();
+  State<SendMessageView> createState() => _SendMessageViewState();
 }
 
 class _SendMessageViewState extends State<SendMessageView> {
@@ -39,8 +39,8 @@ class _SendMessageViewState extends State<SendMessageView> {
       return ImgMsg(widget.model);
     } else if (msgType == MessageElemType.V2TIM_ELEM_TYPE_SOUND) {
       return SoundMsg(widget.model);
-   } else if (msgType == MessageElemType.V2TIM_ELEM_TYPE_VIDEO) {
-     return VideoMessage(msg);
+    } else if (msgType == MessageElemType.V2TIM_ELEM_TYPE_VIDEO) {
+      return VideoMessage(msg);
     } else if (msgType == MessageElemType.V2TIM_ELEM_TYPE_GROUP_TIPS) {
       final V2TimGroupTipsElem groupTipsElem = msg.groupTipsElem!;
       if (groupTipsElem.type ==
@@ -58,6 +58,6 @@ class _SendMessageViewState extends State<SendMessageView> {
         return ModifyGroupInfoMessage(msg);
       }
     }
-    return Text('未知消息');
+    return const Text('未知消息');
   }
 }

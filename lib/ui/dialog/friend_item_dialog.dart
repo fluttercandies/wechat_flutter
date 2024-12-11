@@ -28,7 +28,7 @@ friendItemDialog(BuildContext context,
     }
   }
 
-  Widget item(item) {
+  Widget item(String item) {
     return new Container(
       width: Get.width,
       decoration: BoxDecoration(
@@ -53,7 +53,7 @@ friendItemDialog(BuildContext context,
     context: context,
     isScrollControlled: true,
     builder: (context) {
-      List data = [
+      List<String> data = [
         '设置备注和标签',
         '把她推荐给朋友',
         '设为星标好友',

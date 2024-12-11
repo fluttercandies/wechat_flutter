@@ -1,55 +1,32 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:wechat_flutter/im/group/fun_dim_info.dart';
-import 'package:wechat_flutter/tools/wechat_flutter.dart';
+import 'package:provider/provider.dart';
+import 'package:tencent_cloud_chat_sdk/models/v2_tim_group_tips_elem.dart';
+import 'package:tencent_cloud_chat_sdk/models/v2_tim_message.dart';
+
+import '../../provider/global_model.dart';
 
 class ModifyNotificationMessage extends StatefulWidget {
-  final dynamic data;
+  const ModifyNotificationMessage(this.msg, {super.key});
 
-  ModifyNotificationMessage(this.data);
+  final V2TimMessage msg;
 
   @override
-  ModifyNotificationMessageState createState() => ModifyNotificationMessageState();
+  ModifyNotificationMessageState createState() =>
+      ModifyNotificationMessageState();
 }
 
 class ModifyNotificationMessageState extends State<ModifyNotificationMessage> {
-  String? name;
-  List<dynamic>? membersData;
-
-  @override
-  void initState() {
-    super.initState();
-    String user = widget.data['opGroupMemberInfo']['user'];
-    getCardName(user);
-  }
-
-  getCardName(String user) async {
-    await InfoModel.getGroupMembersInfoModel(widget.data['groupId'], [user], callback: (str) {
-      String strToData = str.toString().replaceAll("'", '"');
-      membersData = json.decode(strToData);
-    });
-    var userPhone = await getStoreValue('userPhone');
-    if (listNoEmpty(membersData)) {
-      if (user == userPhone) {
-        name = '你';
-      } else if (strNoEmpty(membersData![0]['nameCard'])) {
-        name = membersData![0]['nameCard'];
-      } else {
-        name = user;
-      }
-    }
-    setState(() {});
-  }
-
   @override
   Widget build(BuildContext context) {
+    final V2TimGroupTipsElem groupTipsElem = widget.msg.groupTipsElem!;
+    final GlobalModel globalModel = Provider.of<GlobalModel>(context);
     return Container(
       alignment: Alignment.center,
-      margin: EdgeInsets.symmetric(vertical: 5.0),
+      margin: const EdgeInsets.symmetric(vertical: 5.0),
       child: Text(
-        '${name ?? ''} 修改了群公告',
-        style: TextStyle(color: Color.fromRGBO(108, 108, 108, 0.8), fontSize: 11),
+        '${groupTipsElem.opMember.userID == globalModel.account ? "你" : groupTipsElem.opMember.nickName} 修改了群公告',
+        style: const TextStyle(
+            color: Color.fromRGBO(108, 108, 108, 0.8), fontSize: 11),
       ),
     );
   }

@@ -5,16 +5,15 @@ import 'package:provider/provider.dart';
 import 'package:tencent_cloud_chat_sdk/models/v2_tim_image.dart';
 import 'package:tencent_cloud_chat_sdk/models/v2_tim_image_elem.dart';
 import 'package:tencent_cloud_chat_sdk/models/v2_tim_message.dart';
-import 'package:wechat_flutter/im/model/chat_data.dart';
-import 'package:wechat_flutter/tools/wechat_flutter.dart';
-import 'package:wechat_flutter/ui/message_view/msg_avatar.dart';
 
 import '../../provider/global_model.dart';
+import '../../tools/wechat_flutter.dart';
+import 'msg_avatar.dart';
 
 class ImgMsg extends StatelessWidget {
-  final V2TimMessage model;
+  const ImgMsg(this.model, {super.key});
 
-  ImgMsg(this.model);
+  final V2TimMessage model;
 
   @override
   Widget build(BuildContext context) {
@@ -22,42 +21,44 @@ class ImgMsg extends StatelessWidget {
     if (!listNoEmpty(imageElem.imageList)) {
       return const Text('发送中');
     }
-    final V2TimImage? msgInfo = imageElem.imageList[1];
-    final double _height = msgInfo!.height!.toDouble();
-    final double resultH = _height > 200.0 ? 200.0 : _height;
+    final V2TimImage? msgInfo = imageElem.imageList![1];
+    final double height = msgInfo!.height!.toDouble();
+    final double resultH = height > 200.0 ? 200.0 : height;
     final String url = msgInfo.url!;
-    final isFile = File(url).existsSync();
-    final globalModel = Provider.of<GlobalModel>(context);
-    var body = [
-      new MsgAvatar(model: model, globalModel: globalModel),
-      new SizedBox(width: mainSpace),
-      new Expanded(
-        child: new GestureDetector(
-          child: new Container(
+    final bool isFile = File(url).existsSync();
+    final GlobalModel globalModel = Provider.of<GlobalModel>(context);
+    List<Widget> body = <Widget>[
+      MsgAvatar(model: model, globalModel: globalModel),
+      const SizedBox(width: mainSpace),
+      Expanded(
+        child: GestureDetector(
+          child: Container(
             padding: const EdgeInsets.all(5.0),
             decoration: const BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.all(Radius.circular(10.0)),
             ),
-            child: new ClipRRect(
+            child: ClipRRect(
               borderRadius: const BorderRadius.all(Radius.circular(10.0)),
               child: isFile
-                  ? new Image.file(File(url))
-                  : new CachedNetworkImage(
+                  ? Image.file(File(url))
+                  : CachedNetworkImage(
                       imageUrl: url, height: resultH, fit: BoxFit.cover),
             ),
           ),
           onTap: () => Get.to<void>(
-            new PhotoView(
+            PhotoView(
               imageProvider: isFile ? FileImage(File(url)) : NetworkImage(url),
-              onTapUp: (c, f, s) => Navigator.of(context).pop(),
+              onTapUp: (BuildContext c, TapUpDetails f,
+                      PhotoViewControllerValue s) =>
+                  Navigator.of(context).pop(),
               maxScale: 3.0,
               minScale: 1.0,
             ),
           ),
         ),
       ),
-      new Spacer(),
+      const Spacer(),
     ];
     if (model.userID == globalModel.account) {
       body = body.reversed.toList();
@@ -66,7 +67,7 @@ class ImgMsg extends StatelessWidget {
     }
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 5.0),
-      child: new Row(children: body),
+      child: Row(children: body),
     );
   }
 }

@@ -5,15 +5,6 @@ import 'triangle_painter.dart';
 const double _kMenuScreenPadding = 8.0;
 
 class MagicPop extends StatefulWidget {
-  final ValueChanged<int> onValueChanged;
-  final List<String> actions;
-  final Widget child;
-  final PressType pressType;
-  final int pageMaxChildCount;
-  final Color backgroundColor;
-  final double menuWidth;
-  final double menuHeight;
-
   MagicPop({
     required this.onValueChanged,
     required this.actions,
@@ -25,8 +16,17 @@ class MagicPop extends StatefulWidget {
     this.menuHeight = 42,
   });
 
+  final ValueChanged<int> onValueChanged;
+  final List<String> actions;
+  final Widget child;
+  final PressType pressType;
+  final int pageMaxChildCount;
+  final Color backgroundColor;
+  final double menuWidth;
+  final double menuHeight;
+
   @override
-  _WPopupMenuState createState() => _WPopupMenuState();
+  State<MagicPop> createState() => _WPopupMenuState();
 }
 
 class _WPopupMenuState extends State<MagicPop> {
@@ -59,7 +59,7 @@ class _WPopupMenuState extends State<MagicPop> {
         widget.menuHeight,
       ),
     ).then((index) {
-      if (index != null) {
+      if (index != null && index is int) {
         widget.onValueChanged(index);
       }
     });
@@ -72,15 +72,6 @@ enum PressType {
 }
 
 class _PopupMenuRoute extends PopupRoute {
-  final BuildContext btnContext;
-  final double _height;
-  final double _width;
-  final List<String> actions;
-  final int _pageMaxChildCount;
-  final Color backgroundColor;
-  final double menuWidth;
-  final double menuHeight;
-
   _PopupMenuRoute(
     this.btnContext,
     this.actions,
@@ -90,6 +81,14 @@ class _PopupMenuRoute extends PopupRoute {
     this.menuHeight,
   )   : _height = btnContext.size!.height,
         _width = btnContext.size!.width;
+  final BuildContext btnContext;
+  final double _height;
+  final double _width;
+  final List<String> actions;
+  final int _pageMaxChildCount;
+  final Color backgroundColor;
+  final double menuWidth;
+  final double menuHeight;
 
   @override
   Animation<double> createAnimation() {
@@ -129,15 +128,6 @@ class _PopupMenuRoute extends PopupRoute {
 }
 
 class _MenuPopWidget extends StatefulWidget {
-  final BuildContext btnContext;
-  final double _height;
-  final double _width;
-  final List<String> actions;
-  final int _pageMaxChildCount;
-  final Color backgroundColor;
-  final double menuWidth;
-  final double menuHeight;
-
   _MenuPopWidget(
     this.btnContext,
     this._height,
@@ -148,6 +138,15 @@ class _MenuPopWidget extends StatefulWidget {
     this.menuWidth,
     this.menuHeight,
   );
+
+  final BuildContext btnContext;
+  final double _height;
+  final double _width;
+  final List<String> actions;
+  final int _pageMaxChildCount;
+  final Color backgroundColor;
+  final double menuWidth;
+  final double menuHeight;
 
   @override
   __MenuPopWidgetState createState() => __MenuPopWidgetState();
@@ -389,12 +388,6 @@ class __MenuPopWidgetState extends State<_MenuPopWidget> {
 }
 
 class _PopupMenuRouteLayout extends SingleChildLayoutDelegate {
-  final RelativeRect position;
-  final double selectedItemOffset;
-  final TextDirection textDirection;
-  final double width;
-  final double menuWidth;
-
   _PopupMenuRouteLayout(
     this.position,
     this.selectedItemOffset,
@@ -402,6 +395,12 @@ class _PopupMenuRouteLayout extends SingleChildLayoutDelegate {
     this.width,
     this.menuWidth,
   );
+
+  final RelativeRect position;
+  final double selectedItemOffset;
+  final TextDirection textDirection;
+  final double width;
+  final double menuWidth;
 
   @override
   BoxConstraints getConstraintsForChild(BoxConstraints constraints) {

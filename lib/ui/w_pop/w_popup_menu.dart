@@ -87,7 +87,7 @@ class _WPopupMenuState extends State<WPopupMenu> {
         widget.onValueChanged,
       ),
     ).then((index) {
-      if (index != null) {
+      if (index != null && index is String) {
         widget.onValueChanged(index);
       }
     });
