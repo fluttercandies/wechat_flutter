@@ -18,6 +18,8 @@
 
 # log
 
+* 2024.12.16 兼容 flutter 3.24.3【所有插件版本最新】
+
 * 2023.12.28 兼容 flutter 3.0.5 版本 和 Android sdk 33【android 13】.
 
 * 2022.06.28 更换纯ui分支模拟图片地址 【12:00】
@@ -191,52 +193,71 @@ IOS
 
 # 我的Flutter环境
 
-```q1@q1deMacBook-Pro  ~/Documents/git/wechat_flutter   master  flutter doctor -v
-[✓] Flutter (Channel unknown, 2.10.4, on macOS 12.2.1 21D62 darwin-x64, locale en-CN)
-    • Flutter version 2.10.4 at /opt/fvm/versions/2.10.4
-    • Upstream repository unknown
-    • Framework revision c860cba910 (9 weeks ago), 2022-03-25 00:23:12 -0500
-    • Engine revision 57d3bac3dd
-    • Dart version 2.16.2
-    • DevTools version 2.9.2
-    • Pub download mirror https://pub.flutter-io.cn
+```
+flutter doctor -v
+[✓] Flutter (Channel stable, 3.24.3, on macOS 14.0 23A344 darwin-arm64, locale
+    en-CN)
+    • Flutter version 3.24.3 on channel stable at
+      /Users/zengyang/fvm/versions/3.24.3
+    • Upstream repository https://github.com/flutter/flutter.git
+    • Framework revision 2663184aa7 (3 months ago), 2024-09-11 16:27:48 -0500
+    • Engine revision 36335019a8
+    • Dart version 3.5.3
+    • DevTools version 2.37.3
     • Flutter download mirror https://storage.flutter-io.cn
 
-[✓] Android toolchain - develop for Android devices (Android SDK version 31.0.0-rc1)
-    • Android SDK at /Users/q1/android-sdk-macosx
-    • Platform android-31, build-tools 31.0.0-rc1
-    • Java binary at: /Applications/Android Studio.app/Contents/jre/Contents/Home/bin/java
-    • Java version OpenJDK Runtime Environment (build 11.0.11+0-b60-7590822)
+[✓] Android toolchain - develop for Android devices (Android SDK version 34.0.0)
+    • Android SDK at /Users/zengyang/Library/Android/sdk
+    • Platform android-34, build-tools 34.0.0
+    • ANDROID_HOME = /Users/zengyang/Library/Android/sdk
+    • Java binary at: /Applications/Android
+      Studio.app/Contents/jbr/Contents/Home/bin/java
+    • Java version OpenJDK Runtime Environment (build
+      17.0.10+0-17.0.10b1087.21-11609105)
     • All Android licenses accepted.
 
-[✓] Xcode - develop for iOS and macOS (Xcode 13.3.1)
+[✓] Xcode - develop for iOS and macOS (Xcode 15.3)
     • Xcode at /Applications/Xcode.app/Contents/Developer
-    • CocoaPods version 1.11.3
+    • Build 15E204a
+    • CocoaPods version 1.15.2
 
 [✓] Chrome - develop for the web
     • Chrome at /Applications/Google Chrome.app/Contents/MacOS/Google Chrome
 
-[✓] Android Studio (version 2021.1)
+[✓] Android Studio (version 2024.1)
     • Android Studio at /Applications/Android Studio.app/Contents
     • Flutter plugin can be installed from:
       🔨 https://plugins.jetbrains.com/plugin/9212-flutter
     • Dart plugin can be installed from:
       🔨 https://plugins.jetbrains.com/plugin/6351-dart
-    • Java version OpenJDK Runtime Environment (build 11.0.11+0-b60-7590822)
+    • Java version OpenJDK Runtime Environment (build
+      17.0.10+0-17.0.10b1087.21-11609105)
 
-[✓] VS Code (version 1.66.2)
-    • VS Code at /Applications/Visual Studio Code.app/Contents
-    • Flutter extension version 3.38.1
+[✓] VS Code (version 1.95.3)
+    • VS Code at /Volumes/Extreme SSD/Visual Studio Code.app/Contents
+    • Flutter extension version 3.102.0
 
-[✓] Connected device (3 available)
-    • SEA AL10 (mobile) • 6HJ4C20219007098 • android-arm64  • Android 10 (API 29)
-    • macOS (desktop)   • macos            • darwin-x64     • macOS 12.2.1 21D62 darwin-x64
-    • Chrome (web)      • chrome           • web-javascript • Google Chrome 102.0.5005.61
+[✓] Connected device (5 available)
+    • aasaaaa 11 aaaa (mobile)        • 00008030-0019082236E2802E • ios
+      • iOS 17.6.1 21G93
+    • qqqqqqq1iPhone (mobile)         • 00008030-000171CE1168802E • ios
+      • iOS 17.6.1 21G93
+    • macOS (desktop)                 • macos                     • darwin-arm64
+      • macOS 14.0 23A344 darwin-arm64
+    • Mac Designed for iPad (desktop) • mac-designed-for-ipad     • darwin
+      • macOS 14.0 23A344 darwin-arm64
+    • Chrome (web)                    • chrome                    •
+      web-javascript • Google Chrome 131.0.6778.140
+    ! Error: Browsing on the local area network for iPhone 11 Pro Max. Ensure
+      the device is unlocked and attached with a cable or associated with the
+      same local area network as this Mac.
+      The device must be opted into Developer Mode to connect wirelessly. (code
+      -27)
 
-[!] HTTP Host Availability
-    ✗ HTTP host https://maven.google.com/ is not reachable. Reason: An error occurred while checking the HTTP host: Operation timed out
+[✓] Network resources
+    • All expected network resources are available.
 
-! Doctor found issues in 1 category.
+• No issues found!
 ```
 
 # 运行安卓androidx.core:core问题

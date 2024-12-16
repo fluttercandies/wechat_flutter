@@ -22,6 +22,8 @@
 
 # log
 
+* 2024.12.16 Compatible with flutter 3.24.3 [All plugin versions up-to-date
+
 * 2023.12.28 merge 3.0.5 of flutter version and Android sdk 33【android 13】.
 
 * 2022.06.28 Replace the pure ui branch simulation picture address [12:00]
@@ -197,51 +199,70 @@ Or try to go over the wall.
 # My Flutter environment
 
 ```
-[✓] Flutter (Channel unknown, 3.0.5, on macOS 13.0 22A5331f darwin-x64, locale en-CN)
-    • Flutter version 3.0.5 at /opt/fvm/versions/3.0.5
-    • Upstream repository unknown
-    • Framework revision f1875d570e (1 year, 5 months ago), 2022-07-13 11:24:16 -0700
-    • Engine revision e85ea0e79c
-    • Dart version 2.17.6
-    • DevTools version 2.12.2
-    • Pub download mirror https://pub.flutter-io.cn
+flutter doctor -v
+[✓] Flutter (Channel stable, 3.24.3, on macOS 14.0 23A344 darwin-arm64, locale
+    en-CN)
+    • Flutter version 3.24.3 on channel stable at
+      /Users/zengyang/fvm/versions/3.24.3
+    • Upstream repository https://github.com/flutter/flutter.git
+    • Framework revision 2663184aa7 (3 months ago), 2024-09-11 16:27:48 -0500
+    • Engine revision 36335019a8
+    • Dart version 3.5.3
+    • DevTools version 2.37.3
     • Flutter download mirror https://storage.flutter-io.cn
 
-[!] Android toolchain - develop for Android devices (Android SDK version 33.0.0)
-    • Android SDK at /Users/q1/android-sdk-macosx
-    • Platform android-34, build-tools 33.0.0
-    • Java binary at: /Applications/Android Studio.app/Contents/jre/Contents/Home/bin/java
-    • Java version OpenJDK Runtime Environment (build 11.0.13+0-b1751.21-8125866)
-    ✗ Android license status unknown.
-      Run `flutter doctor --android-licenses` to accept the SDK licenses.
-      See https://flutter.dev/docs/get-started/install/macos#android-setup for more details.
+[✓] Android toolchain - develop for Android devices (Android SDK version 34.0.0)
+    • Android SDK at /Users/zengyang/Library/Android/sdk
+    • Platform android-34, build-tools 34.0.0
+    • ANDROID_HOME = /Users/zengyang/Library/Android/sdk
+    • Java binary at: /Applications/Android
+      Studio.app/Contents/jbr/Contents/Home/bin/java
+    • Java version OpenJDK Runtime Environment (build
+      17.0.10+0-17.0.10b1087.21-11609105)
+    • All Android licenses accepted.
 
-[✓] Xcode - develop for iOS and macOS (Xcode 14.2)
+[✓] Xcode - develop for iOS and macOS (Xcode 15.3)
     • Xcode at /Applications/Xcode.app/Contents/Developer
-    • CocoaPods version 1.11.3
+    • Build 15E204a
+    • CocoaPods version 1.15.2
 
 [✓] Chrome - develop for the web
     • Chrome at /Applications/Google Chrome.app/Contents/MacOS/Google Chrome
 
-[✓] Android Studio (version 2021.3)
+[✓] Android Studio (version 2024.1)
     • Android Studio at /Applications/Android Studio.app/Contents
     • Flutter plugin can be installed from:
       🔨 https://plugins.jetbrains.com/plugin/9212-flutter
     • Dart plugin can be installed from:
       🔨 https://plugins.jetbrains.com/plugin/6351-dart
-    • Java version OpenJDK Runtime Environment (build 11.0.13+0-b1751.21-8125866)
+    • Java version OpenJDK Runtime Environment (build
+      17.0.10+0-17.0.10b1087.21-11609105)
 
-[✓] VS Code (version 1.84.2)
-    • VS Code at /Applications/Visual Studio Code.app/Contents
-    • Flutter extension version 3.76.0
+[✓] VS Code (version 1.95.3)
+    • VS Code at /Volumes/Extreme SSD/Visual Studio Code.app/Contents
+    • Flutter extension version 3.102.0
 
-[✓] Connected device (3 available)
-    • SHARK KSR A0 (mobile) • 6fc7fbe3 • android-arm64  • Android 11 (API 30)
-    • macOS (desktop)       • macos    • darwin-x64     • macOS 13.0 22A5331f darwin-x64
-    • Chrome (web)          • chrome   • web-javascript • Google Chrome 120.0.6099.129
+[✓] Connected device (5 available)
+    • aasaaaa 11 aaaa (mobile)        • 00008030-0019082236E2802E • ios
+      • iOS 17.6.1 21G93
+    • qqqqqqq1iPhone (mobile)         • 00008030-000171CE1168802E • ios
+      • iOS 17.6.1 21G93
+    • macOS (desktop)                 • macos                     • darwin-arm64
+      • macOS 14.0 23A344 darwin-arm64
+    • Mac Designed for iPad (desktop) • mac-designed-for-ipad     • darwin
+      • macOS 14.0 23A344 darwin-arm64
+    • Chrome (web)                    • chrome                    •
+      web-javascript • Google Chrome 131.0.6778.140
+    ! Error: Browsing on the local area network for iPhone 11 Pro Max. Ensure
+      the device is unlocked and attached with a cable or associated with the
+      same local area network as this Mac.
+      The device must be opted into Developer Mode to connect wirelessly. (code
+      -27)
 
-[✓] HTTP Host Availability
-    • All required HTTP hosts are available
+[✓] Network resources
+    • All expected network resources are available.
+
+• No issues found!
 ```
 
 # Problems running androidx.core:core
