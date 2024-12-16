@@ -19,7 +19,9 @@ class ChatListData {
                 count: 100, //分页拉取的个数，一次分页拉取不宜太多，会影响拉取的速度，建议每次拉取 100 个会话
                 nextSeq: '0' //分页拉取的游标，第一次默认取传 0，后续分页拉传上一次分页拉取成功回调里的 nextSeq
                 );
-    return getConversationListRes.data?.conversationList ??
-        <V2TimConversation>[];
+    return (getConversationListRes.data?.conversationList ??
+            <V2TimConversation>[])
+        .reversed
+        .toList();
   }
 }

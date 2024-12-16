@@ -65,7 +65,7 @@ class RedPackage extends StatelessWidget {
         },
       ),
     ];
-    final bool self = model.userID == globalModel.account;
+    final bool self = model.sender == globalModel.account;
     if (self) {
       body = body.reversed.toList();
     }

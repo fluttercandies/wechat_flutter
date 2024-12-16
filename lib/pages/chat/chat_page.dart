@@ -125,9 +125,7 @@ class _ChatPageState extends State<ChatPage> {
 
   Future<void> _handleSubmittedData(String text) async {
     _textController.clear();
-    await sendTextMsg(widget.id, widget.type, text, call: (V2TimMessage msg) {
-      chatData.insert(0, msg);
-    });
+    await sendTextMsg(widget.id, widget.type, text);
   }
 
   void onTapHandle(ButtonType type) {

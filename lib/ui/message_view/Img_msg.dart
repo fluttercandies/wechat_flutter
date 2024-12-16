@@ -60,14 +60,13 @@ class ImgMsg extends StatelessWidget {
       ),
       const Spacer(),
     ];
-    if (model.userID == globalModel.account) {
+    if (model.sender == globalModel.account) {
       body = body.reversed.toList();
-    } else {
-      body = body;
     }
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 5.0),
-      child: Row(children: body),
+      alignment: Alignment.topCenter,
+      child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: body),
     );
   }
 }

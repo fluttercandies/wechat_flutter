@@ -110,14 +110,11 @@ class _HomePageState extends State<HomePage>
 
     final String timeStr = '$hour:$minute';
 
-    return SizedBox(
-      width: 35.0,
-      child: Text(
-        timeStr,
-        maxLines: 1,
-        overflow: TextOverflow.ellipsis,
-        style: const TextStyle(color: mainTextColor, fontSize: 14.0),
-      ),
+    return Text(
+      timeStr,
+      maxLines: 1,
+      overflow: TextOverflow.ellipsis,
+      style: const TextStyle(color: mainTextColor, fontSize: 14.0),
     );
   }
 

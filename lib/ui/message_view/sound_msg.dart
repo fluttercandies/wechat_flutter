@@ -77,7 +77,7 @@ class _SoundMsgState extends State<SoundMsg> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     final GlobalModel globalModel = Provider.of<GlobalModel>(context);
-    final bool isSelf = widget.model.userID == globalModel.account;
+    final bool isSelf = widget.model.sender == globalModel.account;
     List<String> soundImg;
     final List<String> leftSoundNames = <String>[
       'assets/images/chat/sound_left_0.webp',
@@ -119,7 +119,7 @@ class _SoundMsgState extends State<SoundMsg> with TickerProviderStateMixin {
         child: TextButton(
           style: TextButton.styleFrom(
             padding: const EdgeInsets.only(left: 18.0, right: 4.0),
-            backgroundColor: widget.model.userID == globalModel.account
+            backgroundColor: widget.model.sender == globalModel.account
                 ? const Color(0xff98E165)
                 : Colors.white,
             shape:

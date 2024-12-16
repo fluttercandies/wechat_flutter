@@ -7,6 +7,8 @@ import 'package:tencent_cloud_chat_sdk/models/v2_tim_value_callback.dart';
 import 'package:tencent_cloud_chat_sdk/tencent_im_sdk_plugin.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
+import '../tools/event/im_event.dart';
+
 typedef CallbackMsg = void Function(V2TimMessage messageInfo);
 
 Future<void> sendTextMsg(String targetId, int type, String context,
@@ -18,9 +20,6 @@ Future<void> sendTextMsg(String targetId, int type, String context,
           .createTextMessage(
             text: context, // 文本信息
           );
-  if (call != null) {
-    call(createTextMessageRes.data!.messageInfo!);
-  }
   if (createTextMessageRes.code == 0) {
     debugPrint('create message:${createTextMessageRes.toJson()}');
     // 文本信息创建成功
@@ -50,7 +49,15 @@ Future<void> sendTextMsg(String targetId, int type, String context,
       if (sendMessageRes.code != 0) {
         showToast(
             '发送消息失败, code ${sendMessageRes.code}, ${sendMessageRes.desc}');
+        return;
       }
+
+      if (call != null) {
+        call(sendMessageRes.data!);
+      }
+
+      /// Notice to refresh conversation list.
+      eventBusNewMsg.value = EventBusNewMsg(targetId);
     } on PlatformException catch (e, s) {
       debugPrint('发送消息失败, $s');
       showToast('发送消息失败: $e');

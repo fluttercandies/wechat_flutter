@@ -42,7 +42,7 @@ class _VideoMessageState extends State<VideoMessage> {
   @override
   Widget build(BuildContext context) {
     final GlobalModel globalModel = Provider.of<GlobalModel>(context);
-    final bool isSelf = widget.msg.userID == globalModel.account;
+    final bool isSelf = widget.msg.sender == globalModel.account;
     if (videoElement.value == null) {
       return Container();
     }

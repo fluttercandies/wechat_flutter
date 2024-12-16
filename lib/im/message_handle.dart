@@ -36,7 +36,7 @@ Future<List<V2TimMessage>> getDimMessages(String id,
             //   MessageElemType.V2TIM_ELEM_TYPE_FILE,
             // ], // 用于过滤历史信息属性，若为空则拉取所有属性信息。
           );
-  return getHistoryMessageListRes.data?.messageList ?? [];
+  return (getHistoryMessageListRes.data?.messageList ?? []).reversed.toList();
 }
 
 Future<void> sendImageMsg(String userName, int type,

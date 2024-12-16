@@ -15,7 +15,7 @@ class TextMsg extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final GlobalModel globalModel = Provider.of<GlobalModel>(context);
-    final bool self = model.userID == globalModel.account;
+    final bool self = model.sender == globalModel.account;
     List<Widget> body = <Widget>[
       MsgAvatar(model: model, globalModel: globalModel),
       TextItemContainer(
@@ -30,7 +30,11 @@ class TextMsg extends StatelessWidget {
     }
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 5.0),
-      child: Row(children: body),
+      alignment: Alignment.topCenter,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: body,
+      ),
     );
   }
 }

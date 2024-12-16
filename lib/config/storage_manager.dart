@@ -1,5 +1,4 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wechat_flutter/tools/wechat_flutter.dart';
 
@@ -8,22 +7,18 @@ class StorageManager {
   static late SharedPreferences sp;
 
   /// 网络连接
-  var connect;
+  StreamSubscription<List<ConnectivityResult>>? connect;
 
   /// 必备数据的初始化操作
-  static init() async {
+  static Future<void> init() async {
     // async 异步操作
     // sync 同步操作
     sp = await SharedPreferences.getInstance();
 
-    if (Platform.isAndroid) {
-      StorageManager().initAutoLogin();
-    } else {
-      debugPrint('IOS自动登陆开发中');
-    }
+    StorageManager().initAutoLogin();
   }
 
-  initAutoLogin() async {
+  Future<void> initAutoLogin() async {
     try {
       // 监测网络变化
       connect = Connectivity()

@@ -1,7 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:tencent_cloud_chat_sdk/models/v2_tim_message.dart';
-import 'package:wechat_flutter/im/model/chat_data.dart';
 import 'package:wechat_flutter/ui/massage/wait1.dart';
 import 'package:wechat_flutter/ui/view/indicator_page_view.dart';
 
@@ -25,7 +24,7 @@ class ChatDetailsBody extends StatelessWidget {
           padding: EdgeInsets.all(8.0),
           reverse: true,
           itemBuilder: (context, int index) {
-            V2TimMessage model = chatData[index];
+            final V2TimMessage model = chatData[index];
             return SendMessageView(model);
           },
           itemCount: chatData.length,
