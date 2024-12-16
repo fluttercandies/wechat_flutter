@@ -141,7 +141,7 @@ class _HomePageState extends State<HomePage>
             return InkWell(
               onTap: () {
                 Get.to<void>(ChatPage(
-                    id: model.conversationID,
+                    id: model.userID ?? model.groupID!,
                     title: model.showName ?? model.conversationID,
                     type: model.type!));
               },

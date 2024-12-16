@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -55,10 +57,13 @@ class _ContactsDetailsPageState extends State<ContactsDetailsPage> {
         margin: EdgeInsets.only(top: 10.0),
         text: '发消息',
         isBorder: true,
-        onPressed: () => Get.replace(new ChatPage(
-            id: widget.id!,
-            title: widget.title!,
-            type: ConversationType.V2TIM_C2C)),
+        onPressed: () {
+          log('to chat page');
+          Get.off(new ChatPage(
+              id: widget.id!,
+              title: widget.title!,
+              type: ConversationType.V2TIM_C2C));
+        },
       ),
       new Visibility(
         visible: !isSelf,

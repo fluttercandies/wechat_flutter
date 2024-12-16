@@ -55,12 +55,13 @@ class GlobalModel extends ChangeNotifier {
       return;
     }
 
-    V2TimUserFullInfo model = data[0];
-    nickName = model.nickName!;
-    await SharedUtil.instance.saveString(Keys.nickName, model.nickName!);
-    avatar = model.faceUrl!;
-    await SharedUtil.instance.saveString(Keys.faceUrl, model.faceUrl!);
-    gender = model.gender!;
+    final V2TimUserFullInfo model = data[0];
+    nickName = model.nickName ?? model.userID ?? '';
+
+    await SharedUtil.instance.saveString(Keys.nickName, nickName);
+    avatar = model.faceUrl ?? '';
+    await SharedUtil.instance.saveString(Keys.faceUrl, avatar);
+    gender = model.gender ?? 0;
     await SharedUtil.instance.saveInt(Keys.gender, model.gender!);
   }
 

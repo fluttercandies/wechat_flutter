@@ -82,7 +82,8 @@ class _ChatInfoPageState extends State<ChatInfoPage> {
       new LabelRow(
         label: '投诉',
         margin: EdgeInsets.only(top: 10.0),
-        onPressed: () => Get.to<void>(new WebViewPage(url: helpUrl, title: '投诉')),
+        onPressed: () =>
+            Get.to<void>(new WebViewPage(url: helpUrl, title: '投诉')),
       ),
     ];
   }
@@ -93,8 +94,12 @@ class _ChatInfoPageState extends State<ChatInfoPage> {
     getInfo();
   }
 
-  getInfo() async {
+  Future<void> getInfo() async {
     final List<V2TimUserFullInfo> infoList = await getUsersProfile([widget.id]);
+    if (infoList.isEmpty) {
+      showToast('获取用户信息错误');
+      return;
+    }
     setState(() {
       model = infoList[0];
     });

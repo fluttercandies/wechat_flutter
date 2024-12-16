@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tencent_cloud_chat_sdk/enum/group_tips_elem_type.dart';
 import 'package:tencent_cloud_chat_sdk/enum/message_elem_type.dart';
+import 'package:tencent_cloud_chat_sdk/models/v2_tim_custom_elem.dart';
 import 'package:tencent_cloud_chat_sdk/models/v2_tim_group_tips_elem.dart';
 import 'package:tencent_cloud_chat_sdk/models/v2_tim_message.dart';
 import 'package:wechat_flutter/ui/message_view/Img_msg.dart';
@@ -57,6 +58,9 @@ class _SendMessageViewState extends State<SendMessageView> {
           GroupTipsElemType.V2TIM_GROUP_TIPS_TYPE_MEMBER_INFO_CHANGE) {
         return ModifyGroupInfoMessage(msg);
       }
+    } else if (msgType == MessageElemType.V2TIM_ELEM_TYPE_CUSTOM) {
+      final V2TimCustomElem customElem = msg.customElem!;
+      return TextMsg('自定义消息：${customElem.data}', widget.model);
     }
     return const Text('未知消息');
   }
