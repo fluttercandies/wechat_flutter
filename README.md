@@ -22,7 +22,7 @@
 
 # log
 
-* 2024.12.16 Compatible with flutter 3.24.3 [All plugin versions up-to-date
+* 2024.12.16 Compatible with flutter 3.24.3 [All plugin versions up-to-date]
 
 * 2023.12.28 merge 3.0.5 of flutter version and Android sdk 33【android 13】.
 
