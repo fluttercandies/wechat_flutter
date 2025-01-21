@@ -18,7 +18,7 @@
 
 课程demo下载地址 https://wwpj.lanzouu.com/s/wechat-new-demo
 
-商务合作联系微信18826987045.
+商务合作联系微信【从底部找二维码】.
 
 # log
 
