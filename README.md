@@ -18,8 +18,6 @@
 
 课程demo下载地址 https://wwpj.lanzouu.com/s/wechat-new-demo
 
-商务合作联系微信【q1666655】，接单flutter【兼容android-ios】项目外包兼职等、全栈【go作为后端】、出技术方案、解决Apple Store上架4.3问题，目前无私活，新年假期无聊，就等你了，接到了就下架广告.
-
 # log
 
 * 2024.12.16 Compatible with flutter 3.24.3 [All plugin versions up-to-date]
