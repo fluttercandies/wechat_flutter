@@ -19,6 +19,8 @@
 
 课程demo下载地址 https://wwpj.lanzouu.com/s/wechat-new-demo
 
+商务合作联系微信【q1666655】，帮面试、出技术方案、解决Apple Store上架4.3等问题.
+
 # log
 
 * 2024.12.16 Compatible with flutter 3.24.3 [All plugin versions up-to-date]
