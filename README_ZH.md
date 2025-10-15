@@ -15,7 +15,7 @@
 
 课程demo下载地址 https://wwpj.lanzouu.com/s/wechat-new-demo
 
-商务合作联系微信【q1666655】，接单项目外包、出技术方案、解决Apple Store上架4.3问题.
+商务合作联系微信【q1666655】，定制开发、帮面试、出技术方案、解决Apple Store上架4.3问题.
 
 # log
 
