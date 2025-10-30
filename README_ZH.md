@@ -1,7 +1,7 @@
 [![GitHub stars](https://img.shields.io/github/stars/fluttercandies/wechat_flutter)](https://github.com/fluttercandies/wechat_flutter/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/fluttercandies/wechat_flutter)](https://github.com/fluttercandies/wechat_flutter/network)
 [![GitHub issues](https://img.shields.io/github/issues/fluttercandies/wechat_flutter)](https://github.com/fluttercandies/wechat_flutter/issues)
-![star](https://gitcode.com/ahyang_1/wechat_flutter/star/badge.svg)
+![star](https://gitcode.com/fluttercandies/wechat_flutter/star/badge.svg)
 
 > 如果产生其他依赖无法编译的问题，可以尝试将`pubspec.yaml`中的`dependencies`中的所有依赖的"^"去掉或者插件版本号改为any，重新编译尝试。
 > 还是出错的话在项目主目录执行`flutter clean`再重新运行。
