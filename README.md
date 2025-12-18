@@ -2,7 +2,7 @@
 [![GitHub forks](https://img.shields.io/github/forks/fluttercandies/wechat_flutter)](https://github.com/fluttercandies/wechat_flutter/network)
 [![GitHub issues](https://img.shields.io/github/issues/fluttercandies/wechat_flutter)](https://github.com/fluttercandies/wechat_flutter/issues)
 ![star](https://gitcode.com/fluttercandies/wechat_flutter/star/badge.svg)
-[![star](https://atomgit.com/https://atomgit.com/fluttercandies/wechat_flutter/star/2025top.svg)](https://atomgit.com/fluttercandies/wechat_flutter)
+[![star](https://atomgit.com/fluttercandies/wechat_flutter/star/2025top.svg)](https://atomgit.com/fluttercandies/wechat_flutter)
 
 
 > If there is a problem that other dependencies cannot be compiled, you can try to remove the "^" of all dependencies in `dependencies` in `pubspec.yaml` or change the plug-in version number to any, and try to compile again.
