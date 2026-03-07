@@ -23,7 +23,11 @@
 
 商务合作联系微信【q1666655】，帮面试、出技术方案、解决Apple Store上架4.3等问题.
 
+Business DM to Telegram: @ahyangnb_1
+
 # log
+
+* 2026.03.07 Basic fit HarmonyOS. (search "鸿蒙专属" in [pubspec.yaml](pubspec.yaml)) (flutter 3.27.5-ohos-1.0.4)
 
 * 2024.12.16 Compatible with flutter 3.24.3 [All plugin versions up-to-date]
 

@@ -17,7 +17,11 @@
 
 商务合作联系微信【q1666655】，定制开发、帮面试、出技术方案、解决Apple Store上架4.3问题.
 
+Business DM to Telegram: @ahyangnb_1
+
 # log
+
+* 2026.03.07 基础兼容鸿蒙系统. (在 [pubspec.yaml](pubspec.yaml) 搜索 "鸿蒙专属") (flutter 3.27.5-ohos-1.0.4)
 
 * 2024.12.16 兼容 flutter 3.24.3【所有插件版本最新】
 
