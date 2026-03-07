@@ -25,6 +25,8 @@ dependencies:
   image_picker: 0.8.6 #选取图库
   extended_text: 14.2.0 #文本扩展显示
   extended_text_field: 16.0.1 #文字表情混入
+#  extended_text_field: #鸿蒙专属
+#   path: ohos_plugins/extended_text_field-16.0.1
   extended_text_library: 12.0.1 #extended 支持库
   url_launcher: 6.3.1 #打开系统浏览器
   connectivity_plus: 6.1.0 #网络连接
