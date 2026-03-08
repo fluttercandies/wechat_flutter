@@ -25,6 +25,17 @@
 
 Business DM to Telegram: @ahyangnb_1
 
+# HarmonyOS Next 6.0 【纯血鸿蒙Next6.0】
+
+|![1.jpg](git/HarmonyOS Next 6.0_1.jpg)| ![2.jpg](git/HarmonyOS Next 6.0_2.jpg) | |
+| --- | --- | --- |
+
+# 赞助
+
+开源不容，买杯咖啡给我点支持，我的想法是完整实现音视频通话和语音房以及直播，在此项目，给我点动力吧。
+
+![payment.png](git/payment.png)
+
 # log
 
 * 2026.03.07 完整兼容纯血鸿蒙6.0 Next系统. (在 [pubspec.yaml](pubspec.yaml) 搜索 "鸿蒙专属") (flutter 3.27.5-ohos-1.0.4)
@@ -120,9 +131,7 @@ Download Experience(Android)
 
 <img src="assets/git/qr_code.png" style="zoom:50%;" />
 
-To prevent the QR code above from not displaying:
-
-<img src="https://oss.shenmeniuma.com/images/app/qr_code.png" style="zoom:50%;" />
+Can't see it? locate to assets/git/qr_code.png
 
 
 
@@ -336,7 +345,8 @@ Sorry guys, from now on into maintenance. [](assets/git/cui.png)
 
 [The above image cannot be displayed click me](http://www.shenmeniuma.com/mockImg/git/left_group.png)
 
-Flutter tutorial website: www.flutterj.com
+Can't see it? locate to assets/git/left_group.png
+
 
 Flutter exchange QQ group: [874592746](https://jq.qq.com/?_wv=1027&k=5coTYqE)
 
