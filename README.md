@@ -27,14 +27,14 @@ Business DM to Telegram: @ahyangnb_1
 
 # HarmonyOS Next 6.0 【纯血鸿蒙Next6.0】
 
-|![1.jpg](git/HarmonyOS Next 6.0_1.jpg)| ![2.jpg](git/HarmonyOS Next 6.0_2.jpg) | |
-| --- | --- | --- |
+| ![1.jpg](git/HarmonyOS_Next_6.0_1.jpg) | ![2.jpg](git/HarmonyOS_Next_6.0_2.jpg) | |
+|----------------------------------------|----------------------------------------|-|
 
 # 赞助
 
 开源不容，买杯咖啡给我点支持，我的想法是完整实现音视频通话和语音房以及直播，在此项目，给我点动力吧。
 
-![payment.png](git/payment.png)
+<img src="git/payment.png" style="zoom:50%;" />
 
 # log
 
