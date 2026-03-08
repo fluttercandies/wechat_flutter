@@ -33,9 +33,9 @@ Business DM to Telegram: @ahyangnb_1
 
 # log
 
-* 2026.03.07 完整兼容纯血鸿蒙6.0 Next系统. (在 [pubspec.yaml](pubspec.yaml) 搜索 "鸿蒙专属") (flutter 3.27.5-ohos-1.0.4)
+* 2026.03.07 完整兼容纯血鸿蒙6.0 Next系统. (在 [pubspec.yaml](pubspec.yaml) 搜索 "鸿蒙专属" 或直接使用pubspec.yaml.harmony) (flutter 3.27.5-ohos-1.0.4)
 
-* 2026.03.07 Fully fit HarmonyOS Next 6.0. (search "鸿蒙专属" in [pubspec.yaml](pubspec.yaml)) (flutter 3.27.5-ohos-1.0.4)
+* 2026.03.07 Fully fit HarmonyOS Next 6.0. (search "鸿蒙专属" in [pubspec.yaml](pubspec.yaml) or using pubspec.yaml.harmony) (flutter 3.27.5-ohos-1.0.4)
 
 * 2024.12.16 Compatible with flutter 3.24.3 [All plugin versions up-to-date]
 
