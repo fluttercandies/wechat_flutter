@@ -5,18 +5,24 @@
 [![star](https://atomgit.com/fluttercandies/wechat_flutter/star/2025top.svg)](https://atomgit.com/fluttercandies/wechat_flutter)
 
 
-> If there is a problem that other dependencies cannot be compiled, you can try to remove the "^" of all dependencies in `dependencies` in `pubspec.yaml` or change the plug-in version number to any, and try to compile again.
-6
-> If there is still an error, execute `flutter clean` in the main directory of the project and run again.
-7
-> If the plug-in version does not match, remember to check whether the plug-in flutter version introduced in the `pubspec.yaml` file is compatible with your local Flutter.
+> If there is a problem that other dependencies cannot be compiled, you can try to remove the "^" of
+> all dependencies in `dependencies` in `pubspec.yaml` or change the plug-in version number to any,
+> and try to compile again.
+> 6
+> If there is still an error, execute `flutter clean` in the main directory of the project and run
+> again.
+> 7
+> If the plug-in version does not match, remember to check whether the plug-in flutter version
+> introduced in the `pubspec.yaml` file is compatible with your local Flutter.
 
 # Related documents
+
 [List of problems and solutions](issues_list.md)
 
 [中文文档 README_ZH.md](README_ZH.md)
 
 # 课程说明
+
 本项目出配套课程啦，耗时6个月打造，flutter3最新版本，从0到1实现微信，包含im聊天单聊群聊功能：https://edu.csdn.net/course/detail/39189
 
 课程demo下载地址 https://wwpj.lanzouu.com/s/wechat-new-demo
@@ -30,23 +36,24 @@ Business DM to Telegram: @ahyangnb_1
 | ![1.jpg](git/HarmonyOS_Next_6.0_1.jpg) | ![2.jpg](git/HarmonyOS_Next_6.0_2.jpg) | |
 |----------------------------------------|----------------------------------------|-|
 
-
 # log
 
-* 2026.03.07 完整兼容纯血鸿蒙6.0 Next系统. (在 [pubspec.yaml](pubspec.yaml) 搜索 "鸿蒙专属" 或直接使用pubspec.yaml.harmony) (flutter 3.27.5-ohos-1.0.4)
+* 2026.03.07 完整兼容纯血鸿蒙6.0 Next系统. (在 [pubspec.yaml](pubspec.yaml) 搜索 "鸿蒙专属"
+  或直接使用pubspec.yaml.harmony) (flutter 3.27.5-ohos-1.0.4)
 
-* 2026.03.07 Fully fit HarmonyOS Next 6.0. (search "鸿蒙专属" in [pubspec.yaml](pubspec.yaml) or using pubspec.yaml.harmony) (flutter 3.27.5-ohos-1.0.4)
+* 2026.03.07 Fully fit HarmonyOS Next 6.0. (search "鸿蒙专属" in [pubspec.yaml](pubspec.yaml) or
+  using pubspec.yaml.harmony) (flutter 3.27.5-ohos-1.0.4)
 
 * 2024.12.16 Compatible with flutter 3.24.3 [All plugin versions up-to-date]
 
 * 2023.12.28 merge 3.0.5 of flutter version and Android sdk 33【android 13】.
 
 * 2022.06.28 Replace the pure ui branch simulation picture address [12:00]
-  
+
 * 2022.06.28 create pure ui branch [10:00]
-  
+
 * 2022.05.28 Update environment information and post `problem list and solution` index
-  
+
 * 2022.05.26 Began to be compatible with flutter2.10.4
 
 * 2022.05.26 List the errors and how to fix them
@@ -59,7 +66,8 @@ Business DM to Telegram: @ahyangnb_1
 
 * 2021.05.10 Adapt to Flutter2 stable branch [11:45]
 
-* 2021.05.10 Fix im plugin example can not get dependencies, fix `lib/ui/flutter/my_cupertino_dialog.dart`
+* 2021.05.10 Fix im plugin example can not get dependencies, fix
+  `lib/ui/flutter/my_cupertino_dialog.dart`
 
 * 2021.01.16 Added a new payment page, waiting for the icon to be completed [14:49]
 
@@ -69,17 +77,22 @@ Business DM to Telegram: @ahyangnb_1
 
 * 2020.07.29 Upload avatar capture error [15:45]
 
-* 2020.07.29 Repair login, logout, and modify information reporting status management monitoring errors;
+* 2020.07.29 Repair login, logout, and modify information reporting status management monitoring
+  errors;
 
-* 2020.06.30 Only when the group members are more than 20 will it display all group members, and the group owner will display the group management item [afternoon]
+* 2020.06.30 Only when the group members are more than 20 will it display all group members, and the
+  group owner will display the group management item [afternoon]
 
-* 2020.06.30 Session list no session message judgment display, fix session error reporting, group announcement complete display [AM
+* 2020.06.30 Session list no session message judgment display, fix session error reporting, group
+  announcement complete display [AM
 
-* 2020.06.26 Quit group chat and disband group chat functions, chat member page, select member page [PM].
+* 2020.06.26 Quit group chat and disband group chat functions, chat member page, select member
+  page [PM].
 
 * 2020.06.26 Modify group chat name page, change chat background page, fix webView [AM].
 
-* 2020.06.24 Group announcement, change group announcement message body content display, add group notes, add group QR code page;
+* 2020.06.24 Group announcement, change group announcement message body content display, add group
+  notes, add group QR code page;
 
 * 2020.06.23 Group chat detail page creation;
 
@@ -109,14 +122,15 @@ Business DM to Telegram: @ahyangnb_1
 
 # Introduction
 
-wechat_flutter is a flutter version of WeChat, currently has implemented the basic functions of instant messaging, support for Android and IOS, specific download experience.
-Download it and experience it! 
+wechat_flutter is a flutter version of WeChat, currently has implemented the basic functions of
+instant messaging, support for Android and IOS, specific download experience.
+Download it and experience it!
 ![start.gif](https://github.com/fluttercandies/wechat_flutter/blob/master/assets/git/start.gif)
 
 # Effect
 
-|![1.gif](https://github.com/fluttercandies/wechat_flutter/blob/master/assets/git/1.jpg)| ![2.gif](https://github.com/fluttercandies/wechat_flutter/blob/master/assets/git/2.gif) | ![3.gif](https://github.com/fluttercandies/wechat_flutter/blob/master/assets/git/3.gif)|
-| --- | --- | --- |
+| ![1.gif](https://github.com/fluttercandies/wechat_flutter/blob/master/assets/git/1.jpg) | ![2.gif](https://github.com/fluttercandies/wechat_flutter/blob/master/assets/git/2.gif) | ![3.gif](https://github.com/fluttercandies/wechat_flutter/blob/master/assets/git/3.gif) |
+|-----------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------|
 | ![4.gif](https://github.com/fluttercandies/wechat_flutter/blob/master/assets/git/4.gif) | ![5.gif](https://github.com/fluttercandies/wechat_flutter/blob/master/assets/git/5.gif) | ![6.gif](https://github.com/fluttercandies/wechat_flutter/blob/master/assets/git/6.gif) |
 | ![7.gif](https://github.com/fluttercandies/wechat_flutter/blob/master/assets/git/7.gif) | ![8.gif](https://github.com/fluttercandies/wechat_flutter/blob/master/assets/git/8.gif) | ![9.gif](https://github.com/fluttercandies/wechat_flutter/blob/master/assets/git/9.gif) |
 
@@ -165,37 +179,39 @@ For IOS, just pull down the project and run it directly.
 
 # Third Party Framework
 
-| Library | Features |
-| ---- | ---- |
-| dim | instant messaging |
-| shared_preferences | persistent_storage |
-| provider | state management |
-| cached_network_image | Image caching |
-| toast | message alerts |
-| webview_flutter | web page display |
-| image_picker | image and video selection |
-| extended_text | extended_text |
-| url_launcher |open_browser_browse |
-| connectivity | check network connection |
-| photo_view | zoom in on images |
-| dio | network_frame |
-| open_file | open_file |
-| package_info | package information |
-| flutter_sound | Audio recording and processing |
-| permission_handler | permission management |
-| audioplayers | audio playback processing |
-| camera | camera
-| video_player | video_players |
-| extended_text_field | extended_text_input |
-| flutter_image_compress | image compression |
-| lpinyin | Get Chinese pinyin |
-| azlistview | Special list slider |
-| wechat_assets_picker | WeChat image gallery |
+| Library                | Features                       |
+|------------------------|--------------------------------|
+| tencent_cloud_chat_sdk | instant messaging              |
+| shared_preferences     | persistent_storage             |
+| provider               | state management               |
+| cached_network_image   | Image caching                  |
+| toast                  | message alerts                 |
+| webview_flutter        | web page display               |
+| image_picker           | image and video selection      |
+| extended_text          | extended_text                  |
+| url_launcher           | open_browser_browse            |
+| connectivity           | check network connection       |
+| photo_view             | zoom in on images              |
+| dio                    | network_frame                  |
+| open_file              | open_file                      |
+| package_info           | package information            |
+| flutter_sound          | Audio recording and processing |
+| permission_handler     | permission management          |
+| audioplayers           | audio playback processing      |
+| camera                 | camera                         
+| video_player           | video_players                  |
+| extended_text_field    | extended_text_input            |
+| flutter_image_compress | image compression              |
+| lpinyin                | Get Chinese pinyin             |
+| azlistview             | Special list slider            |
+| wechat_assets_picker   | WeChat image gallery           |
 
 # Tutorials for using
 
-* Use the command (pull the project): $ git clone https://github.com/fluttercandies/wechat_flutter.git
-* Then command (get dependencies): $ flutter packages get (IOS execute the IOS part and then execute the next step)
+* Use the command (pull the project): $ git
+  clone https://github.com/fluttercandies/wechat_flutter.git
+* Then command (get dependencies): $ flutter packages get (IOS execute the IOS part and then execute
+  the next step)
 * Final command (run): $ flutter run
 
 IOS
@@ -204,7 +220,8 @@ IOS
 * Update Pod (not required): $ pod update
 * Install Pod: $ pod install
 
-If you get `(Connection refused - connect(2) for "raw.githubusercontent.com" port 443)`, then you haven't set up the domestic source.
+If you get `(Connection refused - connect(2) for "raw.githubusercontent.com" port 443)`, then you
+haven't set up the domestic source.
 Or try to go over the wall.
 
 # My Flutter environment
@@ -216,65 +233,16 @@ flutter 3.27.5-ohos-1.0.4
 and
 
 ```
-[✓] Flutter (Channel stable, 3.24.3
+Flutter  3.24.3
 ```
 
-# Problems running androidx.core:core
+# Flutter WeChat group【Flutter微信交流群】
 
-##### Error message:
-
-```
-Android dependency 'androidx.core:core' has different version for 
-the compile (1.0.0) and runtime (1.0.2) classpath. 
-manually set the same version via DependencyResolution
-You should set the same version via DependencyResolution.
-```
-
-##### Solution
-
-`External Libraries` => `Flutter Plugins` => `image_picker-0.6.1+2` at the bottom of the project
-=> `android` => `build.gradle` then at the bottom there is `androidx.core:core:version`.
-
-Change it directly to `androidx.core:core:1.0.0`.
-![](assets/git/core.png)
-
-```
-android {
-    compileSdkVersion 28
-
-    defaultConfig {
-        minSdkVersion 16
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-    }
-    lintOptions {
-        disable 'InvalidPackage'
-    }
-    dependencies {
-        implementation 'androidx.core:core:1.0.0'
-        implementation 'androidx.annotation:annotation:1.0.0'
-    }
-}
-```
-
-And then change the permission_handler as well.
-
-# About the project has not been updated for too long
-
-I'm sorry guys, but from now on I'm in maintenance mode.
-Sorry guys, from now on into maintenance. [](assets/git/cui.png)
-
-# Future
-
-* Later the problems encountered in the project and the solution to the idea of writing a blog for everyone to learn.
-* Imitation WeChat recording audio open source library : https://github.com/yxwandroid/flutter_plugin_record
-* WeChat image library : https://github.com/fluttercandies/flutter_wechat_assets_picker
-
-# Flutter WeChat group
+加我为微信好友，我拉你。
 
 <img src="assets/git/left_group.png" height="200" width="210" style="zoom:30%;" />
 
 Can't see it? locate to assets/git/left_group.png
-
 
 Flutter exchange QQ group: [874592746](https://jq.qq.com/?_wv=1027&k=5coTYqE)
 
