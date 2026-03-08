@@ -14,15 +14,16 @@ dependencies:
   flutter_localizations: #本地化
     sdk: flutter
   cupertino_icons: 1.0.8 #IOS风格材料图标
-#  tencent_cloud_chat_sdk: 8.8.7373 #腾讯云im #鸿蒙专属
-  tencent_cloud_chat_sdk: 8.3.6498 #腾讯云im
+  tencent_cloud_chat_sdk: 8.8.7373 #腾讯云im #兼容鸿蒙
+  #  tencent_cloud_chat_sdk: 8.5.6864+4 #腾讯云im #兼容鸿蒙 # 会出现des空导致未初始化错误
+  #  tencent_cloud_chat_sdk: 8.3.6498 #腾讯云im
   archive: 3.6.1 #腾讯云im生成token需要
-  shared_preferences: 2.3.3 #持久化存储
-#  shared_preferences: #鸿蒙专属
-#    git:
-#      url: https://gitcode.com/openharmony-tpc/flutter_packages.git
-#      path: packages/shared_preferences/shared_preferences
-#      ref: br_shared_preferences-v2.5.3_ohos
+  # shared_preferences: 2.3.3 #持久化存储
+  shared_preferences: #鸿蒙专属
+    git:
+      url: https://gitcode.com/openharmony-tpc/flutter_packages.git
+      path: packages/shared_preferences/shared_preferences
+      ref: br_shared_preferences-v2.5.3_ohos
   provider: 6.1.2 #状态管理
   get: 4.6.6 #状态管理
   cached_network_image: 3.4.1 #图片缓存，图片显示
@@ -30,14 +31,14 @@ dependencies:
   webview_flutter: 4.10.0 #web显示
   image_picker: 0.8.6 #选取图库
   extended_text: 14.2.0 #文本扩展显示
-  extended_text_field: 16.0.1 #文字表情混入
-#  extended_text_field: #鸿蒙专属
-#   path: ohos_plugins/extended_text_field-16.0.1
+  #  extended_text_field: 16.0.1 #文字表情混入
+  extended_text_field: #鸿蒙专属
+    path: ohos_plugins/extended_text_field-16.0.1
   extended_text_library: 12.0.1 #extended 支持库
   url_launcher: 6.3.1 #打开系统浏览器
   connectivity_plus: 6.1.0 #网络连接
-  connectivity_plus_ohos: #^0.0.3 #鸿蒙专属，单不影响正常版本
-#   path: /Users/q1/Documents/hos/connectivity_plus_ohos
+  connectivity_plus_ohos: #^0.0.3
+    #   path: /Users/q1/Documents/hos/connectivity_plus_ohos
     git:
       url: https://github.com/ahyangnb/connectivity_plus_ohos.git
       ref: main  # or specify a branch/tag/commit hash
@@ -59,11 +60,11 @@ dependencies:
 
 dependency_overrides:
   js: 0.7.1
-#  path_provider: #鸿蒙专属
-#    git:
-#      url: https://gitcode.com/openharmony-tpc/flutter_packages.git
-#      path: packages/path_provider/path_provider
-#      ref: br_path_provider-v2.1.5_ohos
+  path_provider: #鸿蒙专属
+    git:
+      url: https://gitcode.com/openharmony-tpc/flutter_packages.git
+      path: packages/path_provider/path_provider
+      ref: br_path_provider-v2.1.5_ohos
 
 dev_dependencies:
   flutter_test:
