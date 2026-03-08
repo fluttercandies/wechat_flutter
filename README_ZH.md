@@ -199,6 +199,12 @@ IOS
 # 我的Flutter环境
 
 ```
+flutter 3.27.5-ohos-1.0.4
+```
+
+和
+
+```
 flutter doctor -v
 [✓] Flutter (Channel stable, 3.24.3, on macOS 14.0 23A344 darwin-arm64, locale
     en-CN)
