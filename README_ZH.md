@@ -230,7 +230,7 @@ Flutter交流QQ群：[874592746](https://jq.qq.com/?_wv=1027&k=5coTYqE)
 
 开源不容，买杯咖啡给我点支持，我的想法是完整实现音视频通话和语音房以及直播，在此项目，给我点动力吧。
 
-<img src="git/payment.png" style="zoom:5%;" />
+<img src="git/payment.png" height="200" width="210" style="zoom:30%;" />
 
 ### LICENSE
 
