@@ -28,7 +28,7 @@ Business DM to Telegram: @ahyangnb_1
 
 开源不容，买杯咖啡给我点支持，我的想法是完整实现音视频通话和语音房以及直播，在此项目，给我点动力吧。
 
-<img src="git/payment.png" style="zoom:50%;" />
+<img src="git/payment.png" style="zoom:20%;" />
 
 # log
 
