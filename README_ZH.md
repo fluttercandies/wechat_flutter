@@ -21,14 +21,8 @@ Business DM to Telegram: @ahyangnb_1
 
 # HarmonyOS Next 6.0 【纯血鸿蒙Next6.0】
 
-|![1.jpg](git/HarmonyOS_Next_6.0_1.jpg)| ![2.jpg](git/HarmonyOS_Next_6.0_2.jpg) | |
-| --- | --- | --- |
-
-# 赞助
-
-开源不容，买杯咖啡给我点支持，我的想法是完整实现音视频通话和语音房以及直播，在此项目，给我点动力吧。
-
-<img src="git/payment.png" style="zoom:5%;" />
+| ![1.jpg](git/HarmonyOS_Next_6.0_1.jpg) | ![2.jpg](git/HarmonyOS_Next_6.0_2.jpg) | |
+|----------------------------------------|----------------------------------------|-|
 
 # log
 
@@ -341,6 +335,12 @@ Flutter交流QQ群：[874592746](https://jq.qq.com/?_wv=1027&k=5coTYqE)
 <img src="http://www.flutterj.com/public.jpg" height="200" width="200" style="zoom:30%;" />
 
 关注公众号“`Flutter前线`”，各种Flutter项目实战经验技巧，干活知识，Flutter面试题答案，等你来领取。
+
+# 赞助
+
+开源不容，买杯咖啡给我点支持，我的想法是完整实现音视频通话和语音房以及直播，在此项目，给我点动力吧。
+
+<img src="git/payment.png" style="zoom:5%;" />
 
 ### LICENSE
 

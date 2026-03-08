@@ -30,11 +30,6 @@ Business DM to Telegram: @ahyangnb_1
 | ![1.jpg](git/HarmonyOS_Next_6.0_1.jpg) | ![2.jpg](git/HarmonyOS_Next_6.0_2.jpg) | |
 |----------------------------------------|----------------------------------------|-|
 
-# 赞助
-
-开源不容，买杯咖啡给我点支持，我的想法是完整实现音视频通话和语音房以及直播，在此项目，给我点动力吧。
-
-<img src="git/payment.png" style="zoom:5%;" />
 
 # log
 
@@ -350,6 +345,12 @@ Can't see it? locate to assets/git/left_group.png
 
 Flutter exchange QQ group: [874592746](https://jq.qq.com/?_wv=1027&k=5coTYqE)
 
+
+# 赞助
+
+开源不容，买杯咖啡给我点支持，我的想法是完整实现音视频通话和语音房以及直播，在此项目，给我点动力吧。
+
+<img src="git/payment.png" style="zoom:5%;" />
 
 ### LICENSE
 
