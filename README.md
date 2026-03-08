@@ -27,7 +27,7 @@ Business DM to Telegram: @ahyangnb_1
 
 # log
 
-* 2026.03.07 Basic fit HarmonyOS. (search "鸿蒙专属" in [pubspec.yaml](pubspec.yaml)) (flutter 3.27.5-ohos-1.0.4)
+* 2026.03.07 Fully fit HarmonyOS Next 6.0. (search "鸿蒙专属" in [pubspec.yaml](pubspec.yaml)) (flutter 3.27.5-ohos-1.0.4)
 
 * 2024.12.16 Compatible with flutter 3.24.3 [All plugin versions up-to-date]
 

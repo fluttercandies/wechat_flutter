@@ -21,7 +21,7 @@ Business DM to Telegram: @ahyangnb_1
 
 # log
 
-* 2026.03.07 基础兼容鸿蒙系统. (在 [pubspec.yaml](pubspec.yaml) 搜索 "鸿蒙专属") (flutter 3.27.5-ohos-1.0.4)
+* 2026.03.07 完整兼容纯血鸿蒙6.0 Next系统. (在 [pubspec.yaml](pubspec.yaml) 搜索 "鸿蒙专属") (flutter 3.27.5-ohos-1.0.4)
 
 * 2024.12.16 兼容 flutter 3.24.3【所有插件版本最新】
 
